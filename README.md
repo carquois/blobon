@@ -1,7 +1,8 @@
-[Twitter Bootstrap](http://twitter.github.com/bootstrap)
+[Punn.it](http://punn.it)
 =================
-test
-Bootstrap provides simple and flexible HTML, CSS, and Javascript for popular user interface components and interactions. In other words, it's a front-end toolkit for faster, more beautiful web development. It's created and maintained by [Mark Otto](http://twitter.com/mdo) and [Jacob Thornton](http://twitter.com/fat) at Twitter.
+
+
+Punn.it is an user-generated content sharing community. It has the best content from all over the Internet. It's created and maintained by [GabrielDancause](http://twitter.com/GabrielDancause).
 
 To get started, checkout http://twitter.github.com/bootstrap!
 
@@ -10,14 +11,12 @@ To get started, checkout http://twitter.github.com/bootstrap!
 Quick start
 -----------
 
-Clone the repo, `git clone git@github.com:twitter/bootstrap.git`, or [download the latest release](https://github.com/twitter/bootstrap/zipball/master).
-
-
+Clone the repo, `git clone git@github.com:GabrielDancause/punn.it.git`
 
 Versioning
 ----------
 
-For transparency and insight into our release cycle, and for striving to maintain backward compatibility, Bootstrap will be maintained under the Semantic Versioning guidelines as much as possible.
+For transparency and insight into our release cycle, and for striving to maintain backward compatibility, Punn.it will be maintained under the Semantic Versioning guidelines as much as possible.
 
 Releases will be numbered with the follow format:
 
@@ -38,14 +37,13 @@ Bug tracker
 
 Have a bug? Please create an issue here on GitHub!
 
-https://github.com/twitter/bootstrap/issues
-
+https://github.com/GabrielDancause/punn.it/issues
 
 
 Twitter account
 ---------------
 
-Keep up to date on announcements and more by following Bootstrap on Twitter, [@TwBootstrap](http://twitter.com/TwBootstrap).
+Keep up to date on announcements and more by following Bootstrap on Twitter, [@Punn_it](http://twitter.com/punn_it).
 
 
 
@@ -54,53 +52,25 @@ Mailing list
 
 Have a question? Ask on our mailing list!
 
-twitter-bootstrap@googlegroups.com
+punnit@googlegroups.com
 
-http://groups.google.com/group/twitter-bootstrap
-
-
-
-IRC
----
-
-Server: irc.freenode.net
-
-Channel: ##twitter-bootstrap (the double ## is not a typo)
-
-
-
-Developers
-----------
-
-We have included a makefile with convenience methods for working with the Bootstrap library.
-
-+ **build** - `make`
-Runs the LESS compiler to rebuild the `/less` files and compiles the docs pages. Requires lessc and uglify-js. <a href="http://twitter.github.com/bootstrap/less.html#compiling">Read more in our docs &raquo;</a>
-
-+ **watch** - `make watch`
-This is a convenience method for watching just Less files and automatically building them whenever you save. Requires the Watchr gem.
-
+http://groups.google.com/group/punnit
 
 
 Authors
 -------
 
-**Mark Otto**
+**Gabriel Dancause**
 
-+ http://twitter.com/mdo
-+ http://github.com/markdotto
-
-**Jacob Thornton**
-
-+ http://twitter.com/fat
-+ http://github.com/fat
++ http://twitter.com/GabrielDancause
++ http://github.com/GabrielDancause
 
 
 
 Copyright and license
 ---------------------
 
-Copyright 2012 Twitter, Inc.
+Copyright 2012 Punn.it, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this work except in compliance with the License.
