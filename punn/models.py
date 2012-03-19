@@ -5,6 +5,6 @@ class Punn(models.Model):
     title = models.CharField(max_length=140)
     karma = models.IntegerField()
     source = models.CharField(max_length=300)
-    created = models.DateTimeField()
+    pub_date = models.DateTimeField('date published')
     def __unicode__(self):
-        return self.titre
+        return self.title
