@@ -1,0 +1,9 @@
+{% if latest_punn_list %}
+    <ul>
+    {% for punn in latest_punn_list %}
+        <li><a href="/punn/{{ punn.id }}/">{{ punn.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
