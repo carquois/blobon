@@ -11,6 +11,9 @@ Quick start
 -----------
 
 Clone the repo, `git clone git@github.com:GabrielDancause/punn.it.git`
+Change the file settings.py.example to settings.py
+Add the database info and engine
+
 
 Versioning
 ----------
