@@ -10,9 +10,9 @@ Punn.it is an user-generated content sharing community. It has the best content 
 Quick start
 -----------
 
-Clone the repo, `git clone git@github.com:GabrielDancause/punn.it.git`
-Change the file settings.py.example to settings.py
-Add the database info and engine
+* Clone the repo, `git clone git@github.com:GabrielDancause/punn.it.git`
+* Change the file settings.py.example to settings.py
+* Add the database info and engine
 
 
 Versioning
