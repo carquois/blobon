@@ -39,4 +39,40 @@ Find relevant Punns based on queries performed by your users.
 
 Friends & Followers
 -----------
-Users follow their interests on Twitter through both one-way and mutual following relationships.
+Users follow their interests on Punn.it through both one-way and mutual following relationships.
+
+* GET followers/ids
+* GET friends/ids
+* GET friendships/exists
+* GET friendships/show
+* POST friendships/create
+* POST friendships/destroy
+* GET friendships/lookup
+
+
+Users
+-----------
+Users are at the center of everything on Punn.it: they follow, they favorite, and punn & repunn.
+
+* GET users/search
+* GET users/show
+
+
+Favorites
+-----------
+Users favorite punnss to give recognition to awesome punns, to curate the best of Punn.it, to save for reading later, and a variety of other reasons. 
+
+* GET favorites
+* POST favorites/create/:id
+* POST favorites/destroy/:id
+
+
+-----------
+-----------
+This api documentation is inscpired by the great [Twitter documentation](https://dev.twitter.com/docs/api)
+
+
+
+
+
+
