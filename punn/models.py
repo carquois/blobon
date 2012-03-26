@@ -1,16 +1,16 @@
 from django.db import models
 
 class User(models.Model):
-    name = models.CharField(max_length=20)
+    username = models.CharField(max_length=20)
     avatar = models.URLField(max_length=300)
     created = models.DateTimeField()
     email = models.CharField(max_length=256)
     def __unicode__(self):
-        return self.name
+        return self.username
 
 class Punn(models.Model):
     title = models.CharField(max_length=140)
-    url = models.URLField(max_length=300)
+    image = models.URLField(max_length=300)
     karma = models.IntegerField()
     source = models.URLField(max_length=300)
     created = models.DateTimeField()
