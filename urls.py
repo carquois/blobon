@@ -7,8 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     # url(r'^punn_it/', include('punn_it.foo.urls')),
-    url(r'^$', 'punn.views.home', name='home'),
-    url(r'^punn/$', 'punn.views.index'),
+    url(r'^$', 'punn.views.index'),
     url(r'^punn/(?P<shorturl>.)/$', 'punn.views.detail'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
