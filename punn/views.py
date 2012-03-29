@@ -16,7 +16,7 @@ def detail(request, shorturl):
     print shorturl
     i = baseconvert(shorturl,BASE62,BASE10)
     p = get_object_or_404(Punn, pk=i)
-    latest_punn_list = Punn.objects.all().order_by('-pub_date')[:6]
+    latest_punn_list = Punn.objects.filter(pub_date__lte=p.pub_date).order_by('-pub_date').exclude(pk=p.id)[:6]
     return render_to_response('punn/index.html', {'punn': p, 'latest_punn_list': latest_punn_list})
 
 
