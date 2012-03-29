@@ -2,7 +2,7 @@
 {% include "punn/header.html" %}
 
 
-    <title>Bootstrap, from Twitter</title>
+    <title>{{ punn.title }}</title>
     <link href='http://fonts.googleapis.com/css?family=Cabin+Condensed' rel='stylesheet' type='text/css'>
     <style type="text/css">
       body {
@@ -71,9 +71,9 @@
                     <i class="icon-retweet icon-white"></i><a href="#"> Repunn</a>
                     <i class="icon-star icon-white"></i><a href="#"> Favorite</a>
                     <i class="icon-remove icon-white"></i><a href="#"> Report</a>
-                  </div> 
+                  </div><br /> 
             <h2 class="caption">{{ punn.title }}</h2>
-            <div style="text-align:center;"><img style=max-width:800px;" src="http://i.imgur.com/ft4Ga.jpg" width="825" /></div>
+            <div style="text-align:center;"><img style=max-width:800px;" src="{{ punn.image }}"  /></div>
               <div class="well" style="background-color:white;margin-top:15px;">
                <form class="form-inline">
                  <textarea class="input-xlarge" id="textarea" rows="1" style="margin-left: 0px; margin-right: 0px; width: 625px; "></textarea>
@@ -110,11 +110,18 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
           </div><!--/well-->
         </div><!--/span-->
         <div class="span3">
-          <div class="well sidebar-nav">
-
+          <div class="well">
+            {% if latest_punn_list %}
+              <ul>
+              {% for punn in latest_punn_list %}
+                <li><a href="/punn/{{ punn.id }}/">{{ punn.title }}</a></li>
+              {% endfor %}
+              </ul>
+            {% else %}
+              <p>No punns are available.</p>
+            {% endif %}
           </div><!--/.well -->
           <div class="well">
-
 
 
 <div align="center">
