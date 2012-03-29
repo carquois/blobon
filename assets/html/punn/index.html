@@ -66,8 +66,28 @@
       <div class="row">
         <div class="span9">
           <div class="well">
-            <h2 class="white caption">{{ punn.title }}</h2>
+                  <div class="pull-right">
+                    <i class="icon-comment icon-white"></i><a href="#"> Comment</a>
+                    <i class="icon-retweet icon-white"></i><a href="#"> Repunn</a>
+                    <i class="icon-star icon-white"></i><a href="#"> Favorite</a>
+                    <i class="icon-remove icon-white"></i><a href="#"> Report</a>
+                  </div> 
+            <h2 class="caption">{{ punn.title }}</h2>
             <div style="text-align:center;"><img style=max-width:800px;" src="http://i.imgur.com/ft4Ga.jpg" width="825" /></div>
+              <div class="well" style="background-color:white;margin-top:15px;">
+               <form class="form-inline">
+                 <textarea class="input-xlarge" id="textarea" rows="1" style="margin-left: 0px; margin-right: 0px; width: 625px; "></textarea>
+                 <button type="submit" class="btn">Comment</button>
+                </form>
+                <blockquote>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis.</p>
+                  <small>Someone famous - <a href="#">Source</a></small>
+                </blockquote>
+                <blockquote>
+                  <p>Lorem ipsum dolor <a href="#">@userName</a> sit amet, consectetur adipiscing elit. Sed nec purus in ante pretium blandit. Aliquam erat volutpat.  <a href="#">#category</a>  <a href="#">#category</a> </p>
+                  <small><a href="#">@userName</a></small>
+                </blockquote>
+              </div><!--/well-->
           </div><!--/well-->
           <div class="well">
 
@@ -93,8 +113,6 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
           <div class="well sidebar-nav">
 
           </div><!--/.well -->
-        </div><!--/.span -->
-        <div class="span3">
           <div class="well">
 
 
@@ -119,6 +137,8 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
           </div><!--/.well -->
           <div class="well">
 
+          </div><!--/.well -->
+          <div class="well">
 
 <div align="center">
 <script type="text/javascript"><!--
