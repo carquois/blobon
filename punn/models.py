@@ -11,6 +11,7 @@ class User(models.Model):
 class Punn(models.Model):
     title = models.CharField(max_length=140)
     image = models.URLField(max_length=300)
+    thumbnail = models.URLField(max_length=300)
     karma = models.IntegerField()
     source = models.URLField(max_length=300)
     created = models.DateTimeField()
@@ -18,8 +19,6 @@ class Punn(models.Model):
     pub_date = models.DateTimeField('date published')
     def __unicode__(self):
         return self.title
-
-
 
 
 
