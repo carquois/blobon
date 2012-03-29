@@ -25,6 +25,24 @@
       .well{
         background-color:#2B2B2B;
       }
+
+      .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+        width: 1240px;
+      }
+
+      .span9 {
+        width: 845px;
+      }
+
+      .span3 {
+        width: 375px;
+      }
+
+      #featured {
+        align:center;
+        max-width:700px;
+      }
+
     </style>
 
   </head>
@@ -39,15 +57,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Project name</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-            <p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>
-          </div><!--/.nav-collapse -->
+          <a class="brand" href="http://punn.it">Punn.it</a>
         </div>
       </div>
     </div>
@@ -57,43 +67,74 @@
         <div class="span9">
           <div class="well">
             <h2 class="white caption">{{ punn.title }}</h2>
-            <img src="http://i.imgur.com/ft4Ga.jpg" width="825" />
-            <div class="row">
-            </div><!--/row-->
+            <div style="text-align:center;"><img style=max-width:800px;" src="http://i.imgur.com/ft4Ga.jpg" width="825" /></div>
           </div><!--/well-->
-        </div><!--/span-->
-        <div class="span9">
+          <div class="well">
 
-<h1>test</h1>
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2546255240848001";
+/* PunnitLeaderboard */
+google_ad_slot = "7108164973";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div><!--/div-->
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="/polls/{{ poll.id }}/vote/" method="post">
-{% csrf_token %}
-{% for choice in poll.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice }}</label><br />
-{% endfor %}
-<input type="submit" value="Vote" />
-</form>
 
 
-
+          </div><!--/well-->
         </div><!--/span-->
         <div class="span3">
           <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li class="active"><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-            </ul>
+
           </div><!--/.well -->
         </div><!--/.span -->
         <div class="span3">
           <div class="well">
+
+
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2546255240848001";
+/* PunnItBigBox */
+google_ad_slot = "9305167792";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div><!--/div-->
+
+
+
+
+          </div><!--/.well -->
+          <div class="well">
+
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2546255240848001";
+/* PunnitSkyscrapper */
+google_ad_slot = "8244057907";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div><!--/div-->
+
+
           </div><!--/.well -->
         </div><!--/span-->
       </div><!--/row-->
@@ -101,7 +142,8 @@
       <hr>
 
       <footer>
-        <p>&copy; Company 2012</p>
+
+        <p>Designed by <a href="http://twitter.com/GabrielDancause" target="_blank">Gabriel Dancause</a>. Proudly powered by <a href="https://www.djangoproject.com/" target="_blank">Django</a> and <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>. Punn.it &copy; 2012</p>
       </footer>
 
     </div><!--/.fluid-container-->
