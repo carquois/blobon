@@ -16,7 +16,9 @@ def detail(request, shorturl):
     print shorturl
     i = baseconvert(shorturl,BASE62,BASE10)
     p = get_object_or_404(Punn, pk=i)
-    return render_to_response('punn/index.html', {'punn': p})
+    latest_punn_list = Punn.objects.all().order_by('-pub_date')[:6]
+    return render_to_response('punn/index.html', {'punn': p, 'latest_punn_list': latest_punn_list})
+
 
 def baseconvert(number,fromdigits,todigits):
     if str(number)[0]=='-':
