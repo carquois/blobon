@@ -38,6 +38,10 @@
         width: 375px;
       }
 
+      .span1 {
+        width: 95px;
+      }
+
       #featured {
         align:center;
         max-width:700px;
@@ -112,9 +116,9 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
         <div class="span3">
           <div class="well">
             {% if latest_punn_list %}
-              <ul>
+              <ul class="thumbnails">
               {% for punn in latest_punn_list %}
-                <li><a href="/punn/{{ punn.id }}/">{{ punn.title }}</a></li>
+                <li class="span1"><a class="thumbnail" href="/punn/{{ punn.id }}/"><img width="130" src="{{ punn.thumbnail }}" alt="{{ punn.title }}" /></a></li>
               {% endfor %}
               </ul>
             {% else %}
