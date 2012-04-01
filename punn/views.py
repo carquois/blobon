@@ -1,5 +1,6 @@
 from punn.models import Punn
 from punn.models import User
+from punn.models import Comment
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 
@@ -17,7 +18,8 @@ def detail(request, shorturl):
     i = baseconvert(shorturl,BASE62,BASE10)
     p = get_object_or_404(Punn, pk=i)
     latest_punn_list = Punn.objects.filter(pub_date__gt=p.pub_date).order_by('pub_date').exclude(pk=p.id)[:6]
-    return render_to_response('punn/index.html', {'punn': p, 'latest_punn_list': latest_punn_list})
+    top_comments = Comment.objects.all().order_by('karma')[:6]
+    return render_to_response('punn/index.html', {'punn': p, 'latest_punn_list': latest_punn_list, 'top_comments': top_comments})
 
 
 def baseconvert(number,fromdigits,todigits):

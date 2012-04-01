@@ -11,7 +11,6 @@ class User(models.Model):
 class Punn(models.Model):
     title = models.CharField(max_length=140)
     thumbnail = models.URLField(max_length=300)
-    content_type = models.ForeignKey(ContentType)
     CONTENT_TYPES = (
         ('I', 'Image'),
         ('V', 'Video'),
@@ -28,7 +27,7 @@ class Punn(models.Model):
     def __unicode__(self):
         return self.title
 
-class Comment(models.Model:
+class Comment(models.Model):
     content = models.CharField(max_length=10000)
     author = models.ForeignKey(User)
     punn = models.ForeignKey(Punn)
