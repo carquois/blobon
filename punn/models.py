@@ -10,8 +10,16 @@ class User(models.Model):
 
 class Punn(models.Model):
     title = models.CharField(max_length=140)
-    image = models.URLField(max_length=300)
     thumbnail = models.URLField(max_length=300)
+    content_type = models.ForeignKey(ContentType)
+    CONTENT_TYPES = (
+        ('I', 'Image'),
+        ('V', 'Video'),
+        ('L', 'Link'),
+        ('A', 'Article'),
+        ('S', 'Status'),
+    )
+    content_type = models.CharField(max_length=1, choices=CONTENT_TYPES)
     karma = models.IntegerField()
     source = models.URLField(max_length=300)
     created = models.DateTimeField()
@@ -19,6 +27,22 @@ class Punn(models.Model):
     pub_date = models.DateTimeField('date published')
     def __unicode__(self):
         return self.title
+
+class Comment(models.Model:
+    content = models.CharField(max_length=10000)
+    author = models.ForeignKey(User)
+    punn = models.ForeignKey(Punn)
+    karma = models.IntegerField()
+    source = models.URLField(max_length=300)
+    pub_date = models.DateTimeField('date published')
+    def __unicode__(self):
+        return self.content
+
+
+
+
+
+
 
 
 
