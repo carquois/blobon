@@ -11,6 +11,7 @@ class User(models.Model):
 class Punn(models.Model):
     title = models.CharField(max_length=140)
     thumbnail = models.URLField(max_length=300)
+    image = models.URLField(max_length=300)
     CONTENT_TYPES = (
         ('I', 'Image'),
         ('V', 'Video'),
