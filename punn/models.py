@@ -2,7 +2,13 @@ from django.db import models
 
 class User(models.Model):
     username = models.CharField(max_length=20)
+    name = models.CharField(max_length=50)
     avatar = models.URLField(max_length=300)
+    background_color = models.CharField(max_length=6)
+    outside_color = models.CharField(max_length=6)
+    inside_color = models.CharField(max_length=6)
+    font_color = models.CharField(max_length=6)
+    link_color = models.CharField(max_length=6)
     created = models.DateTimeField()
     email = models.CharField(max_length=256)
     def __unicode__(self):
@@ -11,7 +17,7 @@ class User(models.Model):
 class Punn(models.Model):
     title = models.CharField(max_length=140)
     thumbnail = models.URLField(max_length=300)
-    image = models.URLField(max_length=300)
+    image = models.URLField(max_length=300, blank=True)
     CONTENT_TYPES = (
         ('I', 'Image'),
         ('V', 'Video'),
