@@ -6,6 +6,7 @@
     <link href='http://fonts.googleapis.com/css?family=Cabin+Condensed' rel='stylesheet' type='text/css'>
     <style type="text/css">
       body {
+        background-color: #{{ punn.user.background_color }};
         padding-top: 60px;
         padding-bottom: 40px;
       }
@@ -14,7 +15,7 @@
       }
 
       h2 {
-        color: #DDDDD1;
+        color: white;
       }
  
       .caption{
@@ -94,17 +95,18 @@
 
             {% if top_comments %}
               {% for comment in top_comments %}
-                    <div id="comment-block" class="well" style="background-color:grey;margin-top:15px;">
+                    <div class="well comment-block" style="background-color:grey;margin-top:15px;">
+                      <div class="pull-left">
+                        <i class="icon-user"></i><a href="#"> {{ comment.author }}</a> from <a href="{{ comment.source }}">Source</a>
+                      </div>
+                      <div id="action-block" class="pull-right" style="display:none">
+                        <i class="icon-share-alt"></i><a href="#"> Reply</a>
+                        <i class="icon-retweet"></i><a href="#"> Repunn</a>
+                        <i class="icon-star"></i><a href="#"> Favorite</a>
+                        <i class="icon-remove"></i><a href="#"> Report</a>
+                      </div><br /> 
 
-                  <div id="action-block" class="pull-right" style="display:none">
-                    <i class="icon-user"></i><a href="#"> {{ comment.author }}</a>
-                    <i class="icon-share-alt"></i><a href="#"> Reply</a>
-                    <i class="icon-retweet"></i><a href="#"> Repunn</a>
-                    <i class="icon-star"></i><a href="#"> Favorite</a>
-                    <i class="icon-remove"></i><a href="#"> Report</a>
-                  </div><br /> 
-
-                      <p>{{ comment.content }} <a class="pull-right" href="{{ comment.source }}">Source</a></p>
+                      <p>{{ comment.content }}</p>
 
 
 
@@ -116,7 +118,7 @@
 
 <script>
   var i = 0;
-  $("#comment-block").mouseover(function() {
+  $(".comment-block").mouseover(function() {
     $(this).find("#action-block").show();
   }).mouseout(function(){
     $(this).find("#action-block").hide();
