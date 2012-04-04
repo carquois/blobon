@@ -94,15 +94,43 @@
 
             {% if top_comments %}
               {% for comment in top_comments %}
-                    <div class="well" style="background-color:grey;margin-top:15px;">
-                      <p>{{ comment.content }}</p>
-                      <small>{{ comment.author }} <a href="{{ comment.source }}">Source</a></small>
+                    <div id="comment-block" class="well" style="background-color:grey;margin-top:15px;">
+
+                  <div id="action-block" class="pull-right" style="display:none">
+                    <i class="icon-user"></i><a href="#"> {{ comment.author }}</a>
+                    <i class="icon-share-alt"></i><a href="#"> Reply</a>
+                    <i class="icon-retweet"></i><a href="#"> Repunn</a>
+                    <i class="icon-star"></i><a href="#"> Favorite</a>
+                    <i class="icon-remove"></i><a href="#"> Report</a>
+                  </div><br /> 
+
+                      <p>{{ comment.content }} <a class="pull-right" href="{{ comment.source }}">Source</a></p>
+
+
+
                     </div>
               {% endfor %}
             {% else %}
               <p>No comments yet.</p>
             {% endif %}
 
+<script>
+  var i = 0;
+  $("#comment-block").mouseover(function() {
+    $(this).find("#action-block").show();
+  }).mouseout(function(){
+    $(this).find("#action-block").hide();
+  });
+
+  var n = 0;
+  $("div.enterleave").mouseenter(function() {
+    n += 1;
+    $(this).find("span").text( "mouse enter x " + n );
+  }).mouseleave(function() {
+    $(this).find("span").text("mouse leave");
+  });
+
+</script>
                   </div><!--/span-->
                 </div><!--/row-->
               </div><!--/well-->
