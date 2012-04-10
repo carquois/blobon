@@ -36,7 +36,6 @@ class Punn(models.Model):
     #Basic infos
     title = models.CharField(max_length=140)
     karma = models.IntegerField()
-    views = models.IntegerField()
     source = models.URLField(max_length=300, blank=True)
     author = models.ForeignKey(User)
     original_punn = models.ForeignKey('self',  null=True, blank=True)
