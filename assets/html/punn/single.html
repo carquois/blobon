@@ -63,19 +63,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="http://punn.it">Punn.it</a>
-
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li class="">
-                <a href="#">Mentions</a>
-              </li>
-              <li class="">
-                <a href="#">Browse</a>
-              </li>
-            </ul>
-          </div> 
-
+          <a class="brand" href="{{ punn.author.site }}">{{ punn.author.name }}</a>
+        </div> 
        </div>
       </div>
     </div>
@@ -87,13 +76,13 @@
             <h2 class="caption">{{ punn.title }}</h2>
             <div class="well" style="background-color:#181817;margin-top:15px;text-align:center;"><img style=max-width:860px;" src="{{ punn.image }}"  /></div>
                     <div class="well comment-block" style="background-color:#181817;margin-top:15px;">
+                    <button class="btn btn-primary">Rocks</button>
+                    <button class="btn btn-primary">Sucks</button>
                     <form class="form-inline">
-                      <button class="btn btn-primary">Rocks</button>
-                      <button class="btn btn-primary">Sucks</button>
                       <textarea class="input-xlarge" id="textarea" rows="1" style="margin-left: 0px; margin-right: 0px; width: 425px; "></textarea>
                       <button type="submit" class="btn btn-inverse">Comment</button>
-                      <a data-toggle="modal" href="#share-block" class="btn btn-inverse">Share</a>
                     </form>
+                    <a data-toggle="modal" href="#share-block" class="btn btn-inverse">Share</a>
 
           <div id="share-block" class="modal hide fade">
             <div class="modal-header">
@@ -128,8 +117,6 @@
 
                     </div>
               {% endfor %}
-            {% else %}
-              <p>No comments yet.</p>
             {% endif %}
 
 <script>
@@ -204,9 +191,27 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
           </div><!--/.well -->
           <div class="well">
-            <p><a href="#">Source</a></p>
-            <p>Submitted : {{ punn.pub_date }}</p>
-            <p>{{ punn.views }} views</p>
+          {% if punn.author.avatar %}
+            <p><a href="#"><img  width="80" src="{{ punn.author.avatar }}" /></a></p>
+          {% endif %}
+          {% if punn.source %}
+            <p><a href="{{ punn.source }} ">Source</a></p>
+          {% endif %}
+          {% if punn.original_punn %}
+             <p>Originally punned by {{ punn.original_punn.author.name }}
+          {% endif %}
+            <p>Submitted : {{ punn.pub_date }} via <a href="{{ punn.app.website }}">{{ punn.app.name }}</a></p>
+            <p>{{ punn.karma }} points</p>
+
+            {% if latest_repunn_list %}
+            <p>Latest repunns : 
+              {% for punn in latest_repunn_list %}
+              <img src="{{ punn.author.avatar }}" width="40"/>
+              {% endfor %}
+            </p>
+            {% endif %}
+
+
           </div><!--/.well -->
           <div class="well">
 
