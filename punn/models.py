@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.sites.models import Site
 
 class User(models.Model):
     #Basic infos
@@ -7,6 +8,7 @@ class User(models.Model):
     avatar = models.URLField(max_length=300)
     created = models.DateTimeField()
     email = models.CharField(max_length=256)
+    sites = models.ForeignKey(Site, blank=True, null=True)
     #Custom user design
     background_color = models.CharField(max_length=6)
     outside_color = models.CharField(max_length=6)
@@ -20,6 +22,16 @@ class User(models.Model):
     def __unicode__(self):
         return self.username
 
+class App(models.Model):
+    name = models.CharField(max_length=32)
+    description = models.CharField(max_length=140)
+    website = models.URLField(max_length=300)
+    author = models.ForeignKey(User)
+    consumer_key = models.CharField(max_length=120)
+    consumer_secret = models.CharField(max_length=120)
+    def __unicode__(self):
+        return self.name
+
 class Punn(models.Model):
     #Basic infos
     title = models.CharField(max_length=140)
@@ -27,16 +39,15 @@ class Punn(models.Model):
     views = models.IntegerField()
     source = models.URLField(max_length=300, blank=True)
     author = models.ForeignKey(User)
-    original_author = models.ForeignKey(User, blank=True)
-    original_punn = models.ForeignKey(Punn, blank=True)
+    original_punn = models.ForeignKey('self',  null=True, blank=True)
     app = models.ForeignKey(App)
     created = models.DateTimeField()
-    pub_date = models.DateTimeField('date published', blank=True)
+    pub_date = models.DateTimeField('date published',  null=True, blank=True)
     #Media infos
     thumbnail = models.URLField(max_length=300, blank=True)
     image = models.URLField(max_length=300, blank=True)
-    youtube_id = models.CharField(max_length=30)
-    vimeo_id = models.CharField(max_length=30)
+    youtube_id = models.CharField(max_length=30, blank=True)
+    vimeo_id = models.CharField(max_length=30, blank=True)
     #Social infos
     facebook_publication_link = models.URLField(max_length=300, blank=True)
     tweet_link = models.URLField(max_length=300, blank=True)
@@ -54,15 +65,9 @@ class Comment(models.Model):
     def __unicode__(self):
         return self.content
 
-
-class App(models.Model):
-    name = models.CharField(max_length=32)
-    description = models.CharField(max_length=140)
-    website = models.URLField(max_length=300)
-    consumer_key = models.CharField(max_length=120)
-    consumer_secret = models.CharField(max_length=120)
+class Tag(models.Model):
+    name = models.CharField(max_length=25)
+    punn = models.ForeignKey(Punn)
     def __unicode__(self):
         return self.name
-
-
 
