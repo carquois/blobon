@@ -18,8 +18,10 @@ def detail(request, shorturl):
     i = baseconvert(shorturl,BASE62,BASE10)
     p = get_object_or_404(Punn, pk=i)
     latest_punn_list = Punn.objects.filter(pub_date__gt=p.pub_date).order_by('pub_date').exclude(pk=p.id)[:6]
+    latest_repunn_list = Punn.objects.filter(original_punn=p.id).order_by('pub_date')[:6]
     top_comments = Comment.objects.all().order_by('karma')[:6]
-    return render_to_response('punn/single.html', {'punn': p, 'latest_punn_list': latest_punn_list, 'top_comments': top_comments})
+    tag_cloud = p.tags.all()[:6]
+    return render_to_response('punn/single.html', {'punn': p, 'tag_cloud': tag_cloud, 'latest_punn_list': latest_punn_list, 'latest_repunn_list': latest_repunn_list, 'top_comments': top_comments})
 
 
 def baseconvert(number,fromdigits,todigits):
