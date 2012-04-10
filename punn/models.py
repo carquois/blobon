@@ -27,6 +27,7 @@ class Punn(models.Model):
     )
     content_type = models.CharField(max_length=1, choices=CONTENT_TYPES)
     karma = models.IntegerField()
+    views = models.IntegerField()
     source = models.URLField(max_length=300)
     created = models.DateTimeField()
     author = models.ForeignKey(User)

@@ -19,7 +19,7 @@ def detail(request, shorturl):
     p = get_object_or_404(Punn, pk=i)
     latest_punn_list = Punn.objects.filter(pub_date__gt=p.pub_date).order_by('pub_date').exclude(pk=p.id)[:6]
     top_comments = Comment.objects.all().order_by('karma')[:6]
-    return render_to_response('punn/index.html', {'punn': p, 'latest_punn_list': latest_punn_list, 'top_comments': top_comments})
+    return render_to_response('punn/single.html', {'punn': p, 'latest_punn_list': latest_punn_list, 'top_comments': top_comments})
 
 
 def baseconvert(number,fromdigits,todigits):

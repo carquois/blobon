@@ -1,0 +1,259 @@
+
+{% include "punn/header.html" %}
+
+
+    <title>{{ punn.title }}</title>
+    <link href='http://fonts.googleapis.com/css?family=Cabin+Condensed' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+      body {
+        background-color: #{{ punn.author.background_color }};
+        color: #{{ punn.author.font_color }};
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+ 
+      .modal {
+        color: black;
+      }
+      .caption{
+        font-weight:normal;
+        font-family: 'Cabin Condensed', sans-serif;
+      }
+
+      .well{
+        background-color:#{{ punn.author.outside_color }};
+      }
+
+      .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+        width: 1380px;
+      }
+
+      .span9 {
+        width: 945px;
+      }
+
+      .span7 {
+        width: 740px;
+      }
+
+      .span3 {
+        width: 375px;
+      }
+
+      .span1 {
+        width: 95px;
+      }
+
+
+    </style>
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="http://punn.it">Punn.it</a>
+
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="">
+                <a href="#">Mentions</a>
+              </li>
+              <li class="">
+                <a href="#">Browse</a>
+              </li>
+            </ul>
+          </div> 
+
+       </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="span9">
+          <div class="well">
+            <h2 class="caption">{{ punn.title }}</h2>
+            <div class="well" style="background-color:#181817;margin-top:15px;text-align:center;"><img style=max-width:860px;" src="{{ punn.image }}"  /></div>
+                    <div class="well comment-block" style="background-color:#181817;margin-top:15px;">
+                    <form class="form-inline">
+                      <button class="btn btn-primary">Rocks</button>
+                      <button class="btn btn-primary">Sucks</button>
+                      <textarea class="input-xlarge" id="textarea" rows="1" style="margin-left: 0px; margin-right: 0px; width: 425px; "></textarea>
+                      <button type="submit" class="btn btn-inverse">Comment</button>
+                      <a data-toggle="modal" href="#share-block" class="btn btn-inverse">Share</a>
+                    </form>
+
+          <div id="share-block" class="modal hide fade">
+            <div class="modal-header">
+              <a class="close" data-dismiss="modal" >&times;</a>
+              <h3>Share</h3>
+            </div>
+            <div class="modal-body">
+              <h4>Facebook</h4>
+            <div class="modal-footer">
+              <a href="#" class="btn" data-dismiss="modal" >Close</a>
+            </div>
+          </div>
+
+          </div>
+                   </div>
+            {% if top_comments %}
+              {% for comment in top_comments %}
+                    <div class="well comment-block" style="background-color:#181817;margin-top:15px;">
+                      <div class="pull-left">
+                        <i class="icon-user"></i><a href="#"> {{ comment.author }}</a> from <a href="{{ comment.source }}">Source</a>
+                      </div>
+                      <div id="action-block" class="pull-right" style="display:none">
+                        <i class="icon-share-alt"></i><a href="#"> Reply</a>
+                        <i class="icon-retweet"></i><a href="#"> Repunn</a>
+                        <i class="icon-star"></i><a href="#"> Favorite</a>
+                        <i class="icon-remove"></i><a href="#"> Report</a>
+                      </div><br /> 
+
+                      <p>{{ comment.content }}</p>
+
+
+
+                    </div>
+              {% endfor %}
+            {% else %}
+              <p>No comments yet.</p>
+            {% endif %}
+
+<script>
+  var i = 0;
+  $(".comment-block").mouseover(function() {
+    $(this).find("#action-block").show();
+  }).mouseout(function(){
+    $(this).find("#action-block").hide();
+  });
+
+  var n = 0;
+  $("div.enterleave").mouseenter(function() {
+    n += 1;
+    $(this).find("span").text( "mouse enter x " + n );
+  }).mouseleave(function() {
+    $(this).find("span").text("mouse leave");
+  });
+
+</script>
+          </div><!--/well-->
+          <div class="well">
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2546255240848001";
+/* PunnitLeaderboard */
+google_ad_slot = "7108164973";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div><!--/div-->
+
+
+
+          </div><!--/well-->
+        </div><!--/span-->
+        <div class="span3">
+          <div class="well">
+            {% if latest_punn_list %}
+              <ul class="thumbnails">
+              {% for punn in latest_punn_list %}
+                <li class="span1"><a class="thumbnail" href="/punn/{{ punn.id }}/"><img width="130" src="{{ punn.thumbnail }}" alt="{{ punn.title }}" /></a></li>
+              {% endfor %}
+              </ul>
+            {% else %}
+              <p>No punns are available.</p>
+            {% endif %}
+          </div><!--/.well -->
+          <div class="well">
+
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2546255240848001";
+/* PunnItBigBox */
+google_ad_slot = "9305167792";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div><!--/div-->
+
+
+
+
+          </div><!--/.well -->
+          <div class="well">
+            <p><a href="#">Source</a></p>
+            <p>Submitted : {{ punn.pub_date }}</p>
+            <p>{{ punn.views }} views</p>
+          </div><!--/.well -->
+          <div class="well">
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2546255240848001";
+/* PunnitSkyscrapper */
+google_ad_slot = "8244057907";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div><!--/div-->
+
+
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+
+        <p>Designed by <a href="http://twitter.com/GabrielDancause" target="_blank">Gabriel Dancause</a>. Proudly powered by <a href="https://www.djangoproject.com/" target="_blank">Django</a> and <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>. Punn.it &copy; 2012</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>
