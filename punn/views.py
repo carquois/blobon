@@ -9,6 +9,8 @@ BASE62 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"
 
 
 
+def index(request): 
+    return render_to_response('punn/index.html', {})
 
 def create(request): 
     return render_to_response('punn/create.html', {})
