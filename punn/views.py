@@ -10,8 +10,8 @@ BASE62 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"
 
 
 
-def index(request):
-    return HttpResponse("Hello index")
+def create(request): 
+    return render_to_response('punn/create.html', {})
 
 def detail(request, shorturl):
     print shorturl

@@ -32,6 +32,11 @@ class App(models.Model):
     def __unicode__(self):
         return self.name
 
+class Tag(models.Model):
+    name = models.CharField(max_length=30)
+    def __unicode__(self):
+        return self.name
+
 class Punn(models.Model):
     #Basic infos
     title = models.CharField(max_length=140)
@@ -40,6 +45,7 @@ class Punn(models.Model):
     author = models.ForeignKey(User)
     original_punn = models.ForeignKey('self',  null=True, blank=True)
     app = models.ForeignKey(App)
+    tags = models.ManyToManyField(Tag, null=True, blank=True)
     created = models.DateTimeField()
     pub_date = models.DateTimeField('date published',  null=True, blank=True)
     #Media infos
@@ -64,9 +70,4 @@ class Comment(models.Model):
     def __unicode__(self):
         return self.content
 
-class Tag(models.Model):
-    name = models.CharField(max_length=25)
-    punn = models.ForeignKey(Punn)
-    def __unicode__(self):
-        return self.name
 
