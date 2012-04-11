@@ -1,58 +1,12 @@
 
 {% include "punn/header.html" %}
 
-
     <title>{{ punn.title }}</title>
     <link href='http://fonts.googleapis.com/css?family=Cabin+Condensed' rel='stylesheet' type='text/css'>
-    <style type="text/css">
-      body {
-        background-color: #{{ punn.author.background_color }};
-        color: #{{ punn.author.font_color }};
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
- 
-      .modal {
-        color: black;
-      }
-      .caption{
-        font-weight:normal;
-        font-family: 'Cabin Condensed', sans-serif;
-      }
 
-      .well{
-        background-color:#{{ punn.author.outside_color }};
-      }
-
-      .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
-        width: 1380px;
-      }
-
-      .span9 {
-        width: 945px;
-      }
-
-      .span7 {
-        width: 740px;
-      }
-
-      .span3 {
-        width: 375px;
-      }
-
-      .span1 {
-        width: 95px;
-      }
-
-
-    </style>
-
+{% include "punn/style.css" %}
 
   </head>
-
   <body>
 
     <div class="navbar navbar-fixed-top">
