@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
+    oauth_token = models.CharField(max_length=200, blank=True)
+    oauth_secret = models.CharField(max_length=200, blank=True)
     #Basic infos
     description = models.CharField(max_length=160, blank=True)
     avatar = models.URLField(max_length=300, blank=True)
