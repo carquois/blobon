@@ -1,14 +1,14 @@
 from punn.models import Punn
-from punn.models import User
+from punn.models import UserProfile
 from punn.models import Comment
 from django.http import HttpResponse
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response, get_object_or_404
+from django.contrib.auth.models import User
 
 BASE10 = "0123456789"
 BASE62 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"
-
 
 
 def index(request): 
@@ -19,7 +19,6 @@ def profile_page(request, user):
     u = get_object_or_404(User, username=user)
     current_site = Site.objects.get(id=settings.SITE_ID)
     return render_to_response('punn/profile.html', {'user': u, 'site': current_site})
-
 
 def create(request): 
     return render_to_response('punn/create.html', {})

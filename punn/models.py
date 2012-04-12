@@ -1,29 +1,26 @@
 from django.db import models
 from django.contrib.sites.models import Site
+from django.contrib.auth.models import User
 
-class User(models.Model):
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
     #Basic infos
-    username = models.CharField(max_length=20)
-    name = models.CharField(max_length=50)
-    description = models.CharField(max_length=160)
-    avatar = models.URLField(max_length=300)
-    domain = models.URLField(max_length=50)
-    location = models.CharField(max_length=50)
-    created = models.DateTimeField()
-    email = models.CharField(max_length=256)
+    description = models.CharField(max_length=160, blank=True)
+    avatar = models.URLField(max_length=300, blank=True)
+    domain = models.URLField(max_length=50, blank=True)
+    location = models.CharField(max_length=50, blank=True)
     sites = models.ForeignKey(Site, blank=True, null=True)
     #Custom user design
-    background_color = models.CharField(max_length=6)
-    outside_color = models.CharField(max_length=6)
-    inside_color = models.CharField(max_length=6)
-    font_color = models.CharField(max_length=6)
-    link_color = models.CharField(max_length=6)
+    background_color = models.CharField(max_length=6, blank=True)
+    well_color = models.CharField(max_length=6, blank=True)
+    font_color = models.CharField(max_length=6, blank=True)
+    link_color = models.CharField(max_length=6, blank=True)
     #Social infos
     facebook_profile = models.URLField(max_length=300, blank=True)
     twitter_oauth_token = models.CharField(max_length=120, blank=True)
     twitter_oauth_token_secret = models.CharField(max_length=120, blank=True)
     def __unicode__(self):
-        return self.username
+        return self.user
 
 class App(models.Model):
     name = models.CharField(max_length=32)
@@ -54,6 +51,7 @@ class Punn(models.Model):
     #Media infos
     thumbnail = models.URLField(max_length=300, blank=True)
     image = models.URLField(max_length=300, blank=True)
+    content = models.CharField(max_length=10000, blank=True)
     youtube_id = models.CharField(max_length=30, blank=True)
     vimeo_id = models.CharField(max_length=30, blank=True)
     #Social infos
