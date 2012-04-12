@@ -5,7 +5,10 @@ class User(models.Model):
     #Basic infos
     username = models.CharField(max_length=20)
     name = models.CharField(max_length=50)
+    description = models.CharField(max_length=160)
     avatar = models.URLField(max_length=300)
+    domain = models.URLField(max_length=50)
+    location = models.CharField(max_length=50)
     created = models.DateTimeField()
     email = models.CharField(max_length=256)
     sites = models.ForeignKey(Site, blank=True, null=True)

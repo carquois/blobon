@@ -10,12 +10,12 @@ urlpatterns = patterns('',
     url(r'^$', 'punn.views.index'),
     url(r'^punn/(?P<shorturl>.)/$', 'punn.views.detail'),
     url(r'^punn/create/$', 'punn.views.create'),
-    url(r'^(?P<username>[^/]+)/$', 'punn.views.profile_page'), 
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^(?P<user>[^/]+)/$', 'punn.views.profile_page'), 
 )
 

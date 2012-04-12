@@ -15,13 +15,17 @@ def index(request):
     current_site = Site.objects.get(id=settings.SITE_ID)
     return render_to_response('punn/index.html', {'site': current_site})
 
-def profile_page(request, username):
-    return HttpResponse("Hello, world. You're at the poll index.")
+def profile_page(request, user):
+    u = get_object_or_404(User, username=user)
+    current_site = Site.objects.get(id=settings.SITE_ID)
+    return render_to_response('punn/profile.html', {'user': u, 'site': current_site})
+
 
 def create(request): 
     return render_to_response('punn/create.html', {})
 
 def detail(request, shorturl):
+    current_site = Site.objects.get(id=settings.SITE_ID)
     i = baseconvert(shorturl,BASE62,BASE10)
     p = get_object_or_404(Punn, pk=i)
     u = p.author
@@ -29,7 +33,7 @@ def detail(request, shorturl):
     latest_repunn_list = Punn.objects.filter(original_punn=p.id).order_by('pub_date')[:6]
     top_comments = Comment.objects.all().order_by('karma')[:6]
     tag_cloud = p.tags.all()[:6]
-    return render_to_response('punn/single.html', {'punn': p, 'user': u, 'tag_cloud': tag_cloud, 'latest_punn_list': latest_punn_list, 'latest_repunn_list': latest_repunn_list, 'top_comments': top_comments})
+    return render_to_response('punn/single.html', {'punn': p, 'user': u,  'site': current_site, 'tag_cloud': tag_cloud, 'latest_punn_list': latest_punn_list, 'latest_repunn_list': latest_repunn_list, 'top_comments': top_comments})
 
 
 def baseconvert(number,fromdigits,todigits):

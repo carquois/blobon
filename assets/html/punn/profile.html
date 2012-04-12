@@ -1,8 +1,9 @@
 {% include "punn/header.html" %}
 
+
 {% include "punn/header.html" %}
 
-    <title>{{ site.name }} / Home</title>
+    <title>{{ user.name }} ({{ user.username }}) on {{ site.name }}</title>
 
 {% include "punn/style.css" %}
 
@@ -24,7 +25,11 @@
         </div><!--/span-->
         <div class="span3">
           <div class="well">
-            <p>Trending tags</p>
+          {% if user.avatar %}
+            <p><a href="#"><img  width="80" src="{{ user.avatar }}" /></a></p>
+          {% endif %}
+            <p>{{ user.name }} <small>@{{ user.username }}</small></p>
+            <p>{{ user.description }}<p>
           </div><!--/.well -->
           <div class="well">
 
@@ -32,7 +37,7 @@
 
           </div><!--/.well -->
           <div class="well">
-            <p>Plus populaires</p> 
+            <p>Most popular for @user</p> 
           </div><!--/.well -->
           <div class="well">
 
