@@ -8,8 +8,9 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^punn_it/', include('punn_it.foo.urls')),
     url(r'^$', 'punn.views.index'),
-    url(r'^punn/create/$', 'punn.views.create'),
     url(r'^punn/(?P<shorturl>.)/$', 'punn.views.detail'),
+    url(r'^punn/create/$', 'punn.views.create'),
+    url(r'^(?P<username>[^/]+)/$', 'punn.views.profile_page'), 
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

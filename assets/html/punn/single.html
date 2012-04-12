@@ -98,10 +98,7 @@
           </div><!--/.well -->
           <div class="well">
 
-
 {% include "punn/bigbox.html" %}
-
-
 
           </div><!--/.well -->
           <div class="well">
@@ -127,7 +124,7 @@
 
             {% if tag_cloud %}
               {% for tag in tag_cloud %}
-              <button class="btn btn-primary"><i class="icon-tag"></i> {{ tag.name }}</button>
+              <button class="btn btn-primary"><i class="icon-tag"></i> #{{ tag.name }}</button>
               {% endfor %}
             {% endif %}
 
