@@ -18,7 +18,8 @@ def index(request):
 def profile_page(request, user):
     u = get_object_or_404(User, username=user)
     current_site = Site.objects.get(id=settings.SITE_ID)
-    return render_to_response('punn/profile.html', {'user': u, 'site': current_site})
+    latest_punn_list = Punn.objects.filter(author=u).order_by('pub_date')[:24]
+    return render_to_response('punn/profile.html', {'user': u, 'site': current_site, 'latest_punn_list': latest_punn_list})
 
 def create(request): 
     return render_to_response('punn/create.html', {})
