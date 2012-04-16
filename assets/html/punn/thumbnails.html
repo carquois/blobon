@@ -2,9 +2,7 @@
               <ul class="thumbnails">
               {% for punn in latest_punn_list %}
                 <li class="span2">
-                  <div class="thumbnail">
-                    <img src="http://placehold.it/200x200" alt="">
-                  </div>
+                  <a class="thumbnail" href="/p/{{ punn.base64id }}/"><img width="200" src="{{ punn.thumbnail }}" alt="{{ punn.title }}" /></a> 
                 </li>
               {% endfor %}
               </ul>
