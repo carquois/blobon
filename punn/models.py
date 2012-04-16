@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
+    #TODO https://github.com/simplegeo/python-oauth2
     oauth_token = models.CharField(max_length=200, blank=True)
     oauth_secret = models.CharField(max_length=200, blank=True)
     #Basic infos
@@ -22,7 +23,7 @@ class UserProfile(models.Model):
     twitter_oauth_token = models.CharField(max_length=120, blank=True)
     twitter_oauth_token_secret = models.CharField(max_length=120, blank=True)
     def __unicode__(self):
-        return self.user
+        return self.description
 
 class App(models.Model):
     name = models.CharField(max_length=32)
@@ -42,6 +43,7 @@ class Tag(models.Model):
 class Punn(models.Model):
     #Basic infos
     title = models.CharField(max_length=140)
+    base64id = models.CharField(max_length=140, blank=True)
     karma = models.IntegerField()
     source = models.URLField(max_length=300, blank=True)
     author = models.ForeignKey(User)
