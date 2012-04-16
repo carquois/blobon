@@ -89,7 +89,7 @@
             {% if latest_punn_list %}
               <ul class="thumbnails">
               {% for punn in latest_punn_list %}
-                <li class="span1"><a class="thumbnail" href="/punn/{{ punn.id }}/"><img width="130" src="{{ punn.thumbnail }}" alt="{{ punn.title }}" /></a></li>
+                <li class="span1"><a class="thumbnail" href="/p/{{ punn.base64id }}/"><img width="130" src="{{ punn.thumbnail }}" alt="{{ punn.title }}" /></a></li>
               {% endfor %}
               </ul>
             {% else %}
@@ -117,7 +117,7 @@
             {% if latest_repunn_list %}
             <p>Latest repunns : 
               {% for punn in latest_repunn_list %}
-              <img src="{{ punn.author.avatar }}" width="40"/>
+              <img src="{{ punn.author.avatar }}" width="40" alt="{{ punn.title }}"/>
               {% endfor %}
             </p>
             {% endif %}

@@ -1,20 +1,18 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.contrib.auth.views import login, logout
 
-# Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^punn_it/', include('punn_it.foo.urls')),
     url(r'^$', 'punn.views.index'),
-    url(r'^punn/(?P<shorturl>.)/$', 'punn.views.detail'),
-    url(r'^punn/create/$', 'punn.views.create'),
+    url(r'^p/(?P<shorturl>.)/$', 'punn.views.detail'),
+    url(r'^p/create/$', 'punn.views.create'),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    #TODO http://www.djangobook.com/en/beta/chapter12/
+    url(r'^accounts/login/$',  login),
+    url(r'^accounts/logout/$', logout),
 
-    # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?P<user>[^/]+)/$', 'punn.views.profile_page'), 
 )

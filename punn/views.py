@@ -12,8 +12,9 @@ BASE62 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"
 
 
 def index(request): 
+    latest_punn_list = Punn.objects.all().order_by('pub_date')[:24]
     current_site = Site.objects.get(id=settings.SITE_ID)
-    return render_to_response('punn/index.html', {'site': current_site})
+    return render_to_response('punn/index.html', {'site': current_site, 'latest_punn_list': latest_punn_list})
 
 def profile_page(request, user):
     u = get_object_or_404(User, username=user)
