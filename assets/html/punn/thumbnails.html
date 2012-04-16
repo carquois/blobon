@@ -1,7 +1,13 @@
-<ul class="thumbnails">
-  <li class="span2">
-    <div class="thumbnail">
-      <img src="http://placehold.it/200x200" alt="">
-    </div>
-  </li>
-</ul>
+            {% if latest_punn_list %}
+              <ul class="thumbnails">
+              {% for punn in latest_punn_list %}
+                <li class="span2">
+                  <div class="thumbnail">
+                    <img src="http://placehold.it/200x200" alt="">
+                  </div>
+                </li>
+              {% endfor %}
+              </ul>
+            {% else %}
+              <p>No punns are available.</p>
+            {% endif %}
