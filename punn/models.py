@@ -62,6 +62,9 @@ class Punn(models.Model):
     facebook_publication_link = models.URLField(max_length=300, blank=True)
     tweet_link = models.URLField(max_length=300, blank=True)
     reddit_link = models.URLField(max_length=300, blank=True)
+    #Adsense && Analytics
+    analytics_id = models.CharField(max_length=30, blank=True)
+    adsense_id = models.CharField(max_length=30, blank=True)
     def __unicode__(self):
         return self.title
 
