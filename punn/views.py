@@ -24,10 +24,11 @@ def profile_page(request, user):
 
 def create(request): 
 
-    if request.method == 'POST': # If the form has been submitted...
-      return render_to_response('post.html', {})
-    elif request.method == 'GET': # If the form has been submitted...
-      return render_to_response('get.html', {})
+    if request.method == 'POST': 
+      return render_to_response('submit.html', {})
+    elif request.method == 'GET':
+      title = request.GET.get('title', '') 
+      return render_to_response('submit.html', {'title': title})
     else:
       return render_to_response('submit.html', {})
 
