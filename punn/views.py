@@ -28,7 +28,10 @@ def create(request):
       return render_to_response('submit.html', {})
     elif request.method == 'GET':
       title = request.GET.get('title', '') 
-      return render_to_response('submit.html', {'title': title})
+      image = request.GET.get('image', '') 
+      source = request.GET.get('source', '') 
+      tags = request.GET.get('tags', '') 
+      return render_to_response('submit.html', {'title': title, 'image': image, 'source': source, 'tags': tags})
     else:
       return render_to_response('submit.html', {})
 
