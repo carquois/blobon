@@ -1,0 +1,41 @@
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+ 
+      .modal {
+        color: black;
+      }
+      .caption{
+        font-weight:normal;
+        font-family: 'Cabin Condensed', sans-serif;
+      }
+
+      .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+        width: 1380px;
+      }
+
+      .span9 {
+        width: 945px;
+      }
+
+      .span7 {
+        width: 740px;
+      }
+
+      .span3 {
+        width: 375px;
+      }
+
+      .span2 {
+        width: 211px;
+      }
+
+      .span1 {
+        width: 95px;
+      }
+    </style>

@@ -1,0 +1,73 @@
+{% include "header.html" %}
+
+
+{% include "header.html" %}
+
+    <title>{{ user.first_name }} {{ user.last_name  }} ({{ user.username }}) on {{ site.name }}</title>
+
+{% include "style.css" %}
+
+    <style type="text/css">
+      body {
+        background-color: #{{ user.userprofile.background_color }};
+        color: #{{ user.userprofile.font_color }};
+      }
+
+      .well{
+        background-color:#{{ user.userprofile.well_color }};
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+{% include "topmenu.html" %}
+
+    <div class="container">
+      <div class="row">
+        <div class="span9">
+          <div class="well">
+
+
+{% include "thumbnails.html" %}
+
+          </div><!--/well-->
+          <div class="well">
+
+{% include "leaderboard.html" %}
+
+          </div><!--/well-->
+        </div><!--/span-->
+        <div class="span3">
+          <div class="well">
+          {% if user.userprofile.avatar %}
+            <p><a href="#"><img  width="80" src="{{ user.userprofile.avatar }}" /></a></p>
+          {% endif %}
+            <p>{{ user.first_name }} {{ user.last_name  }} <small>@{{ user.username }}</small></p>
+            <p>{{ user.userprofile.description }}<p>
+            <p>{{ user.userprofile.location }}<p>
+            <p>{{ user.userprofile.domain }}<p>
+          </div><!--/.well -->
+          <div class="well">
+
+{% include "bigbox.html" %}
+
+          </div><!--/.well -->
+          <div class="well">
+            <p>Most popular for @user</p> 
+          </div><!--/.well -->
+          <div class="well">
+
+{% include "skyscrapper.html" %}
+
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+{% include "footer.html" %}
+
+
+

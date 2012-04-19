@@ -1,0 +1,11 @@
+            {% if latest_punn_list %}
+              <ul class="thumbnails">
+              {% for punn in latest_punn_list %}
+                <li class="span2">
+                  <a class="thumbnail" href="/p/{{ punn.base64id }}/"><img width="200" src="{{ punn.thumbnail }}" alt="{{ punn.title }}" /></a> 
+                </li>
+              {% endfor %}
+              </ul>
+            {% else %}
+              <p>No punns are available.</p>
+            {% endif %}

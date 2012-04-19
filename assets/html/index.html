@@ -1,0 +1,53 @@
+{% include "header.html" %}
+
+{% include "header.html" %}
+
+    <title>{{ site.name }} / Home</title>
+
+{% include "style.css" %}
+
+  </head>
+  <body>
+
+{% include "topmenu.html" %}
+
+    <div class="container">
+      <div class="row">
+        <div class="span9">
+          <div class="well">
+
+{% include "thumbnails.html" %}
+
+          </div><!--/well-->
+          <div class="well">
+
+{% include "leaderboard.html" %}
+
+          </div><!--/well-->
+        </div><!--/span-->
+        <div class="span3">
+          <div class="well">
+            <p>Trending tags</p>
+          </div><!--/.well -->
+          <div class="well">
+
+{% include "bigbox.html" %}
+
+          </div><!--/.well -->
+          <div class="well">
+            <p>Plus populaires</p> 
+          </div><!--/.well -->
+          <div class="well">
+
+{% include "skyscrapper.html" %}
+
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+{% include "footer.html" %}
+
+
+
