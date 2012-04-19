@@ -24,7 +24,12 @@ def profile_page(request, user):
 
 def create(request): 
 
-    return render_to_response('create.html', {})
+    if request.method == 'POST': # If the form has been submitted...
+      return render_to_response('post.html', {})
+    elif request.method == 'GET': # If the form has been submitted...
+      return render_to_response('get.html', {})
+    else:
+      return render_to_response('submit.html', {})
 
 def detail(request, shorturl):
     current_site = Site.objects.get(id=settings.SITE_ID)
