@@ -6,15 +6,45 @@
         <fieldset>
           <legend>Add a punn</legend>
           <div class="control-group">
-            <img src="{{ image }}" width="300px" />
             <label class="control-label" for="focusedInput">Title</label>
             <div class="controls">
-              <input class="input-xlarge focused" id="focusedInput" type="text" value="{{ title }}">
+              <input class="input-xlarge focused" id="focusedInput" type="text" value="{{ title|escape }}">
             </div>
           </div>
+          <div class="control-group">
+            <label class="control-label" for="focusedInput">Image</label>
+              <img class="thumbnail" src="{{ image }}" width="300px" />
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="focusedInput">Source</label>
+            <div class="controls">
+              <input class="input-xlarge" type="text" value="{{ source }}">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="prependedInput">Tags</label>
+            <div class="controls">
+              <div class="input-prepend">
+                <span class="add-on">#</span><input d="prependedInput" size="16" type="text" type="text" class="input-xlarge" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source='["abc","atg"]'><button class="btn" type="button">Go!</button>
+              </div>
+              <p class="help-block">Press enter to enter another tag</p>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inlineCheckboxes">Share</label>
+            <div class="controls">
+              <label class="checkbox inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> Twitter
+              </label>
+              <label class="checkbox inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> Facebook
+              </label>
+            </div>
           <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
         </fieldset>
       </form>
+{% include "footer.html" %}
 
