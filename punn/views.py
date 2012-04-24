@@ -3,6 +3,7 @@ from punn.models import UserProfile
 from punn.models import Comment
 from django.http import HttpResponse
 from django.conf import settings
+from django.contrib import auth
 from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
@@ -18,6 +19,19 @@ def index(request):
 
 def tag(request, shorturl):
     return HttpResponse("Tag page")
+
+def login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = auth.authenticate(username=username, password=password)
+    if user is not None and user.is_active:
+        # Correct password, and the user is marked "active"
+        auth.login(request, user)
+        # Redirect to a success page.
+        return HttpResponseRedirect("/")
+    else:
+        # Show an error page
+        return HttpResponseRedirect("/account/invalid/")
 
 def comment(request, shorturl):
     i = baseconvert(shorturl,BASE62,BASE10)
