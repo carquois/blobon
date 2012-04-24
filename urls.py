@@ -6,8 +6,11 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'punn.views.index'),
-    url(r'^p/(?P<shorturl>.)/$', 'punn.views.detail'),
-    url(r'^api/submit/$', 'punn.views.create'),
+    url(r'^p/(?P<shorturl>.)/$', 'punn.views.single'),
+    url(r'^s/(?P<shorturl>.)/$', 'punn.views.search'),
+    url(r'^t/(?P<shorturl>.)/$', 'punn.views.tag'),
+    url(r'^c/(?P<shorturl>.)/$', 'punn.views.comment'),
+    url(r'^api/submit/$', 'punn.views.submit'),
 
     #TODO http://www.djangobook.com/en/beta/chapter12/
     url(r'^accounts/login/$',  login),
