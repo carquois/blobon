@@ -16,6 +16,12 @@ def index(request):
     current_site = Site.objects.get(id=settings.SITE_ID)
     return render_to_response('index.html', {'site': current_site, 'latest_punn_list': latest_punn_list})
 
+def tag(request, shorturl):
+    return HttpResponse("Tag page")
+
+def comment(request, shorturl):
+    return HttpResponse("Comment page")
+
 def profile_page(request, user):
     u = get_object_or_404(User, username=user)
     current_site = Site.objects.get(id=settings.SITE_ID)
@@ -23,7 +29,6 @@ def profile_page(request, user):
     return render_to_response('profile.html', {'user': u, 'site': current_site, 'latest_punn_list': latest_punn_list})
 
 def create(request): 
-
     if request.method == 'POST': 
       return render_to_response('submit.html', {})
     elif request.method == 'GET':
@@ -35,7 +40,7 @@ def create(request):
     else:
       return render_to_response('submit.html', {})
 
-def detail(request, shorturl):
+def single(request, shorturl):
     current_site = Site.objects.get(id=settings.SITE_ID)
     i = baseconvert(shorturl,BASE62,BASE10)
     p = get_object_or_404(Punn, pk=i)
