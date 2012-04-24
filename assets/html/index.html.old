@@ -1,9 +1,19 @@
-{% extends "base.html" %}
+{% include "header.html" %}
 
-{% block title %}Punn.it / Home{% endblock %}
+{% include "header.html" %}
 
-{% block content %}
+    <title>{{ site.name }} / Home</title>
 
+{% include "style.css" %}
+
+  </head>
+  <body>
+
+{% include "topmenu.html" %}
+
+    <div class="container">
+      <div class="row">
+        <div class="span9">
           <div class="well">
 
 {% include "thumbnails.html" %}
@@ -14,11 +24,8 @@
 {% include "leaderboard.html" %}
 
           </div><!--/well-->
-
-
-{% endblock %}
-{% block sidebar %}
-
+        </div><!--/span-->
+        <div class="span3">
           <div class="well">
             <p>Trending tags</p>
           </div><!--/.well -->
@@ -35,5 +42,12 @@
 {% include "skyscrapper.html" %}
 
           </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
 
-{% endblock %}
+      <hr>
+
+{% include "footer.html" %}
+
+
+

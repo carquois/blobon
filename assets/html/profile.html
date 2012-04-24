@@ -1,13 +1,9 @@
-{% include "header.html" %}
+{% extends "base.html" %}
 
+{% block title %}{{ user.first_name }} {{ user.last_name  }} ({{ user.username }}) on {{ site.name }}{% endblock %}
 
-{% include "header.html" %}
+{% block additional_style %}
 
-    <title>{{ user.first_name }} {{ user.last_name  }} ({{ user.username }}) on {{ site.name }}</title>
-
-{% include "style.css" %}
-
-    <style type="text/css">
       body {
         background-color: #{{ user.userprofile.background_color }};
         color: #{{ user.userprofile.font_color }};
@@ -17,18 +13,11 @@
         background-color:#{{ user.userprofile.well_color }};
       }
 
-    </style>
+{% endblock %}
 
-  </head>
-  <body>
+{% block content %}
 
-{% include "topmenu.html" %}
-
-    <div class="container">
-      <div class="row">
-        <div class="span9">
           <div class="well">
-
 
 {% include "thumbnails.html" %}
 
@@ -38,8 +27,11 @@
 {% include "leaderboard.html" %}
 
           </div><!--/well-->
-        </div><!--/span-->
-        <div class="span3">
+
+
+{% endblock %}
+{% block sidebar %}
+
           <div class="well">
           {% if user.userprofile.avatar %}
             <p><a href="#"><img  width="80" src="{{ user.userprofile.avatar }}" /></a></p>
@@ -55,19 +47,13 @@
 
           </div><!--/.well -->
           <div class="well">
-            <p>Most popular for @user</p> 
+            <p>Most popular for @user</p>
           </div><!--/.well -->
           <div class="well">
 
 {% include "skyscrapper.html" %}
 
           </div><!--/.well -->
-        </div><!--/span-->
-      </div><!--/row-->
 
-      <hr>
-
-{% include "footer.html" %}
-
-
+{% endblock %}
 

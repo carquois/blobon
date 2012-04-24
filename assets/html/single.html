@@ -1,20 +1,22 @@
+{% extends "base.html" %}
 
-{% include "header.html" %}
+{% block title %}{{ punn.title }}{% endblock %}
 
-    <title>{{ punn.title }}</title>
-    <link href='http://fonts.googleapis.com/css?family=Cabin+Condensed' rel='stylesheet' type='text/css'>
+{% block additional_style %}
 
-{% include "style.css" %}
+      body {
+        background-color: #{{ user.userprofile.background_color }};
+        color: #{{ user.userprofile.font_color }};
+      }
 
-  </head>
-  <body>
+      .well{
+        background-color:#{{ user.userprofile.well_color }};
+      }
 
-{% include "topmenu.html" %}
+{% endblock %}
 
+{% block content %}
 
-    <div class="container">
-      <div class="row">
-        <div class="span9">
           <div class="well">
             <h2 class="caption">{{ punn.title }}</h2>
             <div class="well" style="background-color:#181817;margin-top:15px;text-align:center;"><img style=max-width:860px;" src="{{ punn.image }}"  /></div>
@@ -57,8 +59,10 @@
 {% include "leaderboard.html" %}
 
           </div><!--/well-->
-        </div><!--/span-->
-        <div class="span3">
+
+{% endblock %}
+{% block sidebar %}
+
           <div class="well">
             {% if latest_punn_list %}
               <ul class="thumbnails">
@@ -89,7 +93,7 @@
             <p>{{ punn.karma }} points</p>
 
             {% if latest_repunn_list %}
-            <p>Latest repunns : 
+            <p>Latest repunns :
               {% for punn in latest_repunn_list %}
               <img src="{{ punn.author.avatar }}" width="40" alt="{{ punn.title }}"/>
               {% endfor %}
@@ -110,12 +114,6 @@
 
 
           </div><!--/.well -->
-        </div><!--/span-->
-      </div><!--/row-->
 
-      <hr>
-
-{% include "footer.html" %}
-
-
+{% endblock %}
 
