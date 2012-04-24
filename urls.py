@@ -12,8 +12,8 @@ urlpatterns = patterns('',
     url(r'^api/submit/$', 'punn.views.submit'),
 
     #TODO http://www.djangobook.com/en/beta/chapter12/
-    url(r'^accounts/login/$',  login),
-    url(r'^accounts/logout/$', logout),
+    url(r'^login/$',  login),
+    url(r'^logout/$', logout),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?P<user>[^/]+)/$', 'punn.views.profile_page'), 
