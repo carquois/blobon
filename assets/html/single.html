@@ -43,40 +43,14 @@
                    </div>
             {% if top_comments %}
               {% for comment in top_comments %}
-                    <div class="well comment-block" style="background-color:#181817;margin-top:15px;">
-                      <div class="pull-left">
-                        <i class="icon-user"></i><a href="#"> {{ comment.author }}</a> from <a href="{{ comment.source }}">Source</a>
-                      </div>
-                      <div id="action-block" class="pull-right" style="display:none">
-                        <i class="icon-share-alt"></i><a href="#"> Reply</a>
-                        <i class="icon-remove"></i><a href="#"> Report</a>
-                      </div><br /> 
 
-                      <p>{{ comment.content }}</p>
+{% include "comment-block.html" %}
 
-
-
-                    </div>
               {% endfor %}
             {% endif %}
 
-<script>
-  var i = 0;
-  $(".comment-block").mouseover(function() {
-    $(this).find("#action-block").show();
-  }).mouseout(function(){
-    $(this).find("#action-block").hide();
-  });
+{% include "comment-block.js" %}
 
-  var n = 0;
-  $("div.enterleave").mouseenter(function() {
-    n += 1;
-    $(this).find("span").text( "mouse enter x " + n );
-  }).mouseleave(function() {
-    $(this).find("span").text("mouse leave");
-  });
-
-</script>
           </div><!--/well-->
           <div class="well">
 

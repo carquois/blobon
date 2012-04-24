@@ -70,10 +70,12 @@ class Punn(models.Model):
 
 class Comment(models.Model):
     content = models.CharField(max_length=10000)
+    base64id = models.CharField(max_length=140, blank=True)
     author = models.ForeignKey(User)
     punn = models.ForeignKey(Punn)
     karma = models.IntegerField()
-    source = models.URLField(max_length=300)
+    parent = models.ForeignKey('self',  null=True, blank=True)
+    source = models.URLField(max_length=300, blank=True)
     pub_date = models.DateTimeField('date published')
     def __unicode__(self):
         return self.content

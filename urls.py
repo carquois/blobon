@@ -7,7 +7,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'punn.views.index'),
     url(r'^p/(?P<shorturl>.)/$', 'punn.views.single'),
-    url(r'^s/(?P<shorturl>.)/$', 'punn.views.search'),
     url(r'^t/(?P<shorturl>.)/$', 'punn.views.tag'),
     url(r'^c/(?P<shorturl>.)/$', 'punn.views.comment'),
     url(r'^api/submit/$', 'punn.views.submit'),

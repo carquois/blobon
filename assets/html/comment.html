@@ -1,0 +1,63 @@
+
+{% include "header.html" %}
+
+    <title>{{ comment.author }} comment on {{ comment.punn.title }}</title>
+
+{% include "style.css" %}
+
+  </head>
+  <body>
+
+{% include "topmenu.html" %}
+
+
+    <div class="container">
+      <div class="row">
+        <div class="span9">
+          <div class="well">
+
+{% include "comment-block.html" %}
+
+            {% if latest_reply_list %}
+              {% for comment in latest_reply_list %}
+
+{% include "comment-block.html" %}
+
+              {% endfor %}
+            {% endif %}
+
+{% include "comment-block.js" %}
+
+          </div><!--/well-->
+          <div class="well">
+
+{% include "leaderboard.html" %}
+
+          </div><!--/well-->
+        </div><!--/span-->
+        <div class="span3">
+          <div class="well">
+          </div><!--/.well -->
+          <div class="well">
+
+{% include "bigbox.html" %}
+
+          </div><!--/.well -->
+          <div class="well">
+
+          </div><!--/.well -->
+          <div class="well">
+
+{% include "skyscrapper.html" %}
+
+
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+{% include "footer.html" %}
+
+
+

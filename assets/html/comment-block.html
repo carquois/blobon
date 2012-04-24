@@ -1,0 +1,11 @@
+                    <div class="well comment-block" style="background-color:#181817;margin-top:15px;">
+                      <div class="pull-left">
+                        <i class="icon-user"></i><a href="#"> {{ comment.author }}</a> from <a href="{{ comment.source }}">Source</a>
+                      </div>
+                      <div id="action-block" class="pull-right" style="display:none">
+                        <i class="icon-share-alt"></i><a href="#"> Reply</a>
+                        <i class="icon-remove"></i><a href="#"> Report</a>
+                      </div><br />
+
+                      <p>{{ comment.content }}</p>
+                    </div>
