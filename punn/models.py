@@ -1,6 +1,15 @@
 from django.db import models
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
+from django import forms
+from django.forms import ModelForm, CharField, PasswordInput
+
+class UserForm(ModelForm):
+    username = CharField(help_text="Don't worry, you can change it later.")
+    password = CharField(help_text="Be tricky.",widget=forms.PasswordInput())
+    class Meta:
+        model = User
+        fields = ('username', 'password')
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
