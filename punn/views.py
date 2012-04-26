@@ -1,6 +1,7 @@
 from punn.models import Punn
 from punn.models import UserProfile
 from punn.models import Comment
+from punn.models import SignupForm
 from django.http import HttpResponse
 from django.conf import settings
 from django.contrib import auth
@@ -14,15 +15,15 @@ BASE10 = "0123456789"
 BASE62 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"
 
 def signup(request):
-
-    if request.method == 'POST': 
-    username = request.POST['username']
-    password = request.POST['password']
-      return render_to_response('signup.html', {'username': username, 'password': password})
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid(): 
+            return HttpResponseRedirect('/thanks/')
     else:
-      return render_to_response('submit.html', {})
-
+        form = SignupForm()
     return render_to_response('signup.html', {})
+        'form': form,
+    })
 
 def index(request): 
     latest_punn_list = Punn.objects.all().order_by('pub_date')[:24]
