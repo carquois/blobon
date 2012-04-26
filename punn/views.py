@@ -7,10 +7,22 @@ from django.contrib import auth
 from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+from django.contrib.auth.forms import UserCreationForm
 
 BASE10 = "0123456789"
 BASE62 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"
 
+def signup(request):
+
+    if request.method == 'POST': 
+    username = request.POST['username']
+    password = request.POST['password']
+      return render_to_response('signup.html', {'username': username, 'password': password})
+    else:
+      return render_to_response('submit.html', {})
+
+    return render_to_response('signup.html', {})
 
 def index(request): 
     latest_punn_list = Punn.objects.all().order_by('pub_date')[:24]
@@ -25,13 +37,14 @@ def login(request):
     password = request.POST['password']
     user = auth.authenticate(username=username, password=password)
     if user is not None and user.is_active:
-        # Correct password, and the user is marked "active"
         auth.login(request, user)
-        # Redirect to a success page.
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect("/fdsa/")
     else:
-        # Show an error page
         return HttpResponseRedirect("/account/invalid/")
+
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect("/account/loggedout/")
 
 def comment(request, shorturl):
     i = baseconvert(shorturl,BASE62,BASE10)
