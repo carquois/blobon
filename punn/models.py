@@ -13,9 +13,6 @@ class UserForm(ModelForm):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    #TODO https://github.com/simplegeo/python-oauth2
-    oauth_token = models.CharField(max_length=200, blank=True)
-    oauth_secret = models.CharField(max_length=200, blank=True)
     #Basic infos
     description = models.CharField(max_length=160, blank=True)
     avatar = models.URLField(max_length=300, blank=True)
@@ -29,8 +26,9 @@ class UserProfile(models.Model):
     link_color = models.CharField(max_length=6, blank=True)
     #Social infos
     facebook_profile = models.URLField(max_length=300, blank=True)
-    twitter_oauth_token = models.CharField(max_length=120, blank=True)
-    twitter_oauth_token_secret = models.CharField(max_length=120, blank=True)
+    twitter_profile = models.URLField(max_length=300, blank=True)
+    #Google Infos
+    analytics_account = models.CharField(max_length=50, blank=True)
     def __unicode__(self):
         return self.description
 
