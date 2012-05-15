@@ -6,33 +6,27 @@
 
  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-
-<div class="row well">
-  <div class="span2">
-<img class="span2 thumbnail" src="{{ image|escape }}" />
-</div>
-  <div class="span2 offset1">
-
-<form action="" method="post">
-          <legend>Add a punn</legend>
-  <label>Title</label>
-  <input type="text" class="span3" value="{{ title|escape }}" placeholder="Type something…">
-  <label>Tags</label>
-  <input type="text" class="span3" value="{{ tags|escape }}" placeholder="Separate tags by commas">
-  <button type="submit" class="btn">Submit</button>
-</form>
-
-  </div>
-</div>
-
-
-
-
+          <div class="row well">
+            <div class="span2">
+              <img class="span2 thumbnail" src="{{ image|escape }}" />
+            </div>
+            <div class="span2 offset1">
+              <form action="/api/submit" method="post">
+                <legend>Add a punn</legend>
+                <label>Title</label>
+                <input type="text" class="span3" value="{{ title|escape }}" placeholder="Type something…">
+                <label>Tags</label>
+                <input type="text" class="span3" value="{{ tags|escape }}" placeholder="Separate tags by commas">
+                <input type="hidden" name="url" value="{{ source|escape }}" id="id_url" />
+                <button type="submit" class="btn">Submit</button>
+              </form>
+            </div>
+          </div>
 
 {% endblock %}
 {% block sidebar %}
 
-         <div class="well">
+          <div class="well">
           </div><!--/well-->
 
 {% endblock %}
