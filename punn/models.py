@@ -66,6 +66,10 @@ class Punn(models.Model):
         if not self.base62id:
             self.base62id = baseconvert(str(self.id),BASE10,BASE62)
             self.save()
+    def get_absolute_url(self):
+        return "/p/%i/" % self.base62id
+
+
 
 class Comment(models.Model):
     content = models.CharField(max_length=10000)
