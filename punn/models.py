@@ -41,7 +41,7 @@ class Punn(models.Model):
     #Basic infos
     title = models.CharField(max_length=140)
     base64id = models.CharField(max_length=140, blank=True)
-    karma = models.IntegerField(blank=True)
+    karma = models.IntegerField(default=0)
     source = models.URLField(max_length=300, blank=True)
     author = models.ForeignKey(User)
     original_punn = models.ForeignKey('self',  null=True, blank=True)
@@ -58,11 +58,13 @@ class Punn(models.Model):
     facebook_publication_link = models.URLField(max_length=300, blank=True)
     tweet_link = models.URLField(max_length=300, blank=True)
     reddit_link = models.URLField(max_length=300, blank=True)
-    #Adsense && Analytics
-    analytics_id = models.CharField(max_length=30, blank=True)
-    adsense_id = models.CharField(max_length=30, blank=True)
     def __unicode__(self):
         return self.title
+    def save(self):
+        super(Car, self).save()
+        # Place code here, which is excecuted the same
+        # time the ``post_save``-signal would be
+
 
 class Comment(models.Model):
     content = models.CharField(max_length=10000)
