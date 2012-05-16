@@ -32,16 +32,6 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.description
 
-class App(models.Model):
-    name = models.CharField(max_length=32)
-    description = models.CharField(max_length=140)
-    website = models.URLField(max_length=300)
-    author = models.ForeignKey(User)
-    consumer_key = models.CharField(max_length=120)
-    consumer_secret = models.CharField(max_length=120)
-    def __unicode__(self):
-        return self.name
-
 class Tag(models.Model):
     name = models.CharField(max_length=30)
     def __unicode__(self):
@@ -51,11 +41,10 @@ class Punn(models.Model):
     #Basic infos
     title = models.CharField(max_length=140)
     base64id = models.CharField(max_length=140, blank=True)
-    karma = models.IntegerField()
+    karma = models.IntegerField(blank=True)
     source = models.URLField(max_length=300, blank=True)
     author = models.ForeignKey(User)
     original_punn = models.ForeignKey('self',  null=True, blank=True)
-    app = models.ForeignKey(App)
     tags = models.ManyToManyField(Tag, null=True, blank=True)
     created = models.DateTimeField(auto_now_add = True)
     pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
