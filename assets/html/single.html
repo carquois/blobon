@@ -67,7 +67,7 @@
             {% if latest_punn_list %}
               <ul class="thumbnails">
               {% for punn in latest_punn_list %}
-                <li class="span1"><a class="thumbnail" href="/p/{{ punn.base64id }}/"><img width="130" src="{{ punn.thumbnail }}" alt="{{ punn.title }}" /></a></li>
+                <li class="span1"><a class="thumbnail" href="{{ punn.get_absolute_url }}"><img width="130" src="{{ punn.thumbnail }}" alt="{{ punn.title }}" /></a></li>
               {% endfor %}
               </ul>
             {% else %}
