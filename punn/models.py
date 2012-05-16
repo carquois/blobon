@@ -57,8 +57,8 @@ class Punn(models.Model):
     original_punn = models.ForeignKey('self',  null=True, blank=True)
     app = models.ForeignKey(App)
     tags = models.ManyToManyField(Tag, null=True, blank=True)
-    created = models.DateTimeField()
-    pub_date = models.DateTimeField('date published',  null=True, blank=True)
+    created = models.DateTimeField(auto_now_add = True)
+    pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
     #Media infos
     thumbnail = models.URLField(max_length=300, blank=True)
     image = models.URLField(max_length=300, blank=True)
