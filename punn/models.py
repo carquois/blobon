@@ -20,6 +20,12 @@ class UserProfile(models.Model):
     domain = models.URLField(max_length=50, blank=True)
     location = models.CharField(max_length=50, blank=True)
     sites = models.ForeignKey(Site, blank=True, null=True)
+    LANGUAGES_CHOICES = (
+        ('en', 'English'),
+        ('fr', 'Français'),
+        ('qc', 'Québécois'),
+    )
+    language = models.CharField(default="en", max_length=2, choices=LANGUAGES_CHOICES)
     #Custom user design
     background_color = models.CharField(max_length=6, blank=True)
     well_color = models.CharField(max_length=6, blank=True)
