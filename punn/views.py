@@ -66,6 +66,10 @@ def profile_page(request, user):
 @login_required
 def submit(request): 
     if request.method == 'POST': 
+      title = request.POST.get('title', '')
+      image = request.POST.get('image', '')
+      source = request.POST.get('source', '')
+      tags = request.POST.get('tags', '')
       return render_to_response('submit.html', {})
     elif request.method == 'GET':
       title = request.GET.get('title', '') 
