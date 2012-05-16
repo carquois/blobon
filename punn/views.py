@@ -10,9 +10,11 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 BASE10 = "0123456789"
 BASE62 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"
+
 
 def signup(request):
     if request.method == 'POST':
@@ -61,6 +63,7 @@ def profile_page(request, user):
     latest_punn_list = Punn.objects.filter(author=u).order_by('pub_date')[:24]
     return render_to_response('profile.html', {'user': u, 'site': current_site, 'latest_punn_list': latest_punn_list})
 
+@login_required
 def submit(request): 
     if request.method == 'POST': 
       return render_to_response('submit.html', {})
