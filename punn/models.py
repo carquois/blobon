@@ -3,6 +3,7 @@ from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 from django import forms
 from django.forms import ModelForm, CharField, PasswordInput
+from punn.utils import BASE10, BASE62, baseconvert
 
 class UserForm(ModelForm):
     username = CharField(help_text="Don't worry, you can change it later.")
@@ -40,7 +41,7 @@ class Tag(models.Model):
 class Punn(models.Model):
     #Basic infos
     title = models.CharField(max_length=140)
-    base64id = models.CharField(max_length=140, blank=True)
+    base62id = models.CharField(max_length=140, blank=True)
     karma = models.IntegerField(default=0)
     source = models.URLField(max_length=300, blank=True)
     author = models.ForeignKey(User)
@@ -61,10 +62,10 @@ class Punn(models.Model):
     def __unicode__(self):
         return self.title
     def save(self):
-        super(Car, self).save()
-        # Place code here, which is excecuted the same
-        # time the ``post_save``-signal would be
-
+        super(Punn, self).save()
+        if not self.base62id:
+            self.base62id = baseconvert(str(self.id),BASE10,BASE62)
+            self.save()
 
 class Comment(models.Model):
     content = models.CharField(max_length=10000)
