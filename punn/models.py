@@ -59,16 +59,16 @@ class Punn(models.Model):
         ('i', 'Image'),
         ('v', 'Video'),
         ('a', 'Audio'),
-        ('c', 'Comment'),
-        ('s', 'Stories'),
+        ('t', 'Tweet'),
+        ('s', 'Story'),
     )
     punn_type = models.CharField(default="1", max_length=2, types=PUNN_TYPES)
+    image = models.ForeignKey(Image,  null=True, blank=True)
+    video = models.ForeignKey(Video,  null=True, blank=True)
+    audio = models.ForeignKey(Audio,  null=True, blank=True)
+    tweet = models.ForeignKey(Tweet,  null=True, blank=True)
+    story = models.ForeignKey(Story,  null=True, blank=True)
     #Media infos
-    thumbnail = models.URLField(max_length=300, blank=True)
-    image = models.URLField(max_length=300, blank=True)
-    content = models.CharField(max_length=10000, blank=True)
-    youtube_id = models.CharField(max_length=30, blank=True)
-    vimeo_id = models.CharField(max_length=30, blank=True)
     #Social infos
     facebook_publication_link = models.URLField(max_length=300, blank=True)
     tweet_link = models.URLField(max_length=300, blank=True)
@@ -83,6 +83,24 @@ class Punn(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('punn.views.single', [str(self.base62id)])
+
+#TODO PUT THE DEFAULT THUMBNAILS
+class Story(models.Model):
+    thumbnail = models.ImageField(max_length=300, blank=True)
+    content = models.TextField(max_length=10000, blank=True)
+
+class Image(models.Model):
+    thumbnail = models.ImageField(max_length=300, blank=True)
+    image = models.URLField(max_length=300, blank=True)
+
+class Video(models.Model):
+    thumbnail = models.ImageField(max_length=300, blank=True)
+    youtube_id = models.CharField(max_length=30, blank=True)
+    vimeo_id = models.CharField(max_length=30, blank=True)
+
+class Audio(models.Model):
+    thumbnail = models.ImageField(max_length=300, blank=True)
+    audio = models.FileField(blank=True)
 
 class Comment(models.Model):
     content = models.CharField(max_length=10000)
