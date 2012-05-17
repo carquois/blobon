@@ -55,6 +55,14 @@ class Punn(models.Model):
     tags = models.ManyToManyField(Tag, null=True, blank=True)
     created = models.DateTimeField(auto_now_add = True)
     pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
+    PUNN_TYPES = (
+        ('i', 'Image'),
+        ('v', 'Video'),
+        ('a', 'Audio'),
+        ('c', 'Comment'),
+        ('s', 'Stories'),
+    )
+    punn_type = models.CharField(default="1", max_length=2, types=PUNN_TYPES)
     #Media infos
     thumbnail = models.URLField(max_length=300, blank=True)
     image = models.URLField(max_length=300, blank=True)
@@ -75,7 +83,6 @@ class Punn(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('punn.views.single', [str(self.base62id)])
-
 
 class Comment(models.Model):
     content = models.CharField(max_length=10000)
