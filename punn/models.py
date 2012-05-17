@@ -44,6 +44,28 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
 
+#TODO PUT THE DEFAULT THUMBNAILS
+class Story(models.Model):
+    thumbnail = models.ImageField(upload_to='pics', blank=True)
+    content = models.TextField(max_length=10000, blank=True)
+
+class Image(models.Model):
+    thumbnail = models.ImageField(upload_to='pics', blank=True)
+    image = models.ImageField(upload_to='pics', blank=True)
+
+class Video(models.Model):
+    thumbnail = models.ImageField(upload_to='pics', blank=True)
+    youtube_id = models.CharField(max_length=30, blank=True)
+    vimeo_id = models.CharField(max_length=30, blank=True)
+
+class Audio(models.Model):
+    thumbnail = models.ImageField(upload_to='pics', blank=True)
+    audio = models.FileField(upload_to='audio', blank=True)
+
+class Tweet(models.Model):
+    thumbnail = models.ImageField(upload_to='pics', blank=True)
+
+#The Shared Punn Model
 class Punn(models.Model):
     #Basic infos
     title = models.CharField(max_length=140)
@@ -62,7 +84,7 @@ class Punn(models.Model):
         ('t', 'Tweet'),
         ('s', 'Story'),
     )
-    punn_type = models.CharField(default="1", max_length=2, types=PUNN_TYPES)
+    punn_type = models.CharField(default="1", max_length=2, choices=PUNN_TYPES)
     image = models.ForeignKey(Image,  null=True, blank=True)
     video = models.ForeignKey(Video,  null=True, blank=True)
     audio = models.ForeignKey(Audio,  null=True, blank=True)
@@ -84,23 +106,6 @@ class Punn(models.Model):
     def get_absolute_url(self):
         return ('punn.views.single', [str(self.base62id)])
 
-#TODO PUT THE DEFAULT THUMBNAILS
-class Story(models.Model):
-    thumbnail = models.ImageField(max_length=300, blank=True)
-    content = models.TextField(max_length=10000, blank=True)
-
-class Image(models.Model):
-    thumbnail = models.ImageField(max_length=300, blank=True)
-    image = models.URLField(max_length=300, blank=True)
-
-class Video(models.Model):
-    thumbnail = models.ImageField(max_length=300, blank=True)
-    youtube_id = models.CharField(max_length=30, blank=True)
-    vimeo_id = models.CharField(max_length=30, blank=True)
-
-class Audio(models.Model):
-    thumbnail = models.ImageField(max_length=300, blank=True)
-    audio = models.FileField(blank=True)
 
 class Comment(models.Model):
     content = models.CharField(max_length=10000)
