@@ -3,6 +3,7 @@ from punn.models import UserProfile
 from punn.models import Comment
 from punn.utils import BASE10, BASE62, baseconvert
 from punn.models import UserForm
+from punn.models import UserProfileForm
 from django.http import HttpResponse
 from django.conf import settings
 from django.contrib import auth
@@ -18,13 +19,24 @@ def signup(request):
         form = UserForm(request.POST)
         if form.is_valid(): 
           form.save()
-          return HttpResponseRedirect('/login/')
+          return HttpResponseRedirect('/')
     else:
         form = UserForm()
     return render_to_response('signup.html', {
         'form': form,
     })
 
+def edit_profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST)
+        if form.is_valid():
+          form.save()
+          return HttpResponseRedirect('/')
+    else:
+        form = UserProfileForm()
+    return render_to_response('edit_profile.html', {
+        'form': form,
+    })
 
 def index(request): 
     latest_punn_list = Punn.objects.all().order_by('pub_date')[:24]

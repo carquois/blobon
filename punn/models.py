@@ -2,12 +2,12 @@ from django.db import models
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 from django import forms
-from django.forms import ModelForm, CharField, PasswordInput
+from django.forms import EmailField, ModelForm, CharField, PasswordInput
 from punn.utils import BASE10, BASE62, baseconvert
 
 class UserForm(ModelForm):
     username = CharField(help_text="Don't worry, you can change it later.")
-    email = CharField(help_text="What’s your email address?")
+    email = EmailField(help_text="What’s your email address?")
     password = CharField(help_text="Be tricky.",widget=forms.PasswordInput())
     class Meta:
         model = User
@@ -39,6 +39,11 @@ class UserProfile(models.Model):
     analytics_account = models.CharField(max_length=50, blank=True)
     def __unicode__(self):
         return self.description
+
+class UserProfileForm(ModelForm):
+    location = CharField(help_text="Where in the world are you?")
+    class Meta:
+        model = UserProfile
 
 class Tag(models.Model):
     name = models.CharField(max_length=30)

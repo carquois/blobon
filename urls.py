@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^submit/$', 'punn.views.submit'),
     url(r'^login/$',  login),
     url(r'^logout/$', logout),
+    url(r'^settings/profile/$', 'punn.views.edit_profile'),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?P<user>[^/]+)/$', 'punn.views.profile_page'), 
