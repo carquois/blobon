@@ -18,7 +18,7 @@ def signup(request):
         form = UserForm(request.POST)
         if form.is_valid(): 
           form.save()
-          return HttpResponseRedirect('/api/login/')
+          return HttpResponseRedirect('/login/')
     else:
         form = UserForm()
     return render_to_response('signup.html', {
