@@ -108,14 +108,15 @@ class Punn(models.Model):
 
 
 class Comment(models.Model):
-    content = models.CharField(max_length=10000)
+    content = models.TextField(max_length=10000)
     base62id = models.CharField(max_length=140, blank=True)
     author = models.ForeignKey(User)
     punn = models.ForeignKey(Punn)
-    karma = models.IntegerField()
+    karma = models.IntegerField(default=0)
     parent = models.ForeignKey('self',  null=True, blank=True)
     source = models.URLField(max_length=300, blank=True)
-    pub_date = models.DateTimeField('date published')
+    created = models.DateTimeField(auto_now_add = True)
+    pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
     def __unicode__(self):
         return self.content
     def save(self):
