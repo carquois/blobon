@@ -13,10 +13,6 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 
-BASE10 = "0123456789"
-BASE62 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"
-
-
 def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -48,13 +44,13 @@ def login(request):
     else:
         return HttpResponseRedirect("/account/invalid/")
 
+@login_required
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect("/account/loggedout/")
 
 def comment(request, shorturl):
-    i = baseconvert(shorturl,BASE62,BASE10)
-    c = get_object_or_404(Comment, pk=i)
+    c = get_object_or_404(Comment, base62id=shorturl)
     latest_reply_list = Comment.objects.filter(parent=c.id).order_by('pub_date')[:6]
     return render_to_response('comment.html', {'comment': c, 'latest_reply_list': latest_reply_list})
 
@@ -83,8 +79,7 @@ def submit(request):
 
 def single(request, shorturl):
     current_site = Site.objects.get(id=settings.SITE_ID)
-    i = baseconvert(shorturl,BASE62,BASE10)
-    p = get_object_or_404(Punn, pk=i)
+    p = get_object_or_404(Punn, base62id=shorturl)
     u = p.author
     latest_punn_list = Punn.objects.filter(pub_date__gt=p.pub_date).order_by('pub_date').exclude(pk=p.id)[:6]
     latest_repunn_list = Punn.objects.filter(original_punn=p.id).order_by('pub_date')[:6]
