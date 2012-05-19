@@ -7,10 +7,11 @@ from punn.utils import BASE10, BASE62, baseconvert
 
 class UserForm(ModelForm):
     username = CharField(help_text="Don't worry, you can change it later.")
+    email = CharField(help_text="What’s your email address?")
     password = CharField(help_text="Be tricky.",widget=forms.PasswordInput())
     class Meta:
         model = User
-        fields = ('username', 'password')
+        fields = ('username', 'email', 'password')
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
