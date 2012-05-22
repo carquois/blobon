@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 from django import forms
-from django.forms import EmailField, ModelForm, CharField, PasswordInput
+from django.forms import ImageField, EmailField, ModelForm, CharField, PasswordInput
 from punn.utils import BASE10, BASE62, baseconvert
 
 class UserForm(ModelForm):
@@ -17,7 +17,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     #Basic infos
     description = models.CharField(max_length=160, blank=True)
-    avatar = models.URLField(max_length=300, blank=True)
+    avatar = models.ImageField(upload_to='pics', blank=True)
     domain = models.URLField(max_length=50, blank=True)
     location = models.CharField(max_length=50, blank=True)
     sites = models.ForeignKey(Site, blank=True, null=True)
@@ -41,9 +41,11 @@ class UserProfile(models.Model):
         return self.description
 
 class UserProfileForm(ModelForm):
+    avatar   = ImageField(help_text="Maximum size of 700k. JPG, GIF, PNG.")
     location = CharField(help_text="Where in the world are you?")
     class Meta:
         model = UserProfile
+        fields = ('avatar', 'domain')
 
 class Tag(models.Model):
     name = models.CharField(max_length=30)

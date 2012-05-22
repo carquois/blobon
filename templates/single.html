@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}{{ punn.title }}{% endblock %}
+
+{% block additional_style %}
+
+      body {
+        background-color: #{{ user.userprofile.background_color }};
+        color: #{{ user.userprofile.font_color }};
+      }
+
+      .well{
+        background-color:#{{ user.userprofile.well_color }};
+      }
+
+{% endblock %}
+
+{% block content %}
+
+          <div class="well">
+            <h2 class="caption">{{ punn.title }}</h2>
+            <div class="well" style="background-color:#181817;margin-top:15px;text-align:center;"><img style=max-width:860px;" src="{{ punn.image }}"  /></div>
+                    <div class="well comment-block" style="background-color:#181817;margin-top:15px;">
+                    <button class="btn btn-primary">Rocks</button>
+                    <button class="btn btn-primary">Sucks</button>
+                    <form class="form-inline">
+                      <textarea class="input-xlarge" id="textarea" rows="1" style="margin-left: 0px; margin-right: 0px; width: 425px; "></textarea>
+                      <button type="submit" class="btn btn-inverse">Comment</button>
+                    </form>
+                    <a data-toggle="modal" href="#share-block" class="btn btn-inverse">Share</a>
+
+          <div id="share-block" class="modal hide fade">
+            <div class="modal-header">
+              <a class="close" data-dismiss="modal" >&times;</a>
+              <h3>Share</h3>
+            </div>
+            <div class="modal-body">
+              <h4>Facebook</h4>
+            <div class="modal-footer">
+              <a href="#" class="btn" data-dismiss="modal" >Close</a>
+            </div>
+          </div>
+
+          </div>
+                   </div>
+            {% if top_comments %}
+              {% for comment in top_comments %}
+
+{% include "comment-block.html" %}
+
+              {% endfor %}
+            {% endif %}
+
+{% include "comment-block.js" %}
+
+          </div><!--/well-->
+          <div class="well">
+
+{% include "leaderboard.html" %}
+
+          </div><!--/well-->
+
+{% endblock %}
+{% block sidebar %}
+
+          <div class="well">
+            {% if latest_punn_list %}
+              <ul class="thumbnails">
+              {% for punn in latest_punn_list %}
+                <li class="span1"><a class="thumbnail" href="{{ punn.get_absolute_url }}"><img width="130" src="{{ punn.thumbnail }}" alt="{{ punn.title }}" /></a></li>
+              {% endfor %}
+              </ul>
+            {% else %}
+              <p>No punns are available.</p>
+            {% endif %}
+          </div><!--/.well -->
+          <div class="well">
+
+{% include "bigbox.html" %}
+
+          </div><!--/.well -->
+          <div class="well">
+          {% if punn.author.avatar %}
+            <p><a href="#"><img  width="80" src="{{ punn.author.avatar }}" /></a></p>
+          {% endif %}
+          {% if punn.source %}
+            <p><a href="{{ punn.source }} ">Source</a></p>
+          {% endif %}
+          {% if punn.original_punn %}
+             <p>Originally punned by {{ punn.original_punn.author.name }}
+          {% endif %}
+            <p>Submitted : {{ punn.pub_date }} via <a href="{{ punn.app.website }}">{{ punn.app.name }}</a></p>
+            <p>{{ punn.karma }} points</p>
+
+            {% if latest_repunn_list %}
+            <p>Latest repunns :
+              {% for punn in latest_repunn_list %}
+              <img src="{{ punn.author.avatar }}" width="40" alt="{{ punn.title }}"/>
+              {% endfor %}
+            </p>
+            {% endif %}
+
+            {% if tag_cloud %}
+              {% for tag in tag_cloud %}
+              <button class="btn btn-primary"><i class="icon-tag"></i> #{{ tag.name }}</button>
+              {% endfor %}
+            {% endif %}
+
+
+          </div><!--/.well -->
+          <div class="well">
+
+{% include "skyscrapper.html" %}
+
+
+          </div><!--/.well -->
+
+{% endblock %}
+
