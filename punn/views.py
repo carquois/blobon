@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.template import RequestContext
 
 def signup(request):
     if request.method == 'POST':
@@ -26,6 +27,7 @@ def signup(request):
         'form': form,
     })
 
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST)
@@ -41,7 +43,9 @@ def edit_profile(request):
 def index(request): 
     latest_punn_list = Punn.objects.all().order_by('pub_date')[:24]
     current_site = Site.objects.get(id=settings.SITE_ID)
-    return render_to_response('index.html', {'site': current_site, 'latest_punn_list': latest_punn_list})
+    return render_to_response('index.html', 
+                              {'site': current_site, 'latest_punn_list': latest_punn_list}, 
+                              context_instance=RequestContext(request))
 
 def tag(request, shorturl):
     return HttpResponse("Tag page")
