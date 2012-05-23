@@ -1,9 +1,24 @@
             {% if latest_punn_list %}
               <ul class="thumbnails">
               {% for punn in latest_punn_list %}
-                <li class="span2">
-                  <a class="thumbnail" href="{{ punn.get_absolute_url }}"><img width="200" src="{{ punn.thumbnail }}" alt="{{ punn.title }}" /></a> 
-                </li>
+        <li class="span2">
+          <div class="thumbnail">
+            <img src="{{ punn.thumbnail }}" alt="{{ punn.title }}">
+            <div class="caption">
+              <h5>{{ punn.title }}</h5>
+
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <button class="btn"><i class="icon-picture"></i></button>
+          <button class="btn"><i class="icon-thumbs-up"></i>{{ punn.karma }}</button>
+          <button class="btn"><i class="icon-comment"></i> </button>
+          <button class="btn"><i class="icon-user"></i></button>
+        </div>
+      </div>
+
+            </div>
+          </div>
+        </li>
               {% endfor %}
               </ul>
             {% else %}
