@@ -124,7 +124,6 @@ class Comment(models.Model):
     punn = models.ForeignKey(Punn)
     karma = models.IntegerField(default=0)
     parent = models.ForeignKey('self',  null=True, blank=True)
-    source = models.URLField(max_length=300, blank=True)
     created = models.DateTimeField(auto_now_add = True)
     pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
     def __unicode__(self):
