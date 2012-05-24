@@ -38,22 +38,24 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="#">Punn.it</a>
-            <div class="btn-group pull-right">
-              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="icon-user"></i> @{{ user.username }}
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
+          <img style="padding-top:5px;" src="http://asseenontheinter.net/punn_it.png" alt="logo punn.it" />
+            <ul class="nav pull-right">
+              <li id="fat-menu" class="dropdown">
+
+{% if is_logged_in %}Thanks for logging in!{% else %}Please log in.{% endif %}
+
+{{ user.username }}
+
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown 3 <b class="caret"></b></a>
+               <ul class="dropdown-menu">
                 <li><a href="#">View my profile</a></li>
                 <li class="divider"></li>
                 <li><a href="#">Settings</a></li>
                 <li><a href="#">Sign out</a></li>
-              </ul>
+               </ul>
+              </li>
+            </ul>
             </div>
-            <form class="navbar-search pull-right" action="">
-              <input type="text" class="search-query span2" placeholder="Search">
-            </form>
           </div>
         </div>
       </div>
