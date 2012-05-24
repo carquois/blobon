@@ -15,6 +15,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 
+
 def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
