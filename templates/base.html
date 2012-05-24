@@ -39,8 +39,11 @@
           <img style="padding-top:5px;" src="http://asseenontheinter.net/punn_it.png" alt="logo punn.it" />
             <ul class="nav pull-right">
               <li id="fat-menu" class="dropdown">
-              {% if not request.user.is_anonymous %}
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown 3 <b class="caret"></b></a>
+              {% if request.user.is_authenticated %}
+              <a style="padding-top:15px" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img width="50px" src="http://a0.twimg.com/profile_images/2243622940/photo__1__normal.JPG" alt="avatar of {{ user.username }}" />
+                <b class="caret"></b>
+              </a>
                <ul class="dropdown-menu">
                 <li><a href="#">View my profile</a></li>
                 <li class="divider"></li>
@@ -50,22 +53,21 @@
               {% else %}
 
 
-              <a style="padding-top:20px" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-lock icon-white"></i> Login<b class="caret"></b></a>
+              <a style="padding-top:20px" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="icon-lock icon-white"></i> Login<b class="caret"></b>
+              </a>
                <ul class="dropdown-menu">
-<div class="well">
-<form action="/login/" method='post'>
-  {% csrf_token %}
-  <label>Username or email</label>
-  <input type="text" class="span3">
-  <label>Password</label>
-  <input type="password" class="span3">
-  <button type="submit" class="btn">Login</button>
-</form>
-
-<a href="#">Forgot password?</a>
-<a href="/signup/">New to Punn.it? Sign up</a>
-
-</div>
+                 <div class="well">
+                   <form action="/login/" method='post'>{% csrf_token %}
+                     <label>Username or email</label>
+                     <input type="text" class="span3">
+                     <label>Password</label>
+                     <input type="password" class="span3">
+                     <button type="submit" class="btn">Login</button>
+                   </form>
+                   <a href="#">Forgot password?</a>
+                   <a href="/signup/">New to Punn.it? Sign up</a>
+                 </div>
                </ul>
                {% endif %}
               </li>
