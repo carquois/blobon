@@ -3,37 +3,19 @@
 {% block title %}Punn.it / Home{% endblock %}
 
 {% block content %}
-
-          <div class="well">
-
-{% include "thumbnails.html" %}
-
-          </div><!--/well-->
-          <div class="well">
-
-{% include "leaderboard.html" %}
-
-          </div><!--/well-->
-
-
+          <div>
+          {% include "thumbnails.html" %}
+          </div>
+          <div>
+          {% include "leaderboard.html" %}
+          </div>
 {% endblock %}
+
 {% block sidebar %}
-
-          <div class="well">
-            <p>Trending tags</p>
-          </div><!--/.well -->
-          <div class="well">
-
-{% include "bigbox.html" %}
-
-          </div><!--/.well -->
-          <div class="well">
-            <p>Plus populaires</p> 
-          </div><!--/.well -->
-          <div class="well">
-
-{% include "skyscrapper.html" %}
-
-          </div><!--/.well -->
-
+          <div>
+          {% include "bigbox.html" %}
+          </div>
+          <div>
+          {% include "skyscrapper.html" %}
+          </div>
 {% endblock %}
