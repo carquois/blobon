@@ -3,10 +3,10 @@
               {% for punn in latest_punn_list %}
         <li class="span2">
           <div class="thumbnail">
-            <img src="{{ punn.thumbnail }}" alt="{{ punn.title }}">
+            <a href="{{ punn.get_absolute_url }}"><img src="{{ punn.thumbnail }}" alt="{{ punn.title }}"></a>
             <div class="caption">
 
-      <div class="btn-toolbar">
+      <div class="btn-toolbar" style="margin-top:-6px;margin-bottom:-10px;">
         <div class="btn-group">
           <button class="btn"><i class="icon-picture"></i></button>
           <button class="btn"><i class="icon-thumbs-up"></i>{{ punn.karma }}</button>
