@@ -52,28 +52,6 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
 
-#TODO PUT THE DEFAULT THUMBNAILS
-class Story(models.Model):
-    thumbnail = models.ImageField(upload_to='pics', blank=True)
-    content = models.TextField(max_length=10000, blank=True)
-
-class Image(models.Model):
-    thumbnail = models.ImageField(upload_to='pics', blank=True)
-    image = models.ImageField(upload_to='pics', blank=True)
-
-class Video(models.Model):
-    thumbnail = models.ImageField(upload_to='pics', blank=True)
-    youtube_id = models.CharField(max_length=30, blank=True)
-    vimeo_id = models.CharField(max_length=30, blank=True)
-
-class Audio(models.Model):
-    thumbnail = models.ImageField(upload_to='pics', blank=True)
-    audio = models.FileField(upload_to='audio', blank=True)
-
-class Tweet(models.Model):
-    thumbnail = models.ImageField(upload_to='pics', blank=True)
-
-#The Shared Punn Model
 class Punn(models.Model):
     #Basic infos
     title = models.CharField(max_length=140)
@@ -85,20 +63,6 @@ class Punn(models.Model):
     tags = models.ManyToManyField(Tag, null=True, blank=True)
     created = models.DateTimeField(auto_now_add = True)
     pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
-    #PUNN_TYPES = (
-    #    ('i', 'Image'),
-    #    ('v', 'Video'),
-    #    ('a', 'Audio'),
-    #    ('t', 'Tweet'),
-    #    ('s', 'Story'),
-    #)
-    #punn_type = models.CharField(default="1", max_length=2, choices=PUNN_TYPES)
-    #image = models.ForeignKey(Image,  null=True, blank=True)
-    #video = models.ForeignKey(Video,  null=True, blank=True)
-    #audio = models.ForeignKey(Audio,  null=True, blank=True)
-    #tweet = models.ForeignKey(Tweet,  null=True, blank=True)
-    #story = models.ForeignKey(Story,  null=True, blank=True)
-    #Media infos
     #Social infos
     image = models.URLField(max_length=300, blank=True)
     thumbnail = models.URLField(max_length=300, blank=True)
