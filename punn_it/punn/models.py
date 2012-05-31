@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
@@ -7,7 +10,7 @@ from punn.utils import BASE10, BASE62, baseconvert
 
 class UserForm(ModelForm):
     username = CharField(help_text="Don't worry, you can change it later.")
-    email = EmailField(help_text="What’s your email address?")
+    email = EmailField(help_text="What's your email address?")
     password = CharField(help_text="Be tricky.",widget=forms.PasswordInput())
     class Meta:
         model = User
@@ -23,7 +26,7 @@ class UserProfile(models.Model):
     sites = models.ForeignKey(Site, blank=True, null=True)
     LANGUAGES_CHOICES = (
         ('en', 'English'),
-        ('fr', 'Français'),
+        ('fr', 'Francais'),
         ('qc', 'Québécois'),
     )
     language = models.CharField(default="en", max_length=2, choices=LANGUAGES_CHOICES)
