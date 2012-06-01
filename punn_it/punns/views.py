@@ -1,9 +1,9 @@
-from punn.models import Punn
-from account.models import UserProfile
-from comment.models import Comment
-from punn.utils import BASE10, BASE62, baseconvert
-from account.models import UserForm
-from account.models import UserProfileForm
+from punns.models import Punn
+from accounts.models import UserProfile
+from comments.models import Comment
+from punns.utils import BASE10, BASE62, baseconvert
+from accounts.models import UserForm
+from accounts.models import UserProfileForm
 from django.http import HttpResponse
 from django.conf import settings
 from django.contrib import auth
