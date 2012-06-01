@@ -8,29 +8,24 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Punn'
-        db.create_table('punn_punn', (
+        # Adding model 'Comment'
+        db.create_table('comment_comment', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=140)),
+            ('content', self.gf('django.db.models.fields.TextField')(max_length=10000)),
             ('base62id', self.gf('django.db.models.fields.CharField')(max_length=140, blank=True)),
-            ('karma', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('source', self.gf('django.db.models.fields.URLField')(max_length=300, blank=True)),
             ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('original_punn', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['punn.Punn'], null=True, blank=True)),
+            ('punn', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['punn.Punn'])),
+            ('karma', self.gf('django.db.models.fields.IntegerField')(default=0)),
+            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['comment.Comment'], null=True, blank=True)),
             ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('pub_date', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, null=True, blank=True)),
-            ('image', self.gf('django.db.models.fields.URLField')(max_length=300, blank=True)),
-            ('thumbnail', self.gf('django.db.models.fields.URLField')(max_length=300, blank=True)),
-            ('facebook_publication_link', self.gf('django.db.models.fields.URLField')(max_length=300, blank=True)),
-            ('tweet_link', self.gf('django.db.models.fields.URLField')(max_length=300, blank=True)),
-            ('reddit_link', self.gf('django.db.models.fields.URLField')(max_length=300, blank=True)),
         ))
-        db.send_create_signal('punn', ['Punn'])
+        db.send_create_signal('comment', ['Comment'])
 
 
     def backwards(self, orm):
-        # Deleting model 'Punn'
-        db.delete_table('punn_punn')
+        # Deleting model 'Comment'
+        db.delete_table('comment_comment')
 
 
     models = {
@@ -63,6 +58,18 @@ class Migration(SchemaMigration):
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
+        'comment.comment': {
+            'Meta': {'object_name': 'Comment'},
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
+            'base62id': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
+            'content': ('django.db.models.fields.TextField', [], {'max_length': '10000'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'karma': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['comment.Comment']", 'null': 'True', 'blank': 'True'}),
+            'pub_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
+            'punn': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punn.Punn']"})
+        },
         'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
             'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
@@ -89,4 +96,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['punn']
+    complete_apps = ['comment']

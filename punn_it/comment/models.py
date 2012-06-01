@@ -1,5 +1,8 @@
 from django.db import models
 from punn.models import Punn
+from django.contrib.auth.models import User
+from django.forms import ImageField, EmailField, ModelForm, CharField, PasswordInput
+from django import forms
 
 class Comment(models.Model):
     content = models.TextField(max_length=10000)

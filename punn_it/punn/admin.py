@@ -1,7 +1,6 @@
 from punn.models import Punn
-from punn.models import UserProfile
-from punn.models import Comment
-from punn.models import Tag
+from account.models import UserProfile
+from comment.models import Comment
 from django.contrib import admin
 
 admin.site.register(Punn)
