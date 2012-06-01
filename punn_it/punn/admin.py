@@ -6,5 +6,4 @@ from django.contrib import admin
 admin.site.register(Punn)
 admin.site.register(UserProfile)
 admin.site.register(Comment)
-admin.site.register(Tag)
 
