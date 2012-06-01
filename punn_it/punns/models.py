@@ -5,7 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django import forms
 from django.forms import ImageField, EmailField, ModelForm, CharField, PasswordInput
-from punn.utils import BASE10, BASE62, baseconvert
+from punns.utils import BASE10, BASE62, baseconvert
 
 #class Tag(models.Model):
 #    name = models.CharField(max_length=30)
