@@ -1,7 +1,7 @@
 
 BASE10 = "0123456789"
 BASE62 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"
-
+BASE17 = "0123456789abcdef-"
 
 def baseconvert(number,fromdigits,todigits):
     if str(number)[0]=='-':
