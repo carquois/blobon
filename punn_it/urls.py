@@ -19,5 +19,3 @@ urlpatterns = patterns('',
     url(r'^(?P<user>[^/]+)/$', 'punns.views.profile_page'), 
 )
 
-
-
