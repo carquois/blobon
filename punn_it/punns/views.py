@@ -14,6 +14,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
+from django.db.models import Count
 
 
 def signup(request):
@@ -37,12 +38,11 @@ def edit_profile(request):
           return HttpResponseRedirect('/')
     else:
         form = UserProfileForm()
-    return render_to_response('edit_profile.html', {
-        'form': form,
-    })
+    return render_to_response('edit_profile.html', locals())
 
 def index(request): 
     latest_punn_list = Punn.objects.all().order_by('-pub_date')[:24]
+    latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment'))[:24]
     site = Site.objects.get(id=settings.SITE_ID)
     return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 
