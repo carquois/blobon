@@ -42,7 +42,7 @@ def edit_profile(request):
     })
 
 def index(request): 
-    latest_punn_list = Punn.objects.all().order_by('pub_date')[:24]
+    latest_punn_list = Punn.objects.all().order_by('-pub_date')[:24]
     current_site = Site.objects.get(id=settings.SITE_ID)
     return render_to_response('index.html', 
                               {'site': current_site, 'latest_punn_list': latest_punn_list}, 
