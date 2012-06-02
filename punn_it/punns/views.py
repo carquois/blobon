@@ -102,8 +102,7 @@ def single(request, shorturl):
     latest_punn_list = Punn.objects.filter(pub_date__gt=p.pub_date).order_by('pub_date').exclude(pk=p.id)[:6]
     latest_repunn_list = Punn.objects.filter(original_punn=p.id).order_by('pub_date')[:6]
     top_comments = Comment.objects.all().order_by('karma')[:6]
-    tag_cloud = p.tags.all()[:6]
-    return render_to_response('single.html', {'punn': p, 'user': u,  'site': current_site, 'tag_cloud': tag_cloud, 'latest_punn_list': latest_punn_list, 'latest_repunn_list': latest_repunn_list, 'top_comments': top_comments})
+    return render_to_response('single.html', {'punn': p, 'user': u,  'site': current_site, 'latest_punn_list': latest_punn_list, 'latest_repunn_list': latest_repunn_list, 'top_comments': top_comments}, context_instance=RequestContext(request))
 
 
 
