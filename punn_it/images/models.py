@@ -9,7 +9,7 @@ def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
     prefix = instance.punn.base62id
     filename = "%s.%s" % (prefix, ext)
-    return os.path.join('i', filename)
+    return os.path.join('', filename)
 
 class Image(models.Model):
     punn = models.OneToOneField(Punn)
