@@ -16,6 +16,8 @@ class Punn(models.Model):
     source = models.URLField(max_length=300, blank=True)
     author = models.ForeignKey(User)
     original_punn = models.ForeignKey('self',  null=True, blank=True)
+    description = models.TextField(max_length=10000, blank=True)
+    #Datetime infos
     created = models.DateTimeField(auto_now_add = True)
     pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
     #Social infos
