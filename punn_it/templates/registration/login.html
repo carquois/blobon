@@ -16,5 +16,12 @@
     <input type="hidden" name="next" value="{{ next }}" />
   <form action='.' method='post'>
 
+<ul>
+  <li>
+    <a href="{% url socialauth_begin 'twitter' %}">Enter using Twitter</a>
+  </li>
+</ul>
+
+
 {% endblock %}
 
