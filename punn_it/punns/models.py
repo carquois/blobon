@@ -18,6 +18,7 @@ class Punn(models.Model):
     original_punn = models.ForeignKey('self',  null=True, blank=True)
     description = models.TextField(max_length=10000, blank=True)
     #Datetime infos
+    #TODO make the pub_date into last_modified
     created = models.DateTimeField(auto_now_add = True)
     pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
     #Social infos
