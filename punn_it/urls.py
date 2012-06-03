@@ -16,6 +16,8 @@ urlpatterns = patterns('',
     url(r'^logout/$', logout),
     url(r'^settings/profile/$', 'punns.views.edit_profile'),
 
+    url(r'', include('social_auth.urls')),
+
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?P<user>[^/]+)/$', 'punns.views.profile_page'), 
 )
