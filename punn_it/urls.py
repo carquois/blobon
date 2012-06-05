@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     url(r'^c/(?P<shorturl>.)/$', 'punns.views.comment'),
     url(r'^top/$', 'punns.views.top'),
     url(r'^top/day$', 'punns.views.top_day'),
-    url(r'^signup/$', 'punns.views.signup'),
+    url(r'^signup/$', 'punns.views.register'),
     url(r'^submit/$', 'punns.views.submit'),
 
 

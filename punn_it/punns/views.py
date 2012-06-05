@@ -11,27 +11,28 @@ from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.db.models import Count
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+           new_user = form.save()
+           return HttpResponseRedirect("/settings/profile/")
+    else:
+       form = UserCreationForm()
+    return render_to_response("registration/register.html", {'form': form,}, context_instance=RequestContext(request))
+
 
 def top(request):
-    latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-karma')[:24]
-    site = Site.objects.get(id=settings.SITE_ID)
-    return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+    return HttpResponse_("Welcome to my site.")
 
-def signup(request):
-    if request.method == 'POST':
-        form = UserForm(request.POST)
-        if form.is_valid(): 
-          form.save()
-          return HttpResponseRedirect('/')
-    else:
-        form = UserForm()
-    return render_to_response('signup.html', {
-        'form': form,
-    })
+def top_day(request):
+    return HttpResponse('<h1>DAy</h1>')
 
 @login_required
 def edit_profile(request):
