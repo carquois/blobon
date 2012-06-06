@@ -41,7 +41,7 @@ def edit_profile(request):
         form = UserProfileForm(request.POST)
         if form.is_valid():
           form.save()
-          return HttpResponseRedirect('reverse('punns.views.index')')
+          return HttpResponseRedirect(reverse('punns.views.index'))
     else:
         form = UserProfileForm()
     return render_to_response('edit_profile.html', locals())
@@ -57,7 +57,7 @@ def tag(request, shorturl):
 @login_required
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect(reverse('django.contrib.auth.views.login'))
 
 def comment(request, shorturl):
     comment = get_object_or_404(Comment, base62id=shorturl)
