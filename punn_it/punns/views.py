@@ -16,13 +16,14 @@ from django.template import RequestContext
 from django.db.models import Count
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.core.urlresolvers import reverse
 
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
            new_user = form.save()
-           return HttpResponseRedirect("/settings/profile/")
+	   return HttpResponseRedirect(reverse('punns.views.edit_profile'))
     else:
        form = UserCreationForm()
     return render_to_response("registration/register.html", {'form': form,}, context_instance=RequestContext(request))
@@ -40,7 +41,7 @@ def edit_profile(request):
         form = UserProfileForm(request.POST)
         if form.is_valid():
           form.save()
-          return HttpResponseRedirect('/')
+          return HttpResponseRedirect('reverse('punns.views.index')')
     else:
         form = UserProfileForm()
     return render_to_response('edit_profile.html', locals())
