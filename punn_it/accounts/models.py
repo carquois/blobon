@@ -23,6 +23,7 @@ class UserProfile(models.Model):
     avatar = models.ImageField(upload_to='pics', blank=True)
     domain = models.URLField(max_length=50, blank=True)
     location = models.CharField(max_length=50, blank=True)
+    pro_user = models.BooleanField(default=True)
     sites = models.ForeignKey(Site, blank=True, null=True)
     LANGUAGES_CHOICES = (
         ('en', 'English'),
