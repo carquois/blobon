@@ -30,7 +30,7 @@ def register(request):
 
 
 def top(request):
-    return HttpResponse_("Welcome to my site.")
+    return render_to_response('top.html', locals(), context_instance=RequestContext(request))
 
 def top_day(request):
     return HttpResponse('<h1>DAy</h1>')
