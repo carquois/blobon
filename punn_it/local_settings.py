@@ -13,6 +13,11 @@ LOGIN_ERROR_URL                   = '/login/error/'
 GITHUB_APP_ID                     = ''
 GITHUB_API_SECRET                 = ''
 
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+
+SOCIAL_AUTH_EXPIRATION = 'expires'
+
 SOCIAL_AUTH_PIPELINE = (
    'social_auth.backends.pipeline.social.social_auth_user',
    'social_auth.backends.pipeline.associate.associate_by_email',
