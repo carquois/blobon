@@ -65,8 +65,8 @@
             <li class="divider-vertical"></li>
           </ul>
           <ul class="nav pull-right">
-            <li id="fat-menu" class="dropdown">
             {% if request.user.is_authenticated %}
+            <li id="fat-menu" class="dropdown">
               <a style="padding-top:15px" href="#" class="dropdown-toggle" data-toggle="dropdown">
                 @{{ user.username }}<b class="caret"></b>
               </a>
@@ -76,23 +76,13 @@
                 <li><a href="#">Settings</a></li>
                 <li><a href="/logout/">Sign out</a></li>
               </ul>
+	    </li>
             {% else %}
+            <li>
               <a style="padding-top:20px" href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="icon-lock icon-white"></i> Login<b class="caret"></b>
               </a>
-              <ul class="dropdown-menu">
-                <div class="span4">
-                  <form action="/login/" method='post'>{% csrf_token %}
-                    <label>Username or email</label>
-                    <input type="text" class="span3">
-                    <label>Password</label>
-                    <input type="password" class="span3">
-                    <button type="submit" class="btn">Login</button>
-                  </form>
-                  <a href="#">Forgot password?</a>
-                  <a href="/signup/">New to Punn.it? Sign up</a>
-                </div>
-              </ul>
+	    </li>
             {% endif %}
           </ul>
         </div>
