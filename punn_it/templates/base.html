@@ -15,6 +15,7 @@
 
     <!-- Le styles -->
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
     <style type="text/css">
 
       body {
@@ -73,15 +74,31 @@
             <li>
               <a href="#"><div class="join-community"></div></a>
             </li>
+          </ul>
+          <ul class="nav pull-right">
             <li>
               <a href="#"><div class="lick-icon"></div></a>
             </li>
             <li>
 	      <div><input name="search" type="text" maxlength="30" class="nav-search" > </div>
             </li>
+            {% if request.user.is_authenticated %}
+            <li id="fat-menu" class="dropdown">
+              <a style="padding-top:15px" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                @{{ user.username }}<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">View my profile</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="/logout/">Sign out</a></li>
+              </ul>
+	    </li>
+            {% else %}
 	    <li >
 	      <a href="#"><div class="login-icon">Login</div></a> 
 	    </li>
+            {% endif %}
 	  </ul>
         </div>
       </div>
