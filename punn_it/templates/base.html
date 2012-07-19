@@ -61,15 +61,15 @@
                 @{{ user.username }}<b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#">View my profile</a></li>
+                <li><a href="#">{% trans 'View my profile' %}</a></li>
                 <li class="divider"></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="/logout/">Sign out</a></li>
+                <li><a href="#">{% trans 'Settings' %}</a></li>
+                <li><a href="/logout/">{% trans 'Sign out' %}</a></li>
               </ul>
 	    </li>
             {% else %}
 	    <li >
-	      <a href="#"><div class="login-icon">Login</div></a> 
+	      <a href="#"><div class="login-icon">{% trans 'Login' %}</div></a> 
 	    </li>
             {% endif %}
 	  </ul>
@@ -91,7 +91,7 @@
         </div><!--/span12-->
       <hr>
       <footer>
-        <p>Powered by <a href="https://punn.it">Punn.it</a> &copy; 2012</p>
+        <p>{% trans 'Powered by' %} <a href="https://punn.it">Punn.it</a> &copy; 2012</p>
       </footer>
     </div><!--/.container-->
 
