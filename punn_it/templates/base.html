@@ -5,9 +5,6 @@
     <meta name="description" content="">
     <meta name="author" content="e">
 
-    <!-- Le styles -->
-    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
-
     <!-- Le jQuery -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 
@@ -16,42 +13,12 @@
 
     <title>{% block title %}Punn.it{% endblock %}</title>
 
+    <!-- Le styles -->
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
+
       body {
-        padding-top: 80px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
- 
-      .caption{
-        font-weight:normal;
-        font-family: 'Cabin Condensed', sans-serif;
-      }
-
-      .navbar-search {
-        position: relative;
-      }
-  
-      .navbar-search .search-query {
-        padding-left: 29px;
-        background-color: #E3E3E3;
-      }
-
-      .navbar-search .icon-search {
-        position: absolute;
-        top: 7px;
-        left: 11px;
-        background-image: url("http://twitter.github.com/bootstrap/assets/img/glyphicons-halflings-white.png");
-      }
-
-      .navbar-search .search-query:focus, .navbar-search .search-query.focused {
-        padding-left: 30px;
-      }
-
-      .search-query:focus + .icon-search {
-        background-image: url("http://twitter.github.com/bootstrap/assets/img/glyphicons-halflings.png");
+        padding-top: 60px;
       }
 
       {% block additional_style %}{% endblock %}
@@ -60,9 +27,10 @@
 
   </head>
   <body>
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
+    <div class="navbar navbar-fixed-top" style=" max-height:55px;">
+      <div class="navbar-inner" style=" max-height:55px;">
+        <div class="container" style=" max-height:55px;">
+          <!--
           <ul class="nav">
             <li><img style="padding-top:5px;" src="http://asseenontheinter.net/punn_it.png" alt="logo punn.it" /></li>
             <li class="divider-vertical"></li>
@@ -88,6 +56,33 @@
 	    </li>
             {% endif %}
           </ul>
+          -->
+          <ul class="nav">
+            <li class="">
+	      <a href="#"><div class="logoPunn"></div></a>
+            </li>
+            <li class="active">
+              <a href="#"><div class="photo-icon"></div></a>
+            </li>
+            <li>
+              <a href="#"><div class="video-icon"></div></a>
+            </li>
+            <li>
+              <a href="#"><div class="write-icon"></div></a>
+            </li>
+            <li>
+              <a href="#"><div class="join-community"></div></a>
+            </li>
+            <li>
+              <a href="#"><div class="lick-icon"></div></a>
+            </li>
+            <li>
+	      <div><input name="search" type="text" maxlength="30" class="nav-search" > </div>
+            </li>
+	    <li >
+	      <a href="#"><div class="login-icon">Login</div></a> 
+	    </li>
+	  </ul>
         </div>
       </div>
     </div>
