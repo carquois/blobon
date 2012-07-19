@@ -13,7 +13,7 @@
             {{ form.password.label_tag }}
             {{ form.password }}
             <br />
-            <input class="btn btn-primary" type="submit" value="login" />
+            <input class="btn btn-primary" type="submit" value="{% trans 'Login' %}" />
             <input type="hidden" name="next" value="{{ next }}" />
           </form>
 {% endblock %}
