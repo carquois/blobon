@@ -1,25 +1,13 @@
             {% if latest_punn_list %}
-              <ul class="thumbnails">
               {% for punn in latest_punn_list %}
-                <li class="span2">
-                  <div class="thumbnail">
-                    <a href="{{ punn.get_absolute_url }}">
-		      <img src="{{ STATIC_URL }}{{ punn.image.image }}{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
-		    </a>
-                    <div class="caption">
-                      <div class="btn-toolbar" style="margin-top:-6px;margin-bottom:-10px;">
-                        <div class="btn-group">
-                          <button class="btn"><i class="icon-picture"></i></button>
-                          <button class="btn"><i class="icon-thumbs-up"></i>{{ punn.karma }}</button>
-                          <button class="btn"><i class="icon-comment"></i> {{ punn.number_of_comments }}</button>
-                          <button class="btn"><i class="icon-user"></i></button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+              <div class="thumbnailsMAIN">
+	        <a href="{{ punn.get_absolute_url }}"><img src="{{ STATIC_URL }}{{ punn.image.image }}{{ im.url }}" ></a>
+		<a href="#"><div class="itemicon1"></div></a>
+		<a href="#"><div class="itemicon2"><div class="itemTexte">{{ punn.karma }}</div></div></a>
+		<a href="#"><div class="itemicon3"><div class="itemTexte2">{{ punn.number_of_comments }}</div></div></a>
+		<a href="#"> <div class="itemicon4"></div></a>
+              </div> 
               {% endfor %}
-              </ul>
             {% else %}
               <p>No punns are available.</p>
             {% endif %}
