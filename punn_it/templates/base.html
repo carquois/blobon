@@ -66,12 +66,12 @@
                 <li><a href="#">{% trans 'View my profile' %}</a></li>
                 <li class="divider"></li>
                 <li><a href="#">{% trans 'Settings' %}</a></li>
-                <li><a href="/logout/">{% trans 'Sign out' %}</a></li>
+                <li><a href="{% url django.contrib.auth.views.logout %}">{% trans 'Sign out' %}</a></li>
               </ul>
 	    </li>
             {% else %}
 	    <li >
-	      <a href="#"><div class="login-icon">{% trans 'Login' %}</div></a> 
+	      <a href="{% url django.contrib.auth.views.login %}"><div class="login-icon">{% trans 'Login' %}</div></a> 
 	    </li>
             {% endif %}
 	  </ul>
