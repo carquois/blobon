@@ -82,15 +82,14 @@ class Migration(SchemaMigration):
             'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
             'base62id': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {'max_length': '10000', 'blank': 'True'}),
             'facebook_publication_link': ('django.db.models.fields.URLField', [], {'max_length': '300', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.URLField', [], {'max_length': '300', 'blank': 'True'}),
             'karma': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'original_punn': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Punn']", 'null': 'True', 'blank': 'True'}),
             'pub_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
             'reddit_link': ('django.db.models.fields.URLField', [], {'max_length': '300', 'blank': 'True'}),
             'source': ('django.db.models.fields.URLField', [], {'max_length': '300', 'blank': 'True'}),
-            'thumbnail': ('django.db.models.fields.URLField', [], {'max_length': '300', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '140'}),
             'tweet_link': ('django.db.models.fields.URLField', [], {'max_length': '300', 'blank': 'True'})
         }
