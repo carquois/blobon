@@ -20,7 +20,6 @@ urlpatterns = patterns('',
                           {'template_name': 'registration/password_reset_confirm.html'}),
     url(r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete', 
 			  {'template_name': 'registration/password_reset_complete.html'}),
-
     url(r'^$', 'punns.views.index'),
     url(r'^p/(?P<shorturl>.)/$', 'punns.views.single'),
     url(r'^s/(?P<shorturl>.)/$', 'punns.views.tag'),
@@ -29,10 +28,7 @@ urlpatterns = patterns('',
     url(r'^top/day$', 'punns.views.top_day'),
     url(r'^signup/$', 'punns.views.register'),
     url(r'^submit/$', 'punns.views.submit'),
-
-
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?P<user>[^/]+)/$', 'punns.views.profile_page'), 
-    url(r'', include('social_auth.urls')),
 )
 
