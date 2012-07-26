@@ -1,8 +1,12 @@
             {% load i18n %}
+            {% load thumbnail %}
             {% if latest_punn_list %}
               {% for punn in latest_punn_list %}
               <div class="thumbnailsMAIN">
-	        <a href="{{ punn.get_absolute_url }}"><img src="{{ STATIC_URL }}{{ punn.image.image }}" ></a>
+	        <a href="{{ punn.get_absolute_url }}">
+                  {% thumbnail punn.image.image "155x160" crop="center" as im %}
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                  {% endthumbnail %}
 		<a href="#"><div class="itemicon1"></div></a>
 		<a href="#"><div class="itemicon2"><div class="itemTexte">{{ punn.karma }}</div></div></a>
 		<a href="#"><div class="itemicon3"><div class="itemTexte2">{{ punn.number_of_comments }}</div></div></a>
