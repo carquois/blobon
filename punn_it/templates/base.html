@@ -17,6 +17,7 @@
 
     <!-- Le styles -->
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/non-responsive.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
     <style type="text/css">
 
@@ -79,12 +80,19 @@
       </div>
     </div>
 
-    <div class="container">
-      <div class="sharetheworld"></div>
-        <div class="span12">
-          <div class="row ">
-            <div class="span7 blancBG "> 
-              {% block content %}{% endblock %}
+
+                <div class="container">
+                        <div class="sharetheworld"></div>
+                        <div class="row">
+                                <div class="span12">
+
+                                        <div class="row ">
+                                                <div class="span7 blancBG ">
+
+                                <div style="padding-bottom:60px; background-color:#f1f1f1;">
+
+                {% block content %}{% endblock %}
+              </div>
             </div><!--/span7-->
             <div class="span5">
               {% block sidebar %}{% endblock %}
