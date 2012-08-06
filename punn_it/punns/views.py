@@ -74,17 +74,13 @@ def profile_page(request, user):
 @login_required
 def submit(request): 
     if request.method == 'POST': 
-      title = request.POST.get('title', '')
-      image = request.POST.get('image', '')
-      source = request.POST.get('source', '')
-      tags = request.POST.get('tags', '')
-      return render_to_response('submit.html', {})
+      return render_to_response('submit.html', context_instance=RequestContext(request))
     elif request.method == 'GET':
       title = request.GET.get('title', '') 
-      image = request.GET.get('image', '') 
       source = request.GET.get('source', '') 
-      tags = request.GET.get('tags', '') 
-      return render_to_response('submit.html', {'title': title, 'image': image, 'source': source, 'tags': tags})
+      s = request.GET.get('selection', '') 
+      i = request.GET.get('i', '') 
+      return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
     else:
       return render_to_response('submit.html', {})
 
