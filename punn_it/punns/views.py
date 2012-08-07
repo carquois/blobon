@@ -88,7 +88,7 @@ def single(request, shorturl):
     site = Site.objects.get(id=settings.SITE_ID)
     punn = get_object_or_404(Punn, base62id=shorturl)
     user = punn.author
-    latest_punn_list = Punn.objects.filter(pub_date__gt=punn.pub_date).order_by('pub_date').exclude(pk=punn.id)[:6]
+    latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:6]
     latest_repunn_list = Punn.objects.filter(original_punn=punn.id).order_by('pub_date')[:6]
     top_comments = Comment.objects.all().order_by('karma')[:6]
     return render_to_response('single.html', locals(), context_instance=RequestContext(request))
