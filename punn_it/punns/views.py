@@ -78,7 +78,7 @@ def submit(request):
     elif request.method == 'GET':
       title = request.GET.get('title', '') 
       source = request.GET.get('source', '') 
-      s = request.GET.get('selection', '') 
+      selection = request.GET.get('selection', '') 
       i = request.GET.get('i', '') 
       return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
     else:
