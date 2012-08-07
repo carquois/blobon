@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% load thumbnail %}
 
 {% block title %}{{ punn.title }}{% endblock %}
 
@@ -71,10 +73,14 @@
 {% block sidebar %}
 
           <div class="well">
-            {% if latest_punn_list %}
-              <ul class="thumbnails">
-              {% for punn in latest_punn_list %}
-                <li class="span1"><a class="thumbnail" href="{{ punn.get_absolute_url }}"><img width="130" src="{{ punn.thumbnail }}" alt="{{ punn.title }}" /></a></li>
+          {% if latest_punn_list %}
+            <ul class="thumbnails">
+            {% for punn in latest_punn_list %}
+              <li><a class="thumbnail" href="{{ punn.get_absolute_url }}">
+              {% thumbnail punn.image.image "60x60" crop="center" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+              {% endthumbnail %}
+              </a></li>
               {% endfor %}
               </ul>
             {% else %}
