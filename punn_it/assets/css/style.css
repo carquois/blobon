@@ -2,8 +2,6 @@
 /* CSS Document */
 
 
-
-
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
 .logoPunn{
@@ -148,10 +146,11 @@
 
 .join-community{
 	width:221px;
-	height:70px;
+	height:80px;
 	background:url(../img/punnitIcons.png) no-repeat;
 	background-position:-10px -132px;
 	margin-top:-10px;
+	margin-left: 123px;
 	
 }
 
@@ -171,7 +170,7 @@
 	padding-left:20px;
 	padding-top:15px;
 	font-family: 'Abel', sans-serif;
-	font-weight:bold;
+	
 	font-size:14px;
 	
 	
@@ -185,6 +184,7 @@
 	float:left;
 	text-align: center;
 	padding-top:4px;
+	font-weight:bold;
 	 
 }
 .menu-main-col:hover{
@@ -313,5 +313,65 @@
 	margin-top:5px;
 	font-weight:bold;
 	color:#777475;
+	
+}
+
+
+
+/* SINGLE PAGE SPECIFIC */
+
+
+
+#singleTitle{
+	
+	color:#fff;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	margin-top: -5px
+}
+	
+#fleche_single{
+	
+	background:url(../img/fleche_single.png) no-repeat bottom;
+	width:302px;
+	height:28px; 
+	margin-left: 22px;
+
+}	
+	
+.flecheprev{
+	width:151px;
+	height: 20px;
+	margin-top:8px;
+	float:left;
+	color:#666;
+	padding-left: 72px;
+	padding-top: 2px;
+ 
+}	
+
+.flechenext{
+	width:151px;
+	height: 20px;
+	margin-top:8px;
+	float:left;
+	color:#666;
+	padding-left: 42px;
+	padding-top: 2px;
+ 
+}		
+	
+.thumb_single {
+	
+	width:95px;
+	height:115px;
+	margin-right:6px;
+	margin-bottom:6px;
+	float:left;
+}	
+	
+	
+/*	*/
+	
 	
 }
