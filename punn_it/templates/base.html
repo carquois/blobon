@@ -30,6 +30,7 @@
     </style>
 
   </head>
+
   <body>
     <div class="navbar navbar-fixed-top" style=" max-height:55px;">
       <div class="navbar-inner" style=" max-height:55px;">
@@ -81,28 +82,25 @@
         </div>
       </div>
     </div>
-
+		
+		
 
     <div class="container">
-      <div class="sharetheworld"></div>
-        <div class="row">
-          <div class="span12">
-            <div class="row ">
-              <div class="span7 blancBG ">
-                <div style="padding-bottom:60px; background-color:#f1f1f1;">
-                  {% block content %}{% endblock %}
-                </div>
-              </div><!--/span7-->
-              <div class="span5">
-                {% block sidebar %}{% endblock %}
-              </div><!--/span5-->
-            </div><!--/row-->
-          </div><!--/span12-->
-        </div><!--/row-->
-      <hr>
-      <footer>
-        <p>{% trans 'Powered by' %} <a href="http://punn.it">Punn.it</a> &copy; 2012</p>
-      </footer>
+      <!--<div class="sharetheworld"></div>-->
+      <div class="row">
+        <div class="span12">
+          <div class="row ">
+            <div class="span7 blancBG ">
+              <div style="padding-bottom:0px; background-color:#f1f1f1;">
+                {% block content %}{% endblock %}
+              </div>
+            </div><!--/span7-->
+            <div class="span5">
+              {% block sidebar %}{% endblock %}
+            </div><!--/span5-->
+          </div><!--/row-->
+        </div><!--/span12-->
+      </div><!--/row-->
     </div><!--/.container-->
 
     <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
