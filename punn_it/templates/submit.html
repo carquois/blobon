@@ -25,7 +25,7 @@
 <body>
           <div class="well">
             <div>
-              <form action="/submit/" method="post" class="well form-horizontal">
+              <form action="/submit/" method="post" class="well form-horizontal">{% csrf_token %}
               <fieldset>
                 <legend>Add a punn</legend>
                 <label for"title">Title</label>

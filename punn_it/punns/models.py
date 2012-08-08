@@ -4,7 +4,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django import forms
-from django.forms import ImageField, EmailField, ModelForm, CharField, PasswordInput
+from django.forms import CharField, URLField, ModelForm
 from punns.utils import BASE10, BASE62, baseconvert
 
 
@@ -36,6 +36,10 @@ class Punn(models.Model):
     def get_absolute_url(self):
         return ('punns.views.single', [str(self.base62id)])
 
-
-
+class PunnForm(ModelForm):
+    title = CharField()
+    source = URLField()
+    image = URLField()
+    class Meta:
+        model = Punn
 

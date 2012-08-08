@@ -1,4 +1,4 @@
-from punns.models import Punn
+from punns.models import Punn, PunnForm
 from accounts.models import UserProfile
 from comments.models import Comment
 from punns.utils import BASE10, BASE62, baseconvert
@@ -70,11 +70,13 @@ def profile_page(request, user):
     latest_punn_list = Punn.objects.filter(author=user).order_by('-pub_date')[:24]
     return render_to_response('profile.html', locals(),context_instance=RequestContext(request))
 
-#TODO enctype="multipart/form-data" dans le <form>
 @login_required
 def submit(request): 
-    if request.method == 'POST': 
-      return render_to_response('submit.html', context_instance=RequestContext(request))
+    if request.method == 'POST':
+        form = PunnForm(request.POST)
+        if form.is_valid():
+          new_punn = form.save()
+          return HttpResponseRedirect(reverse('punns.views.index'))
     elif request.method == 'GET':
       title = request.GET.get('title', '') 
       source = request.GET.get('source', '') 
