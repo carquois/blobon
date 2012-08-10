@@ -17,24 +17,21 @@
 
 .navbar-inner{
 	background:url(../img/bg_nav.png);
-
-
 }
-
 
 
 .box-right{
 	width:100%;
 	background-color:#f3f3f3;
-	height:347px;
+	height:297px;
 	margin-bottom:30px;
 	/*padding:20px;*/
 	
 }
 
-.box-right img{
+.pub-google{
 	margin-left:24px;
-	margin-top:24px;
+	padding-top:24px;
 	
 }
 
@@ -166,7 +163,7 @@
 .top-main-col{
 	height:55px;
 	width:100%;
-	background:url(../img/bg_col.png);
+	background:url(../img/bg_col.png) !important;  
 	padding-left:20px;
 	padding-top:15px;
 	font-family: 'Abel', sans-serif;
