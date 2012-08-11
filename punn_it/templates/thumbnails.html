@@ -4,7 +4,7 @@
               {% for punn in latest_punn_list %}
               <div class="thumbnailsMAIN">
 	        <a href="{{ punn.get_absolute_url }}">
-                  {% thumbnail punn.image.image "155x185" crop="center" as im %}
+                  {% thumbnail punn.pic "155x185" crop="center" as im %}
                   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                   {% endthumbnail %}
 		<!--<a href="#"><div class="itemicon1"></div></a>

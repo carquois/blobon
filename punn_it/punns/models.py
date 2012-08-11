@@ -6,7 +6,15 @@ from django.contrib.auth.models import User
 from django import forms
 from django.forms import CharField, URLField, ModelForm
 from punns.utils import BASE10, BASE62, baseconvert
+from sorl.thumbnail import ImageField
+import uuid
+import os
 
+def get_file_path(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    filename = "%s.%s" % (prefix, ext)
+    return os.path.join('', filename)
 
 class Punn(models.Model):
     #Basic infos
@@ -16,15 +24,12 @@ class Punn(models.Model):
     source = models.URLField(max_length=300, blank=True)
     author = models.ForeignKey(User)
     original_punn = models.ForeignKey('self',  null=True, blank=True)
-    description = models.TextField(max_length=10000, blank=True)
     #Datetime infos
     #TODO make the pub_date into last_modified
     created = models.DateTimeField(auto_now_add = True)
     pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
-    #Social infos
-    facebook_publication_link = models.URLField(max_length=300, blank=True)
-    tweet_link = models.URLField(max_length=300, blank=True)
-    reddit_link = models.URLField(max_length=300, blank=True)
+    #Media
+    pic = ImageField(upload_to=get_file_path, null=True, blank=True)
     def __unicode__(self):
         return self.title
     def save(self):
