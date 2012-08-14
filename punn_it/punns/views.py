@@ -47,7 +47,7 @@ def edit_profile(request):
     return render_to_response('edit_profile.html', locals())
 
 def index(request): 
-    latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:34]
+    latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
     return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 
 def tag(request, shorturl):
