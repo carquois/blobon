@@ -44,12 +44,10 @@
 {% endblock %}
 {% block sidebar %}
               <div class="box-right well">
-<!--
                 <div id="fleche_single">
-                  <a href="#"><div class="flecheprev">Prev</div></a>	
-                  <a href="#"><div class="flechenext">Next</div></a>	
+                  <a href="http://votedonc.ca{{ prev_punn.get_absolute_url }}"><div class="flecheprev">Prev</div></a>	
+                  <a href="http://votedonc.ca{{ next_punn.get_absolute_url }}"><div class="flechenext">Next</div></a>	
                 </div>
--->
                 {% if latest_punn_list %}
                 <div class="thumbnails" style="margin-left: 4px; margin-top: 9px;">
                   {% for punn in latest_punn_list %}
@@ -71,6 +69,8 @@
               </div> 
               <div class="box-right">
 {% include "bigbox.html" %}
+
+
               </div>
 {% endblock %}
 
