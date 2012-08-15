@@ -73,9 +73,9 @@ def profile_page(request, user):
 def submit(request): 
     if request.method == 'POST':
         form = PunnForm(request.POST)
-        if form.is_valid():
-          new_punn = form.save()
-          return HttpResponseRedirect(reverse('punns.views.index'))
+        new_punn = form.save()
+        new_punn.save()
+        return HttpResponseRedirect(reverse('punns.views.single', shorturl=new_punn.base62id))
     elif request.method == 'GET':
       title = request.GET.get('title', '') 
       source = request.GET.get('source', '') 
@@ -89,6 +89,7 @@ def single(request, shorturl):
     punn = get_object_or_404(Punn, base62id=shorturl)
     user = punn.author
     latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:6]
+    prev = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
     latest_repunn_list = Punn.objects.filter(original_punn=punn.id).order_by('pub_date')[:6]
     top_comments = Comment.objects.all().order_by('karma')[:6]
     return render_to_response('single.html', locals(), context_instance=RequestContext(request))
