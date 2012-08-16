@@ -2,6 +2,15 @@
 {% load i18n %}
 {% load thumbnail %}
 
+{% block open-graphs %}
+    <!-- Le open graphs tags -->
+    <meta property="og:title" content="{{ punn.title }}" />
+    <meta property="og:url" content="http://votedonc.ca{{ punn.get_absolute_url }}" />
+    <meta property="og:image" content="{{ STATIC_URL }}{{ punn.pic }}" />
+    <meta property="og:site_name" content="VoteDonc.Ca" />
+    <meta property="fb:admins" content="772035088" />
+{% endblock %}
+
 {% block title %}{{ punn.title }}{% endblock %}
 
 {% block content %}
