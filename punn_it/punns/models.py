@@ -44,7 +44,7 @@ class Punn(models.Model):
 class PunnForm(ModelForm):
     title = CharField()
     source = URLField()
-    image = URLField()
+    pic = ImageField()
     class Meta:
         model = Punn
 
