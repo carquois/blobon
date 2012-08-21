@@ -63,8 +63,14 @@ def edit_profile(request):
     return render_to_response('edit_profile.html', locals())
 
 def index(request): 
-    latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
-    return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+    meta = request.META['HTTP_HOST']
+    current_site = Site.objects.get_current()
+    if current_site.domain == 'votedonc.ca':
+        latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
+        return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+    else:
+        latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:10]
+        return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 
 def tag(request, shorturl):
     return HttpResponse("Tag page")
