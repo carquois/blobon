@@ -17,6 +17,22 @@ from django.db.models import Count
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
+from django.contrib.syndication.views import Feed
+
+class feed(Feed):
+    title = "Punn.it feed"
+    link = "/f/"
+    description = "Updates on changes and additions Punn.it."
+
+    def items(self):
+        return Punn.objects.order_by('-pub_date')[:5]
+
+    def item_title(self, punn):
+        return punn.title
+
+    def item_description(self, punn):
+        return punn.description
+
 
 def register(request):
     if request.method == 'POST':
