@@ -24,21 +24,13 @@ class UserProfile(models.Model):
     domain = models.URLField(max_length=50, blank=True)
     location = models.CharField(max_length=50, blank=True)
     pro_user = models.BooleanField(default=True)
-    sites = models.ForeignKey(Site, blank=True, null=True)
+    site = models.ForeignKey(Site, blank=True, null=True)
     LANGUAGES_CHOICES = (
         ('en', 'English'),
         ('fr', 'Français'),
         ('qc', 'Québécois'),
     )
     language = models.CharField(default="en", max_length=2, choices=LANGUAGES_CHOICES)
-    #Custom user design
-    background_color = models.CharField(max_length=6, blank=True)
-    well_color = models.CharField(max_length=6, blank=True)
-    font_color = models.CharField(max_length=6, blank=True)
-    link_color = models.CharField(max_length=6, blank=True)
-    #Social infos
-    facebook_profile = models.URLField(max_length=300, blank=True)
-    twitter_profile = models.URLField(max_length=300, blank=True)
     #Google Infos
     analytics_account = models.CharField(max_length=50, blank=True)
     def __unicode__(self):
