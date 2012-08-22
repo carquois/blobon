@@ -33,7 +33,6 @@ class feed(Feed):
     def item_description(self, punn):
         return punn.description
 
-
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -65,12 +64,14 @@ def edit_profile(request):
 def index(request): 
     meta = request.META['HTTP_HOST']
     current_site = Site.objects.get_current()
-    if current_site.domain == 'votedonc.ca':
+    if meta == 'punn.it':
+        latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:10]
+        return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+    elif meta == 'votedonc.ca':
         latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
         return render_to_response('index.html', locals(), context_instance=RequestContext(request))
     else:
-        latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:10]
-        return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+        return HttpResponseRedirect('http://google.com')
 
 def tag(request, shorturl):
     return HttpResponse("Tag page")
@@ -122,4 +123,17 @@ def single(request, shorturl):
     return render_to_response('single.html', locals(), context_instance=RequestContext(request))
 
 
+def singletest(request, shorturl):
+    punn = get_object_or_404(Punn, base62id=shorturl)
+    latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:6]
+    next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
+    if Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]:
+      next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
+      next_punn = next_punn_query[0]
+    if Punn.objects.filter(pub_date__gt=punn.pub_date).order_by('pub_date').exclude(pk=punn.id)[:1]:
+      prev_punn_query = Punn.objects.filter(pub_date__gt=punn.pub_date).order_by('pub_date').exclude(pk=punn.id)[:1]
+      prev_punn = prev_punn_query[0]
+    latest_repunn_list = Punn.objects.filter(original_punn=punn.id).order_by('pub_date')[:6]
+    top_comments = Comment.objects.all().order_by('karma')[:6]
+    return render_to_response('singletest.html', locals(), context_instance=RequestContext(request))
 
