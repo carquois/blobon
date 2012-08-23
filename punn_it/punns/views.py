@@ -62,16 +62,20 @@ def edit_profile(request):
     return render_to_response('edit_profile.html', locals())
 
 def index(request): 
-    meta = request.META['HTTP_HOST']
-    current_site = Site.objects.get_current()
-    if meta == 'punn.it':
-        latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:10]
+    host = request.META['HTTP_HOST']
+    url = 'http://%s/' % (host)
+    if host == 'votedonc.ca':
+        latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
         return render_to_response('index.html', locals(), context_instance=RequestContext(request))
-    elif meta == 'votedonc.ca':
+    elif host == 'punn.it':
         latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
         return render_to_response('index.html', locals(), context_instance=RequestContext(request))
     else:
-        return HttpResponseRedirect('http://google.com')
+        if UserProfile.objects.filter(domain=url).exists():
+          user = UserProfile.objects.get(domain=url).user
+          return HttpResponseRedirect(reverse('punns.views.profile_page', args=[user.username]))
+        else:
+          return HttpResponseRedirect('http://doesnt.com')
 
 def tag(request, shorturl):
     return HttpResponse("Tag page")
@@ -88,9 +92,20 @@ def comment(request, shorturl):
 
 def profile_page(request, user):
     user = get_object_or_404(User, username=user)
-    site = Site.objects.get(id=settings.SITE_ID)
-    latest_punn_list = Punn.objects.filter(author=user).order_by('-pub_date')[:24]
-    return render_to_response('profile.html', locals(),context_instance=RequestContext(request))
+    host = request.META['HTTP_HOST']
+    latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
+    return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+    #if host == 'punn.it':
+    #    if user.userprofile.domain:
+    #        return HttpResponseRedirect(user.userprofile.domain)
+    #    else:
+    #        latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:24]
+    #        return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+    #elif host == 'votedonc.ca':
+    #    latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:24]
+    #    return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+    #else:
+    #    return HttpResponseRedirect('http://google.com')
 
 @login_required
 def submit(request): 
