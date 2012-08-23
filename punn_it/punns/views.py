@@ -43,13 +43,6 @@ def register(request):
        form = UserCreationForm()
     return render_to_response("registration/register.html", {'form': form,}, context_instance=RequestContext(request))
 
-
-def top(request):
-    return render_to_response('top.html', locals(), context_instance=RequestContext(request))
-
-def top_day(request):
-    return HttpResponse('<h1>DAy</h1>')
-
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
@@ -76,9 +69,6 @@ def index(request):
           return HttpResponseRedirect(reverse('punns.views.profile_page', args=[user.username]))
         else:
           return HttpResponseRedirect('http://doesnt.com')
-
-def tag(request, shorturl):
-    return HttpResponse("Tag page")
 
 @login_required
 def logout(request):
