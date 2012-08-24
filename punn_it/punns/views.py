@@ -66,9 +66,10 @@ def index(request):
     else:
         if UserProfile.objects.filter(domain=url).exists():
           user = UserProfile.objects.get(domain=url).user
-          return HttpResponseRedirect(reverse('punns.views.profile_page', args=[user.username]))
+          latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
+          return render_to_response('index.html', locals(), context_instance=RequestContext(request))
         else:
-          return HttpResponseRedirect('http://doesnt.com')
+          return HttpResponseRedirect(reverse('punns.views.index')) 
 
 @login_required
 def logout(request):
@@ -82,7 +83,7 @@ def comment(request, shorturl):
 
 def profile_page(request, user):
     user = get_object_or_404(User, username=user)
-    host = request.META['HTTP_HOST']
+    #host = request.META['HTTP_HOST']
     latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
     return render_to_response('index.html', locals(), context_instance=RequestContext(request))
     #if host == 'punn.it':
