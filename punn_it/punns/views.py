@@ -92,24 +92,6 @@ def profile_page(request, user):
         return render_to_response('index.html', locals(), context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect('http://%s/' % (host))
-    #url = 'http://%s/' % (host)
-    #if UserProfile.objects.filter(domain=url).exists():
-    #  domain = UserProfile.objects.get(domain=url).domain
-    #  return HttpResponseRedirect('http://exists.com')
-    #else:
-    #  latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
-    #  return render_to_response('index.html', locals(), context_instance=RequestContext(request))
-    #if host == 'punn.it':
-    #    if user.userprofile.domain:
-    #        return HttpResponseRedirect(user.userprofile.domain)
-    #    else:
-    #        latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:24]
-    #        return render_to_response('index.html', locals(), context_instance=RequestContext(request))
-    #elif host == 'votedonc.ca':
-    #    latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:24]
-    #    return render_to_response('index.html', locals(), context_instance=RequestContext(request))
-    #else:
-    #    return HttpResponseRedirect('http://google.com')
 
 @login_required
 def submit(request): 
