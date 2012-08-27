@@ -20,6 +20,14 @@
   </head>
   <body>
     <div class="well">
+
+
+
+<form method="post" action="{% url punns.views.submit %}">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit Form"/>
+</form>
+
       <form action="/submit/" method="post" class="form-horizontal">{% csrf_token %}
         <fieldset>
           <div class="control-group">

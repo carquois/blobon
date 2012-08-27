@@ -45,6 +45,8 @@ class PunnForm(ModelForm):
     title = CharField()
     source = URLField()
     pic = ImageField()
+    author = forms.ModelChoiceField(queryset=User.objects.all())
     class Meta:
         model = Punn
+        fields = ('title', 'pic', 'author')
 

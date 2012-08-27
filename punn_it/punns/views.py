@@ -83,17 +83,26 @@ def profile_page(request, user):
 def submit(request): 
     if request.method == 'POST':
         form = PunnForm(request.POST)
-        new_punn = form.save()
-        new_punn.save()
-        return HttpResponseRedirect(reverse('punns.views.single', shorturl=new_punn.base62id))
-    elif request.method == 'GET':
-      title = request.GET.get('title', '') 
-      source = request.GET.get('source', '') 
-      selection = request.GET.get('selection', '') 
-      i = request.GET.get('i', '') 
-      return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
+        if form.is_valid():
+          new_punn = form.save()
+          return HttpResponseRedirect(new_punn.base62id)
+        else:
+          return render_to_response('submit.html', context_instance=RequestContext(request))
+    #elif request.method == 'GET':
+    #  title = request.GET.get('title', '') 
+    #  source = request.GET.get('source', '') 
+    #  selection = request.GET.get('selection', '') 
+    #  i = request.GET.get('i', '') 
+    #  return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
+    #else:
+    #  form = PunnForm()
+    #  return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
+
     else:
-      return render_to_response('submit.html', {})
+        form = PunnForm() # An unbound form
+
+    return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
+
 
 def single(request, shorturl):
     punn = get_object_or_404(Punn, base62id=shorturl)
