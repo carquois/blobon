@@ -43,10 +43,10 @@ class Punn(models.Model):
 
 class PunnForm(ModelForm):
     title = CharField()
-    source = URLField()
+    source = URLField(required=False)
     pic = ImageField()
     author = forms.ModelChoiceField(queryset=User.objects.all())
     class Meta:
         model = Punn
-        fields = ('title', 'pic', 'author')
+        fields = ('title', 'author')
 
