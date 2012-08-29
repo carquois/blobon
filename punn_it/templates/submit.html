@@ -21,13 +21,6 @@
   <body>
     <div class="well">
 
-
-
-<form method="post" action="{% url punns.views.submit %}">{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit Form"/>
-</form>
-
       <form action="/submit/" method="post" class="form-horizontal">{% csrf_token %}
         <fieldset>
           <div class="control-group">
@@ -61,6 +54,44 @@
           </div>
         </fieldset>
       </form>
+
+      <form action="/submit/" method="post" class="form-horizontal">{% csrf_token %}
+        {{ form.non_field_errors }}
+        <fieldset>
+          <div class="control-group">
+            {{ form.title.errors }}
+            <label class="control-label" for="title">Title</label>
+            <div class="controls">
+              {{ form.title }}
+            </div>
+          </div>
+          <div class="control-group">
+            {{ form.source.errors }}
+            <label class="control-label" for="source">Source</label>
+            <div class="controls">
+              {{ form.source }}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="optionsCheckbox">Publish</label>
+            <div class="controls">
+              <label class="checkbox">
+                <input type="checkbox" id="publish" value="option1">
+              </label>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="fileInput">Image</label>
+            <div class="controls">
+              <input class="input-file" id="fileInput" type="file">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </fieldset>
+      </form>
+
     </div>
   </body>
 

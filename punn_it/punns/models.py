@@ -19,6 +19,7 @@ def get_file_path(instance, filename):
 class Punn(models.Model):
     #Basic infos
     title = models.CharField(max_length=140)
+    slug = models.CharField(max_length=140, blank=True)
     base62id = models.CharField(max_length=140, blank=True)
     karma = models.IntegerField(default=0)
     source = models.URLField(max_length=300, blank=True)
