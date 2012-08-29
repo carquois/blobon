@@ -18,6 +18,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
 from django.contrib.syndication.views import Feed
+from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
 
 def register(request):
     if request.method == 'POST':
@@ -43,10 +45,7 @@ def edit_profile(request):
 def index(request): 
     host = request.META['HTTP_HOST']
     url = 'http://%s/' % (host)
-    if host == 'votedonc.ca':
-        latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
-        return render_to_response('index.html', locals(), context_instance=RequestContext(request))
-    elif host == 'punn.it':
+    if host == 'punn.it':
         latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
         return render_to_response('index.html', locals(), context_instance=RequestContext(request))
     else:
@@ -55,7 +54,7 @@ def index(request):
           latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
           return render_to_response('index.html', locals(), context_instance=RequestContext(request))
         else:
-          return HttpResponseRedirect(reverse('punns.views.index')) 
+          return HttpResponseRedirect('http://punn.it') 
 
 @login_required
 def logout(request):
@@ -84,10 +83,13 @@ def submit(request):
     if request.method == 'POST':
         form = PunnForm(request.POST)
         if form.is_valid():
-          new_punn = form.save()
-          return HttpResponseRedirect(new_punn.base62id)
-        else:
-          return render_to_response('submit.html', context_instance=RequestContext(request))
+          new_punn = form.save(commit=False)
+          #img_temp = NamedTemporaryFile(delete=True)
+          #img_temp.write(urllib2.urlopen(url).read())
+          #img_temp.flush()
+          return HttpResponseRedirect(reverse('punns.views.single', {'shorturl': new_punn.base62id}))
+        #else:
+        #  return render_to_response('submit.html', context_instance=RequestContext(request))
     #elif request.method == 'GET':
     #  title = request.GET.get('title', '') 
     #  source = request.GET.get('source', '') 
