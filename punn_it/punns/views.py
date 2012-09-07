@@ -67,16 +67,18 @@ def comment(request, shorturl):
     return render_to_response('comment.html', locals())
 
 def profile_page(request, user):
-    user = get_object_or_404(User, username=user)
     host = request.META['HTTP_HOST']
+    url = 'http://%s/' % (host)
+    slug = request.path
     if host == 'punn.it':
+      user = get_object_or_404(User, username=user)
       if user.userprofile.domain:
         return HttpResponseRedirect(user.userprofile.domain)
       else:
         latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
         return render_to_response('index.html', locals(), context_instance=RequestContext(request))
     else:
-        return HttpResponseRedirect('http://%s/' % (host))
+      return HttpResponseRedirect('http://%s/' % (slug))
 
 @login_required
 def submit(request): 

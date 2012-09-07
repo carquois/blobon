@@ -1,0 +1,83 @@
+* { margin: 0; padding: 0; } /* Reset stuff */
+
+
+ul#punn-menu {
+	width: 684px; margin: 0px auto;
+	list-style: none;
+}
+
+ul#punn-menu li { display: inline; }
+	
+ul#punn-menu li a {
+	display: block; float: left; height: 66px;
+	background-image: url(../img/menu-sprite.png); 
+}
+
+	ul#punn-menu li a.source {
+		width: 93px; background-position: 0 0;	
+	}
+	
+	ul#punn-menu li a.share {
+		width: 89px; background-position: -93px 0;	
+	}
+	
+	ul#punn-menu li a.user {
+		width: 159px; background-position: -182px 0;	
+	}
+	
+	ul#punn-menu li a.visit {
+		width: 77px; background-position: -341px 0;	
+	}
+	
+	ul#punn-menu li a.shizzle {
+		width: 70px; background-position: -418px 0;	
+	}
+	ul#punn-menu li a.repunn {
+		width: 68px; background-position: -488px 0;	
+	}
+	
+	ul#punn-menu li a.down {
+		width: 66px; background-position: -556px 0;	
+	}
+	
+	ul#punn-menu li a.up {
+		width: 62px; background-position: -622px 0;	
+	}
+	
+	
+	
+	
+	ul#punn-menu li a.source:hover, ul#punn-menu li a.source:focus {
+		background-position: 0 -72px;	
+	}
+	
+	ul#punn-menu li a.share:hover, ul#punn-menu li a.share:focus {
+		background-position: -93px -72px;	
+	}
+	
+	ul#punn-menu li a.user:hover, ul#punn-menu li a.user:focus {
+		background-position: -182px -72px;	
+	}
+	
+	ul#punn-menu li a.visit:hover, ul#punn-menu li a.visit:focus {
+		background-position: -341px -72px;	
+	}
+	
+	ul#punn-menu li a.shizzle:hover, ul#punn-menu li a.shizzle:focus {
+		background-position: -418px -72px;	
+	}
+	
+	ul#punn-menu li a.repunn:hover, ul#punn-menu li a.repunn:focus {
+		background-position: -488px -72px;	
+	}
+	
+	ul#punn-menu li a.down:hover, ul#punn-menu li a.down:focus {
+		background-position: -556px -72px;	
+	}
+	
+	ul#punn-menu li a.up:hover, ul#punn-menu li a.up:focus {
+		background-position: -622px -72px;	
+	}
+		
+
+a { outline: none; }
