@@ -19,42 +19,10 @@
     </style>
   </head>
   <body>
+
+{{ images }}
+
     <div class="well">
-
-      <form action="/submit/" method="post" class="form-horizontal">{% csrf_token %}
-        <fieldset>
-          <div class="control-group">
-            <label class="control-label" for="title">Title</label>
-            <div class="controls">
-              <input type="text" class="input-xlarge" id="title" value="{{ title }}" placeholder="Enter your title here">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="source">Source</label>
-            <div class="controls">
-              <input type="text" class="input-xlarge" id="source" value="{{ source }}" >
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="optionsCheckbox">Publish</label>
-            <div class="controls">
-              <label class="checkbox">
-                <input type="checkbox" id="publish" value="option1">
-              </label>
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="fileInput">Image</label>
-            <div class="controls">
-              <input class="input-file" id="fileInput" type="file">
-            </div>
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </fieldset>
-      </form>
-
       <form action="/submit/" method="post" class="form-horizontal">{% csrf_token %}
         {{ form.non_field_errors }}
         <fieldset>
@@ -81,9 +49,9 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="fileInput">Image</label>
+            <label class="control-label" for="source">Image URL</label>
             <div class="controls">
-              <input class="input-file" id="fileInput" type="file">
+              <input type="text" class="input-xlarge" id="image-url" value="{{ image }}" >
             </div>
           </div>
           <div class="form-actions">

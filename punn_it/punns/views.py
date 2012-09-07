@@ -20,6 +20,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.syndication.views import Feed
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
+import urllib2
+from bs4 import BeautifulSoup
 
 def register(request):
     if request.method == 'POST':
@@ -94,10 +96,17 @@ def submit(request):
         #  return render_to_response('submit.html', context_instance=RequestContext(request))
     elif request.method == 'GET':
       source = request.GET.get('source', '') 
-      title = request.GET.get('title', '') 
-      form = PunnForm(initial={'source':source, 'title':title})
-      selection = request.GET.get('selection', '') 
-      i = request.GET.get('i', '') 
+      if request.GET.get('selection', ''):
+        title = request.GET.get('selection', '') 
+      else:
+        title = request.GET.get('title', '') 
+      image = request.GET.get('i', '') 
+      form = PunnForm(initial={'source':source, 'title':title, 'image': image})
+      page = urllib2.urlopen("http://imgur.com/gallery/K84kO")
+      soup = BeautifulSoup(page)
+      images = [] 
+      for image in soup.find_all('img'):
+        images.append(image.get('src'))
       return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
     #else:
     #  form = PunnForm()
