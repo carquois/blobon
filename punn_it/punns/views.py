@@ -92,18 +92,19 @@ def submit(request):
           return HttpResponseRedirect(reverse('punns.views.single', {'shorturl': new_punn.base62id}))
         #else:
         #  return render_to_response('submit.html', context_instance=RequestContext(request))
-    #elif request.method == 'GET':
-    #  title = request.GET.get('title', '') 
-    #  source = request.GET.get('source', '') 
-    #  selection = request.GET.get('selection', '') 
-    #  i = request.GET.get('i', '') 
-    #  return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
+    elif request.method == 'GET':
+      title = request.GET.get('title', '') 
+      source = request.GET.get('source', '') 
+      selection = request.GET.get('selection', '') 
+      i = request.GET.get('i', '') 
+      form = PunnForm()
+      return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
     #else:
     #  form = PunnForm()
     #  return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
 
     else:
-        form = PunnForm() # An unbound form
+        form = PunnForm()
 
     return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
 
