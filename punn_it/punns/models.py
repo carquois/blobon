@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+from django.utils.translation import ugettext as _
 from django.db import models
 from django.contrib.auth.models import User
 from django import forms
@@ -19,8 +19,8 @@ def get_file_path(instance, filename):
 class Punn(models.Model):
     #Basic infos
     title = models.CharField(max_length=140)
-    slug = models.CharField(max_length=140, blank=True)
     base62id = models.CharField(max_length=140, blank=True)
+    slug = models.SlugField(max_length=140, blank=True)
     karma = models.IntegerField(default=0)
     source = models.URLField(max_length=300, blank=True)
     author = models.ForeignKey(User)
@@ -43,7 +43,8 @@ class Punn(models.Model):
         return ('punns.views.single', [str(self.base62id)])
 
 class PunnForm(ModelForm):
-    title = CharField()
+    placeholder = _('Enter your title here')
+    title = CharField(widget=forms.TextInput(attrs={'placeholder': placeholder}))
     source = URLField(required=False)
     pic = ImageField()
     author = forms.ModelChoiceField(queryset=User.objects.all())
