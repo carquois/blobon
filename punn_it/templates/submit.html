@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,17 +13,17 @@
     <script src="http://punn.it/less.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 
-    <title>{% block title %}Punn.it{% endblock %}</title>
-    <style>
-     .thumbnail {width: 150px; float: left;}
-     .offset11 {margin-left: 200px;}
-    </style>
+    <title>{% block title %}{% trans 'Create a blob' %}{% endblock %}</title>
   </head>
   <body>
 
-{{ images }}
-
     <div class="well">
+<div class="row">
+  <div class="span2">
+    <img src="{{ image }}" class="thumbnail">
+  </div>
+  <div class="span4">
+<!--
       <form action="/submit/" method="post" class="form-horizontal">{% csrf_token %}
         {{ form.non_field_errors }}
         <fieldset>
@@ -40,26 +41,30 @@
               {{ form.source }}
             </div>
           </div>
-          <div class="control-group">
-            <label class="control-label" for="optionsCheckbox">Publish</label>
-            <div class="controls">
-              <label class="checkbox">
-                <input type="checkbox" id="publish" value="option1">
-              </label>
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="source">Image URL</label>
-            <div class="controls">
-              <input type="text" class="input-xlarge" id="image-url" value="{{ image }}" >
-            </div>
-          </div>
           <div class="form-actions">
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </fieldset>
       </form>
+-->
+<form action="/submit/" method="post" class=>{% csrf_token %}
+            {{ form.author.errors }}
+            {{ form.author.label_tag }}
+            {{ form.author }}
+
+            {{ form.title.errors }}
+            {{ form.title.label_tag }}
+            {{ form.title }}
+
+            {{ form.source }}
+            <input type="hidden" name="media" value="{{ image }}" id="media" />
+<br />
+  <button type="submit" class="btn">Submit</button>
+</form>
+
 
     </div>
+  </div>
+</div>
   </body>
 

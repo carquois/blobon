@@ -21,7 +21,7 @@ from django.contrib.syndication.views import Feed
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 import urllib2
-from bs4 import BeautifulSoup
+from urlparse import urlparse
 
 def register(request):
     if request.method == 'POST':
@@ -87,34 +87,37 @@ def submit(request):
     if request.method == 'POST':
         form = PunnForm(request.POST)
         if form.is_valid():
-          new_punn = form.save(commit=False)
-          #img_temp = NamedTemporaryFile(delete=True)
-          #img_temp.write(urllib2.urlopen(url).read())
-          #img_temp.flush()
-          return HttpResponseRedirect(reverse('punns.views.single', {'shorturl': new_punn.base62id}))
+          new_punn = form.save()
+          img_temp = NamedTemporaryFile(delete=True)
+          img_temp.write(urllib2.urlopen(request.POST['media']).read())
+          img_temp.flush()
+          filename = urlparse(request.POST['media']).path.split('/')[-1]
+          ext = filename.split('.')[-1]
+          prefix = new_punn.base62id
+          filename = "%s.%s" % (prefix, ext)
+          new_punn.pic.save(filename, File(img_temp))
+          return HttpResponseRedirect(reverse('punns.views.index'))
         #else:
         #  return render_to_response('submit.html', context_instance=RequestContext(request))
     elif request.method == 'GET':
-      source = request.GET.get('source', '') 
-      if request.GET.get('selection', ''):
-        title = request.GET.get('selection', '') 
-      else:
-        title = request.GET.get('title', '') 
-      image = request.GET.get('i', '') 
+      source = request.GET.get('url', '') 
+      title = request.GET.get('title', '') 
+      image = request.GET.get('media', '') 
       form = PunnForm(initial={'source':source, 'title':title, 'image': image})
-      page = urllib2.urlopen("http://imgur.com/gallery/K84kO")
-      soup = BeautifulSoup(page)
-      images = [] 
-      for image in soup.find_all('img'):
-        images.append(image.get('src'))
+      #page = urllib2.urlopen("http://imgur.com/gallery/K84kO")
+      #soup = BeautifulSoup(page)
+      #images = [] 
+      #size = [] 
+      #for image in soup.find_all('img'):
+        #url = image.get('src')
+        #usock = urllib2.urlopen(url)
+        #data = usock.read()
+        #size.append(data.__len__())
+        #images.append(image.get('src'))
+      #imagedata = soup.find_all('img')
       return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
-    #else:
-    #  form = PunnForm()
-    #  return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
-
     else:
-        form = PunnForm()
-
+      form = PunnForm()
     return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
 
 
