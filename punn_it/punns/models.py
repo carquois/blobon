@@ -43,10 +43,8 @@ class Punn(models.Model):
         return ('punns.views.single', [str(self.base62id)])
 
 class PunnForm(ModelForm):
-    placeholder = _('Enter your title here')
-    title = CharField(widget=forms.TextInput(attrs={'placeholder': placeholder}))
-    source = URLField(required=False)
-    pic = ImageField()
+    title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here')}))
+    source = URLField(widget=forms.HiddenInput(), required=False)
     author = forms.ModelChoiceField(queryset=User.objects.all())
     class Meta:
         model = Punn

@@ -47,7 +47,7 @@ def edit_profile(request):
 def index(request): 
     host = request.META['HTTP_HOST']
     url = 'http://%s/' % (host)
-    if host == 'punn.it':
+    if host == 'blobon.com':
         latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
         return render_to_response('index.html', locals(), context_instance=RequestContext(request))
     else:
@@ -72,7 +72,7 @@ def profile_page(request, user):
     host = request.META['HTTP_HOST']
     url = 'http://%s/' % (host)
     slug = request.path
-    if host == 'punn.it':
+    if host == 'blobon.com':
       user = get_object_or_404(User, username=user)
       if user.userprofile.domain:
         return HttpResponseRedirect(user.userprofile.domain)
@@ -96,7 +96,8 @@ def submit(request):
           prefix = new_punn.base62id
           filename = "%s.%s" % (prefix, ext)
           new_punn.pic.save(filename, File(img_temp))
-          return HttpResponseRedirect(reverse('punns.views.index'))
+          return render_to_response('success.html', {"punn": new_punn}, context_instance=RequestContext(request))
+          #return HttpResponseRedirect(reverse('punns.views.single', new_punn.base62id))
         #else:
         #  return render_to_response('submit.html', context_instance=RequestContext(request))
     elif request.method == 'GET':

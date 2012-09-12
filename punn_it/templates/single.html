@@ -49,7 +49,7 @@
                   </div>
                 </div>
                 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-50251a32413e32d6"></script>
-                <div class="fb-comments" data-href="http://votedonc.ca{{ punn.get_absolute_url }}" data-num-posts="6" data-width="685"></div> 
+                <div style="padding-left:25px;" class="fb-comments" data-href="http://votedonc.ca{{ punn.get_absolute_url }}" data-num-posts="6" data-width="685"></div> 
 {% endblock %}
 {% block sidebar %}
               <div class="box-right well">
@@ -73,13 +73,11 @@
                   <p>No more content</p>
                 {% endif %}	
               </div><!--/.well -->								   
-              <div class="box-right" style="padding-top:22px; padding-left:24px;">          
-                <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FVoteDoncCa&amp;width=292&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=false&amp;appId=136698563024760" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:258px;" allowTransparency="true"></iframe>
-              </div> 
               <div class="box-right">
 {% include "bigbox.html" %}
-
-
+              </div>
+              <div class="box-right">
+{% include "bigbox.html" %}
               </div>
 {% endblock %}
 
