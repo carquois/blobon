@@ -54,7 +54,7 @@ def index(request):
         if UserProfile.objects.filter(domain=url).exists():
           user = UserProfile.objects.get(domain=url).user
           latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
-          return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+          return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
         else:
           return HttpResponseRedirect('http://punn.it') 
 
@@ -88,6 +88,7 @@ def submit(request):
         form = PunnForm(request.POST)
         if form.is_valid():
           new_punn = form.save()
+          new_punn.source = request.POST['source']
           img_temp = NamedTemporaryFile(delete=True)
           img_temp.write(urllib2.urlopen(request.POST['media']).read())
           img_temp.flush()
@@ -134,6 +135,7 @@ def single(request, shorturl):
       prev_punn = prev_punn_query[0] 
     latest_repunn_list = Punn.objects.filter(original_punn=punn.id).order_by('pub_date')[:6]
     top_comments = Comment.objects.all().order_by('karma')[:6]
+    url = request.build_absolute_uri()
     return render_to_response('single.html', locals(), context_instance=RequestContext(request))
 
 
