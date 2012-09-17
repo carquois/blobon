@@ -16,7 +16,7 @@ https://github.com/GabrielDancause/punn.it/issues
 Twitter account
 ---------------
 
-Keep up to date on announcements and more by following Bootstrap on Twitter, [@Punn_it](http://twitter.com/punn_it).
+Keep up to date on announcements and more by following Bootstrap on Twitter, [@Blobon](http://twitter.com/blobon).
 
 
 
@@ -42,4 +42,4 @@ Authors
 Copyright and license
 ---------------------
 
-Copyright 2012 Punn.it, Inc.
+Copyright 2012 Blobon, Inc.
