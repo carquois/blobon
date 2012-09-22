@@ -5,25 +5,18 @@
 
 <h2>{% trans 'Rock On!' %}</h2>
 <h3>Your <a href="{{ punn.get_absolute_url }}">blob</a> was added the THE BLOB</a></h3>
-<ul>
-<li>
-<a href="{{ punn.get_absolute_url }}" target="_blank">
+<a class="btn"  href="{{ punn.get_absolute_url }}" target="_blank">
 {% trans 'See it' %}
 </a>
-</li>
-
-<li>
-<a class="btn-danger" href="http://twitter.com/home/?status={{ punn.title|iriencode }}{{ punn.get_absolute_url|iriencode }}">
+<a class="btn"  href="/submit/?media=http://blobon.com/i/{{ punn.pic }}&url={{ punn.get_absolute_url }}&title={{ punn.title }}" target="_blank">
+{% trans 'Reblob' %}
+</a>
+<a class="btn btn-danger" href="http://twitter.com/home/?status={{ punn.title|iriencode }}{{ punn.get_absolute_url|iriencode }}">
 Tweet your blob
 </a>
-</li>
-
-<li>
-<a class="btn-danger" href="http://www.facebook.com/sharer.php?u={{ punn.get_absolute_url|iriencode }}&t={{ punn.title|iriencode }}">
+<a class="btn btn-danger" href="http://www.facebook.com/sharer.php?u={{ punn.get_absolute_url|iriencode }}&t={{ punn.title|iriencode }}">
 Share on Facebook
 </a>
-</li>
-</ul>
 {% endblock %}
 
       </div>
