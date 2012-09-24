@@ -17,6 +17,11 @@ def get_file_path(instance, filename):
     return os.path.join('', filename)
 
 class Punn(models.Model):
+    STATUS = (
+        ('P', 'Publish'),
+        ('D', 'Draft'),
+    )
+    status = models.CharField(max_length=2, choices=STATUS, null=True, blank=True)
     #Basic infos
     title = models.CharField(max_length=140)
     base62id = models.CharField(max_length=140, blank=True)
