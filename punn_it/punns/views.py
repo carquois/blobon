@@ -29,10 +29,10 @@ class LatestEntriesFeed(Feed):
     description = "The World Rocks"
 
     def items(self):
-        return Punn.objects.order_by('-pub_date')[:5]
+      return Punn.objects.order_by('-pub_date')[:5]
 
     def item_title(self, item):
-        return item.title
+      return item.title
 
 def register(request):
     if request.method == 'POST':

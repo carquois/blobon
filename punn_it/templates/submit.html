@@ -56,6 +56,10 @@
             {{ form.title.label_tag }}
             {{ form.title }}
 
+            {{ form.status.errors }}
+            {{ form.status.label_tag }}
+            {{ form.status }}
+
             {{ form.source }}
             <input type="hidden" name="media" value="{{ image }}" id="media" />
 <br />
