@@ -157,14 +157,16 @@ def submit(request):
 def single(request, shorturl):
     punn = get_object_or_404(Punn, base62id=shorturl)
     user = punn.author
-    latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:6]
+    latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=user).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:6]
     next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
     if Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]:
-      next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
-      next_punn = next_punn_query[0] 
+      next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=user).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:1]
+      if (next_punn_query.count() > 0):
+        next_punn = next_punn_query[0] 
     if Punn.objects.filter(pub_date__gt=punn.pub_date).order_by('pub_date').exclude(pk=punn.id)[:1]:
-      prev_punn_query = Punn.objects.filter(pub_date__gt=punn.pub_date).order_by('pub_date').exclude(pk=punn.id)[:1]
-      prev_punn = prev_punn_query[0] 
+      prev_punn_query = Punn.objects.filter(pub_date__gt=punn.pub_date).filter(author=user).filter(status='P').order_by('pub_date').exclude(pk=punn.id)[:1]
+      if (prev_punn_query.count() > 0):
+        prev_punn = prev_punn_query[0] 
     latest_repunn_list = Punn.objects.filter(original_punn=punn.id).order_by('pub_date')[:6]
     top_comments = Comment.objects.all().order_by('karma')[:6]
     url = request.build_absolute_uri()
