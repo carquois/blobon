@@ -23,6 +23,17 @@ from django.core.files.temp import NamedTemporaryFile
 import urllib2
 from urlparse import urlparse
 
+class LatestEntriesFeed(Feed):
+    title = "Blobon"
+    link = "/"
+    description = "The World Rocks"
+
+    def items(self):
+        return Punn.objects.order_by('-pub_date')[:5]
+
+    def item_title(self, item):
+        return item.title
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -56,7 +67,7 @@ def index(request):
           latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
           return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
         else:
-          return HttpResponseRedirect('http://punn.it') 
+          return HttpResponseRedirect('http://blobon.com') 
 
 @login_required
 def logout(request):
@@ -145,6 +156,7 @@ def submit(request):
 
 def single(request, shorturl):
     punn = get_object_or_404(Punn, base62id=shorturl)
+    user = punn.author
     latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:6]
     next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
     if Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]:
