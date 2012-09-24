@@ -9,6 +9,11 @@
     <meta property="og:image" content="http://blobon.com{{ STATIC_URL }}{{ punn.pic }}" />
     <meta property="og:site_name" content="{{ punn.author.first_name }} {{ punn.author.last_name }}" />
     <meta property="fb:admins" content="772035088" />
+    <!-- Le twitter cards -->
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:url" content="{{ url }}">
+    <meta name="twitter:title" content="{{ punn.title }}">
+    <meta name="twitter:image" content="http://blobon.com{{ STATIC_URL }}{{ punn.pic }}">
 {% endblock %}
 {% block title %}{{ punn.title }} / {{ punn.author.first_name }} {{ punn.author.last_name }}{% endblock %}
 {% block content %}
