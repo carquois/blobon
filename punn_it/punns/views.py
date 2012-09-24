@@ -64,7 +64,7 @@ def index(request):
     else:
         if UserProfile.objects.filter(domain=url).exists():
           user = UserProfile.objects.get(domain=url).user
-          latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
+          latest_punn_list = Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
           return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
         else:
           return HttpResponseRedirect('http://blobon.com') 
