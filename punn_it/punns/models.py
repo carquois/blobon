@@ -10,6 +10,11 @@ from sorl.thumbnail import ImageField
 import uuid
 import os
 
+STATUS = (
+    ('P', 'Publish'),
+    ('D', 'Draft'),
+)
+
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
     prefix = instance.base62id
@@ -17,10 +22,6 @@ def get_file_path(instance, filename):
     return os.path.join('', filename)
 
 class Punn(models.Model):
-    STATUS = (
-        ('P', 'Publish'),
-        ('D', 'Draft'),
-    )
     status = models.CharField(max_length=2, choices=STATUS, null=True, blank=True)
     #Basic infos
     title = models.CharField(max_length=140)
@@ -50,8 +51,9 @@ class Punn(models.Model):
 class PunnForm(ModelForm):
     title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here')}))
     source = URLField(widget=forms.HiddenInput(), required=False)
-    author = forms.ModelChoiceField(queryset=User.objects.all())
+    author = forms.ModelChoiceField(queryset=User.objects.all(), initial=User.objects.get(pk=3))
+    status = forms.CharField(max_length=2, widget=forms.Select(choices=STATUS), initial='D')
     class Meta:
         model = Punn
-        fields = ('title', 'author')
+        fields = ('title', 'author', 'status')
 
