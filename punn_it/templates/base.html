@@ -9,10 +9,10 @@
 
     {% block open-graphs %}
     <!-- Le open graphs tags -->
-    <meta property="og:title" content="Blobon" />
-    <meta property="og:url" content="http://votedonc.ca" />
-    <meta property="og:image" content="http://votedonc.ca/assets/img/pub_votedonc.jpg" />
-    <meta property="og:site_name" content="Vote Donc" />
+    <meta property="og:title" content="Blobon - The World Rocks" />
+    <meta property="og:url" content="http://blobon.com" />
+    <meta property="og:image" content="http://a0.twimg.com/profile_images/2618882885/o3bht53ptjtg79zxlw55.jpeg" />
+    <meta property="og:site_name" content="Blobon - The World Rocks" />
     <meta property="fb:admins" content="772035088" />
     {% endblock %}
 
@@ -66,7 +66,7 @@
         <div class="container" style=" max-height:55px;">
           <ul class="nav">
             <li class="">
-	      <a class="brand" href="{{ user.userprofile.domain }}">{{ user.username }}</a> 
+	      <a class="brand" href="{{ user.userprofile.domain }}">{{ user.first_name }} {{ user.last_name }}</a> 
             </li>
  <!-- 
             <li class="active">
