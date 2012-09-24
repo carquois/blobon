@@ -68,6 +68,26 @@ def comment(request, shorturl):
     latest_reply_list = Comment.objects.filter(parent=comment.id).order_by('pub_date')[:6]
     return render_to_response('comment.html', locals())
 
+def home(request):
+    """Home view, displays login mechanism"""
+    if request.user.is_authenticated():
+        """Login complete view, displays user data"""
+        ctx = {
+            'last_login': request.session.get('social_auth_last_login_backend')
+        }
+        return render_to_response('done.html', ctx, RequestContext(request))
+    else:
+        return render_to_response('home.html', RequestContext(request))
+
+
+@login_required
+def done(request):
+    """Login complete view, displays user data"""
+    ctx = {
+        'last_login': request.session.get('social_auth_last_login_backend')
+    }
+    return render_to_response('done.html', ctx, RequestContext(request))
+
 def profile_page(request, user):
     host = request.META['HTTP_HOST']
     url = 'http://%s/' % (host)
