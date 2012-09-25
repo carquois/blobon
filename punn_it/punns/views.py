@@ -82,11 +82,13 @@ def index(request):
     host = request.META['HTTP_HOST']
     url = 'http://%s/' % (host)
     if host == 'blobon.com':
+        home = "http://blobon.com"
         latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
         return render_to_response('index.html', locals(), context_instance=RequestContext(request))
     else:
         if UserProfile.objects.filter(domain=url).exists():
           user = UserProfile.objects.get(domain=url).user
+          home = user.userprofile.domain
           latest_punn_list = Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
           return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
         else:
@@ -180,6 +182,10 @@ def submit(request):
 def single(request, shorturl):
     punn = get_object_or_404(Punn, base62id=shorturl)
     user = punn.author
+    if user.userprofile.domain:
+      home = user.userprofile.domain
+    else:
+      home = "http://blobon.com"
     latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=user).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:6]
     next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
     if Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]:

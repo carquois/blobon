@@ -66,7 +66,11 @@
         <div class="container" style=" max-height:55px;">
           <ul class="nav">
             <li class="">
-	      <a class="brand" href="{{ user.userprofile.domain }}">{{ user.first_name }} {{ user.last_name }}</a> 
+{% if user.userprofile.domain %}
+	      <a class="brand" href="{{ home }}">{{ user.first_name }} {{ user.last_name }}</a> 
+{% else %}
+	      <a class="brand" href="{{ home }}">{{ user.username }}</a> 
+{% endif %}
             </li>
  <!-- 
             <li class="active">
