@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from punns.models import Punn, PunnForm
 from accounts.models import UserProfile
 from comments.models import Comment
@@ -18,10 +19,32 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
 from django.contrib.syndication.views import Feed
+from django.contrib.syndication.views import FeedDoesNotExist
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 import urllib2
 from urlparse import urlparse
+
+class UserFeed(Feed):
+    #description_template = 'feeds.html'
+
+    def get_object(self, request, username):
+        return get_object_or_404(User, username=username)
+
+    def title(self, obj):
+        return "%s" % obj.first_name 
+
+    def link(self, obj):
+        if obj.userprofile.domain:
+          return "http://%s/%s" % (obj.userprofile.domain, obj.get_absolute_url())
+        else:
+          return obj.get_absolute_url()
+
+    def description(self, obj):
+        return "Recent blobs by %s" % obj.username
+
+    def items(self, obj):
+        return Punn.objects.filter(author=obj).filter(status='P').order_by('-pub_date')[:30]
 
 class LatestEntriesFeed(Feed):
     title = "Blobon"
