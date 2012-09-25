@@ -25,6 +25,9 @@ from django.core.files.temp import NamedTemporaryFile
 import urllib2
 from urlparse import urlparse
 
+def infinite(request):
+    return render_to_response('infinite.html', locals(), context_instance=RequestContext(request))
+
 class UserFeed(Feed):
     #description_template = 'feeds.html'
 
