@@ -20,226 +20,40 @@
   <section style="padding-left:20px;padding-right:30px;">
     
     
-      <h1>Infinite Scroll</h1>
+      <h1>Check Donc Ça</h1>
     
     
 
 <div id="container" class="transitions-enabled infinite-scroll clearfix">
 
-  <div class="box col5">
+              {% for punn in punns %}
+  <div class="box col{{ col|random }}">
     <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
+      <a href="{{ punn.get_absolute_url }}" title="{{ punn.title }}"><img src="{{ STATIC_URL }}{{ punn.pic }}" alt="{{ punn.title }}"  /></a>
     </p>
   </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col1">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col4">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col5">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col1">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col4">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col3">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col3">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col3">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col5">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col1">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col4">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col5">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col1">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col4">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col3">    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>  <div class="box col3">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col3">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-
-  <div class="box col3">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col3">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col3">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col3">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col3">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col3">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
-  <div class="box col3">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3318887645/" title="Clarendon Metro by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3619/3318887645_1f33364338.jpg" alt="Clarendon Metro"  /></a>
-    </p>
-  </div>
-  <div class="box col2">
-    <p>
-      <a href="http://www.flickr.com/photos/nemoorange/3319714470/" title="Whitlow's on Wilson by nemoorange, on Flickr"><img src="http://farm4.static.flickr.com/3008/3319714470_c05a5cb5a8_m.jpg" alt="Whitlow's on Wilson" /></a>
-    </p>
-  </div>
+{% endfor %}
 
 </div> <!-- #container -->
 
+<div class="pagination">
+    <span class="step-links">
+        {% if punns.has_previous %}
+            <a href="?page={{ punns.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ punns.number }} of {{ punns.paginator.num_pages }}.
+        </span>
+
+        {% if punns.has_next %}
+            <a href="?page={{ punns.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
 <nav id="page-nav">
-  <a href="../pages/2.html"></a>
+<a href="?page={{ punns.next_page_number }}"></a>
 </nav>
 
 <script src="http://masonry.desandro.com/js/jquery-1.7.1.min.js"></script>

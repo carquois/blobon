@@ -24,8 +24,19 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 import urllib2
 from urlparse import urlparse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def infinite(request):
+    punn_list = Punn.objects.all().order_by('-pub_date')
+    paginator = Paginator(punn_list, 25)
+    col = ['2', '3', '4']
+    page = request.GET.get('page')
+    try:
+        punns = paginator.page(page)
+    except PageNotAnInteger:
+        punns = paginator.page(1)
+    except EmptyPage:
+        punns = paginator.page(paginator.num_pages)
     return render_to_response('infinite.html', locals(), context_instance=RequestContext(request))
 
 class UserFeed(Feed):
