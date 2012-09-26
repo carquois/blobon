@@ -4,19 +4,83 @@
     {% block content %}
 
 <h2>{% trans 'Rock On!' %}</h2>
-<h3>Your <a href="{{ punn.get_absolute_url }}">blob</a> was added the THE BLOB</a></h3>
-<a class="btn"  href="{{ punn.get_absolute_url }}" target="_blank">
-{% trans 'See it' %}
-</a>
-<a class="btn"  href="/submit/?media=http://blobon.com/i/{{ punn.pic }}&url={{ punn.get_absolute_url }}&title={{ punn.title }}" target="_blank">
-{% trans 'Reblob' %}
-</a>
-<a class="btn btn-danger" href="http://twitter.com/home/?status={{ punn.title|iriencode }}{{ punn.get_absolute_url|iriencode }}">
-Tweet your blob
-</a>
-<a class="btn btn-danger" href="http://www.facebook.com/sharer.php?u={{ punn.get_absolute_url|iriencode }}&t={{ punn.title|iriencode }}">
-Share on Facebook
-</a>
+<h3>{% trans 'Your blob was added to the THE BLOB and now appears on your profile.' %}</h3>
+<h4>{% trans 'Where to go from here?' %}</h4>
+<p>{% trans 'You could submit your blob to open blobs. A good way to be notice.' %}</p>
+<ul>
+<li>
+<a href="#">Animals</a>
+</li>
+<li>
+<a href="#">Architecture</a>
+</li>
+<li>
+<a href="#">Art</a>
+</li>
+<li>
+<a href="#">Bacon</a>
+</li>
+<li>
+<a href="#">Comics</a>
+</li>
+<li>
+<a href="#">Cute</a>
+</li>
+<li>
+<a href="#">Design</a>
+</li>
+<li>
+<a href="#">Food & Drink</a>
+</li>
+<li>
+<a href="#">Funny</a>
+</li>
+<li>
+<a href="#">Geek</a>
+</li>
+<li>
+<a href="#">Google maps</a>
+</li>
+<li>
+<a href="#">History</a>
+</li>
+<li>
+<a href="#">Photography</a>
+</li>
+<li>
+<a href="#">Products</a>
+</li>
+<li>
+<a href="#">Quotes</a>
+</li>
+<li>
+<a href="#">Sad</a>
+</li>
+<li>
+<a href="#">Social media</a>
+</li>
+<li>
+<a href="#">Space</a>
+</li>
+<li>
+<a href="#">Sport</a>
+</li>
+<li>
+<a href="#">Tattoos</a>
+</li>
+<li>
+<a href="#">Videos</a>
+</li>
+<li>
+<a href="#">Zombies</a>
+</li>
+<li>
+<a href="#">WTF</a>
+</li>
+</ul>
+
+<h4>{% trans 'List incomplete? You can create your own open-blob' %}</h4>
+<button class="btn btn-large btn-primary" type="button">{% trans 'Go!' %}</button>
 {% endblock %}
 
       </div>
