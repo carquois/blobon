@@ -97,7 +97,7 @@ def index(request):
     url = 'http://%s/' % (host)
     if host == 'blobon.com':
         home = "http://blobon.com"
-        latest_punn_list = Punn.objects.annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
+        latest_punn_list = Punn.objects.filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
         return render_to_response('index.html', locals(), context_instance=RequestContext(request))
     else:
         if UserProfile.objects.filter(domain=url).exists():
@@ -147,7 +147,7 @@ def profile_page(request, user):
       if user.userprofile.domain:
         return HttpResponseRedirect(user.userprofile.domain)
       else:
-        latest_punn_list = Punn.objects.filter(author=user).annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
+        latest_punn_list = Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
         return render_to_response('index.html', locals(), context_instance=RequestContext(request))
     else:
       return HttpResponseRedirect('http://%s/' % (slug))
