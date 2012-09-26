@@ -1,3 +1,5 @@
+            {% load i18n %}
+            {% load thumbnail %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,7 +16,7 @@
   <!-- scripts at bottom of page -->
 
 </head>
-<body class="demos ">
+<body>
   
   
   <section style="padding-left:20px;padding-right:30px;">
@@ -27,30 +29,18 @@
 <div id="container" class="transitions-enabled infinite-scroll clearfix">
 
               {% for punn in punns %}
-  <div class="box col{{ col|random }}">
+  <div class="box col2">
     <p>
-      <a href="{{ punn.get_absolute_url }}" title="{{ punn.title }}"><img src="{{ STATIC_URL }}{{ punn.pic }}" alt="{{ punn.title }}"  /></a>
+<a href="{{ punn.get_absolute_url }}" title="{{ punn.title }}">
+                  {% thumbnail punn.pic "185x185" crop="center" as im %}
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
+                  {% endthumbnail %}
+</a>
     </p>
   </div>
 {% endfor %}
 
 </div> <!-- #container -->
-
-<div class="pagination">
-    <span class="step-links">
-        {% if punns.has_previous %}
-            <a href="?page={{ punns.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ punns.number }} of {{ punns.paginator.num_pages }}.
-        </span>
-
-        {% if punns.has_next %}
-            <a href="?page={{ punns.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
 
 <nav id="page-nav">
 <a href="?page={{ punns.next_page_number }}"></a>
