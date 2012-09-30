@@ -40,36 +40,20 @@ def infinite(request):
     return render_to_response('infinite.html', locals(), context_instance=RequestContext(request))
 
 class UserFeed(Feed):
-    #description_template = 'feeds.html'
-
     def get_object(self, request, username):
         return get_object_or_404(User, username=username)
-
     def title(self, obj):
         return "%s" % obj.first_name 
-
     def link(self, obj):
         if obj.userprofile.domain:
           return "http://%s/%s" % (obj.userprofile.domain, obj.get_absolute_url())
         else:
           return obj.get_absolute_url()
-
     def description(self, obj):
         return "Recent blobs by %s" % obj.username
-
     def items(self, obj):
         return Punn.objects.filter(author=obj).filter(status='P').order_by('-pub_date')[:30]
 
-class LatestEntriesFeed(Feed):
-    title = "Blobon"
-    link = "/"
-    description = "The World Rocks"
-
-    def items(self):
-      return Punn.objects.order_by('-pub_date')[:5]
-
-    def item_title(self, item):
-      return item.title
 
 def register(request):
     if request.method == 'POST':

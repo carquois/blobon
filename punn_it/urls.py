@@ -32,7 +32,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^social/$', 'punns.views.home'),
     url(r'^done/$', 'punns.views.done'),
-    (r'^feed/$', LatestEntriesFeed()),
     url(r'^(?P<user>[^/]+)/$', 'punns.views.profile_page'), 
     url(r'', include('social_auth.urls')),
 )
