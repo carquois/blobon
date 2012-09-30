@@ -32,7 +32,6 @@ class Punn(models.Model):
     author = models.ForeignKey(User)
     original_punn = models.ForeignKey('self',  null=True, blank=True)
     #Datetime infos
-    #TODO make the pub_date into last_modified
     created = models.DateTimeField(auto_now_add = True)
     pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
     #Media

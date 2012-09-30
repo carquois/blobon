@@ -30,6 +30,7 @@ class UserProfile(models.Model):
         ('qc', 'Québécois'),
     )
     language = models.CharField(default="en", max_length=2, choices=LANGUAGES_CHOICES)
+    is_obox_client = models.BooleanField(default=False, blank=True)
     #Google Infos
     analytics_account = models.CharField(max_length=50, blank=True)
     def __unicode__(self):

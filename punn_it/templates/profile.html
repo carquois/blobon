@@ -13,9 +13,7 @@
     <meta name="twitter:title" content="{{ user.first_name }} {{ user.last_name }}">
     <meta name="twitter:image" content="http://blobon.com{{ STATIC_URL }}{{ user.userprofile.avatar }}">
 {% endblock %}
-
 {% block title %}{{ user.first_name }} {{ user.last_name }}{% endblock %}
-
 {% if user.userprofile.analytics_account %}
 {% block additional_analytics %}
     <!-- Le user analytics  -->
@@ -31,7 +29,11 @@
     </script>
 {% endblock %}
 {% endif %}
-
+{% if user.userprofile.is_obox_client %}
+{% block obox %}
+{% include "obox_profile.html" %}
+{% endblock %}
+{% endif %}
 {% block sidebar %}
               <div class="box-right">{% include "bigbox.html" %}</div>
               <div class="box-right">{% include "bigbox.html" %}</div>

@@ -148,7 +148,7 @@ def profile_page(request, user):
         return HttpResponseRedirect(user.userprofile.domain)
       else:
         latest_punn_list = Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
-        return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+        return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
     else:
       return HttpResponseRedirect('http://%s/' % (slug))
 
