@@ -50,32 +50,11 @@ class UserFeed(Feed):
         else:
           return obj.get_absolute_url()
     def description(self, obj):
-        return "Recent blobs by %s" % obj.username
+        return "Feed : %s" % obj.username
     def items(self, obj):
         return Punn.objects.filter(author=obj).filter(status='P').order_by('-pub_date')[:30]
 
-
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-           new_user = form.save()
-	   return HttpResponseRedirect(reverse('punns.views.edit_profile'))
-    else:
-       form = UserCreationForm()
-    return render_to_response("registration/register.html", {'form': form,}, context_instance=RequestContext(request))
-
 @login_required
-def edit_profile(request):
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST)
-        if form.is_valid():
-          form.save()
-          return HttpResponseRedirect(reverse('punns.views.index'))
-    else:
-        form = UserProfileForm()
-    return render_to_response('edit_profile.html', locals())
-
 def index(request): 
     host = request.META['HTTP_HOST']
     url = 'http://%s/' % (host)
@@ -93,15 +72,12 @@ def index(request):
           return HttpResponseRedirect('http://blobon.com') 
 
 @login_required
-def logout(request):
-    auth.logout(request)
-    return HttpResponseRedirect(reverse('django.contrib.auth.views.login'))
-
 def comment(request, shorturl):
     comment = get_object_or_404(Comment, base62id=shorturl)
     latest_reply_list = Comment.objects.filter(parent=comment.id).order_by('pub_date')[:6]
     return render_to_response('comment.html', locals())
 
+@login_required
 def home(request):
     """Home view, displays login mechanism"""
     if request.user.is_authenticated():
@@ -200,17 +176,4 @@ def single(request, shorturl):
     return render_to_response('single.html', locals(), context_instance=RequestContext(request))
 
 
-def singletest(request, shorturl):
-    punn = get_object_or_404(Punn, base62id=shorturl)
-    latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:6]
-    next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
-    if Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]:
-      next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
-      next_punn = next_punn_query[0]
-    if Punn.objects.filter(pub_date__gt=punn.pub_date).order_by('pub_date').exclude(pk=punn.id)[:1]:
-      prev_punn_query = Punn.objects.filter(pub_date__gt=punn.pub_date).order_by('pub_date').exclude(pk=punn.id)[:1]
-      prev_punn = prev_punn_query[0]
-    latest_repunn_list = Punn.objects.filter(original_punn=punn.id).order_by('pub_date')[:6]
-    top_comments = Comment.objects.all().order_by('karma')[:6]
-    return render_to_response('singletest.html', locals(), context_instance=RequestContext(request))
 

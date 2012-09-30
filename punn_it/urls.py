@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
-from punns.views import LatestEntriesFeed, UserFeed
+from punns.views import UserFeed
 
 admin.autodiscover()
 
@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout',
                           {'next_page': '/'}),
-    url(r'^settings/profile/$', 'punns.views.edit_profile'),
+    url(r'^settings/profile/$', 'accounts.views.edit_profile'),
     url(r'^settings/password/$', 'django.contrib.auth.views.password_change',
                           {'post_change_redirect': '/settings/password/password_reset_confirmation/'}),
     url(r'^settings/password/password_reset_confirmation/$', 'django.contrib.auth.views.password_change_done'),
@@ -27,7 +27,7 @@ urlpatterns = patterns('',
     url(r'^d/(?P<shorturl>.*)/$', 'punns.views.singletest'),
     url(r'^c/(?P<shorturl>.)/$', 'punns.views.comment'),
     url(r'^f/(?P<username>.*)/$', UserFeed()),
-    url(r'^signup/$', 'punns.views.register'),
+    url(r'^signup/$', 'accounts.views.register'),
     url(r'^submit/$', 'punns.views.submit'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^social/$', 'punns.views.home'),
