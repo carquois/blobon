@@ -54,7 +54,6 @@ class UserFeed(Feed):
     def items(self, obj):
         return Punn.objects.filter(author=obj).filter(status='P').order_by('-pub_date')[:30]
 
-@login_required
 def index(request): 
     host = request.META['HTTP_HOST']
     url = 'http://%s/' % (host)
