@@ -62,7 +62,7 @@ def draft(request):
         if UserProfile.objects.filter(domain=url).exists():
           user = UserProfile.objects.get(domain=url).user
           home = user.userprofile.domain
-          punn_list = Punn.objects.filter(author=user).filter(status='D').order_by('-pub_date')
+          punn_list = Punn.objects.filter(author=user).filter(status='D').order_by('pub_date')
           paginator = Paginator(punn_list, 25)
           col = ['2', '3', '4']
           page = request.GET.get('page')
