@@ -11,7 +11,7 @@ from django.contrib import auth
 from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.db.models import Count
@@ -118,7 +118,7 @@ def profile_page(request, user):
         latest_punn_list = Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
         return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
     else:
-      return HttpResponseRedirect('http://%s/' % (slug))
+      return HttpResponseNotFound('<h1>Erreur 404</h1>') 
 
 @login_required
 def submit(request): 
