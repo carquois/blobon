@@ -64,7 +64,11 @@
                   </div>
                 </div>
                 <div class="well" style="background-color:#fff;margin-top:0px;text-align:center;">
-                  <a href="{{ next_punn.get_absolute_url }}"><img style=max-width:685px;" src="{{ STATIC_URL }}{{ punn.pic }}" /></a>
+                  <a href="{{ next_punn.get_absolute_url }}">
+                    {% thumbnail punn.pic "685" as im %}
+                      <img src="{{ im.url }}" />
+                    {% endthumbnail %}
+                  </a>
                 </div>
 {% if punn.source %}
                 <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
