@@ -1,96 +1,100 @@
-{% extends "base.html" %}
             {% load i18n %}
             {% load thumbnail %}
-
-{% block description %}
-    <meta name="description" content="{{ user.userprofile.description }}" />
-{% endblock %}
-{% block additional_stylesheet %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/infinite.css" />
-{% endblock %}
-
-{% block open-graphs %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  
+  <title>{% block title %}{{ user.first_name }} {{ user.last_name }}{% endblock %}</title>
+  <meta name="description" content="{{ user.userprofile.description }}">
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ user.first_name }} {{ user.last_name }}" />
     <meta property="og:url" content="{{ url }}" />
     <meta property="og:image" content="http://blobon.com{{ STATIC_URL }}{{ user.userprofile.avatar }}" />
-    <meta property="og:site_name" content="{{ user.first_name }} {{ user.last_name }}" />
+    <meta property="og:site_name" content="{{ punn.author.first_name }} {{ punn.author.last_name }}" />
     <meta property="fb:admins" content="772035088" />
     <!-- Le twitter cards -->
     <meta name="twitter:card" content="photo">
     <meta name="twitter:url" content="{{ url }}">
     <meta name="twitter:title" content="{{ user.first_name }} {{ user.last_name }}">
     <meta name="twitter:image" content="http://blobon.com{{ STATIC_URL }}{{ user.userprofile.avatar }}">
-{% endblock %}
-{% block title %}{{ user.first_name }} {{ user.last_name }}{% endblock %}
-{% if user.userprofile.analytics_account %}
-{% block additional_analytics %}
-    <!-- Le user analytics  -->
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '{{ user.userprofile.analytics_account }}']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-{% endblock %}
+
+ 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/infinite.css" />
+ <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet"> 
+  
+  <!-- scripts at bottom of page -->
+<style type="text/css">
+.thumbnailsMAIN{
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border: 1px solid #D8D8D8;
+        width:155px;
+        height:185px;
+        overflow:hidden;
+        float:left;
+        margin-left:20px;
+        margin-top:20px;
+        display:inline-block;
+        -webkit-box-shadow: 0px 3px 3px 3px #dddddd;
+        box-shadow: 0px 3px 3px 3px #dddddd;
+        font-size:9px;
+
+}
+
+</style>
+
+
+</head>
+<body>
+ 
+    <div class="navbar navbar-fixed-top" style=" max-height:55px;">
+      <div class="navbar-inner" style=" max-height:55px;">
+          <ul class="nav" style="float:left;">
+            <li style="padding-left:20px;">
+{% if user.userprofile.domain %}
+	      <a class="brand" href="{{ home }}">{{ user.first_name }} {{ user.last_name }}</a> 
+{% else %}
+	      <a class="brand" href="{{ home }}">{{ user.username }}</a> 
 {% endif %}
-{% if user.userprofile.is_obox_client %}
-{% block obox %}
-{% include "obox_profile.html" %}
-{% endblock %}
-{% endif %}
-
-{% block content %}
-  <section style="padding-left:20px;padding-right:30px;">
-    
-    
-    
-
-<div id="container" class="transitions-enabled infinite-scroll clearfix">
-
-              {% for punn in punns %}
-
-                                <div class="col2 thumbnailsMAIN">
-                                        <a href="{{ punn.get_absolute_url }}" title="{{ punn.title }}">
-{% thumbnail punn.pic "155x185" crop="center" as im %}
-                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
-                  {% endthumbnail %}
-
-</a>
-                                </div>
-
-
-
-
+            </li>
+	  </ul>
+      </div>
+      </div>
+    </div> 
+    <section style="padding-top:50px;padding-left:20px;padding-right:30px;">
+      <div id="container" class="transitions-enabled infinite-scroll clearfix">
+{% for punn in punns %}
+        <div class="col2 thumbnailsMAIN">
+          <a href="{{ punn.get_absolute_url }}" title="{{ punn.title }}">
+          {% thumbnail punn.pic "155x185" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
+          {% endthumbnail %}
+          </a>
+        </div>
 {% endfor %}
-
-</div> <!-- #container -->
-
-<nav id="page-nav">
-<a href="?page={{ punns.next_page_number }}"></a>
-</nav>
-
-<script src="http://masonry.desandro.com/js/jquery-1.7.1.min.js"></script>
-<script src="http://masonry.desandro.com/jquery.masonry.min.js"></script>
-<script src="http://masonry.desandro.com/js/jquery.infinitescroll.min.js"></script>
-<script>
-  $(function(){
-    
-    var $container = $('#container');
-    
-    $container.imagesLoaded(function(){
-      $container.masonry({
-        itemSelector: '.thumbnailsMAIN',
-        columnWidth: 100
-      });
-    });
-    
-    $container.infinitescroll({
-      navSelector  : '#page-nav',    // selector for the paged navigation 
+       </div> <!-- #container -->
+       <nav id="page-nav">
+         <a href="?page={{ punns.next_page_number }}"></a>
+       </nav>
+       <script src="http://masonry.desandro.com/js/jquery-1.7.1.min.js"></script>
+       <script src="http://masonry.desandro.com/jquery.masonry.min.js"></script>
+       <script src="http://masonry.desandro.com/js/jquery.infinitescroll.min.js"></script>
+       <script>
+         $(function(){ 
+           var $container = $('#container');  
+             $container.imagesLoaded(function(){
+             $container.masonry({
+               itemSelector: '.thumbnailsMAIN',
+               columnWidth: 100
+             });
+             });
+          $container.infinitescroll({
+          navSelector  : '#page-nav',    // selector for the paged navigation 
       nextSelector : '#page-nav a',  // selector for the NEXT link (to page 2)
       itemSelector : '.thumbnailsMAIN',     // selector for all items you'll retrieve
       loading: {
@@ -114,7 +118,7 @@
   });
 </script>
   </section> <!-- #content -->
-{% endblock %}
 
-
-
+</body>
+</html>
+ 

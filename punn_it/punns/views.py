@@ -37,7 +37,7 @@ def infinite(request):
         punns = paginator.page(1)
     except EmptyPage:
         punns = paginator.page(paginator.num_pages)
-    return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
+    return render_to_response('infinite.html', locals(), context_instance=RequestContext(request))
 
 class UserFeed(Feed):
     def get_object(self, request, username):
