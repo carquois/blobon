@@ -118,7 +118,7 @@ def profile_page(request, user):
         latest_punn_list = Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
         return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
     else:
-      return HttpResponseNotFound('<h1>Erreur 404</h1>') 
+      return HttpResponseNotFound('<img src="http://i.imgur.com/WWBaz.jpg" /><p><a href="http://checkdonc.ca">Accueil</a></p>') 
 
 @login_required
 def submit(request): 
