@@ -37,7 +37,7 @@ def infinite(request):
         punns = paginator.page(1)
     except EmptyPage:
         punns = paginator.page(paginator.num_pages)
-    return render_to_response('infinite.html', locals(), context_instance=RequestContext(request))
+    return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
 
 class UserFeed(Feed):
     def get_object(self, request, username):
@@ -65,7 +65,16 @@ def index(request):
         if UserProfile.objects.filter(domain=url).exists():
           user = UserProfile.objects.get(domain=url).user
           home = user.userprofile.domain
-          latest_punn_list = Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
+          punn_list = Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date')
+          paginator = Paginator(punn_list, 25)
+          col = ['2', '3', '4']
+          page = request.GET.get('page')
+          try:
+            punns = paginator.page(page)
+          except PageNotAnInteger:
+            punns = paginator.page(1)
+          except EmptyPage:
+            punns = paginator.page(paginator.num_pages)
           return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
         else:
           return HttpResponseRedirect('http://blobon.com') 

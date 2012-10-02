@@ -35,6 +35,14 @@
 {% endblock %}
 {% endif %}
 {% block content %}
+
+    <div class="container">
+      <!--<div class="sharetheworld"></div>-->
+      <div class="row">
+        <div class="span12">
+          <div class="row ">
+            <div class="span7 blancBG ">
+              <div style="padding-bottom:0px; background-color:#f1f1f1;">
                 <script>
                   $(document).ready(function () {
                     $(document).keydown(function(e) {
@@ -86,8 +94,12 @@
                 </div>
                 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-50251a32413e32d6"></script>
                 <div style="padding-left:25px;" class="fb-comments" data-href="{{ url }}" data-num-posts="6" data-width="685"></div> 
+              </div>
+            </div><!--/span7-->
+
 {% endblock %}
 {% block sidebar %}
+            <div class="span5">
               <div class="box-right well">
                 <div id="fleche_single">
                   <a href="{{ prev_punn.get_absolute_url }}"><div class="flecheprev">Prev</div></a>	
@@ -115,6 +127,11 @@
               <div class="box-right">
 {% include "bigbox.html" %}
               </div>
+            </div><!--/span5-->
+          </div><!--/row-->
+        </div><!--/span12-->
+      </div><!--/row-->
+    </div><!--/.container-->
 {% endblock %}
 
 

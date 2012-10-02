@@ -5,6 +5,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="author" content="">
+    {% block additional_stylesheet %}{% endblock %}
+
     {% block description %}{% endblock %}
 
     {% block open-graphs %}
@@ -36,7 +38,6 @@
       {% block additional_style %}{% endblock %}
     </style>
 
-    {% block additional_stylesheet %}{% endblock %}
 
     <!-- Le analytics -->
     <script type="text/javascript">
@@ -82,6 +83,7 @@
 
 
 
+{% block content %}
     <div class="container">
       <!--<div class="sharetheworld"></div>-->
       <div class="row">
@@ -89,20 +91,19 @@
           <div class="row ">
             <div class="span7 blancBG ">
               <div style="padding-bottom:0px; background-color:#f1f1f1;">
-                {% block content %}
                   {% include "top-main-col.html" %}
                   {% include "thumbnails.html" %}
-                {% endblock %}
               </div>
             </div><!--/span7-->
+{% endblock %}
+{% block sidebar %}
             <div class="span5">
-              {% block sidebar %}{% endblock %}
             </div><!--/span5-->
           </div><!--/row-->
         </div><!--/span12-->
       </div><!--/row-->
     </div><!--/.container-->
-
+{% endblock %}
     <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script>

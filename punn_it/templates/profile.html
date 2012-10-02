@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+            {% load i18n %}
+            {% load thumbnail %}
 
 {% block description %}
     <meta name="description" content="{{ user.userprofile.description }}" />
@@ -41,7 +43,78 @@
 {% include "obox_profile.html" %}
 {% endblock %}
 {% endif %}
-{% block sidebar %}
-              <div class="box-right">{% include "bigbox.html" %}</div>
-              <div class="box-right">{% include "bigbox.html" %}</div>
+
+{% block content %}
+  <section style="padding-left:20px;padding-right:30px;">
+    
+    
+    
+
+<div id="container" class="transitions-enabled infinite-scroll clearfix">
+
+              {% for punn in punns %}
+
+                                <div class="col2 thumbnailsMAIN">
+                                        <a href="{{ punn.get_absolute_url }}" title="{{ punn.title }}">
+{% thumbnail punn.pic "155x185" crop="center" as im %}
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
+                  {% endthumbnail %}
+
+</a>
+                                </div>
+
+
+
+
+{% endfor %}
+
+</div> <!-- #container -->
+
+<nav id="page-nav">
+<a href="?page={{ punns.next_page_number }}"></a>
+</nav>
+
+<script src="http://masonry.desandro.com/js/jquery-1.7.1.min.js"></script>
+<script src="http://masonry.desandro.com/jquery.masonry.min.js"></script>
+<script src="http://masonry.desandro.com/js/jquery.infinitescroll.min.js"></script>
+<script>
+  $(function(){
+    
+    var $container = $('#container');
+    
+    $container.imagesLoaded(function(){
+      $container.masonry({
+        itemSelector: '.thumbnailsMAIN',
+        columnWidth: 100
+      });
+    });
+    
+    $container.infinitescroll({
+      navSelector  : '#page-nav',    // selector for the paged navigation 
+      nextSelector : '#page-nav a',  // selector for the NEXT link (to page 2)
+      itemSelector : '.thumbnailsMAIN',     // selector for all items you'll retrieve
+      loading: {
+          finishedMsg: 'No more pages to load.',
+          img: 'http://i.imgur.com/6RMhx.gif'
+        }
+      },
+      // trigger Masonry as a callback
+      function( newElements ) {
+        // hide new items while they are loading
+        var $newElems = $( newElements ).css({ opacity: 0 });
+        // ensure that images load before adding to masonry layout
+        $newElems.imagesLoaded(function(){
+          // show elems now they're ready
+          $newElems.animate({ opacity: 1 });
+          $container.masonry( 'appended', $newElems, true ); 
+        });
+      }
+    );
+    
+  });
+</script>
+  </section> <!-- #content -->
 {% endblock %}
+
+
+
