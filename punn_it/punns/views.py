@@ -188,6 +188,8 @@ def submit(request):
 def single(request, shorturl):
     punn = get_object_or_404(Punn, base62id=shorturl)
     user = punn.author
+    if request.user.is_authenticated():
+      auth_user = request.user
     if user.userprofile.domain:
       home = user.userprofile.domain
     else:

@@ -70,19 +70,13 @@
                 <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
                   <a href="{{ punn.source }}" class="btn small" rel="popover" title="Source" data-content="{{ punn.source }}" target="_blank">Source</a>
                 </div>
-                <script>
-                  $(function () {
-                    $("a[rel=popover]")
-                    .popover({
-                      offset: 10
-                    })
-                    .click(function(e) {
-                      e.preventDefault()
-                      window.open("{{ punn.source }}");
-                    })
-                  })
-                </script>
 {% endif %}
+{% if auth_user.is_authenticated %}
+                <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
+                  <a href="http://blobon.com/admin/punns/punn/{{ punn.id }}" class="btn small" >Edit</a>
+                </div>
+{% endif %}
+
                 <div class="social pull-right" style="padding-top:5px;">
                   <div class="addthis_toolbox addthis_default_style" style="margin-right:15px;">
                     <a class="addthis_button_pinterest" pi:pinit:url="{{ url }}" 
