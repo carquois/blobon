@@ -3,6 +3,9 @@
 {% block description %}
     <meta name="description" content="{{ user.userprofile.description }}" />
 {% endblock %}
+{% block additional_stylesheet %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/infinite.css" />
+{% endblock %}
 
 {% block open-graphs %}
     <!-- Le open graphs tags -->
