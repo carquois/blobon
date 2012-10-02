@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block description %}
+    <meta name="description" content="{{ user.userprofile.description }}" />
+{% endblock %}
+
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ user.first_name }} {{ user.last_name }}" />
