@@ -167,7 +167,7 @@ def single(request, shorturl):
     if user.userprofile.domain:
       home = user.userprofile.domain
     else:
-      home = "http://blobon.com"
+      home = "http://checkdonc.ca"
     latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=user).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:6]
     next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
     if Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]:
@@ -178,8 +178,6 @@ def single(request, shorturl):
       prev_punn_query = Punn.objects.filter(pub_date__gt=punn.pub_date).filter(author=user).filter(status='P').order_by('pub_date').exclude(pk=punn.id)[:1]
       if (prev_punn_query.count() > 0):
         prev_punn = prev_punn_query[0] 
-    latest_repunn_list = Punn.objects.filter(original_punn=punn.id).order_by('pub_date')[:6]
-    top_comments = Comment.objects.all().order_by('karma')[:6]
     url = request.build_absolute_uri()
     return render_to_response('single.html', locals(), context_instance=RequestContext(request))
 
