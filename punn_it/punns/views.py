@@ -55,6 +55,28 @@ class UserFeed(Feed):
     def items(self, obj):
         return Punn.objects.filter(author=obj).filter(status='P').order_by('-pub_date')[:30]
 
+
+def draft(request):
+        host = request.META['HTTP_HOST']
+        url = 'http://%s/' % (host) 
+        if UserProfile.objects.filter(domain=url).exists():
+          user = UserProfile.objects.get(domain=url).user
+          home = user.userprofile.domain
+          punn_list = Punn.objects.filter(author=user).filter(status='D').order_by('-pub_date')
+          paginator = Paginator(punn_list, 25)
+          col = ['2', '3', '4']
+          page = request.GET.get('page')
+          try:
+            punns = paginator.page(page)
+          except PageNotAnInteger:
+            punns = paginator.page(1)
+          except EmptyPage:
+            punns = paginator.page(paginator.num_pages)
+          return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
+        else:
+          return HttpResponseNotFound('<img src="http://i.imgur.com/WWBaz.jpg" /><p><a href="http://checkdonc.ca">Accueil</a></p>')
+
+
 def index(request): 
     host = request.META['HTTP_HOST']
     url = 'http://%s/' % (host)
