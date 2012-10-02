@@ -45,10 +45,10 @@ class UserFeed(Feed):
     def title(self, obj):
         return "%s" % obj.first_name 
     def link(self, obj):
-        if obj.userprofile.domain:
-          return "http://%s/%s" % (obj.userprofile.domain, obj.get_absolute_url())
-        else:
-          return obj.get_absolute_url()
+        #if obj.userprofile.domain:
+          return "http://%s/%s" % ("http://checkdonc.ca", obj.get_absolute_url())
+        #else:
+        #  return obj.get_absolute_url()
     def description(self, obj):
         return "Feed : %s" % obj.username
     def items(self, obj):
