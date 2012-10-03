@@ -75,6 +75,9 @@
                 <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
                   <a href="http://blobon.com/admin/punns/punn/{{ punn.id }}" class="btn small" >Edit</a>
                 </div>
+                <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
+                  <a href="http://punn.it/submit/?media={{ STATIC_URL|iriencode }}{{ punn.pic|iriencode }}&url={{ punn.source|iriencode }}&title={{ punn.title|iriencode }}&is_video=false" class="btn small" target="_blank">Reblob</a>
+                </div>
 {% endif %}
 
                 <div class="social pull-right" style="padding-top:5px;">
