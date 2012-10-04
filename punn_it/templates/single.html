@@ -55,6 +55,12 @@
                       if (url) {
                         window.location = url;
                       }
+                      if (e.which == 13) {
+                        window.open(
+                          'http://punn.it/submit/?media=http%3A%2F%2Fblobon.com%2Fi%2F{{ punn.pic|iriencode }}&url={{ punn.source|iriencode }}&title={{ punn.title|iriencode }}&is_video=false',
+                          '_blank'
+                        );
+                      }
                     });
                   });
                 </script>
@@ -76,7 +82,7 @@
                   <a href="http://blobon.com/admin/punns/punn/{{ punn.id }}" class="btn small" >Edit</a>
                 </div>
                 <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
-                  <a href="http://punn.it/submit/?media=http%3A%2F%2Fblobon.com%2Fi%2F{{ punn.pic|iriencode }}&url={{ punn.source|iriencode }}&title={{ punn.title|iriencode }}&is_video=false" class="btn small" target="_blank">Reblob</a>
+                  <a href="http://punn.it/submit/?media=http%3A%2F%2Fblobon.com%2Fi%2F{{ punn.pic|iriencode }}&title={{ punn.title|iriencode }}&is_video=false" class="btn small" target="_blank">Reblob</a>
                 </div>
 {% endif %}
 

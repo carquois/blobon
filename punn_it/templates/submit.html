@@ -5,14 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="Samuel" >
 
     <!-- Le styles -->
-    <link href="http://asseenontheinter.net/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet/less" href="http://punn.it/less.js">
-    <script src="http://punn.it/less.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
     <title>{% block title %}{% trans 'Create a blob' %}{% endblock %}</title>
   </head>
   <body>
@@ -65,8 +61,9 @@
 <br />
   <button type="submit" class="btn">Submit</button>
 </form>
-
-
+<script>
+$('#id_title').focus();
+</script>
     </div>
   </div>
 </div>
