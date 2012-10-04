@@ -1,12 +1,27 @@
 {% extends "base.html" %}
-
-{% block title %}Create an account{% endblock %}
+{% load i18n %}
+{% block title %}{% trans 'Create an account' %}{% endblock %}
 
 {% block content %}
-  <h1>Create an account</h1>
+  <h1>{% trans 'Join BlobOn' %}</h1>
     <form action="" method="post">{% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" value="Create the account">
+    {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+        {{ form.username.errors }}
+        {{ form.username.label_tag }}
+        {{ form.username }}
+
+        {{ form.password1.errors }}
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+
+        {{ form.password2.errors }}
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+
+    </div>
+    <p><input class="btn btn-warning" type="submit" value="{% trans 'Create my account' %}" /></p>
+
     </form>
 {% endblock %}
 
