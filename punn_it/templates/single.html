@@ -2,6 +2,8 @@
 {% load i18n %}
 {% load thumbnail %}
 
+<meta name="description" content="{{ punn.author.userprofile.description }}" />
+
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ punn.title }}" />
