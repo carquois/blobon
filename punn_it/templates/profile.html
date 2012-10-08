@@ -90,7 +90,7 @@
       </div>
     </div> 
     <section style="padding-top:50px;padding-left:20px;padding-right:30px;">
-      <div id="container" class="transitions-enabled infinite-scroll clearfix">
+      <div id="container" class="transitions-enabled infinite-scroll centered clearfix">
 {% for punn in punns %}
         <div class="col2 thumbnailsMAIN">
           <a href="{{ punn.get_absolute_url }}" title="{{ punn.title }}">
@@ -113,7 +113,8 @@
              $container.imagesLoaded(function(){
              $container.masonry({
                itemSelector: '.thumbnailsMAIN',
-               columnWidth: 100
+               columnWidth: 100, 
+               isFitWidth: true
              });
              });
           $container.infinitescroll({
