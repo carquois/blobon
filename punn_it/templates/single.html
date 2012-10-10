@@ -47,6 +47,7 @@
               <div style="padding-bottom:0px; background-color:#f1f1f1;">
                 <script>
                   $(document).ready(function () {
+                    
                     $(document).keydown(function(e) {
                       var url = false;
                       if (e.which == 37) {
@@ -72,37 +73,26 @@
                   </div>
                 </div>
                 <div class="well" style="background-color:#fff;margin-top:0px;text-align:center;">
-                  <a href="{{ next_punn.get_absolute_url }}"><img style=max-width:685px;" src="{{ STATIC_URL }}{{ punn.pic }}" /></a>
+                  <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style=max-width:685px;" src="{{ STATIC_URL }}{{ punn.pic }}" /></a>
                 </div>
-{% if punn.source %}
-                <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
-                  <a href="{{ punn.source }}" class="btn small" rel="popover" title="Source" data-content="{{ punn.source }}" target="_blank">Source</a>
-                </div>
-{% endif %}
-{% if auth_user.is_authenticated %}
-                <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
-                  <a href="http://blobon.com/admin/punns/punn/{{ punn.id }}" class="btn small" >Edit</a>
-                </div>
-                <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
-                  <a href="http://punn.it/submit/?media=http%3A%2F%2Fblobon.com%2Fi%2F{{ punn.pic|iriencode }}&title={{ punn.title|iriencode }}&is_video=false" class="btn small" target="_blank">Reblob</a>
-                </div>
-{% endif %}
-
-                <div class="social pull-right" style="padding-top:5px;">
-                  <div class="addthis_toolbox addthis_default_style" style="margin-right:15px;">
-                    <a class="addthis_button_pinterest" pi:pinit:url="{{ url }}" 
-                      pi:pinit:media="http://checkdonc.ca{{ STATIC_URL }}{{ punn.pic }}" pi:pinit:layout="horizontal"></a>
-                    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-                    <a class="addthis_button_tweet" tw:via="CheckDoncCa" ></a>
-                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-                  </div>
-                </div>
-                <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-50251a32413e32d6"></script>
-                <div style="padding-left:25px;" class="fb-comments" data-href="{{ url }}" data-num-posts="6" data-width="685"></div> 
               </div>
+
+
+<script type="text/javascript" charset="utf-8">
+    function up(data){
+        Dajaxice.punns.up(Dajax.process, {'karma':{{ punn.karma }}, 'punnid':{{ punn.id }}});
+    }
+    function down(data){
+        Dajaxice.punns.down(Dajax.process, {'karma':{{ punn.karma }}, 'punnid':{{ punn.id }}});
+    }
+</script>
+<button class="btn btn-primary" onclick="up();">Up</button>
+<input type="text" value="{{ punn.karma }}" id="karma" class="input-small">
+<button class="btn btn-primary" onclick="down();">Down</button>
+
+
 {% include "leaderboard.html" %}
             </div><!--/span7-->
-
 {% endblock %}
 {% block sidebar %}
             <div class="span5">
@@ -117,7 +107,7 @@
                   <div class="thumb_single">
                     <a class="thumbnail" href="{{ punn.get_absolute_url }}">
                     {% thumbnail punn.pic "95x115" crop="center" as im %}
-                      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                      <img class="sidebarThumbs" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                     {% endthumbnail %}
                     </a>
                   </div>
@@ -126,6 +116,9 @@
                 {% else %}
                   <p>No more content</p>
                 {% endif %}	
+              </div><!--/.well -->								   
+              <div class="box-right well">
+                <img src="" id="testImage" />
               </div><!--/.well -->								   
               <div class="box-right">
 {% include "bigbox.html" %}

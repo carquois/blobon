@@ -1,8 +1,10 @@
 {% load i18n %}
+{% load dajaxice_templatetags %}
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% dajaxice_js_import %}
     <meta charset="utf-8">
     <meta name="author" content="">
     {% block additional_stylesheet %}{% endblock %}
@@ -14,6 +16,7 @@
 
     <!-- Le jQuery -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.dajax.core.js"></script>
 
     <!-- Le fonts -->
     <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>

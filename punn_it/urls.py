@@ -1,10 +1,14 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 from punns.views import UserFeed
+from dajaxice.core import dajaxice_autodiscover, dajaxice_config
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+dajaxice_autodiscover()
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
     url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout',
                           {'next_page': '/'}),
@@ -36,3 +40,4 @@ urlpatterns = patterns('',
     url(r'', include('social_auth.urls')),
 )
 
+urlpatterns += staticfiles_urlpatterns()
