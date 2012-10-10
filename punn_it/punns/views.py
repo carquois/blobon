@@ -129,7 +129,6 @@ def done(request):
     }
     return render_to_response('done.html', ctx, RequestContext(request))
 
-@cache_page(60 * 15)
 def profile_page(request, user):
     host = request.META['HTTP_HOST']
     url = 'http://%s/' % (host)
@@ -184,7 +183,6 @@ def submit(request):
       form = PunnForm()
     return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
 
-@cache_page(60 * 30)
 def single(request, shorturl):
     punn = get_object_or_404(Punn, base62id=shorturl)
     user = punn.author
