@@ -20,7 +20,7 @@ def up(request, karma, punnid):
         return dajax.json()
     except Punn.DoesNotExist:
         dajax = Dajax()
-        dajax.alert _("Something went wrong")
+        dajax.alert('Something went wrong')
         return dajax.json()
 
 @dajaxice_register
