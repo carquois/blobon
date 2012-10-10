@@ -37,7 +37,6 @@
 {% endblock %}
 {% endif %}
 {% block content %}
-
     <div class="container">
       <!--<div class="sharetheworld"></div>-->
       <div class="row">
@@ -47,7 +46,8 @@
               <div style="padding-bottom:0px; background-color:#f1f1f1;">
                 <script>
                   $(document).ready(function () {
-                    
+                    $("#mainImage").attr('src', '{{ STATIC_URL }}{{ punn.pic }}')
+                    //{{ STATIC_URL }}{{ punn.pic }}
                     $(document).keydown(function(e) {
                       var url = false;
                       if (e.which == 37) {
@@ -73,7 +73,7 @@
                   </div>
                 </div>
                 <div class="well" style="background-color:#fff;margin-top:0px;text-align:center;">
-                  <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style=max-width:685px;" src="{{ STATIC_URL }}{{ punn.pic }}" /></a>
+                  <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style=max-width:685px;" src="http://i.imgur.com/Sjk3r.gif" /></a>
                 </div>
               </div>
 
@@ -138,13 +138,4 @@
       </div><!--/row-->
     </div><!--/.container-->
 {% endblock %}
-
-
-
-
-
-
-
-
-
 
