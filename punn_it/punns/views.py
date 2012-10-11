@@ -159,25 +159,11 @@ def submit(request):
           filename = "%s.%s" % (prefix, ext)
           new_punn.pic.save(filename, File(img_temp))
           return render_to_response('success.html', {"punn": new_punn}, context_instance=RequestContext(request))
-          #return HttpResponseRedirect(reverse('punns.views.single', new_punn.base62id))
-        #else:
-        #  return render_to_response('submit.html', context_instance=RequestContext(request))
     elif request.method == 'GET':
       source = request.GET.get('url', '') 
       title = request.GET.get('title', '') 
       image = request.GET.get('media', '') 
       form = PunnForm(initial={'source':source, 'title':title, 'image': image})
-      #page = urllib2.urlopen("http://imgur.com/gallery/K84kO")
-      #soup = BeautifulSoup(page)
-      #images = [] 
-      #size = [] 
-      #for image in soup.find_all('img'):
-        #url = image.get('src')
-        #usock = urllib2.urlopen(url)
-        #data = usock.read()
-        #size.append(data.__len__())
-        #images.append(image.get('src'))
-      #imagedata = soup.find_all('img')
       return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
     else:
       form = PunnForm()
@@ -204,26 +190,4 @@ def single(request, shorturl):
         prev_punn = prev_punn_query[0] 
     url = request.build_absolute_uri()
     return render_to_response('single.html', locals(), context_instance=RequestContext(request))
-
-def sin(request, shorturl):
-    punn = get_object_or_404(Punn, base62id=shorturl)
-    user = punn.author
-    if request.user.is_authenticated():
-      auth_user = request.user
-    if user.userprofile.domain:
-      home = user.userprofile.domain
-    else:
-      home = "http://checkdonc.ca"
-    latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=user).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:6]
-    next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
-    if Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]:
-      next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=user).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:1]
-      if (next_punn_query.count() > 0):
-        next_punn = next_punn_query[0]
-    if Punn.objects.filter(pub_date__gt=punn.pub_date).order_by('pub_date').exclude(pk=punn.id)[:1]:
-      prev_punn_query = Punn.objects.filter(pub_date__gt=punn.pub_date).filter(author=user).filter(status='P').order_by('pub_date').exclude(pk=punn.id)[:1]
-      if (prev_punn_query.count() > 0):
-        prev_punn = prev_punn_query[0]
-    url = request.build_absolute_uri()
-    return render_to_response('sin.html', locals(), context_instance=RequestContext(request))
 
