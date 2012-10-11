@@ -46,9 +46,11 @@
             <div class="span7 blancBG ">
               <div style="padding-bottom:0px; background-color:#f1f1f1;">
                 <script>
+                  function changeImage(){
+                    Dajaxice.punns.changeImage(Dajax.process, {'image':'{{ STATIC_URL }}{{ punn.pic }}'});
+                  }
                   $(document).ready(function () {
-                    $("#mainImage").attr('src', '{{ STATIC_URL }}{{ punn.pic }}')
-                    //{{ STATIC_URL }}{{ punn.pic }}
+                    changeImage(); 
                     $(document).keydown(function(e) {
                       var url = false;
                       if (e.which == 37) {

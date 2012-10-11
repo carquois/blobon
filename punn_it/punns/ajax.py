@@ -30,3 +30,9 @@ def down(request, karma, punnid):
     dajax.assign('#karma','value',str(result))
     dajax.add_css_class('#downbutton','btn-primary')
     return dajax.json()
+
+@dajaxice_register
+def changeImage(request, image):
+    dajax = Dajax()
+    dajax.assign('#mainImage','src', image)
+    return dajax.json()
