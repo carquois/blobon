@@ -78,7 +78,14 @@
                 <div class="well" style="background-color:#fff;margin-top:0px;text-align:center;">
                   <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style=max-width:685px;" src="http://i.imgur.com/Sjk3r.gif" /></a>
                 </div>
+
+                {% if punn.content %}
+                <div class="well">
+                  {{ punn.content|markdown:"safe" }}
+                </div>
+                {% endif %}
               </div>
+
 
 {% if auth_user.is_authenticated %}
 <script type="text/javascript" charset="utf-8">
