@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load thumbnail %}
+{% load markup %} 
 
 <meta name="description" content="{{ punn.author.userprofile.description }}" />
 
@@ -76,18 +77,6 @@
                   <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style=max-width:685px;" src="http://i.imgur.com/Sjk3r.gif" /></a>
                 </div>
 
-                {% if comment_list %}
-                  {% for comment in comment_list %}
-                <div class="well" style="background-color:#fff;margin-top:0px;text-align:center;">
-                  {{ comment.content }} 
-                </div>
-                  {% endfor %}
-                </div>
-                {% else %}
-                  <p>{% trans 'No comment. Yet...' %}</p>
-                {% endif %}
-
-
               </div>
 
 {% if auth_user.is_authenticated %}
@@ -107,6 +96,20 @@
 <input type="text" value="{{ punn.karma }}" id="karma" class="input-small">
 <a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Down</a>
 {% endif %}
+
+<textarea rows="1" placeholder="{% trans 'Sumbit a comment' %}"></textarea>
+
+
+                {% if comment_list %}
+                  {% for comment in comment_list %}
+                <div class="well">
+                  {{ comment.content|markdown:"safe" }} 
+                </div>
+                  {% endfor %}
+                {% else %}
+                  <p>{% trans 'No comment. Yet...' %}</p>
+                {% endif %}
+
 
 
 
