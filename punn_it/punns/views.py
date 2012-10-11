@@ -188,6 +188,7 @@ def single(request, shorturl):
       prev_punn_query = Punn.objects.filter(pub_date__gt=punn.pub_date).filter(author=user).filter(status='P').order_by('pub_date').exclude(pk=punn.id)[:1]
       if (prev_punn_query.count() > 0):
         prev_punn = prev_punn_query[0] 
+    comment_list = Comment.objects.filter(punn=punn).order_by('-pub_date')
     url = request.build_absolute_uri()
     return render_to_response('single.html', locals(), context_instance=RequestContext(request))
 
