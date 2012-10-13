@@ -5,3 +5,11 @@
 *.swo
 env/*
 punn_it/media/*
+src/*
+bin/*
+lib/*
+build/*
+include/*
+share/*
+.Python
+punn_it/local_settings.py
