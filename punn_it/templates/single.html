@@ -79,9 +79,9 @@
                   <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style=max-width:685px;" src="http://i.imgur.com/Sjk3r.gif" /></a>
                 </div>
 
-                {% if punn.content %}
+                {% if content %}
                 <div class="well">
-                  {{ punn.content|markdown:"safe" }}
+                  {{ content|safe }}
                 </div>
                 {% endif %}
               </div>
