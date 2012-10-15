@@ -118,10 +118,12 @@
                   <p>{% trans 'No comment. Yet...' %}</p>
                 {% endif %}
 
-
-
-
+{% if punn.author.userprofile.is_obox_client %}
+{% include "obox_leaderboard.html" %}
+{% else %}
 {% include "leaderboard.html" %}
+{% endif %}
+
             </div><!--/span7-->
 {% endblock %}
 {% block sidebar %}
@@ -151,10 +153,18 @@
                 <img src="" id="testImage" />
               </div><!--/.well -->								   
               <div class="box-right">
+{% if punn.author.userprofile.is_obox_client %}
+{% include "obox_primary.html" %}
+{% else %}
 {% include "bigbox.html" %}
+{% endif %}
               </div>
               <div class="box-right">
+{% if punn.author.userprofile.is_obox_client %}
+{% include "obox_bigbox.html" %}
+{% else %}
 {% include "bigbox.html" %}
+{% endif %}
               </div>
             </div><!--/span5-->
           </div><!--/row-->
