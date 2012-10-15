@@ -63,7 +63,8 @@ def draft(request):
             punns = paginator.page(paginator.num_pages)
           return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
         else:
-          return HttpResponseNotFound('<img src="http://i.imgur.com/WWBaz.jpg" /><p><a href="http://checkdonc.ca">Accueil</a></p>')
+          punn_list = Punn.objects.filter(status='D').order_by('pub_date')
+          return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
 
 
 def index(request): 
