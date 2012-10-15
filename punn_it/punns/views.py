@@ -81,9 +81,16 @@ def index(request):
         punns = paginator.page(paginator.num_pages)
       return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
     else:
-        home = "http://blobon.com"
-        latest_punn_list = Punn.objects.filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
-        return render_to_response('index.html', {'home': home, 'latest_punn_list': latest_punn_list}, context_instance=RequestContext(request))
+      punn_list = Punn.objects.filter(status='P').order_by('-pub_date')
+      paginator = Paginator(punn_list, 25)
+      page = request.GET.get('page')
+      try:
+        punns = paginator.page(page)
+      except PageNotAnInteger:
+        punns = paginator.page(1)
+      except EmptyPage:
+        punns = paginator.page(paginator.num_pages)
+      return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
 
 @login_required
 def comment(request, shorturl):
@@ -113,18 +120,12 @@ def done(request):
     return render_to_response('done.html', ctx, RequestContext(request))
 
 def profile_page(request, user):
-    host = request.META['HTTP_HOST']
-    url = 'http://%s/' % (host)
-    slug = request.path
-    if host == 'blobon.com':
       user = get_object_or_404(User, username=user)
       if user.userprofile.domain:
         return HttpResponseRedirect(user.userprofile.domain)
       else:
         latest_punn_list = Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
         return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
-    else:
-      return HttpResponseNotFound('<img src="http://i.imgur.com/WWBaz.jpg" /><p><a href="http://checkdonc.ca">Accueil</a></p>') 
 
 @login_required
 def submit(request): 
@@ -160,16 +161,16 @@ def single(request, shorturl):
       home = punn.author.userprofile.domain
     else:
       home = "http://checkdonc.ca"
-    latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=user).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:6]
+    latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=punn.author).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:6]
     next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
     prev_punn = ""
     next_punn = ""
     if Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]:
-      next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=user).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:1]
+      next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=punn.author).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:1]
       if (next_punn_query.count() > 0):
         next_punn = next_punn_query[0] 
     if Punn.objects.filter(pub_date__gt=punn.pub_date).order_by('pub_date').exclude(pk=punn.id)[:1]:
-      prev_punn_query = Punn.objects.filter(pub_date__gt=punn.pub_date).filter(author=user).filter(status='P').order_by('pub_date').exclude(pk=punn.id)[:1]
+      prev_punn_query = Punn.objects.filter(pub_date__gt=punn.pub_date).filter(author=punn.author).filter(status='P').order_by('pub_date').exclude(pk=punn.id)[:1]
       if (prev_punn_query.count() > 0):
         prev_punn = prev_punn_query[0] 
     content = ""
