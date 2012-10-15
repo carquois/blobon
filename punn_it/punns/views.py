@@ -35,10 +35,7 @@ class UserFeed(Feed):
     def title(self, obj):
         return "%s" % obj.first_name 
     def link(self, obj):
-        #if obj.userprofile.domain:
           return "http://%s/%s" % ("http://checkdonc.ca", obj.get_absolute_url())
-        #else:
-        #  return obj.get_absolute_url()
     def description(self, obj):
         return "Feed : %s" % obj.username
     def items(self, obj):
@@ -70,33 +67,29 @@ def draft(request):
 def index(request): 
     host = request.META['HTTP_HOST']
     url = 'http://%s/' % (host)
-    if host == 'blobon.com':
+    if UserProfile.objects.filter(domain=url).exists():
+      user = UserProfile.objects.get(domain=url).user
+      home = user.userprofile.domain
+      punn_list = Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date')
+      paginator = Paginator(punn_list, 25)
+      page = request.GET.get('page')
+      try:
+        punns = paginator.page(page)
+      except PageNotAnInteger:
+        punns = paginator.page(1)
+      except EmptyPage:
+        punns = paginator.page(paginator.num_pages)
+      return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
+    else:
         home = "http://blobon.com"
         latest_punn_list = Punn.objects.filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date')[:100]
-        return render_to_response('index.html', locals(), context_instance=RequestContext(request))
-    else:
-        if UserProfile.objects.filter(domain=url).exists():
-          user = UserProfile.objects.get(domain=url).user
-          home = user.userprofile.domain
-          punn_list = Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date')
-          paginator = Paginator(punn_list, 25)
-          col = ['2', '3', '4']
-          page = request.GET.get('page')
-          try:
-            punns = paginator.page(page)
-          except PageNotAnInteger:
-            punns = paginator.page(1)
-          except EmptyPage:
-            punns = paginator.page(paginator.num_pages)
-          return render_to_response('profile.html', locals(), context_instance=RequestContext(request))
-        else:
-          return HttpResponseRedirect('http://blobon.com') 
+        return render_to_response('index.html', {'home': home, 'latest_punn_list': latest_punn_list}, context_instance=RequestContext(request))
 
 @login_required
 def comment(request, shorturl):
     comment = get_object_or_404(Comment, base62id=shorturl)
     latest_reply_list = Comment.objects.filter(parent=comment.id).order_by('pub_date')[:6]
-    return render_to_response('comment.html', locals())
+    return render_to_response('comment.html', {'comment': comment, 'latest_reply_list': latest_reply_list}, context_instance=RequestContext(request))
 
 @login_required
 def home(request):
