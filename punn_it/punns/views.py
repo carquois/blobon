@@ -160,15 +160,16 @@ def submit(request):
 
 def single(request, shorturl):
     punn = get_object_or_404(Punn, base62id=shorturl)
-    user = punn.author
     if request.user.is_authenticated():
       auth_user = request.user
-    if user.userprofile.domain:
-      home = user.userprofile.domain
+    if punn.author.userprofile.domain:
+      home = punn.author.userprofile.domain
     else:
       home = "http://checkdonc.ca"
     latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=user).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:6]
     next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
+    prev_punn = ""
+    next_punn = ""
     if Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]:
       next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=user).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:1]
       if (next_punn_query.count() > 0):
