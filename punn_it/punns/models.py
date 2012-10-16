@@ -34,6 +34,7 @@ class Punn(models.Model):
     original_punn = models.ForeignKey('self',  null=True, blank=True)
     content = models.TextField(max_length=10000, blank=True)
     is_video = models.BooleanField(default=False)
+    youtube_id = models.CharField(max_length=50, null=True, blank=True)
     #Datetime infos
     created = models.DateTimeField(auto_now_add = True)
     pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
