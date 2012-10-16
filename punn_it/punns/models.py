@@ -28,6 +28,7 @@ class Punn(models.Model):
     base62id = models.CharField(max_length=140, blank=True)
     slug = models.SlugField(max_length=140, blank=True)
     karma = models.IntegerField(default=0)
+    views = models.IntegerField(default=0, blank=True)
     source = models.URLField(max_length=300, blank=True)
     author = models.ForeignKey(User)
     original_punn = models.ForeignKey('self',  null=True, blank=True)
