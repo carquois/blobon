@@ -76,7 +76,11 @@
                   </div>
                 </div>
                 <div class="well" style="background-color:#fff;margin-top:0px;text-align:center;">
+{% if punn.youtube_id %}
+                  <iframe width="640" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+{% else %}
                   <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style=max-width:685px;" src="http://i.imgur.com/Sjk3r.gif" /></a>
+{% endif %}
                 </div>
 
                 {% if content %}

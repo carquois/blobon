@@ -1,3 +1,4 @@
+from cgi import parse_qs
 import re
 import markdown
 from django.views.decorators.cache import cache_page
@@ -26,6 +27,7 @@ from django.contrib.syndication.views import FeedDoesNotExist
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 import urllib2
+import urlparse
 from urlparse import urlparse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -142,12 +144,18 @@ def submit(request):
           prefix = new_punn.base62id
           filename = "%s.%s" % (prefix, ext)
           new_punn.pic.save(filename, File(img_temp))
+          if request.POST['is_video'] == 'true':
+            query = urlparse(new_punn.source)
+            p = parse_qs(query.query)
+            new_punn.youtube_id = p['v'][0]
+            new_punn.save()
           return render_to_response('success.html', {"punn": new_punn}, context_instance=RequestContext(request))
     elif request.method == 'GET':
       source = request.GET.get('url', '') 
       title = request.GET.get('title', '') 
       image = request.GET.get('media', '') 
-      form = PunnForm(initial={'source':source, 'title':title, 'image': image})
+      is_video = request.GET.get('is_video', '') 
+      form = PunnForm(initial={'source':source, 'title':title, 'image': image, 'is_video':is_video})
       return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
     else:
       form = PunnForm()
