@@ -33,6 +33,7 @@ class Punn(models.Model):
     author = models.ForeignKey(User)
     original_punn = models.ForeignKey('self',  null=True, blank=True)
     content = models.TextField(max_length=10000, blank=True)
+    is_video = models.BooleanField(default=False)
     #Datetime infos
     created = models.DateTimeField(auto_now_add = True)
     pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
