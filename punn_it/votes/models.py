@@ -6,7 +6,6 @@ from django.utils.translation import ugettext as _
 
 VOTE_CHOICES = (
     ('1',  _('Vote up')),
-    ('0',  _('Rescind')),
     ('-1', _('Vote down')),
 )
 
