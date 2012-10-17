@@ -186,6 +186,9 @@ def single(request, shorturl):
         content = linkify(punn.content) 
         content = markdown.markdown(content)
     comment_list = Comment.objects.filter(punn=punn).order_by('-pub_date')
+    for comment in comment_list:
+        comment.content = linkify(comment.content)
+        comment.content = markdown.markdown(comment.content)
     url = request.build_absolute_uri()
     return render_to_response('single.html', {'punn': punn, 'latest_punn_list': latest_punn_list,
                                               'next_punn': next_punn, 'prev_punn': prev_punn, 
