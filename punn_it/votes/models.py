@@ -13,7 +13,7 @@ VOTE_CHOICES = (
 class CommentVote(models.Model):
     comment = models.ForeignKey(Comment)
     user    = models.ForeignKey(User)
-    vote    = models.CharField(max_length=1, choices=VOTE_CHOICES)
+    vote    = models.CharField(max_length=2, choices=VOTE_CHOICES)
 
 class PunnVote(models.Model):
     punn = models.ForeignKey(Punn)
