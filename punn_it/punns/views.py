@@ -9,6 +9,7 @@ from comments.models import Comment
 from punns.utils import BASE10, BASE62, baseconvert
 from accounts.models import UserForm
 from accounts.models import UserProfileForm
+from votes.models import PunnVote
 from django.http import HttpResponse
 from django.conf import settings
 from django.contrib import auth
@@ -163,6 +164,9 @@ def submit(request):
 
 def single(request, shorturl):
     punn = get_object_or_404(Punn, base62id=shorturl)
+    votesup = PunnVote.objects.filter(punn=punn).filter(vote='U')
+    votesdown = PunnVote.objects.filter(punn=punn).filter(vote='D')
+    karma = votesup.count() - votesdown.count()
     if request.user.is_authenticated():
       auth_user = request.user
     if punn.author.userprofile.domain:
@@ -193,7 +197,7 @@ def single(request, shorturl):
     return render_to_response('single.html', {'punn': punn, 'latest_punn_list': latest_punn_list,
                                               'next_punn': next_punn, 'prev_punn': prev_punn, 
                                               'content': content, 'comment_list': comment_list,
-                                              'url': url}, context_instance=RequestContext(request))
+                                              'url': url, 'karma':karma}, context_instance=RequestContext(request))
 
 
 def linkify(string):

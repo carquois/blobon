@@ -5,8 +5,8 @@ from punns.models import Punn
 from django.utils.translation import ugettext as _
 
 VOTE_CHOICES = (
-    ('1',  _('Vote up')),
-    ('-1', _('Vote down')),
+    ('U',  _('Vote up')),
+    ('D', _('Vote down')),
 )
 
 class CommentVote(models.Model):

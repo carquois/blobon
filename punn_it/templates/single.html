@@ -101,11 +101,11 @@
     }
 </script>
 <button id="upbutton" class="btn" onclick="up();">Up</button>
-<input type="text" value="{{ punn.karma }}" id="karma" class="input-small">
+<input type="text" value="{{ karma }}" id="karma" class="input-small">
 <button id="downbutton" class="btn" onclick="down();">Down</button>
 {% else %}
 <a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Up</a>
-<input type="text" value="{{ punn.karma }}" id="karma" class="input-small">
+<input type="text" value="{{ karma }}" id="karma" class="input-small">
 <a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Down</a>
 {% endif %}
 
