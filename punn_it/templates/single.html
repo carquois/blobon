@@ -91,18 +91,18 @@
               </div>
 
 
-{% if auth_user.is_authenticated %}
+{% if auth_user %}
 <script type="text/javascript" charset="utf-8">
     function up(data){
-        Dajaxice.punns.up(Dajax.process, {'karma':{{ punn.karma }}, 'punnid':{{ punn.id }}});
+        Dajaxice.punns.up(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}});
     }
     function down(data){
-        Dajaxice.punns.down(Dajax.process, {'karma':{{ punn.karma }}, 'punnid':{{ punn.id }}});
+        Dajaxice.punns.down(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}});
     }
 </script>
-<button id="upbutton" class="btn" onclick="up();">Up</button>
+<button id="upbutton" class="btn {% if vote == "U" %}btn-primary{% endif %}" onclick="up();">Up</button>
 <input type="text" value="{{ karma }}" id="karma" class="input-small">
-<button id="downbutton" class="btn" onclick="down();">Down</button>
+<button id="downbutton" class="btn {% if vote == "D" %}btn-primary{% endif %}" onclick="down();">Down</button>
 {% else %}
 <a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Up</a>
 <input type="text" value="{{ karma }}" id="karma" class="input-small">

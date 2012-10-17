@@ -167,8 +167,15 @@ def single(request, shorturl):
     votesup = PunnVote.objects.filter(punn=punn).filter(vote='U')
     votesdown = PunnVote.objects.filter(punn=punn).filter(vote='D')
     karma = votesup.count() - votesdown.count()
+    auth_user = ""
+    vote = ""
     if request.user.is_authenticated():
       auth_user = request.user
+      if PunnVote.objects.filter(punn=punn).filter(user=auth_user):
+        if PunnVote.objects.filter(punn=punn).filter(user=auth_user).filter(vote='U'):
+          vote = 'U'
+        else:
+          vote = 'D'
     if punn.author.userprofile.domain:
       home = punn.author.userprofile.domain
     else:
@@ -197,7 +204,8 @@ def single(request, shorturl):
     return render_to_response('single.html', {'punn': punn, 'latest_punn_list': latest_punn_list,
                                               'next_punn': next_punn, 'prev_punn': prev_punn, 
                                               'content': content, 'comment_list': comment_list,
-                                              'url': url, 'karma':karma}, context_instance=RequestContext(request))
+                                              'url': url, 'karma':karma, 'auth_user':auth_user,
+                                              'vote': vote}, context_instance=RequestContext(request))
 
 
 def linkify(string):
