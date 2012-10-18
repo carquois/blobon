@@ -17,8 +17,8 @@ def up(request, auth_userid, punnid, karma):
         vote = PunnVote.objects.filter(user=user).filter(punn=punn).filter(vote='U')[0]
         vote.delete()
         dajax = Dajax()
-        result = int(karma)
-        dajax.assign('#karma','value',str(result))
+        karma = getKarma(punn) 
+        dajax.assign('#karma','value',str(karma))
         dajax.remove_css_class('#upbutton','btn-primary')
         return dajax.json()
       else:
@@ -26,17 +26,17 @@ def up(request, auth_userid, punnid, karma):
         vote.vote = 'U'
         vote.save()
         dajax = Dajax()
-        result = int(karma) + 1
-        dajax.assign('#karma','value',str(result))
+        karma = getKarma(punn)
+        dajax.assign('#karma','value',str(karma))
         dajax.remove_css_class('#downbutton','btn-primary')
         dajax.add_css_class('#upbutton','btn-primary')
         return dajax.json()
     else:
-      result = int(karma) + 1 
       vote = PunnVote(user=user, punn=punn, vote='U')
       vote.save()
       dajax = Dajax()
-      dajax.assign('#karma','value',str(result))
+      karma = getKarma(punn)
+      dajax.assign('#karma','value',str(karma))
       dajax.add_css_class('#upbutton','btn-primary')
       return dajax.json()
 
@@ -49,8 +49,8 @@ def down(request, auth_userid, punnid, karma):
         vote = PunnVote.objects.filter(user=user).filter(punn=punn).filter(vote='D')[0]
         vote.delete()
         dajax = Dajax()
-        result = int(karma)
-        dajax.assign('#karma','value',str(result))
+        karma = getKarma(punn) 
+        dajax.assign('#karma','value',str(karma))
         dajax.remove_css_class('#downbutton','btn-primary')
         return dajax.json()
       else:
@@ -58,17 +58,17 @@ def down(request, auth_userid, punnid, karma):
         vote.vote = 'D'
         vote.save()
         dajax = Dajax()
-        result = int(karma) - 1
-        dajax.assign('#karma','value',str(result))
+        karma = getKarma(punn) 
+        dajax.assign('#karma','value',str(karma))
         dajax.remove_css_class('#upbutton','btn-primary')
         dajax.add_css_class('#downbutton','btn-primary')
         return dajax.json()
     else:
-      result = int(karma) - 1  
       vote = PunnVote(user=user, punn=punn, vote='D')
       vote.save()
       dajax = Dajax()
-      dajax.assign('#karma','value',str(result))
+      karma = getKarma(punn) 
+      dajax.assign('#karma','value',str(karma))
       dajax.add_css_class('#downbutton','btn-primary')
       return dajax.json()
 
@@ -77,3 +77,9 @@ def changeImage(request, image):
     dajax = Dajax()
     dajax.assign('#mainImage','src', image)
     return dajax.json()
+
+def getKarma(punn):
+    votesup = PunnVote.objects.filter(punn=punn).filter(vote='U')
+    votesdown = PunnVote.objects.filter(punn=punn).filter(vote='D')
+    return votesup.count() - votesdown.count()
+
