@@ -2,11 +2,14 @@ from django.utils import simplejson
 from dajaxice.decorators import dajaxice_register
 from dajax.core import Dajax
 from punns.models import Punn
+from comments.models import Comment
 from votes.models import PunnVote
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
+from punns.views import linkify 
+import markdown
 
 @dajaxice_register
 def up(request, auth_userid, punnid, karma):
@@ -76,6 +79,19 @@ def down(request, auth_userid, punnid, karma):
 def changeImage(request, image):
     dajax = Dajax()
     dajax.assign('#mainImage','src', image)
+    return dajax.json()
+
+@dajaxice_register
+def loadComments(request, punnid):
+    dajax = Dajax()
+    punn = Punn.objects.get(pk=int(punnid))
+    comment_list = Comment.objects.filter(punn=punn).order_by('-pub_date')[:10]
+    dajax.remove('#loading-comments')
+    for comment in comment_list:
+        comment.content = linkify(comment.content)
+        comment.content = markdown.markdown(comment.content)
+        
+        dajax.append('#comments', 'innerHTML', str(comment.content))
     return dajax.json()
 
 def getKarma(punn):
