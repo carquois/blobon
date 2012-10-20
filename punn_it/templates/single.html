@@ -49,8 +49,12 @@
                   function changeImage(){
                     Dajaxice.punns.changeImage(Dajax.process, {'image':'{{ STATIC_URL }}{{ punn.pic }}'});
                   }
+                  function loadComments(){
+                    Dajaxice.punns.loadComments(Dajax.process, {'punnid':{{ punn.id }}});
+                  }
                   $(document).ready(function () {
                     changeImage(); 
+                    loadComments(); 
                     $(document).keydown(function(e) {
                       var url = false;
                       if (e.which == 37) {
@@ -76,52 +80,47 @@
                   </div>
                 </div>
                 <div class="well" style="background-color:#fff;margin-top:0px;text-align:center;">
+{% if punn.youtube_id %}
+                  <iframe width="640" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+{% else %}
                   <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style=max-width:685px;" src="http://i.imgur.com/Sjk3r.gif" /></a>
+{% endif %}
                 </div>
-
                 {% if content %}
                 <div class="well">
                   {{ content|safe }}
                 </div>
                 {% endif %}
               </div>
-
-
-{% if auth_user.is_authenticated %}
+{% if auth_user %}
 <script type="text/javascript" charset="utf-8">
     function up(data){
-        Dajaxice.punns.up(Dajax.process, {'karma':{{ punn.karma }}, 'punnid':{{ punn.id }}});
+        Dajaxice.punns.up(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
     }
     function down(data){
-        Dajaxice.punns.down(Dajax.process, {'karma':{{ punn.karma }}, 'punnid':{{ punn.id }}});
+        Dajaxice.punns.down(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
     }
 </script>
-<button id="upbutton" class="btn" onclick="up();">Up</button>
-<input type="text" value="{{ punn.karma }}" id="karma" class="input-small">
-<button id="downbutton" class="btn" onclick="down();">Down</button>
+<button id="upbutton" class="btn {% if vote == "U" %}btn-primary{% endif %}" onclick="up();">Up</button>
+<input type="text" value="{{ karma }}" id="karma" class="input-small">
+<button id="downbutton" class="btn {% if vote == "D" %}btn-primary{% endif %}" onclick="down();">Down</button>
 {% else %}
 <a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Up</a>
-<input type="text" value="{{ punn.karma }}" id="karma" class="input-small">
+<input type="text" value="{{ karma }}" id="karma" class="input-small">
 <a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Down</a>
 {% endif %}
-
 <textarea rows="1" placeholder="{% trans 'Sumbit a comment' %}"></textarea>
 
-
-                {% if comment_list %}
-                  {% for comment in comment_list %}
-                <div class="well">
-                  {{ comment.content|markdown:"safe" }} 
+                <div id="comments" class="well">
+                  <img id="loading-comments" src="http://i.imgur.com/Sjk3r.gif" />
                 </div>
-                  {% endfor %}
-                {% else %}
-                  <p>{% trans 'No comment. Yet...' %}</p>
-                {% endif %}
 
-
-
-
+{% if punn.author.userprofile.is_obox_client %}
+{% include "obox_leaderboard.html" %}
+{% else %}
 {% include "leaderboard.html" %}
+{% endif %}
+
             </div><!--/span7-->
 {% endblock %}
 {% block sidebar %}
@@ -151,10 +150,18 @@
                 <img src="" id="testImage" />
               </div><!--/.well -->								   
               <div class="box-right">
+{% if punn.author.userprofile.is_obox_client %}
+{% include "obox_primary.html" %}
+{% else %}
 {% include "bigbox.html" %}
+{% endif %}
               </div>
               <div class="box-right">
+{% if punn.author.userprofile.is_obox_client %}
+{% include "obox_bigbox.html" %}
+{% else %}
 {% include "bigbox.html" %}
+{% endif %}
               </div>
             </div><!--/span5-->
           </div><!--/row-->
