@@ -1,19 +1,29 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load url from future %}
 
 {% block title %}{% trans 'Sign in to Punn.it' %}{% endblock %}
 {% block content %}
 {% if form.errors %}
-{% trans 'Your username and password did not match. Please try again.' %}
+    {% trans 'Your username and password did not match. Please try again.' %}
 {% endif %}
-          <form method="post" action="{% url django.contrib.auth.views.login %}">
-            {% csrf_token %}
-            {{ form.username.label_tag }}
-            {{ form.username }}
-            {{ form.password.label_tag }}
-            {{ form.password }}
-            <br />
-            <input class="btn btn-primary" type="submit" value="{% trans 'Login' %}" />
-            <input type="hidden" name="next" value="{{ next }}" />
-          </form>
+    <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+        {% csrf_token %}
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {{ form.password.label_tag }}
+        {{ form.password }}
+        <br />
+        <input class="btn btn-primary" type="submit" value="{% trans 'Login' %}" />
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    <p>
+        Login with
+        <ul>
+            {# TODO : checkout what redirect_querystring does #}
+            <li><a href="{% url 'socialauth_begin' backend='facebook' %}">Facebook</a></li>
+            <li><a href="{% url 'socialauth_begin' backend='twitter' %}">Twitter</a></li>
+            <li><a href="{% url 'socialauth_begin' backend='google' %}">Google</a></li>
+        </ul>
+    </p>
 {% endblock %}

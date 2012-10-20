@@ -37,7 +37,7 @@ urlpatterns = patterns('',
     url(r'^social/$', 'punns.views.home'),
     url(r'^done/$', 'punns.views.done'),
     url(r'^(?P<user>[^/]+)/$', 'punns.views.profile_page'), 
-    url(r'social_auth', include('social_auth.urls')),
+    url(r'', include('social_auth.urls')),
 )
 
 if settings.DEBUG:
