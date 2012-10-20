@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load url from future %}
 {% block title %}{% trans 'Create an account' %}{% endblock %}
 
 {% block content %}
@@ -23,5 +24,15 @@
     <p><input class="btn btn-warning" type="submit" value="{% trans 'Create my account' %}" /></p>
 
     </form>
+    <p>
+        Or signup with
+        <ul>
+            {# TODO : checkout what redirect_querystring does #}
+            <li><a href="{% url 'socialauth_begin' backend='facebook' %}">Facebook</a></li>
+            <li><a href="{% url 'socialauth_begin' backend='twitter' %}">Twitter</a></li>
+            <li><a href="{% url 'socialauth_begin' backend='google' %}">Google</a></li>
+        </ul>
+    </p>
+    
 {% endblock %}
 

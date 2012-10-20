@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.conf import settings
 from django.contrib import admin
 from punns.views import UserFeed
 from dajaxice.core import dajaxice_autodiscover, dajaxice_config
@@ -39,4 +40,11 @@ urlpatterns = patterns('',
     url(r'', include('social_auth.urls')),
 )
 
-urlpatterns += staticfiles_urlpatterns()
+if settings.DEBUG:
+    urlpatterns = patterns('',
+        url(r'^i/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
+    ) + urlpatterns
+
+    #static hosting for dev server
+    urlpatterns += staticfiles_urlpatterns()

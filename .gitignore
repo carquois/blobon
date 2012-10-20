@@ -13,3 +13,5 @@ include/*
 share/*
 .Python
 punn_it/local_settings.py
+
+.DS_Store
