@@ -90,7 +90,9 @@ def loadComments(request, punnid):
     for comment in comment_list:
         comment.content = linkify(comment.content)
         comment.content = markdown.markdown(comment.content)
-        
+        dajax.append('#comments', 'innerHTML', '<button id="upbutton" class="btn {% if vote == "U" %}btn-primary{% endif %}" onclick="up();">Up</button>')
+        dajax.append('#comments', 'innerHTML', '<input type="text" value="{{ karma }}" id="karma" class="input-small">')
+        dajax.append('#comments', 'innerHTML', '<button id="downbutton" class="btn {% if vote == "D" %}btn-primary{% endif %}" onclick="down();">Down</button>')
         dajax.append('#comments', 'innerHTML', str(comment.content))
     return dajax.json()
 
