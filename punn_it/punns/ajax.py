@@ -3,7 +3,7 @@ from dajaxice.decorators import dajaxice_register
 from dajax.core import Dajax
 from punns.models import Punn
 from comments.models import Comment
-from votes.models import PunnVote
+from votes.models import PunnVote, CommentVote
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
