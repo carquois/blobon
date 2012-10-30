@@ -82,7 +82,7 @@ def index(request):
         punns = paginator.page(1)
       except EmptyPage:
         punns = paginator.page(paginator.num_pages)
-      return render_to_response('profile.html', {'user': user, 'url': url, 'punn': punn, 'home': home, 'punns': punns}, context_instance=RequestContext(request))
+      return render_to_response('profile.html', {'user': user, 'url': url, 'home': home, 'punns': punns}, context_instance=RequestContext(request))
     else:
       punn_list = Punn.objects.filter(status='P').order_by('-pub_date')
       paginator = Paginator(punn_list, 25)
