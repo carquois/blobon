@@ -86,40 +86,32 @@
                   <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style=max-width:685px;" src="http://i.imgur.com/Sjk3r.gif" /></a>
 {% endif %}
                 </div>
+{% if punn.source %}
+                <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
+                  <a href="{{ punn.source }}" class="btn small" rel="popover" title="Source" data-content="{{ punn.source }}" target="_blank">Source</a>
+                </div>
+{% endif %}
                 {% if content %}
                 <div class="well">
                   {{ content|safe }}
                 </div>
                 {% endif %}
               </div>
-{% if auth_user %}
-<script type="text/javascript" charset="utf-8">
-    function up(data){
-        Dajaxice.punns.up(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
-    }
-    function down(data){
-        Dajaxice.punns.down(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
-    }
-</script>
-<button id="upbutton" class="btn {% if vote == "U" %}btn-primary{% endif %}" onclick="up();">Up</button>
-<input type="text" value="{{ karma }}" id="karma" class="input-small">
-<button id="downbutton" class="btn {% if vote == "D" %}btn-primary{% endif %}" onclick="down();">Down</button>
-{% else %}
-<a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Up</a>
-<input type="text" value="{{ karma }}" id="karma" class="input-small">
-<a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Down</a>
-{% endif %}
-<textarea rows="1" placeholder="{% trans 'Sumbit a comment' %}"></textarea>
+<!-- AddThis Button BEGIN -->
+<div style="padding-left:575px;" class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_compact"></a>
+</div>
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f31a102440808e2"></script>
+<!-- AddThis Button END -->
 
-                <div id="comments" class="well">
-                  <img id="loading-comments" src="http://i.imgur.com/Sjk3r.gif" />
-                </div>
 
-{% if punn.author.userprofile.is_obox_client %}
-{% include "obox_leaderboard.html" %}
-{% else %}
+                <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-50251a32413e32d6"></script>
+                <div style="padding-left:25px;" class="fb-comments" data-href="{{ url }}" data-num-posts="6" data-width="685"></div>
+
 {% include "leaderboard.html" %}
-{% endif %}
 
             </div><!--/span7-->
 {% endblock %}
