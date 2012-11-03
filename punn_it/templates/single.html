@@ -46,14 +46,10 @@
             <div class="span7 blancBG ">
               <div style="padding-bottom:0px; background-color:#f1f1f1;">
                 <script>
-                  function changeImage(){
-                    Dajaxice.punns.changeImage(Dajax.process, {'image':'{{ MEDIA_URL }}{{ punn.pic }}'});
-                  }
                   function loadComments(){
                     Dajaxice.punns.loadComments(Dajax.process, {'punnid':{{ punn.id }}});
                   }
                   $(document).ready(function () {
-                    changeImage(); 
                     loadComments(); 
                     $(document).keydown(function(e) {
                       var url = false;
@@ -83,7 +79,7 @@
 {% if punn.youtube_id %}
                   <iframe width="640" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
 {% else %}
-                  <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style=max-width:685px;" src="http://i.imgur.com/Sjk3r.gif" /></a>
+                  <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style=max-width:685px;" src="{{ MEDIA_URL }}{{ punn.pic }}" /></a>
 {% endif %}
                 </div>
 {% if punn.source %}
