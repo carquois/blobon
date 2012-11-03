@@ -134,10 +134,10 @@ def submit(request):
       image = request.GET.get('media', '') 
       is_video = request.GET.get('is_video', '') 
       form = PunnForm(initial={'source':source, 'title':title, 'image': image, 'is_video':is_video})
-      return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
+      return render_to_response('submit.html', {'image': image, 'form': form, 'is_video': is_video}, context_instance=RequestContext(request))
     else:
       form = PunnForm()
-    return render_to_response('submit.html', locals(), context_instance=RequestContext(request))
+    return render_to_response('submit.html', {'form': form}, context_instance=RequestContext(request))
 
 def single(request, shorturl):
     punn = get_object_or_404(Punn, base62id=shorturl)
