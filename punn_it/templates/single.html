@@ -98,10 +98,10 @@
                 {% endif %}
               </div>
 <!-- AddThis Button BEGIN -->
-<div style="padding-left:575px;" class="addthis_toolbox addthis_default_style addthis_32x32_style">
-<a class="addthis_button_preferred_1"></a>
-<a class="addthis_button_preferred_2"></a>
-<a class="addthis_button_preferred_3"></a>
+<div style="padding-left:560px;" class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<a class="addthis_button_twitter"></a>
+<a class="addthis_button_facebook"></a>
+<a class="addthis_button_pinterest_share"></a>
 <a class="addthis_button_compact"></a>
 </div>
 <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f31a102440808e2"></script>
@@ -138,9 +138,6 @@
                   <p>No more content</p>
                 {% endif %}	
               </div><!--/.well -->								   
-              <div class="box-right well">
-                <img src="" id="testImage" />
-              </div><!--/.well -->								   
               <div class="box-right">
 {% if punn.author.userprofile.is_obox_client %}
 {% include "obox_primary.html" %}
@@ -149,11 +146,7 @@
 {% endif %}
               </div>
               <div class="box-right">
-{% if punn.author.userprofile.is_obox_client %}
-{% include "obox_bigbox.html" %}
-{% else %}
 {% include "bigbox.html" %}
-{% endif %}
               </div>
             </div><!--/span5-->
           </div><!--/row-->

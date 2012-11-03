@@ -205,7 +205,7 @@ def single(request, shorturl):
                                               'next_punn': next_punn, 'prev_punn': prev_punn, 
                                               'content': content, 'comment_list': comment_list,
                                               'url': url, 'karma':karma, 'auth_user':auth_user,
-                                              'vote': vote}, context_instance=RequestContext(request))
+                                              'vote': vote, 'user': punn.author, 'home': home}, context_instance=RequestContext(request))
 
 
 def linkify(string):
