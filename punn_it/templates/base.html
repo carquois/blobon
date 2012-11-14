@@ -1,5 +1,4 @@
-{% load i18n %}
-{% load dajaxice_templatetags %}
+{% load i18n dajaxice_templatetags compress %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,10 +23,12 @@
     <title>{% block title %}{% endblock %}</title>
 
     <!-- Le styles -->
+    {% compress css %}
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/non-responsive.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet">    
+    <link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet">
+    {% endcompress %}
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -50,7 +51,7 @@
     {% block additional_analytics %}{% endblock %}
     {% block obox %}{% endblock %}
     <!-- Le jQuery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script> 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
   </head>
 
   <body>
@@ -68,9 +69,9 @@
           <ul class="nav">
             <li class="">
 {% if user.userprofile.domain %}
-	      <a class="brand" href="{{ home }}">{{ user.first_name }} {{ user.last_name }}</a> 
+	      <a class="brand" href="{{ home }}">{{ user.first_name }} {{ user.last_name }}</a>
 {% else %}
-	      <a class="brand" href="{{ home }}">{{ user.username }}</a> 
+	      <a class="brand" href="{{ home }}">{{ user.username }}</a>
 {% endif %}
             </li>
 	  </ul>
@@ -109,7 +110,6 @@
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-scrollspy.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
-    <!--<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>-->
     <script src="http://checkdonc.ca/wp-content/themes/zetheme/js/bootstrap-popover.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
