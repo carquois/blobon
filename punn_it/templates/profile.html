@@ -36,76 +36,50 @@
         <div class="container" style=" max-height:55px;">
           <div class="nav-collapse">
             <ul class="nav">
-                     	<li class="blobTitle">
-								<a href="#"><div class=""></div>Check Donc Ça</a>
-							</li>
-							
-                           
-						</ul>
-						
-						
-							<div id="nav_rightSide"> 
-						 
-							 	
-                             
-								<div style="float:left; margin-left: -80px;"><input name="search" type="text" maxlength="30" class="nav-search"  placeholder="Recherche"> </div>
-								
-								 
-							</div>
-							
-							
-					</div><!--/.nav-collapse -->
-				</div>
-			</div>
-		</div>
-
-		<div class="container">
-		<div class="row">
-				<div class="span12">
-
-					<div class="row ">
-						<div class="span8 blancBG "> 
-                        
-                        	<div class="grosseEstidColonne" >
-                            
-                                <div class="top-main-col" >
-                                	
-                                	<div class="top_social" style="float: right">
-                                		 	<a href="#">Aimez-nous<img src="{{ STATIC_URL }}img/facebook.png"></a><a href="#">Suivez-nous<img src="{{ STATIC_URL }}img/twitter.png"></a>
-                               		</div>
-                               		
-                                                                
-                                </div>
-{% for punn in punns %}
-        <div class="thumbnailsMAIN">
-          <a href="{{ punn.get_absolute_url }}" title="{{ punn.title }}">
-          {% thumbnail punn.pic "157x192" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
-          {% endthumbnail %}
-          </a>
+              <li class="blobTitle">
+                <a href="#"><div class=""></div>Check Donc Ça</a>
+              </li>
+            </ul>
+            <div id="nav_rightSide"> 
+              <div style="float:left; margin-left: -80px;"><input name="search" type="text" maxlength="30" class="nav-search"  placeholder="Recherche"> </div>
+            </div>
+          </div><!--/.nav-collapse -->
         </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <div class="row ">
+            <div class="span8 blancBG "> 
+              <div class="grosseEstidColonne" >
+                <div class="top-main-col" >
+                  <div class="top_social" style="float: right">
+                    <a href="#">Aimez-nous<img src="{{ STATIC_URL }}img/facebook.png"></a><a href="#">Suivez-nous<img src="{{ STATIC_URL }}img/twitter.png"></a>
+                  </div>
+                </div>
+{% for punn in punns %}
+                <div class="thumbnailsMAIN">
+                  <a href="{{ punn.get_absolute_url }}" title="{{ punn.title }}">
+                  {% thumbnail punn.pic "157x192" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
+                  {% endthumbnail %}
+                  </a>
+                </div>
 {% endfor %}
-                                
-                               
-                               <div style="clear:both"></div>
-                                </div>
-                            
-                            
-						</div>
-						<div class="span5" >
- 							<div class="box-right-wrap">
- 							
-								<div class="box-right"></div>
-	                            <div class="box-right"></div>
- 							</div>		                        
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
-		<!-- /container -->
-
+                <div style="clear:both"></div>
+              </div>
+            </div>
+            <div class="span5" >
+              <div class="box-right-wrap">
+                <div class="box-right"></div>
+	        <div class="box-right"></div>
+              </div>		                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /container -->
 		<!-- Le javascript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster 
@@ -122,6 +96,5 @@
 		<script src="../assets/js/bootstrap-collapse.js"></script>
 		<script src="../assets/js/bootstrap-carousel.js"></script>
 		<script src="../assets/js/bootstrap-typeahead.js"></script>-->
-
-	</body>
+  </body>
 </html>
