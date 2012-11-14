@@ -16,7 +16,7 @@
     <meta name="twitter:card" content="photo">
     <meta name="twitter:url" content="{{ url }}">
     <meta name="twitter:title" content="{{ user.first_name }} {{ user.last_name }}">
-    <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
+    <meta name="twitter:image" content="{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
     <!-- Le styles -->
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
     <style>
