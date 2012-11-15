@@ -19,38 +19,14 @@
     <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}">
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
-{% block additional_analytics %}
-    <!-- Le user analytics  -->
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '{{ punn.author.userprofile.analytics_account }}']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-{% endblock %}
 {% if punn.author.userprofile.is_obox_client %}
 {% block obox %}
 {% include "obox_single.html" %}
 {% endblock %}
 {% endif %}
 {% block content %}
-    <div class="container">
-      <!--<div class="sharetheworld"></div>-->
-      <div class="row">
-        <div class="span12">
-          <div class="row ">
-            <div class="span7 blancBG ">
-              <div style="padding-bottom:0px; background-color:#f1f1f1;">
                 <script>
-                  function loadComments(){
-                    Dajaxice.punns.loadComments(Dajax.process, {'punnid':{{ punn.id }}});
-                  }
                   $(document).ready(function () {
-                    loadComments(); 
                     $(document).keydown(function(e) {
                       var url = false;
                       if (e.which == 37) {
@@ -75,24 +51,17 @@
                     {{ punn.title }} 
                   </div>
                 </div>
-                <div class="well" style="background-color:#fff;margin-top:0px;text-align:center;">
 {% if punn.youtube_id %}
                   <iframe width="640" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
 {% else %}
                   <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style="max-width:685px;" src="{{ MEDIA_URL }}{{ punn.pic }}" /></a>
 {% endif %}
-                </div>
+                <div>
 {% if punn.source %}
                 <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
                   <a href="{{ punn.source }}" class="btn small" rel="popover" title="Source" data-content="{{ punn.source }}" target="_blank">Source</a>
                 </div>
 {% endif %}
-                {% if content %}
-                <div class="well">
-                  {{ content|safe }}
-                </div>
-                {% endif %}
-              </div>
 <!-- AddThis Button BEGIN -->
 <div style="padding-left:560px;" class="addthis_toolbox addthis_default_style addthis_32x32_style">
 <a class="addthis_button_twitter"></a>
@@ -103,51 +72,17 @@
 <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f31a102440808e2"></script>
 <!-- AddThis Button END -->
 
+                </div>
 
                 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-50251a32413e32d6"></script>
                 <div style="padding-left:25px;" class="fb-comments" data-href="{{ url }}" data-num-posts="6" data-width="685"></div>
 
 {% include "leaderboard.html" %}
 
+
             </div><!--/span7-->
 {% endblock %}
 {% block sidebar %}
-            <div class="span5">
-              <div class="box-right well">
-                <div id="fleche_single">
-                  <a href="{{ prev_punn.get_absolute_url }}"><div class="flecheprev">Prev</div></a>	
-                  <a href="{{ next_punn.get_absolute_url }}"><div class="flechenext">Next</div></a>	
-                </div>
-                {% if latest_punn_list %}
-                <div class="thumbnails" style="margin-left: 4px; margin-top: 9px;">
-                  {% for punn in latest_punn_list %}
-                  <div class="thumb_single">
-                    <a class="thumbnail" href="{{ punn.get_absolute_url }}">
-                    {% thumbnail punn.pic "95x115" crop="center" as im %}
-                      <img class="sidebarThumbs" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-                    {% endthumbnail %}
-                    </a>
-                  </div>
-                  {% endfor %}
-                </div>
-                {% else %}
-                  <p>No more content</p>
-                {% endif %}	
-              </div><!--/.well -->								   
-              <div class="box-right">
-{% if punn.author.userprofile.is_obox_client %}
-{% include "obox_primary.html" %}
-{% else %}
-{% include "bigbox.html" %}
-{% endif %}
-              </div>
-              <div class="box-right">
-{% include "bigbox.html" %}
-              </div>
-            </div><!--/span5-->
-          </div><!--/row-->
-        </div><!--/span12-->
-      </div><!--/row-->
-    </div><!--/.container-->
+                <div class="box-right"></div>
+                <div class="box-right"></div>
 {% endblock %}
-
