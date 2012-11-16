@@ -42,11 +42,13 @@
                     {{ punn.title }}
                   </div>
                 </div>
+                <div style="text-align:center;" class="main-content" >
 {% if punn.youtube_id %}
-                <iframe width="640" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+                  <iframe width="640" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
 {% else %}
-                <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style="max-width:728px;" src="{{ MEDIA_URL }}{{ punn.pic }}" /></a>
+                  <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style="max-width:728px;" src="{{ MEDIA_URL }}{{ punn.pic }}" /></a>
 {% endif %}
+                </div>
                 <div>
 {% if punn.source %}
                   <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
