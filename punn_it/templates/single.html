@@ -1,10 +1,6 @@
 {% extends "base.html" %}
-{% load i18n %}
-{% load thumbnail %}
-{% load markup %} 
-
+{% load i18n thumbnail %}
 <meta name="description" content="{{ punn.author.userprofile.description }}" />
-
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ punn.title }}" />
@@ -19,11 +15,6 @@
     <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}">
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
-{% if punn.author.userprofile.is_obox_client %}
-{% block obox %}
-{% include "obox_single.html" %}
-{% endblock %}
-{% endif %}
 {% block content %}
                 <script>
                   $(document).ready(function () {
@@ -46,43 +37,34 @@
                     });
                   });
                 </script>
-                <div class="top-main-col">
+                <div class="top-main-col" >
                   <div id="singleTitle">
-                    {{ punn.title }} 
+                    {{ punn.title }}
                   </div>
                 </div>
 {% if punn.youtube_id %}
-                  <iframe width="640" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+                <iframe width="640" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
 {% else %}
-                  <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style="max-width:685px;" src="{{ MEDIA_URL }}{{ punn.pic }}" /></a>
+                <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style="max-width:728px;" src="{{ MEDIA_URL }}{{ punn.pic }}" /></a>
 {% endif %}
                 <div>
 {% if punn.source %}
-                <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
-                  <a href="{{ punn.source }}" class="btn small" rel="popover" title="Source" data-content="{{ punn.source }}" target="_blank">Source</a>
-                </div>
+                  <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
+                    <a href="{{ punn.source }}" class="btn small" rel="popover" title="Source" data-content="{{ punn.source }}" target="_blank">Source</a>
+                  </div>
 {% endif %}
-<!-- AddThis Button BEGIN -->
-<div style="padding-left:560px;" class="addthis_toolbox addthis_default_style addthis_32x32_style">
-<a class="addthis_button_twitter"></a>
-<a class="addthis_button_facebook"></a>
-<a class="addthis_button_pinterest_share"></a>
-<a class="addthis_button_compact"></a>
-</div>
-<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f31a102440808e2"></script>
-<!-- AddThis Button END -->
-
+                  <div style="padding-left:560px;" class="addthis_toolbox addthis_default_style addthis_32x32_style">
+                    <a class="addthis_button_twitter"></a>
+                    <a class="addthis_button_facebook"></a>
+                    <a class="addthis_button_pinterest_share"></a>
+                    <a class="addthis_button_compact"></a>
+                  </div>
+                  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f31a102440808e2"></script>
                 </div>
-
-                <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-50251a32413e32d6"></script>
                 <div style="padding-left:25px;" class="fb-comments" data-href="{{ url }}" data-num-posts="6" data-width="685"></div>
-
 {% include "leaderboard.html" %}
-
-
-            </div><!--/span7-->
 {% endblock %}
 {% block sidebar %}
                 <div class="box-right"></div>
-                <div class="box-right"></div>
+	        <div class="box-right"></div>
 {% endblock %}
