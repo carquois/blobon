@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      #id_tags{
+        height:200px;
+      }
+    </style>
+    <title>{% block title %}{% trans 'Create a blob' %}{% endblock %}</title>
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+</html>
