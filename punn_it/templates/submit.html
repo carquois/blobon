@@ -1,17 +1,8 @@
+{% extends "submit_base.html" %}
+
 {% load i18n %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-      #id_tags{
-        height:200px;
-      }
-    </style>
-  </head>
-  <body>
+{% block content %}
     <div class="well">
       <div class="row">
         <div class="span2">
@@ -48,5 +39,4 @@
         </script>
       </div>
     </div>
-  </body>
-</html>
+{% endblock %}
