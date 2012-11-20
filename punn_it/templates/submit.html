@@ -1,25 +1,24 @@
 {% load i18n %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-
-    <!-- Le styles -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
-    <title>{% block title %}{% trans 'Create a blob' %}{% endblock %}</title>
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      #id_tags{
+        height:200px;
+      }
+    </style>
   </head>
   <body>
-
     <div class="well">
-<div class="row">
-  <div class="span2">
-    <img src="{{ image }}" class="thumbnail">
-  </div>
-  <div class="span4">
-    <form action="/submit/" method="post" class=>{% csrf_token %}
+      <div class="row">
+        <div class="span2">
+          <img src="{{ image }}" class="thumbnail">
+        </div>
+        <form action="/submit/" method="post" class=>{% csrf_token %}
+          <div class="span4">
             {{ form.author.errors }}
             {{ form.author.label_tag }}
             {{ form.author }}
@@ -31,7 +30,8 @@
             {{ form.status.errors }}
             {{ form.status.label_tag }}
             {{ form.status }}
-
+          </div>
+          <div class="span4">
             {{ form.tags.errors }}
             {{ form.tags.label_tag }}
             {{ form.tags }}
@@ -39,14 +39,14 @@
             {{ form.source }}
             <input type="hidden" name="media" value="{{ image }}" id="media" />
             <input type="hidden" name="is_video" value="{{ is_video }}" id="is_video" />
-        <br />
-        <button type="submit" class="btn">Submit</button>
-      </form>
-<script>
-$('#id_title').focus();
-</script>
+            <br />
+            <button type="submit" class="btn">Submit</button>
+          </div>
+        </form>
+        <script>
+          $('#id_title').focus();
+        </script>
+      </div>
     </div>
-  </div>
-</div>
   </body>
-
+</html>
