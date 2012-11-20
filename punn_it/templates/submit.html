@@ -19,31 +19,7 @@
     <img src="{{ image }}" class="thumbnail">
   </div>
   <div class="span4">
-<!--
-      <form action="/submit/" method="post" class="form-horizontal">{% csrf_token %}
-        {{ form.non_field_errors }}
-        <fieldset>
-          <div class="control-group">
-            {{ form.title.errors }}
-            <label class="control-label" for="title">Title</label>
-            <div class="controls">
-              {{ form.title }}
-            </div>
-          </div>
-          <div class="control-group">
-            {{ form.source.errors }}
-            <label class="control-label" for="source">Source</label>
-            <div class="controls">
-              {{ form.source }}
-            </div>
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </fieldset>
-      </form>
--->
-<form action="/submit/" method="post" class=>{% csrf_token %}
+    <form action="/submit/" method="post" class=>{% csrf_token %}
             {{ form.author.errors }}
             {{ form.author.label_tag }}
             {{ form.author }}
@@ -56,12 +32,16 @@
             {{ form.status.label_tag }}
             {{ form.status }}
 
+            {{ form.tags.errors }}
+            {{ form.tags.label_tag }}
+            {{ form.tags }}
+
             {{ form.source }}
             <input type="hidden" name="media" value="{{ image }}" id="media" />
             <input type="hidden" name="is_video" value="{{ is_video }}" id="is_video" />
-<br />
-  <button type="submit" class="btn">Submit</button>
-</form>
+        <br />
+        <button type="submit" class="btn">Submit</button>
+      </form>
 <script>
 $('#id_title').focus();
 </script>
