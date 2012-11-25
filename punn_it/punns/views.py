@@ -1,19 +1,20 @@
-from cgi import parse_qs
 import re
 import markdown
+import urllib2
+import urlparse
+from cgi import parse_qs
 from django.views.decorators.cache import cache_page
-from django.contrib.auth.models import User
 from punns.models import Punn, PunnForm
 from accounts.models import UserProfile
 from comments.models import Comment
 from punns.utils import BASE10, BASE62, baseconvert
-from accounts.models import UserForm
-from accounts.models import UserProfileForm
+from accounts.models import UserForm, UserProfileForm
 from votes.models import PunnVote
 from django.http import HttpResponse
 from django.conf import settings
 from django.contrib import auth
 from django.contrib.sites.models import Site
+from django.contrib.auth.models import User
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponseNotFound
@@ -26,9 +27,6 @@ from django.core.urlresolvers import reverse
 from django.contrib.syndication.views import Feed, FeedDoesNotExist
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
-import urllib2
-import urlparse
-from urlparse import urlparse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 class UserFeed(Feed):
