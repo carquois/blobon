@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 from django.db import models
 from django.contrib.auth.models import User
 from django import forms
-from django.forms import CharField, URLField, ModelForm
+from django.forms import CharField, URLField, ModelForm, ModelMultipleChoiceField
 from punns.utils import BASE10, BASE62, baseconvert
 from sorl.thumbnail import ImageField
 import uuid
@@ -21,6 +21,11 @@ def get_file_path(instance, filename):
     filename = "%s.%s" % (prefix, ext)
     return os.path.join('', filename)
 
+class Tags(models.Model):
+    tag = models.CharField(max_length=140)
+    def __unicode__(self):
+        return self.tag
+
 class Punn(models.Model):
     status = models.CharField(max_length=2, choices=STATUS, null=True, blank=True)
     #Basic infos
@@ -35,6 +40,7 @@ class Punn(models.Model):
     content = models.TextField(max_length=10000, blank=True)
     is_video = models.BooleanField(default=False)
     youtube_id = models.CharField(max_length=50, null=True, blank=True)
+    tags = models.ManyToManyField(Tags)
     #Datetime infos
     created = models.DateTimeField(auto_now_add = True)
     pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
@@ -56,7 +62,8 @@ class PunnForm(ModelForm):
     source = URLField(widget=forms.HiddenInput(), required=False)
     author = forms.ModelChoiceField(queryset=User.objects.all(), initial=User.objects.get(pk=3))
     status = forms.CharField(max_length=2, widget=forms.Select(choices=STATUS), initial='D')
+    tags = forms.ModelMultipleChoiceField(queryset=Tags.objects.all())
     class Meta:
         model = Punn
-        fields = ('title', 'author', 'status')
+        fields = ('title', 'author', 'status', 'tags')
 
