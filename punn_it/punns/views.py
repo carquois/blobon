@@ -44,8 +44,10 @@ class UserFeed(Feed):
         return Punn.objects.filter(author=obj).filter(status='P').order_by('-pub_date')[:30]
 
 def index(request): 
+    #Test pour voir si la requête est faite à l'adresse principale
     if request.META['HTTP_HOST'] == settings.MAIN_SITE: 
       return HttpResponse("You're at the main site index.")
+    #Test pour voir si la requête est faite à une adresse entrée dans le profil d'un utilisateur
     elif UserProfile.objects.filter(domain='http://%s/' % (request.META['HTTP_HOST'])).exists():
       user = UserProfile.objects.get(domain='http://%s/' % (request.META['HTTP_HOST'])).user
       punn_list = Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date')
@@ -61,6 +63,7 @@ def index(request):
                                {'user': user, 'url': 'http://%s/' % (request.META['HTTP_HOST']), 
                                 'punns': punns}, 
                                context_instance=RequestContext(request))
+    #Il s'agit d'une adresse qui pointe vers nous sans que l'URL soit entré dans le profil
     else:
       return HttpResponse("Something is wrong with the config. ")
 
