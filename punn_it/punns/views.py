@@ -23,8 +23,7 @@ from django.db.models import Count
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
-from django.contrib.syndication.views import Feed
-from django.contrib.syndication.views import FeedDoesNotExist
+from django.contrib.syndication.views import Feed, FeedDoesNotExist
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 import urllib2
@@ -45,8 +44,7 @@ class UserFeed(Feed):
         return Punn.objects.filter(author=obj).filter(status='P').order_by('-pub_date')[:30]
 
 def index(request): 
-    host = request.META['HTTP_HOST']
-    url = 'http://%s/' % (host)
+    url = 'http://%s/' % (request.META['HTTP_HOST'])
     if UserProfile.objects.filter(domain=url).exists():
       user = UserProfile.objects.get(domain=url).user
       home = user.userprofile.domain
