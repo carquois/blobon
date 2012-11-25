@@ -3,31 +3,30 @@ import markdown
 import urllib2
 import urlparse
 from cgi import parse_qs
-from django.views.decorators.cache import cache_page
-from punns.models import Punn, PunnForm
-from accounts.models import UserProfile
+
+from accounts.models import UserProfile, UserForm, UserProfileForm
 from comments.models import Comment
+from punns.models import Punn, PunnForm
 from punns.utils import BASE10, BASE62, baseconvert
-from accounts.models import UserForm, UserProfileForm
 from votes.models import PunnVote
-from django.http import HttpResponse
+
+from django import forms
 from django.conf import settings
 from django.contrib import auth
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
-from django.shortcuts import render_to_response, get_object_or_404
-from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
-from django.db.models import Count
-from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.core.urlresolvers import reverse
 from django.contrib.syndication.views import Feed, FeedDoesNotExist
+from django.core.urlresolvers import reverse
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Count
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
+from django.views.decorators.cache import cache_page
 
 class UserFeed(Feed):
     def get_object(self, request, username):
@@ -42,10 +41,10 @@ class UserFeed(Feed):
         return Punn.objects.filter(author=obj).filter(status='P').order_by('-pub_date')[:30]
 
 def index(request): 
-    #Test pour voir si la requête est faite à l'adresse principale
+    #Test pour voir si la requete est faite à l'adresse principale
     if request.META['HTTP_HOST'] == settings.MAIN_SITE: 
       return HttpResponse("You're at the main site index.")
-    #Test pour voir si la requête est faite à une adresse entrée dans le profil d'un utilisateur
+    #Test pour voir si la requete est faite à une adresse entrée dans le profil d'un utilisateur
     elif UserProfile.objects.filter(domain='http://%s/' % (request.META['HTTP_HOST'])).exists():
       user = UserProfile.objects.get(domain='http://%s/' % (request.META['HTTP_HOST'])).user
       punn_list = Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date')
@@ -61,7 +60,7 @@ def index(request):
                                {'user': user, 'url': 'http://%s/' % (request.META['HTTP_HOST']), 
                                 'punns': punns}, 
                                context_instance=RequestContext(request))
-    #Il s'agit d'une adresse qui pointe vers nous sans que l'URL soit entré dans le profil
+    #Il s'agit d'une adresse qui pointe vers nous sans que l'URL soit entre dans le profil
     else:
       return HttpResponse("Something is wrong with the config. ")
 
@@ -171,11 +170,13 @@ def single(request, shorturl):
         comment.content = linkify(comment.content)
         comment.content = markdown.markdown(comment.content)
     url = request.build_absolute_uri()
-    return render_to_response('single.html', {'punn': punn, 'latest_punn_list': latest_punn_list,
-                                              'next_punn': next_punn, 'prev_punn': prev_punn, 
-                                              'content': content, 'comment_list': comment_list,
-                                              'url': url, 'karma':karma, 'auth_user':auth_user,
-                                              'vote': vote, 'user': punn.author, 'home': home}, context_instance=RequestContext(request))
+    return render_to_response('single.html', 
+                              {'punn': punn, 'latest_punn_list': latest_punn_list,
+                               'next_punn': next_punn, 'prev_punn': prev_punn, 
+                               'content': content, 'comment_list': comment_list,
+                               'url': url, 'karma':karma, 'auth_user':auth_user,
+                               'vote': vote, 'user': punn.author, 'home': home}, 
+                              context_instance=RequestContext(request))
 
 
 def linkify(string):
