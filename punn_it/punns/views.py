@@ -44,9 +44,10 @@ class UserFeed(Feed):
         return Punn.objects.filter(author=obj).filter(status='P').order_by('-pub_date')[:30]
 
 def index(request): 
-    url = 'http://%s/' % (request.META['HTTP_HOST'])
-    if UserProfile.objects.filter(domain=url).exists():
-      user = UserProfile.objects.get(domain=url).user
+    if request.META['HTTP_HOST'] == settings.MAIN_SITE: 
+      return HttpResponse("Hello, world. You're at the main site index.")
+    elif UserProfile.objects.filter(domain='http://%s/' % (request.META['HTTP_HOST'])).exists():
+      user = UserProfile.objects.get(domain='http://%s/' % (request.META['HTTP_HOST'])).user
       home = user.userprofile.domain
       punn_list = Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date')
       paginator = Paginator(punn_list, 20)
@@ -57,7 +58,7 @@ def index(request):
         punns = paginator.page(1)
       except EmptyPage:
         punns = paginator.page(paginator.num_pages)
-      return render_to_response('profile.html', {'user': user, 'url': url, 'home': home, 'punns': punns}, context_instance=RequestContext(request))
+      return render_to_response('profile.html', {'user': user, 'url': 'http://%s/' % (request.META['HTTP_HOST']), 'home': home, 'punns': punns}, context_instance=RequestContext(request))
     else:
       punn_list = Punn.objects.filter(status='P').order_by('-pub_date')
       paginator = Paginator(punn_list, 20)
