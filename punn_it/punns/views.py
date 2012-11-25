@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import re
 import markdown
 import urllib2
@@ -57,7 +59,8 @@ def index(request):
       except EmptyPage:
         punns = paginator.page(paginator.num_pages)
       return render_to_response('profile.html', 
-                               {'user': user, 'url': 'http://%s/' % (request.META['HTTP_HOST']), 
+                               {'user': user, 
+                                'url': 'http://%s/' % (request.META['HTTP_HOST']), 
                                 'punns': punns}, 
                                context_instance=RequestContext(request))
     #Il s'agit d'une adresse qui pointe vers nous sans que l'URL soit entre dans le profil
