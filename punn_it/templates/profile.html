@@ -10,10 +10,15 @@
                 </div>
 {% for punn in punns %}
                 <div class="thumbnailsMAIN">
-                  <a href="{{ punn.get_absolute_url }}" title="{{ punn.title }}">
-                  {% thumbnail punn.pic "157x192" crop="center" as im %}
-                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
-                  {% endthumbnail %}
+      	          <a href="{{ punn.get_absolute_url }}">
+                    <div class="itemPhoto">
+                    {% thumbnail punn.pic "157x192" crop="center" as im %}
+                      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
+                    {% endthumbnail %}
+                    </div>
+                    <div class="itemDesc">
+                      {{ punn.title }}
+                    </div>
                   </a>
                 </div>
 {% endfor %}
