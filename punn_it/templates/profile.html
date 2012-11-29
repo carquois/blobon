@@ -17,7 +17,8 @@
                     {% endthumbnail %}
                     </div>
                     <div class="itemDesc">
-                      {{ punn.title }}
+
+                      {{ punn.title|truncatechars:60 }}
                     </div>
                   </a>
                 </div>
