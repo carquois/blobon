@@ -1,14 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.utils.translation import ugettext as _
-from django.db import models
-from django.contrib.auth.models import User
+
+###IMPORTS###
+#Django
 from django import forms
+from django.contrib.auth.models import User
+from django.db import models
 from django.forms import CharField, URLField, ModelForm, ModelMultipleChoiceField
+from django.utils.translation import ugettext as _
+
+#House
 from punns.utils import BASE10, BASE62, baseconvert
-from sorl.thumbnail import ImageField
+
+#Others
 import uuid
 import os
+from sorl.thumbnail import ImageField
 
 STATUS = (
     ('P', 'Publish'),
