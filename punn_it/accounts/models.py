@@ -29,13 +29,16 @@ class UserProfile(models.Model):
         ('fr', 'Français'),
         ('qc', 'Québécois'),
     )
-    PUBLICATION_FREQUENCY = (
+    language = models.CharField(default="en", max_length=2, choices=LANGUAGES_CHOICES)
+    PUBLICATION_FREQUENCY_CHOICES = (
         ('15m', '15 minutes'),
         ('30m', '30 minutes'),
         ('1h', '1 hour'),
         ('3h', '3 hours'),
     )
-    language = models.CharField(default="en", max_length=2, choices=LANGUAGES_CHOICES)
+    publication_frequency = models.CharField(default="30m", 
+                                             max_length=3, 
+                                             choices=PUBLICATION_FREQUENCY_CHOICES)
     is_obox_client = models.BooleanField(default=False, blank=True)
     #Google Infos
     analytics_account = models.CharField(max_length=50, blank=True)
