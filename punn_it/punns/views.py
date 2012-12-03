@@ -43,16 +43,6 @@ class UserFeed(Feed):
         return Punn.objects.filter(author=obj).filter(status='P').order_by('-pub_date')[:30]
 
 
-def paginate(request, list_of_objects, number_of_items): 
-    paginator = Paginator(list_of_objects, number_of_items)
-    page = request.GET.get('page')
-    try:
-      paginated_objects = paginator.page(page)
-    except PageNotAnInteger:
-      paginated_objects = paginator.page(1)
-    except EmptyPage:
-      paginated_objects = paginator.page(paginator.num_pages)
-    return paginated_objects
 
 def index(request): 
     #Test pour voir si la requete est faite à l'adresse principale
@@ -61,15 +51,9 @@ def index(request):
     #Test pour voir si la requete est faite à une adresse entrée dans le profil d'un utilisateur
     elif UserProfile.objects.filter(domain='http://%s/' % (request.META['HTTP_HOST'])).exists():
       user = UserProfile.objects.get(domain='http://%s/' % (request.META['HTTP_HOST'])).user
-      punn_list = Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date')
-      paginator = Paginator(punn_list, 20)
-      page = request.GET.get('page')
-      try:
-        punns = paginator.page(page)
-      except PageNotAnInteger:
-        punns = paginator.page(1)
-      except EmptyPage:
-        punns = paginator.page(paginator.num_pages)
+      punns = paginate(request,
+                      Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
+                      20)
       return render_to_response('profile.html', 
                                {'user': user, 
                                 'url': 'http://%s/' % (request.META['HTTP_HOST']), 
@@ -194,6 +178,20 @@ def single(request, shorturl):
                               context_instance=RequestContext(request))
 
 
+###UTILS###
+#Une fonction pour paginer une liste d'objets
+def paginate(request, list_of_objects, number_of_items): 
+    paginator = Paginator(list_of_objects, number_of_items)
+    page = request.GET.get('page')
+    try:
+      paginated_objects = paginator.page(page)
+    except PageNotAnInteger:
+      paginated_objects = paginator.page(1)
+    except EmptyPage:
+      paginated_objects = paginator.page(paginator.num_pages)
+    return paginated_objects
+
+#Une fonction pour changer les usernames et les hastags en liens
 def linkify(string):
     string = re.sub(r'(\A|\s)@(\w+)', r'\1[@\2](/\2)', string)
     return re.sub(r'(\A|\s)#(\w+)', r'\1[#\2](/s/\2)', string)
