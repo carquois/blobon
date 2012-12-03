@@ -42,6 +42,18 @@ class UserFeed(Feed):
     def items(self, obj):
         return Punn.objects.filter(author=obj).filter(status='P').order_by('-pub_date')[:30]
 
+
+def paginate(request, list_of_objects, number_of_items): 
+    paginator = Paginator(list_of_objects, number_of_items)
+    page = request.GET.get('page')
+    try:
+      paginated_objects = paginator.page(page)
+    except PageNotAnInteger:
+      paginated_objects = paginator.page(1)
+    except EmptyPage:
+      paginated_objects = paginator.page(paginator.num_pages)
+    return paginated_objects
+
 def index(request): 
     #Test pour voir si la requete est faite à l'adresse principale
     if request.META['HTTP_HOST'] == settings.MAIN_SITE: 
