@@ -365,6 +365,11 @@
 
 }
 
+.box-thumbnails{
+        background: url(../img/blob_bg.gif);
+
+}
+
 .top-main-col{
 	height:55px;
 	width:100%;
