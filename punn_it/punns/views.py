@@ -30,17 +30,6 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.views.decorators.cache import cache_page
 
-class UserFeed(Feed):
-    def get_object(self, request, username):
-        return get_object_or_404(User, username=username)
-    def title(self, obj):
-        return "%s" % obj.first_name 
-    def link(self, obj):
-          return "http://%s/%s" % ("http://checkdonc.ca", obj.get_absolute_url())
-    def description(self, obj):
-        return "Feed : %s" % obj.username
-    def items(self, obj):
-        return Punn.objects.filter(author=obj).filter(status='P').order_by('-pub_date')[:30]
 
 
 
@@ -176,6 +165,18 @@ def single(request, shorturl):
                                'url': url, 'karma':karma, 'auth_user':auth_user,
                                'vote': vote, 'user': punn.author, 'home': home}, 
                               context_instance=RequestContext(request))
+
+class UserFeed(Feed):
+    def get_object(self, request, username):
+        return get_object_or_404(User, username=username)
+    def title(self, obj):
+        return "%s" % obj.first_name 
+    def link(self, obj):
+          return "http://%s/%s" % ("http://checkdonc.ca", obj.get_absolute_url())
+    def description(self, obj):
+        return "Feed : %s" % obj.username
+    def items(self, obj):
+        return Punn.objects.filter(author=obj).filter(status='P').order_by('-pub_date')[:30]
 
 
 ###UTILS###
