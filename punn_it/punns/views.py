@@ -30,19 +30,22 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.views.decorators.cache import cache_page
 
-
-
-
-def index(request): 
+def index(request, draft):
     #Test pour voir si la requete est faite à l'adresse principale
     if request.META['HTTP_HOST'] == settings.MAIN_SITE: 
       return HttpResponse("You're at the main site index.")
     #Test pour voir si la requete est faite à une adresse entrée dans le profil d'un utilisateur
     elif UserProfile.objects.filter(domain='http://%s/' % (request.META['HTTP_HOST'])).exists():
       user = UserProfile.objects.get(domain='http://%s/' % (request.META['HTTP_HOST'])).user
-      punns = paginate(request,
-                      Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
-                      20)
+      #Test to see if the variable is a draft or not
+      if draft == False:
+        punns = paginate(request,
+                         Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
+                         20)
+      else:
+        punns = paginate(request,
+                         Punn.objects.filter(author=user).filter(status='D').order_by('-pub_date'),
+                         20)
       return render_to_response('profile.html', 
                                {'user': user, 
                                 'url': 'http://%s/' % (request.META['HTTP_HOST']), 
