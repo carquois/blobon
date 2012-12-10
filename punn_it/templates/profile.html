@@ -23,9 +23,27 @@
                   </a>
                 </div>
 {% endfor %}
-              <center><a class="span8" style="padding-top:30px;padding-right:50px;" href="?page={{ punns.next_page_number }}">
-                <button class="btn btn-large btn-primary" type="button">+</button>
-              </a></center>
+                
+                <ul class="pager span7" style="margin-left:50px;">
+{% if punns.has_previous %}
+                  <li class="previous">
+                    <a href="?page={{ punns.previous_page_number }}">&larr; {% trans 'Prev' %}</a>
+                  </li>
+{% else %}
+                  <li class="previous disabled">
+                    <a href="#">&larr; {% trans 'Prev' %}</a>
+                  </li>
+{% endif %}
+{% if punns.has_next %}
+                  <li class="next">
+                    <a href="?page={{ punns.next_page_number }}">{% trans 'Next' %} &rarr;</a>
+                  </li>
+{% else %}
+                  <li class="next disabled">
+                    <a href="#">{% trans 'Next' %} &rarr;</a>
+                  </li>
+{% endif %}
+                </ul>
                 <div style="clear:both"></div>
 {% endblock %}
 {% block sidebar %}
