@@ -69,23 +69,25 @@
                 </div>
 {% endblock %}
 {% block sidebar %}
-              <!-- La boîte des 6 thumbnails -->
-              <div class="box-thumbnails">
-<div class="btn-group" data-toggle="buttons-radio" style="margin-left:50px;margin-top:-10px;">
+              <div class="box-thumbnails" style="width:300px;height:264px;margin-right:6px;margin-bottom:25px;">
+              <!-- Bouton open souce Bootstrap.
+<div class="btn-group" data-toggle="buttons-radio" style="margin-left:50px;margin-top:0px;">
   <button class="btn btn-mini" type="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prev&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
   <button class="btn btn-mini" type="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Next&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
 </div>
-<!--
-                <div id="fleche_single" style="margin-left:-10px;margin-right:-10px;margin-top:-15px;">
-                  <a href="{{ prev_punn.get_absolute_url }}"><div class="flecheprev">Prev</div></a>	
-                  <a href="{{ next_punn.get_absolute_url }}"><div class="flechenext">Next</div></a>	
-                </div>
 -->
+
+                <div id="fleche" style="margin-bottom:-5px; padding-top:6px;text-decoration: none; text-align:center;">
+                  <a href="{{ prev_punn.get_absolute_url }}" style="text-decoration: none;font-family: helvetica-bold; font-size: 11px; color: #3f3f3f;"><i class="icon-arrow-left" style="margin-top:-2px;"></i>&nbsp;PREV</a>	
+                  <span class="espace" style="margin-left:50px;">
+                  <a href="{{ next_punn.get_absolute_url }}" style="text-decoration: none;font-family: helvetica-bold; font-size: 11px; color: #3f3f3f;">NEXT&nbsp;<i class="icon-arrow-right" style="margin-top:-2px;"></i></a>
+                </div>
+
                 {% if latest_punn_list %}
-                <div class="thumbnails" style="margin-left:-2px;margin-top: 9px;pading-bottom:-10px;">
+                <div class="thumbnails" style="margin-left:10px;margin-top:10px;">
                   {% for punn in latest_punn_list %}
-                  <div class="thumb_single" style="width:82px;">
-                    <a class="thumbnail" href="{{ punn.get_absolute_url }}">
+                  <div class="thumb_single" style="width:94px;margin-bottom:-13px;margin-right:2px;">
+                    <a class="thumbnails_images" href="{{ punn.get_absolute_url }}">
                     {% thumbnail punn.pic "85x95" crop="center" as im %}
                       <img class="sidebarThumbs" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                     {% endthumbnail %}
@@ -96,10 +98,12 @@
                 {% else %}
                   <p>No more content</p>
                 {% endif %}
-               <a href="http://facebook.com/checkdoncca"><i class="icon-thumbs-up"></i> Aimez-nous</a>
-               <a href="http://twitter.com/checkdoncca"><i class="icon-arrow-right"></i> Suivez-nous</a>
+                <div class="social-media" style="text-align:right;margin-right:10px;">
+               <a href=" {{ user.userprofile.facebook_link }}" style="font-family: helvetica-bold; font-size: 10.3px; color: #7f7f7f;"> AIMEZ-NOUS <img src="{{ STATIC_URL }}img/icone_facebook.gif"></a>
+               <a href=" {{ user.userprofile.twitter_link }}" style="font-family: helvetica-bold; font-size: 10.3px; color: #7f7f7f;"> SUIVEZ-NOUS <img src="{{ STATIC_URL }}img/icone_twitter.gif"></a>
+               </div>
               </div><!--/.well -->
-              <div class="box-right">
+              <div class="box-right"> 
 {% include "bigbox.html" %}
               </div>
               <div class="box-right">
