@@ -76,7 +76,11 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li class="blobTitle">
+{% if user.userprofile.domain == "http://checkdonc.ca/" %}
+                <img src="{{ STATIC_URL }}img/cdclogo.png" />
+{% else %}
                 <a href="{{ user.userprofile.domain }}"><div class=""></div>{{ user.first_name }} {{ user.last_name }}</a>
+{% endif %}
               </li>
             </ul>
             <div id="nav_rightSide"> 
