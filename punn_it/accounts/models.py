@@ -42,6 +42,9 @@ class UserProfile(models.Model):
     is_obox_client = models.BooleanField(default=False, blank=True)
     #Google Infos
     analytics_account = models.CharField(max_length=50, blank=True)
+    #Social media info
+    facebook_link = models.URLField(max_length=100, blank=True)
+    twitter_link = models.URLField(max_length=100, blank=True)
     def __unicode__(self):
         return self.description
 
