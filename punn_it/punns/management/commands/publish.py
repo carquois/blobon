@@ -1,14 +1,18 @@
+from accounts.models import UserProfile
+from punns.models import Punn
+
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
-from punns.models import Punn
-from accounts.models import UserProfile
+
+import random
+
 
 def publish(frequency):
   for u in UserProfile.objects.all().distinct():
     if u.publication_frequency == frequency:
       p = Punn.objects.filter(author = u.user).filter(status='D')
       if p.count() > 0:
-        e = Punn.objects.get(id=p[0].pk)
+        e = Punn.objects.get(id=p[random.randrange(0,p.count())].pk)
         e.status = 'P'
         e.save()
 
