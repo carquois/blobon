@@ -69,20 +69,12 @@
                 </div>
 {% endblock %}
 {% block sidebar %}
-              <div class="box-thumbnails" style="width:300px;height:264px;margin-right:6px;margin-bottom:25px;">
-              <!-- Bouton open souce Bootstrap.
-<div class="btn-group" data-toggle="buttons-radio" style="margin-left:50px;margin-top:0px;">
-  <button class="btn btn-mini" type="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prev&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-  <button class="btn btn-mini" type="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Next&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-</div>
--->
-
+              <div class="box-thumbnails" style="width:300px;height:264px;margin-right:6px;margin-bottom:20px;">
                 <div id="fleche" style="margin-bottom:-5px; padding-top:6px;text-decoration: none; text-align:center;">
                   <a href="{{ prev_punn.get_absolute_url }}" style="text-decoration: none;font-family: helvetica-bold; font-size: 11px; color: #3f3f3f;"><i class="icon-arrow-left" style="margin-top:-2px;"></i>&nbsp;PREV</a>	
                   <span class="espace" style="margin-left:50px;">
                   <a href="{{ next_punn.get_absolute_url }}" style="text-decoration: none;font-family: helvetica-bold; font-size: 11px; color: #3f3f3f;">NEXT&nbsp;<i class="icon-arrow-right" style="margin-top:-2px;"></i></a>
                 </div>
-
                 {% if latest_punn_list %}
                 <div class="thumbnails" style="margin-left:10px;margin-top:10px;">
                   {% for punn in latest_punn_list %}
@@ -103,12 +95,7 @@
                <a href=" {{ user.userprofile.twitter_link }}" style="font-family: helvetica-bold; font-size: 10.3px; color: #7f7f7f;"> SUIVEZ-NOUS <img src="{{ STATIC_URL }}img/icone_twitter.gif"></a>
                </div>
               </div><!--/.well -->
-              <div class="box-right"> 
-{% include "bigbox.html" %}
-              </div>
-              <div class="box-right">
-{% include "bigbox.html" %}
-              </div>
+{% include "blocpub.html" %}
             </div><!--/span5-->
           </div><!--/row-->
         </div><!--/span12-->
