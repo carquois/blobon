@@ -3,7 +3,7 @@
 import re
 import markdown
 import urllib2
-import urlparse
+from urlparse import urlparse
 from cgi import parse_qs
 
 from accounts.models import UserProfile, UserForm, UserProfileForm
