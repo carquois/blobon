@@ -53,7 +53,22 @@ def index(request, draft):
                                context_instance=RequestContext(request))
     #Il s'agit d'une adresse qui pointe vers nous sans que l'URL soit entre dans le profil
     else:
-      return HttpResponse("Something is wrong with the config. ")
+      #En cas de l'adresse ne semble pas présente dans notre db, présenter checkdonc.ca
+      user = UserProfile.objects.get(pk=3)
+      #Test to see if the variable is a draft or not
+      if draft == False:
+        punns = paginate(request,
+                         Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
+                         20)
+      else:
+        punns = paginate(request,
+                         Punn.objects.filter(author=user).filter(status='D').order_by('-pub_date'),
+                         20)
+      return render_to_response('profile.html',
+                               {'user': user,
+                                'url': 'http://%s/' % (request.META['HTTP_HOST']),
+                                'punns': punns},
+                               context_instance=RequestContext(request))
 
 @login_required
 def comment(request, shorturl):
