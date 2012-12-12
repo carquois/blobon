@@ -7,6 +7,7 @@
     <title>{% block title %}{{ user.first_name }} {{ user.last_name }}{% endblock %}</title>
     <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <meta name="description" content="{{ user.userprofile.description }}">
+{% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ user.first_name }} {{ user.last_name }}" />
     <meta property="og:url" content="{{ url }}" />
@@ -16,6 +17,7 @@
     <meta name="twitter:url" content="{{ url }}">
     <meta name="twitter:title" content="{{ user.first_name }} {{ user.last_name }}">
     <meta name="twitter:image" content="{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
+{% endblock %}
     <!-- Le jQuery -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.dajax.core.js"></script>
