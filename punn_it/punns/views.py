@@ -42,10 +42,11 @@ def index(request, draft):
         punns = paginate(request,
                          Punn.objects.filter(author=user).filter(status='D').order_by('-pub_date'),
                          20)
+      home = 'http://%s/' % settings.MAIN_SITE
       return render_to_response('profile.html',
                                {'user': user,
                                 'url': 'http://%s/' % (request.META['HTTP_HOST']),
-                                'punns': punns},
+                                'punns': punns, 'home': home},
                                context_instance=RequestContext(request))
 
 @login_required
