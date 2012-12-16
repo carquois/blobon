@@ -5,8 +5,8 @@
   <head>
     <meta charset="utf-8">
     <title>{% block title %}{{ user.first_name }} {{ user.last_name }}{% endblock %}</title>
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-    <meta name="description" content="{{ user.userprofile.description }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% endblock %}">
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ user.first_name }} {{ user.last_name }}" />
