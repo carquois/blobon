@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load i18n thumbnail %}
-<meta name="description" content="{{ punn.author.userprofile.description }}" />
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ punn.title }}" />
@@ -16,6 +15,9 @@
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
 {% block content %}
+{% if is_mobile %}
+    est mobile 
+{% else %}
                 <script>
                   $(document).ready(function () {
                     $(document).keydown(function(e) {
@@ -67,8 +69,12 @@
                 <div style="text-align:center;padding-top:-30px;">
 {% include "leaderboard.html" %}
                 </div>
+{% endif %}
 {% endblock %}
 {% block sidebar %}
+{% if is_mobile %}
+    est mobile
+{% else %}
               <div class="box-thumbnails" style="width:300px;height:264px;margin-right:6px;margin-bottom:24px;">
                 <div id="fleche" style="margin-bottom:-5px; padding-top:6px;text-decoration: none; text-align:center;">
                   <a href="{{ prev_punn.get_absolute_url }}" style="text-decoration: none;font-family: helvetica-bold; font-size: 11px; color: #3f3f3f;"><i class="icon-arrow-left" style="margin-top:-2px;"></i>&nbsp;PREV</a>	
@@ -101,4 +107,5 @@
         </div><!--/span12-->
       </div><!--/row-->
     </div><!--/.container-->
+{% endif %}
 {% endblock %}

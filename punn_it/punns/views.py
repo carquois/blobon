@@ -43,9 +43,9 @@ def index(request, draft):
                          Punn.objects.filter(author=user).filter(status='D').order_by('-pub_date'),
                          20)
       home = 'http://%s/' % settings.MAIN_SITE
+      site_description = settings.MAIN_SITE_DESCRIPTION
       return render_to_response('profile.html',
-                               {'user': user,
-                                'url': 'http://%s/' % (request.META['HTTP_HOST']),
+                               {'user': user, 'site_description': site_description,
                                 'punns': punns, 'home': home},
                                context_instance=RequestContext(request))
 

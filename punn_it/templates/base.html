@@ -10,11 +10,11 @@
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ user.first_name }} {{ user.last_name }}" />
-    <meta property="og:url" content="{{ url }}" />
+    <meta property="og:url" content="{{ home }}" />
     <meta property="og:image" content="{{ MEDIA_URL }}{{ user.userprofile.avatar }}" />
     <!-- Le twitter cards -->
     <meta name="twitter:card" content="photo">
-    <meta name="twitter:url" content="{{ url }}">
+    <meta name="twitter:url" content="{{ home }}">
     <meta name="twitter:title" content="{{ user.first_name }} {{ user.last_name }}">
     <meta name="twitter:image" content="{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
 {% endblock %}
