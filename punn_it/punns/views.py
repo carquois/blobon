@@ -32,11 +32,7 @@ from django.template import RequestContext
 from django.views.decorators.cache import cache_page
 
 def index(request, draft):
-      request = check_mobile(request)
-      if request.is_mobile:
-        is_mobile = True
-      else:
-        is_mobile = False
+      is_mobile = check_mobile(request)
       #Affichage de checkdonc.ca
       user = UserProfile.objects.get(pk=3)
       #Test to see if the variable is a draft or not
@@ -53,7 +49,7 @@ def index(request, draft):
       return render_to_response('base.html',
                                {'user': user, 'site_description': site_description,
                                 'punns': punns, 'site': site, 'is_mobile': is_mobile},
-                               context_instance=RequestContext(request))
+                                context_instance=RequestContext(request))
 
 @login_required
 def comment(request, shorturl):
@@ -161,11 +157,7 @@ def single(request, shorturl):
         comment.content = linkify(comment.content)
         comment.content = markdown.markdown(comment.content)
     url = request.build_absolute_uri()
-    check_mobile(request)
-    if request.is_mobile:
-      is_mobile = True
-    else:
-      is_mobile = False
+    is_mobile = check_mobile(request)
     return render_to_response('single.html', 
                               {'punn': punn, 'latest_punn_list': latest_punn_list,
                                'next_punn': next_punn, 'prev_punn': prev_punn, 
@@ -192,7 +184,6 @@ class UserFeed(Feed):
 #Une fonction pour vérifier si le l'utilisateur utilise unappareil mobile
 def check_mobile(request): 
         is_mobile = False;
-
         if request.META.has_key('HTTP_USER_AGENT'):
             user_agent = request.META['HTTP_USER_AGENT']
 
@@ -239,9 +230,7 @@ def check_mobile(request):
                 test = user_agent[0:4].lower()
                 if test in user_agents_test:
                     is_mobile = True
-
-        request.is_mobile = is_mobile
-        return request
+        return is_mobile 
 
 #Une fonction pour paginer une liste d'objets
 def paginate(request, list_of_objects, number_of_items): 

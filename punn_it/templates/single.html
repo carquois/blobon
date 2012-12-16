@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {% load i18n thumbnail %}
+{% block javascript %}
+
+{{ is_mobile }}
+
+{% endblock %}
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ punn.title }}" />
     <meta property="og:url" content="{{ url }}" />
     <meta property="og:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}" />
     <meta property="og:site_name" content="{{ punn.author.first_name }} {{ punn.author.last_name }}" />
-    <meta property="fb:admins" content="772035088" />
     <!-- Le twitter cards -->
     <meta name="twitter:card" content="photo">
     <meta name="twitter:url" content="{{ url }}">
@@ -14,9 +18,27 @@
     <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}">
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
-{% block content %}
+{% block container %}
 {% if is_mobile %}
-    est mobile 
+		<div data-role="header">
+			<a href="index.html" data-icon="delete" iconpos="notext">Cancel</a>
+			<h1>Bar swatch "a"</h1>
+			<a href="index.html" data-icon="arrow-r" data-iconpos="right" data-theme="b">Save</a>
+		</div>
+<div data-role="page">
+
+
+	<div data-role="content">	
+		<p>This is a single page boilerplate template that you can copy to build your first jQuery Mobile page. Each link or form from here will pull a new page in via Ajax to support the animated page transitions.</p>		
+		<p>Just view the source and copy the code to get started. All the CSS and JS is linked to the jQuery CDN versions so this is super easy to set up. Remember to include a meta viewport tag in the head to set the zoom level.</p>
+		<p>This template is standard HTML document with a single "page" container inside, unlike a <a href="multipage-template.html" data-ajax="false">multi-page template</a> that has multiple pages within it. We strongly recommend building your site or app as a series of separate pages like this because it's cleaner, more lightweight and works better without JavaScript.</p>
+	</div><!-- /content -->
+	
+	<div data-role="footer">
+		<h4>Footer content</h4>
+	</div><!-- /footer -->
+	
+</div><!-- /page -->
 {% else %}
                 <script>
                   $(document).ready(function () {
