@@ -9,14 +9,14 @@
     <meta name="description" content="{% block description %}{{ site_description }}{% endblock %}">
 {% block open-graphs %}
     <!-- Le open graphs tags -->
-    <meta property="og:title" content="{{ user.first_name }} {{ user.last_name }}" />
-    <meta property="og:url" content="{{ home }}" />
-    <meta property="og:image" content="{{ MEDIA_URL }}{{ user.userprofile.avatar }}" />
+    <meta property="og:title" content="{{ site.name }}" />
+    <meta property="og:url" content="http://{{ site.domain }}" />
+    <meta property="og:image" content="{{ STATIC_URL }}img/avatar.png" />
     <!-- Le twitter cards -->
     <meta name="twitter:card" content="photo">
     <meta name="twitter:url" content="{{ home }}">
-    <meta name="twitter:title" content="{{ user.first_name }} {{ user.last_name }}">
-    <meta name="twitter:image" content="{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
+    <meta name="twitter:title" content="{{ site.name }}">
+    <meta name="twitter:image" content="{{ STATIC_URL }}img/avatar.png">
 {% endblock %}
 {% block javascript %}
     <!-- Le jQuery -->
@@ -30,7 +30,6 @@
         background-color: #D3D3D3!important;
       }
     </style>
-    <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
     {% compress css %}
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">

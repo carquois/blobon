@@ -32,6 +32,11 @@ from django.template import RequestContext
 from django.views.decorators.cache import cache_page
 
 def index(request, draft):
+      request = check_mobile(request)
+      if request.is_mobile:
+        is_mobile = True
+      else:
+        is_mobile = False
       #Affichage de checkdonc.ca
       user = UserProfile.objects.get(pk=3)
       #Test to see if the variable is a draft or not
@@ -47,7 +52,7 @@ def index(request, draft):
       site = get_current_site(request)
       return render_to_response('profile.html',
                                {'user': user, 'site_description': site_description,
-                                'punns': punns, 'site': site},
+                                'punns': punns, 'site': site, 'is_mobile': is_mobile},
                                context_instance=RequestContext(request))
 
 @login_required
