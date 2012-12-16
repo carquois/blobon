@@ -15,27 +15,21 @@
 {% block title %}{{ punn.title }}{% endblock %}
 {% block container %}
 {% if is_mobile %}
-<div data-role="page" style="background: #000;">
-
-        <div data-role="header">
-
-<a href="{{ prev_punn.get_absolute_url }}" data-icon="arrow-l">Prev</a>
-                <h1><img src="{{ STATIC_URL }}img/cdclogo.png" alt="Check Donc Ça" width="120px;" /></h1>
-<a href="{{ next_punn.get_absolute_url }}" data-icon="arrow-r" data-iconpos="right" >Next</a>
-
-        </div><!-- /header -->
-
-	<div data-role="content">	
-         <a href="{{ next_punn.get_absolute_url }}"><img src="{{ MEDIA_URL }}{{ punn.pic }}" width="100%" /></a>
-	</div><!-- /content -->
-
-		<div class="ui-body ui-body-d" data-position="fixed">
-			<p>{{ punn.title }}</p>
-		</div><!-- /themed container -->	
-
-	
-</div><!-- /page -->
+    <div data-role="page" style="background: #000;">
+      <div data-role="header">
+        <a href="{{ prev_punn.get_absolute_url }}" data-icon="arrow-l">Prev</a>
+        <h1><a href="http://{{ site.domain }}"><img src="{{ STATIC_URL }}img/cdclogo.png" alt="Check Donc Ça" width="120px;" /></a></h1>
+        <a href="{{ next_punn.get_absolute_url }}" data-icon="arrow-r" data-iconpos="right" >Next</a>
+      </div><!-- /header -->
+      <div data-role="content">	
+        <a href="{{ next_punn.get_absolute_url }}"><img src="{{ MEDIA_URL }}{{ punn.pic }}" width="100%" /></a>
+      </div><!-- /content -->
+      <div class="ui-body ui-body-d" data-position="fixed">
+        <p>{{ punn.title }}</p>
+      </div><!-- /themed container -->	
+    </div><!-- /page -->
 {% else %}
+
                 <script>
                   $(document).ready(function () {
                     $(document).keydown(function(e) {
