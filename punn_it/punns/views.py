@@ -50,7 +50,7 @@ def index(request, draft):
                          20)
       site_description = settings.MAIN_SITE_DESCRIPTION
       site = get_current_site(request)
-      return render_to_response('profile.html',
+      return render_to_response('base.html',
                                {'user': user, 'site_description': site_description,
                                 'punns': punns, 'site': site, 'is_mobile': is_mobile},
                                context_instance=RequestContext(request))

@@ -1,4 +1,4 @@
-{% load i18n dajaxice_templatetags compress %}
+{% load thumbnail i18n dajaxice_templatetags compress %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -91,14 +91,56 @@
           <div class="row ">
             <div class="span8 blancBG " style="width: 770px;"> 
               <div class="grosseEstidColonne" >
-                {% block content %}
-                {% endblock %}
+                <div class="top-main-col" >
+                  <div class="top_social" style="float: right">
+                    <a href="{{ user.userprofile.facebook_link }}">AIMEZ-NOUS<img style="padding-bottom:5px;" src="{{ STATIC_URL }}img/facebook.png"></a><a href="{{ user.userprofile.twitter_link }}">SUIVEZ-NOUS<img style="padding-bottom:5px;" src="{{ STATIC_URL }}img/twitter.png"></a>
+                  </div>
+                </div>
+{% for punn in punns %}
+                <div class="thumbnailsMAIN">
+      	          <a href="{{ punn.get_absolute_url }}">
+                    <div class="itemPhoto">
+                    {% thumbnail punn.pic "157x192" crop="center" as im %}
+                      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
+                    {% endthumbnail %}
+                    </div>
+                    <div class="itemDesc">
+
+                      {{ punn.title|truncatechars:60 }}
+                    </div>
+                  </a>
+                </div>
+{% endfor %}
+                
+                <ul class="pager span7" style="margin-left:50px;">
+{% if punns.has_previous %}
+                  <li class="previous">
+                    <a href="?page={{ punns.previous_page_number }}">&larr; {% trans 'Prev' %}</a>
+                  </li>
+{% else %}
+                  <li class="previous disabled">
+                    <a href="#">&larr; {% trans 'Prev' %}</a>
+                  </li>
+{% endif %}
+{% if punns.has_next %}
+                  <li class="next">
+                    <a href="?page={{ punns.next_page_number }}">{% trans 'Next' %} &rarr;</a>
+                  </li>
+{% else %}
+                  <li class="next disabled">
+                    <a href="#">{% trans 'Next' %} &rarr;</a>
+                  </li>
+{% endif %}
+                </ul>
+                <div style="clear:both"></div>
+
               </div>
             </div>
             <div class="span4" style="margin-left: 25px;" >
               <div class="box-right-wrap">
-                {% block sidebar %}
-                {% endblock %}
+
+{% include "blocpub.html" %}
+
               </div>		                        
             </div>
           </div>
