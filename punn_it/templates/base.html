@@ -77,39 +77,19 @@
     }(document, 'script', 'facebook-jssdk'));</script>
 {% block container %}
 {% if is_mobile %}
-<div data-role="page">
-
-	<div data-role="header">
-
-{% if punns.has_previous %}
-           <a href="?page={{ punns.previous_page_number }}" data-icon="arrow-l">Prev</a>
-{% else %}
-           <a class="ui-disabled" href="?page={{ punns.previous_page_number }}" data-icon="arrow-l">Prev</a>
-{% endif %}
-		<h1><img src="{{ STATIC_URL }}img/cdclogo.png" alt="Check Donc Ça" width="120px;" /></h1>
-{% if punns.has_next %}
-<a href="?page={{ punns.next_page_number }}" data-icon="arrow-r" data-iconpos="right" >Next</a>
-{% else %}
-<a href="?page={{ punns.next_page_number }}" class="ui-disabled" data-icon="arrow-r" data-iconpos="right" >Next</a>
-{% endif %}
-	</div><!-- /header -->
-
-	<div data-role="content" style="margin-top:-15px;background:#000;">	
+    <div data-role="page">
+{% include "mobile-header.html" %}
+      <div data-role="content" style="margin-top:-15px;background:#000;">	
 {% for punn in punns %}
-      	          <a href="{{ punn.get_absolute_url }}">
-                    {% thumbnail punn.pic "140x172" crop="center" as im %}
-                      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
-                    {% endthumbnail %}
-                  </a>
+        <a href="{{ punn.get_absolute_url }}">
+        {% thumbnail punn.pic "140x172" crop="center" as im %}
+          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
+        {% endthumbnail %}
+        </a>
 {% endfor %}
-</div><!-- /content-->
-
-	<div data-role="footer">
-		<h4>Footer content</h4>
-	</div><!-- /footer -->
-	
-</div><!-- /page --> 
-
+      </div><!-- /content-->
+{% include "mobile-header.html" %}
+    </div><!-- /page --> 
 {% else %}
     <div class="navbar navbar-fixed-top" style=" max-height:55px;">
       <div class="navbar-inner" style=" max-height:55px;">
