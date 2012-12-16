@@ -15,10 +15,11 @@ from votes.models import PunnVote
 from django import forms
 from django.conf import settings
 from django.contrib import auth
-from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.sites.models import Site
+from django.contrib.sites.models import get_current_site
 from django.contrib.syndication.views import Feed, FeedDoesNotExist
 from django.core.urlresolvers import reverse
 from django.core.files import File
@@ -42,11 +43,11 @@ def index(request, draft):
         punns = paginate(request,
                          Punn.objects.filter(author=user).filter(status='D').order_by('-pub_date'),
                          20)
-      home = 'http://%s/' % settings.MAIN_SITE
       site_description = settings.MAIN_SITE_DESCRIPTION
+      site = get_current_site(request)
       return render_to_response('profile.html',
                                {'user': user, 'site_description': site_description,
-                                'punns': punns, 'home': home},
+                                'punns': punns, 'site': site},
                                context_instance=RequestContext(request))
 
 @login_required
