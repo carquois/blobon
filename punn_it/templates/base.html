@@ -11,12 +11,12 @@
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ site.name }}" />
     <meta property="og:url" content="http://{{ site.domain }}" />
-    <meta property="og:image" content="{{ STATIC_URL }}img/avatar.png" />
+    <meta property="og:image" content="http://{{ site.domain }}{{ STATIC_URL }}img/avatar.png" />
     <!-- Le twitter cards -->
     <meta name="twitter:card" content="photo">
-    <meta name="twitter:url" content="{{ home }}">
+    <meta name="twitter:url" content="http://{{ site.domain }}">
     <meta name="twitter:title" content="{{ site.name }}">
-    <meta name="twitter:image" content="{{ STATIC_URL }}img/avatar.png">
+    <meta name="twitter:image" content="http://{{ site.domain }}{{ STATIC_URL }}img/avatar.png">
 {% endblock %}
 {% block javascript %}
   {% if is_mobile %}

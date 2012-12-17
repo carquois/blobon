@@ -158,13 +158,15 @@ def single(request, shorturl):
         comment.content = markdown.markdown(comment.content)
     url = request.build_absolute_uri()
     is_mobile = check_mobile(request)
+    site_description = settings.MAIN_SITE_DESCRIPTION
+    site = get_current_site(request)
     return render_to_response('single.html', 
                               {'punn': punn, 'latest_punn_list': latest_punn_list,
                                'next_punn': next_punn, 'prev_punn': prev_punn, 
                                'content': content, 'comment_list': comment_list,
                                'url': url, 'karma':karma, 'auth_user':auth_user,
                                'vote': vote, 'user': punn.author, 'home': home, 
-                               'is_mobile': is_mobile}, 
+                               'is_mobile': is_mobile, 'site_description': site_description, 'site': site}, 
                               context_instance=RequestContext(request))
 
 class UserFeed(Feed):
