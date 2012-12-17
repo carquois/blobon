@@ -1,0 +1,13 @@
+      <div data-role="header">
+{% if punns.has_previous %}
+        <a href="?page={{ punns.previous_page_number }}" data-icon="arrow-l">Prev</a>
+{% else %}
+        <a class="ui-disabled" href="?page={{ punns.previous_page_number }}" data-icon="arrow-l">Prev</a>
+{% endif %}
+        <h1><a href="http://{{ site.domain }}"><img src="{{ STATIC_URL }}img/cdclogo.png" alt="Check Donc Ça" width="120px;" /></a></h1>
+{% if punns.has_next %}
+        <a href="?page={{ punns.next_page_number }}" data-icon="arrow-r" data-iconpos="right" >Next</a>
+{% else %}
+        <a href="?page={{ punns.next_page_number }}" class="ui-disabled" data-icon="arrow-r" data-iconpos="right" >Next</a>
+{% endif %}
+      </div><!-- /header -->
