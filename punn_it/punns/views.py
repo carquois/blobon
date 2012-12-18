@@ -27,7 +27,7 @@ from django.core.files.temp import NamedTemporaryFile
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import redirect, render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.views.decorators.cache import cache_page
 
@@ -67,6 +67,11 @@ def search(request):
                                   context_instance=RequestContext(request))
       else:
         return HttpResponseRedirect('http://%s/' % site.domain)
+
+def random(request):
+      user = UserProfile.objects.get(pk=3)
+      r = Punn.objects.filter(author=user).filter(status='P').order_by('?')[:1]
+      return redirect(r[0])
 
 @login_required
 def comment(request, shorturl):
