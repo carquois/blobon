@@ -31,25 +31,33 @@ from django.shortcuts import redirect, render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.views.decorators.cache import cache_page
 
-def index(request, draft):
+def index(request):
       is_mobile = check_mobile(request)
-      #Affichage de checkdonc.ca
       user = UserProfile.objects.get(pk=3)
-      #Test to see if the variable is a draft or not
-      if draft == False:
-        punns = paginate(request,
-                         Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
-                         20)
-      else:
-        punns = paginate(request,
-                         Punn.objects.filter(author=user).filter(status='D').order_by('-pub_date'),
-                         20)
+      punns = paginate(request,
+                       Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
+                       20)
       site_description = settings.MAIN_SITE_DESCRIPTION
       site = get_current_site(request)
       return render_to_response('base.html',
                                {'user': user, 'site_description': site_description,
                                 'punns': punns, 'site': site, 'is_mobile': is_mobile},
                                 context_instance=RequestContext(request))
+
+def draft(request):
+      is_mobile = check_mobile(request)
+      user = UserProfile.objects.get(pk=3)
+      punns = paginate(request,
+                       Punn.objects.filter(author=user).filter(status='D').order_by('-pub_date'),
+                       20)
+      site_description = settings.MAIN_SITE_DESCRIPTION
+      site = get_current_site(request)
+      return render_to_response('base.html',
+                               {'user': user, 'site_description': site_description,
+                                'punns': punns, 'site': site, 'is_mobile': is_mobile},
+                                context_instance=RequestContext(request))
+
+
 
 def search(request):
       site_description = settings.MAIN_SITE_DESCRIPTION
