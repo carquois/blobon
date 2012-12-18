@@ -51,6 +51,23 @@ def index(request, draft):
                                 'punns': punns, 'site': site, 'is_mobile': is_mobile},
                                 context_instance=RequestContext(request))
 
+def search(request):
+      site_description = settings.MAIN_SITE_DESCRIPTION
+      site = get_current_site(request)
+      is_mobile = check_mobile(request)
+      if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        punns = paginate(request,
+                         Punn.objects.filter(title__icontains=q).filter(status='P').order_by('-pub_date'),
+                         20)
+        return render_to_response('base.html',
+                                  {'site_description': site_description, 'query': q,
+                                   'punns': punns, 'site': site, 'is_mobile': is_mobile,
+                                   'search': True},
+                                  context_instance=RequestContext(request))
+      else:
+        return HttpResponseRedirect('http://%s/' % site.domain)
+
 @login_required
 def comment(request, shorturl):
     comment = get_object_or_404(Comment, base62id=shorturl)

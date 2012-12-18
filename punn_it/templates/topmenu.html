@@ -1,14 +1,18 @@
-    <div class="navbar navbar-fixed-top" style=" max-height:55px;">
+{% load i18n %}
+    <div class="navbar navbar-fixed-top navbar-inverse" style=" max-height:55px;">
       <div class="navbar-inner" style=" max-height:55px;">
         <div class="container" style=" max-height:55px;">
           <div class="nav-collapse">
             <ul class="nav">
               <li class="blobTitle">
-                <a href="{{ home }}"><img src="{{ STATIC_URL }}img/cdclogo.png" style="margin-top:-10px;" /></a>
+                <a href="http://{{ site.domain }}"><img src="{{ STATIC_URL }}img/cdclogo.png" style="margin-top:-10px;" /></a>
               </li>
             </ul>
-            <div id="nav_rightSide"> 
-              <div style="display:none;float:left; margin-left: -80px;"><input name="search" type="text" maxlength="30" class="nav-search"  placeholder="Recherche"> </div>
+            <div class="pull-right" style="margin-right:80px;margin-top:15px;">
+              <form class="navbar-search" style="margin-top:0px;" action="{% url punns.views.search %}" method="get">
+                <input style="height: 25px;" type="text" name="q" class="search-query span3" placeholder="{% trans 'Search' %}">
+                <div class="icon-search"></div>
+              </form>
             </div>
           </div><!--/.nav-collapse -->
         </div>
