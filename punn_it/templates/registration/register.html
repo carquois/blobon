@@ -1,10 +1,27 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load url from future %}
-{% block title %}{% trans 'Create an account' %}{% endblock %}
+{% block title %}{% trans 'Se créer un compte' %}{% endblock %}
+{% block additional_css %}
+    <style>
 
-{% block content %}
-  <h1>{% trans 'Join BlobOn' %}</h1>
+body {
+  background: url({{ STATIC_URL }}img/blob_bg.gif);
+}
+
+.centered {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+}
+    </style>
+{% endblock %}
+
+
+{% block container %}
+ <div class="centered">
     <form action="" method="post">{% csrf_token %}
     {{ form.non_field_errors }}
     <div class="fieldWrapper">
@@ -24,6 +41,8 @@
     <p><input class="btn btn-warning" type="submit" value="{% trans 'Create my account' %}" /></p>
 
     </form>
+<hr>
+
     <p>
         Or signup with
         <ul>
@@ -33,6 +52,6 @@
             <li><a href="{% url 'socialauth_begin' backend='google' %}">Google</a></li>
         </ul>
     </p>
-    
+   </div/ 
 {% endblock %}
 

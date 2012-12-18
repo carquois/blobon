@@ -6,6 +6,12 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 
+def signup(request):
+    if request.user.is_authenticated():
+      return HttpResponseRedirect(reverse('punns.views.index'))
+    else:
+      return render_to_response("registration/signup.html", 
+                                context_instance=RequestContext(request))
 @login_required
 def register(request):
     if request.method == 'POST':

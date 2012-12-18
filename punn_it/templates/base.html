@@ -32,12 +32,6 @@
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
   {% else %}
     <!-- Le styles -->
-    <style>
-      body {
-        padding-top: 60px;
-        background-color: #D3D3D3!important;
-      }
-    </style>
     {% compress css %}
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
@@ -47,6 +41,14 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   {% endif %}
+{% endblock %}
+{% block additional_css %}
+    <style>
+      body {
+        padding-top: 60px;
+        background-color: #D3D3D3!important;
+      }
+    </style>
 {% endblock %}
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
