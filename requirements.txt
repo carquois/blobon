@@ -7,6 +7,7 @@ Markdown==2.2.0
 python-memcached==1.48
 oauth2==1.5.211
 python-openid==2.2.5
+google-api-python-client==1.0
 django-social-auth==0.7.7
 django-dajax==0.9.2
 django-dajaxice==0.5.2
