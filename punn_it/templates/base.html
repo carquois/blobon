@@ -19,18 +19,11 @@
     <meta name="twitter:image" content="http://{{ site.domain }}{{ STATIC_URL }}img/avatar.png">
 {% endblock %}
 {% block javascript %}
-  {% if is_mobile %}
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-  {% else %}
-    <!-- Le jQuery -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-  {% endif %}
 {% endblock %}
 {% block css %}
-  {% if is_mobile %}
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-  {% else %}
     <!-- Le styles -->
     <style>
       body {
@@ -47,7 +40,6 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-  {% endif %}
 {% endblock %}
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
@@ -77,8 +69,7 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 {% block container %}
-{% if is_mobile %}
-    <div data-role="page">
+    <div class="visible-phone" data-role="page">
 {% include "mobile-header.html" %}
       <div data-role="content" style="margin-top:-15px;background:#000;">	
 {% for punn in punns %}
@@ -91,7 +82,6 @@
       </div><!-- /content-->
 {% include "mobile-header.html" %}
     </div><!-- /page --> 
-{% else %}
 {% include "topmenu.html" %}
     <div class="container" style="margin-top:35px;">
       <div class="row">
@@ -161,7 +151,6 @@
         </div>
       </div>
     </div><!-- /container -->
-{% endif %}
 {% endblock %}
   </body>
 </html>
