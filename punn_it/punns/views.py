@@ -40,11 +40,10 @@ def index(request):
       site = get_current_site(request)
       return render_to_response('base.html',
                                {'user': user, 'site_description': site_description,
-                                'punns': punns, 'site': site, 'is_mobile': is_mobile},
+                                'punns': punns, 'site': site},
                                 context_instance=RequestContext(request))
 
 def draft(request):
-      is_mobile = check_mobile(request)
       user = UserProfile.objects.get(pk=3)
       punns = paginate(request,
                        Punn.objects.filter(author=user).filter(status='D').order_by('-pub_date'),
@@ -209,7 +208,6 @@ class UserFeed(Feed):
 
 
 ###UTILS###
-#Une fonction pour vérifier si le l'utilisateur utilise unappareil mobile
 #Une fonction pour paginer une liste d'objets
 def paginate(request, list_of_objects, number_of_items): 
     paginator = Paginator(list_of_objects, number_of_items)
