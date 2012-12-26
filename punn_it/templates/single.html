@@ -14,8 +14,7 @@
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
 {% block container %}
-{% if is_mobile %}
-    <div data-role="page" style="background: #000;">
+    <div class="visible-phone" data-role="page" style="background: #000;">
       <div data-role="header">
         <a href="{{ prev_punn.get_absolute_url }}" data-icon="arrow-l">Prev</a>
         <h1><a href="http://{{ site.domain }}"><img src="{{ STATIC_URL }}img/cdclogo.png" alt="Check Donc Ça" width="120px;" /></a></h1>
@@ -37,9 +36,8 @@
         </script>
       </div><!-- /content -->
     </div><!-- /page -->
-{% else %}
 {% include "topmenu.html" %}
-    <div class="container" style="margin-top:35px;">
+    <div class="hidden-phone container" style="margin-top:35px;">
       <div class="row">
         <div class="span12" style="width: 1170px;">
           <div class="row ">
@@ -127,5 +125,4 @@
         </div><!--/span12-->
       </div><!--/row-->
     </div><!--/.container-->
-{% endif %}
 {% endblock %}
