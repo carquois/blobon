@@ -76,7 +76,7 @@
       js.src = "//connect.facebook.net/fr_CA/all.js#xfbml=1&appId=339826172767964";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
-{% block container %}
+{% block mobile %}
     <div class="visible-phone" data-role="page">
 {% include "mobile-header.html" %}
       <div data-role="content" style="margin-top:-15px;background:#000;">	
@@ -90,49 +90,41 @@
       </div><!-- /content-->
 {% include "mobile-header.html" %}
     </div><!-- /page --> 
+
+{% endblock %}
+{% block topmenu %}
 {% include "topmenu.html" %}
+{% endblock %}
+{% block top-content %}
     <div class="container hidden-phone" style="margin-top:35px;">
       <div class="row">
         <div class="span12" style="width: 1170px;">
           <div class="row ">
             <div class="span8 blancBG " style="width: 770px;"> 
-<div class="navbar">
-  <div class="navbar-inner">
-    <ul class="nav">
-      <li class="active"><a href="#">Nouveau</a></li>
-      <li class="divider-vertical"></li>
-  <li class="dropdown">
-    <a class="dropdown-toggle"
-       data-toggle="dropdown"
-       href="#">
-        Les plus populaires 
-        <b class="caret"></b>
-      </a>
-    <ul class="dropdown-menu">
-  <li><a href="#">Dernier jour</a></li>
-  <li><a href="#">Dernière semaine</a></li>
-  <li><a href="#">Dernier mois</a></li>
-  <li><a href="#">Depuis le début</a></li>
-    </ul>
-  </li>    
-</ul>
-  </div>
-</div>
-<div class="navbar">
-  <div class="navbar-inner">
-    <ul class="nav">
-      <li><a href="#">Nouveau</a></li>
-      <li class="divider-vertical"></li>
-      <li class=disabled"><a href="#">Les plus populaires</a></li>
-  <li class="active"><a href="#">Jour</a></li>
-  <li><a href="#">Semaine</a></li>
-  <li><a href="#">Mois</a></li>
-  <li><a href="#">Tout</a></li>
-    </ul>
-  </li>    
-</ul>
-  </div>
-</div>
+{% endblock %}
+{% block navbar %}
+              <div class="navbar">
+                <div class="navbar-inner">
+                  <ul class="nav">
+                    <li class="active"><a href="#">{% trans 'Nouveau' %}</a></li>
+                    <li class="divider-vertical"></li>
+                    <li class="dropdown">
+                      <a class="dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#">
+                        {% trans 'Les plus populaires' %}
+                        <b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">Dernier jour</a></li>
+                        <li><a href="#">Dernière semaine</a></li>
+                        <li><a href="#">Dernier mois</a></li>
+                        <li><a href="#">Depuis le début</a></li>
+                      </ul>
+                    </li>    
+                  </ul>
+                </div>
+              </div>
               <div style="margin-top:-20px;" class="grosseEstidColonne" >
                 <div class="top-main-col" >
 
