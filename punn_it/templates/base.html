@@ -95,11 +95,49 @@
 {% else %}
 {% include "topmenu.html" %}
     <div class="container" style="margin-top:35px;">
+
       <div class="row">
         <div class="span12" style="width: 1170px;">
           <div class="row ">
             <div class="span8 blancBG " style="width: 770px;"> 
-              <div class="grosseEstidColonne" >
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav">
+      <li class="active"><a href="#">Nouveau</a></li>
+      <li class="divider-vertical"></li>
+  <li class="dropdown">
+    <a class="dropdown-toggle"
+       data-toggle="dropdown"
+       href="#">
+        Les plus populaires 
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu">
+  <li><a href="#">Dernier jour</a></li>
+  <li><a href="#">Dernière semaine</a></li>
+  <li><a href="#">Dernier mois</a></li>
+  <li><a href="#">Depuis le début</a></li>
+    </ul>
+  </li>    
+</ul>
+  </div>
+</div>
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav">
+      <li><a href="#">Nouveau</a></li>
+      <li class="divider-vertical"></li>
+      <li class=disabled"><a href="#">Les plus populaires</a></li>
+  <li class="active"><a href="#">Jour</a></li>
+  <li><a href="#">Semaine</a></li>
+  <li><a href="#">Mois</a></li>
+  <li><a href="#">Tout</a></li>
+    </ul>
+  </li>    
+</ul>
+  </div>
+</div>
+              <div style="margin-top:-20px;" class="grosseEstidColonne" >
                 <div class="top-main-col" >
 
 <form class="form-inline" style="margin-top:10px;margin-left: 10px;{% if not search %}display: none;{% endif %}" method="get" action="{% url punns.views.search %}">
@@ -107,9 +145,6 @@
   <button type="submit" class="btn">&nbsp;&nbsp;&nbsp;<i class="icon-search"></i>&nbsp;&nbsp;&nbsp;</button>
 </form>
 
-                  <div class="top_social" style="float: right; {% if search %}display: none;{% endif %}">
-                    <a href="{{ user.userprofile.facebook_link }}">AIMEZ-NOUS<img style="padding-bottom:5px;" src="{{ STATIC_URL }}img/facebook.png"></a><a href="{{ user.userprofile.twitter_link }}">SUIVEZ-NOUS<img style="padding-bottom:5px;" src="{{ STATIC_URL }}img/twitter.png"></a>
-                  </div>
                 </div>
 {% for punn in punns %}
                 <div class="thumbnailsMAIN">
@@ -164,5 +199,6 @@
     </div><!-- /container -->
 {% endif %}
 {% endblock %}
+<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
   </body>
 </html>
