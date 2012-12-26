@@ -19,28 +19,27 @@
     <meta name="twitter:image" content="http://{{ site.domain }}{{ STATIC_URL }}img/avatar.png">
 {% endblock %}
 {% block javascript %}
-  {% if is_mobile %}
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <!-- Changer le loading des pages en ajax. -->
+    <script>
+      $(document).bind("mobileinit", function () {
+        $.mobile.ajaxEnabled = false;
+      });
+    </script>
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-  {% else %}
-    <!-- Le jQuery -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-  {% endif %}
 {% endblock %}
 {% block css %}
-  {% if is_mobile %}
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-  {% else %}
     <!-- Le styles -->
     {% compress css %}
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
     {% endcompress %}
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-  {% endif %}
 {% endblock %}
 {% block additional_css %}
     <style>
@@ -78,8 +77,7 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 {% block container %}
-{% if is_mobile %}
-    <div data-role="page">
+    <div class="visible-phone" data-role="page">
 {% include "mobile-header.html" %}
       <div data-role="content" style="margin-top:-15px;background:#000;">	
 {% for punn in punns %}
@@ -92,10 +90,8 @@
       </div><!-- /content-->
 {% include "mobile-header.html" %}
     </div><!-- /page --> 
-{% else %}
 {% include "topmenu.html" %}
-    <div class="container" style="margin-top:35px;">
-
+    <div class="container hidden-phone" style="margin-top:35px;">
       <div class="row">
         <div class="span12" style="width: 1170px;">
           <div class="row ">
@@ -197,7 +193,6 @@
         </div>
       </div>
     </div><!-- /container -->
-{% endif %}
 {% endblock %}
 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
   </body>
