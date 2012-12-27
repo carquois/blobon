@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 import re
 import markdown
 import urllib2
 from urlparse import urlparse
 from cgi import parse_qs
+
 
 from accounts.models import UserProfile, UserForm, UserProfileForm
 from comments.models import Comment
@@ -71,6 +73,34 @@ def search(request):
                                   context_instance=RequestContext(request))
       else:
         return HttpResponseRedirect('http://%s/' % site.domain)
+
+def top(request):
+      site_description = settings.MAIN_SITE_DESCRIPTION
+      site = get_current_site(request)
+      if 't' in request.GET and request.GET['t']:
+        t = request.GET['t']
+        if t == "day":
+          t = "day"
+          punns = paginate(request,
+                           Punn.objects.filter(status='P').filter(pub_date__gte=datetime.date.today()).order_by('-views'),
+                           20)
+          return render_to_response('top.html',
+                                    {'site_description': site_description,
+                                     'punns': punns, 'site': site, 't': t},
+                                    context_instance=RequestContext(request))
+
+        else:
+          return HttpResponse("get %s" % request.GET['t'])
+
+      else:
+        t = "all"
+        punns = paginate(request,
+                         Punn.objects.filter(status='P').order_by('-views'),
+                         20)
+        return render_to_response('top.html',
+                                  {'site_description': site_description,
+                                   'punns': punns, 'site': site, 't': t},
+                                  context_instance=RequestContext(request))
 
 def random(request):
       user = UserProfile.objects.get(pk=3)
