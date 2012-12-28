@@ -11,12 +11,38 @@
     <meta name="twitter:url" content="{{ url }}">
     <meta name="twitter:title" content="{{ punn.title }}">
     <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}">
+<style>
+
+.social-btn{
+  width: 259px;
+  height: 72px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  background:url('{{ STATIC_URL }}img/social-sprite.gif');
+}
+.fb {
+  background-position: 0 0;
+}
+.tw {
+  background-position: 0 -216px;
+}
+.fb:active {
+  background-position: 0 -144px;
+}
+.tw:active {
+  background-position: 0 -360px;
+}
+</style>
+
+
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
 {% block navbar %}
 {% endblock %}
 {% block mobile %}
-    <div class="visible-phone" data-role="page" style="background: #000;">
+    <div class="visible-phone" data-role="page" id="post" style="background: #000;">
       <div data-role="header">
         <a href="{{ prev_punn.get_absolute_url }}" data-icon="arrow-l">Prev</a>
         <h1><a href="http://{{ site.domain }}"><img src="{{ STATIC_URL }}img/cdclogo.png" alt="Check Donc Ça" width="120px;" /></a></h1>
@@ -26,7 +52,27 @@
         <p style="color: #DDDDD1;">{{ punn.title }}</p>
         <a href="{{ next_punn.get_absolute_url }}"><img src="{{ MEDIA_URL }}{{ punn.pic }}" width="100%" /></a>
       </div><!-- /content -->
+      <div data-role="footer" class="ui-bar">
+        <p><a href="#share" data-icon="plus" data-role="button">{% trans "Partager" %}</a></p>
+      </div><!-- /footer -->
     </div><!-- /page -->
+    <div data-role="page" id="share" data-theme="c">
+      <div data-role="header" date-theme="c">
+        <h1>{% trans "Partagez sur :" %} </h1>
+      </div><!-- /header -->
+      <div data-role="content" data-theme="c">	
+        <a href="http://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank">
+          <div class="social-btn fb"></div>
+        </a>
+        <a href="https://twitter.com/intent/tweet?text={{ punn.title|iriencode }}&url={{ url|iriencode }}" target="_blank">
+          <div class="social-btn tw"></div>
+        </a>
+        <p><a href="#post" data-role="button">{% trans "Retour à :" %} {{ punn.title }}</a></p>
+      </div><!-- /content -->
+    </div><!-- /page share -->
+
+
+
 {% endblock %}
 {% block content %}
     <div class="hidden-phone container" style="margin-top:35px;">
