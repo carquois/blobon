@@ -127,12 +127,6 @@
 {% endblock %}
 {% block content %}
               <div style="margin-top:-20px;" class="grosseEstidColonne" >
-                <div class="top-main-col" >
-                  <form class="form-inline" style="margin-top:10px;margin-left: 10px;{% if not search %}display: none;{% endif %}" method="get" action="{% url punns.views.search %}">
-                    <input name="q" style="height: 30px;width: 640px;" type="text" class="input-xxlarge" value="{{ query }}">
-                    <button type="submit" class="btn">&nbsp;&nbsp;&nbsp;<i class="icon-search"></i>&nbsp;&nbsp;&nbsp;</button>
-                  </form>
-                </div>
 {% for punn in punns %}
                 <div class="thumbnailsMAIN">
       	          <a href="{{ punn.get_absolute_url }}">
@@ -185,6 +179,6 @@
       </div>
     </div><!-- /container -->
 {% endblock %}
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
+  <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
   </body>
 </html>

@@ -70,9 +70,9 @@ def search(request):
         punns = paginate(request,
                          Punn.objects.filter(title__icontains=q).filter(status='P').filter(author=user).order_by('-pub_date'),
                          20)
-        return render_to_response('base.html',
+        return render_to_response('search.html',
                                   {'site_description': site_description, 'query': q,
-                                   'punns': punns, 'site': site, 'search': True},
+                                   'punns': punns, 'site': site},
                                   context_instance=RequestContext(request))
       else:
         return HttpResponseRedirect('http://%s/' % site.domain)

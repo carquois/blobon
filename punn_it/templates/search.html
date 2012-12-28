@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n thumbnail %}
+{% block navbar %}
+{% endblock %}
+{% block title %}{% trans 'Recherche' %}{% endblock %}
+{% block content %}
+              <div class="grosseEstidColonne" >
+                <div class="top-main-col" >
+                  <form class="form-inline" style="margin-top:10px;margin-left: 10px;" method="get" action="{% url punns.views.search %}">
+                    <input name="q" style="height: 30px;width: 640px;" type="text" class="input-xxlarge" value="{{ query }}">
+                    <button type="submit" class="btn">&nbsp;&nbsp;&nbsp;<i class="icon-search"></i>&nbsp;&nbsp;&nbsp;</button>
+                  </form>
+                </div>
+{% for punn in punns %}
+                <div class="thumbnailsMAIN">
+                  <a href="{{ punn.get_absolute_url }}">
+                    <div class="itemPhoto">
+                    {% thumbnail punn.pic "157x192" crop="center" as im %}
+                      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
+                    {% endthumbnail %}
+                    </div>
+                    <div class="itemDesc">
+
+                      {{ punn.title|truncatechars:60 }}
+                    </div>
+                  </a>
+                </div>
+{% endfor %}
+
+                <ul class="pager span7" style="margin-left:50px;">
+{% if punns.has_previous %}
+                  <li class="previous">
+                    <a href="?page={{ punns.previous_page_number }}" rel="nofollow">&larr; {% trans 'Prev' %}</a>
+                  </li>
+{% else %}
+                  <li class="previous disabled">
+                    <a href="#">&larr; {% trans 'Prev' %}</a>
+                  </li>
+{% endif %}
+{% if punns.has_next %}
+                  <li class="next">
+                    <a href="?page={{ punns.next_page_number }}" rel="nofollow">{% trans 'Next' %} &rarr;</a>
+                  </li>
+{% else %}
+                  <li class="next disabled">
+                    <a href="#">{% trans 'Next' %} &rarr;</a>
+                  </li>
+{% endif %}
+                </ul>
+                <div style="clear:both"></div>
+
+              </div>
+            </div>
+            <div class="span4" style="margin-left: 25px;" >
+              <div class="box-right-wrap">
+
+{% include "blocpub.html" %}
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /container -->
+{% endblock %}
+
