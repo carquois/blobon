@@ -74,33 +74,25 @@ def search(request):
       else:
         return HttpResponseRedirect('http://%s/' % site.domain)
 
-def top(request):
+def today(request):
       site_description = settings.MAIN_SITE_DESCRIPTION
       site = get_current_site(request)
-      if 't' in request.GET and request.GET['t']:
-        t = request.GET['t']
-        if t == "day":
-          t = "day"
-          punns = paginate(request,
-                           Punn.objects.filter(status='P').filter(pub_date__gte=datetime.date.today()).order_by('-views'),
-                           20)
-          return render_to_response('top.html',
-                                    {'site_description': site_description,
-                                     'punns': punns, 'site': site, 't': t},
-                                    context_instance=RequestContext(request))
+      punns = paginate(request,
+                       Punn.objects.filter(status='P').filter(pub_date__gte=datetime.date.today()).order_by('-views'),
+                       20)
+      return render_to_response('top.html',
+                                {'site_description': site_description,
+                                 'punns': punns, 'site': site, 't': 'today'},
+                                context_instance=RequestContext(request))
 
-        else:
-          return HttpResponse("get %s" % request.GET['t'])
+def week(request):
+     return HttpResponse("Week")
 
-      else:
-        t = "all"
-        punns = paginate(request,
-                         Punn.objects.filter(status='P').order_by('-views'),
-                         20)
-        return render_to_response('top.html',
-                                  {'site_description': site_description,
-                                   'punns': punns, 'site': site, 't': t},
-                                  context_instance=RequestContext(request))
+def month(request):
+     return HttpResponse("Month")
+
+def top(request):
+     return HttpResponse("Top")
 
 def random(request):
       user = UserProfile.objects.get(pk=3)
