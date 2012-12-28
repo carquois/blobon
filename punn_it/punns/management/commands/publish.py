@@ -1,11 +1,11 @@
+from datetime import datetime
+import random
+
 from accounts.models import UserProfile
 from punns.models import Punn
 
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
-
-import random
-
 
 def publish(frequency):
   for u in UserProfile.objects.all().distinct():
@@ -14,7 +14,10 @@ def publish(frequency):
       if p.count() > 0:
         e = Punn.objects.get(id=p[random.randrange(0,p.count())].pk)
         e.status = 'P'
+        e.pub_date = datetime.now()
         e.save()
+        print e
+        print e.id
 
 class Command(BaseCommand):
   args = '<frequency frequency ...>'
