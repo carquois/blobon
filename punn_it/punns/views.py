@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+from datetime import date, timedelta
 import re
 import markdown
 import urllib2
@@ -31,6 +32,7 @@ from django.db.models import Count
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import redirect, render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.utils import timezone
 from django.views.decorators.cache import cache_page
 
 def index(request):
@@ -86,13 +88,38 @@ def today(request):
                                 context_instance=RequestContext(request))
 
 def week(request):
-     return HttpResponse("Week")
+      site_description = settings.MAIN_SITE_DESCRIPTION
+      site = get_current_site(request)
+      punns = paginate(request,
+                       Punn.objects.filter(status='P').filter(pub_date__range=(datetime.date.today() - timedelta(days=7) , datetime.date.today())).order_by('-views'),
+                       20)
+      return render_to_response('top.html',
+                                {'site_description': site_description,
+                                 'punns': punns, 'site': site, 't': 'week'},
+                                context_instance=RequestContext(request))
 
 def month(request):
-     return HttpResponse("Month")
+      site_description = settings.MAIN_SITE_DESCRIPTION
+      site = get_current_site(request)
+      punns = paginate(request,
+                       Punn.objects.filter(status='P').filter(pub_date__range=(datetime.date.today() - timedelta(days=30) , datetime.date.today())).order_by('-views'),
+                       20)
+      return render_to_response('top.html',
+                                {'site_description': site_description,
+                                 'punns': punns, 'site': site, 't': 'month'},
+                                context_instance=RequestContext(request))
 
 def top(request):
-     return HttpResponse("Top")
+      site_description = settings.MAIN_SITE_DESCRIPTION
+      site = get_current_site(request)
+      punns = paginate(request,
+                       Punn.objects.filter(status='P').order_by('-views'),
+                       20)
+      return render_to_response('top.html',
+                                {'site_description': site_description,
+                                 'punns': punns, 'site': site, 't': 'all'},
+                                context_instance=RequestContext(request))
+
 
 def random(request):
       user = UserProfile.objects.get(pk=3)
