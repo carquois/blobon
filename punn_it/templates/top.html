@@ -1,14 +1,19 @@
 {% extends "base.html" %}
-
-{% block title %}Create an account{% endblock %}
-
-{% block content %}
-
-<ul>
-  <li>
-   <a href="{% url socialauth_begin 'twitter' %}">Enter using Twitter</a>
-   </li>
-</ul>
+{% load i18n thumbnail %}
+{% block navbar %}
+              <div class="navbar">
+                <div class="navbar-inner">
+                  <ul class="nav">
+                    <li><a href="{% url punns.views.index %}">{% trans 'Nouveau' %}</a></li>
+                    <li class="divider-vertical"></li>
+                    <li class="disabled"><a>{% trans 'Les plus populaires' %}</a></li>
+                    <li {% if t == "today" %}class="active"{% endif %}><a href="{% url punns.views.today %}">{% trans 'Jour' %}</a></li>
+                    <li {% if t == "week" %}class="active"{% endif %}><a href="{% url punns.views.week %}">{% trans 'Semaine' %}</a></li>
+                    <li {% if t == "month" %}class="active"{% endif %}><a href="{% url punns.views.month %}">{% trans 'Mois' %}</a></li>
+                    <li {% if t == "all" %}class="active"{% endif %}><a href="{% url punns.views.top %}">{% trans 'Tout' %}</a></li>
+                  </ul>
+                </div>
+              </div>
 
 {% endblock %}
-
+{% block title %}{% trans 'Les plus populaires' %}{% endblock %}
