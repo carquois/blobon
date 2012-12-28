@@ -66,8 +66,9 @@ def search(request):
       site = get_current_site(request)
       if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
+        user = UserProfile.objects.get(pk=3)
         punns = paginate(request,
-                         Punn.objects.filter(title__icontains=q).filter(status='P').order_by('-pub_date'),
+                         Punn.objects.filter(title__icontains=q).filter(status='P').filter(author=user).order_by('-pub_date'),
                          20)
         return render_to_response('base.html',
                                   {'site_description': site_description, 'query': q,
