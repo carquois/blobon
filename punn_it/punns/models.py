@@ -50,7 +50,7 @@ class Punn(models.Model):
     tags = models.ManyToManyField(Tags)
     #Datetime infos
     created = models.DateTimeField(auto_now_add = True)
-    pub_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
+    pub_date = models.DateTimeField(null=True, blank=True)
     #Media
     pic = ImageField(upload_to=get_file_path, null=True, blank=True)
     def __unicode__(self):
