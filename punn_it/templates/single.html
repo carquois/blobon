@@ -15,19 +15,20 @@
 {% block title %}{{ punn.title }}{% endblock %}
 {% block navbar %}
 {% endblock %}
-{% block content %}
+{% block mobile %}
     <div class="visible-phone" data-role="page" style="background: #000;">
       <div data-role="header">
         <a href="{{ prev_punn.get_absolute_url }}" data-icon="arrow-l">Prev</a>
         <h1><a href="http://{{ site.domain }}"><img src="{{ STATIC_URL }}img/cdclogo.png" alt="Check Donc Ça" width="120px;" /></a></h1>
         <a href="{{ next_punn.get_absolute_url }}" data-icon="arrow-r" data-iconpos="right" >Next</a>
       </div><!-- /header -->
-      <div data-role="content" style="margin-top:-10px;">	
+      <div data-role="content" style="margin-top:-10px;">
         <p style="color: #DDDDD1;">{{ punn.title }}</p>
         <a href="{{ next_punn.get_absolute_url }}"><img src="{{ MEDIA_URL }}{{ punn.pic }}" width="100%" /></a>
       </div><!-- /content -->
     </div><!-- /page -->
-{% include "topmenu.html" %}
+{% endblock %}
+{% block content %}
     <div class="hidden-phone container" style="margin-top:35px;">
       <div class="row">
         <div class="span12" style="width: 1170px;">
@@ -76,6 +77,7 @@
                   </div>
                   <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f31a102440808e2"></script>
                 </div>
+                <div style="padding-left:25px;" class="fb-comments" data-href="{{ url }}" data-num-posts="6" data-width="728"></div>
                 <div style="text-align:center;padding-top:-30px;">
 {% include "leaderboard.html" %}
                 </div>
