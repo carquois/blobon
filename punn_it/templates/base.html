@@ -106,7 +106,7 @@
               <div class="navbar">
                 <div class="navbar-inner">
                   <ul class="nav">
-                    <li class="active"><a href="#">{% trans 'Nouveau' %}</a></li>
+                    <li class="active"><a href="{% url punns.views.index %}">{% trans 'Nouveau' %}</a></li>
                     <li class="divider-vertical"></li>
                     <li class="dropdown">
                       <a class="dropdown-toggle"
@@ -116,23 +116,23 @@
                         <b class="caret"></b>
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a href="#">Dernier jour</a></li>
-                        <li><a href="#">Dernière semaine</a></li>
-                        <li><a href="#">Dernier mois</a></li>
-                        <li><a href="#">Depuis le début</a></li>
+                        <li><a href="{% url punns.views.today %}">{% trans "Aujourd'hui" %}</a></li>
+                        <li><a href="{% url punns.views.week %}">{% trans 'Dernière semaine' %}</a></li>
+                        <li><a href="{% url punns.views.month %}">{% trans 'Dernier mois' %}</a></li>
+                        <li><a href="{% url punns.views.top %}">{% trans 'Depuis le début' %}</a></li>
                       </ul>
                     </li>    
                   </ul>
                 </div>
               </div>
+{% endblock %}
+{% block content %}
               <div style="margin-top:-20px;" class="grosseEstidColonne" >
                 <div class="top-main-col" >
-
-<form class="form-inline" style="margin-top:10px;margin-left: 10px;{% if not search %}display: none;{% endif %}" method="get" action="{% url punns.views.search %}">
-  <input name="q" style="height: 30px;width: 640px;" type="text" class="input-xxlarge" value="{{ query }}">
-  <button type="submit" class="btn">&nbsp;&nbsp;&nbsp;<i class="icon-search"></i>&nbsp;&nbsp;&nbsp;</button>
-</form>
-
+                  <form class="form-inline" style="margin-top:10px;margin-left: 10px;{% if not search %}display: none;{% endif %}" method="get" action="{% url punns.views.search %}">
+                    <input name="q" style="height: 30px;width: 640px;" type="text" class="input-xxlarge" value="{{ query }}">
+                    <button type="submit" class="btn">&nbsp;&nbsp;&nbsp;<i class="icon-search"></i>&nbsp;&nbsp;&nbsp;</button>
+                  </form>
                 </div>
 {% for punn in punns %}
                 <div class="thumbnailsMAIN">
