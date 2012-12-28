@@ -152,7 +152,7 @@
                 <ul class="pager span7" style="margin-left:50px;">
 {% if punns.has_previous %}
                   <li class="previous">
-                    <a href="?page={{ punns.previous_page_number }}">&larr; {% trans 'Prev' %}</a>
+                    <a href="?page={{ punns.previous_page_number }}" rel="nofollow">&larr; {% trans 'Prev' %}</a>
                   </li>
 {% else %}
                   <li class="previous disabled">
@@ -161,7 +161,7 @@
 {% endif %}
 {% if punns.has_next %}
                   <li class="next">
-                    <a href="?page={{ punns.next_page_number }}">{% trans 'Next' %} &rarr;</a>
+                    <a href="?page={{ punns.next_page_number }}" rel="nofollow">{% trans 'Next' %} &rarr;</a>
                   </li>
 {% else %}
                   <li class="next disabled">
