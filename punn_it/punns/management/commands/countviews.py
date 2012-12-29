@@ -30,7 +30,7 @@ class Command(BaseCommand):
   def handle(self, *args, **options):
     service = sample_utils.initialize_service()
     user = UserProfile.objects.get(pk=3)
-    for p in Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date')[:4000]:
+    for p in Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date')[:5500]:
       try:
         print "Id : %s" % p.id
         results = get_api_query(service, p.base62id).execute()
