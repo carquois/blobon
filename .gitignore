@@ -14,5 +14,6 @@ share/*
 .Python
 punn_it/local_settings.py
 static/*
+analytics.dat 
 distribute-0.6.10.tar.gz
 .DS_Store
