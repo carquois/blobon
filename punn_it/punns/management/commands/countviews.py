@@ -45,15 +45,14 @@ def countviews(number_to_count):
         # Handle Auth errors.
         print ('The credentials have been revoked or expired, please re-run '
                'the application to re-authorize')
-    self.stdout.write('Success')
 
 class Command(BaseCommand):
   args = '<number_to_count number_to_count ...>'
   help = 'Count the views'
 
   def handle(self, *args, **options):
-    for frequency in args:
-      if frequency == '1':
-        countviews(1)
-      if frequency == '5500':
+    for number_to_count in args:
+      if number_to_count == '100':
+        countviews(100)
+      if number_to_count == '5500':
         countviews(5500)
