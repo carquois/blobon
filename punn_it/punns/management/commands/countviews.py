@@ -23,14 +23,10 @@ def get_api_query(service, path):
       filters='ga:pagePath==/p/%s/' % path,
       max_results='1')
 
-
-class Command(BaseCommand):
-  help = 'Count the views'
-
-  def handle(self, *args, **options):
+def countviews(number_to_count):
     service = sample_utils.initialize_service()
     user = UserProfile.objects.get(pk=3)
-    for p in Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date')[:5500]:
+    for p in Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date')[:number_to_count]:
       try:
         print "Id : %s" % p.id
         results = get_api_query(service, p.base62id).execute()
@@ -50,3 +46,14 @@ class Command(BaseCommand):
         print ('The credentials have been revoked or expired, please re-run '
                'the application to re-authorize')
     self.stdout.write('Success')
+
+class Command(BaseCommand):
+  args = '<number_to_count number_to_count ...>'
+  help = 'Count the views'
+
+  def handle(self, *args, **options):
+    for frequency in args:
+      if frequency == '1':
+        countviews(1)
+      if frequency == '5500':
+        countviews(5500)
