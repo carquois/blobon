@@ -24,31 +24,26 @@ def get_api_query(service, path):
       start_date='2010-10-01',
       end_date=str(datetime.date.today()),
       metrics='ga:pageviews',
-      filters='ga:pagePath==/p/%s/' % path,
+      filters='ga:pagePath==/%s' % path,
       max_results='1')
 
-def countviews(number_to_count):
+def countviews(path):
     service = sample_utils.initialize_service()
-    user = UserProfile.objects.get(pk=3)
-    for p in Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date')[:number_to_count]:
-      try:
-        print "Id : %s" % p.id
-        results = get_api_query(service, p.base62id).execute()
-        for row in results.get('rows'):
-          p.views = row[0]
-          print "Views : %s" % p.views
-          p.save()
-      except TypeError, error:
-        # Handle errors in constructing a query.
-        print ('There was an error in constructing your query : %s' % error)
-      except HttpError, error:
-        # Handle API errors.
-        print ('Arg, there was an API error : %s : %s' %
-               (error.resp.status, error._get_reason()))
-      except AccessTokenRefreshError:
-        # Handle Auth errors.
-        print ('The credentials have been revoked or expired, please re-run '
-               'the application to re-authorize')
+    try:
+      results = get_api_query(service, path).execute()
+      for row in results.get('rows'):
+        print row[0]
+    except TypeError, error:
+      # Handle errors in constructing a query.
+      print ('There was an error in constructing your query : %s' % error)
+    except HttpError, error:
+      # Handle API errors.
+      print ('Arg, there was an API error : %s : %s' %
+             (error.resp.status, error._get_reason()))
+    except AccessTokenRefreshError:
+      # Handle Auth errors.
+      print ('The credentials have been revoked or expired, please re-run '
+             'the application to re-authorize')
 
 class Command(BaseCommand):
   help = 'Import the articles'
@@ -56,7 +51,14 @@ class Command(BaseCommand):
   def handle(self, *args, **options):
     dom = minidom.parse("gab.xml")
     for node in dom.getElementsByTagName('item'):
+      print "Title : "
       print node.getElementsByTagName('title')[0].firstChild.data
+      print "Wordpress id : " 
+      print node.getElementsByTagName('wp:post_id')[0].firstChild.data
+      print "Page views : " 
+      countviews(node.getElementsByTagName('wp:post_id')[0].firstChild.data)
+      print "Post date : " 
+      print node.getElementsByTagName('wp:post_date')[0].firstChild.data
       for meta in node.getElementsByTagName('wp:postmeta'):
         if meta.getElementsByTagName('wp:meta_key')[0].firstChild.data == "via":
           try: 
