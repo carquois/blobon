@@ -1,60 +1,25 @@
 {% extends "base.html" %}
-
 {% load i18n thumbnail %}
-
-{% block content %}
-
-{% if is_mobile %}
-    est mobile
-{% else %}
-    pas mobile
-{% endif %}
-
-                <div class="top-main-col" >
-                  <div class="top_social" style="float: right">
-                    <a href="{{ user.userprofile.facebook_link }}">AIMEZ-NOUS<img style="padding-bottom:5px;" src="{{ STATIC_URL }}img/facebook.png"></a><a href="{{ user.userprofile.twitter_link }}">SUIVEZ-NOUS<img style="padding-bottom:5px;" src="{{ STATIC_URL }}img/twitter.png"></a>
-                  </div>
-                </div>
-{% for punn in punns %}
-                <div class="thumbnailsMAIN">
-      	          <a href="{{ punn.get_absolute_url }}">
-                    <div class="itemPhoto">
-                    {% thumbnail punn.pic "157x192" crop="center" as im %}
-                      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
-                    {% endthumbnail %}
-                    </div>
-                    <div class="itemDesc">
-
-                      {{ punn.title|truncatechars:60 }}
-                    </div>
-                  </a>
-                </div>
-{% endfor %}
-                
-                <ul class="pager span7" style="margin-left:50px;">
-{% if punns.has_previous %}
-                  <li class="previous">
-                    <a href="?page={{ punns.previous_page_number }}">&larr; {% trans 'Prev' %}</a>
-                  </li>
-{% else %}
-                  <li class="previous disabled">
-                    <a href="#">&larr; {% trans 'Prev' %}</a>
-                  </li>
-{% endif %}
-{% if punns.has_next %}
-                  <li class="next">
-                    <a href="?page={{ punns.next_page_number }}">{% trans 'Next' %} &rarr;</a>
-                  </li>
-{% else %}
-                  <li class="next disabled">
-                    <a href="#">{% trans 'Next' %} &rarr;</a>
-                  </li>
-{% endif %}
-                </ul>
-                <div style="clear:both"></div>
+{% block open-graphs %}
+    <!-- Le open graphs tags -->
+    <meta property="og:title" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}" />
+    <meta property="og:url" content="{{ url }}" />
+    <meta property="og:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ user.userprofile.avatar }}" />
+    <meta property="og:site_name" content="{{ user.first_name }} {{ user.last_name }}" />
+    <!-- Le twitter cards -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="{{ url }}">
+    <meta name="twitter:title" content="{{ user.first_name }} {{ user.last_name }} {% trans 'sur' %} {{ site.name }}">
+    <meta name="twitter:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
+    <meta name="twitter:description" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}">
 {% endblock %}
-{% block sidebar %}
-
-{% include "blocpub.html" %}
-
+{% block navbar %}
+              <div class="navbar">
+                <div class="navbar-inner">
+                  <ul class="nav">
+                    <li class="active"><a class="brand" href="#">{{ user.first_name }} {{ user.last_name }}</a></a></li>
+                    <li class="divider-vertical"></li>
+                  </ul>
+                </div>
+              </div>
 {% endblock %}

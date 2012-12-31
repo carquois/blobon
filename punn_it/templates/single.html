@@ -70,9 +70,6 @@
         <p><a href="#post" data-role="button">{% trans "Retour à :" %} {{ punn.title }}</a></p>
       </div><!-- /content -->
     </div><!-- /page share -->
-
-
-
 {% endblock %}
 {% block content %}
               <div class="grosseEstidColonne" >
@@ -96,29 +93,45 @@
                     {{ punn.title }}
                   </div>
                 </div>
-                <div style="padding-top:10px;text-align:center;" class="main-content" >
+                <div style="padding-top:10px;text-align:center;margin-bottom:20px" class="main-content" >
 {% if punn.youtube_id %}
                   <iframe width="640" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
 {% else %}
                   <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style="max-width:728px;" src="{{ MEDIA_URL }}{{ punn.pic }}" /></a>
 {% endif %}
                 </div>
-                <div style="padding-top:10px;">
-{% if punn.source %}
-                  <div style="float:left;padding-left:20px;padding-bottom:15px;padding-top:5px;">
-                    <a style="margin-bottom: 12px;margin-right: 10px;" href="{{ punn.source }}" class="btn small" rel="popover" title="Source" data-content="{{ punn.source }}" target="_blank">Source</a>
-                    <div class="fb-like" data-href="{{ url }}" data-layout="button_count" data-send="false" data-width="450" data-show-faces="false"></div>
+                <div class="row" style="margin-left:30px;">
+                  <div class="addthis_toolbox addthis_default_style ">
+                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                    <a style="padding-left:20px;" class="addthis_button_tweet"></a>
+                    <a class="addthis_button_pinterest_pinit"></a>
+                    <a style="padding-left:10px;" class="addthis_button_google_plusone" g:plusone:size="medium"></a> 
+                    <a class="addthis_counter addthis_pill_style"></a>
                   </div>
-{% endif %}
-                  <div style="padding-left:605px;" class="addthis_toolbox addthis_default_style addthis_32x32_style">
-                    <a class="addthis_button_twitter"></a>
-                    <a class="addthis_button_facebook"></a>
-                    <a class="addthis_button_pinterest_share"></a>
-                    <a class="addthis_button_compact"></a>
-                  </div>
-                  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f31a102440808e2"></script>
+                  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f31a102440808e2"></script>
                 </div>
-                <div style="padding-left:25px;" class="fb-comments" data-href="{{ url }}" data-num-posts="6" data-width="728"></div>
+                <div class="row" style="margin-left:1px;margin-top:20px;">
+                  <div class="span1">
+                    <a href="/{{ user.username }}/">
+                    {% thumbnail user.userprofile.avatar "70" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ userprofile.description }}">
+                    {% endthumbnail %}
+                    </a>
+                  </div>
+                  <div class="span4" style="text-align:left;">
+                    <p style="margin: 0 0 4px;">{{ user.first_name }} {{ user.last_name }}</p>
+                    <p style="margin: 0 0 4px;"><a href="/{{ user.username }}/">@{{ user.username }}</a></p>
+                    <p style="margin: 0 0 4px;color:gray;">
+                      {% trans 'Publié le' %} {{ punn.pub_date|date:"SHORT_DATE_FORMAT" }} {% if punn.source %}via <a href="{{ punn.source }}" target="_blank">(Source)</a>{% endif %}
+                    </p>
+                  </div>
+                  <div class="span2" style="float:right;text-align:right;">
+                    <p style="margin-right:30px;margin-bottom:4px;"><strong>2097</strong></p>
+                    <p style="margin-right:30px;margin-bottom:4px;color:gray;">{% trans 'vues' %}</p>
+                    <p style="margin-right:30px;margin-bottom:4px;"><i class="icon-flag"></i> <small><a href="mailto:gab@checkdonc.ca">{% trans 'Rapporter' %}</a></small></p>
+                  </div>
+                </div>
+                <div style="margin-top:20px;padding-left:25px;" class="fb-comments" data-href="{{ url }}" data-num-posts="6" data-width="728"></div>
                 <div style="text-align:center;padding-top:-30px;">
 {% include "leaderboard.html" %}
                 </div>
