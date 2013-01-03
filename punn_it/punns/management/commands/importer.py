@@ -37,6 +37,7 @@ def countviews(path):
       results = get_api_query(service, path).execute()
       for row in results.get('rows'):
         print row[0]
+      return row[0] 
     except TypeError, error:
       # Handle errors in constructing a query.
       print ('There was an error in constructing your query : %s' % error)
@@ -80,13 +81,19 @@ class Command(BaseCommand):
             prefix = new_punn.base62id
             filename = "%s.%s" % (prefix, ext)
             new_punn.pic.save(filename, File(img_temp))
-            #new_punn.views = int(countviews(node.getElementsByTagName('wp:post_id')[0].firstChild.data))
+            try:
+              new_punn.views = int(countviews(node.getElementsByTagName('wp:post_id')[0].firstChild.data))
+              new_punn.save() 
+            except TypeError:
+              new_punn.views = 0
+              print "TypeError, views = 0"
+            if meta.getElementsByTagName('wp:meta_key')[0].firstChild.data == "via":
+              try: 
+                print meta.getElementsByTagName('wp:meta_value')[0].firstChild.data
+                new_punn.source = meta.getElementsByTagName('wp:meta_value')[0].firstChild.data
+              except AttributeError:
+                print "Pas de source, pas grave"
             new_punn.save() 
           except AttributeError:
             print "Pas d'image, on laisse faire"
-        if meta.getElementsByTagName('wp:meta_key')[0].firstChild.data == "via":
-          try: 
-            print meta.getElementsByTagName('wp:meta_value')[0].firstChild.data
-          except AttributeError:
-            print "Pas de source, pas grave"
 
