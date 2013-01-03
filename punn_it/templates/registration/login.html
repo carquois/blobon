@@ -2,10 +2,10 @@
 {% load i18n %}
 {% load url from future %}
 
-{% block title %}{% trans 'Sign in to Punn.it' %}{% endblock %}
-{% block container %}
+{% block title %}{% trans "Veuillez vous connecter" %}{% endblock %}
+{% block content %}
 {% if form.errors %}
-    {% trans 'Your username and password did not match. Please try again.' %}
+    {% trans "Votre nom d'utilisateur et mot de passe ne correspondent pas. S'il vous plaît essayez de nouveau." %}
 {% endif %}
     <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
         {% csrf_token %}
