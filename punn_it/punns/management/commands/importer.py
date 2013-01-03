@@ -91,6 +91,9 @@ class Command(BaseCommand):
               if meta.getElementsByTagName('wp:meta_key')[0].firstChild.data == "via":
                 new_punn.source = meta.getElementsByTagName('wp:meta_value')[0].firstChild.data
             new_punn.status = 'P'
+            new_punn.pub_date = node.getElementsByTagName('wp:post_date')[0].firstChild.data
+            print "Pub date : "
+            print new_punn.pub_date
             new_punn.save() 
           except AttributeError:
             print "Pas d'image, on laisse faire"
