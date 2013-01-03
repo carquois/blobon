@@ -1,3 +1,6 @@
+from django.core.files import File
+from urlparse import urlparse
+import urllib2
 from httplib2 import Http
 from urllib import urlencode
 import string, os, sys, getopt
@@ -7,6 +10,7 @@ from django.core.management.base import BaseCommand, CommandError
 from punns.models import Punn
 import datetime
 from accounts.models import UserProfile
+from django.core.files.temp import NamedTemporaryFile
 
 import sys
 import sample_utils
@@ -60,22 +64,29 @@ class Command(BaseCommand):
       print "Post date : " 
       print node.getElementsByTagName('wp:post_date')[0].firstChild.data
       for meta in node.getElementsByTagName('wp:postmeta'):
+        if meta.getElementsByTagName('wp:meta_key')[0].firstChild.data == "image":
+          try: 
+            print meta.getElementsByTagName('wp:meta_value')[0].firstChild.data
+            user = User.objects.get(pk=3)
+            new_punn = Punn(author=user, title=node.getElementsByTagName('title')[0].firstChild.data)
+            new_punn.save()
+            print "New punn id"
+            print new_punn.id
+            img_temp = NamedTemporaryFile(delete=True)
+            img_temp.write(urllib2.urlopen(meta.getElementsByTagName('wp:meta_value')[0].firstChild.data).read())
+            img_temp.flush()
+            filename = urlparse(meta.getElementsByTagName('wp:meta_value')[0].firstChild.data).path.split('/')[-1]
+            ext = filename.split('.')[-1]
+            prefix = new_punn.base62id
+            filename = "%s.%s" % (prefix, ext)
+            new_punn.pic.save(filename, File(img_temp))
+            #new_punn.views = int(countviews(node.getElementsByTagName('wp:post_id')[0].firstChild.data))
+            new_punn.save() 
+          except AttributeError:
+            print "Pas d'image, on laisse faire"
         if meta.getElementsByTagName('wp:meta_key')[0].firstChild.data == "via":
           try: 
             print meta.getElementsByTagName('wp:meta_value')[0].firstChild.data
           except AttributeError:
             print "Pas de source, pas grave"
-        if meta.getElementsByTagName('wp:meta_key')[0].firstChild.data == "image":
-          try: 
-            print meta.getElementsByTagName('wp:meta_value')[0].firstChild.data
-          except AttributeError:
-            print "Pas d'image, on laisse faire"
-        #img_temp = NamedTemporaryFile(delete=True)
-        #img_temp.write(urllib2.urlopen(meta.getElementsByTagName('wp:meta_value')[0].firstChild.data).read())
-        #img_temp.flush()
-        #filename = urlparse(meta.getElementsByTagName('wp:meta_value')[0].firstChild.data).path.split('/')[-1]
-        #ext = filename.split('.')[-1]
-        #prefix = new_punn.base62id
-        #filename = "%s.%s" % (prefix, ext)
-        #new_punn.pic.save(filename, File(img_temp))
 
