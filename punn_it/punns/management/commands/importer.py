@@ -87,13 +87,10 @@ class Command(BaseCommand):
             except TypeError:
               new_punn.views = 0
               print "TypeError, views = 0"
-            if meta.getElementsByTagName('wp:meta_key')[0].firstChild.data == "via":
-              try: 
-                print meta.getElementsByTagName('wp:meta_value')[0].firstChild.data
+            for meta in node.getElementsByTagName('wp:postmeta'):
+              if meta.getElementsByTagName('wp:meta_key')[0].firstChild.data == "via":
                 new_punn.source = meta.getElementsByTagName('wp:meta_value')[0].firstChild.data
-              except AttributeError:
-                print "Pas de source, pas grave"
+            new_punn.status = 'P'
             new_punn.save() 
           except AttributeError:
             print "Pas d'image, on laisse faire"
-
