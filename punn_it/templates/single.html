@@ -100,6 +100,9 @@
                   <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style="max-width:728px;" src="{{ MEDIA_URL }}{{ punn.pic }}" /></a>
 {% endif %}
                 </div>
+                <div style="margin-left: 20px;margin-right: 20px;">
+                  {{ content|safe }}
+                </div>
                 <div class="row" style="margin-left:30px;">
                   <div class="addthis_toolbox addthis_default_style ">
                     <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>

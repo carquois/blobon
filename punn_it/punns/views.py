@@ -278,4 +278,4 @@ def paginate(request, list_of_objects, number_of_items):
 #Une fonction pour changer les usernames et les hastags en liens
 def linkify(string):
     string = re.sub(r'(\A|\s)@(\w+)', r'\1[@\2](/\2)', string)
-    return re.sub(r'(\A|\s)#(\w+)', r'\1[#\2](/s/\2)', string)
+    return re.sub(r'(\A|\s)#(\w+)', r'\1[#\2](/s/?q=%23\2)', string)
