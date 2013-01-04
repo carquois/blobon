@@ -10,17 +10,28 @@ body {
 }
 
 .centered {
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -100px;
+  width: 700px;
+  margin: auto;
 }
     </style>
 {% endblock %}
+{% block topmenu %}
+{% endblock %}
+{% block top-content %}
+{% endblock %}
+{% block navbar %}
+{% endblock %}
+{% block content %}
+{% endblock %}
 
 
-{% block container %}
+
+
+
+
+
+
+
  <div class="centered">
     <form action="" method="post">{% csrf_token %}
     {{ form.non_field_errors }}
@@ -53,5 +64,3 @@ body {
         </ul>
     </p>
    </div/ 
-{% endblock %}
-

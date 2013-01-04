@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -12,13 +14,12 @@ def signup(request):
     else:
       return render_to_response("registration/signup.html", 
                                 context_instance=RequestContext(request))
-@login_required
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
            new_user = form.save()
-           return HttpResponseRedirect(reverse('accounts.views.edit_profile'))
+           return HttpResponse("Une page qui explique c'est quoi les étapes astheure")
     else:
        form = UserCreationForm()
     return render_to_response("registration/register.html", {'form': form,}, context_instance=RequestContext(request))
