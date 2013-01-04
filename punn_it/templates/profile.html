@@ -14,12 +14,13 @@
     <meta name="twitter:description" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}">
 {% endblock %}
 {% block navbar %}
-              <div class="navbar">
-                <div class="navbar-inner">
-                  <ul class="nav">
-                    <li class="active"><a class="brand" href="#">{{ user.first_name }} {{ user.last_name }}</a></a></li>
-                    <li class="divider-vertical"></li>
-                  </ul>
-                </div>
+              <div style="background: white;height: 200px;">
+                    {% thumbnail user.userprofile.avatar "70" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ userprofile.description }}">
+                    {% endthumbnail %}
+<p>{{ user.first_name }} {{ user.last_name }}</p>
+<p>@{{ user.username }}</p>
+<p>{{ user.userprofile.description }}</p>
+<p><a href="{{ user.userprofile.domain }}">{{ user.userprofile.domain }}</a></p>
               </div>
 {% endblock %}
