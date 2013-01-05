@@ -76,12 +76,6 @@ def down(request, auth_userid, punnid, karma):
       return dajax.json()
 
 @dajaxice_register
-def changeImage(request, image):
-    dajax = Dajax()
-    dajax.assign('#mainImage','src', image)
-    return dajax.json()
-
-@dajaxice_register
 def loadComments(request, punnid):
     dajax = Dajax()
     punn = Punn.objects.get(pk=int(punnid))
