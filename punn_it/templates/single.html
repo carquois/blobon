@@ -73,6 +73,23 @@
     </div><!-- /page share -->
 {% endblock %}
 {% block content %}
+{% if auth_user %}
+                <script type="text/javascript" charset="utf-8">
+                  function up(data){
+                    Dajaxice.punns.up(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
+                  }
+                  function down(data){
+                    Dajaxice.punns.down(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
+                  }
+                </script>
+                <button id="upbutton" class="btn {% if vote == "U" %}btn-primary{% endif %}" onclick="up();">Up</button>
+                <input type="text" value="{{ karma }}" id="karma" class="input-small">
+                <button id="downbutton" class="btn {% if vote == "D" %}btn-primary{% endif %}" onclick="down();">Down</button>
+{% else %}
+                <a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Up</a>
+                <input type="text" value="{{ karma }}" id="karma" class="input-small">
+                <a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Down</a>
+{% endif %}
               <div class="grosseEstidColonne" >
                 <script>
                   $(document).ready(function () {
@@ -105,31 +122,8 @@
                 <div style="margin-left: 20px;margin-right: 20px;">
                   {{ content|safe }}
                 </div>
+{% endif %}
                 <hr style="border-top: 1px solid lightgray;">
-{% endif %}
-
-{% if auth_user %}
-<script type="text/javascript" charset="utf-8">
-    function up(data){
-        Dajaxice.punns.up(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
-    }
-    function down(data){
-        Dajaxice.punns.down(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
-    }
-</script>
-<button id="upbutton" class="btn {% if vote == "U" %}btn-primary{% endif %}" onclick="up();">Up</button>
-<input type="text" value="{{ karma }}" id="karma" class="input-small">
-<button id="downbutton" class="btn {% if vote == "D" %}btn-primary{% endif %}" onclick="down();">Down</button>
-{% else %}
-<a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Up</a>
-<input type="text" value="{{ karma }}" id="karma" class="input-small">
-<a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Down</a>
-{% endif %}
-
-                <div>
-                </div>
-
-
                 <div class="row" style="margin-left:1px;margin-top:20px;">
                   <div class="span1">
                     <a href="/{{ user.username }}/">
@@ -151,7 +145,28 @@
                     <p style="margin-right:30px;margin-bottom:4px;"><i class="icon-flag"></i> <small><a href="mailto:gab@checkdonc.ca">{% trans 'Rapporter' %}</a></small></p>
                   </div>
                 </div>
-                <div style="text-align:center;padding-top:-30px;">
+                <hr style="border-top: 1px solid lightgray;">
+                <script>
+                  jQuery(function($){
+                    $('#comment-box').focus(function(){
+                      $(this).attr('rows',5);
+                      //$('#comment-submit').(function(){                     
+                      //  $(this).show();
+                      //});
+                    }).blur(function(){
+                      $(this).attr('rows',1);
+                      $("#comment-submit").hide();
+                      return false;
+                    });
+                  }); 
+                </script>
+                <div style="margin-left:20px;margin-right:20px;">
+                  <textarea id="comment-box" rows="1" placeholder="{% trans "Soumettre un commentaire..." %}" style="width:728px;"></textarea>
+                  <div id="comment-buttons">
+                    <button id="comment-submit" type="submit" class="btn btn-primary pull-right">{% trans "Soumettre" %}</button>
+                  </div>
+                </div>
+                <div style="text-align:center;margin-top:25px;">
 {% include "leaderboard.html" %}
                 </div>
               </div>
