@@ -22,15 +22,6 @@ body {
 {% block navbar %}
 {% endblock %}
 {% block content %}
-{% endblock %}
-
-
-
-
-
-
-
-
 
  <div class="centered">
     <form action="" method="post">{% csrf_token %}
@@ -39,6 +30,10 @@ body {
         {{ form.username.errors }}
         {{ form.username.label_tag }}
         {{ form.username }}
+
+        {{ form.email.errors }}
+        {{ form.email.label_tag }}
+        {{ form.email }}
 
         {{ form.password1.errors }}
         {{ form.password1.label_tag }}
@@ -64,3 +59,4 @@ body {
         </ul>
     </p>
    </div/ 
+{% endblock %}
