@@ -35,8 +35,40 @@
 .tw:active {
   background-position: 0 -360px;
 }
-</style>
 
+
+.vote-up-down{
+  width: 56px;
+  height: 60px;
+  background:url('{{ STATIC_URL }}img/sprite.png');
+}
+.up {
+  background-position: -264px 0;
+}
+.up:hover {
+  background-position: -264px -65px;
+}
+.up-on {
+  background-position: -264px -194px;
+}
+.point {
+  width: 56px;
+  height: 52px;
+  background-position: -264px -505px;
+  font-family:"Helvetica", sans-serif;
+  font-size:20px;
+  color:lightgray;
+}
+.down {
+  background-position: -264px -257px;
+}
+.down:hover {
+  background-position: -264px -320px;
+}
+.down-on {
+  background-position: -264px -444px;
+}
+</style>
 
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
@@ -82,14 +114,16 @@
                     Dajaxice.punns.down(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
                   }
                 </script>
-                <button id="upbutton" class="btn {% if vote == "U" %}btn-primary{% endif %}" onclick="up();">Up</button>
-                <input type="text" value="{{ karma }}" id="karma" class="input-small">
-                <button id="downbutton" class="btn {% if vote == "D" %}btn-primary{% endif %}" onclick="down();">Down</button>
-{% else %}
-                <a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Up</a>
-                <input type="text" value="{{ karma }}" id="karma" class="input-small">
-                <a class="btn" href="{% url django.contrib.auth.views.login %}?next={{request.path}}">Down</a>
 {% endif %}
+<div style="float: left;margin-left:-58px;">
+{% if not auth_user %}<a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">{% endif %}
+  <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}" {% if auth_user %}onclick="up();"{% endif %}></div>
+{% if not auth_user %}</a>{% endif %}
+<div class="vote-up-down point"><p style="text-align:center;padding-top:17px;" id="karma">{{ karma }}</p></div>
+{% if not auth_user %}<a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">{% endif %}
+  <div id="downbutton" class="vote-up-down down {% if vote == "D" %} up-down{% endif %}" {% if auth_user %}onclick="down();"{% endif %}></div>
+{% if not auth_user %}</a>{% endif %}
+</div>
               <div class="grosseEstidColonne" >
                 <script>
                   $(document).ready(function () {
