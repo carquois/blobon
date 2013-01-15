@@ -43,30 +43,48 @@
   background:url('{{ STATIC_URL }}img/sprite.png');
 }
 .up {
-  background-position: -264px 0;
+  background-position: -367px -355px;
 }
 .up:hover {
-  background-position: -264px -65px;
+  background-position: -367px -290px;
+}
+.up:active {
+  background-position: -367px -225px;
 }
 .up-on {
-  background-position: -264px -194px;
+  background-position: -308px -355px;
+}
+.up-on:hover {
+  background-position: -308px -290px;
+}
+.up-on:active {
+  background-position: -308px -225px;
 }
 .point {
   width: 56px;
   height: 52px;
-  background-position: -264px -505px;
+  background-position: -309px -620px;
   font-family:"Helvetica", sans-serif;
   font-size:20px;
-  color:lightgray;
+  color:white;
 }
 .down {
-  background-position: -264px -257px;
+  background-position: -367px -425px;
 }
 .down:hover {
-  background-position: -264px -320px;
+  background-position: -367px -490px;
+}
+.down:active {
+  background-position: -367px -555px;
 }
 .down-on {
-  background-position: -264px -444px;
+  background-position: -308px -425px;
+}
+.down-on:hover {
+  background-position: -308px -490px;
+}
+.down-on:active {
+  background-position: -308px -555px;
 }
 </style>
 
@@ -115,7 +133,7 @@
                   }
                 </script>
 {% endif %}
-<div style="float: left;margin-left:-58px;">
+<div style="float: left;margin-left:-57px;margin-top:-1px;">
 {% if not auth_user %}<a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">{% endif %}
   <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}" {% if auth_user %}onclick="up();"{% endif %}></div>
 {% if not auth_user %}</a>{% endif %}
