@@ -14,6 +14,13 @@
                 <input style="height: 25px;" type="text" name="q" class="search-query span3" placeholder="{% trans 'Recherche' %}">
                 <div class="icon-search"></div>
               </form>
+
+<a href="/{{ user.username }}/">
+                    {% thumbnail user.userprofile.avatar "40" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ userprofile.description }}">
+                    {% endthumbnail %}
+                    </a>
+
             </div>
           </div><!--/.nav-collapse -->
         </div>

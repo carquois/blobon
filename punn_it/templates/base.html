@@ -49,6 +49,25 @@
         padding-top: 60px;
         background-color: #D3D3D3!important;
       }
+      .logo {
+        width: 188px;
+        height: 55px;
+        background:url('{{ STATIC_URL }}img/sprite.png');
+        background-position: -253px -665px;
+      }
+      .random {
+        width: 37px;
+        height: 30px;
+        margin-top: 8px;
+        background:url('{{ STATIC_URL }}img/sprite.png');
+        background-position: -260px -220px;
+      }
+      .random:hover {
+        background-position: -260px -250px;
+      }
+      .random:active {
+        background-position: -260px -280px;
+      }
     </style>
 {% endblock %}
     <!-- Le fav and touch icons -->
@@ -86,7 +105,45 @@
     </div><!-- /page --> 
 {% endblock %}
 {% block topmenu %}
-{% include "topmenu.html" %}
+    <div id="top-nav" class="hidden-phone navbar navbar-fixed-top navbar-inverse" style=" max-height:55px;">
+      <div class="navbar-inner" style=" max-height:55px;">
+        <div class="container" style=" max-height:55px;">
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li>
+                <a class="logo" href="http://{{ site.domain }}"></a>
+              </li>
+              <li>
+                <a class="random" href="{% url punns.views.random %}"></a>
+              </li>
+            </ul>
+
+ <ul class="nav pull-right" style="margin-right:75px;">
+{% if auth_user %}
+<li class="divider-vertical"></li>
+<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+{% thumbnail auth_user.userprofile.avatar "30" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ userprofile.description }}">
+                    {% endthumbnail %}
+<b style="margin-top:12px;" class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="{% url django.contrib.auth.views.logout %}">{% trans "Se déconnecter" %}</a></li>
+                        </ul>
+                      </li>
+{% else %}
+                      <li><a href="{% url django.contrib.auth.views.login %}?next={{ request.path }}">{% trans "Se connecter" %}</a></li>
+{% endif %}
+            </ul>
+
+              <form class="pull-right navbar-search" style="margin-top:12px;" action="{% url punns.views.search %}" method="get">
+                <input style="height: 25px;" type="text" name="q" class="search-query span3" placeholder="{% trans 'Recherche' %}">
+                <div class="icon-search"></div>
+              </form>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
 {% endblock %}
 {% block top-content %}
     <div class="container hidden-phone" style="margin-top:35px;">
