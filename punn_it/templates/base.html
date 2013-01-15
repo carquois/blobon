@@ -51,22 +51,51 @@
       }
       .logo {
         width: 188px;
-        height: 55px;
+        height: 25px;
+        margin-top: 10px;
         background:url('{{ STATIC_URL }}img/sprite.png');
-        background-position: -253px -665px;
+        background-position: -253px -676px;
+      }
+      .logo:hover {
+        background-position: -253px -703px;
+      }
+      .logo:active {
+        background-position: -253px -730px;
+      }
+      .piton {
+        width: 37px;
+        height: 25px;
+        background:url('{{ STATIC_URL }}img/sprite.png');
+        margin-top: 10px;
+        margin-left: 15px;
+
+      }
+      .image {
+        background-position: -260px -368px;
+      }
+      .image:hover {
+        background-position: -260px -390px;
+      }
+      .image:active {
+        background-position: -260px -414px;
+      }
+      .video {
+        background-position: -260px -437px;
+      }
+      .video:hover {
+        background-position: -260px -461px;
+      }
+      .video:active {
+        background-position: -260px -485px;
       }
       .random {
-        width: 37px;
-        height: 30px;
-        margin-top: 8px;
-        background:url('{{ STATIC_URL }}img/sprite.png');
-        background-position: -260px -220px;
+        background-position: -260px -225px;
       }
       .random:hover {
-        background-position: -260px -250px;
+        background-position: -260px -255px;
       }
       .random:active {
-        background-position: -260px -280px;
+        background-position: -260px -285px;
       }
     </style>
 {% endblock %}
@@ -114,7 +143,13 @@
                 <a class="logo" href="http://{{ site.domain }}"></a>
               </li>
               <li>
-                <a class="random" href="{% url punns.views.random %}"></a>
+                <a class="piton image" href="{% url punns.views.random %}"></a>
+              </li>
+              <li>
+                <a class="piton video" href="{% url punns.views.random %}"></a>
+              </li>
+              <li>
+                <a class="piton random" href="{% url punns.views.random %}"></a>
               </li>
             </ul>
 
