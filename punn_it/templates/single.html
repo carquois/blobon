@@ -139,7 +139,7 @@
 {% if not auth_user %}</a>{% endif %}
 <div class="vote-up-down point"><p style="text-align:center;padding-top:17px;" id="karma">{{ karma }}</p></div>
 {% if not auth_user %}<a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">{% endif %}
-  <div id="downbutton" class="vote-up-down down {% if vote == "D" %} up-down{% endif %}" {% if auth_user %}onclick="down();"{% endif %}></div>
+  <div id="downbutton" class="vote-up-down down {% if vote == "D" %} down-on{% endif %}" {% if auth_user %}onclick="down();"{% endif %}></div>
 {% if not auth_user %}</a>{% endif %}
 </div>
               <div class="grosseEstidColonne" >
