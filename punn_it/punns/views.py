@@ -13,7 +13,7 @@ from accounts.models import UserProfile, UserForm, UserProfileForm
 from comments.models import Comment
 from punns.models import Punn, PunnForm
 from punns.utils import BASE10, BASE62, baseconvert
-from votes.models import PunnVote
+from votes.models import PunnVote, CommentVote
 
 from django import forms
 from django.conf import settings
