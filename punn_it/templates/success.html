@@ -1,12 +1,14 @@
 {% extends "submit_base.html" %}
 {% load i18n %}
-    {% block title %}{% trans 'Rock On!' %}{% endblock %}
+    {% block title %}{% trans "C'est réussi !" %}{% endblock %}
     {% block content %}
 
-<h2>{% trans 'Rock On!' %}</h2>
-<h3>{% trans 'Your blob was added to the THE BLOB and now appears on your profile.' %}</h3>
-<h4>{% trans 'Reblob on another account' %}</h4>
-<a class="btn btn-large btn-primary" href="/submit/?media=http%3A%2F%2Fblobon.com%2Fi%2F{{ punn.pic|iriencode }}&url=http%3A%2F%2Fblobon.com{{ punn.get_absolute_url|iriencode }}&title={{ punn.title|iriencode }}&is_video=false&description={{ punn.title|iriencode }}">{% trans 'Reblob' %}</a>
+<h2>{% trans "C'est réussi !" %}</h2>
+<h3>{% trans "Votre contenu apparaît maintenant sur votre profil" %}</h3>
+
+<a href="" class="btn">{% trans "Voir sur le site" %}</a>
+<a href="" class="btn">{% trans "Partager sur Facebook" %}</a>
+<a href="" class="btn">{% trans "Tweeter" %}</a>
 
 {% endblock %}
 
