@@ -240,6 +240,9 @@ def single(request, shorturl):
     for comment in comment_list:
         comment.content = linkify(comment.content)
         comment.content = markdown.markdown(comment.content)
+        votesup = CommentVote.objects.filter(comment=comment).filter(vote='U')
+        votesdown = CommentVote.objects.filter(comment=comment).filter(vote='D')
+        comment.karma = votesup.count() - votesdown.count()
     url = request.build_absolute_uri()
     site_description = settings.MAIN_SITE_DESCRIPTION
     site = get_current_site(request)

@@ -233,6 +233,7 @@
                  {% for comment in comment_list %}
                     <a href="/{{ comment.author.username }}/">{{ comment.author.username }}</a> 
                     {{ comment.content|safe }}
+                    {{ comment.karma }}
                     <hr style="border-top: 1px solid lightgray;">
                   {% endfor %}
                 </div>
