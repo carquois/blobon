@@ -21,6 +21,13 @@ body {
   font-size:32px; 
   font-weight:normal;
 }
+.logo{
+  width: 340px;
+  height: 255px;
+  margin: auto;
+  background:url('{{ STATIC_URL }}img/sprite.png');
+  background-position: -435px 0px;
+}
 .social-btn{
   width: 259px;
   height: 72px;
@@ -69,7 +76,8 @@ p {
 
     </style>
 {% endblock %}
-
+{% block mobile %}
+{% endblock %}
 {% block topmenu %}
 {% endblock %}
 {% block top-content %}
@@ -78,7 +86,7 @@ p {
 {% endblock %}
 {% block content %}
      <div class="centered">
-       <img src="{{ STATIC_URL }}img/logo-texte.png" alt="Logo" />
+       <div class="logo"></div>
        <hr>
        <h2 class="titre">{% trans 'Créez votre compte avec' %}</h2>
        <hr>
