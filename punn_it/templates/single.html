@@ -213,7 +213,6 @@
                       }
                     });
                   });
-                  jQuery(function($){
                     $('#comment-box').focus(function(){
                       $(this).attr('rows',5);
                       $('#comment-submit').show();
@@ -221,17 +220,16 @@
                       $(this).attr('rows',1);
                       $("#comment-submit").hide();
                     });
-                  }); 
                 </script>
                 <div style="margin-left:20px;margin-right:20px;">
                   <textarea id="comment-box" rows="1" placeholder="{% trans "Soumettre un commentaire..." %}" style="width:728px;"></textarea>
 		  {% if auth_user %}
                   <a id="comment-submit" href="#" class="btn disabled pull-right" style="display:none;">{% trans "Soumettre" %}</a>
 		  {% else %}
-                  <a id="comment-submit" href="#" class="btn btn-danger pull-right" style="display:none;">{% trans "Créer un compte" %}</a>
+                  <a id="comment-submit" href="#" class="btn btn-danger pull-right" style="display:none;margin-bottom:20px;">{% trans "Créer un compte" %}</a>
 		  {% endif %}
                 </div>
-                <hr style="border-top: 1px solid lightgray;margin-top:20px;">
+                <hr style="border-top: 1px solid lightgray;">
                 {% if comment_list %}
                 <div style="margin-left:20px;margin-right:20px;">
                   <h3 style="color: gray;">{% trans "Meilleur commentaire" %}</h3> 
