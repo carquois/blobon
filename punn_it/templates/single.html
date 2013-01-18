@@ -143,36 +143,6 @@
 {% if not auth_user %}</a>{% endif %}
 </div>
               <div class="grosseEstidColonne" >
-                <script>
-                  $(document).ready(function () {
-                    $(document).keydown(function(e) {
-                      if ($(e.target).is('input, textarea')) {
-                      }else{
-                        var url = false;
-                        if (e.which == 37) {
-                          url = "{{ prev_punn.get_absolute_url }}";
-                        }else if (e.which == 39) {
-                          url = "{{ next_punn.get_absolute_url }}";
-                        }else if (e.which == 82) {
-                          url = "{% url punns.views.random %}"; 
-                        }
-                        if (url) {
-                          window.location = url;
-                        }
-                        if (e.which == 70) {
-                          up(); 
-                        }
-                        if (e.which == 65) {
-                          down(); 
-                        }
-                        if (e.which == 67) {
-                          $("#comment-box").focus();
-			  return false;
-                        }
-                      }
-                    });
-                  });
-                </script>
                 <div class="top-main-col" >
                   <div style="padding-top:5px;line-height: 1.1;" id="singleTitle">
                     {{ punn.title }}
@@ -213,7 +183,41 @@
                   </div>
                 </div>
                 <hr style="border-top: 1px solid lightgray;">
+
                 <script>
+                  $(document).ready(function () {
+                    $(#comment-box).keyup(function(e) {
+                      if($(this).val() != ''){
+		        $('#comment-submit').removeClass('disabled');
+	              }
+                    });
+                    $(document).keydown(function(e) {
+                      if ($(e.target).is('input, textarea')) {
+                      }else{
+                        var url = false;
+                        if (e.which == 37) {
+                          url = "{{ prev_punn.get_absolute_url }}";
+                        }else if (e.which == 39) {
+                          url = "{{ next_punn.get_absolute_url }}";
+                        }else if (e.which == 82) {
+                          url = "{% url punns.views.random %}"; 
+                        }
+                        if (url) {
+                          window.location = url;
+                        }
+                        if (e.which == 70) {
+                          up(); 
+                        }
+                        if (e.which == 65) {
+                          down(); 
+                        }
+                        if (e.which == 67) {
+                          $("#comment-box").focus();
+			  return false;
+                        }
+                      }
+                    });
+                  });
                   jQuery(function($){
                     $('#comment-box').focus(function(){
                       $(this).attr('rows',5);
