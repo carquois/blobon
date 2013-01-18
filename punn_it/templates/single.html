@@ -186,11 +186,6 @@
 
                 <script>
                   $(document).ready(function () {
-                    $(#comment-box).keyup(function(e) {
-                      if($(this).val() != ''){
-		        $('#comment-submit').removeClass('disabled');
-	              }
-                    });
                     $(document).keydown(function(e) {
                       if ($(e.target).is('input, textarea')) {
                       }else{
