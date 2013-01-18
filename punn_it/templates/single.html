@@ -217,9 +217,11 @@
                     $('#comment-box').focus(function(){
                       $(this).attr('rows',5);
                       $('#comment-submit').show();
+		      return false;
                     }).blur(function(){
                       $(this).attr('rows',1);
                       $("#comment-submit").hide();
+		      return false;
                     });
                   }); 
                 </script>
