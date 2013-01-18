@@ -213,9 +213,6 @@
                       }
                     });
                   });
-		  $('#comment-box').keyup(function() {
-                    $('#comment-submit').removeClass('disabled');
-		  }
                   jQuery(function($){
                     $('#comment-box').focus(function(){
                       $(this).attr('rows',5);
@@ -229,12 +226,7 @@
                 </script>
                 <div style="margin-left:20px;margin-right:20px;">
                   <textarea id="comment-box" rows="1" placeholder="{% trans "Soumettre un commentaire..." %}" style="width:728px;"></textarea>
-                  <p>{% trans "Les commentaires sont traitées avec" %}<a href"http://fr.wikipedia.org/wiki/Markdown">Markdown</a></p>
-		  {% if auth_user %}
-		  <a id="comment-submit" href="#" class="btn disabled pull-right" style="display:none;">{% trans "Soumettre" %}</a>
-                  {% else %}
-		  <a id="comment-submit" href="#" class="btn pull-right" style="display:none;">{% trans "Créer mon compte" %}</a>
-                  {% endif %}
+                  <a id="comment-submit" href="#" class="btn disabled" style="display:none;">{% trans "Soumettre" %}</a>
                 </div>
                 <hr style="border-top: 1px solid lightgray;">
                 {% if comment_list %}
