@@ -219,10 +219,12 @@
                   });
                   jQuery(function($){
                     $('#comment-box').focus(function(){
+                      console.log("comment-box has focus);
                       $(this).attr('rows',5);
                       $('#comment-submit').removeClass('hide');
 		      return false;
                     }).blur(function(){
+                      console.log("comment-box lose focus);
                       $(this).attr('rows',1);
                       $("#comment-submit").addClass('hide');
 		      return false;
