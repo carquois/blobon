@@ -220,7 +220,6 @@
                     }).blur(function(){
                       $(this).attr('rows',1);
                       $("#comment-submit").hide();
-                      return false;
                     });
                   }); 
                 </script>
@@ -229,10 +228,10 @@
 		  {% if auth_user %}
                   <a id="comment-submit" href="#" class="btn disabled pull-right" style="display:none;">{% trans "Soumettre" %}</a>
 		  {% else %}
-                  <a id="comment-submit" href="#" class="btn pull-right" style="display:none;">{% trans "Créer un compte" %}</a>
+                  <a id="comment-submit" href="#" class="btn btn-danger pull-right" style="display:none;">{% trans "Créer un compte" %}</a>
 		  {% endif %}
                 </div>
-                <hr style="border-top: 1px solid lightgray;">
+                <hr style="border-top: 1px solid lightgray;margin-top:20px;">
                 {% if comment_list %}
                 <div style="margin-left:20px;margin-right:20px;">
                   <h3 style="color: gray;">{% trans "Meilleur commentaire" %}</h3> 
