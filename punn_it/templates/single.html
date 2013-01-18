@@ -148,27 +148,27 @@
                     $(document).keydown(function(e) {
                       if ($(e.target).is('input, textarea')) {
                       }else{
-                      var url = false;
-                      if (e.which == 37) {
-                        url = "{{ prev_punn.get_absolute_url }}";
-                      }else if (e.which == 39) {
-                        url = "{{ next_punn.get_absolute_url }}";
-                      }else if (e.which == 82) {
-                        url = "{% url punns.views.random %}"; 
-                      }
-                      if (url) {
-                        window.location = url;
-                      }
-                      if (e.which == 70) {
-                        up(); 
-                      }
-                      if (e.which == 65) {
-                        down(); 
-                      }
-                      if (e.which == 67) {
-                        $("#comment-box").focus();
-			return false;
-                      }
+                        var url = false;
+                        if (e.which == 37) {
+                          url = "{{ prev_punn.get_absolute_url }}";
+                        }else if (e.which == 39) {
+                          url = "{{ next_punn.get_absolute_url }}";
+                        }else if (e.which == 82) {
+                          url = "{% url punns.views.random %}"; 
+                        }
+                        if (url) {
+                          window.location = url;
+                        }
+                        if (e.which == 70) {
+                          up(); 
+                        }
+                        if (e.which == 65) {
+                          down(); 
+                        }
+                        if (e.which == 67) {
+                          $("#comment-box").focus();
+			  return false;
+                        }
                       }
                     });
                   });
