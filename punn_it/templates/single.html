@@ -14,9 +14,6 @@
     <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}">
 <style>
 
-.hide {
-  display: none;
-}
 
 .social-btn{
   width: 259px;
@@ -237,13 +234,23 @@
                 </div>
                 {% if comment_list %}
                 <div style="margin-left:20px;margin-right:20px;margin-top:20px;">
-                  <p class="comment-title">{% trans "Meilleur commentaire" %}</p> 
-                  <hr style="border-top: 1px solid lightgray;margin-top:-5px;">
-                 {% for comment in comment_list %}
-                    <a href="/{{ comment.author.username }}/">{{ comment.author.username }}</a> 
-                    {{ comment.content|safe }}
-                    {{ comment.karma }}
-                    <hr style="border-top: 1px solid lightgray;">
+                 {% for comment in comment_list|dictsortreversed:"karma" %}
+                    {% if forloop.first %}
+                      <p class="comment-title">{% trans "Meilleur commentaire" %}</p> 
+                      <hr style="border-top: 1px solid lightgray;margin-top:-5px;">
+                      <div class="comment-vote-up"></div> 
+                      {{ comment.content|safe }}
+                    {% else %}
+                      {% if forloop.counter == 2 %}
+                      <p class="comment-title">{% trans "Tous les commentaires" %}</p> 
+                      <hr style="border-top: 1px solid lightgray;">
+                      {{ comment.content|safe }}
+                      <hr style="border-top: 1px solid lightgray;">
+                      {% else %}
+                      {{ comment.content|safe }}
+                      <hr style="border-top: 1px solid lightgray;">
+                      {% endif %}
+                    {% endif %}
                   {% endfor %}
                 </div>
                 {% endif %}
