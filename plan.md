@@ -5,8 +5,8 @@ GitHub Flavored Markdown
 
 Let's get the whole "linebreak" thing out of the way. The next paragraph contains two phrases separated by a single newline character:
 
-Roses are red
-Violets are blue
+Roses are red 
+Violets are blue 
 
 
 1.- Direction
