@@ -15,28 +15,47 @@
 <style>
 
 
-.social-btn{
-  width: 259px;
-  height: 72px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  background:url('{{ STATIC_URL }}img/social-sprite.gif');
+.comment-vote {
+  width: 25px;
+  height: 20px;
+  background:url('{{ STATIC_URL }}img/sprite.png');
 }
-.fb {
-  background-position: 0 0;
+.comment-vote-up {
+  background-position: -473px -314px;
 }
-.tw {
-  background-position: 0 -216px;
+.comment-vote-up:hover {
+  background-position: -473px -295px;
 }
-.fb:active {
-  background-position: 0 -144px;
+.comment-vote-up:active {
+  background-position: -473px -276px;
 }
-.tw:active {
-  background-position: 0 -360px;
+.comment-vote-down {
+  background-position: -473px -333px;
 }
-
+.comment-vote-down:hover {
+  background-position: -473px -353px;
+}
+.comment-vote-down:active {
+  background-position: -473px -373px;
+}
+.comment-vote-up-on {
+  background-position: -448px -314px;
+}
+.comment-vote-up-on:hover {
+  background-position: -448px -295px;
+}
+.comment-vote-up-on:active {
+  background-position: -448px -276px;
+}
+.comment-vote-down-on {
+  background-position: -448px -333px;
+}
+.comment-vote-down-on:hover {
+  background-position: -448px -353px;
+}
+.comment-vote-down-on:active {
+  background-position: -448px -373px;
+}
 
 .vote-up-down{
   width: 56px;
@@ -238,7 +257,10 @@
                     {% if forloop.first %}
                       <p class="comment-title">{% trans "Meilleur commentaire" %}</p> 
                       <hr style="border-top: 1px solid lightgray;margin-top:-5px;">
-                      <div class="comment-vote-up"></div> 
+                      <div class="comment-vote comment-vote-up"></div> 
+                      <div class="comment-vote comment-vote-up-on"></div> 
+                      <div class="comment-vote comment-vote-down"></div> 
+                      <div class="comment-vote comment-vote-down-on"></div> 
                       {{ comment.content|safe }}
                     {% else %}
                       {% if forloop.counter == 2 %}
