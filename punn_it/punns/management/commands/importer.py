@@ -54,35 +54,39 @@ class Command(BaseCommand):
   help = 'Import the articles'
 
   def handle(self, *args, **options):
-    dom = minidom.parse("gab.xml")
+    dom = minidom.parse("asoti.xml")
     for node in dom.getElementsByTagName('item'):
       print "Title : "
       print node.getElementsByTagName('title')[0].firstChild.data
       print "Wordpress id : " 
       print node.getElementsByTagName('wp:post_id')[0].firstChild.data
       print "Page views : " 
-      countviews(node.getElementsByTagName('wp:post_id')[0].firstChild.data)
+      #countviews(node.getElementsByTagName('wp:post_id')[0].firstChild.data)
       print "Post date : " 
       print node.getElementsByTagName('wp:post_date')[0].firstChild.data
       for meta in node.getElementsByTagName('wp:postmeta'):
         if meta.getElementsByTagName('wp:meta_key')[0].firstChild.data == "image":
           try: 
             print meta.getElementsByTagName('wp:meta_value')[0].firstChild.data
-            user = User.objects.get(pk=3)
+            user = User.objects.get(pk=1)
             new_punn = Punn(author=user, title=node.getElementsByTagName('title')[0].firstChild.data)
             new_punn.save()
             print "New punn id"
             print new_punn.id
             img_temp = NamedTemporaryFile(delete=True)
-            img_temp.write(urllib2.urlopen(meta.getElementsByTagName('wp:meta_value')[0].firstChild.data).read())
-            img_temp.flush()
-            filename = urlparse(meta.getElementsByTagName('wp:meta_value')[0].firstChild.data).path.split('/')[-1]
-            ext = filename.split('.')[-1]
-            prefix = new_punn.base62id
-            filename = "%s.%s" % (prefix, ext)
-            new_punn.pic.save(filename, File(img_temp))
             try:
-              new_punn.views = int(countviews(node.getElementsByTagName('wp:post_id')[0].firstChild.data))
+              img_temp.write(urllib2.urlopen(meta.getElementsByTagName('wp:meta_value')[0].firstChild.data).read())
+              img_temp.flush()
+              filename = urlparse(meta.getElementsByTagName('wp:meta_value')[0].firstChild.data).path.split('/')[-1]
+              ext = filename.split('.')[-1]
+              prefix = new_punn.base62id
+              filename = "%s.%s" % (prefix, ext)
+              new_punn.pic.save(filename, File(img_temp))
+            except urllib2.HTTPError:
+               print "Oups erreur... new punn id : "
+               print new_punn.id
+            try:
+              #new_punn.views = int(countviews(node.getElementsByTagName('wp:post_id')[0].firstChild.data))
               new_punn.save() 
             except TypeError:
               new_punn.views = 0
