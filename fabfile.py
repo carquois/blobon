@@ -130,7 +130,7 @@ def deploy():
     """
     Deploys the current project : hg push, hg update, manage.py collectstatic, manage.py migrate and restart gunicorn
     """
-    local("git push ssh://%(host)s/%(path)s" % {
+    local("git push ssh://root@%(host)s/%(path)s" % {
         'host' : env.host,
         'path' : env.directory,
     })
