@@ -130,14 +130,11 @@ def deploy():
     """
     Deploys the current project : hg push, hg update, manage.py collectstatic, manage.py migrate and restart gunicorn
     """
-    local("git push ssh://root@%(host)s/%(path)s" % {
-        'host' : env.host,
-        'path' : env.directory,
-    })
+    local("git push")
 
     with cd(env.project_root):
         run("git rev-parse HEAD")
-        run("git update")
+        run("git pull")
     with virtualenv():
         with cd(env.directory):
             run('pip install -r requirements.txt')
