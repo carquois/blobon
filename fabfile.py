@@ -78,8 +78,10 @@ def get_mysql_db():
     get('/tmp/%s.sql.gz' % filename, '/tmp/%s.sql.gz' % filename)
 
     #load sql
-    local('gunzip < /tmp/%(filename)s.sql.gz | mysql -u %(user)s %(database)s' % {
+    local('gunzip < /tmp/%(filename)s.sql.gz | mysql -u %(user)s -h %(host)s -p%(password)s %(database)s' % {
         'user' : settings.DATABASES['default']['USER'],
+        'password' : settings.DATABASES['default']['PASSWORD'],
+        'host' : settings.DATABASES['default']['HOST'],
         'password' : settings.DATABASES['default']['PASSWORD'],
         'database' : settings.DATABASES['default']['NAME'],
         'filename' : filename,
