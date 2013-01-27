@@ -50,6 +50,11 @@
                 <a class="piton random" href="/random/"></a>
               </li>
             </ul>
+	    <a href="#" class="btn pull-right">Se connecter</a>
+	    <form class="pull-right navbar-search" style="margin-top:6px;margin-right:20px;" action="{% url punns.views.search %}" method="get">
+              <input style="height: 20px;" type="text" name="q" class="search-query span3" placeholder="Recherche">
+              <div class="icon-search"></div>
+            </form>
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -75,7 +80,7 @@
           <div class="thumbs"></div>
           <div class="thumbs"></div>
 	</div>
-        <div id="sidebar" class="span4">...</div>
+        <div id="sidebar" class="span4">Sidebar</div>
       </div>
     </div> <!-- /container -->
 
