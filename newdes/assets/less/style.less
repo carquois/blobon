@@ -1,13 +1,29 @@
 @nav-height: 60px;
 @back-color: black;
-@back-img: url('../assets/img/back.jpeg');
-@sprite: url('../assets/img/sprite.png')
+@back-img:   '../img/back.jpeg';
+@sprite:     '../img/sprite.png';
+@texture:     '../img/texture.gif';
+@big-screen:  1220px;
+@big-container: 1190px;
+@big-content : 824px;
+@big-sidebar : 336px;
 
 body {
   padding-top: @nav-height;
   background-color: @back-color;
+  background-image:url(@back-img);
+  background-repeat:no-repeat; 
+  background-position: center top;
 }
-
-
-
+.container { 
+  width: @big-container!important;
+}
+#content {
+  width: @big-content!important;
+  background: url(@texture);
+}
+#sidebar {
+  width: @big-sidebar!important;
+  background: url(@texture);
+}
 
