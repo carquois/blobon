@@ -57,6 +57,8 @@ def get_db():
 
     TODO : add support for POSTGRES
     """
+    require("hosts", provided_by=["dev","prod"])
+    
     msg = prompt("Are you sure you want to replace content of local database with the database from '%s'?" % env.hosts[0], default="y/n")
     if msg == "y":
         if settings.DATABASES['default']['ENGINE'] == "django.db.backends.mysql":
@@ -65,7 +67,6 @@ def get_db():
             raise Exception("Database engine not supported")
 
 
-@task
 def get_mysql_db():
     """
     Will fetch a mysql db
@@ -86,6 +87,11 @@ def get_mysql_db():
         'database' : settings.DATABASES['default']['NAME'],
         'filename' : filename,
     })
+    
+    #clear thumbnail cache, so thumbnails are re-generated
+    local_python = os.path.join(PROJECT_DIR, "bin", "python")
+    local_project_dir = os.path.join(PROJECT_DIR, "punn_it")
+    local("%s %s/manage.py thumbnail clear" % (local_python, local_project_dir))
 
 
 @task
@@ -93,6 +99,8 @@ def get_all_media():
     """
     will fetch the media for remote project using rsync
     """
+    require("hosts", provided_by=["dev","prod"])
+    
     remote_dir = os.path.join(env.project_root, "media")
     local_dir = os.path.join(PROJECT_DIR, "punn_it", "media")
     local("rsync -ave ssh root@%(host)s:/%(remote_dir)s/ %(local_dir)s/ --exclude \"cache\"" % {
@@ -107,22 +115,35 @@ def get_recent_media():
     """
     will fetch the media for remote project using rsync
     """
+    require("hosts", provided_by=["dev","prod"])
+        
     remote_dir = os.path.join(env.project_root, "media")
     local_dir = os.path.join(PROJECT_DIR, "punn_it", "media")
-    run("touch -d '%s' timestampfile" % (datetime.now()-timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S'))
+    
+    
+    run("touch -d '%s' timestampfile" % (datetime.now()-timedelta(days=3)).strftime('%Y-%m-%d %H:%M:%S'))
     local('ssh root@%(host)s "find %(remote_dir)s -maxdepth 1 -newer timestampfile -print0"  | rsync -av  --no-relative --files-from=- root@%(host)s:/  %(local_dir)s' % {
         'host' : env.host,
         'local_dir' : local_dir,
         'remote_dir' : remote_dir,
-        
     })
-
+    
+    #always get media/pics
+    remote_pics_dir = os.path.join(env.project_root, "media", 'pics')
+    local_pics_dir = os.path.join(PROJECT_DIR, "punn_it", "media", "pics")
+    local("rsync -ave ssh root@%(host)s:/%(remote_dir)s/ %(local_dir)s/ " % {
+        'host' : env.host,
+        'remote_dir' : remote_pics_dir,
+        'local_dir' : local_pics_dir,
+    })
 
 @task
 def update_local():
     """
     Will fetch db and media
     """
+    require("hosts", provided_by=["dev","prod"])
+    
     execute(get_db)
     execute(get_recent_media)
 
@@ -132,6 +153,8 @@ def deploy():
     """
     Deploys the current project : hg push, hg update, manage.py collectstatic, manage.py migrate and restart gunicorn
     """
+    require("hosts", provided_by=["dev","prod"])
+    
     local("git push")
 
     with cd(env.project_root):
