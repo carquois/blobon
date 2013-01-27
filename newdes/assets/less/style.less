@@ -26,11 +26,91 @@ body {
   width: @big-sidebar!important;
   background: url(@texture);
 }
+
+.logo {
+  width: 188px;
+  height: 25px;
+  margin-top: 10px;
+  background:url(@sprite);
+  background-position: -253px -676px;
+}
+.logo:hover {
+  background-position: -253px -703px;
+}
+.logo:active {
+  background-position: -253px -730px;
+}
+.piton {
+  width: 20px;
+  height: 4px;
+  background:url(@sprite);
+  margin-top: 12px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+}
+
+@piton-x: -260px;
+
+.image {
+  background-position: @piton-x -368px;
+}
+.image:hover {
+  background-position: @piton-x -390px;
+}
+.image:active {
+  background-position: @piton-x -414px;
+}
+.video {
+  background-position: @piton-x -437px;
+}
+.video:hover {
+  background-position: @piton-x -461px;
+}
+.video:active {
+  background-position: @piton-x -485px;
+}
+.crayon {
+  background-position: @piton-x -512px;
+}
+.crayon:hover {
+  background-position: @piton-x -533px;
+}
+.crayon:active {
+  background-position: @piton-x -554px;
+}
+.random {
+  background-position: @piton-x -225px;
+}
+.random:hover {
+  background-position: @piton-x -255px;
+}
+.random:active {
+  background-position: @piton-x -285px;
+}
+.brand {
+  margin-top:5px;
+}
+
 .thumbs {
+  .rounded-corners (@radius: 5px) {
+    border-radius: @radius; 
+    -moz-border-radius: @radius; 
+    -webkit-border-radius: @radius; 
+  }
+  img {
+    .rounded-corners;
+    margin-top: 3px;
+    margin-left: 5px;
+    width: 152px;
+    height: 186px;
+  }
+  img:hover {
+    opacity:0.4;
+  }
   width: 166px;
-  height: 205px;
+  height: 200px;
   background: url(@sprite);
-  background-position: -267px 4px;
+  background-position: -267px -4px;
   margin: 13px;
   float: left;
 }
