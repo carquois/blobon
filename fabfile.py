@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import os
 from fabric.api import *
 from contextlib import contextmanager as _contextmanager
-from punn_it import local_settings as django_django_settings
+from punn_it import local_settings as django_settings
 
 env.use_ssh_config= True
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
