@@ -50,7 +50,16 @@
       </div><!-- /header -->
       <div data-role="content" style="margin-top:-10px;">
         <p style="color: #DDDDD1;">{{ punn.title }}</p>
-        <a href="{{ next_punn.get_absolute_url }}"><img src="{{ MEDIA_URL }}{{ punn.pic }}" width="100%" /></a>
+        <a href="{{ next_punn.get_absolute_url }}">
+            {% if punn.pic|is_animated_gif %}
+                <img src="{{ MEDIA_URL }}{{ punn.pic }}" width="100%" />
+            {% else %}
+                {% thumbnail punn.pic  "728" upscale=False as im  %}
+                    <img src="{{ im.url }}" width="100%" />
+                {% endthumbnail %}
+            {% endif %}
+        </a>
+        
       </div><!-- /content -->
       <div data-role="footer" class="ui-bar">
         <p><a href="#share" data-icon="plus" data-role="button">{% trans "Partager" %}</a></p>
@@ -112,7 +121,6 @@
                             <img id="mainImage" style="max-width:728px;" src="{{ im.url }}" />
                           {% endthumbnail %}
                       {% endif %}
-
                   </a>
 {% endif %}
                 </div>
