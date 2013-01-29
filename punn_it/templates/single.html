@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n thumbnail %}
+{% load i18n thumbnail punn_tags %}
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ punn.title }}" />
@@ -103,7 +103,17 @@
 {% if punn.youtube_id %}
                   <iframe width="640" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
 {% else %}
-                  <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style="max-width:728px;" src="{{ MEDIA_URL }}{{ punn.pic }}" /></a>
+                  <a href="{{ next_punn.get_absolute_url }}">
+                      {# don't resize animated gif #}
+                      {% if punn.pic|is_animated_gif %}
+                          <img id="mainImage" style="max-width:728px;" src="{{ MEDIA_URL }}{{ punn.pic }}" />
+                      {% else %}
+                          {% thumbnail punn.pic  "728" upscale=False as im  %}
+                            <img id="mainImage" style="max-width:728px;" src="{{ im.url }}" />
+                          {% endthumbnail %}
+                      {% endif %}
+
+                  </a>
 {% endif %}
                 </div>
 {% if content %}
