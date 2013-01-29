@@ -8,6 +8,46 @@
 @big-content : 824px;
 @big-sidebar : 336px;
 
+      /* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 60px;
+	p {
+	  text-align: center;
+	}
+      }
+      #footer {
+        background-color: white;
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+
 body {
   padding-top: @nav-height;
   background-color: @back-color;
@@ -27,19 +67,6 @@ body {
   background: url(@texture);
 }
 
-.logo {
-  width: 188px;
-  height: 25px;
-  margin-top: 10px;
-  background:url(@sprite);
-  background-position: -253px -676px;
-}
-.logo:hover {
-  background-position: -253px -703px;
-}
-.logo:active {
-  background-position: -253px -730px;
-}
 .piton {
   width: 20px;
   height: 4px;
@@ -116,16 +143,14 @@ body {
   float: left;
 }
 .navbar-search {
-    position: relative;
-    }
-      
-      .navbar-search .search-query {
-          padding-left: 29px !important;
-	  }
-
-	  .navbar-search .icon-search {
-	      position: absolute;
-	          top: 5px;
-		      left: 11px;
-		          background-image: url('../img/glyphicons-halflings.png');
-			  } 
+  position: relative;
+}
+.navbar-search .search-query {
+  padding-left: 29px !important;
+}
+.navbar-search .icon-search {
+  position: absolute;
+  top: 5px;
+  left: 11px;
+  background-image: url('../img/glyphicons-halflings.png');
+} 
