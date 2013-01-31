@@ -8,7 +8,6 @@ import urllib2
 from urlparse import urlparse
 from cgi import parse_qs
 
-
 from accounts.models import UserProfile, UserForm, UserProfileForm
 from comments.models import Comment
 from punns.models import Punn, PunnForm
@@ -45,9 +44,10 @@ def index(request):
       auth_user = ""
       if request.user.is_authenticated():
         auth_user = request.user
+      sizes = ['152x186', '380x450']
       return render_to_response('base.html',
                                {'user': user, 'site_description': site_description,
-                                'punns': punns, 'site': site, 'auth_user': auth_user},
+                                'punns': punns, 'site': site, 'auth_user': auth_user, 'sizes': sizes},
                                 context_instance=RequestContext(request))
 
 def draft(request):

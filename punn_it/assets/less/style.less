@@ -23,6 +23,8 @@ body {
   width: @big-content!important;
   background: url(@texture);
   float: left;
+  padding-top: 10px;
+  padding-left: 40px;
 }
 #sidebar {
   width: @big-sidebar!important;
@@ -82,21 +84,20 @@ body {
 }
 .thumbs-and-featured {
   .rounded-corners (@radius: 4px) {
-    border-radius: @radius; 
-    -moz-border-radius: @radius; 
-    -webkit-border-radius: @radius; 
-  }
+  border-radius: @radius; 
+  -moz-border-radius: @radius; 
+  -webkit-border-radius: @radius; 
+  }  
   img {
     .rounded-corners;
     padding:1px;
     border:1px solid black;
     background-color:gray;
-}
+  }
   img:hover {
     opacity:0.4;
   }
-  margin-top: 25px;
-  margin-left: 33px;
+  margin-top: 20px;
 }
 .thumbs {
   .thumbs-and-featured;
@@ -134,6 +135,8 @@ body {
   -webkit-border-radius: 10px;
      -moz-border-radius: 10px;
           border-radius: 10px;
+
+
 }
 }
 
