@@ -120,7 +120,6 @@ body {
   left: 11px;
   background-image: url('../img/glyphicons-halflings.png');
 }
-/* Infinite Scroll loader */
 #infscr-loading { 
   text-align: center;
   z-index: 100;
@@ -137,6 +136,102 @@ body {
           border-radius: 10px;
 
 
+}
+.comment-vote {
+  width: 25px;
+  height: 20px;
+  background:url('{{ STATIC_URL }}img/sprite.png');
+}
+.comment-vote-up {
+  background-position: -473px -314px;
+}
+.comment-vote-up:hover {
+  background-position: -473px -295px;
+}
+.comment-vote-up:active {
+  background-position: -473px -276px;
+}
+.comment-vote-down {
+  background-position: -473px -333px;
+}
+.comment-vote-down:hover {
+  background-position: -473px -353px;
+}
+.comment-vote-down:active {
+  background-position: -473px -373px;
+}
+.comment-vote-up-on {
+  background-position: -448px -314px;
+}
+.comment-vote-up-on:hover {
+  background-position: -448px -295px;
+}
+.comment-vote-up-on:active {
+  background-position: -448px -276px;
+}
+.comment-vote-down-on {
+  background-position: -448px -333px;
+}
+.comment-vote-down-on:hover {
+  background-position: -448px -353px;
+}
+.comment-vote-down-on:active {
+  background-position: -448px -373px;
+}
+
+.vote-up-down{
+  width: 56px;
+  height: 60px;
+  background:url('{{ STATIC_URL }}img/sprite.png');
+}
+.up {
+  background-position: -367px -355px;
+}
+.up:hover {
+  background-position: -367px -290px;
+}
+.up:active {
+  background-position: -367px -225px;
+}
+.up-on {
+  background-position: -308px -355px;
+}
+.up-on:hover {
+  background-position: -308px -290px;
+}
+.up-on:active {
+  background-position: -308px -225px;
+}
+.point {
+  width: 56px;
+  height: 52px;
+  background-position: -309px -620px;
+  font-family:"Helvetica", sans-serif;
+  font-size:20px;
+  color:white;
+}
+.down {
+  background-position: -367px -425px;
+}
+.down:hover {
+  background-position: -367px -490px;
+}
+.down:active {
+  background-position: -367px -555px;
+}
+.down-on {
+  background-position: -308px -425px;
+}
+.down-on:hover {
+  background-position: -308px -490px;
+}
+.down-on:active {
+  background-position: -308px -555px;
+}
+.comment-title {
+  color: #868686;
+  font-size: 14px;
+  font-family:helvetica, sans-serif;
 }
 }
 
