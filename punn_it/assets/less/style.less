@@ -8,46 +8,6 @@
 @big-content : 824px;
 @big-sidebar : 336px;
 
-      /* Sticky footer styles
-      -------------------------------------------------- */
-
-      html,
-      body {
-        height: 100%;
-        /* The html and body elements cannot have any padding or margin. */
-      }
-
-      /* Wrapper for page content to push down footer */
-      #wrap {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-        /* Negative indent footer by it's height */
-        margin: 0 auto -60px;
-      }
-
-      /* Set the fixed height of the footer here */
-      #push,
-      #footer {
-        height: 60px;
-	p {
-	  text-align: center;
-	}
-      }
-      #footer {
-        background-color: white;
-      }
-
-      /* Lastly, apply responsive CSS fixes as necessary */
-      @media (max-width: 767px) {
-        #footer {
-          margin-left: -20px;
-          margin-right: -20px;
-          padding-left: 20px;
-          padding-right: 20px;
-        }
-      }
-
 body {
   padding-top: @nav-height;
   background-color: @back-color;
@@ -117,8 +77,7 @@ body {
 .brand {
   margin-top:5px;
 }
-
-.thumbs {
+.thumbs-and-featured {
   .rounded-corners (@radius: 5px) {
     border-radius: @radius; 
     -moz-border-radius: @radius; 
@@ -140,7 +99,15 @@ body {
   background-position: -267px -4px;
   margin-top: 25px;
   margin-left: 33px;
+}
+.thumbs {
+  .thumbs-and-featured;
   float: left;
+}
+.featured {
+  .thumbs-and-featured;
+  float: right;
+  margin-right: 27px;
 }
 .navbar-search {
   position: relative;
@@ -153,4 +120,21 @@ body {
   top: 5px;
   left: 11px;
   background-image: url('../img/glyphicons-halflings.png');
-} 
+}
+/* Infinite Scroll loader */
+#infscr-loading { 
+  text-align: center;
+  z-index: 100;
+  position: fixed;
+  left: 45%;
+  bottom: 40px;
+  width: 200px;
+  padding: 10px;
+  background: #000; 
+  opacity: 0.8;
+  color: #FFF;
+  -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+          border-radius: 10px;
+}
+
