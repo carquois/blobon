@@ -115,7 +115,7 @@
       </div>
       <div class="container transitions-enabled infinite-scroll clearfix">
         <div class="row">
-          <div id="content" class="span8">
+          <div id="content">
 	    <div class="featured">
   	      <a href="#">
   	        <img src="{{ STATIC_URL}}img/featured.jpg" alt="{% trans 'Sponsorisé' %}"/>
@@ -131,12 +131,8 @@
   	    </div>
            {% endfor %}
   	  </div>
-          <div id="sidebar" class="span4">
-	    <!-- 336x280TopRight -->
-	    <div id='div-gpt-ad-1359445108757-3' style='width:336px; height:280px;'>
-	    <script type='text/javascript'>
-	    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1359445108757-3'); });
-	    </script>
+          <div id="sidebar">
+	    <p>Sidebar</p>
 	  </div>
         </div>
       </div> <!-- /container -->
@@ -181,8 +177,6 @@
           $container.imagesLoaded(function(){
             $container.masonry({
               itemSelector: '.thumbs',
-	      columnWidth: 157,
-	      cornerStampSelector: '.corner-stamp'
   	    isAnimated: true
             });
           });
@@ -191,8 +185,8 @@
             nextSelector : '#page-nav a',  // selector for the NEXT link (to page 2)
             itemSelector : '.thumbs',     // selector for all items you'll retrieve
             loading: {
-                finishedMsg: 'No more pages to load.',
-                img: '{{ STATIC_URL }}img/wait.gif'
+                finishedMsg: "{% trans 'Chargement terminé' %}",
+                img: '{{ STATIC_URL }}img/loading.gif'
               }
             },
             function( newElements ) {
