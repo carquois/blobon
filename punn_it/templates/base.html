@@ -113,10 +113,10 @@
           </div>
         </div>
       </div>
-      <div class="container-fluid" id="container-fluid">
+      <div class="container-fluid">
         <div class="row-fluid">
+         {% block content %}
           <div id="content" class="span8 transitions-enabled infinite-scroll clearfix">
-           {% block content %}
             <!--<div class="featured">
   	      <a href="#">
   	        <img src="{{ STATIC_URL}}img/featured.jpg" alt="{% trans 'Sponsorisé' %}"/>
@@ -143,8 +143,8 @@
   	    </div>
            {% endif %}
            {% endfor %}
-           {% endblock %}
           </div>
+         {% endblock %}
           <div id="sidebar" class="span4">
 	    <div>Bacon ipsum dolor sit amet hamburger turkey ball tip biltong boudin pancetta. Meatloaf filet mignon pork chop bresaola corned beef chicken swine turkey shoulder beef hamburger spare ribs pork belly boudin. Swine tenderloin ground round pork belly biltong short loin. Fatback beef ribs boudin tail sirloin t-bone doner venison biltong beef ball tip pork meatloaf ham hock swine. Brisket bresaola jowl t-bone kielbasa salami. Cow fatback beef ribs chicken. T-bone brisket ribeye fatback pork belly.</div>
         </div>

@@ -13,13 +13,22 @@ body {
   background-repeat:no-repeat; 
   background-position: center top;
 }
-#content {
+.texture {
   background: url(@texture);
+}
+#content {
+  .texture;
   float: left;
   padding-top: 10px;
   padding-left: 40px;
   clear: both;
   margin: 0 auto;
+}
+#content-single {
+  .texture;
+}
+#content-single-wrapper {
+  margin: 15px 30px;
 }
 #sidebar {
   background: url(@texture);
@@ -28,10 +37,10 @@ body {
 #title{
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   font-weight: 600;
-  font-size: 20px;
+  font-size: 23px;
   color: #3f3f3f;
 }
-#container-fluid {
+.container-fluid {
   margin-left: 200px;
 }
 

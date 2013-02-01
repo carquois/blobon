@@ -14,31 +14,12 @@
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
 {% block content %}
-                    <h1 id="title">{{ punn.title }}</h1>
-{% if punn.youtube_id %}
-                  <iframe width="640" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
-{% else %}
-                  <a href="{{ next_punn.get_absolute_url }}">
-                      {# don't resize animated gif #}
-                      {% if punn.pic|is_animated_gif %}
-                          <img style="max-width:728px;" src="{{ MEDIA_URL }}{{ punn.pic }}" />
-                      {% else %}
-                          {% thumbnail punn.pic  "728" upscale=False as im  %}
-                            <img style="max-width:728px;" src="{{ im.url }}" />
-                          {% endthumbnail %}
-                      {% endif %}
-                  </a>
-{% endif %}
-                </div>
-{% if content %}
-                <div style="margin-left: 20px;margin-right: 20px;">
-                  {{ content|safe }}
-                </div>
-{% endif %}
-<!-- 728x90BottomLeft -->
-<div id='div-gpt-ad-1359066738731-2' style='width:728px; height:90px;'>
-<script type='text/javascript'>
-googletag.cmd.push(function() { googletag.display('div-gpt-ad-1359066738731-2'); });
-</script>
-</div>
+          <div id="content-single" class="span8">
+	    <div id="content-single-wrapper">
+              <h1 id="title">{{ punn.title }}</h1>
+              <a href="{{ next_punn.get_absolute_url }}">
+                <img src="http://i.imgur.com/qp6KesU.jpg" />
+              </a>
+           </div>
+         </div>
 {% endblock %}
