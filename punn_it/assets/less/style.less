@@ -30,13 +30,21 @@ body {
 #content-single-wrapper {
   margin: 15px 30px;
 }
+#image-wrapper{
+  background-color: white;
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 #sidebar {
   background: url(@texture);
   float: right;
 }
 #title{
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-  font-weight: 600;
+  font-weight: 300;
   font-size: 23px;
   color: #3f3f3f;
 }
@@ -44,7 +52,9 @@ body {
   margin-left: 200px;
   margin-right: 200px;
 }
-
+.li-items {
+  margin-top: 3px;
+}
 .piton {
   width: 20px;
   height: 4px;
@@ -75,13 +85,13 @@ body {
   background-position: @piton-x -485px;
 }
 .crayon {
-  background-position: @piton-x -512px;
+  background-position: @piton-x -513px;
 }
 .crayon:hover {
-  background-position: @piton-x -533px;
+  background-position: @piton-x -547px;
 }
 .crayon:active {
-  background-position: @piton-x -554px;
+  background-position: @piton-x -579px;
 }
 .random {
   background-position: @piton-x -225px;
@@ -100,8 +110,12 @@ body {
   border-radius: @radius; 
   -moz-border-radius: @radius; 
   -webkit-border-radius: @radius; 
-  border-width: 3px;
-  border-image:url("../img/border-image.png") 25 repeat;
+  border-width:5px 5px 10px 5px;
+  //-moz-border-image:url(@border-image) 5 5 15 5 repeat stretch;
+  //-webkit-border-image:url(@border-image) 25 30 10 20 repeat stretch;
+  border-image:url(@border-image) 5 5 10 5 repeat stretch;
+  //border-width: 10px;
+  //border-image:url("../img/border-image.png") 10 repeat;
   }  
   img {
     .rounded-corners;
@@ -122,13 +136,17 @@ body {
 }
 .navbar-search {
   position: relative;
+  margin-right: 20px;
+  input {
+    height: 25px; 
+  } 
 }
 .navbar-search .search-query {
   padding-left: 29px !important;
 }
 .navbar-search .icon-search {
   position: absolute;
-  top: 5px;
+  top: 9px;
   left: 11px;
   background-image: url('../img/glyphicons-halflings.png');
 }

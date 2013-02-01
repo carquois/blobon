@@ -90,12 +90,6 @@
             </a>
   	    <a class="brand" href="#">Check Donc Ça</a>
             <div class="nav-collapse collapse">
-  	      <a href="#" class="btn pull-right">Se connecter</a>
-              <form class="navbar-search" action="{% url punns.views.search %}" method="get">
-                <input style="height: 25px;" type="text" name="q" class="search-query span3" placeholder="{% trans 'Recherche' %}">
-	        <div class="icon-search"></div>
-              </form>
-
               <ul class="nav">
                 <li>
                   <a class="piton image" href="/random/"></a>
@@ -109,17 +103,22 @@
                 <li>
                   <a class="piton random" href="/random/"></a>
                 </li>
-		<li class="dropdown">
+              </ul>
+              <ul class="nav pull-right">
+                  <li class="dropdown li-items">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Langue" %}: {% trans "Français" %}<b class="caret"></b></a>
 	          <ul class="dropdown-menu">
                     <li><a href="#">English</a></li>
                   </ul>
                 </li>
+                <li class="li-items">
+                  <a href="#">{% trans "Se connecter" %}</a>
+                </li>
               </ul>
-  	    <form class="pull-right navbar-search" style="margin-top:6px;margin-right:20px;" action="{% url punns.views.search %}" method="get">
-                <input style="height: 20px;" type="text" name="q" class="search-query span3" placeholder="Recherche">
-                <div class="icon-search"></div>
-              </form>
+	      <form class="pull-right navbar-search" action="{% url punns.views.search %}" method="get">
+                <input type="text" name="q" class="search-query span3" placeholder="Recherche">
+	        <div class="icon-search"></div>
+	      </form>
             </div><!--/.nav-collapse -->
           </div>
         </div>
@@ -147,7 +146,7 @@
             <div class="thumbs">
   	      <a href="{{ punn.get_absolute_url }}">
   	        <!--<span></span>-->
-	       {% thumbnail punn.pic "157x186" crop="center" as im %}
+	       {% thumbnail punn.pic "157x172" crop="center" as im %}
   	        <img src="{{ im.url }}" alt="{{ punn.title }}"/>
 	       {% endthumbnail %}
   	      </a>
