@@ -82,7 +82,7 @@
     <div id="wrap">
       <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
-          <div class="container">
+          <div class="container-fluid">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -113,9 +113,9 @@
           </div>
         </div>
       </div>
-      <div class="container transitions-enabled infinite-scroll clearfix">
-        <div class="row">
-          <div id="content">
+      <div class="container-fluid" id="container-fluid">
+        <div class="row-fluid">
+          <div id="content" class="span8 transitions-enabled infinite-scroll clearfix">
            {% block content %}
             <!--<div class="featured">
   	      <a href="#">
@@ -145,7 +145,7 @@
            {% endfor %}
            {% endblock %}
           </div>
-          <div id="sidebar">
+          <div id="sidebar" class="span4">
 	    <div>Bacon ipsum dolor sit amet hamburger turkey ball tip biltong boudin pancetta. Meatloaf filet mignon pork chop bresaola corned beef chicken swine turkey shoulder beef hamburger spare ribs pork belly boudin. Swine tenderloin ground round pork belly biltong short loin. Fatback beef ribs boudin tail sirloin t-bone doner venison biltong beef ball tip pork meatloaf ham hock swine. Brisket bresaola jowl t-bone kielbasa salami. Cow fatback beef ribs chicken. T-bone brisket ribeye fatback pork belly.</div>
         </div>
       </div> <!-- /container -->
@@ -157,34 +157,6 @@
       <script src="{{ STATIC_URL }}js/jquery.masonry.min.js"></script>
       <script src="{{ STATIC_URL }}js/jquery.infinitescroll.min.js"></script>
       <script>
-        // Masonry corner stamp modifications
-        $.Mason.prototype.resize = function() {
-          this._getColumns();
-          this._reLayout();
-        };
-        
-        $.Mason.prototype._reLayout = function( callback ) {
-          var freeCols = this.cols;
-          if ( this.options.cornerStampSelector ) {
-            var $cornerStamp = this.element.find( this.options.cornerStampSelector ),
-                cornerStampX = $cornerStamp.offset().left - 
-                  ( this.element.offset().left + this.offset.x + parseInt($cornerStamp.css('marginLeft')) );
-            freeCols = Math.floor( cornerStampX / this.columnWidth );
-          }
-          // reset columns
-          var i = this.cols;
-          this.colYs = [];
-          while (i--) {
-            this.colYs.push( this.offset.y );
-          }
-
-          for ( i = freeCols; i < this.cols; i++ ) {
-            this.colYs[i] = this.offset.y + $cornerStamp.outerHeight(true);
-          }
-
-          // apply layout logic to all bricks
-          this.layout( this.$bricks, callback );
-        };
         $(function(){
           var $container = $('#content');
           $container.imagesLoaded(function(){
@@ -192,7 +164,7 @@
               itemSelector: '.thumbs',
 	      columnWidth: 170,
 	      gutterWidth: 30,
-  	      isAnimated: true
+	      isAnimated: true 
             });
           });
           $container.infinitescroll({

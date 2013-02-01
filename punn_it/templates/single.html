@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% load dajaxice_templatetags i18n thumbnail %}
-
+{% load i18n thumbnail punn_tags %}
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ punn.title }}" />
@@ -12,178 +11,23 @@
     <meta name="twitter:url" content="{{ url }}">
     <meta name="twitter:title" content="{{ punn.title }}">
     <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}">
-<style>
-
-
-.comment-vote {
-  width: 25px;
-  height: 20px;
-  background:url('{{ STATIC_URL }}img/sprite.png');
-}
-.comment-vote-up {
-  background-position: -473px -314px;
-}
-.comment-vote-up:hover {
-  background-position: -473px -295px;
-}
-.comment-vote-up:active {
-  background-position: -473px -276px;
-}
-.comment-vote-down {
-  background-position: -473px -333px;
-}
-.comment-vote-down:hover {
-  background-position: -473px -353px;
-}
-.comment-vote-down:active {
-  background-position: -473px -373px;
-}
-.comment-vote-up-on {
-  background-position: -448px -314px;
-}
-.comment-vote-up-on:hover {
-  background-position: -448px -295px;
-}
-.comment-vote-up-on:active {
-  background-position: -448px -276px;
-}
-.comment-vote-down-on {
-  background-position: -448px -333px;
-}
-.comment-vote-down-on:hover {
-  background-position: -448px -353px;
-}
-.comment-vote-down-on:active {
-  background-position: -448px -373px;
-}
-
-.vote-up-down{
-  width: 56px;
-  height: 60px;
-  background:url('{{ STATIC_URL }}img/sprite.png');
-}
-.up {
-  background-position: -367px -355px;
-}
-.up:hover {
-  background-position: -367px -290px;
-}
-.up:active {
-  background-position: -367px -225px;
-}
-.up-on {
-  background-position: -308px -355px;
-}
-.up-on:hover {
-  background-position: -308px -290px;
-}
-.up-on:active {
-  background-position: -308px -225px;
-}
-.point {
-  width: 56px;
-  height: 52px;
-  background-position: -309px -620px;
-  font-family:"Helvetica", sans-serif;
-  font-size:20px;
-  color:white;
-}
-.down {
-  background-position: -367px -425px;
-}
-.down:hover {
-  background-position: -367px -490px;
-}
-.down:active {
-  background-position: -367px -555px;
-}
-.down-on {
-  background-position: -308px -425px;
-}
-.down-on:hover {
-  background-position: -308px -490px;
-}
-.down-on:active {
-  background-position: -308px -555px;
-}
-.comment-title {
-  color: #868686;
-  font-size: 14px;
-  font-family:helvetica, sans-serif;
-}
-</style>
-
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
-{% block navbar %}
-{% endblock %}
-{% block mobile %}
-    <div class="visible-phone" data-role="page" id="post" style="background: #000;">
-      <div data-role="header">
-        <a href="{{ prev_punn.get_absolute_url }}" data-icon="arrow-l">Prev</a>
-        <h1><a href="http://{{ site.domain }}"><img src="{{ STATIC_URL }}img/cdclogo.png" alt="Check Donc Ça" width="120px;" /></a></h1>
-        <a href="{{ next_punn.get_absolute_url }}" data-icon="arrow-r" data-iconpos="right" >Next</a>
-      </div><!-- /header -->
-      <div data-role="content" style="margin-top:-10px;">
-        <p style="color: #DDDDD1;">{{ punn.title }}</p>
-        <a href="{{ next_punn.get_absolute_url }}"><img src="{{ MEDIA_URL }}{{ punn.pic }}" width="100%" /></a>
-      </div><!-- /content -->
-      <div data-role="footer" class="ui-bar">
-        <p><a href="#share" data-icon="plus" data-role="button">{% trans "Partager" %}</a></p>
-      </div><!-- /footer -->
-    <!-- MobileLeaderboardBelowTheContent -->
-    <div id='div-gpt-ad-1359066738731-3' style='width:320px; height:50px;'>
-    <script type='text/javascript'>
-    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1359066738731-3'); });
-    </script>
-    </div>
-    </div><!-- /page -->
-    <div data-role="page" id="share" data-theme="c">
-      <div data-role="header" date-theme="c">
-        <h1>{% trans "Partagez sur :" %} </h1>
-      </div><!-- /header -->
-      <div data-role="content" data-theme="c">	
-        <a href="http://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank">
-          <div class="social-btn fb"></div>
-        </a>
-        <a href="https://twitter.com/intent/tweet?text={{ punn.title|iriencode }}&url={{ url|iriencode }}" target="_blank">
-          <div class="social-btn tw"></div>
-        </a>
-        <p><a href="#post" data-role="button">{% trans "Retour à :" %} {{ punn.title }}</a></p>
-      </div><!-- /content -->
-    </div><!-- /page share -->
-{% endblock %}
 {% block content %}
-{% if auth_user %}
-                <script type="text/javascript" charset="utf-8">
-                  function up(data){
-                    Dajaxice.punns.up(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
-                  }
-                  function down(data){
-                    Dajaxice.punns.down(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
-                  }
-                </script>
-{% endif %}
-<div style="float: left;margin-left:-57px;margin-top:-1px;">
-{% if not auth_user %}<a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">{% endif %}
-  <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}" {% if auth_user %}onclick="up();"{% endif %}></div>
-{% if not auth_user %}</a>{% endif %}
-<div class="vote-up-down point"><p style="text-align:center;padding-top:17px;" id="karma">{{ karma }}</p></div>
-{% if not auth_user %}<a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">{% endif %}
-  <div id="downbutton" class="vote-up-down down {% if vote == "D" %} down-on{% endif %}" {% if auth_user %}onclick="down();"{% endif %}></div>
-{% if not auth_user %}</a>{% endif %}
-</div>
-              <div class="grosseEstidColonne" >
-                <div class="top-main-col" >
-                  <div style="padding-top:5px;line-height: 1.1;" id="singleTitle">
-                    {{ punn.title }}
-                  </div>
-                </div>
-                <div style="padding-top:10px;text-align:center;margin-bottom:20px" class="main-content" >
+                    <h1 id="title">{{ punn.title }}</h1>
 {% if punn.youtube_id %}
                   <iframe width="640" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
 {% else %}
-                  <a href="{{ next_punn.get_absolute_url }}"><img id="mainImage" style="max-width:728px;" src="{{ MEDIA_URL }}{{ punn.pic }}" /></a>
+                  <a href="{{ next_punn.get_absolute_url }}">
+                      {# don't resize animated gif #}
+                      {% if punn.pic|is_animated_gif %}
+                          <img style="max-width:728px;" src="{{ MEDIA_URL }}{{ punn.pic }}" />
+                      {% else %}
+                          {% thumbnail punn.pic  "728" upscale=False as im  %}
+                            <img style="max-width:728px;" src="{{ im.url }}" />
+                          {% endthumbnail %}
+                      {% endif %}
+                  </a>
 {% endif %}
                 </div>
 {% if content %}
@@ -191,134 +35,10 @@
                   {{ content|safe }}
                 </div>
 {% endif %}
-                <hr style="border-top: 1px solid lightgray;">
-                <div class="row" style="margin-left:1px;margin-top:20px;">
-                  <div class="span1">
-                    <a href="/{{ user.username }}/">
-                    {% thumbnail user.userprofile.avatar "70" crop="center" as im %}
-                      <img src="{{ im.url }}" alt="{{ userprofile.description }}">
-                    {% endthumbnail %}
-                    </a>
-                  </div>
-                  <div class="span4" style="text-align:left;">
-                    <p style="margin: 0 0 4px;">{{ user.first_name }} {{ user.last_name }}</p>
-                    <p style="margin: 0 0 4px;"><a href="/{{ user.username }}/">@{{ user.username }}</a></p>
-                    <p style="margin: 0 0 4px;color:gray;">
-                      {% trans 'Publié le' %} {{ punn.pub_date|date:"SHORT_DATE_FORMAT" }} {% if punn.source %}via <a href="{{ punn.source }}" target="_blank">(Source)</a>{% endif %}
-                    </p>
-                  </div>
-                  <div class="span2" style="float:right;text-align:right;">
-                    <p style="margin-right:30px;margin-bottom:4px;"><strong>{{ punn.views }}</strong></p>
-                    <p style="margin-right:30px;margin-bottom:4px;color:gray;">{% trans 'vues' %}</p>
-                    <p style="margin-right:30px;margin-bottom:4px;"><i class="icon-flag"></i> <small><a href="mailto:gab@checkdonc.ca">{% trans 'Rapporter' %}</a></small></p>
-                  </div>
-                </div>
-                <hr style="border-top: 1px solid lightgray;">
-
-                <script>
-                  $(document).ready(function () {
-                    $(document).keydown(function(e) {
-                      if ($(e.target).is('input, textarea')) {
-                      }else{
-                        var url = false;
-                        if (e.which == 37) {
-                          url = "{{ prev_punn.get_absolute_url }}";
-                        }else if (e.which == 39) {
-                          url = "{{ next_punn.get_absolute_url }}";
-                        }else if (e.which == 82) {
-                          url = "{% url punns.views.random %}"; 
-                        }
-                        if (url) {
-                          window.location = url;
-                        }
-                        if (e.which == 70) {
-                          up(); 
-                        }
-                        if (e.which == 65) {
-                          down(); 
-                        }
-                        if (e.which == 67) {
-                          $("#comment-box").focus();
-			  return false;
-                        }
-                      }
-                    });
-                  });
-                  jQuery(function($){
-                    $('#comment-box').focus(function(){
-                      $(this).attr('rows',5);
-		      return false;
-                    }).blur(function(){
-                      $(this).attr('rows',1);
-		      return false;
-                    });
-                  }); 
-                </script>
-                <div style="margin-left:20px;margin-right:20px;">
-                  <textarea id="comment-box" rows="1" placeholder="{% trans "Soumettre un commentaire..." %}" style="width:728px;"></textarea>
-                </div>
-                {% if comment_list %}
-                <div style="margin-left:20px;margin-right:20px;margin-top:20px;">
-                 {% for comment in comment_list|dictsortreversed:"karma" %}
-                    {% if forloop.first %}
-                      <p class="comment-title">{% trans "Meilleur commentaire" %}</p> 
-                      <hr style="border-top: 1px solid lightgray;margin-top:-5px;">
-                      <div class="comment-vote comment-vote-up"></div> 
-                      <!--<div class="comment-vote comment-vote-up-on"></div>-->
-                      <div class="comment-vote comment-vote-down"></div> 
-                      <!--<div class="comment-vote comment-vote-down-on"></div>-->
-                      {{ comment.content|safe }}
-                    {% else %}
-                      {% if forloop.counter == 2 %}
-                      <p class="comment-title">{% trans "Tous les commentaires" %}</p> 
-                      <hr style="border-top: 1px solid lightgray;">
-                      {{ comment.content|safe }}
-                      <hr style="border-top: 1px solid lightgray;">
-                      {% else %}
-                      {{ comment.content|safe }}
-                      <hr style="border-top: 1px solid lightgray;">
-                      {% endif %}
-                    {% endif %}
-                  {% endfor %}
-                </div>
-                {% endif %}
-                <div style="text-align:center;padding-top:-30px;margin-left:24px">
-{% include "leaderboard.html" %}
-                </div>
-              </div>
-            </div>
-            <div class="span4" style="margin-left: 25px;" >
-              <div class="box-right-wrap">
-              <div class="box-thumbnails" style="width:300px;height:264px;margin-right:6px;margin-bottom:24px;">
-                <div id="fleche" style="margin-bottom:-5px; padding-top:6px;text-decoration: none; text-align:center;">
-                  <a href="{{ prev_punn.get_absolute_url }}" style="text-decoration: none;font-family: helvetica-bold; font-size: 11px; color: #3f3f3f;"><i class="icon-arrow-left" style="margin-top:-2px;"></i>&nbsp;PREV</a>	
-                  <span class="espace" style="margin-left:50px;">
-                  <a href="{{ next_punn.get_absolute_url }}" style="text-decoration: none;font-family: helvetica-bold; font-size: 11px; color: #3f3f3f;">NEXT&nbsp;<i class="icon-arrow-right" style="margin-top:-2px;"></i></a>
-                </div>
-                {% if latest_punn_list %}
-                <div class="thumbnails" style="margin-left:10px;margin-top:10px;">
-                  {% for punn in latest_punn_list %}
-                  <div class="thumb_single" style="width:94px;margin-bottom:-13px;margin-right:2px;">
-                    <a class="thumbnails_images" href="{{ punn.get_absolute_url }}">
-                    {% thumbnail punn.pic "85x95" crop="center" as im %}
-                      <img class="sidebarThumbs" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-                    {% endthumbnail %}
-                    </a>
-                  </div>
-                  {% endfor %}
-                </div>
-                {% else %}
-                  <p>No more content</p>
-                {% endif %}
-                <div class="social-media" style="text-align:right;margin-right:10px;">
-               <a href=" {{ user.userprofile.facebook_link }}" style="font-family: helvetica-bold; font-size: 10.3px; color: #7f7f7f;"> AIMEZ-NOUS <img style="padding-bottom:4px;" src="{{ STATIC_URL }}img/icone_facebook.gif"></a>
-               <a href=" {{ user.userprofile.twitter_link }}" style="font-family: helvetica-bold; font-size: 10.3px; color: #7f7f7f;"> SUIVEZ-NOUS <img style="padding-bottom:4px;" src="{{ STATIC_URL }}img/icone_twitter.gif"></a>
-               </div>
-              </div><!--/.well -->
-{% include "blocpub.html" %}
-            </div><!--/span5-->
-          </div><!--/row-->
-        </div><!--/span12-->
-      </div><!--/row-->
-    </div><!--/.container-->
+<!-- 728x90BottomLeft -->
+<div id='div-gpt-ad-1359066738731-2' style='width:728px; height:90px;'>
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1359066738731-2'); });
+</script>
+</div>
 {% endblock %}

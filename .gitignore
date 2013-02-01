@@ -12,6 +12,7 @@ build/*
 include/*
 share/*
 .Python
+punns/management/commands/analytics.dat
 punn_it/local_settings.py
 static/*
 analytics.dat 
