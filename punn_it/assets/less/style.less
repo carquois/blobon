@@ -28,9 +28,6 @@ body {
 #content-single-wrapper {
   margin: 15px 30px;
 }
-.container-fluid {
-  margin-left: 100px;
-}
 #image-wrapper{
   background-color: lightgray;
   img {
@@ -48,8 +45,6 @@ body {
   font-weight: 300;
   font-size: 23px;
   color: #3f3f3f;
-}
-.container-fluid {
 }
 .li-items {
   margin-top: 3px;
@@ -287,4 +282,33 @@ body {
   font-size: 14px;
   font-family:helvetica, sans-serif;
 }
+.container-fluid {
+  margin-left: 100px;
+}
+@media (min-width: 1200px) {
+  .container-fluid {
+    margin-left: 120px;
+  }
+}
 
+ 
+@media (min-width: 768px) and (max-width: 979px) {
+  .container-fluid {
+    margin-left: 0px;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .container-fluid {
+    margin-left: 0px;
+  }
+
+}
+   
+@media (max-width: 480px) {
+  .container-fluid {
+    margin-left: 0px;
+  }
+
+}
