@@ -139,6 +139,7 @@
           </div>
         </div>
       </div>
+     {% block container %}
       <div class="container-fluid">
         <div class="row-fluid">
          {% block content %}
@@ -155,10 +156,14 @@
            {% endfor %}
           </div>
          {% endblock %}
+         {% block sidebar %}
           <div id="sidebar" class="span3">
-	    <div>Bacon ipsum dolor sit amet hamburger turkey ball tip biltong boudin pancetta. Meatloaf filet mignon pork chop bresaola corned beef chicken swine turkey shoulder beef hamburger spare ribs pork belly boudin. Swine tenderloin ground round pork belly biltong short loin. Fatback beef ribs boudin tail sirloin t-bone doner venison biltong beef ball tip pork meatloaf ham hock swine. Brisket bresaola jowl t-bone kielbasa salami. Cow fatback beef ribs chicken. T-bone brisket ribeye fatback pork belly.</div>
+	    <div>f hamburger spare ribs pork belly boudin. Swine tenderloin ground round pork belly biltong short loin. Fatback beef ribs boudin tail sirloin t-bone doner venison biltong beef ball tip pork meatloaf ham hock swine. Brisket bresaola jowl t-bone kielbasa salami. Cow fatback beef ribs chicken. T-bone brisket ribeye fatback pork belly.</div>
+          </div>
+       {% endblock %}
         </div>
       </div> <!-- /container -->
+     {% endblock %}
       <nav id="page-nav">
         <a href="?page={{ punns.next_page_number }}"></a>
       </nav>
