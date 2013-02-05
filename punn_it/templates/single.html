@@ -18,10 +18,13 @@
 	    <div id="content-single-wrapper">
               <h1 id="title">{{ punn.title }}</h1>
 	      <div id="image-wrapper">
-                  <a href="{{ next_punn.get_absolute_url }}">
-                   <img id="main-image" src="{{ MEDIA_URL }}{{ punn.pic }}" />
-                 </a>
-             </div>
+                <a href="{{ next_punn.get_absolute_url }}">
+                  <img id="main-image" src="{{ MEDIA_URL }}{{ punn.pic }}" />
+                </a>
+                <div id="article-content">
+                   {{ content|safe }}
+                </div>
+              </div>
            </div>
          </div>
 {% endblock %}
