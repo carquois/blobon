@@ -44,10 +44,9 @@ def index(request):
       auth_user = ""
       if request.user.is_authenticated():
         auth_user = request.user
-      sizes = ['152x186', '380x450']
       return render_to_response('base.html',
                                {'user': user, 'site_description': site_description,
-                                'punns': punns, 'site': site, 'auth_user': auth_user, 'sizes': sizes},
+                                'punns': punns, 'site': site, 'auth_user': auth_user},
                                 context_instance=RequestContext(request))
 
 def draft(request):

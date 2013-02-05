@@ -105,15 +105,31 @@
                 </li>
               </ul>
               <ul class="nav pull-right">
-                  <li class="dropdown li-items">
+		{% if not auth_user %}
+                <li class="dropdown li-items">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Langue" %}: {% trans "Français" %}<b class="caret"></b></a>
 	          <ul class="dropdown-menu">
                     <li><a href="#">English</a></li>
                   </ul>
                 </li>
+		{% endif %}
+		{% if auth_user %}
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" href="/{{ user.username }}/">
+                  {% thumbnail user.userprofile.avatar "35" crop="center" as im %}
+                    <img src="{{ im.url }}" alt="{{ userprofile.description }}">
+                  {% endthumbnail %}
+                    <b class="caret"></b>
+		  </a>
+	          <ul class="dropdown-menu">
+                    <li><a href="#">{% trans "Se déconnecter" %}</a></li>
+                  </ul>
+                </li>
+		{% else %}
                 <li class="li-items">
                   <a href="#">{% trans "Se connecter" %}</a>
                 </li>
+		{% endif %}
               </ul>
 	      <form class="pull-right navbar-search" action="{% url punns.views.search %}" method="get">
                 <input type="text" name="q" class="search-query span3" placeholder="Recherche">
@@ -126,7 +142,7 @@
       <div class="container-fluid">
         <div class="row-fluid">
          {% block content %}
-          <div id="content" class="span8 transitions-enabled infinite-scroll clearfix">
+          <div id="content" class="span9 transitions-enabled infinite-scroll clearfix">
             <!--<div class="featured">
   	      <a href="#">
   	        <img src="{{ STATIC_URL}}img/featured.jpg" alt="{% trans 'Sponsorisé' %}"/>
@@ -137,7 +153,7 @@
             <div class="thumbs">
   	      <a href="{{ punn.get_absolute_url }}">
   	        <!--<span></span>-->
-	       {% thumbnail punn.pic "555x395" crop="center" as im %}
+	       {% thumbnail punn.pic "555x400" crop="center" as im %}
   	        <img src="{{ im.url }}" alt="{{ punn.title }}"/>
 	       {% endthumbnail %}
   	      </a>
@@ -146,7 +162,7 @@
             <div class="thumbs">
   	      <a href="{{ punn.get_absolute_url }}">
   	        <!--<span></span>-->
-	       {% thumbnail punn.pic "157x172" crop="center" as im %}
+	       {% thumbnail punn.pic "153x182" crop="center" as im %}
   	        <img src="{{ im.url }}" alt="{{ punn.title }}"/>
 	       {% endthumbnail %}
   	      </a>
@@ -155,7 +171,7 @@
            {% endfor %}
           </div>
          {% endblock %}
-          <div id="sidebar" class="span4">
+          <div id="sidebar" class="span3">
 	    <div>Bacon ipsum dolor sit amet hamburger turkey ball tip biltong boudin pancetta. Meatloaf filet mignon pork chop bresaola corned beef chicken swine turkey shoulder beef hamburger spare ribs pork belly boudin. Swine tenderloin ground round pork belly biltong short loin. Fatback beef ribs boudin tail sirloin t-bone doner venison biltong beef ball tip pork meatloaf ham hock swine. Brisket bresaola jowl t-bone kielbasa salami. Cow fatback beef ribs chicken. T-bone brisket ribeye fatback pork belly.</div>
         </div>
       </div> <!-- /container -->
