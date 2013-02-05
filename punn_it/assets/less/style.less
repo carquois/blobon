@@ -282,9 +282,22 @@ body {
   font-size: 14px;
   font-family:helvetica, sans-serif;
 }
+
 .container-fluid {
   margin-left: 0px;
 }
+.row-fluid .span9 {
+  width: 53%!important;
+}
+
+#vote-wrapper {
+  float: left;
+  margin-left:84px;
+  margin-top:-1px;
+}
+
+/////////////MEDIA QUERIES////////////////
+
 @media (min-width: 2000px) {
   .container-fluid {
     margin-left: 120px;
@@ -296,18 +309,23 @@ body {
   .container-fluid {
     margin-left: 120px;
   }
-
 }
 
 @media (min-width: 1200px) and (max-width: 1499px) {
   .container-fluid {
-    margin-left: 0px;
+    margin-left: 120px;
+  }
+  .row-fluid .span9 {
+    width: 68%!important;
   }
 }
  
 @media (min-width: 768px) and (max-width: 979px) {
   .container-fluid {
     margin-left: 0px;
+  }
+  .row-fluid .span9 {
+    width: 100%!important;
   }
 
 }

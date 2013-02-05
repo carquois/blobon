@@ -24,7 +24,7 @@
                   }
                 </script>
 {% endif %}
-<div style="float: left;margin-left:84px;margin-top:-1px;" class="hidden-phone">
+<div id="vote-wrapper" class="hidden-tablet hidden-phone">
 {% if not auth_user %}<a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">{% endif %}
   <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}" {% if auth_user %}onclick="up();"{% endif %}></div>
 {% if not auth_user %}</a>{% endif %}
