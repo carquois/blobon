@@ -283,14 +283,27 @@ body {
   font-family:helvetica, sans-serif;
 }
 .container-fluid {
-  margin-left: 100px;
+  margin-left: 0px;
 }
-@media (min-width: 1200px) {
+@media (min-width: 2000px) {
   .container-fluid {
     margin-left: 120px;
+    margin-right: 120px;
   }
 }
 
+@media (min-width: 1500px) and (max-width: 1999px) {
+  .container-fluid {
+    margin-left: 120px;
+  }
+
+}
+
+@media (min-width: 1200px) and (max-width: 1499px) {
+  .container-fluid {
+    margin-left: 0px;
+  }
+}
  
 @media (min-width: 768px) and (max-width: 979px) {
   .container-fluid {
