@@ -13,26 +13,34 @@
     <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}">
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
-     {% block container %}
-{% if auth_user %}
-                <script type="text/javascript" charset="utf-8">
-                  function up(data){
-                    Dajaxice.punns.up(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
-                  }
-                  function down(data){
-                    Dajaxice.punns.down(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
-                  }
-                </script>
-{% endif %}
-<div id="vote-wrapper" class="visible-desktop">
-{% if not auth_user %}<a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">{% endif %}
-  <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}" {% if auth_user %}onclick="up();"{% endif %}></div>
-{% if not auth_user %}</a>{% endif %}
-<div class="vote-up-down point"><p style="text-align:center;padding-top:17px;" id="karma">{{ karma }}</p></div>
-{% if not auth_user %}<a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">{% endif %}
-  <div id="downbutton" class="vote-up-down down {% if vote == "D" %} down-on{% endif %}" {% if auth_user %}onclick="down();"{% endif %}></div>
-{% if not auth_user %}</a>{% endif %}
-</div>
+    {% block container %}
+     {% if auth_user %}
+      <script type="text/javascript" charset="utf-8">
+        function up(data){
+           Dajaxice.punns.up(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
+        }
+        function down(data){
+           Dajaxice.punns.down(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
+        }
+      </script>
+     {% endif %}
+      <div id="vote-wrapper" class="visible-desktop">
+       {% if not auth_user %}
+        <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">
+       {% endif %}
+        <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}" {% if auth_user %}onclick="up();"{% endif %}></div>
+       {% if not auth_user %}
+        </a>
+       {% endif %}
+        <div class="vote-up-down point"><p style="text-align:center;padding-top:17px;" id="karma">{{ karma }}</p></div>
+       {% if not auth_user %}
+        <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">
+       {% endif %}
+        <div id="downbutton" class="vote-up-down down {% if vote == "D" %} down-on{% endif %}" {% if auth_user %}onclick="down();"{% endif %}></div>
+       {% if not auth_user %}
+        </a>
+       {% endif %}
+      </div>
       <div class="container-fluid">
         <div class="row-fluid">
          {% block content %}
