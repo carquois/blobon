@@ -143,22 +143,7 @@
         <div class="row-fluid">
          {% block content %}
           <div id="content" class="span9 transitions-enabled infinite-scroll clearfix">
-            <!--<div class="featured">
-  	      <a href="#">
-  	        <img src="{{ STATIC_URL}}img/featured.jpg" alt="{% trans 'Sponsorisé' %}"/>
-  	      </a>
-            </div>-->
            {% for punn in punns %}
-	   {% if forloop.first %}
-            <div class="thumbs">
-  	      <a href="{{ punn.get_absolute_url }}">
-  	        <!--<span></span>-->
-	       {% thumbnail punn.pic "555x400" crop="center" as im %}
-  	        <img src="{{ im.url }}" alt="{{ punn.title }}"/>
-	       {% endthumbnail %}
-  	      </a>
-  	    </div>
-	   {% else %}
             <div class="thumbs">
   	      <a href="{{ punn.get_absolute_url }}">
   	        <!--<span></span>-->
@@ -167,7 +152,6 @@
 	       {% endthumbnail %}
   	      </a>
   	    </div>
-           {% endif %}
            {% endfor %}
           </div>
          {% endblock %}

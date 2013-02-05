@@ -48,6 +48,22 @@ def index(request):
                                {'user': user, 'site_description': site_description,
                                 'punns': punns, 'site': site, 'auth_user': auth_user},
                                 context_instance=RequestContext(request))
+def videos(request):
+      user = UserProfile.objects.get(pk=3)
+      punns = paginate(request,
+                       Punn.objects.filter(author=user).filter(status='P').exclude(youtube_id__isnull=True).exclude(youtube_id='').order_by('-pub_date'),
+                       20)
+      site_description = settings.MAIN_SITE_DESCRIPTION
+      site = get_current_site(request)
+      auth_user = ""
+      if request.user.is_authenticated():
+        auth_user = request.user
+      return render_to_response('base.html',
+                               {'user': user, 'site_description': site_description,
+                                'punns': punns, 'site': site, 'auth_user': auth_user},
+                                context_instance=RequestContext(request))
+
+
 
 def draft(request):
       user = UserProfile.objects.get(pk=3)
