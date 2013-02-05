@@ -14,12 +14,12 @@
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
 {% block content %}
-          <div id="content-single" class="span8">
+          <div id="content-single" class="span9">
 	    <div id="content-single-wrapper">
               <h1 id="title">{{ punn.title }}</h1>
 	      <div id="image-wrapper">
                   <a href="{{ next_punn.get_absolute_url }}">
-                   <img style="max-width:100%;" src="http://i.imgur.com/qp6KesU.jpg" />
+                   <img id="main-image" src="{{ MEDIA_URL }}{{ punn.pic }}" />
                  </a>
              </div>
            </div>
