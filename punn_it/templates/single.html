@@ -24,6 +24,56 @@
                 <div id="article-content">
                    {{ content|safe }}
                 </div>
+                <script>
+                  $(document).ready(function () {
+                    $(document).keydown(function(e) {
+                      if ($(e.target).is('input, textarea')) {
+                      }else{
+                        var url = false;
+                        if (e.which == 37) {
+                          url = "{{ prev_punn.get_absolute_url }}";
+                        }else if (e.which == 39) {
+                          url = "{{ next_punn.get_absolute_url }}";
+                        }else if (e.which == 82) {
+                          url = "{% url punns.views.random %}"; 
+                        }
+                        if (url) {
+                          window.location = url;
+                        }
+                        if (e.which == 70) {
+                          up(); 
+                        }
+                        if (e.which == 65) {
+                          down(); 
+                        }
+                        if (e.which == 67) {
+                          $("#comment-box").focus();
+			  return false;
+                        }
+                      }
+                    });
+                  });
+                  jQuery(function($){
+                    $('#comment-box').focus(function(){
+                      $(this).attr('rows',5);
+		      return false;
+                    }).blur(function(){
+                      $(this).attr('rows',1);
+		      return false;
+                    });
+                  }); 
+                </script>
+                <div style="margin-left:20px;margin-right:20px;">
+                  <textarea id="comment-box" rows="1" placeholder="{% trans "Soumettre un commentaire..." %}" style="width:728px;"></textarea>
+                </div>
+                {% if comment_list %}
+                <div style="margin-left:20px;margin-right:20px;margin-top:20px;">
+                 {% for comment in comment_list|dictsortreversed:"karma" %}
+                    {% if forloop.first %}
+                      <p class="comment-title">{% trans "Meilleur commentaire" %}</p> 
+                      <hr style="border-top: 1px solid lightgray;margin-top:-5px;">
+                      <div class="comment-vote comment-vote-up"></div> 
+                      <!--<div class="comment-vote comment-vote-up-on"></div>-->
               </div>
            </div>
          </div>
