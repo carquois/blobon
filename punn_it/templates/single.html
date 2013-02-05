@@ -13,7 +13,10 @@
     <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}">
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
-{% block content %}
+     {% block container %}
+      <div class="container-fluid">
+        <div class="row-fluid">
+         {% block content %}
           <div class="span9" id="content-single">
 	    <div id="content-single-wrapper">
               <h1 id="title">{{ punn.title }}</h1>
@@ -92,4 +95,12 @@
               </div>
            </div>
          </div>
-{% endblock %}
+        {% endblock %}
+        {% block sidebar %}
+          <div id="sidebar" class="span3">
+	    <div>f hamburger spare ribs pork belly boudin. Swine tenderloin ground round pork belly biltong short loin. Fatback beef ribs boudin tail sirloin t-bone doner venison biltong beef ball tip pork meatloaf ham hock swine. Brisket bresaola jowl t-bone kielbasa salami. Cow fatback beef ribs chicken. T-bone brisket ribeye fatback pork belly.</div>
+          </div>
+         {% endblock %}
+        </div>
+      </div> <!-- /container -->
+     {% endblock %}
