@@ -4,18 +4,16 @@
 {% block title %}{% trans 'Se créer un compte' %}{% endblock %}
 {% block additional_css %}
     <style>
+      body {
+        background: url({{ STATIC_URL }}img/blob_bg.gif);
+      }
 
-body {
-  background: url({{ STATIC_URL }}img/blob_bg.gif);
-}
-
-a {
-  color:#f4663b;
-}
-p {
-  color:#828282;
-} 
-
+      a {
+        color:#f4663b;
+      }
+      p {
+        color:#828282;
+      } 
     </style>
 {% endblock %}
 {% block topmenu %}
@@ -41,6 +39,8 @@ p {
        </div>
        <hr>
        <p>{% trans 'ou inscrivez-vous en utilisant' %} <a href"#">{% trans 'votre adresse courriel' %}</a></p>
+       <hr>
+       <p>{% trans "Nous ne publierons rien sans votre permission"  %}</a></p>
        <hr>
        <p><small>{% trans 'Vous avez déjà un compte ?' %} <a href="#">{% trans 'Se connnecter' %}</a></small></p>
      </div/ 
