@@ -9,64 +9,6 @@ body {
   background: url({{ STATIC_URL }}img/blob_bg.gif);
 }
 
-.centered {
-  width: 700px;
-  margin: auto;
-  text-align: center;
-  margin-top: 50px;
-}
-.titre{
-  color: #505050;
-  font-family:helvetica, arial, sans-serif; 
-  font-size:32px; 
-  font-weight:normal;
-}
-.logo{
-  width: 340px;
-  height: 255px;
-  margin: auto;
-  background:url('{{ STATIC_URL }}img/sprite.png');
-  background-position: -435px 0px;
-}
-.social-btn{
-  width: 259px;
-  height: 72px;
-  background:url('{{ STATIC_URL }}img/sprite.png');
-}
-.fb {
-  background-position: 0 0;
-  float: left;
-  margin-left:80px;
-}
-.fb:hover {
-  background-position: 0 -72px;
-}
-.fb:active {
-  background-position: 0 -144px;
-}
-.tw {
-  background-position: 0 -216px;
-  float: right; 
-  margin-right:80px;
-}
-.tw:hover {
-  background-position: 0 -288px;
-}
-.tw:active {
-  background-position: 0 -360px;
-}
-.google {
-  background-position: 0 -432px;
-  margin:auto;
-  width: 216px;
-  margin-top:20px;
-}
-.google:hover {
-  background-position: 0 -504px;
-}
-.google:active {
-  background-position: 0 -576px;
-}
 a {
   color:#f4663b;
 }
@@ -76,15 +18,9 @@ p {
 
     </style>
 {% endblock %}
-{% block mobile %}
-{% endblock %}
 {% block topmenu %}
 {% endblock %}
-{% block top-content %}
-{% endblock %}
-{% block navbar %}
-{% endblock %}
-{% block content %}
+{% block container %}
      <div class="centered">
        <div class="logo"></div>
        <hr>
