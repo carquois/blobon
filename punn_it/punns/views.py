@@ -36,7 +36,7 @@ from django.utils import timezone
 from django.views.decorators.cache import cache_page
 
 def index(request):
-      user = UserProfile.objects.get(pk=3)
+      user = User.objects.get(pk=3)
       punns = paginate(request,
                        Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
                        20)
