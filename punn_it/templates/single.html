@@ -48,9 +48,12 @@
 	    <div id="content-single-wrapper">
               <h1 id="title">{{ punn.title }}</h1>
 	      <div id="image-wrapper">
+	       {% if punn.youtube_id %}
+	       {% else %}
                 <a href="{{ next_punn.get_absolute_url }}">
                   <img id="main-image" src="{{ MEDIA_URL }}{{ punn.pic }}" />
                 </a>
+	       {% endif %}
                 <div id="article-content">
                    {{ content|safe }}
                 </div>
