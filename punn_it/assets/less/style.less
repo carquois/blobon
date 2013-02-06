@@ -304,28 +304,12 @@ body {
   background-position: @comment-vote-on-x @comment-vote-down-active-y;
 }
 
+/////VOTE UP - VOTE DOWN///////
+
 .vote-up-down{
   width: 56px;
   height: 60px;
   background:url(@sprite);
-}
-.up {
-  background-position: -367px -355px;
-}
-.up:hover {
-  background-position: -367px -290px;
-}
-.up:active {
-  background-position: -367px -225px;
-}
-.up-on {
-  background-position: -308px -355px;
-}
-.up-on:hover {
-  background-position: -308px -290px;
-}
-.up-on:active {
-  background-position: -308px -225px;
 }
 .point {
   width: 56px;
@@ -335,23 +319,45 @@ body {
   font-size:20px;
   color:white;
 }
+
+@vote-x : -367px;
+@vote-on-x : -308px;
+
+.up {
+  background-position: @vote-x -355px;
+}
+.up:hover {
+  background-position: @vote-x -290px;
+}
+.up:active {
+  background-position: @vote-x -225px;
+}
+.up-on {
+  background-position: @vote-on-x -355px;
+}
+.up-on:hover {
+  background-position: @vote-on-x -290px;
+}
+.up-on:active {
+  background-position: @vote-on-x -225px;
+}
 .down {
-  background-position: -367px -425px;
+  background-position: @vote-x -425px;
 }
 .down:hover {
-  background-position: -367px -490px;
+  background-position: @vote-x -490px;
 }
 .down:active {
-  background-position: -367px -555px;
+  background-position: @vote-x -555px;
 }
 .down-on {
-  background-position: -308px -425px;
+  background-position: @vote-on-x -425px;
 }
 .down-on:hover {
-  background-position: -308px -490px;
+  background-position: @vote-on-x -490px;
 }
 .down-on:active {
-  background-position: -308px -555px;
+  background-position: @vote-on-x -555px;
 }
 .comment-title {
   color: #868686;
