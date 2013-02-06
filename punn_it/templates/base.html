@@ -80,6 +80,7 @@
   </head>
   <body>
     <div id="wrap">
+     {% block topmenu %}
       <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
           <div class="container-fluid">
@@ -139,6 +140,7 @@
           </div>
         </div>
       </div>
+     {% endblock %}
      {% block container %}
       <div class="container-fluid">
         <div class="row-fluid">
