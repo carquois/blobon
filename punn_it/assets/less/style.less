@@ -53,6 +53,66 @@ body {
 .li-items {
   margin-top: 3px;
 }
+.centered {
+  width: 700px;
+  margin: auto;
+  text-align: center;
+  margin-top: 50px;
+}
+.titre{
+  color: #505050;
+  font-family:helvetica, arial, sans-serif; 
+  font-size:32px; 
+  font-weight:normal;
+}
+.logo{
+  width: 340px;
+  height: 255px;
+  margin: auto;
+  background:url(@sprite);
+  background-position: -435px 0px;
+}
+@social-btn-x: 0;
+.social-btn{
+  width: 259px;
+  height: 72px;
+  background:url(@sprite);
+}
+.fb {
+  background-position: @social-btn-x 0;
+  float: left;
+  margin-left:80px;
+}
+.fb:hover {
+  background-position: @social-btn-x -72px;
+}
+.fb:active {
+  background-position: @social-btn-x -144px;
+}
+.tw {
+  background-position: @social-btn-x -216px;
+  float: right; 
+  margin-right:80px;
+}
+.tw:hover {
+  background-position: @social-btn-x -288px;
+}
+.tw:active {
+  background-position: @social-btn-x -360px;
+}
+.google {
+  background-position: @social-btn-x -432px;
+  margin:auto;
+  width: 216px;
+  margin-top:20px;
+}
+.google:hover {
+  background-position: @social-btn-x -504px;
+}
+.google:active {
+  background-position: @social-btn-x -576px;
+}
+
 .piton {
   width: 20px;
   height: 4px;
@@ -64,6 +124,15 @@ body {
 
 @piton-x: -260px;
 
+.random {
+  background-position: @piton-x -225px;
+}
+.random:hover {
+  background-position: @piton-x -255px;
+}
+.random:active {
+  background-position: @piton-x -285px;
+}
 .image {
   background-position: @piton-x -368px;
 }
@@ -90,15 +159,6 @@ body {
 }
 .crayon:active {
   background-position: @piton-x -579px;
-}
-.random {
-  background-position: @piton-x -225px;
-}
-.random:hover {
-  background-position: @piton-x -255px;
-}
-.random:active {
-  background-position: @piton-x -285px;
 }
 .brand {
   margin-top:5px;
@@ -190,46 +250,58 @@ body {
 
 
 }
+
+
 .comment-vote {
   width: 25px;
   height: 20px;
-  background:url('{{ STATIC_URL }}img/sprite.png');
+  background:url(@sprite);
 }
+
+@comment-vote-x              : -473px;
+@comment-vote-on-x           : -448px;
+@comment-vote-up-y           : -314px;
+@comment-vote-up-hover-y     : -295px;
+@comment-vote-up-active-y    : -276px;
+@comment-vote-down-y         : -333px;
+@comment-vote-down-hover-y   : -353px;
+@comment-vote-down-active-y  : -373px;
+
 .comment-vote-up {
-  background-position: -473px -314px;
+  background-position: @comment-vote-x @comment-vote-up-y;
 }
 .comment-vote-up:hover {
-  background-position: -473px -295px;
+  background-position: @comment-vote-x @comment-vote-up-hover-y;
 }
 .comment-vote-up:active {
-  background-position: -473px -276px;
+  background-position: @comment-vote-x @comment-vote-up-active-y;
 }
 .comment-vote-down {
-  background-position: -473px -333px;
+  background-position: @comment-vote-x @comment-vote-down-y;
 }
 .comment-vote-down:hover {
-  background-position: -473px -353px;
+  background-position: @comment-vote-x @comment-vote-down-hover-y;
 }
 .comment-vote-down:active {
-  background-position: -473px -373px;
+  background-position: @comment-vote-x @comment-vote-down-active-y;
 }
 .comment-vote-up-on {
-  background-position: -448px -314px;
+  background-position: @comment-vote-on-x @comment-vote-up-y;
 }
 .comment-vote-up-on:hover {
-  background-position: -448px -295px;
+  background-position: @comment-vote-on-x @comment-vote-up-hover-y;
 }
 .comment-vote-up-on:active {
-  background-position: -448px -276px;
+  background-position: @comment-vote-on-x @comment-vote-up-active-y;
 }
 .comment-vote-down-on {
-  background-position: -448px -333px;
+  background-position: @comment-vote-on-x @comment-vote-down-y;
 }
 .comment-vote-down-on:hover {
-  background-position: -448px -353px;
+  background-position: @comment-vote-on-x @comment-vote-down-hover-y;
 }
 .comment-vote-down-on:active {
-  background-position: -448px -373px;
+  background-position: @comment-vote-on-x @comment-vote-down-active-y;
 }
 
 .vote-up-down{
