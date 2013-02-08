@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.forms import ImageField, EmailField, ModelForm, CharField, PasswordInput
@@ -45,6 +46,12 @@ class UserProfile(models.Model):
     #Social media info
     facebook_link = models.URLField(max_length=100, blank=True)
     twitter_link = models.URLField(max_length=100, blank=True)
+    
+    birthdate = models.DateField(blank=True, null=True)
+    gender = models.CharField(blank=True, max_length=100, null=True, choices=(('m', 'Male'), ('f', 'Female'),))
+    fb_friends = models.TextField(blank=True, null=True)
+    fb_likes = models.TextField(blank=True, null=True)
+    
     def __unicode__(self):
         return self.description
 
@@ -56,3 +63,10 @@ class UserProfileForm(ModelForm):
         fields = ('avatar', 'domain')
 
 
+
+def create_user_profile(sender, instance, created, **kwargs):
+    """Add a signal to make sure a user profile is created for all users"""
+    if created:
+        UserProfile.objects.create(user=instance)
+
+post_save.connect(create_user_profile, sender=User)
