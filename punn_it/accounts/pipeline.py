@@ -1,3 +1,4 @@
+from django.core.files.base import ContentFile
 from datetime import datetime, timedelta
 import facebook
 
@@ -20,6 +21,12 @@ def load_facebook_extra_data(backend, details, response, uid, user, social_user=
     profile.fb_likes = fb_likes
     profile.gender = fb_profile['gender'][:1]
     profile.birthdate = datetime.strptime(fb_profile['birthday'], "%d/%m/%Y").date()
-    profile.facebook_link= fb_profile['link']
+    profile.facebook_link = fb_profile['link']
+    
+    fb_profile_pic= graph.get_object("me/picture", width=800)
+    fb_profile_pic_file = ContentFile(fb_profile_pic['data'])
+    file_extension = fb_profile_pic['mime-type'].split("/")[1]
+    profile.fb_avatar.save("%s_fb_profile.%s" % (user.username, file_extension), fb_profile_pic_file) 
+    
     profile.save()
 

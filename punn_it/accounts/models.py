@@ -53,6 +53,7 @@ class UserProfile(models.Model):
     gender = models.CharField(blank=True, max_length=100, null=True, choices=(('m', 'Male'), ('f', 'Female'),))
     fb_friends = models.TextField(blank=True, null=True)
     fb_likes = models.TextField(blank=True, null=True)
+    fb_avatar = models.ImageField(upload_to='pics', blank=True, null=True)
     is_new_from_social = models.BooleanField(default=False)
     
     def __unicode__(self):
