@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -7,14 +7,57 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from accounts.forms import UserCreateForm
+from django.utils.translation import ugettext as _
+from accounts.forms import UserCreateForm, SocialSignupForm
+
 
 def signup(request):
+    if request.user.is_authenticated() and request.user.get_profile().is_new_from_social:
+        return HttpResponseRedirect(reverse('accounts.views.social_signup_step2'))
+
     if request.user.is_authenticated():
-      return HttpResponseRedirect(reverse('punns.views.index'))
+        return HttpResponseRedirect(reverse('punns.views.index'))
+    
+    
+    return render_to_response("registration/signup.html", context_instance=RequestContext(request))
+                                
+def social_signup_step2(request):
+    user = request.user
+    
+    if not user.is_authenticated():
+        return HttpResponseRedirect(reverse('accounts.views.signup'))
+
+    if user.is_authenticated() and not user.get_profile().is_new_from_social:
+        return HttpResponseRedirect(reverse('punns.views.index'))
+
+    if request.POST:
+        form = SocialSignupForm(request.POST)
     else:
-      return render_to_response("registration/signup.html", 
-                                context_instance=RequestContext(request))
+        form = SocialSignupForm(initial={
+            'email' : user.email,
+            'username' : user.username,
+        })
+    
+    if form.is_valid():
+        #set user fields
+        user.username =  form.cleaned_data['username']
+        user.set_password(form.cleaned_data['password']) 
+        user.email = form.cleaned_data['email']
+        user.save()
+        
+        profile = user.get_profile()
+        profile.is_new_from_social = False
+        profile.save()
+        
+        #send a welcome message to the templates
+        messages.add_message(request, messages.INFO, _(u'Bienvenue sur Check Donc Ça!'))
+        return HttpResponseRedirect(reverse('punns.views.index'))
+    
+    return render_to_response("registration/signup_social_step2.html", {'form': form,}, context_instance=RequestContext(request))
+    
+    
+    
+    
 
 def discover(request):
     return render_to_response("registration/discover.html", 

@@ -16,3 +16,9 @@ class UserCreateForm(UserCreationForm):
             user.save()
         return user
 
+class SocialSignupForm(forms.Form):
+    username = forms.CharField(required=True)
+    email = forms.CharField(required=True)
+    password = forms.CharField(widget=forms.PasswordInput, required=True)
+    fb_publish_activity = forms.BooleanField(initial=True)
+    avatar = forms.FileField(required=False)

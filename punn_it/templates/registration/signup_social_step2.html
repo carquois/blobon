@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load url from future %}
+{% block title %}{% trans 'Se créer un compte' %}{% endblock %}
+{% block additional_css %}
+    <style>
+      body {
+        background: url({{ STATIC_URL }}img/blob_bg.gif);
+      }
+
+      a {
+        color:#f4663b;
+      }
+      p {
+        color:#828282;
+      } 
+    </style>
+{% endblock %}
+{% block topmenu %}
+{% endblock %}
+{% block container %}
+     <div class="centered">
+       <div class="logo"></div>
+       <hr>
+       <h2 class="titre">{% trans 'Créez votre compte avec :' %}</h2>
+       <div classs="signup-form">
+           <form method="POST">
+               {% csrf_token %}
+               {{form.as_table}}
+               <div>
+                   <input type="submit" value="{% trans "Créer un compte" %}"></input>
+               </div>
+           </form>
+       </div>
+     </div>
+{% endblock %}
+

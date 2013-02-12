@@ -1,5 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import facebook
+
 
 def load_facebook_extra_data(backend, details, response, uid, user, social_user=None, *args, **kwargs):
     """
@@ -21,5 +22,4 @@ def load_facebook_extra_data(backend, details, response, uid, user, social_user=
     profile.birthdate = datetime.strptime(fb_profile['birthday'], "%d/%m/%Y").date()
     profile.facebook_link= fb_profile['link']
     profile.save()
-
 

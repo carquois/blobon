@@ -5,8 +5,10 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.forms import ImageField, EmailField, ModelForm, CharField, PasswordInput
 from django import forms
+from django.forms import ImageField, EmailField, ModelForm, CharField, PasswordInput
+
+from social_auth.signals import socialauth_registered
 
 
 class UserForm(ModelForm):
@@ -51,6 +53,7 @@ class UserProfile(models.Model):
     gender = models.CharField(blank=True, max_length=100, null=True, choices=(('m', 'Male'), ('f', 'Female'),))
     fb_friends = models.TextField(blank=True, null=True)
     fb_likes = models.TextField(blank=True, null=True)
+    is_new_from_social = models.BooleanField(default=False)
     
     def __unicode__(self):
         return self.description
@@ -70,3 +73,16 @@ def create_user_profile(sender, instance, created, **kwargs):
         UserProfile.objects.create(user=instance)
 
 post_save.connect(create_user_profile, sender=User)
+
+
+def new_users_handler(sender, user, response, details, **kwargs):
+    """
+    When a user is created from a social authentification (facebook, twitter or google)
+    we mark it inactive so the signup proces can continue
+    """
+    profile = user.get_profile()
+    profile.is_new_from_social = True
+    profile.save()
+
+socialauth_registered.connect(new_users_handler, sender=None)
+

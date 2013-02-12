@@ -18,3 +18,4 @@ Fabric==1.5.2
 django-extensions==1.0.3
 -e git+https://github.com/bedingue/django-dbdump.git#egg=DjangoDBDump
 facebook-sdk==0.4.0
+Werkzeug==0.8.3
