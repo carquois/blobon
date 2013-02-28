@@ -28,5 +28,9 @@ def load_facebook_extra_data(backend, details, response, uid, user, social_user=
     file_extension = fb_profile_pic['mime-type'].split("/")[1]
     profile.fb_avatar.save("%s_fb_profile.%s" % (user.username, file_extension), fb_profile_pic_file) 
     
+    #use it for default avatar if there wasn't an avatar already
+    if not profile.avatar:
+        profile.avatar = profile.fb_avatar
+    
     profile.save()
 
