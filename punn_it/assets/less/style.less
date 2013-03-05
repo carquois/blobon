@@ -21,6 +21,7 @@ body {
   padding-left: 40px;
   clear: both;
   margin: 0 auto;
+  width: 645px;
 }
 #content-single {
   .texture;
@@ -43,6 +44,7 @@ body {
 #sidebar {
   background: url(@texture);
   float: right;
+  width: 300px;
 }
 #title{
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
@@ -370,13 +372,6 @@ body {
 }
 
 
-.container-fluid {
-  margin-left: 0px;
-}
-.row-fluid .span9 {
-  width: 53%!important;
-}
-
 #vote-wrapper {
   float: left;
   margin-left:84px;
@@ -385,65 +380,69 @@ body {
 
 /////////////MEDIA QUERIES////////////////
 
-@media (min-width: 2000px) {
-  .container-fluid {
-    margin-left: 120px;
-    margin-right: 120px;
+@media (min-width: 1200px) {
+  #content {
+    width: 820px;
   }
-  .row-fluid .span9 {
-    width: 74%!important;
-  }
-}
-
-@media (min-width: 1500px) and (max-width: 1999px) {
-  .container-fluid {
-    margin-left: 120px;
-  }
-  .row-fluid .span9 {
-    width: 74%!important;
+  #sidebar {
+    width: 300px;
   }
 }
-
-@media (min-width: 1200px) and (max-width: 1499px) {
-  .container-fluid {
-    margin-left: 120px;
+@media (min-width: 1140px) and (max-width: 1199px) {
+  .container {
+    width: 1100px;
   }
-  .row-fluid .span9 {
-    width: 68%!important;
+  #content {
+    margin-left: 100px;
+    width: 635px;
+  }
+  #sidebar {
+    width: 300px;
+  }
+}
+@media (min-width: 980px) and (max-width: 1139px) {
+  .container {
+    width: 1000px;
+  }
+  #content {
+    margin-left: 10px;
+    width: 635px;
+  }
+  #sidebar {
+    width: 300px;
   }
 }
  
 @media (min-width: 768px) and (max-width: 979px) {
-  .container-fluid {
-    margin-left: 0px;
-  }
-  .row-fluid .span9 {
-    width: 100%!important;
+  #content {
+    width: 798px;
+    margin-left: -60px;
   }
 }
 
-@media (max-width: 767px) {
-  .container-fluid {
-    margin-left: 0px;
+@media (min-width: 587px) and (max-width: 767px) {
+  #content {
+    width: 460px;
+    margin-left: 50px;
   }
-  .row-fluid .span9 {
-    width: 100%!important;
-  }
-  #comment-box {
-    width: 90%;
-  }
+}
 
+@media (min-width: 480px) and (max-width: 586px) {
+  #content {
+    width: 460px;
+    margin-left: 5px;
+  }
 }
    
-@media (max-width: 480px) {
-  .container-fluid {
-    margin-left: 0px;
+@media (max-width: 479px) {
+  #content {
+    width: 460px;
+    margin-left: -5px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
-  .row-fluid .span9 {
-    width: 100%!important;
-  }
-  #comment-box {
-    width: 90%;
+  .thumbs {
+    width: 20%;
   }
 }
    

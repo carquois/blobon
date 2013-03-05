@@ -91,7 +91,7 @@
             </a>
   	    <a class="brand" href="#">Check Donc Ça</a>
             <div class="nav-collapse collapse">
-              <ul class="nav">
+              <ul class="nav" style="display:none">
                 <li>
                   <a class="piton image" href="/random/"></a>
                 </li>
@@ -142,10 +142,10 @@
       </div>
      {% endblock %}
      {% block container %}
-      <div class="container-fluid">
-        <div class="row-fluid">
+      <div class="container">
+        <div class="row">
          {% block content %}
-          <div id="content" class="span9 transitions-enabled infinite-scroll clearfix">
+          <div id="content" class="span8 transitions-enabled infinite-scroll clearfix">
            {% for punn in punns %}
             <div class="thumbs">
   	      <a href="{{ punn.get_absolute_url }}">
