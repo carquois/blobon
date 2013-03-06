@@ -31,7 +31,7 @@ def social_signup_step2(request):
         return HttpResponseRedirect(reverse('punns.views.index'))
 
     if request.POST:
-        form = SocialSignupForm(request.POST)
+        form = SocialSignupForm(request.POST, request.FILES or None)
     else:
         form = SocialSignupForm(initial={
             'email' : user.email,
@@ -47,6 +47,12 @@ def social_signup_step2(request):
         
         profile = user.get_profile()
         profile.is_new_from_social = False
+        
+        #if there is a new uploaded avatar, we overwrite it 
+        if form.cleaned_data['avatar']:
+            profile.avatar= form.cleaned_data['avatar']
+        
+        
         profile.save()
         
         #send a welcome message to the templates
