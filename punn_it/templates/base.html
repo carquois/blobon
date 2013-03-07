@@ -125,7 +125,7 @@
                 </li>
 		{% else %}
                 <li class="li-items">
-                  <a href="{% url django.contrib.auth.views.login %}">{% trans "Se connecter" %}</a>
+                  <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">{% trans "Se connecter" %}</a>
                 </li>
 		{% endif %}
               </ul>
