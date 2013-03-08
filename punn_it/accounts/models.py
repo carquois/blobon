@@ -55,6 +55,7 @@ class UserProfile(models.Model):
     fb_likes = models.TextField(blank=True, null=True)
     fb_avatar = models.ImageField(upload_to='pics', blank=True, null=True)
     is_new_from_social = models.BooleanField(default=False)
+    created_with_provider = models.CharField(blank=True, max_length=100)
     
     def __unicode__(self):
         return self.description
@@ -83,6 +84,8 @@ def new_users_handler(sender, user, response, details, **kwargs):
     """
     profile = user.get_profile()
     profile.is_new_from_social = True
+    #save the name of the auth provider that the user was created with
+    profile.created_with_provider= sender.name
     profile.save()
 
 socialauth_registered.connect(new_users_handler, sender=None)
