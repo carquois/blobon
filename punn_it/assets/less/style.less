@@ -1,9 +1,39 @@
 @nav-height: 60px;
-@back-color: black;
+@back-color: lightgray;
 @back-img:     '../img/back.jpeg';
 @sprite:       '../img/sprite.png';
 @texture:      '../img/texture.gif';
 @border-image: '../img/border-image.png';
+
+
+.itemDesc {
+position: absolute;
+margin-top: -192px;
+font-size: 24px;
+color: #484848;
+width: 157px;
+height: 192px;
+padding: 10px;
+font-weight: bold;
+line-height: 28px;
+opacity: 0;
+}
+
+.itemDesc:hover{
+	position:absolute;
+	margin-top: -192px;
+	font-size:22px;
+	color:#000;
+	width:157px;
+	height:192px;
+	padding-top:30px;
+	font-weight:bold;
+	line-height: 22px;
+	opacity:0.6;
+	filter:alpha(opacity=60);
+	background-color:#fff;
+}
+
 
 body {
   padding-top: @nav-height;

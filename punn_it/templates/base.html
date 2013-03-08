@@ -95,7 +95,9 @@
             </a>
   	    <a class="brand" href="{% url punns.views.index %}">{{ site.name }}</a>
             <div class="nav-collapse collapse">
+             {% if not auth_user %}
               <a href="{% url accounts.views.signup %}" class="btn" id="join">{% trans "Rejoindre" %} {{ site.name }}</a>
+             {% endif %}
               <ul class="nav" style="display:none">
                 <li>
                   <a class="piton image" href="/random/"></a>
@@ -160,6 +162,7 @@
 	       {% endthumbnail %}
   	      </a>
   	    </div>
+            <div class="itemDesc">Pas sûr...</div>
            {% endfor %}
           </div>
          {% endblock %}

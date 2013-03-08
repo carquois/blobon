@@ -3,27 +3,62 @@
 {% load url from future %}
 
 {% block title %}{% trans "Veuillez vous connecter" %}{% endblock %}
-{% block content %}
-{% if form.errors %}
-    {% trans "Votre nom d'utilisateur et mot de passe ne correspondent pas. S'il vous plaît essayez de nouveau." %}
-{% endif %}
-    <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
-        {% csrf_token %}
-        {{ form.username.label_tag }}
-        {{ form.username }}
-        {{ form.password.label_tag }}
-        {{ form.password }}
-        <br />
-        <input class="btn btn-primary" type="submit" value="{% trans 'Login' %}" />
-        <input type="hidden" name="next" value="{{ next }}" />
-    </form>
-    <p>
-        Login with
-        <ul>
-            {# TODO : checkout what redirect_querystring does #}
-            <li><a href="{% url 'socialauth_begin' backend='facebook' %}">Facebook</a></li>
-            <li><a href="{% url 'socialauth_begin' backend='twitter' %}">Twitter</a></li>
-            <li><a href="{% url 'socialauth_begin' backend='google' %}">Google</a></li>
-        </ul>
-    </p>
+{% block additional_css %}
+    <style>
+      body {
+        background: url({{ STATIC_URL }}img/blob_bg.gif);
+      }
+
+      a {
+        color:#f4663b;
+      }
+      p {
+        color:#828282;
+      }
+      @media (max-width: 479px) {
+        .logo {
+          display:none;
+        }
+      }
+    </style>
 {% endblock %}
+{% block topmenu %}
+{% endblock %}
+{% block container %}
+     <div class="centered">
+       <div class="logo"></div>
+       {% if form.errors %}
+         <p>{% trans "Votre nom d'utilisateur et mot de passe ne correspondent pas. S'il vous plaît essayez de nouveau." %}</p>
+       {% endif %}
+       <hr>
+       <h2 class="titre">{% trans "Connectez-vous avec :" %}</h2>
+       <div class="row">
+         <a href="{% url 'socialauth_begin' backend='facebook' %}">
+           <div class="social-btn fb"></div>
+         </a>
+       </div>
+       <hr>
+       <form class="form-horizontal" method="post" action="{% url 'django.contrib.auth.views.login' %}">{% csrf_token %}
+         <div class="control-group">
+           <label class="control-label" for="inputEmail">{% trans "Nom d'utilisateur" %}</label>
+           <div class="controls">
+             {{ form.username }}
+           </div>
+         </div>
+         <div class="control-group">
+           <label class="control-label" for="inputPassword">{% trans "Mot de passe" %}</label>
+           <div class="controls">
+             {{ form.password }}
+           </div>
+         </div>
+         <div class="control-group">
+           <div class="controls">
+             <button type="submit" class="btn">{% trans "Se connecter" %}</button>
+           </div>
+         </div>
+         <input type="hidden" name="next" value="{{ next }}" />
+       </form>
+
+{% endblock %}
+
+
