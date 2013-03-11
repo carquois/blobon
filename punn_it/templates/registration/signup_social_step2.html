@@ -20,7 +20,6 @@
 {% endblock %}
 {% block container %}
      <div class="centered">
-       <div class="logo"></div>
        <h2 class="titre">{% trans 'Créez votre compte' %}</h2>
         {% for auth_backed in social_auth.associated  %}
          <div class="alert alert-info">
@@ -29,35 +28,61 @@
           {% endblocktrans %}
          </div>
         {% endfor %}
-       <form class="form-horizontal" method="post" action="{% url 'django.contrib.auth.views.login' %}">{% csrf_token %}
-<div class="control-group success">
-  <label class="control-label" for="inputSuccess">Input with success</label>
-  <div class="controls">
-    <input type="text" id="inputSuccess">
-    <span class="help-inline">Woohoo!</span>
-  </div>
-</div>
+       <form class="form-horizontal" method="post" enctype="multipart/form-data">{% csrf_token %}
+         {% thumbnail request.user.get_profile.avatar "200x200" as avatar %}
+         <img src="{{avatar.url}}" class="img-polaroid" style="margin-bottom: 15px;"/>
+         {% endthumbnail %}
+         {% if form.username.errors %}
+         <div class="control-group error">
+           <label class="control-label" for="inputUsername">{% trans "Nom d'utilisateur" %}</label>
+           <div class="controls">
+             {{ form.username }}
+             <span class="help-inline">{% for error in form.username.errors %}{{ error|escape }}{% endfor %}</span>
+           </div>
+         </div>
+         {% else %}
          <div class="control-group">
-           <label class="control-label" for="inputEmail">{% trans "Nom d'utilisateur" %}</label>
+           <label class="control-label" for="inputUsername">{% trans "Nom d'utilisateur" %}</label>
            <div class="controls">
              {{ form.username }}
            </div>
          </div>
+         {% endif %}
+         {% if form.email.errors %}
+         <div class="control-group error">
+           <label class="control-label" for="inputError">{% trans "Adresse courriel" %}</label>
+           <div class="controls">
+             {{ form.email }}
+             <span class="help-inline">{% for error in form.email.errors %}{{ error|escape }}{% endfor %}</span>
+           </div>
+         </div>
+         {% else %}
          <div class="control-group">
            <label class="control-label" for="inputEmail">{% trans "Adresse courriel" %}</label>
            <div class="controls">
              {{ form.email }}
            </div>
          </div>
+         {% endif %}
+         {% if form.password.errors %}
+         <div class="control-group error">
+           <label class="control-label" for="inputError">{% trans "Mot de passe" %}</label>
+           <div class="controls">
+             {{ form.password }}
+             <span class="help-inline">{% for error in form.password.errors %}{{ error|escape }}{% endfor %}</span>
+           </div>
+         </div>
+         {% else %}
          <div class="control-group">
-           <label class="control-label" for="inputPassword">{% trans "Mot de passe" %}</label>
+           <label class="control-label" for="inputEmail">{% trans "Adresse courriel" %} :</label>
            <div class="controls">
              {{ form.password }}
            </div>
          </div>
+         {% endif %}
          <div class="control-group">
            <div class="controls">
-             <button type="submit" class="btn">{% trans "Se connecter" %}</button>
+             <button type="submit" class="btn btn-primary">{% trans "Créer un compte" %}</button>
            </div>
          </div>
          <input type="hidden" name="next" value="{{ next }}" />
@@ -67,6 +92,7 @@
            <form method="POST" enctype="multipart/form-data">
                {% csrf_token %}
                {{form.as_table}}
+
                <div>
                    {% thumbnail request.user.get_profile.avatar "200x200" as avatar %}
                        <img src="{{avatar.url}}" />
