@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n thumbnail %}
 {% load url from future %}
-{% block title %}{% trans 'Se créer un compte' %}{% endblock %}
+{% block title %}{% trans 'Se créer un compte / Étape 2' %}{% endblock %}
 {% block additional_css %}
     <style>
       body {
@@ -20,18 +20,14 @@
 {% endblock %}
 {% block container %}
      <div class="centered">
-       <div class="logo"></div>
-       <hr>
-       <h2 class="titre">{% trans 'Créez votre compte avec :' %}</h2>
-       <ul>
+       <h2 class="titre">{% trans 'Créez votre compte' %}</h2>
            {% for auth_backed in social_auth.associated  %}
-               <li>
+               <div class="alert alert-info">
                    {% blocktrans with backend_name=auth_backed.provider|title %}
                    Connecté avec {{ backend_name }}
                    {% endblocktrans %}
-               </li>
+               </div>
            {% endfor %}
-       </ul>
        <div classs="signup-form">
            <form method="POST" enctype="multipart/form-data">
                {% csrf_token %}
