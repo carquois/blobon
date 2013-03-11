@@ -87,30 +87,6 @@
          </div>
          <input type="hidden" name="next" value="{{ next }}" />
        </form>
-
-       <div classs="signup-form">
-           <form method="POST" enctype="multipart/form-data">
-               {% csrf_token %}
-               {{form.as_table}}
-
-               <div>
-                   {% thumbnail request.user.get_profile.avatar "200x200" as avatar %}
-                       <img src="{{avatar.url}}" />
-                   {% endthumbnail %}
-                   <input type="submit" value="{% trans "Créer un compte" %}"></input>
-               </div>
-               
-               {% for auth_backed in social_auth.associated  %}
-                   <li>
-                       {% blocktrans with backend_name=auth_backed.provider|title %}
-                       Connecté avec {{ backend_name }}
-                       {% endblocktrans %}
-                   </li>
-               {% endfor %}
-               
-               
-           </form>
-       </div>
      </div>
 {% endblock %}
 
