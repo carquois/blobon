@@ -54,7 +54,6 @@ def social_signup_step2(request):
         if form.cleaned_data['avatar']:
             profile.avatar= form.cleaned_data['avatar']
         
-        
         profile.save()
         
         #send a welcome message to the templates
@@ -62,9 +61,6 @@ def social_signup_step2(request):
         return HttpResponseRedirect(reverse('punns.views.index'))
     
     return render_to_response("registration/signup_social_step2.html", {'form': form,}, context_instance=RequestContext(request))
-    
-    
-    
     
 
 def discover(request):

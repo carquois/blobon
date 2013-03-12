@@ -75,18 +75,3 @@ def create_user_profile(sender, instance, created, **kwargs):
         UserProfile.objects.create(user=instance)
 
 post_save.connect(create_user_profile, sender=User)
-
-
-def new_users_handler(sender, user, response, details, **kwargs):
-    """
-    When a user is created from a social authentification (facebook, twitter or google)
-    we mark it inactive so the signup proces can continue
-    """
-    profile = user.get_profile()
-    profile.is_new_from_social = True
-    #save the name of the auth provider that the user was created with
-    profile.created_with_provider= sender.name
-    profile.save()
-
-socialauth_registered.connect(new_users_handler, sender=None)
-

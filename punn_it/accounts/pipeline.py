@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import facebook
 
 
-def load_facebook_extra_data(backend, details, response, uid, user, social_user=None, *args, **kwargs):
+def load_facebook_extra_data(backend, details, response, uid, user, social_user=None, is_new=False, *args, **kwargs):
     """
     Load extra data from Facebook and save it in the user's profile
     """
@@ -31,6 +31,11 @@ def load_facebook_extra_data(backend, details, response, uid, user, social_user=
     #use it for default avatar if there wasn't an avatar already
     if not profile.avatar:
         profile.avatar = profile.fb_avatar
+    
+    if is_new:
+        profile.is_new_from_social = True
+        #save the name of the auth provider that the user was created with
+        profile.created_with_provider= "facebook"
     
     profile.save()
 
