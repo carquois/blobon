@@ -32,54 +32,37 @@
          {% thumbnail request.user.get_profile.avatar "200x200" as avatar %}
          <img src="{{avatar.url}}" class="img-polaroid" style="margin-bottom: 15px;"/>
          {% endthumbnail %}
-         {% if form.username.errors %}
-         <div class="control-group error">
+         
+         <div class="control-group{% if form.username.errors %} error{% endif %}">
            <label class="control-label" for="inputUsername">{% trans "Nom d'utilisateur" %}</label>
            <div class="controls">
              {{ form.username }}
+             {% if form.username.errors %}
              <span class="help-inline">{% for error in form.username.errors %}{{ error|escape }}{% endfor %}</span>
+             {% endif %}
            </div>
          </div>
-         {% else %}
-         <div class="control-group">
-           <label class="control-label" for="inputUsername">{% trans "Nom d'utilisateur" %}</label>
-           <div class="controls">
-             {{ form.username }}
-           </div>
-         </div>
-         {% endif %}
-         {% if form.email.errors %}
-         <div class="control-group error">
+         
+         <div class="control-group{% if form.email.errors %} error{% endif %}">
            <label class="control-label" for="inputError">{% trans "Adresse courriel" %}</label>
            <div class="controls">
              {{ form.email }}
+             {% if form.email.errors %}
              <span class="help-inline">{% for error in form.email.errors %}{{ error|escape }}{% endfor %}</span>
+             {% endif %}
            </div>
          </div>
-         {% else %}
-         <div class="control-group">
-           <label class="control-label" for="inputEmail">{% trans "Adresse courriel" %}</label>
-           <div class="controls">
-             {{ form.email }}
-           </div>
-         </div>
-         {% endif %}
-         {% if form.password.errors %}
-         <div class="control-group error">
+         
+         <div class="control-group{% if form.password.errors %} error{% endif %}">
            <label class="control-label" for="inputError">{% trans "Mot de passe" %}</label>
            <div class="controls">
              {{ form.password }}
+             {% if form.password.errors %}
              <span class="help-inline">{% for error in form.password.errors %}{{ error|escape }}{% endfor %}</span>
+             {% endif %}
            </div>
          </div>
-         {% else %}
-         <div class="control-group">
-           <label class="control-label" for="inputEmail">{% trans "Adresse courriel" %} :</label>
-           <div class="controls">
-             {{ form.password }}
-           </div>
-         </div>
-         {% endif %}
+         
          <div class="control-group">
            <div class="controls">
              <button type="submit" class="btn btn-primary">{% trans "Créer un compte" %}</button>
