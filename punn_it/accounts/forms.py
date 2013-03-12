@@ -18,7 +18,6 @@ class UserCreateForm(UserCreationForm):
 
 class SocialSignupForm(forms.Form):
     username = forms.CharField(required=True)
-    email = forms.CharField(required=True)
+    email = forms.CharField(required=True, widget=forms.TextInput(attrs={'readonly' : True}))
     password = forms.CharField(widget=forms.PasswordInput, required=True)
-    fb_publish_activity = forms.BooleanField(initial=True)
     avatar = forms.FileField(required=False)

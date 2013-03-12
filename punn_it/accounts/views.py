@@ -42,7 +42,9 @@ def social_signup_step2(request):
         #set user fields
         user.username =  form.cleaned_data['username']
         user.set_password(form.cleaned_data['password']) 
-        user.email = form.cleaned_data['email']
+        
+        #dont save email... always use the one provided by Facebook
+        # user.email = form.cleaned_data['email']
         user.save()
         
         profile = user.get_profile()
