@@ -39,6 +39,10 @@
 
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
+{% block oboxpath %}
+        OBOXADS.vars.sectionPathName = 'post';
+        OBOXADS.vars.postID = {{ punn.id }};
+{% endblock %}
 {% block navbar %}
 {% endblock %}
 {% block mobile %}

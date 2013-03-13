@@ -105,6 +105,22 @@
         googletag.enableServices();
       });
     </script>
+    <script type="text/javascript" language="JavaScript">
+        (function() {
+          var proto = (window.location.protocol == "https:" ? "https:" : "http:");
+          document.writeln('<scr' + 'ipt type="text/ja' + 'vascr' + 'ipt" s' + 'rc="' +
+                      proto + '//cdn.oboxads.com/oboxads/oboxads-min.js?ver=2'+
+                      '"></scr' + 'ipt>');
+    
+        })();
+    </script>
+    <script type="text/javascript" language="JavaScript">
+        OBOXADS.vars.lang = 'fr'; 
+        {% block oboxpath %}
+        OBOXADS.vars.sectionPathName = 'home';
+        {% endblock %}
+        OBOXADS.fn.init();
+    </script>
   </head>
   <body>
     <div id="fb-root"></div>
