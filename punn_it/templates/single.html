@@ -105,6 +105,7 @@
                 
                 <!-- INSÉREZ LES COMMENTS ICI -->
                 <div id="best-comment"> Meilleur commentaire </div> 
+                <hr>
                 <div id="comment-wrapper">   
                   <div id="vote-comment-wrapper">
                     <div class="comment-vote comment-vote-up"></div>
@@ -119,12 +120,19 @@
                     <p id="comment-hours">10 hours ago</p>
                     <br />
                     <div id="comment">
-                      <p>I don't get what these hate comments are about!!!</p>
+                    <p>
+                    
+                    I don't get what these hate comments are about!!!
+                    I don't get what these hate comments are about!!!
+                    I don't get what these hate comments are about!!!
+                    I don't get what these hate comments are about!!!
+                    I don't get what these hate comments are about!!!
+                    
+                    </p>
                     </div>
                 </div>
-                <!-- FIN COMMENT -->
-                
-                
+                    <div style="clear: both;">                
+                </div>                
                 {% if comment_list %}
                 <div id="comments">
                  {% for comment in comment_list|dictsortreversed:"karma" %}
