@@ -100,10 +100,33 @@
                     });
                   }); 
                 </script>
-                <textarea id="comment-box" rows="1" placeholder="{% trans "Soumettre un commentaire..." %}" style="display:none"></textarea>
-                <!--
+                <textarea id="comment-box" rows="1" placeholder="{% trans "Soumettre un commentaire..." %}"></textarea>
+                
+                
+                <!-- INSÉREZ LES COMMENTS ICI -->
+                <div id="best-comment"> Meilleur commentaire </div> 
+                <div id="comment-wrapper">   
+                  <div id="vote-comment-wrapper">
+                    <div class="comment-vote comment-vote-up"></div>
+                    <p id="comment-score">543</p>
+                    <div class="comment-vote comment-vote-down"></div>
+                  </div>                    
+                  <div id="comment-author-avatar">
+                    <img src="http://i.imgur.com/Ce2mlR3s.jpg">
+                  </div>
+                  <div id="comment-right-column">
+                    <div id="username-comment">RoccoSiffredi69</div>
+                    <p id="comment-hours">10 hours ago</p>
+                    <br />
+                    <div id="comment">
+                      <p>I don't get what these hate comments are about!!!</p>
+                    </div>
+                </div>
+                <!-- FIN COMMENT -->
+                
+                
                 {% if comment_list %}
-                <div style="margin-left:20px;margin-right:20px;margin-top:20px;">
+                <div id="comments">
                  {% for comment in comment_list|dictsortreversed:"karma" %}
                     {% if forloop.first %}
                       <p class="comment-title">{% trans "Meilleur commentaire" %}</p> 
@@ -112,6 +135,7 @@
                       <!--<div class="comment-vote comment-vote-up-on"></div>-->
                       <div class="comment-vote comment-vote-down"></div> 
                       <!--<div class="comment-vote comment-vote-down-on"></div>-->
+					  <img id="comment-author-avatar" src="{{ MEDIA_URL }}{{ comment.author.userprofile.avatar }}" />                      
                       {{ comment.content|safe }}
                     {% else %}
                       {% if forloop.counter == 2 %}
@@ -128,8 +152,6 @@
                 </div>
                 {% endif %}
               </div>
-                -->
-                <div style="margin-top:20px;padding-left:25px;" class="fb-comments" data-href="http://checkdonc.ca/p/Ia0/" data-num-posts="6" ></div>
            </div>
          </div>
       </div> <!-- /container -->
