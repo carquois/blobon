@@ -27,9 +27,6 @@
 {% block container %}
      <div class="centered">
        <div class="logo"></div>
-       {% if form.errors %}
-         <p>{% trans "Votre nom d'utilisateur et mot de passe ne correspondent pas. S'il vous plaît essayez de nouveau." %}</p>
-       {% endif %}
        <hr>
        <h2 class="titre">{% trans "Connectez-vous avec :" %}</h2>
        <div class="row">
@@ -39,16 +36,30 @@
        </div>
        <hr>
        <form class="form-horizontal" method="post" action="{% url 'django.contrib.auth.views.login' %}">{% csrf_token %}
-         <div class="control-group">
-           <label class="control-label" for="inputEmail">{% trans "Nom d'utilisateur" %}</label>
+       {% if form.non_field_errors %}
+         <div class="alert alert-block alert-error">
+           <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <h4>{% trans 'Erreur' %}</h4>
+           {% trans "Votre nom d'utilisateur et mot de passe ne correspondent pas. S'il vous plaît essayez de nouveau." %}
+         </div>
+
+       {% endif %}
+         <div class="control-group{% if form.username.errors %} error{% endif %}">
+           <label class="control-label" for="inputUsername">{% trans "Nom d'utilisateur" %}</label>
            <div class="controls">
              {{ form.username }}
+             {% if form.username.errors %}
+             <span class="help-inline">{% for error in form.username.errors %}{{ error|escape }}{% endfor %}</span>
+             {% endif %}
            </div>
          </div>
-         <div class="control-group">
-           <label class="control-label" for="inputPassword">{% trans "Mot de passe" %}</label>
+         <div class="control-group{% if form.password.errors %} error{% endif %}">
+           <label class="control-label" for="inputError">{% trans "Mot de passe" %}</label>
            <div class="controls">
              {{ form.password }}
+             {% if form.password.errors %}
+             <span class="help-inline">{% for error in form.password.errors %}{{ error|escape }}{% endfor %}</span>
+             {% endif %}
            </div>
          </div>
          <div class="control-group">
