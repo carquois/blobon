@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n thumbnail punn_tags %}
+{% load i18n thumbnail punn_tags humanize %}
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ punn.title }}" />
@@ -121,7 +121,7 @@
                   </div>
                   <div id="comment-right-column">
                     <div id="username-comment">{{ comment.author.username }}</div>
-                    <p id="comment-hours">10 hours ago</p>
+                    <p class="comment-time">{{ comment.created|naturaltime }}</p>
                     <br />
                     <div id="comment">
                       {{ comment.content|safe }}
