@@ -1,7 +1,13 @@
 html * {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 }
-#best-comment {
+#all-comments {
+  margin-top: 80px;
+}
+#comment-score {
+  margin-left: 6px;
+}
+.best-all-comments {
   color: #979797;
   font-size:16px;
   margin:26px;
@@ -11,9 +17,10 @@ html * {
     box-shadow: 0 1px 0 #e7e7e7;
 }
 #comment-wrapper {
-  padding: 15px;
+  padding: 12px;
 }
 #vote-comment-wrapper {
+  margin-left: -5px;
   float: left;
 }
 #comment-author-avatar {
@@ -363,6 +370,7 @@ body {
   background-position: @comment-vote-x @comment-vote-up-active-y;
 }
 .comment-vote-down {
+  margin-top:-10px;
   background-position: @comment-vote-x @comment-vote-down-y;
 }
 .comment-vote-down:hover {

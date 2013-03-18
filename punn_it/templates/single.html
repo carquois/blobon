@@ -101,64 +101,38 @@
                   }); 
                 </script>
                 <textarea id="comment-box" rows="1" placeholder="{% trans "Soumettre un commentaire..." %}"></textarea>
-                
-                
-                <!-- INSÉREZ LES COMMENTS ICI -->
-                <div id="best-comment"> Meilleur commentaire </div> 
+                {% if comment_list %} 
+                <div class="best-all-comments">{% trans "Meilleur commentaire" %}</div> 
+                {% for comment in comment_list|dictsortreversed:"karma" %}
+                {% if forloop.counter == 2 %}
+                <div class="best-all-comments" id="all-comments">{% trans "Tous les commentaires" %}</div> 
+                {% endif %}
                 <div class="separator"></div>
                 <div id="comment-wrapper">   
                   <div id="vote-comment-wrapper">
                     <div class="comment-vote comment-vote-up"></div>
-                    <p id="comment-score">543</p>
+                      <!--<div class="comment-vote comment-vote-up-on"></div>-->
+                    <p id="comment-score">{{ comment.karma }}</p>
                     <div class="comment-vote comment-vote-down"></div>
+                      <!--<div class="comment-vote comment-vote-down-on"></div>-->
                   </div>                    
                   <div id="comment-author-avatar">
-                    <img src="http://i.imgur.com/Ce2mlR3s.jpg">
+                    <img src="{{ MEDIA_URL }}{{ comment.author.userprofile.avatar }}">
                   </div>
                   <div id="comment-right-column">
-                    <div id="username-comment">RoccoSiffredi69</div>
+                    <div id="username-comment">{{ comment.author.username }}</div>
                     <p id="comment-hours">10 hours ago</p>
                     <br />
                     <div id="comment">
-                    <p>
-                    
-                    I don't get what these hate comments are about!!!
-                    I don't get what these hate comments are about!!!
-                    I don't get what these hate comments are about!!!
-                    I don't get what these hate comments are about!!!
-                    I don't get what these hate comments are about!!!
-                    
-                    </p>
+                      {{ comment.content|safe }}
                     </div>
+                  </div>
                 </div>
+                <div style="clear: both;">                
+                {% endfor %}
+                {% endif %}
                     <div style="clear: both;">                
                 </div>                
-                {% if comment_list %}
-                <div id="comments">
-                 {% for comment in comment_list|dictsortreversed:"karma" %}
-                    {% if forloop.first %}
-                      <p class="comment-title">{% trans "Meilleur commentaire" %}</p> 
-                      <hr>
-                      <div class="comment-vote comment-vote-up"></div> 
-                      <!--<div class="comment-vote comment-vote-up-on"></div>-->
-                      <div class="comment-vote comment-vote-down"></div> 
-                      <!--<div class="comment-vote comment-vote-down-on"></div>-->
-					  <img id="comment-author-avatar" src="{{ MEDIA_URL }}{{ comment.author.userprofile.avatar }}" />                      
-                      {{ comment.content|safe }}
-                    {% else %}
-                      {% if forloop.counter == 2 %}
-                      <p class="comment-title">{% trans "Tous les commentaires" %}</p> 
-                      <hr style="border-top: 1px solid lightgray;">
-                      {{ comment.content|safe }}
-                      <hr style="border-top: 1px solid lightgray;">
-                      {% else %}
-                      {{ comment.content|safe }}
-                      <hr style="border-top: 1px solid lightgray;">
-                      {% endif %}
-                    {% endif %}
-                  {% endfor %}
-                </div>
-                {% endif %}
               </div>
            </div>
          </div>
