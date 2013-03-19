@@ -100,16 +100,54 @@
                     });
                   }); 
                 </script>
+                <div class="separator" id="above-the-infos"></div>
+                <div id="buttons-below-the-content">
+                  <div class="pull-left" id="author-avatar">
+                    {% thumbnail punn.author.userprofile.avatar "70" crop="center" as im %}
+                    <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}">
+                    {% endthumbnail %}
+                  </div>
+                  <div class="pull-left" id="informations">
+                    <p>{{ punn.author.first_name }} {{ punn.author.last_name }}</p>
+                    <p><a href="/{{ user.username }}/">@{{ user.username }}</a></p>
+                    <p id="published-infos">{% trans "Publié" %} {{ punn.pub_date|naturaltime }} {% if punn.source %}{% trans "via" %} <a href="{{ punn.source }}" target="_blank">(Source)</a>{% endif %}</p>
+                  </div>
+                  <div class="btn-toolbar pull-right" id="below-content-right-toolbar">
+                    <div class="btn-group">
+                      <a href="#share" role="button" class="btn" data-toggle="modal">{% trans "Partager" %}</a>
+                    </div>
+                  </div>
+                </div>
+                <div id="share" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">{% trans "Partager" %}</h3>
+                  </div>
+                  <div class="modal-body">
+                    <div class="addthis_toolbox addthis_default_style ">
+                      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                      <a style="padding-left:20px;" class="addthis_button_tweet"></a>
+                      <a class="addthis_button_pinterest_pinit"></a>
+                      <a style="padding-left:10px;" class="addthis_button_google_plusone" g:plusone:size="medium"></a> 
+                      <a class="addthis_counter addthis_pill_style"></a>
+                    </div>
+                    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f31a102440808e2"></script>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Fermer" %}</button>
+                  </div>
+                </div>
+
                 <textarea id="comment-box" rows="1" placeholder="{% trans "Soumettre un commentaire..." %}"></textarea>
                 {% if comment_list %} 
-                <div class="best-all-comments">{% trans "Meilleur commentaire" %}</div> 
+                <!--<div class="best-all-comments">{% trans "Meilleur commentaire" %}</div>-->
                 {% for comment in comment_list|dictsortreversed:"karma" %}
                 {% if forloop.counter == 2 %}
-                <div class="best-all-comments" id="all-comments">{% trans "Tous les commentaires" %}</div> 
+                <!--<div class="best-all-comments" id="all-comments">{% trans "Tous les commentaires" %}</div>--> 
                 {% endif %}
                 <div class="separator"></div>
                 <div id="comment-wrapper">   
-                  <div id="vote-comment-wrapper">
+                  <div id="vote-comment-wrapper" style="display:none">
                     <div class="comment-vote comment-vote-up"></div>
                       <!--<div class="comment-vote comment-vote-up-on"></div>-->
                     <p id="comment-score">{{ comment.karma }}</p>
