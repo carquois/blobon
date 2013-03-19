@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
     {% dajaxice_js_import %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -182,7 +183,6 @@
       <nav id="page-nav">
         <a href="?page={{ punns.next_page_number }}"></a>
       </nav>
-      <script src="{{ STATIC_URL }}js/jquery.js"></script>
       <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
       <script src="{{ STATIC_URL }}js/jquery.masonry.min.js"></script>
       <script src="{{ STATIC_URL }}js/jquery.infinitescroll.min.js"></script>
