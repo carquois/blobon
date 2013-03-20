@@ -94,9 +94,6 @@
                     $('#comment-box').focus(function(){
                       $(this).attr('rows',5);
 		      return false;
-                    }).blur(function(){
-                      $(this).attr('rows',1);
-		      return false;
                     });
                   }); 
                 </script>
@@ -137,8 +134,50 @@
                     <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Fermer" %}</button>
                   </div>
                 </div>
-
-                <textarea id="comment-box" rows="1" placeholder="{% trans "Soumettre un commentaire..." %}"></textarea>
+                <div id="comment-block">
+                  <textarea id="comment-box" rows="1" placeholder="{% trans "Soumettre un commentaire..." %}"></textarea>
+                  <a href="#syntax" role="button" class="pull-left" data-toggle="modal">{% trans "Syntaxe des commentaires" %}</a>
+                  <button class="btn pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
+                </div>
+                <div style="clear: both;">
+                <div id="syntax" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="syntaxLabel" aria-hidden="true">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="syntaxLabel">{% trans "Syntaxe" %}</h3>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>{% trans "Vous écrivez :" %}</th>
+                          <th>{% trans "Vous voyez :" %}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>*{% trans "italique" %}*</td>
+                          <td><em>{% trans "italique" %}</em></td>
+                        </tr>
+                        <tr>
+                          <td>**{% trans "gras" %}**</td>
+                          <td><strong>{% trans "gras" %}</strong></td>
+                        </tr>
+                        <tr>
+                          <td>[Check Donc Ça](http://checkdonc.ca)</td>
+                          <td><a href="http://checkdonc.ca" target="_blank">Check Donc Ça</a></td>
+                        </tr>
+                        <tr>
+                          <td>> {% trans "texte cité" %}</td>
+                          <td><blockquote><p>{% trans "texte cité" %}</p></blockquote></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p>{% trans "Pour plus d'exemples :" %} <a href="http://fr.wikipedia.org/wiki/Markdown#Quelques_exemples" target="_blank">Markdown</a></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Fermer" %}</button>
+                  </div>
+                </div>
                 {% if comment_list %} 
                 <!--<div class="best-all-comments">{% trans "Meilleur commentaire" %}</div>-->
                 {% for comment in comment_list|dictsortreversed:"karma" %}
