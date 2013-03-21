@@ -261,13 +261,15 @@ def single(request, shorturl):
     url = request.build_absolute_uri()
     site_description = settings.MAIN_SITE_DESCRIPTION
     site = get_current_site(request)
+    from comments.models import CommentForm
+    comment_form = CommentForm()
     return render_to_response('single.html', 
                               {'punn': punn, 'latest_punn_list': latest_punn_list,
                                'next_punn': next_punn, 'prev_punn': prev_punn, 
                                'content': content, 'comment_list': comment_list,
                                'url': url, 'karma':karma, 'auth_user':auth_user,
                                'vote': vote, 'user': punn.author, 'home': home, 
-                               'site_description': site_description, 'site': site}, 
+                               'site_description': site_description, 'site': site, 'comment_form': comment_form}, 
                               context_instance=RequestContext(request))
 
 class UserFeed(Feed):

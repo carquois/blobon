@@ -135,7 +135,9 @@
                   </div>
                 </div>
                 <div id="comment-block">
-                  <textarea id="comment-box" rows="1" placeholder="{% trans "Soumettre un commentaire..." %}"></textarea>
+                  <form method="post" action="">
+                      {{ comment_form.content }}
+                  </form>
                   <a href="#syntax" role="button" class="pull-left" data-toggle="modal">{% trans "Syntaxe des commentaires" %}</a>
                   <button class="btn pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
                 </div>
