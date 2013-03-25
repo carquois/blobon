@@ -1,8 +1,6 @@
 from django.db import models
 from punns.models import Punn
 from django.contrib.auth.models import User
-from django.forms import ImageField, EmailField, ModelForm, CharField, PasswordInput
-from django import forms
 from punns.utils import BASE10, BASE62, baseconvert
 from django.forms import ModelForm, Textarea
 from django.utils.translation import ugettext as _
@@ -27,13 +25,4 @@ class Comment(models.Model):
     def get_absolute_url(self):
         return ('punn.views.comment', [str(self.base62id)])
 
-class CommentForm(ModelForm):
-    class Meta:
-        model = Comment
-        fields = ('content',)
-        widgets = {
-            'content': Textarea(attrs={'placeholder': _('Soumettre un commentaire...'),
-                                       'id': 'comment-box', 
-                                       'rows': '1'}),
-        }
 
