@@ -136,10 +136,11 @@
                 </div>
                 <div id="comment-block">
                   <form method="post" action="">
+                      {% csrf_token %}
                       {{ comment_form.content }}
-                  </form>
                   <a href="#syntax" role="button" class="pull-left" data-toggle="modal">{% trans "Syntaxe des commentaires" %}</a>
                   <button class="btn pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
+                  </form>
                 </div>
                 <div style="clear: both;">
                 <div id="syntax" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="syntaxLabel" aria-hidden="true">

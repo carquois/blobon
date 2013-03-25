@@ -10,6 +10,7 @@ from cgi import parse_qs
 
 from accounts.models import UserProfile, UserForm, UserProfileForm
 from comments.models import Comment
+from comments.forms import CommentForm
 from punns.models import Punn, PunnForm
 from punns.utils import BASE10, BASE62, baseconvert
 from votes.models import PunnVote, CommentVote
@@ -251,6 +252,18 @@ def single(request, shorturl):
     if punn.content:
         content = linkify(punn.content) 
         content = markdown.markdown(content)
+        
+    #save new comment before querying for comments related to this punn
+    comment_form = CommentForm(request.POST or None)
+    if request.user.is_authenticated() and comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.punn = punn
+        comment.author = request.user
+        comment.save()
+        #redirect user so a refresh doesn't trigger a double post
+        return HttpResponseRedirect( punn.get_absolute_url() )
+        
+
     comment_list = Comment.objects.filter(punn=punn).order_by('-pub_date')
     for comment in comment_list:
         comment.content = linkify(comment.content)
@@ -261,8 +274,8 @@ def single(request, shorturl):
     url = request.build_absolute_uri()
     site_description = settings.MAIN_SITE_DESCRIPTION
     site = get_current_site(request)
-    from comments.models import CommentForm
-    comment_form = CommentForm()
+    
+    
     return render_to_response('single.html', 
                               {'punn': punn, 'latest_punn_list': latest_punn_list,
                                'next_punn': next_punn, 'prev_punn': prev_punn, 
