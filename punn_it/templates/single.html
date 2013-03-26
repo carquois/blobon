@@ -97,8 +97,20 @@
                     });
                   }); 
                 </script>
-                <div class="separator" id="above-the-infos"></div>
                 <div id="buttons-below-the-content">
+                  <div class="separator separator-with-margin"></div>
+                  <div class="btn-toolbar" id="below-content-toolbar">
+                    <div class="btn-group pull-left">
+                      <a href="mailto:gab@checkdonc.ca" class="btn"><i class="icon-flag"></i></a>
+                      <a href="#share" role="button" class="btn" data-toggle="modal">{% trans "Partager" %}</a>
+                    </div>
+                    <div class="btn-group pull-right">
+                      <a href="{{ prev_punn.get_absolute_url }}" class="btn">&larr;</a>
+                      <a href="{{ next_punn.get_absolute_url }}" class="btn">&rarr;</a>
+                    </div>
+                  </div>
+                  <div style="clear:both;"></div>
+                  <div class="separator separator-with-margin"></div>
                   <div class="pull-left" id="author-avatar">
                     {% thumbnail punn.author.userprofile.avatar "70" crop="center" as im %}
                     <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}">
@@ -108,11 +120,6 @@
                     <p>{{ punn.author.first_name }} {{ punn.author.last_name }}</p>
                     <p><a href="/{{ user.username }}/">@{{ user.username }}</a></p>
                     <p id="published-infos">{% trans "Publié" %} {{ punn.pub_date|naturaltime }} {% if punn.source %}{% trans "via" %} <a href="{{ punn.source }}" target="_blank">(Source)</a>{% endif %}</p>
-                  </div>
-                  <div class="btn-toolbar pull-right" id="below-content-right-toolbar">
-                    <div class="btn-group">
-                      <a href="#share" role="button" class="btn" data-toggle="modal">{% trans "Partager" %}</a>
-                    </div>
                   </div>
                 </div>
                 <div id="share" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -129,15 +136,28 @@
                       <a class="addthis_counter addthis_pill_style"></a>
                     </div>
                     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f31a102440808e2"></script>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                   </div>
                   <div class="modal-footer">
                     <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Fermer" %}</button>
                   </div>
                 </div>
                 <div id="comment-block">
-                  <textarea id="comment-box" rows="1" placeholder="{% trans "Soumettre un commentaire..." %}"></textarea>
-                  <a href="#syntax" role="button" class="pull-left" data-toggle="modal">{% trans "Syntaxe des commentaires" %}</a>
+                  <form method="post" action="">
+                      {% csrf_token %}
+                      {{ comment_form.content }}
+                  </form>
+                  <a rel="tooltip" title="{% trans "Syntaxe des commentaires" %}" href="#syntax" role="button" class="btn pull-left" data-toggle="modal"><i class="icon-pencil"></i></a>
                   <button class="btn pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
+                  </form>
                 </div>
                 <div style="clear: both;">
                 <div id="syntax" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="syntaxLabel" aria-hidden="true">
@@ -146,6 +166,10 @@
                     <h3 id="syntaxLabel">{% trans "Syntaxe" %}</h3>
                   </div>
                   <div class="modal-body">
+                    <p>{% trans "Bonjour les amis," %}</p>
+                    <p>{% trans "Vous allez remarquer que nous avons mis une syntaxe dans les commentaires qui vous permet de formater vos commentaires un peu comme dans un document Word. Vous avez donc accès à mettre du texte en gras, en italique et tout plein d'autres trucs cool comme ceux-là." %}</p>
+                    <p>{% trans "Pour appliquer une syntaxe, vous n'avez qu'à lire plus bas. Sinon, vous pouvez toujours écrire vos commentaires normalement, à la bonne franquette, comme sur Facebook par exemple." %}</p>
+                    <br />
                     <table class="table">
                       <thead>
                         <tr>

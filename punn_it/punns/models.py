@@ -66,10 +66,10 @@ class Punn(models.Model):
         return ('punns.views.single', [str(self.base62id)])
 
 class PunnForm(ModelForm):
-    title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here')}))
-    source = URLField(widget=forms.HiddenInput(), required=False)
-    author = forms.ModelChoiceField(queryset=User.objects.all(), initial=User.objects.get(pk=3))
-    status = forms.CharField(max_length=2, widget=forms.Select(choices=STATUS), initial='D')
+    title = CharField(label=_('Titre :'), widget=forms.TextInput(attrs={'placeholder': _('Entrez votre titre ici')}))
+    source = URLField(label=_('Source :'), widget=forms.HiddenInput(), required=False)
+    author = forms.ModelChoiceField(label=_('Auteur :'), queryset=User.objects.all(), initial=User.objects.get(pk=3))
+    status = forms.CharField(label=_('Statut :'), max_length=2, widget=forms.Select(choices=STATUS), initial='D')
     tags = forms.ModelMultipleChoiceField(queryset=Tags.objects.all())
     class Meta:
         model = Punn
