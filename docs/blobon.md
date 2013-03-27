@@ -1,7 +1,7 @@
 [BlobOn](http://blobon.com)
 =================
 
-La mission de Blobon est de répertorié tout le contenu du Web et de le rendre intéressant à naviguer.
+La mission de Blobon est de répertorier tout le contenu du Web et de le rendre intéressant à naviguer.
 
 ##Le statut du Web en 2013
 
@@ -48,7 +48,7 @@ Par contre, ce type de classification est déficient. Il ne permet pas de voter 
 
 S'exprimer sur un sujet est à la base des réseaux sociaux. Pouvoir commenter est donc une fonctionnalité qui remonte donc à très loin, au début, ce sont les blogues qui ont implémenté cette fonctionnalité. 
 
-
+Esthétisme ignoré par Google
 
 
 
