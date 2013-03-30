@@ -312,5 +312,29 @@ Amélioration Locative | 5000 $
 Matériel de bureau | 500 $/employé supplémentaire
 Ordinateur | 1500 $/employé supplémentaire
 
+4.— Les ressources humaines
+=================
 
+4.1 Main d'œuvre requise
+-----------
+
+Selon les plus récentes prévisions, afin de pouvoir répondre efficacement à la demande, 6 ingénieurs supplémentaires en informatique devraient se joindre à l’équipe. De ce fait, Blobon pourrait accélérer l’aspect programmation de ses projets, sans pour autant nuire à la division design et graphisme. De plus, de par la mise en commun des connaissances de sa nouvelle équipe, il se pourrait que l’entreprise n’ait plus du tout besoin de faire affaire avec des consultants professionnels à l’externe.
+
+Un tel projet nécessite l’agrandissement des locaux et une structure d’entreprise plus solide. L’arrivée de nouveaux membres dans l’équipe étant déjà planifiée. Blobon est prêt à aller de l’avant. Pour y arriver, il y a irrémédiablement des variables financières à ajuster via de nouveaux investisseurs ou des programmes de subventions. Les gestionnaires de Blobon se sont toutefois donnés comme mot d’ordre de ne jamais croitre au-delà des limites de l’entreprise. En d’autres termes, ils appliquent un plan de gestion réaliste et n’embaucherons que si leur capacité financière le permet.
+
+4.2 Identification des postes et budget salarial
+-----------
+
+Pour maximiser son potentiel et ses chances de réussite, Blobon aurait besoin au total de huit employés. À la tête de l’entreprise, on retrouve les promoteurs Gabriel Dancause, directeur technique et Philippe Héroux, directeur du marketing et du graphisme. Afin de compléter son équipe, Blobon fera appel à un autre graphiste ainsi qu’à un intégrateur et un programmeur. Il faudra aussi joindre à l’équipe un administrateur de systèmes ainsi que deux développeurs spécialisés respectivement en plateformes iOs et Android pour les applications tablettes, mobiles et spécialisées.
+
+Poste | Salaire 
+--- | --- 
+Directeur technique (Gabriel) | Dividende
+Directeur Marketing/graphisme (Philippe) | Dividende
+Graphiste | 45 000 $
+Intégrateur technique | 45 000 $
+Programmeur | 55 000 $
+Administrateur Système | 55 000 $
+Développeur iOS | 65 000 $
+Développeur Android | 65 000 $
 
