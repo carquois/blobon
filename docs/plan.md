@@ -4,11 +4,12 @@
 1.1 Identification de l'entreprise
 -----------
 
-Blobon  
-201 St-Louis, App 401  
-St-Jean-sur-Richelieu, Québec, Canada 
-J3B 1X9 
-+1 (514) 887-1868 
+Blobon
+201 St-Louis, App 401
+St-Jean-sur-Richelieu, Québec, Canada
+J3B 1X9
++1 514 887-1868
+9264-4590 Québec inc.
 
 
 1.2 Identification du secteur d'activité économique 
