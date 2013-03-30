@@ -293,8 +293,12 @@ Outre le dynamisme des bureaux, une autre amélioration à considérer est l’a
 
 Les permis et licences pour Blobon se limitent à :
 
-Licence du système de comptabilité.
-Licence Photoshop
-Papiers d’incorporation.
+Licence du système de comptabilité.  
+Licence Photoshop.  
+Papiers d’incorporation.  
 
-
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
