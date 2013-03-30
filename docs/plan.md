@@ -297,8 +297,20 @@ Licence du système de comptabilité.
 Licence Photoshop.  
 Papiers d’incorporation.  
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+Équipement requis | Coût relatif estimatif à l’acquisition 
+--- | --- 
+Bureau | 2000 $/mois
+Connexion Internet | 300 $/mois
+5 serveurs | 150 $/mois
+Licences | 5000 $/année
+iPhone | 500 $
+iPad | 500 $
+Tablette Android | 500 $
+Téléphone Android | 500 $
+PC windows | 1000 $
+Amélioration Locative | 5000 $
+Matériel de bureau | 500 $/employé supplémentaire
+Ordinateur | 1500 $/employé supplémentaire
+
+
+
