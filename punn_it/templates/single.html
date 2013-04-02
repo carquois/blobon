@@ -154,7 +154,6 @@
                   <form method="post" action="">
                       {% csrf_token %}
                       {{ comment_form.content }}
-                  </form>
                   <a rel="tooltip" title="{% trans "Syntaxe des commentaires" %}" href="#syntax" role="button" class="btn pull-left" data-toggle="modal"><i class="icon-pencil"></i></a>
                   <button class="btn pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
                   </form>
