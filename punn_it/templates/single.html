@@ -24,25 +24,25 @@
         }
       </script>
      {% endif %}
-      <div id="vote-wrapper" class="visible-desktop">
-       {% if not auth_user %}
-        <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">
-       {% endif %}
-        <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}" {% if auth_user %}onclick="up();"{% endif %}></div>
-       {% if not auth_user %}
-        </a>
-       {% endif %}
-        <div class="vote-up-down point"><p style="text-align:center;padding-top:17px;" id="karma">{{ karma }}</p></div>
-       {% if not auth_user %}
-        <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">
-       {% endif %}
-        <div id="downbutton" class="vote-up-down down {% if vote == "D" %} down-on{% endif %}" {% if auth_user %}onclick="down();"{% endif %}></div>
-       {% if not auth_user %}
-        </a>
-       {% endif %}
-      </div>
       <div class="container">
         <div class="row">
+          <div id="vote-wrapper" class="visible-desktop">
+           {% if not auth_user %}
+            <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">
+           {% endif %}
+            <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}" {% if auth_user %}onclick="up();"{% endif %}></div>
+           {% if not auth_user %}
+            </a>
+           {% endif %}
+            <div class="vote-up-down point"><p style="text-align:center;padding-top:17px;" id="karma">{{ karma }}</p></div>
+           {% if not auth_user %}
+            <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">
+           {% endif %}
+            <div id="downbutton" class="vote-up-down down {% if vote == "D" %} down-on{% endif %}" {% if auth_user %}onclick="down();"{% endif %}></div>
+           {% if not auth_user %}
+            </a>
+           {% endif %}
+          </div>
           <div class="span9" id="content-single">
 	    <div id="content-single-wrapper">
               <h1 id="title">{{ punn.title }}</h1>
@@ -154,7 +154,6 @@
                   <form method="post" action="">
                       {% csrf_token %}
                       {{ comment_form.content }}
-                  </form>
                   <a rel="tooltip" title="{% trans "Syntaxe des commentaires" %}" href="#syntax" role="button" class="btn pull-left" data-toggle="modal"><i class="icon-pencil"></i></a>
                   <button class="btn pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
                   </form>
