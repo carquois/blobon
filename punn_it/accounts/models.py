@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+from django.core.mail import mail_admins
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
@@ -73,5 +73,8 @@ def create_user_profile(sender, instance, created, **kwargs):
     """Add a signal to make sure a user profile is created for all users"""
     if created:
         UserProfile.objects.create(user=instance)
+        #envoye un email quand on ajoute un nouveau user
+        message = "Nouveau user : {username} - {email}".format(username=instance.username, email=instance.email)
+        mail_admins("Nouveau user", message)
 
 post_save.connect(create_user_profile, sender=User)
