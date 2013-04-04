@@ -7,7 +7,22 @@ La mission de Blobon est de répertorier tout le contenu du Web et de le rendre 
 
 Depuis les 10 dernières années, le Web a beaucoup évolué pour prendre beaucoup de place dans nos vies. 
 
-**Entrer qq stats sur le temps passé en ligne ici
+Voici les sites les plus populaires en Amérique du nord selon Alexa.com :  
+
+Rang | Site
+--- | --- 
+1  | Google
+2  | Facebook
+3  | YouTube
+4  | Yahoo!
+5  | Amazon.com
+6  | eBay
+7  | Wikipedia
+8  | Craigslist
+9  | Windows Live
+10 | Bing
+
+
 
 ###Le Web social
 
