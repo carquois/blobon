@@ -1,4 +1,4 @@
-{% load thumbnail i18n compress dajaxice_templatetags %}
+{% load thumbnail i18n compress dajaxice_templatetags calculate_age %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,6 +51,12 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
+    {% if request.user.is_authenticated %}
+        _gaq.push(['_setCustomVar', 3, 'uid', '{{request.user.pk}}', 1]);
+        _gaq.push(['_setCustomVar', 4, 'gender', '{{request.user.get_profile.gender}}', 1]);
+        _gaq.push(['_setCustomVar', 5, 'age', '{{request.user.get_profile.birthdate|age}}', 1]);
+    {% endif %}
+      
     </script>
     <script type='text/javascript'>
       var googletag = googletag || {};
