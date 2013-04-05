@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 from django.core.files import File
 from urlparse import urlparse
 import urllib2
@@ -100,4 +101,8 @@ class Command(BaseCommand):
             print new_punn.pub_date
             new_punn.save() 
           except AttributeError:
-            print "Pas d'image, on laisse faire"
+            print "Pas d'image, on essaie d'extraire l'image du contenu"
+            tree = BeautifulSoup(node.getElementsByTagName('content')[0].firstChild.data)
+            print "Img link :"
+            img_link = (tree.find('img')[0]).attr['src']
+            print img_link

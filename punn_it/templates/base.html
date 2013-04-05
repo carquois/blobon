@@ -1,8 +1,10 @@
-{% load thumbnail i18n compress %}
+{% load thumbnail i18n compress dajaxice_templatetags calculate_age %}
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    {% dajaxice_js_import %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ site.name }}{% endblock %}</title>
@@ -18,23 +20,13 @@
     <meta name="twitter:title" content="{{ site.name }}">
     <meta name="twitter:image" content="http://{{ site.domain }}{{ STATIC_URL }}img/avatar.png">
 {% endblock %}
-{% block javascript %}
-    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-    <!-- Changer le loading des pages en ajax. -->
-    <script>
-      $(document).bind("mobileinit", function () {
-        $.mobile.ajaxEnabled = false;
-      });
-    </script>
-    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-{% endblock %}
+    <script src="{{ STATIC_URL }}js/jquery.dajax.core.js"></script>
 {% block css %}
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-    <!-- Le styles -->
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet/less" href="{{ STATIC_URL }}less/style.less">
+    <script src="{{ STATIC_URL }}js/less.js" type="text/javascript"></script>
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
     {% compress css %}
-    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
     {% endcompress %}
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -42,15 +34,6 @@
     <![endif]-->
 {% endblock %}
 {% block additional_css %}
-    <style>
-      body {
-        padding-top: 60px;
-        background-color: black!important;
-        background-image:url('{{ STATIC_URL }}img/back.jpeg')!important;
-        background-repeat:no-repeat!important; 
-        background-position:center!important;
-     }
-    </style>
 {% endblock %}
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
@@ -80,6 +63,14 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
+    {% if request.user.is_authenticated %}
+        _gaq.push(['_setCustomVar', 3, 'uid', '{{request.user.pk}}', 1]);
+        _gaq.push(['_setCustomVar', 4, 'gender', '{{request.user.get_profile.gender}}', 1]);
+        {% if request.user.get_profile.birthdate %}
+        _gaq.push(['_setCustomVar', 5, 'age', '{{request.user.get_profile.birthdate|age}}', 1]);
+        {% endif %}
+    {% endif %}
+      
     </script>
     <script type='text/javascript'>
       var googletag = googletag || {};
@@ -105,21 +96,11 @@
         googletag.enableServices();
       });
     </script>
-    <script type="text/javascript" language="JavaScript">
-        (function() {
-          var proto = (window.location.protocol == "https:" ? "https:" : "http:");
-          document.writeln('<scr' + 'ipt type="text/ja' + 'vascr' + 'ipt" s' + 'rc="' +
-                      proto + '//cdn.oboxads.com/oboxads/oboxads-min.js?ver=2'+
-                      '"></scr' + 'ipt>');
-    
-        })();
-    </script>
-    <script type="text/javascript" language="JavaScript">
-        OBOXADS.vars.lang = 'fr'; 
-        {% block oboxpath %}
-        OBOXADS.vars.sectionPathName = 'home';
-        {% endblock %}
-        OBOXADS.fn.init();
+    <!-- To initialize the tooltips -->
+    <script type="text/javascript">
+      $(function () {
+        $("[rel='tooltip']").tooltip();
+      });
     </script>
   </head>
   <body>
@@ -131,119 +112,156 @@
       js.src = "//connect.facebook.net/fr_CA/all.js#xfbml=1&appId=339826172767964";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
-{% block mobile %}
-    <div class="visible-phone" data-role="page">
-{% include "mobile-header.html" %}
-      <div data-role="content" style="margin-top:-15px;background:#000;">	
-{% for punn in punns %}
-        <a href="{{ punn.get_absolute_url }}">
-        {% thumbnail punn.pic "140x172" crop="center" as im %}
-          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
-        {% endthumbnail %}
-        </a>
-{% endfor %}
-      </div><!-- /content-->
-{% include "mobile-header.html" %}
-    </div><!-- /page --> 
-{% endblock %}
-{% block topmenu %}
-{% include "topmenu.html" %}
-{% endblock %}
-{% block top-content %}
-    <div class="container hidden-phone" style="margin-top:35px;">
-      <div class="row">
-        <div class="span12" style="width: 1170px;">
-          <div class="row ">
-            <div class="span8 blancBG " style="width: 770px;"> 
-<div style=" background:white;
-   padding: 10px;
-   text-align:center;margin-bottom:10px;">
-<div id='div-gpt-ad-1363051510706-0' style='width:728px; height:90px;margin-left:10px;'>
-<script type='text/javascript'>
-googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
-</script>
-</div>
-</div>
-
-{% endblock %}
-{% block navbar %}
-              <div class="navbar">
-                <div class="navbar-inner">
-                  <ul class="nav">
-                    <li class="active"><a href="{% url punns.views.index %}">{% trans 'Nouveau' %}</a></li>
-                    <li class="divider-vertical"></li>
-                    <li class="dropdown">
-                      <a class="dropdown-toggle"
-                        data-toggle="dropdown"
-                        href="#">
-                        {% trans 'Les plus populaires' %}
-                        <b class="caret"></b>
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li><a href="{% url punns.views.today %}">{% trans "Aujourd'hui" %}</a></li>
-                        <li><a href="{% url punns.views.week %}">{% trans 'Dernière semaine' %}</a></li>
-                        <li><a href="{% url punns.views.month %}">{% trans 'Dernier mois' %}</a></li>
-                        <li><a href="{% url punns.views.top %}">{% trans 'Depuis le début' %}</a></li>
-                      </ul>
-                    </li>    
+    <div id="wrap">
+       {% block top-ads %}
+      <div id='div-gpt-ad-1363051510706-0' class="hidden-phone skyscr">
+        <script type='text/javascript'>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
+        </script>
+      </div>
+      <div id='div-gpt-ad-1360772351679-1' style='width:320px; height:50px; margin-left: -17px;' class="visible-phone">
+        <script type='text/javascript'>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-1'); });
+        </script>
+      </div>
+      {% endblock %}
+     {% block topmenu %}
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+  	    <a class="brand" href="{% url punns.views.index %}">{{ site.name }}</a>
+            <div class="nav-collapse collapse">
+             {% if not auth_user %}
+              <a href="{% url accounts.views.signup %}" class="btn" id="join">{% trans "Rejoindre" %} {{ site.name }}</a>
+             {% endif %}
+              <ul class="nav" style="display:none">
+                <li>
+                  <a class="piton image" href="/random/"></a>
+                </li>
+                <li>
+                  <a class="piton video" href="{% url punns.views.videos %}"></a>
+                </li>
+                <li>
+                  <a class="piton crayon" href="/random/"></a>
+                </li>
+                <li>
+                  <a class="piton random" href="/random/"></a>
+                </li>
+              </ul>
+              <ul class="nav pull-right">
+		{% if not auth_user %}
+                <li class="dropdown li-items" style="display:none">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Langue" %}: {% trans "Français" %}<b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+                    <li><a href="#">English</a></li>
                   </ul>
-                </div>
-              </div>
-{% endblock %}
-{% block content %}
-              <div style="margin-top:-20px;" class="grosseEstidColonne" >
-{% for punn in punns %}
-                <div class="thumbnailsMAIN">
-      	          <a href="{{ punn.get_absolute_url }}">
-                    <div class="itemPhoto">
-                    {% thumbnail punn.pic "157x192" crop="center" as im %}
-                      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ punn.title }}">
-                    {% endthumbnail %}
-                    </div>
-                    <div class="itemDesc">
-
-                      {{ punn.title|truncatechars:60 }}
-                    </div>
-                  </a>
-                </div>
-{% endfor %}
-                
-                <ul class="pager span7" style="margin-left:50px;">
-{% if punns.has_previous %}
-                  <li class="previous">
-                    <a href="?page={{ punns.previous_page_number }}" rel="nofollow">&larr; {% trans 'Prev' %}</a>
-                  </li>
-{% else %}
-                  <li class="previous disabled">
-                    <a href="#">&larr; {% trans 'Prev' %}</a>
-                  </li>
-{% endif %}
-{% if punns.has_next %}
-                  <li class="next">
-                    <a href="?page={{ punns.next_page_number }}" rel="nofollow">{% trans 'Next' %} &rarr;</a>
-                  </li>
-{% else %}
-                  <li class="next disabled">
-                    <a href="#">{% trans 'Next' %} &rarr;</a>
-                  </li>
-{% endif %}
-                </ul>
-                <div style="clear:both"></div>
-
-              </div>
-            </div>
-            <div class="span4" style="margin-left: 25px;" >
-              <div class="box-right-wrap">
-
-{% include "blocpub.html" %}
-
-              </div>		                        
-            </div>
+                </li>
+		{% endif %}
+		{% if auth_user %}
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" href="/{{ user.username }}/">
+                  {% thumbnail auth_user.userprofile.avatar "35" crop="center" as im %}
+                    <img src="{{ im.url }}" alt="{{ auth_user.userprofile.description }}">
+                  {% endthumbnail %}
+                    <b class="caret"></b>
+		  </a>
+	          <ul class="dropdown-menu">
+                    <li><a href="{% url django.contrib.auth.views.logout %}">{% trans "Se déconnecter" %}</a></li>
+                  </ul>
+                </li>
+		{% else %}
+                <li class="li-items">
+                  <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">{% trans "Se connecter" %}</a>
+                </li>
+		{% endif %}
+              </ul>
+	      <form class="pull-right navbar-search" action="{% url punns.views.search %}" method="get" style="display:none">
+                <input type="text" name="q" class="search-query span3" placeholder="Recherche">
+	        <div class="icon-search"></div>
+	      </form>
+            </div><!--/.nav-collapse -->
           </div>
         </div>
       </div>
-    </div><!-- /container -->
-{% endblock %}
-  <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
+     {% endblock %}
+     {% block container %}
+      <div class="container">
+        <div class="row">
+         {% block content %}
+          <div id="content" class="span8 transitions-enabled infinite-scroll clearfix">
+           {% for punn in punns %}
+            <div class="thumbs">
+  	      <a href="{{ punn.get_absolute_url }}">
+  	        <!--<span></span>-->
+	       {% thumbnail punn.pic "153x182" crop="center" as im %}
+  	        <img src="{{ im.url }}" alt="{{ punn.title }}"/>
+	       {% endthumbnail %}
+  	      </a>
+  	    </div>
+           {% endfor %}
+          </div>
+         {% endblock %}
+         {% block sidebar %}
+          <div id="sidebar" class="span3 visible-desktop">
+            {% block top-sidebar %}{% endblock %}
+            <!-- 300x250TopRight -->
+	    <div id='div-gpt-ad-1360772351679-0'>
+	      <script type='text/javascript'>
+	        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-0'); });
+	      </script>
+	    </div>
+            <!-- SkyScrapper -->
+            <div id='div-gpt-ad-1363052072029-0' style='width:160px; height:600px;margin-left:60px;margin-top: 20px;margin-bottom: 20px;'>
+              <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363052072029-0'); });
+              </script>
+            </div>
+          </div>
+       {% endblock %}
+        </div>
+      </div> <!-- /container -->
+     {% endblock %}
+      <nav id="page-nav">
+        <a href="?page={{ punns.next_page_number }}"></a>
+      </nav>
+      <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+      <script src="{{ STATIC_URL }}js/jquery.masonry.min.js"></script>
+      <script src="{{ STATIC_URL }}js/jquery.infinitescroll.min.js"></script>
+      <script>
+        $(function(){
+          var $container = $('#content');
+          $container.imagesLoaded(function(){
+            $container.masonry({
+              itemSelector: '.thumbs',
+	      columnWidth: 170,
+	      gutterWidth: 30,
+	      isAnimated: true 
+            });
+          });
+          $container.infinitescroll({
+            navSelector  : '#page-nav',    // selector for the paged navigation 
+            nextSelector : '#page-nav a',  // selector for the NEXT link (to page 2)
+            itemSelector : '.thumbs',     // selector for all items you'll retrieve
+            loading: {
+                finishedMsg: "{% trans 'Chargement terminé' %}",
+                img: '{{ STATIC_URL }}img/loading.gif'
+              }
+            },
+            function( newElements ) {
+              var $newElems = $( newElements ).css({ opacity: 0 });
+              $newElems.imagesLoaded(function(){
+                $newElems.animate({ opacity: 1 });
+                $container.masonry( 'appended', $newElems, true ); 
+              });
+            }
+          );
+        });
+      </script>
+    </div>
   </body>
 </html>

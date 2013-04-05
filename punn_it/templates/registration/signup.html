@@ -4,95 +4,58 @@
 {% block title %}{% trans 'Se créer un compte' %}{% endblock %}
 {% block additional_css %}
     <style>
+      body {
+        background: url({{ STATIC_URL }}img/blob_bg.gif);
+      }
 
-body {
-  background: url({{ STATIC_URL }}img/blob_bg.gif);
-}
-
-.centered {
-  width: 700px;
-  margin: auto;
-  text-align: center;
-  vertical-align: middle;
-}
-.titre{
-  color: #505050;
-  font-family:helvetica, arial, sans-serif; 
-  font-size:32px; 
-  font-weight:normal;
-}
-.social-btn{
-  width: 259px;
-  height: 72px;
-  background:url('{{ STATIC_URL }}img/social-sprite.gif');
-}
-.fb {
-  background-position: 0 0;
-  float: left;
-  margin-left:80px;
-}
-.fb:hover {
-  background-position: 0 -72px;
-}
-.fb:active {
-  background-position: 0 -144px;
-}
-.tw {
-  background-position: 0 -216px;
-  float: right; 
-  margin-right:80px;
-}
-.tw:hover {
-  background-position: 0 -288px;
-}
-.tw:active {
-  background-position: 0 -360px;
-}
-.google {
-  background-position: 0 -432px;
-  margin:auto;
-  width: 216px;
-  margin-top:20px;
-}
-.google:hover {
-  background-position: 0 -504px;
-}
-.google:active {
-  background-position: 0 -576px;
-}
-a {
-  color:#f4663b;
-}
-p {
-  color:#828282;
-} 
-
+      a {
+        color:#f4663b;
+      }
+      p {
+        color:#828282;
+      }
+      @media (max-width: 479px) {
+        .logo {
+          display:none;
+        } 
+      } 
     </style>
 {% endblock %}
-
-{% block content %}
+{% block topmenu %}
+{% endblock %}
+{% block top-ads %}
+{% endblock %}
+{% block container %}
      <div class="centered">
-       <img src="{{ STATIC_URL }}img/logo-texte.png" alt="Logo" />
+       <div class="logo"></div>
        <hr>
-       <h2 class="titre">{% trans 'Se connecter avec' %}</h2>
-       <hr>
+       <h2 class="titre">{% trans 'Créez votre compte avec :' %}</h2>
        <div class="row">
          <a href="{% url 'socialauth_begin' backend='facebook' %}">
            <div class="social-btn fb"></div>
          </a>
-         <a href="{% url 'socialauth_begin' backend='twitter' %}">
+         <a href="{% url 'socialauth_begin' backend='twitter' %}" style="display: none">
            <div class="pull-right social-btn tw"></div>
          </a>
        </div>
-       <div class="row">
-         <a href="{% url 'socialauth_begin' backend='google' %}">
-           <div class="social-btn google"></div>
-         </a>
+       <hr>
+       <p><small><a href="#myModal" data-toggle="modal">{% trans "Nous ne publierons rien sans votre permission"  %}</a></small></p>
+       <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+           <h3 id="myModalLabel">{% trans "À propos de l'inscription avec Facebook"  %}</h3>
+         </div>
+         <div class="modal-body">
+           <p>{% trans "Si vous décidez d'utiliser l'incription avec Facebook, vous avez accès à une inscription en un seul clic. Nous allons demander quelques information dans le but de vous présenter du contenu et des publicités plus ciblées. "  %}</p>
+           <p>{% trans "Nous demandons aussi la permission de publier en votre nom. Nous ne le ferons pas tant que vous nous spécifiez explicitement que vous voulez publier (votre commentaire par exemple) sur votre profil." %}</p>
+         </div>
+         <div class="modal-footer">
+           <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Fermer"  %}</button>
+         </div>
        </div>
+       <!--<p>{% trans 'ou inscrivez-vous en utilisant' %} <a href"#">{% trans 'votre adresse courriel' %}</a></p>-->
        <hr>
-       <p>{% trans 'ou inscrivez-vous en utilisant' %} <a href="#">{% trans 'votre adresse courriel' %}</a></p>
-       <hr>
-       <p><small>{% trans 'Vous avez déjà un compte ?' %} <a href="#">{% trans 'Se connnecter' %}</a></small></p>
-     </div/ 
+       <p><small>{% trans 'Vous avez déjà un compte ?' %} <a href="/login/">{% trans 'Se connnecter' %}</a></small></p>
+     </div>
 {% endblock %}
 

@@ -8,12 +8,12 @@ import urllib2
 from urlparse import urlparse
 from cgi import parse_qs
 
-
 from accounts.models import UserProfile, UserForm, UserProfileForm
 from comments.models import Comment
+from comments.forms import CommentForm
 from punns.models import Punn, PunnForm
 from punns.utils import BASE10, BASE62, baseconvert
-from votes.models import PunnVote
+from votes.models import PunnVote, CommentVote
 
 from django import forms
 from django.conf import settings
@@ -42,10 +42,29 @@ def index(request):
                        20)
       site_description = settings.MAIN_SITE_DESCRIPTION
       site = get_current_site(request)
+      auth_user = ""
+      if request.user.is_authenticated():
+        auth_user = request.user
       return render_to_response('base.html',
                                {'user': user, 'site_description': site_description,
-                                'punns': punns, 'site': site},
+                                'punns': punns, 'site': site, 'auth_user': auth_user},
                                 context_instance=RequestContext(request))
+def videos(request):
+      user = UserProfile.objects.get(pk=3)
+      punns = paginate(request,
+                       Punn.objects.filter(author=user).filter(status='P').exclude(youtube_id__isnull=True).exclude(youtube_id='').order_by('-pub_date'),
+                       20)
+      site_description = settings.MAIN_SITE_DESCRIPTION
+      site = get_current_site(request)
+      auth_user = ""
+      if request.user.is_authenticated():
+        auth_user = request.user
+      return render_to_response('base.html',
+                               {'user': user, 'site_description': site_description,
+                                'punns': punns, 'site': site, 'auth_user': auth_user},
+                                context_instance=RequestContext(request))
+
+
 
 def draft(request):
       user = UserProfile.objects.get(pk=3)
@@ -233,20 +252,37 @@ def single(request, shorturl):
     if punn.content:
         content = linkify(punn.content) 
         content = markdown.markdown(content)
+        
+    #save new comment before querying for comments related to this punn
+    comment_form = CommentForm(request.POST or None)
+    if request.user.is_authenticated() and comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.punn = punn
+        comment.author = request.user
+        comment.save()
+        #redirect user so a refresh doesn't trigger a double post
+        return HttpResponseRedirect( punn.get_absolute_url() )
+        
+
     comment_list = Comment.objects.filter(punn=punn).order_by('-pub_date')
     for comment in comment_list:
         comment.content = linkify(comment.content)
         comment.content = markdown.markdown(comment.content)
+        votesup = CommentVote.objects.filter(comment=comment).filter(vote='U')
+        votesdown = CommentVote.objects.filter(comment=comment).filter(vote='D')
+        comment.karma = votesup.count() - votesdown.count()
     url = request.build_absolute_uri()
     site_description = settings.MAIN_SITE_DESCRIPTION
     site = get_current_site(request)
+    
+    
     return render_to_response('single.html', 
                               {'punn': punn, 'latest_punn_list': latest_punn_list,
                                'next_punn': next_punn, 'prev_punn': prev_punn, 
                                'content': content, 'comment_list': comment_list,
                                'url': url, 'karma':karma, 'auth_user':auth_user,
                                'vote': vote, 'user': punn.author, 'home': home, 
-                               'site_description': site_description, 'site': site}, 
+                               'site_description': site_description, 'site': site, 'comment_form': comment_form}, 
                               context_instance=RequestContext(request))
 
 class UserFeed(Feed):

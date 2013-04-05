@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n thumbnail punn_tags %}
+{% load i18n thumbnail punn_tags humanize %}
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ punn.title }}" />
@@ -11,195 +11,247 @@
     <meta name="twitter:url" content="{{ url }}">
     <meta name="twitter:title" content="{{ punn.title }}">
     <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}">
-<style>
-
-.social-btn{
-  width: 259px;
-  height: 72px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  background:url('{{ STATIC_URL }}img/social-sprite.gif');
-}
-.fb {
-  background-position: 0 0;
-}
-.tw {
-  background-position: 0 -216px;
-}
-.fb:active {
-  background-position: 0 -144px;
-}
-.tw:active {
-  background-position: 0 -360px;
-}
-</style>
-
-
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
-{% block oboxpath %}
-        OBOXADS.vars.sectionPathName = 'post';
-        OBOXADS.vars.postID = {{ punn.id }};
-{% endblock %}
-{% block navbar %}
-{% endblock %}
-{% block mobile %}
-    <div class="visible-phone" data-role="page" id="post" style="background: #000;">
-      <div data-role="header">
-        <a href="{{ prev_punn.get_absolute_url }}" data-icon="arrow-l">Prev</a>
-        <h1><a href="http://{{ site.domain }}"><img src="{{ STATIC_URL }}img/cdclogo.png" alt="Check Donc Ça" width="120px;" /></a></h1>
-        <a href="{{ next_punn.get_absolute_url }}" data-icon="arrow-r" data-iconpos="right" >Next</a>
-      </div><!-- /header -->
-      <div data-role="content" style="margin-top:-10px;">
-        <p style="color: #DDDDD1;">{{ punn.title }}</p>
-        <a href="{{ next_punn.get_absolute_url }}">
-            {% if punn.pic|is_animated_gif %}
-                <img src="{{ MEDIA_URL }}{{ punn.pic }}" width="100%" />
-            {% else %}
-                {% thumbnail punn.pic  "728" upscale=False as im  %}
-                    <img src="{{ im.url }}" width="100%" />
-                {% endthumbnail %}
-            {% endif %}
-        </a>
-        
-      </div><!-- /content -->
-      <div data-role="footer" class="ui-bar">
-        <p><a href="#share" data-icon="plus" data-role="button">{% trans "Partager" %}</a></p>
-      </div><!-- /footer -->
-      <!-- MobileLeaderboardBelowTheContent -->
-      <div id='div-gpt-ad-1360772351679-1' style='width:320px; height:50px;'>
-      <script type='text/javascript'>
-      googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-1'); });
+    {% block content %}
+     {% if auth_user %}
+      <script type="text/javascript" charset="utf-8">
+        function up(data){
+           Dajaxice.punns.up(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
+        }
+        function down(data){
+           Dajaxice.punns.down(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
+        }
       </script>
-      </div>
-    </div><!-- /page -->
-    <div data-role="page" id="share" data-theme="c">
-      <div data-role="header" date-theme="c">
-        <h1>{% trans "Partagez sur :" %} </h1>
-      </div><!-- /header -->
-      <div data-role="content" data-theme="c">	
-        <a href="http://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank">
-          <div class="social-btn fb"></div>
-        </a>
-        <a href="https://twitter.com/intent/tweet?text={{ punn.title|iriencode }}&url={{ url|iriencode }}" target="_blank">
-          <div class="social-btn tw"></div>
-        </a>
-        <p><a href="#post" data-role="button">{% trans "Retour à :" %} {{ punn.title }}</a></p>
-      </div><!-- /content -->
-    </div><!-- /page share -->
-{% endblock %}
-{% block content %}
-              <div class="grosseEstidColonne" >
+     {% endif %}
+      <div class="container">
+        <div class="row">
+          <div id="vote-wrapper" class="visible-desktop">
+           {% if not auth_user %}
+            <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">
+           {% endif %}
+            <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}" {% if auth_user %}onclick="up();"{% endif %}></div>
+           {% if not auth_user %}
+            </a>
+           {% endif %}
+            <div class="vote-up-down point"><p style="text-align:center;padding-top:17px;" id="karma">{{ karma }}</p></div>
+           {% if not auth_user %}
+            <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">
+           {% endif %}
+            <div id="downbutton" class="vote-up-down down {% if vote == "D" %} down-on{% endif %}" {% if auth_user %}onclick="down();"{% endif %}></div>
+           {% if not auth_user %}
+            </a>
+           {% endif %}
+          </div>
+          <div class="span9" id="content-single">
+	    <div id="content-single-wrapper">
+              <h1 id="title">{{ punn.title }}</h1>
+	      <div id="image-wrapper">
+	       {% if punn.youtube_id %}
+                <iframe src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+               {% else %}
+	        {% if punn.pic %}
+                <a href="{{ next_punn.get_absolute_url }}">
+                  <img id="main-image" src="{{ MEDIA_URL }}{{ punn.pic }}" />
+                </a>
+	        {% endif %}
+	       {% endif %}
+               {% if content %}
+                <div id="article-content">
+                   {{ content|safe }}
+                </div>
+               {% endif %}
                 <script>
                   $(document).ready(function () {
                     $(document).keydown(function(e) {
-                      var url = false;
-                      if (e.which == 37) {
-                        url = "{{ prev_punn.get_absolute_url }}";
-                      }else if (e.which == 39) {
-                        url = "{{ next_punn.get_absolute_url }}"
-                      }
-                      if (url) {
-                        window.location = url;
+                      if ($(e.target).is('input, textarea')) {
+                      }else{
+                        var url = false;
+                        if (e.which == 37) {
+                          url = "{{ prev_punn.get_absolute_url }}";
+                        }else if (e.which == 39) {
+                          url = "{{ next_punn.get_absolute_url }}";
+                        }else if (e.which == 82) {
+                          url = "{% url punns.views.random %}"; 
+                        }
+                        if (url) {
+                          window.location = url;
+                        }
+                        if (e.which == 70) {
+                          up(); 
+                        }
+                        if (e.which == 65) {
+                          down(); 
+                        }
+                        if (e.which == 67) {
+                          $("#comment-box").focus();
+			  return false;
+                        }
                       }
                     });
                   });
+                  jQuery(function($){
+                    $('#comment-box').focus(function(){
+                      $(this).attr('rows',5);
+		      return false;
+                    });
+                  }); 
                 </script>
-                <div class="top-main-col" >
-                  <div style="padding-top:5px;line-height: 1.1;" id="singleTitle">
-                    {{ punn.title }}
+                <div id="buttons-below-the-content">
+                  <div class="separator separator-with-margin"></div>
+                  <div class="btn-toolbar" id="below-content-toolbar">
+                    <div class="btn-group pull-left">
+                      <a rel="tooltip" title="{% trans "Rapporter" %}" href="mailto:gab@checkdonc.ca" class="btn"><i class="icon-flag"></i></a>
+                      <a href="#share" role="button" class="btn" data-toggle="modal">{% trans "Partager" %}</a>
+                    </div>
+                    <div class="btn-group pull-right">
+                      <a rel="tooltip" title="{% trans "Page précédente" %}" href="{{ prev_punn.get_absolute_url }}" class="btn">&larr;</a>
+                      <a rel="tooltip" title="{% trans "Page suivante" %}" href="{{ next_punn.get_absolute_url }}" class="btn">&rarr;</a>
+                    </div>
                   </div>
-                </div>
-                <div style="padding-top:10px;text-align:center;margin-bottom:20px" class="main-content" >
-{% if punn.youtube_id %}
-                  <iframe width="640" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
-{% else %}
-                  <a href="{{ next_punn.get_absolute_url }}">
-                      {# don't resize animated gif #}
-                      {% if punn.pic|is_animated_gif %}
-                          <img id="mainImage" style="max-width:728px;" src="{{ MEDIA_URL }}{{ punn.pic }}" />
-                      {% else %}
-                          {% thumbnail punn.pic  "728" upscale=False as im  %}
-                            <img id="mainImage" style="max-width:728px;" src="{{ im.url }}" />
-                          {% endthumbnail %}
-                      {% endif %}
-                  </a>
-{% endif %}
-                </div>
-{% if content %}
-                <div style="margin-left: 20px;margin-right: 20px;">
-                  {{ content|safe }}
-                </div>
-                <hr style="border-top: 1px solid lightgray;">
-{% endif %}
-                <div class="row" style="margin-left:30px;">
-                  <div class="addthis_toolbox addthis_default_style ">
-                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-                    <a style="padding-left:20px;" class="addthis_button_tweet"></a>
-                    <a class="addthis_button_pinterest_pinit"></a>
-                    <a style="padding-left:10px;" class="addthis_button_google_plusone" g:plusone:size="medium"></a> 
-                    <a class="addthis_counter addthis_pill_style"></a>
-                  </div>
-                  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f31a102440808e2"></script>
-                </div>
-                <div class="row" style="margin-left:1px;margin-top:20px;">
-                  <div class="span1">
-                    <a href="/{{ user.username }}/">
-                    {% thumbnail user.userprofile.avatar "70" crop="center" as im %}
-                      <img src="{{ im.url }}" alt="{{ userprofile.description }}">
+                  <div style="clear:both;"></div>
+                  <div class="separator separator-with-margin"></div>
+                  <div class="pull-left" id="author-avatar">
+                    {% thumbnail punn.author.userprofile.avatar "70" crop="center" as im %}
+                    <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}">
                     {% endthumbnail %}
-                    </a>
                   </div>
-                  <div class="span4" style="text-align:left;">
-                    <p style="margin: 0 0 4px;">{{ user.first_name }} {{ user.last_name }}</p>
-                    <p style="margin: 0 0 4px;"><a href="/{{ user.username }}/">@{{ user.username }}</a></p>
-                    <p style="margin: 0 0 4px;color:gray;">
-                      {% trans 'Publié le' %} {{ punn.pub_date|date:"SHORT_DATE_FORMAT" }} {% if punn.source %}via <a href="{{ punn.source }}" target="_blank">(Source)</a>{% endif %}
-                    </p>
-                  </div>
-                  <div class="span2" style="float:right;text-align:right;">
-                    <p style="margin-right:30px;margin-bottom:4px;"><strong>{{ punn.views }}</strong></p>
-                    <p style="margin-right:30px;margin-bottom:4px;color:gray;">{% trans 'vues' %}</p>
-                    <p style="margin-right:30px;margin-bottom:4px;"><i class="icon-flag"></i> <small><a href="mailto:gab@checkdonc.ca">{% trans 'Rapporter' %}</a></small></p>
+                  <div class="pull-left" id="informations">
+                    <p>{{ punn.author.first_name }} {{ punn.author.last_name }}</p>
+                    <p><a href="/{{ user.username }}/">@{{ user.username }}</a></p>
+                    <p id="published-infos">{% trans "Publié" %} {{ punn.pub_date|naturaltime }} {% if punn.source %}{% trans "via" %} <a href="{{ punn.source }}" target="_blank">(Source)</a>{% endif %}</p>
                   </div>
                 </div>
-                <div style="margin-top:20px;padding-left:25px;" class="fb-comments" data-href="{{ url }}" data-num-posts="6" data-width="728"></div>
+                <div id="share" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">{% trans "Partager" %}</h3>
+                  </div>
+                  <div class="modal-body">
+                    <div class="addthis_toolbox addthis_default_style ">
+                      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                      <a style="padding-left:20px;" class="addthis_button_tweet"></a>
+                      <a class="addthis_button_pinterest_pinit"></a>
+                      <a style="padding-left:10px;" class="addthis_button_google_plusone" g:plusone:size="medium"></a> 
+                      <a class="addthis_counter addthis_pill_style"></a>
+                    </div>
+                    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f31a102440808e2"></script>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Fermer" %}</button>
+                  </div>
+                </div>
+                <div id="comment-block">
+                  <form method="post" action="">
+                      {% csrf_token %}
+                      {{ comment_form.content }}
+                  <a rel="tooltip" title="{% trans "Syntaxe des commentaires" %}" href="#syntax" role="button" class="btn pull-left" data-toggle="modal"><i class="icon-pencil"></i></a>
+                  <button rel="tooltip" title="{% trans "Cliquez ici pour soumettre votre commentaire" %}" class="btn pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
+                  </form>
+                </div>
+                <div style="clear: both;">
+                <div id="syntax" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="syntaxLabel" aria-hidden="true">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="syntaxLabel">{% trans "Syntaxe" %}</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>{% trans "Bonjour les amis," %}</p>
+                    <p>{% trans "Vous allez remarquer que nous avons mis une syntaxe dans les commentaires qui vous permet de formater vos commentaires un peu comme dans un document Word. Vous avez donc accès à mettre du texte en gras, en italique et tout plein d'autres trucs cool comme ceux-là." %}</p>
+                    <p>{% trans "Pour appliquer une syntaxe, vous n'avez qu'à lire plus bas. Sinon, vous pouvez toujours écrire vos commentaires normalement, à la bonne franquette, comme sur Facebook par exemple." %}</p>
+                    <br />
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>{% trans "Vous écrivez :" %}</th>
+                          <th>{% trans "Vous voyez :" %}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>*{% trans "italique" %}*</td>
+                          <td><em>{% trans "italique" %}</em></td>
+                        </tr>
+                        <tr>
+                          <td>**{% trans "gras" %}**</td>
+                          <td><strong>{% trans "gras" %}</strong></td>
+                        </tr>
+                        <tr>
+                          <td>[Check Donc Ça](http://checkdonc.ca)</td>
+                          <td><a href="http://checkdonc.ca" target="_blank">Check Donc Ça</a></td>
+                        </tr>
+                        <tr>
+                          <td>> {% trans "texte cité" %}</td>
+                          <td><blockquote><p>{% trans "texte cité" %}</p></blockquote></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p>{% trans "Pour plus d'exemples :" %} <a href="http://fr.wikipedia.org/wiki/Markdown#Quelques_exemples" target="_blank">Markdown</a></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Fermer" %}</button>
+                  </div>
+                </div>
+                {% if comment_list %} 
+                <!--<div class="best-all-comments">{% trans "Meilleur commentaire" %}</div>-->
+                {% for comment in comment_list|dictsortreversed:"karma" %}
+                {% if forloop.counter == 2 %}
+                <!--<div class="best-all-comments" id="all-comments">{% trans "Tous les commentaires" %}</div>--> 
+                {% endif %}
+                <div class="separator"></div>
+                <div id="comment-wrapper">   
+                  <div id="vote-comment-wrapper" style="display:none">
+                    <div class="comment-vote comment-vote-up"></div>
+                      <!--<div class="comment-vote comment-vote-up-on"></div>-->
+                    <p id="comment-score">{{ comment.karma }}</p>
+                    <div class="comment-vote comment-vote-down"></div>
+                      <!--<div class="comment-vote comment-vote-down-on"></div>-->
+                  </div>                    
+                  <div id="comment-author-avatar">
+                    <img src="{{ MEDIA_URL }}{{ comment.author.userprofile.avatar }}">
+                  </div>
+                  <div id="comment-right-column">
+                    <div id="username-comment">{{ comment.author.username }}</div>
+                    <p class="comment-time">{{ comment.created|naturaltime }}</p>
+                    <br />
+                    <div id="comment">
+                      {{ comment.content|safe }}
+                    </div>
+                  </div>
+                </div>
+                <div style="clear: both;">                
+                </div>                
+                {% endfor %}
+                {% endif %}
+                <div style="clear: both;">                
+                </div>                
               </div>
-            </div>
-            <div class="span4" style="margin-left: 25px;" >
-              <div class="box-right-wrap">
-              <div class="box-thumbnails" style="width:300px;height:264px;margin-right:6px;margin-bottom:24px;">
-                <div id="fleche" style="margin-bottom:-5px; padding-top:6px;text-decoration: none; text-align:center;">
-                  <a href="{{ prev_punn.get_absolute_url }}" style="text-decoration: none;font-family: helvetica-bold; font-size: 11px; color: #3f3f3f;"><i class="icon-arrow-left" style="margin-top:-2px;"></i>&nbsp;PREV</a>	
-                  <span class="espace" style="margin-left:50px;">
-                  <a href="{{ next_punn.get_absolute_url }}" style="text-decoration: none;font-family: helvetica-bold; font-size: 11px; color: #3f3f3f;">NEXT&nbsp;<i class="icon-arrow-right" style="margin-top:-2px;"></i></a>
-                </div>
+           </div>
+         </div>
+      </div> <!-- /container -->
+     {% endblock %}
+     {% block top-sidebar %}
                 {% if latest_punn_list %}
-                <div class="thumbnails" style="margin-left:10px;margin-top:10px;">
+                  <div id="top-thumbs">
                   {% for punn in latest_punn_list %}
-                  <div class="thumb_single" style="width:94px;margin-bottom:-13px;margin-right:2px;">
                     <a class="thumbnails_images" href="{{ punn.get_absolute_url }}">
-                    {% thumbnail punn.pic "85x95" crop="center" as im %}
+                    {% thumbnail punn.pic "85x90" crop="center" as im %}
                       <img class="sidebarThumbs" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                     {% endthumbnail %}
                     </a>
-                  </div>
                   {% endfor %}
-                </div>
+                 </div>
                 {% else %}
                   <p>No more content</p>
                 {% endif %}
-                <div class="social-media" style="text-align:right;margin-right:10px;">
-               <a href=" {{ user.userprofile.facebook_link }}" style="font-family: helvetica-bold; font-size: 10.3px; color: #7f7f7f;"> AIMEZ-NOUS <img style="padding-bottom:4px;" src="{{ STATIC_URL }}img/icone_facebook.gif"></a>
-               <a href=" {{ user.userprofile.twitter_link }}" style="font-family: helvetica-bold; font-size: 10.3px; color: #7f7f7f;"> SUIVEZ-NOUS <img style="padding-bottom:4px;" src="{{ STATIC_URL }}img/icone_twitter.gif"></a>
-               </div>
-              </div><!--/.well -->
-{% include "blocpub.html" %}
-            </div><!--/span5-->
-          </div><!--/row-->
-        </div><!--/span12-->
-      </div><!--/row-->
-    </div><!--/.container-->
-{% endblock %}
+     {% endblock %}
+

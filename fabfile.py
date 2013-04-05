@@ -80,7 +80,7 @@ def get_mysql_db():
     get('/tmp/%s.sql.gz' % filename, '/tmp/%s.sql.gz' % filename)
 
     #load sql
-    local('gunzip < /tmp/%(filename)s.sql.gz | mysql -u %(user)s -h %(host)s -p%(password)s %(database)s' % {
+    local('zcat /tmp/%(filename)s.sql.gz | mysql -u %(user)s -h %(host)s -p%(password)s %(database)s' % {
         'user' : django_settings.DATABASES['default']['USER'],
         'password' : django_settings.DATABASES['default']['PASSWORD'],
         'host' : django_settings.DATABASES['default']['HOST'],

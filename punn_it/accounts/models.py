@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+from django.core.mail import mail_admins
 from django.db import models
+from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.forms import ImageField, EmailField, ModelForm, CharField, PasswordInput
 from django import forms
+from django.forms import ImageField, EmailField, ModelForm, CharField, PasswordInput
+
+from social_auth.signals import socialauth_registered
 
 
 class UserForm(ModelForm):
@@ -45,6 +48,15 @@ class UserProfile(models.Model):
     #Social media info
     facebook_link = models.URLField(max_length=100, blank=True)
     twitter_link = models.URLField(max_length=100, blank=True)
+    
+    birthdate = models.DateField(blank=True, null=True)
+    gender = models.CharField(blank=True, max_length=100, null=True, choices=(('m', 'Male'), ('f', 'Female'),))
+    fb_friends = models.TextField(blank=True, null=True)
+    fb_likes = models.TextField(blank=True, null=True)
+    fb_avatar = models.ImageField(upload_to='pics', blank=True, null=True)
+    is_new_from_social = models.BooleanField(default=False)
+    created_with_provider = models.CharField(blank=True, max_length=100)
+    
     def __unicode__(self):
         return self.description
 
@@ -56,3 +68,13 @@ class UserProfileForm(ModelForm):
         fields = ('avatar', 'domain')
 
 
+
+def create_user_profile(sender, instance, created, **kwargs):
+    """Add a signal to make sure a user profile is created for all users"""
+    if created:
+        UserProfile.objects.create(user=instance)
+        #envoye un email quand on ajoute un nouveau user
+        message = "Nouveau user : {username} - {email}".format(username=instance.username, email=instance.email)
+        mail_admins("Nouveau user", message)
+
+post_save.connect(create_user_profile, sender=User)

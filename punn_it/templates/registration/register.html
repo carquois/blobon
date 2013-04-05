@@ -10,17 +10,19 @@ body {
 }
 
 .centered {
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -100px;
+  width: 700px;
+  margin: auto;
 }
     </style>
 {% endblock %}
+{% block topmenu %}
+{% endblock %}
+{% block top-content %}
+{% endblock %}
+{% block navbar %}
+{% endblock %}
+{% block content %}
 
-
-{% block container %}
  <div class="centered">
     <form action="" method="post">{% csrf_token %}
     {{ form.non_field_errors }}
@@ -28,6 +30,10 @@ body {
         {{ form.username.errors }}
         {{ form.username.label_tag }}
         {{ form.username }}
+
+        {{ form.email.errors }}
+        {{ form.email.label_tag }}
+        {{ form.email }}
 
         {{ form.password1.errors }}
         {{ form.password1.label_tag }}
@@ -54,4 +60,3 @@ body {
     </p>
    </div/ 
 {% endblock %}
-
