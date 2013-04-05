@@ -54,7 +54,9 @@
     {% if request.user.is_authenticated %}
         _gaq.push(['_setCustomVar', 3, 'uid', '{{request.user.pk}}', 1]);
         _gaq.push(['_setCustomVar', 4, 'gender', '{{request.user.get_profile.gender}}', 1]);
+        {% if request.user.get_profile.birthdate %}
         _gaq.push(['_setCustomVar', 5, 'age', '{{request.user.get_profile.birthdate|age}}', 1]);
+        {% endif %}
     {% endif %}
       
     </script>
@@ -99,13 +101,18 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
     <div id="wrap">
-
-<div id='div-gpt-ad-1363051510706-0' class="hidden-phone skyscr">
-<script type='text/javascript'>
-googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
-</script>
-</div>
-
+       {% block top-ads %}
+      <div id='div-gpt-ad-1363051510706-0' class="hidden-phone skyscr">
+        <script type='text/javascript'>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
+        </script>
+      </div>
+      <div id='div-gpt-ad-1360772351679-1' style='width:320px; height:50px; margin-left: -17px;' class="visible-phone">
+        <script type='text/javascript'>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-1'); });
+        </script>
+      </div>
+      {% endblock %}
      {% block topmenu %}
       <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">

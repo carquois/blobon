@@ -24,6 +24,8 @@
 {% endblock %}
 {% block topmenu %}
 {% endblock %}
+{% block top-ads %}
+{% endblock %}
 {% block container %}
      <div class="centered">
        <div class="logo"></div>
@@ -35,7 +37,6 @@
          </a>
        </div>
        <hr>
-<!--
        <form class="form-horizontal" method="post" action="{% url 'django.contrib.auth.views.login' %}">{% csrf_token %}
        {% if form.non_field_errors %}
          <div class="alert alert-block alert-error">
@@ -70,7 +71,6 @@
          </div>
          <input type="hidden" name="next" value="{{ next }}" />
        </form>
--->
 {% endblock %}
 
 
