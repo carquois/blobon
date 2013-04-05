@@ -245,7 +245,7 @@
                   <div id="top-thumbs">
                   {% for punn in latest_punn_list %}
                     <a class="thumbnails_images" href="{{ punn.get_absolute_url }}">
-                    {% thumbnail punn.pic "97x120" crop="center" as im %}
+                    {% thumbnail punn.pic "90x90" crop="center" as im %}
                       <img class="sidebarThumbs" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                     {% endthumbnail %}
                     </a>
