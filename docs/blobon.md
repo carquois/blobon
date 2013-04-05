@@ -29,7 +29,8 @@ Dans les 15 premiers sur la liste, on dénombre 4 engins de recherche et 3 médi
 ###Le Web social
 
 > Les médias sociaux sont un groupe d’applications en ligne qui se fondent sur l’idéologie et la technologie du Web 2.0 et permettent la création et l’échange du contenu généré par les utilisateurs
-[Andreas Kaplan et Michael Haenlein](http://fr.wikipedia.org/wiki/M%C3%A9dias_sociaux)
+
+<small>[Andreas Kaplan et Michael Haenlein](http://fr.wikipedia.org/wiki/M%C3%A9dias_sociaux)</small>
 
 ![](img/facebook.jpg)
 
