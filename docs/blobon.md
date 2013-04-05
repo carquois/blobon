@@ -8,41 +8,40 @@ Voici les sites les plus populaires au monde selon [Google](http://www.google.co
 
 Rang | Site | Catégorie
 --- | --- | ---
-1  | google.com | Engin de recherche
+1  | google.com | Moteur de recherche
 2  | facebook.com | Média social
 3  | youtube.com | Média social vidéo
 4  | yahoo.com | Portail
-5  | live.com | Engin de recherche
+5  | live.com | Moteur de recherche
 6  | msn.com | Portail
 7  | wikipedia.org | Encyclopédie
 8  | blogspot.com | Média social blogue
-9  | bing.com | Engin de recherche
+9  | bing.com | Moteur de recherche
 10 | microsoft.com | Logiciel
 11 | qq.com | Portail
-12 | ask.com | Engin de recherche
+12 | ask.com | Moteur de recherche
 13 | adobe.com | Logiciel
 14 | taobao.com | Annonces classées
 15 | twitter.com | Média social
 
 Dans les 15 premiers sur la liste, on dénombre 4 engins de recherche et 3 médias sociaux. 
 
+###Les moteurs de recherche
+
+La recherche internet constitue une autre facette plus qu'importante de l'Internet d'aujourd'hui. En effet, le site le plus visité au monde est *Google* et ce n'est pas pour rien. Une recherche consitue presque toujours le point d'entrée d'une session de Web. 
+
+En ce moment, le marché de la recherche sur le Web est dominé outrageusement par *Google* avec 85% des recherches sur Internet [Source](http://fr.wikipedia.org/wiki/M%C3%A9dias_sociaux). Ce n'est pas par hasard non plus, leur moteur de recherche est ce qui se fait de mieux dans le domaine depuis plusieurs années. Les résultats sont affichés très simplement sur une page de résultats avec une vitesse impressionante.
+
 ###Le Web social
 
 > Les médias sociaux sont un groupe d’applications en ligne qui se fondent sur l’idéologie et la technologie du Web 2.0 et permettent la création et l’échange du contenu généré par les utilisateurs
 
-<small>[Andreas Kaplan et Michael Haenlein](http://fr.wikipedia.org/wiki/M%C3%A9dias_sociaux)</small>
+- [Andreas Kaplan et Michael Haenlein](http://fr.wikipedia.org/wiki/M%C3%A9dias_sociaux)
 
 ![](img/facebook.jpg)
 
 ![](img/twitter.jpg)
 
-###Les moteurs de recherche
-
-La recherche internet constitue une autre facette plus qu'importante de l'Internet d'aujourd'hui. En effet, le site le plus visité au monde est *Google* et ce n'est pas pour rien. Une recherche consitue presque toujours le point d'entrée d'une session de Web. 
-
-En ce moment, le marché de la recherche sur le Web est dominé outrageusement par *Google* avec INSÉREZ LE % DE RECHERCHE GOOGLE des recherches sur Internet. Ce n'est pas par hasard non plus, leur moteur de recherche est ce qui se fait de mieux dans le domaine depuis plusieurs années. Les résultats sont affichés très simplement sur une page de résultats avec une vitesse impressionante.
-
-Le deuxième moteur de recherche en importance est *Bing* qui profite de sa position de dominance sur le maché des systèmes d'exploitation pour gagner un pourcentage des recherches. Par contre, comme ce fut démontré par **Google** il y a quelques années, tout ce que *Bing* fait, est copier une partie des résultats de recherche de Google.
 
 ###Blobon
 
