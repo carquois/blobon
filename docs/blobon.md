@@ -1,6 +1,8 @@
 [BlobOn](http://blobon.com)
 =================
 
+![](http://i.imgur.com/SM8gvdb.jpg)
+
 La mission de Blobon est de répertorier tout le contenu du Web et de le rendre intéressant à naviguer.
 
 ##Le statut du Web en 2013
