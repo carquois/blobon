@@ -4,21 +4,25 @@
 
 Depuis les 10 dernières années, le Web a beaucoup évolué pour prendre beaucoup de place dans nos vies. 
 
-Voici les sites les plus populaires en Amérique du nord selon Alexa.com :  
+Voici les sites les plus populaires au monde selon [Google](http://www.google.com/adplanner/static/top1000/) :  
 
-Rang | Site
---- | --- 
-1  | Google
-2  | Facebook
-3  | YouTube
-4  | Yahoo!
-5  | Amazon.com
-6  | eBay
-7  | Wikipedia
-8  | Craigslist
-9  | Windows Live
-10 | Bing
-
+Rang | Site | Catégorie
+--- | --- | ---
+1  | google.com | Engin de recherche
+2  | facebook.com | Média social
+3  | youtube.com | Média social
+4  | yahoo.com | Portail
+5  | live.com | Engin de recherche
+6  | msn.com | Portail
+7  | wikipedia.org | Encyclopédie
+8  | blogspot.com | Média social
+9  | baidu.com | Engin de recherche
+10 | microsoft.com | Logiciel
+11 | qq.com | Portail
+12 | ask.com | Engin de recherche
+13 | adobe.com | Logiciel
+14 | taobao.com | Annonces classées
+15 | twitter.com | Média social
 
 
 ###Le Web social
