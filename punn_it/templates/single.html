@@ -239,3 +239,20 @@
          </div>
       </div> <!-- /container -->
      {% endblock %}
+     {% block top-sidebar %}
+ 
+                {% if latest_punn_list %}
+                  <div id="top-thumbs">
+                  {% for punn in latest_punn_list %}
+                    <a class="thumbnails_images" href="{{ punn.get_absolute_url }}">
+                    {% thumbnail punn.pic "97x120" crop="center" as im %}
+                      <img class="sidebarThumbs" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                    {% endthumbnail %}
+                    </a>
+                  {% endfor %}
+                 </div>
+                {% else %}
+                  <p>No more content</p>
+                {% endif %}
+     {% endblock %}
+
