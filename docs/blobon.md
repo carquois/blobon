@@ -1,9 +1,4 @@
-[BlobOn](http://blobon.com)
-=================
 
-![](img/blobon.jpeg)
-
-La mission de Blobon est de répertorier tout le contenu du Web et de le rendre intéressant à naviguer.
 
 ##Le statut du Web en 2013
 
@@ -42,7 +37,11 @@ Le deuxième moteur de recherche en importance est *Bing* qui profite de sa posi
 
 ###Blobon
 
+![](img/blobon.jpeg)
+
 Voici où nous entrons en jeu. Blobon se veut un pont entre la recherche Web et les médias sociaux.
+
+La mission de Blobon est de répertorier tout le contenu du Web et de le rendre intéressant à naviguer.
 
 Nous croyons que pour percer dans le monde de géants mentionnés plus haut, un site doit jumeler fonctionnalités et intérêt. Les gens vont sur *Google* pour trouver des choses intéressantes et vont ensuite sur *Facebook* et *Twitter* pour les partager et en discuter. Dans le meilleur des mondes, tout ça se ferait sur la même plateforme.  
 
@@ -67,6 +66,10 @@ S'exprimer sur un sujet est à la base des réseaux sociaux. Pouvoir commenter e
 
 Esthétisme ignoré par Google
 
+
+####Comment y arriver
+
+![](img/cdc.jpeg)
 
 
 
