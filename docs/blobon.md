@@ -46,7 +46,7 @@ Le deuxième moteur de recherche en importance est *Bing* qui profite de sa posi
 
 ###Blobon
 
-![](img/blobon.jpeg)
+![](img/blobon.jpg)
 
 Voici où nous entrons en jeu. Blobon se veut un pont entre la recherche Web et les médias sociaux.
 
