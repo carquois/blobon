@@ -10,13 +10,13 @@ Rang | Site | Catégorie
 --- | --- | ---
 1  | google.com | Engin de recherche
 2  | facebook.com | Média social
-3  | youtube.com | Média social
+3  | youtube.com | Média social vidéo
 4  | yahoo.com | Portail
 5  | live.com | Engin de recherche
 6  | msn.com | Portail
 7  | wikipedia.org | Encyclopédie
-8  | blogspot.com | Média social
-9  | baidu.com | Engin de recherche
+8  | blogspot.com | Média social blogue
+9  | bing.com | Engin de recherche
 10 | microsoft.com | Logiciel
 11 | qq.com | Portail
 12 | ask.com | Engin de recherche
@@ -24,16 +24,20 @@ Rang | Site | Catégorie
 14 | taobao.com | Annonces classées
 15 | twitter.com | Média social
 
+Dans les 15 premiers sur la liste, on dénombre 4 engins de recherche et 3 médias sociaux. 
 
 ###Le Web social
 
-Un des plus gros changements qui arriva lors de cette période est l'arrivée du Web social. Facebook a dépassé le cap des XXX utilisateurs et Twitter suit en deuxième avec XXX
+> Les médias sociaux sont un groupe d’applications en ligne qui se fondent sur l’idéologie et la technologie du Web 2.0 et permettent la création et l’échange du contenu généré par les utilisateurs
+[Andreas Kaplan et Michael Haenlein](http://fr.wikipedia.org/wiki/M%C3%A9dias_sociaux)
 
-**Entrer qq stats sur les médias sociaux
+![](img/facebook.jpg)
+
+![](img/twitter.jpg)
 
 ###Les moteurs de recherche
 
-La recherche internet constitue une autre facette plus qu'importante de l'Internet d'aujourd'hui. En effet, le site le plus visité au monde est *Google*.com et ce n'est pas pour rien. Une recherche consitue presque toujours le point d'entrée d'une session de Web. 
+La recherche internet constitue une autre facette plus qu'importante de l'Internet d'aujourd'hui. En effet, le site le plus visité au monde est *Google* et ce n'est pas pour rien. Une recherche consitue presque toujours le point d'entrée d'une session de Web. 
 
 En ce moment, le marché de la recherche sur le Web est dominé outrageusement par *Google* avec INSÉREZ LE % DE RECHERCHE GOOGLE des recherches sur Internet. Ce n'est pas par hasard non plus, leur moteur de recherche est ce qui se fait de mieux dans le domaine depuis plusieurs années. Les résultats sont affichés très simplement sur une page de résultats avec une vitesse impressionante.
 
