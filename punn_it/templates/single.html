@@ -101,12 +101,12 @@
                   <div class="separator separator-with-margin"></div>
                   <div class="btn-toolbar" id="below-content-toolbar">
                     <div class="btn-group pull-left">
-                      <a href="mailto:gab@checkdonc.ca" class="btn"><i class="icon-flag"></i></a>
+                      <a rel="tooltip" title="{% trans "Rapporter" %}" href="mailto:gab@checkdonc.ca" class="btn"><i class="icon-flag"></i></a>
                       <a href="#share" role="button" class="btn" data-toggle="modal">{% trans "Partager" %}</a>
                     </div>
                     <div class="btn-group pull-right">
-                      <a href="{{ prev_punn.get_absolute_url }}" class="btn">&larr;</a>
-                      <a href="{{ next_punn.get_absolute_url }}" class="btn">&rarr;</a>
+                      <a rel="tooltip" title="{% trans "Page précédente" %}" href="{{ prev_punn.get_absolute_url }}" class="btn">&larr;</a>
+                      <a rel="tooltip" title="{% trans "Page suivante" %}" href="{{ next_punn.get_absolute_url }}" class="btn">&rarr;</a>
                     </div>
                   </div>
                   <div style="clear:both;"></div>
@@ -155,7 +155,7 @@
                       {% csrf_token %}
                       {{ comment_form.content }}
                   <a rel="tooltip" title="{% trans "Syntaxe des commentaires" %}" href="#syntax" role="button" class="btn pull-left" data-toggle="modal"><i class="icon-pencil"></i></a>
-                  <button class="btn pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
+                  <button rel="tooltip" title="{% trans "Cliquez ici pour soumettre votre commentaire" %}" class="btn pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
                   </form>
                 </div>
                 <div style="clear: both;">
