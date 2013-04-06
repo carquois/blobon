@@ -1,10 +1,4 @@
-
-
-##Le statut du Web en 2013
-
-Depuis les 10 dernières années, le Web a beaucoup évolué pour prendre beaucoup de place dans nos vies. 
-
-Voici les sites les plus populaires au monde selon [Google](http://www.google.com/adplanner/static/top1000/) :  
+###Les sites les plus populaires
 
 Rang | Site | Catégorie
 --- | --- | ---
@@ -24,63 +18,111 @@ Rang | Site | Catégorie
 14 | taobao.com | Annonces classées
 15 | twitter.com | Média social
 
+[Source : Google](http://www.google.com/adplanner/static/top1000/) :  
+
 Dans les 15 premiers sur la liste, on dénombre 4 engins de recherche et 3 médias sociaux. 
 
 ###Les moteurs de recherche
 
-La recherche internet constitue une autre facette plus qu'importante de l'Internet d'aujourd'hui. En effet, le site le plus visité au monde est *Google* et ce n'est pas pour rien. Une recherche consitue presque toujours le point d'entrée d'une session de Web. 
+Rang | Site | Part de marché
+--- | --- | ---
+1 | Google | 88.8%
+2 | Bing | 4.2%
+3 | Baidu | 3.5%
+4 | Yahoo | 2.4%
+5 | Ask.com | 0.6%
+6 | Autres | 0.5%
 
-En ce moment, le marché de la recherche sur le Web est dominé outrageusement par *Google* avec 85% des recherches sur Internet [Source](http://fr.wikipedia.org/wiki/M%C3%A9dias_sociaux). Ce n'est pas par hasard non plus, leur moteur de recherche est ce qui se fait de mieux dans le domaine depuis plusieurs années. Les résultats sont affichés très simplement sur une page de résultats avec une vitesse impressionante.
+[Source](http://www.karmasnack.com/about/search-engine-market-share/)
 
-###Le Web social
+###Les médias sociaux
 
 > Les médias sociaux sont un groupe d’applications en ligne qui se fondent sur l’idéologie et la technologie du Web 2.0 et permettent la création et l’échange du contenu généré par les utilisateurs
 
-- [Andreas Kaplan et Michael Haenlein](http://fr.wikipedia.org/wiki/M%C3%A9dias_sociaux)
+[Andreas Kaplan et Michael Haenlein](http://fr.wikipedia.org/wiki/M%C3%A9dias_sociaux)
 
-![](img/facebook.jpg)
+Rang | Site | Part de marché
+--- | --- | ---
+1 | Facebook | 61.82%
+2 | Youtube | 21.33%
+3 | Twitter | 1.85%
+4 | Pinterest | 1.22%
+5 | Yahoo! Answers | 0,90%
+6 | Google+ | 0,73%
+7 | LinkedIn | 0,83%
+8 | Tagged | 0,55%
+9 | Instagram | 0,37%
+10 |Tumblr | 0,34%
 
-![](img/twitter.jpg)
+[Source](http://www.dreamgrow.com/top-10-social-networking-sites-by-market-share-of-visits-january-2013/)
 
+###Facebook
+
+![](img/facebook.png)
+
+###Twitter
+
+![](img/twitter.png)
+
+###Pinterest
+
+![](img/pinterest.png)
+
+###Google Plus
+
+![](img/google_plus.png)
+
+###Tumblr
+
+![](img/tumblr.png)
+
+#Tendances
+
+##Un nouveau système de votation
+
+###Digg
+
+![](img/digg.jpg)
+
+###Reddit
+
+![](img/reddit.png)
+
+###Imgur
+
+![](img/imgur.png)
+
+##Les sous-communautés
+
+###Subreddit
+
+![](img/sub_reddit.png)
 
 ###Blobon
 
-![](img/blobon.jpeg)
+![](img/blobon.jpg)
 
-Voici où nous entrons en jeu. Blobon se veut un pont entre la recherche Web et les médias sociaux.
+Blobon se veut un pont entre la recherche Web et les médias sociaux.
 
 La mission de Blobon est de répertorier tout le contenu du Web et de le rendre intéressant à naviguer.
 
-Nous croyons que pour percer dans le monde de géants mentionnés plus haut, un site doit jumeler fonctionnalités et intérêt. Les gens vont sur *Google* pour trouver des choses intéressantes et vont ensuite sur *Facebook* et *Twitter* pour les partager et en discuter. Dans le meilleur des mondes, tout ça se ferait sur la même plateforme.  
+![](img/google_blobon.png)
 
-C'est justement ce que nous voulons créer. Un moteur de recherche à la fine pointe de la technologie avec un réseau social qui permet de partager, discuter et qui nous aide à modérer et classifier le contenu. 
+###Le partage de profit
 
-####Notre réseau social
+![](img/adsense.png)
 
-Nous croyons que la liste des fonctionnalités disponibles aux utilisateurs d'un réseau social doit être assez limité pour que le réseau social soit bien compris par les utilisateurs. Nous pensons aussi que, pour qu'un nouveau réseau perce, il doit prendre exemple sur les réseaux existants pour que les utilisateurs aient déjà une bonne compréhension au premier essai.
+![](img/weseekyou.png)
 
-#####Système de votation (J'aime)
+![](img/google_analytics.png)
 
-Facebook a été dans les premiers à offrir une fonctionnalité pour pouvoir indiquer que l'utilisateur apprécie le contenu avec le J'aime. Un petit bouton avec un icône de pouce en l'air pour afficher son appréciation à un status, une photo, un vidéo, un commentaire. Google a suivi le pas avec son réseau social avec le +1. Twitter a son équivalent avec le RT. 
+###CheckDonc.Ca
 
-Les réseaux se servent de ces votes pour tenter de classifier le meilleur contenu et l'afficher aux utilisateurs ensuite.
+![](img/cdc.jpg)
 
-Par contre, ce type de classification est déficient. Il ne permet pas de voter de manière négative sur le contenu 
+[CheckDonc.Ca](http://checkdonc.ca)
 
-
-#####Les commentaires
-
-S'exprimer sur un sujet est à la base des réseaux sociaux. Pouvoir commenter est donc une fonctionnalité qui remonte donc à très loin, au début, ce sont les blogues qui ont implémenté cette fonctionnalité. 
-
-Esthétisme ignoré par Google
-
-
-####Comment y arriver
-
-![](img/cdc.jpeg)
-
-
-
+[Vente publicitaire et statistiques](http://checkdonc.ca/i/grille.pdf)
 
 Auteur
 -------
