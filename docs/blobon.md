@@ -106,7 +106,7 @@ Blobon se veut un pont entre la recherche Web et les médias sociaux.
 
 La mission de Blobon est de répertorier tout le contenu du Web et de le rendre intéressant à naviguer.
 
-Voir le plan de développement pour la liste de fonctionnalités. 
+![](img/google_blobon.png)
 
 ###Le partage de profit
 
