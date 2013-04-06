@@ -76,6 +76,9 @@ Rang | Site | Part de marché
 
 ![](img/tumblr.png)
 
+#Tendances
+
+##Un nouveau système de votation
 
 ###Digg
 
@@ -88,6 +91,8 @@ Rang | Site | Part de marché
 ###Imgur
 
 ![](img/imgur.png)
+
+##Les sous-communautés
 
 ###Subreddit
 
