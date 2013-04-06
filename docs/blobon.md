@@ -26,7 +26,6 @@ Dans les 15 premiers sur la liste, on dénombre 4 engins de recherche et 3 médi
 
 Rang | Site | Part de marché
 --- | --- | ---
-
 1 | Google | 88.8%
 2 | Bing | 4.2%
 3 | Baidu | 3.5%
@@ -42,6 +41,8 @@ Rang | Site | Part de marché
 
 [Andreas Kaplan et Michael Haenlein](http://fr.wikipedia.org/wiki/M%C3%A9dias_sociaux)
 
+Rang | Site | Part de marché
+--- | --- | ---
 1 | Facebook | 61.82%
 2 | Youtube | 21.33%
 3 | Twitter | 1.85%
