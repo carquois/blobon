@@ -1,5 +1,4 @@
-##Le statut du Web en 2013
-
+###Les sites les plus populaires
 
 Rang | Site | Catégorie
 --- | --- | ---
@@ -54,6 +53,8 @@ Rang | Site | Part de marché
 9 | Instagram | 0,37%
 10 |Tumblr | 0,34%
 
+[Source](http://www.dreamgrow.com/top-10-social-networking-sites-by-market-share-of-visits-january-2013/)
+
 ###Facebook
 
 ![](img/facebook.png)
@@ -70,17 +71,17 @@ Rang | Site | Part de marché
 
 ![](img/google_plus.png)
 
+###Tumblr
+
+![](img/tumblr.png)
+
 ###Blobon
 
 ![](img/blobon.jpg)
 
-Voici où nous entrons en jeu. Blobon se veut un pont entre la recherche Web et les médias sociaux.
+Blobon se veut un pont entre la recherche Web et les médias sociaux.
 
 La mission de Blobon est de répertorier tout le contenu du Web et de le rendre intéressant à naviguer.
-
-Nous croyons que pour percer dans le monde de géants mentionnés plus haut, un site doit jumeler fonctionnalités et intérêt. Les gens vont sur *Google* pour trouver des choses intéressantes et vont ensuite sur *Facebook* et *Twitter* pour les partager et en discuter. Dans le meilleur des mondes, tout ça se ferait sur la même plateforme.  
-
-C'est justement ce que nous voulons créer. Un moteur de recherche à la fine pointe de la technologie avec un réseau social qui permet de partager, discuter et qui nous aide à modérer et classifier le contenu. 
 
 ####Notre réseau social
 
@@ -108,13 +109,6 @@ Les réseaux se servent de ces votes pour tenter de classifier le meilleur conte
 
 ![](img/sub_reddit.png)
 
-###Tumblr
-
-![](img/tumblr.png)
-
-#####Les commentaires
-
-S'exprimer sur un sujet est à la base des réseaux sociaux. Pouvoir commenter est donc une fonctionnalité qui remonte donc à très loin, au début, ce sont les blogues qui ont implémenté cette fonctionnalité. 
 
 ###Le partage de profit
 
@@ -128,9 +122,9 @@ S'exprimer sur un sujet est à la base des réseaux sociaux. Pouvoir commenter e
 
 ![](img/cdc.jpg)
 
+[CheckDonc.Ca](http://checkdonc.ca)
 
-
-
+[Vente publicitaire et statistiques](http://checkdonc.ca/i/grille.pdf)
 
 Auteur
 -------
