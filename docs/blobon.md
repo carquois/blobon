@@ -1,9 +1,5 @@
-
 ##Le statut du Web en 2013
 
-Depuis les 10 dernières années, le Web a beaucoup évolué pour prendre beaucoup de place dans nos vies. 
-
-Voici les sites les plus populaires au monde selon [Google](http://www.google.com/adplanner/static/top1000/) :  
 
 Rang | Site | Catégorie
 --- | --- | ---
@@ -23,23 +19,54 @@ Rang | Site | Catégorie
 14 | taobao.com | Annonces classées
 15 | twitter.com | Média social
 
+[Source : Google](http://www.google.com/adplanner/static/top1000/) :  
+
 Dans les 15 premiers sur la liste, on dénombre 4 engins de recherche et 3 médias sociaux. 
 
 ###Les moteurs de recherche
 
-La recherche internet constitue une autre facette plus qu'importante de l'Internet d'aujourd'hui. En effet, le site le plus visité au monde est *Google* et ce n'est pas pour rien. Une recherche consitue presque toujours le point d'entrée d'une session de Web. 
+Rang | Site | Part de marché
+--- | --- | ---
 
-En ce moment, le marché de la recherche sur le Web est dominé outrageusement par *Google* avec 85%des recherches sur Internet. Ce n'est pas par hasard non plus, leur moteur de recherche est ce qui se fait de mieux dans le domaine depuis plusieurs années. Les résultats sont affichés très simplement sur une page de résultats avec une vitesse impressionante.
+1 | Google | 88.8%
+2 | Bing | 4.2%
+3 | Baidu | 3.5%
+4 | Yahoo | 2.4%
+5 | Ask.com | 0.6%
+6 | Autres | 0.5%
 
-###Le Web social
+[Source](http://www.karmasnack.com/about/search-engine-market-share/)
+
+###Les médias sociaux
 
 > Les médias sociaux sont un groupe d’applications en ligne qui se fondent sur l’idéologie et la technologie du Web 2.0 et permettent la création et l’échange du contenu généré par les utilisateurs
 
 [Andreas Kaplan et Michael Haenlein](http://fr.wikipedia.org/wiki/M%C3%A9dias_sociaux)
 
+1 | Facebook | 61.82%
+2 | Youtube | 21.33%
+3 | Twitter | 1.85%
+4 | Pinterest | 1.22%
+5 | Yahoo! Answers | 0,90%
+6 | Google+ | 0,73%
+7 | LinkedIn | 0,83%
+8 | Tagged | 0,55%
+9 | Instagram | 0,37%
+10 |Tumblr | 0,34%
+
+###Facebook
+
 ![](img/facebook.png)
 
+###Twitter
+
 ![](img/twitter.png)
+
+###Pinterest
+
+![](img/pinterest.png)
+
+###Google Plus
 
 ![](img/google_plus.png)
 
@@ -59,7 +86,7 @@ C'est justement ce que nous voulons créer. Un moteur de recherche à la fine po
 
 Nous croyons que la liste des fonctionnalités (ou applications) disponibles aux utilisateurs d'un réseau social doit être assez limité pour que le réseau social soit bien compris par les utilisateurs. Nous pensons aussi que, pour qu'un nouveau réseau perce, il doit prendre exemple sur les réseaux existants pour que les utilisateurs aient déjà une bonne compréhension au premier essai.
 
-#####Système de votation (J'aime)
+#####Système de votation 
 
 Facebook a été dans les premiers à offrir une fonctionnalité pour pouvoir indiquer que l'utilisateur apprécie le contenu avec le J'aime. Un petit bouton avec un icône de pouce en l'air pour afficher son appréciation à un status, une photo, un vidéo, un commentaire. Google a suivi le pas avec son réseau social avec le +1. Twitter a son équivalent avec le RT. 
 
@@ -68,6 +95,22 @@ Les réseaux se servent de ces votes pour tenter de classifier le meilleur conte
 ###Digg
 
 ![](img/digg.jpg)
+
+###Reddit
+
+![](img/reddit.png)
+
+###Imgur
+
+![](img/imgur.png)
+
+###Subreddit
+
+![](img/sub_reddit.png)
+
+###Tumblr
+
+![](img/tumblr.png)
 
 #####Les commentaires
 
@@ -83,7 +126,8 @@ S'exprimer sur un sujet est à la base des réseaux sociaux. Pouvoir commenter e
 
 ###CheckDonc.Ca
 
-![](img/cdc.jpeg)
+![](img/cdc.jpg)
+
 
 
 
