@@ -76,23 +76,6 @@ Rang | Site | Part de marché
 
 ![](img/tumblr.png)
 
-###Blobon
-
-![](img/blobon.jpg)
-
-Blobon se veut un pont entre la recherche Web et les médias sociaux.
-
-La mission de Blobon est de répertorier tout le contenu du Web et de le rendre intéressant à naviguer.
-
-####Notre réseau social
-
-Nous croyons que la liste des fonctionnalités (ou applications) disponibles aux utilisateurs d'un réseau social doit être assez limité pour que le réseau social soit bien compris par les utilisateurs. Nous pensons aussi que, pour qu'un nouveau réseau perce, il doit prendre exemple sur les réseaux existants pour que les utilisateurs aient déjà une bonne compréhension au premier essai.
-
-#####Système de votation 
-
-Facebook a été dans les premiers à offrir une fonctionnalité pour pouvoir indiquer que l'utilisateur apprécie le contenu avec le J'aime. Un petit bouton avec un icône de pouce en l'air pour afficher son appréciation à un status, une photo, un vidéo, un commentaire. Google a suivi le pas avec son réseau social avec le +1. Twitter a son équivalent avec le RT. 
-
-Les réseaux se servent de ces votes pour tenter de classifier le meilleur contenu et l'afficher aux utilisateurs ensuite.
 
 ###Digg
 
@@ -110,6 +93,15 @@ Les réseaux se servent de ces votes pour tenter de classifier le meilleur conte
 
 ![](img/sub_reddit.png)
 
+###Blobon
+
+![](img/blobon.jpg)
+
+Blobon se veut un pont entre la recherche Web et les médias sociaux.
+
+La mission de Blobon est de répertorier tout le contenu du Web et de le rendre intéressant à naviguer.
+
+Voir le plan de développement pour la liste de fonctionnalités. 
 
 ###Le partage de profit
 
