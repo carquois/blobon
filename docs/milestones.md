@@ -1,4 +1,4 @@
-    2. Édition de profil. (200 heures)
+    2. Édition de profil. (400 heures)
     
             2a. Date de naissance et sexe. 
     
@@ -18,7 +18,7 @@
     
     
     
-    3. Commentaires. (50 heures)
+    3. Commentaires. (200 heures)
     
             3a. Vote sur les commentaires.
     
@@ -28,11 +28,11 @@
     
     
     
-    4. Page de profil (50 heures)
+    4. Page de profil (200 heures)
     
      
     
-    5. Générer du contenu. (100 heures)
+    5. Générer du contenu. (200 heures)
     
            5a. Brander le blob it.
     
@@ -42,15 +42,15 @@
     
        
     
-    6. Intégrer des raccourcis avec pop up explicatif (50 heures)
+    6. Intégrer des raccourcis avec pop up explicatif (100 heures)
     
     
     
-    7. Responsive design. (300 heures)
+    7. Responsive design. (500 heures)
     
     
     
-    8. Système de notifications par courriel / sur blobon (200 heures)
+    8. Système de notifications par courriel / sur blobon (500 heures)
     
            8a. Quand un ami se crée un profil.
     
@@ -68,11 +68,11 @@
     
            8h. Mention
     
-           81. de flagf
+           81. Flag
     
     
     
-    9. Intégrer un glissement de la main dans les versions mobiles et tablettes. (100 heures)
+    9. Intégrer un glissement de la main dans les versions mobiles et tablettes. (200 heures)
     
     
     
@@ -86,11 +86,11 @@
     
     
     
-    11. Choix de page d'accueil entre type blog et mosaïque. (100 heures)
+    11. Choix de page d'accueil entre type blog et mosaïque. (200 heures)
     
     
     
-    12. Traduire l'interface. (100 heures)
+    12. Traduire l'interface. (300 heures)
     
     
     
@@ -122,15 +122,15 @@
     
     
     
-    15.  À propos. (50 heures)
+    15.  À propos. (100 heures)
     
     
     
-    16. Login via Google + et  Twitter. (200 heures)
+    16. Login via Google + et  Twitter. (300 heures)
     
     
     
-    17. Fonctionnalités de navigations (100 heures)
+    17. Fonctionnalités de navigations (200 heures)
     
               17a. Navigation Trend et Top
     
@@ -224,6 +224,19 @@
     
               12d. End User Licence agreement
 
+Environ 9000 heures
+
+    (Moteur de recherche)
+    
+    13. Connexion du moteur de recherche au Google Api (500 heures)
+
+    14. Indexation du Web. (2000 heures)
+
+    15. Code d'un outil de base de donnée pour contenir le Web (3000 heures)
+
+    16. Coder un système de cache pour afficher les résultats (3000 heures) 
+
+Environ 8500 heures
 
 Auteur
 -------
