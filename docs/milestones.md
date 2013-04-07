@@ -1,4 +1,4 @@
-**2. Édition de profil.
+2. Édition de profil.
 
         2a. Date de naissance et sexe. 
 
@@ -18,7 +18,7 @@
 
 
 
-**3. Commentaires.
+3. Commentaires.
 
         3a. Vote sur les commentaires.
 
@@ -32,7 +32,7 @@
 
  
 
-**5. Générer du contenu.
+5. Générer du contenu.
 
        5a. Brander le blob it.
 
@@ -50,7 +50,7 @@
 
 
 
-**8. Système de notifications par courriel / sur blobon
+8. Système de notifications par courriel / sur blobon
 
        8a. Quand un ami se crée un profil.
 
@@ -76,7 +76,7 @@
 
 
 
-**10. Application mobile.
+10. Application mobile.
 
           10a. Géolocalisation.
 
@@ -90,11 +90,11 @@
 
 
 
-**12. Traduire l'interface.
+12. Traduire l'interface.
 
 
 
-**13. Ajouter des types de contenu.
+13. Ajouter des types de contenu.
 
          13a. Audio
 
@@ -130,7 +130,7 @@
 
 
 
-**17. Fonctionnalités de navigations
+17. Fonctionnalités de navigations
 
           17a. Navigation Trend et Top
 
@@ -142,9 +142,9 @@ Blobon
 
 
 
-**1. Sub-blob.
+1. Sub-blob.
 
-       1a. possibilité aux utilisateurs de créer des sub-blob
+        1a. possibilité aux utilisateurs de créer des sub-blob
 
         1b. Bio, username et Url
 
@@ -160,7 +160,7 @@ Blobon
 
 
 
- **3. Système de partage de profil
+3. Système de partage de profil
 
         3a. Paiement par chèque = adresse complète.
 
@@ -176,7 +176,7 @@ Blobon
 
 
 
-**5. Contrôle du spam
+5. Contrôle du spam
 
        5a. pour le shaker revenu.
 
@@ -198,11 +198,11 @@ Blobon
 
 
 
-**9. Coder la recherche.
+9. Coder la recherche.
 
 
 
-**11. Gestionnaire de médias sociaux.
+11. Gestionnaire de médias sociaux.
 
           11a. Synchroniser l'avatar
 
@@ -214,7 +214,7 @@ Blobon
 
 
 
-**12. Paramètre de confidentialité.
+12. Paramètre de confidentialité.
 
           12a. sécurité du draft
 
