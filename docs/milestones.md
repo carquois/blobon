@@ -1,4 +1,4 @@
-    2. Édition de profil.
+    2. Édition de profil. (200 heures)
     
             2a. Date de naissance et sexe. 
     
@@ -18,7 +18,7 @@
     
     
     
-    3. Commentaires.
+    3. Commentaires. (50 heures)
     
             3a. Vote sur les commentaires.
     
@@ -28,11 +28,11 @@
     
     
     
-    4. Page de profil
+    4. Page de profil (50 heures)
     
      
     
-    5. Générer du contenu.
+    5. Générer du contenu. (100 heures)
     
            5a. Brander le blob it.
     
@@ -42,15 +42,15 @@
     
        
     
-    6. Intégrer des raccourcis avec pop up explicatif
+    6. Intégrer des raccourcis avec pop up explicatif (50 heures)
     
     
     
-    7. Responsive design.
+    7. Responsive design. (300 heures)
     
     
     
-    8. Système de notifications par courriel / sur blobon
+    8. Système de notifications par courriel / sur blobon (200 heures)
     
            8a. Quand un ami se crée un profil.
     
@@ -72,11 +72,11 @@
     
     
     
-    9. Intégrer un glissement de la main dans les versions mobiles et tablettes.
+    9. Intégrer un glissement de la main dans les versions mobiles et tablettes. (100 heures)
     
     
     
-    10. Application mobile.
+    10. Application mobile. (1000 heures)
     
               10a. Géolocalisation.
     
@@ -86,15 +86,15 @@
     
     
     
-    11. Choix de page d'accueil entre type blog et mosaïque.
+    11. Choix de page d'accueil entre type blog et mosaïque. (100 heures)
     
     
     
-    12. Traduire l'interface.
+    12. Traduire l'interface. (100 heures)
     
     
     
-    13. Ajouter des types de contenu.
+    13. Ajouter des types de contenu. (400 heures)
     
              13a. Audio
     
@@ -102,7 +102,7 @@
     
     
     
-    14. Fonctionnalité des utilisateurs
+    14. Fonctionnalité des utilisateurs (300 heures)
     
           14a. Le system de give some love (follow /) à un utilisateur.
     
@@ -122,15 +122,15 @@
     
     
     
-    15.  À propos.
+    15.  À propos. (50 heures)
     
     
     
-    16. Login via Google + et  Twitter.
+    16. Login via Google + et  Twitter. (200 heures)
     
     
     
-    17. Fonctionnalités de navigations
+    17. Fonctionnalités de navigations (100 heures)
     
               17a. Navigation Trend et Top
     
@@ -142,7 +142,7 @@
     
     
     
-    1. Sub-blob.
+    1. Sub-blob. (300 heures)
     
             1a. possibilité aux utilisateurs de créer des sub-blob
     
@@ -156,11 +156,11 @@
     
     
     
-    2. Système de modérateurs.
+    2. Système de modérateurs. (400 heures)
     
     
     
-    3. Système de partage de profil
+    3. Système de partage de profit (1000 heures)
     
             3a. Paiement par chèque = adresse complète.
     
@@ -172,11 +172,11 @@
     
     
     
-    4. Connecter le ad server sur les infos d'utilisateurs.
+    4. Connecter le ad server sur les infos d'utilisateurs. (100 heures)
     
     
     
-    5. Contrôle du spam
+    5. Contrôle du spam (300 heures)
     
            5a. pour le shaker revenu.
     
@@ -186,23 +186,23 @@
     
     
     
-    6. Partage automatique sur Facebook  Google + et Twiter
+    6. Partage automatique sur Facebook, Google + et Twiter (300 heures)
     
     
     
-    7. Possibilité de connecter une page Facebook et Google +
+    7. Possibilité de connecter une page Facebook et Google + (200 heures)
     
     
     
-    8. Custom domaine.
+    8. Custom domain pour le profil des utilisateurs. (500 heures)
     
     
     
-    9. Coder la recherche.
+    9. Coder la recherche. (200 heures)
     
     
     
-    11. Gestionnaire de médias sociaux.
+    11. Gestionnaire de médias sociaux. (400 heures)
     
               11a. Synchroniser l'avatar
     
@@ -214,7 +214,7 @@
     
     
     
-    12. Paramètre de confidentialité.
+    12. Paramètre de confidentialité. (200 heures)
     
               12a. sécurité du draft
     
