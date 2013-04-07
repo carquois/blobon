@@ -130,6 +130,8 @@ La mission de Blobon est de répertorier tout le contenu du Web et de le rendre 
 
 [Progression du nombre de comptes sur Facebook](http://www.datagenetics.com/blog/december32010/fbyearend.png)
 
+[Plan de développement](https://github.com/GabrielDancause/punn.it/blob/master/docs/milestones.md)
+
 Auteur
 -------
 
