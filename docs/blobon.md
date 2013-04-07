@@ -124,6 +124,12 @@ La mission de Blobon est de répertorier tout le contenu du Web et de le rendre 
 
 [Vente publicitaire et statistiques](http://checkdonc.ca/i/grille.pdf)
 
+[Finances](https://docs.google.com/spreadsheet/ccc?key=0AvrONNJmucVCdDZic1hRN2U0U0VqOXZ6YkdfOTZGVEE)
+
+[Règle du 1%](http://fr.wikipedia.org/wiki/R%C3%A8gle_du_1_%25)
+
+[Progression du nombre de comptes sur Facebook](http://www.datagenetics.com/blog/december32010/fbyearend.png)
+
 Auteur
 -------
 
