@@ -19,3 +19,4 @@ django-extensions==1.0.3
 -e git+https://github.com/bedingue/django-dbdump.git#egg=DjangoDBDump
 facebook-sdk==0.4.0
 Werkzeug==0.8.3
+raven==3.3.2
