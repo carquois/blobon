@@ -20,3 +20,8 @@ Annexe
 -----------
 
 ![](img/annexe4.png)
+
+5. Avantage-coût (%) du Grand Montréal
+-----------
+
+![](img/annexe5.png)
