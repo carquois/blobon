@@ -215,7 +215,10 @@
                     <p id="comment-score">{{ comment.karma }}</p>
                     <div class="comment-vote comment-vote-down"></div>
                       <!--<div class="comment-vote comment-vote-down-on"></div>-->
-                  </div>                    
+                  </div>
+                  {% if comment.author == auth_user  %}
+                  <a class="close pull-right" rel="tooltip" title="{% trans "Cliquez ici pour effacer votre commentaire" %}" href="/delete/{{ comment.id }}">&times;</a>
+                  {% endif %}
                   <div id="comment-author-avatar">
                     <img src="{{ MEDIA_URL }}{{ comment.author.userprofile.avatar }}">
                   </div>
@@ -223,7 +226,7 @@
                     <div id="username-comment">{{ comment.author.username }}</div>
                     <p class="comment-time">{{ comment.created|naturaltime }}</p>
                     <br />
-                    <div id="comment">
+                    <div class="comment">
                       {{ comment.content|safe }}
                     </div>
                   </div>

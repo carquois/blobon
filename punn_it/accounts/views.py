@@ -17,9 +17,12 @@ def signup(request):
 
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('punns.views.index'))
+
+    context = {}
+    if request.GET.get("message", False):
+        context.update({'error' : True})
     
-    
-    return render_to_response("registration/signup.html", context_instance=RequestContext(request))
+    return render_to_response("registration/signup.html", context, context_instance=RequestContext(request))
                                 
 def social_signup_step2(request):
     user = request.user

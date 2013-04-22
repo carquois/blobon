@@ -1,73 +1,136 @@
-[BlobOn](http://blobon.com)
-=================
+###Les sites les plus populaires
 
-La mission de Blobon est de répertorier tout le contenu du Web et de le rendre intéressant à naviguer.
+Rang | Site | Catégorie
+--- | --- | ---
+1  | google.com | Moteur de recherche
+2  | facebook.com | Média social
+3  | youtube.com | Média social vidéo
+4  | yahoo.com | Portail
+5  | live.com | Moteur de recherche
+6  | msn.com | Portail
+7  | wikipedia.org | Encyclopédie
+8  | blogspot.com | Média social blogue
+9  | bing.com | Moteur de recherche
+10 | microsoft.com | Logiciel
+11 | qq.com | Portail
+12 | ask.com | Moteur de recherche
+13 | adobe.com | Logiciel
+14 | taobao.com | Annonces classées
+15 | twitter.com | Média social
 
-##Le statut du Web en 2013
+[Source : Google](http://www.google.com/adplanner/static/top1000/) :  
 
-Depuis les 10 dernières années, le Web a beaucoup évolué pour prendre beaucoup de place dans nos vies. 
-
-Voici les sites les plus populaires en Amérique du nord selon Alexa.com :  
-
-Rang | Site
---- | --- 
-1  | Google
-2  | Facebook
-3  | YouTube
-4  | Yahoo!
-5  | Amazon.com
-6  | eBay
-7  | Wikipedia
-8  | Craigslist
-9  | Windows Live
-10 | Bing
-
-
-
-###Le Web social
-
-Un des plus gros changements qui arriva lors de cette période est l'arrivée du Web social. Facebook a dépassé le cap des XXX utilisateurs et Twitter suit en deuxième avec XXX
-
-**Entrer qq stats sur les médias sociaux
+Dans les 15 premiers sur la liste, on dénombre 4 engins de recherche et 3 médias sociaux. 
 
 ###Les moteurs de recherche
 
-La recherche internet constitue une autre facette plus qu'importante de l'Internet d'aujourd'hui. En effet, le site le plus visité au monde est *Google*.com et ce n'est pas pour rien. Une recherche consitue presque toujours le point d'entrée d'une session de Web. 
+Rang | Site | Part de marché
+--- | --- | ---
+1 | Google | 88.8%
+2 | Bing | 4.2%
+3 | Baidu | 3.5%
+4 | Yahoo | 2.4%
+5 | Ask.com | 0.6%
+6 | Autres | 0.5%
 
-En ce moment, le marché de la recherche sur le Web est dominé outrageusement par *Google* avec INSÉREZ LE % DE RECHERCHE GOOGLE des recherches sur Internet. Ce n'est pas par hasard non plus, leur moteur de recherche est ce qui se fait de mieux dans le domaine depuis plusieurs années. Les résultats sont affichés très simplement sur une page de résultats avec une vitesse impressionante.
+[Source](http://www.karmasnack.com/about/search-engine-market-share/)
 
-Le deuxième moteur de recherche en importance est *Bing* qui profite de sa position de dominance sur le maché des systèmes d'exploitation pour gagner un pourcentage des recherches. Par contre, comme ce fut démontré par **Google** il y a quelques années, tout ce que *Bing* fait, est copier une partie des résultats de recherche de Google.
+###Les médias sociaux
+
+> Les médias sociaux sont un groupe d’applications en ligne qui se fondent sur l’idéologie et la technologie du Web 2.0 et permettent la création et l’échange du contenu généré par les utilisateurs
+
+[Andreas Kaplan et Michael Haenlein](http://fr.wikipedia.org/wiki/M%C3%A9dias_sociaux)
+
+Rang | Site | Part de marché
+--- | --- | ---
+1 | Facebook | 61.82%
+2 | Youtube | 21.33%
+3 | Twitter | 1.85%
+4 | Pinterest | 1.22%
+5 | Yahoo! Answers | 0,90%
+6 | Google+ | 0,73%
+7 | LinkedIn | 0,83%
+8 | Tagged | 0,55%
+9 | Instagram | 0,37%
+10 |Tumblr | 0,34%
+
+[Source](http://www.dreamgrow.com/top-10-social-networking-sites-by-market-share-of-visits-january-2013/)
+
+###Facebook
+
+![](img/facebook.png)
+
+###Twitter
+
+![](img/twitter.png)
+
+###Pinterest
+
+![](img/pinterest.png)
+
+###Google Plus
+
+![](img/google_plus.png)
+
+###Tumblr
+
+![](img/tumblr.png)
+
+#Tendances
+
+##Un nouveau système de votation
+
+###Digg
+
+![](img/digg.jpg)
+
+###Reddit
+
+![](img/reddit.png)
+
+###Imgur
+
+![](img/imgur.png)
+
+##Les sous-communautés
+
+###Subreddit
+
+![](img/sub_reddit.png)
 
 ###Blobon
 
-Voici où nous entrons en jeu. Blobon se veut un pont entre la recherche Web et les médias sociaux.
+![](img/blobon.jpg)
 
-Nous croyons que pour percer dans le monde de géants mentionnés plus haut, un site doit jumeler fonctionnalités et intérêt. Les gens vont sur *Google* pour trouver des choses intéressantes et vont ensuite sur *Facebook* et *Twitter* pour les partager et en discuter. Dans le meilleur des mondes, tout ça se ferait sur la même plateforme.  
+Blobon se veut un pont entre la recherche Web et les médias sociaux.
 
-C'est justement ce que nous voulons créer. Un moteur de recherche à la fine pointe de la technologie avec un réseau social qui permet de partager, discuter et qui nous aide à modérer et classifier le contenu. 
+La mission de Blobon est de répertorier tout le contenu du Web et de le rendre intéressant à naviguer.
 
-####Notre réseau social
+![](img/google_blobon.png)
 
-Nous croyons que la liste des fonctionnalités disponibles aux utilisateurs d'un réseau social doit être assez limité pour que le réseau social soit bien compris par les utilisateurs. Nous pensons aussi que, pour qu'un nouveau réseau perce, il doit prendre exemple sur les réseaux existants pour que les utilisateurs aient déjà une bonne compréhension au premier essai.
+###Le partage de profit
 
-#####Système de votation (J'aime)
+![](img/adsense.png)
 
-Facebook a été dans les premiers à offrir une fonctionnalité pour pouvoir indiquer que l'utilisateur apprécie le contenu avec le J'aime. Un petit bouton avec un icône de pouce en l'air pour afficher son appréciation à un status, une photo, un vidéo, un commentaire. Google a suivi le pas avec son réseau social avec le +1. Twitter a son équivalent avec le RT. 
+![](img/weseekyou.png)
 
-Les réseaux se servent de ces votes pour tenter de classifier le meilleur contenu et l'afficher aux utilisateurs ensuite.
+![](img/google_analytics.png)
 
-Par contre, ce type de classification est déficient. Il ne permet pas de voter de manière négative sur le contenu 
+###CheckDonc.Ca
 
+![](img/cdc.jpg)
 
-#####Les commentaires
+[CheckDonc.Ca](http://checkdonc.ca)
 
-S'exprimer sur un sujet est à la base des réseaux sociaux. Pouvoir commenter est donc une fonctionnalité qui remonte donc à très loin, au début, ce sont les blogues qui ont implémenté cette fonctionnalité. 
+[Vente publicitaire et statistiques](http://checkdonc.ca/i/grille.pdf)
 
-Esthétisme ignoré par Google
+[Finances](https://docs.google.com/spreadsheet/ccc?key=0AvrONNJmucVCdDZic1hRN2U0U0VqOXZ6YkdfOTZGVEE)
 
+[Règle du 1%](http://fr.wikipedia.org/wiki/R%C3%A8gle_du_1_%25)
 
+[Progression du nombre de comptes sur Facebook](http://www.datagenetics.com/blog/december32010/fbyearend.png)
 
-
+[Plan de développement](https://github.com/GabrielDancause/punn.it/blob/master/docs/milestones.md)
 
 Auteur
 -------

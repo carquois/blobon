@@ -114,6 +114,8 @@ Les recettes du secteur des TIC ont augmenté de 5,1 % en 2011, en hausse pour u
 
 Les recettes du secteur des TIC sont passées de 129 G$ à 168 G$ entre 2002 et 2011, ce qui représente une hausse de 30 %. Comme le révèle le graphique ci-dessous, la structure industrielle du secteur est résolument en train de se déplacer vers les services. Si les recettes du sous-secteur de la fabrication ont diminué de 17 % depuis 2002, celles du sous-secteur des services ont crû de 58 % au cours de la même période.
 
+![](img/secteurtic.png)
+
 En 2011, le secteur des TIC a contribué pour 62,7 G$ au PIB du Canada (en dollars constants de 2002).
 
 Le secteur des TIC a crû plus rapidement que l'ensemble de l'économie en 2011. Il a progressé de 3,1 % par rapport à 2010 comparativement à 2,6 % dans le cas de l'ensemble de l'économie canadienne. Ce secteur a enregistré une croissance moyenne de 3,8 % par année depuis 2002; comparativement à 1,9 % pour l’ensemble de l’économie.
