@@ -202,7 +202,7 @@
                   </div>
                 </div>
                 {% if comment_list %} 
-                <div class="best-all-comments">{% trans "Meilleur commentaire" %}
+                <div class="best-all-comments">{% trans "Meilleur commentaire" %}</div>
                 {% for comment in comment_list|dictsortreversed:"karma" %}
                 {% if forloop.counter == 2 %}
                 <div class="best-all-comments" id="all-comments">{% trans "Tous les commentaires" %}</div>
@@ -210,10 +210,18 @@
                 <div class="separator"></div>
                 <div id="comment-wrapper">   
                   <div id="vote-comment-wrapper">
-                    <a href="/voteup/{{ comment.id }}"><div class="comment-vote comment-vote-up"></div></a>
+                    <a href="
+                             {% if request.user.is_authenticated %}/voteup/{{ comment.id }}
+                             {% else %}{% url accounts.views.signup %}
+                             {% endif %}
+                             "><div class="comment-vote comment-vote-up"></div></a>
                       <!--<div class="comment-vote comment-vote-up-on"></div>-->
                     <p id="comment-score">{{ comment.karma }}</p>
-                    <a href="/votedown/{{ comment.id }}"><div class="comment-vote comment-vote-down"></div></a>
+                    <a href="
+                             {% if request.user.is_authenticated %}/votedown/{{ comment.id }}
+                             {% else %}{% url accounts.views.signup %}
+                             {% endif %}
+                             "><div class="comment-vote comment-vote-down"></div></a>
                       <!--<div class="comment-vote comment-vote-down-on"></div>-->
                   </div>
                   {% if comment.author == auth_user  %}
