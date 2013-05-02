@@ -27,21 +27,21 @@
       <div class="container">
         <div class="row">
           <div id="vote-wrapper" class="visible-desktop">
-           {% if not auth_user %}
-            <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">
-           {% endif %}
-            <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}" {% if auth_user %}onclick="up();"{% endif %}></div>
-           {% if not auth_user %}
+            <a href="{% if request.user.is_authenticated %}
+                       #
+                     {% else %}
+                       {% url django.contrib.auth.views.login %}?next={{request.path}}
+                     {% endif %}">
+              <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}"></div>
             </a>
-           {% endif %}
             <div class="vote-up-down point"><p style="text-align:center;padding-top:17px;" id="karma">{{ karma }}</p></div>
-           {% if not auth_user %}
-            <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">
-           {% endif %}
-            <div id="downbutton" class="vote-up-down down {% if vote == "D" %} down-on{% endif %}" {% if auth_user %}onclick="down();"{% endif %}></div>
-           {% if not auth_user %}
+            <a href="{% if request.user.is_authenticated %}
+                       #
+                     {% else %}
+                       {% url django.contrib.auth.views.login %}?next={{request.path}}
+                     {% endif %}">
+              <div id="downbutton" class="vote-up-down down {% if vote == "D" %} down-on{% endif %}"></div>
             </a>
-           {% endif %}
           </div>
           <div class="span9" id="content-single">
 	    <div id="content-single-wrapper">
