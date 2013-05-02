@@ -154,10 +154,9 @@
                 </li>
               </ul>
               <ul class="nav pull-right">
-<li>
-                  <a rel="tooltip" title="{% trans "Les dernières nouvelles" %}" class="piton news" href="{% url news.views.all %}"></a>
-
-</li>
+                <li>
+                  <a class="piton crayon" href="/news/"></a>
+                </li>
 		{% if not auth_user %}
                 <li class="dropdown li-items" style="display:none">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Langue" %}: {% trans "Français" %}<b class="caret"></b></a>
