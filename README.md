@@ -4,6 +4,7 @@
 
 BlobOn is an user-generated content sharing community. It has the best content from all over the Internet. It's created and maintained by [GabrielDancause](http://twitter.com/GabrielDancause).
 
+The Web Rocks!
 
 Bug tracker
 -----------
