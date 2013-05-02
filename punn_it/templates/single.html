@@ -28,7 +28,7 @@
         <div class="row">
           <div id="vote-wrapper" class="visible-desktop">
             <a href="{% if request.user.is_authenticated %}
-                       #
+                       {% url votes.views.up punn.id %}
                      {% else %}
                        {% url django.contrib.auth.views.login %}?next={{request.path}}
                      {% endif %}">
@@ -36,7 +36,7 @@
             </a>
             <div class="vote-up-down point"><p style="text-align:center;padding-top:17px;" id="karma">{{ karma }}</p></div>
             <a href="{% if request.user.is_authenticated %}
-                       #
+                       {% url votes.views.down punn.id %}
                      {% else %}
                        {% url django.contrib.auth.views.login %}?next={{request.path}}
                      {% endif %}">
@@ -214,14 +214,14 @@
                              {% if request.user.is_authenticated %}/voteup/{{ comment.id }}
                              {% else %}{% url accounts.views.signup %}
                              {% endif %}
-                             "><div class="comment-vote comment-vote-up"></div></a>
+                             "><div class="comment-vote comment-vote-up {% if comment.vote == "U" %}comment-vote-up-on{% endif %}"></div></a>
                       <!--<div class="comment-vote comment-vote-up-on"></div>-->
                     <p id="comment-score">{{ comment.karma }}</p>
                     <a href="
                              {% if request.user.is_authenticated %}/votedown/{{ comment.id }}
                              {% else %}{% url accounts.views.signup %}
                              {% endif %}
-                             "><div class="comment-vote comment-vote-down"></div></a>
+                             "><div class="comment-vote comment-vote-down {% if comment.vote == "D" %}comment-vote-down-on{% endif %}"></div></a>
                       <!--<div class="comment-vote comment-vote-down-on"></div>-->
                   </div>
                   {% if comment.author == auth_user  %}
