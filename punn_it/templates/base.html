@@ -155,7 +155,7 @@
               </ul>
               <ul class="nav pull-right">
 <li>
-<a href="#">blog</a>
+                  <a rel="tooltip" title="{% trans "Les dernières nouvelles" %}" class="piton news" href="{% url news.views.all %}"></a>
 
 </li>
 		{% if not auth_user %}

@@ -1,1 +1,10 @@
-News
+{% extends "base.html" %}
+{% load i18n markup %}
+{% block content %}
+{% for post in news %}
+          <div class="well">
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.content|markdown }}</p>
+          </div>
+{% endfor %}
+{% endblock %}
