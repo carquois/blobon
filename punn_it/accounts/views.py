@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
-from accounts.forms import UserCreateForm, SocialSignupForm
+from accounts.forms import UserCreateForm, SocialSignupForm, UserProfileForm, UserForm
 
 
 def signup(request):
@@ -84,13 +84,19 @@ def register(request):
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        form = UserProfileForm(request.POST)
-        if form.is_valid():
-          form.save()
-          return HttpResponseRedirect(reverse('punns.views.index'))
+        userprofile_form = UserProfileForm(request.POST, instance=request.user.get_profile())
+        user_form = UserForm(request.POST, instance=request.user)
+        if userprofile_form.is_valid() and user_form.is_valid():
+          userprofile_form.save()
+          user_form.save()
+          messages.add_message(request, messages.INFO, _(u"Merci, vos paramètres ont été enregistrés."))
+          return HttpResponseRedirect(reverse('accounts.views.edit_profile'))
     else:
-        form = UserProfileForm()
-    return render_to_response('edit_profile.html', locals())
+        userprofile_form = UserProfileForm(instance=request.user.get_profile())
+        user_form = UserForm(instance=request.user)
+    return render_to_response('edit_profile.html', 
+                              {'userprofile_form': userprofile_form, 'user_form': user_form}, 
+                              context_instance=RequestContext(request))
 
 @login_required
 def logout(request):
