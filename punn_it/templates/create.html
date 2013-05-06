@@ -5,7 +5,32 @@
 
 {% block content %}
 
-{{ form }}
+       <form class="form-horizontal" method="post" action="{% url punns.views.create %}">{% csrf_token %}
+       {% if form.non_field_errors %}
+         <div class="alert alert-block alert-error">
+           <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <h4>{% trans 'Erreur' %}</h4>
+           {% trans "Quelque chose s'est mal passé. Veuillez réessayer." %}
+         </div>
+       {% endif %}
+       {% for field in form %}
+         <div class="control-group{% if field.errors %} error{% endif %}">
+           <label class="control-label" >{{ field.label }}</label>
+           <div class="controls">
+             {{ field }}
+             {% if field.errors %}
+             <span class="help-inline">{% for error in field.errors %}{{ error|escape }}{% endfor %}</span>
+             {% endif %}
+           </div>
+         </div>
+       {% endfor %}
+         <div class="control-group">
+           <div class="controls">
+             <button type="submit" class="btn">{% trans "Soumettre" %}</button>
+           </div>
+         </div>
+         <input type="hidden" name="next" value="{{ next }}" />
+       </form>
 
 {% endblock %}
 
