@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django import forms
 from django.forms import ImageField, EmailField, ModelForm, CharField, PasswordInput
+from django.utils.translation import ugettext as _
 
 from social_auth.signals import socialauth_registered
 
@@ -22,10 +23,10 @@ class UserForm(ModelForm):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     #Basic infos
-    description = models.CharField(max_length=160, blank=True)
-    avatar = models.ImageField(upload_to='pics', blank=True)
-    domain = models.URLField(max_length=50, blank=True)
-    location = models.CharField(max_length=50, blank=True)
+    description = models.CharField(verbose_name=_('Biographie'), max_length=160, blank=True)
+    avatar = models.ImageField(verbose_name=_('Photo'), upload_to='pics', blank=True)
+    domain = models.URLField(verbose_name=_('Site Web'), max_length=50, blank=True)
+    location = models.CharField(verbose_name=_('Localisation'), max_length=50, blank=True)
     pro_user = models.BooleanField(default=True)
     LANGUAGES_CHOICES = (
         ('en', 'English'),
@@ -60,12 +61,6 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.description
 
-class UserProfileForm(ModelForm):
-    avatar   = ImageField(help_text="Maximum size of 700k. JPG, GIF, PNG.")
-    location = CharField(help_text="Where in the world are you?")
-    class Meta:
-        model = UserProfile
-        fields = ('avatar', 'domain')
 
 
 

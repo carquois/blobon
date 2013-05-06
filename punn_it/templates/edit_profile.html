@@ -1,28 +1,44 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Punn.it / Home{% endblock %}
+{% block title %}{% trans "Changez vos informations" %}{% endblock %}
 
 {% block content %}
 
+       <form class="form-horizontal" method="post" action="{% url accounts.views.edit_profile %}">{% csrf_token %}
+       {% if form.non_field_errors %}
+         <div class="alert alert-block alert-error">
+           <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <h4>{% trans 'Erreur' %}</h4>
+           {% trans "Des erreurs se sont glissées. Veuillez réessayer." %}
+         </div>
+       {% endif %}
+         <div class="control-group{% if user_form.username.errors %} error{% endif %}">
+           <label class="control-label" for="inputUsername">{% trans "Nom d'utilisateur" %}</label>
+           <div class="controls">
+             {{ user_form.username }}
+             {% if user_form.username.errors %}
+             <span class="help-inline">{% for error in user_form.username.errors %}{{ error|escape }}{% endfor %}</span>
+             {% endif %}
+           </div>
+         </div>
+         <div class="control-group">
+           <div class="controls">
+             <button type="submit" class="btn">{% trans "Soumettre" %}</button>
+           </div>
+         </div>
+         <input type="hidden" name="next" value="{{ next }}" />
+       </form>
 
-      {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
+<!--
 
 <form class="form-horizontal" action="." method="post">{% csrf_token %}
-{{ form.as_p }}
+{{ user_form }}
+{{ userprofile_form }}
 <button type="submit" class="btn-large btn-primary">Save</button>
 </form>
 
+-->
 
-
-
-{% endblock %}
-{% block sidebar %}
-
-          <div class="well">
-
-{% include "bigbox.html" %}
-
-          </div><!--/.well -->
 {% endblock %}
 

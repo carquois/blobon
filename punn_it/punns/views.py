@@ -8,7 +8,7 @@ import urllib2
 from urlparse import urlparse
 from cgi import parse_qs
 
-from accounts.models import UserProfile, UserForm, UserProfileForm
+from accounts.models import UserProfile, UserForm
 from comments.models import Comment
 from comments.forms import CommentForm
 from punns.models import Punn, PunnForm
