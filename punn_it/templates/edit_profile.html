@@ -5,6 +5,16 @@
 
 {% block content %}
 
+{% if messages %}
+{% for message in messages %}
+
+<div class="alert alert-block alert-info">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+
        <form class="form-horizontal" method="post" action="{% url accounts.views.edit_profile %}">{% csrf_token %}
        {% if form.non_field_errors %}
          <div class="alert alert-block alert-error">
@@ -30,15 +40,6 @@
          <input type="hidden" name="next" value="{{ next }}" />
        </form>
 
-<!--
-
-<form class="form-horizontal" action="." method="post">{% csrf_token %}
-{{ user_form }}
-{{ userprofile_form }}
-<button type="submit" class="btn-large btn-primary">Save</button>
-</form>
-
--->
 
 {% endblock %}
 

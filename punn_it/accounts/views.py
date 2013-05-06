@@ -84,12 +84,13 @@ def register(request):
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        userprofile_form = UserProfileForm(request.POST)
-        user_form = UserForm(request.POST)
+        userprofile_form = UserProfileForm(request.POST, instance=request.user.get_profile())
+        user_form = UserForm(request.POST, instance=request.user)
         if userprofile_form.is_valid() and user_form.is_valid():
-          userprofile_form.save(instance=request.user.get_profile())
-          user_form.save(instance=request.user)
-          return HttpResponseRedirect(reverse('punns.views.index'))
+          userprofile_form.save()
+          user_form.save()
+          messages.add_message(request, messages.INFO, _(u"Merci, vos paramètres ont été enregistrés."))
+          return HttpResponseRedirect(reverse('accounts.views.edit_profile'))
     else:
         userprofile_form = UserProfileForm(instance=request.user.get_profile())
         user_form = UserForm(instance=request.user)
