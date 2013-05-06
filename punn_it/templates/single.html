@@ -205,14 +205,14 @@
                 <div id="comment-wrapper">   
                   <div id="vote-comment-wrapper">
                     <a href="
-                             {% if request.user.is_authenticated %}/voteup/{{ comment.id }}
+                             {% if request.user.is_authenticated %}{% url votes.views.commentup comment.id %}
                              {% else %}{% url accounts.views.signup %}
                              {% endif %}
                              "><div class="comment-vote comment-vote-up {% if comment.vote == "U" %}comment-vote-up-on{% endif %}"></div></a>
                       <!--<div class="comment-vote comment-vote-up-on"></div>-->
                     <p id="comment-score">{{ comment.karma }}</p>
                     <a href="
-                             {% if request.user.is_authenticated %}/votedown/{{ comment.id }}
+                             {% if request.user.is_authenticated %}{% url votes.views.commentdown comment.id %}
                              {% else %}{% url accounts.views.signup %}
                              {% endif %}
                              "><div class="comment-vote comment-vote-down {% if comment.vote == "D" %}comment-vote-down-on{% endif %}"></div></a>
