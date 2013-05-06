@@ -188,8 +188,10 @@ def profile_page(request, user):
 
 @login_required
 def create(request): 
+      from punns.forms import PunnForm
+      form = PunnForm()
       return render_to_response('create.html', 
-                                {}, 
+                                {'form': form}, 
                                 context_instance=RequestContext(request))
 
 @login_required
