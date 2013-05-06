@@ -187,6 +187,12 @@ def profile_page(request, user):
                                 context_instance=RequestContext(request))
 
 @login_required
+def create(request): 
+      return render_to_response('create.html', 
+                                {}, 
+                                context_instance=RequestContext(request))
+
+@login_required
 def submit(request): 
     if request.method == 'POST':
         form = PunnForm(request.POST)

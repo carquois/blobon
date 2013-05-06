@@ -155,6 +155,9 @@
               </ul>
               <ul class="nav pull-right">
                 <li>
+                  <a href="{% url punns.views.create %}">Publish</a>
+                </li>
+                <li>
                   <a class="piton crayon" href="{% url news.views.all %}"></a>
                 </li>
 		{% if not auth_user %}
