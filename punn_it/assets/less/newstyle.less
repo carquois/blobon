@@ -18,6 +18,15 @@ body {
   padding: 0px; 
 }
 
+.container-fluid {
+  max-width: 1180px;
+  margin: auto;	
+}
+
+  #main_container {
+  padding:0 40px 0 40px; 
+  }
+
 .navbar-inverse .navbar-inner {
 
   background-image: url('../img/navbar_background.jpg')!important;
@@ -36,6 +45,9 @@ body {
 }
 
 #wrapper {
+
+  float: right;
+  margin-left: 56px;
   
 }
 
@@ -59,7 +71,6 @@ body {
 .content {
   .texture;
   margin-right:330px;
-  min-height: 200px;
 }
 
 #title{
@@ -103,6 +114,9 @@ body {
 
 /* --------------  CSS Base  ---------------- */
 
+
+
+
 /* --------------  CSS Single  ---------------- */
 
 #content-single-wrapper{
@@ -110,13 +124,88 @@ body {
   margin: 0 30px;
 }
 
+#content-single{
+
+}
+
 #main-image {
   max-width: 100%;
-}  
+}
+
+#vote-wrapper {
+  float: left;
+  margin-top:-1px;
+  margin-right: -100%;
+  margin-left: -56px;
+  width: 55px;
+  float: left;
+  position: relative;
+  z-index: 4;
+}
+
+/////VOTE UP - VOTE DOWN///////
+
+.vote-up-down{
+  width: 56px;
+  height: 60px;
+  background:url(@sprite);
+}
+.point {
+  width: 56px;
+  height: 52px;
+  background-position: -309px -620px;
+  font-family:"Helvetica", sans-serif;
+  font-size:20px;
+  color:white;
+}
+
+@vote-x : -367px;
+@vote-on-x : -308px;
+
+.up {
+  background-position: @vote-x -355px;
+}
+.up:hover {
+  background-position: @vote-x -290px;
+}
+.up:active {
+  background-position: @vote-x -225px;
+}
+.up-on {
+  background-position: @vote-on-x -355px;
+}
+.up-on:hover {
+  background-position: @vote-on-x -290px;
+}
+.up-on:active {
+  background-position: @vote-on-x -225px;
+}
+.down {
+  background-position: @vote-x -425px;
+}
+.down:hover {
+  background-position: @vote-x -490px;
+}
+.down:active {
+  background-position: @vote-x -555px;
+}
+.down-on {
+  background-position: @vote-on-x -425px;
+}
+.down-on:hover {
+  background-position: @vote-on-x -490px;
+}
+.down-on:active {
+  background-position: @vote-on-x -555px;
+}
+  
 
 /* --------------  CSS Single  ---------------- */
 
-/* --------------  CSS Sidebar  ---------------- */
+
+
+
+
 
 /* --------------  CSS top-thumbs  ---------------- */
 
@@ -141,6 +230,10 @@ body {
 
 }
 
+.brand {
+  margin-left: -20px!important;
+}
+
 
 /* --------------  CSS top-thumbs  ---------------- */
 
@@ -154,7 +247,10 @@ body {
   #wrapper {
   padding:10px!important;
   margin: -8px 0 0 0;
-  }	
+  }
+    #main_container {
+  padding:0 20px 0 20px; 
+  }
 }
 
 @media (max-width: 767px){
@@ -164,6 +260,9 @@ body {
   #wrapper {
   padding: 0px!important;
   margin: -8px -8px 0 -8px;
+  }
+  #main_container {
+  padding:0 0 0 0; 
   }
   .content {
   margin-right:0px;
@@ -180,6 +279,9 @@ body {
   #wrapper {
   padding: 0px!important;
   margin: -8px -8px 0 -8px;
+  }
+  #main_container {
+  padding:0 0 0 0; 
   }
   .content {
   margin-right:0px;
