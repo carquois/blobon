@@ -13,17 +13,7 @@
            {% trans "Quelque chose s'est mal passé. Veuillez réessayer." %}
          </div>
        {% endif %}
-       {% for field in form %}
-         <div class="control-group{% if field.errors %} error{% endif %}">
-           <label class="control-label" >{{ field.label }}</label>
-           <div class="controls">
-             {{ field }}
-             {% if field.errors %}
-             <span class="help-inline">{% for error in field.errors %}{{ error|escape }}{% endfor %}</span>
-             {% endif %}
-           </div>
-         </div>
-       {% endfor %}
+         {% include "horizontal-form.html" %}
          <div class="control-group">
            <div class="controls">
              <button type="submit" class="btn">{% trans "Soumettre" %}</button>
