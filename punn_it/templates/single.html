@@ -14,34 +14,24 @@
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
     {% block content %}
-     {% if auth_user %}
-      <script type="text/javascript" charset="utf-8">
-        function up(data){
-           Dajaxice.punns.up(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
-        }
-        function down(data){
-           Dajaxice.punns.down(Dajax.process, {'auth_userid':{{ auth_user.id }}, 'punnid':{{ punn.id }}, 'karma':{{ karma }}});
-        }
-      </script>
-     {% endif %}
       <div class="container">
         <div class="row">
           <div id="vote-wrapper" class="visible-desktop">
-           {% if not auth_user %}
-            <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">
-           {% endif %}
-            <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}" {% if auth_user %}onclick="up();"{% endif %}></div>
-           {% if not auth_user %}
+            <a href="{% if request.user.is_authenticated %}
+                       {% url votes.views.up punn.id %}
+                     {% else %}
+                       {% url django.contrib.auth.views.login %}?next={{request.path}}
+                     {% endif %}">
+              <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}"></div>
             </a>
-           {% endif %}
             <div class="vote-up-down point"><p style="text-align:center;padding-top:17px;" id="karma">{{ karma }}</p></div>
-           {% if not auth_user %}
-            <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">
-           {% endif %}
-            <div id="downbutton" class="vote-up-down down {% if vote == "D" %} down-on{% endif %}" {% if auth_user %}onclick="down();"{% endif %}></div>
-           {% if not auth_user %}
+            <a href="{% if request.user.is_authenticated %}
+                       {% url votes.views.down punn.id %}
+                     {% else %}
+                       {% url django.contrib.auth.views.login %}?next={{request.path}}
+                     {% endif %}">
+              <div id="downbutton" class="vote-up-down down {% if vote == "D" %} down-on{% endif %}"></div>
             </a>
-           {% endif %}
           </div>
           <div class="span9" id="content-single">
 	    <div id="content-single-wrapper">
@@ -69,19 +59,23 @@
                         var url = false;
                         if (e.which == 37) {
                           url = "{{ prev_punn.get_absolute_url }}";
-                        }else if (e.which == 39) {
+                        }
+                        else if (e.which == 39) {
                           url = "{{ next_punn.get_absolute_url }}";
-                        }else if (e.which == 82) {
+                        }
+                        else if (e.which == 82) {
                           url = "{% url punns.views.random %}"; 
                         }
-                        if (url) {
-                          window.location = url;
-                        }
-                        if (e.which == 70) {
-                          up(); 
+                        {% if request.user.is_authenticated %}
+                        else if (e.which == 70) {
+                          url = "{% url votes.views.up punn.id %}";
                         }
                         if (e.which == 65) {
-                          down(); 
+                          url = "{% url votes.views.down punn.id %}";
+                        }
+                        {% endif %}
+                        if (url) {
+                          window.location = url;
                         }
                         if (e.which == 67) {
                           $("#comment-box").focus();
@@ -211,17 +205,17 @@
                 <div id="comment-wrapper">   
                   <div id="vote-comment-wrapper">
                     <a href="
-                             {% if request.user.is_authenticated %}/voteup/{{ comment.id }}
+                             {% if request.user.is_authenticated %}{% url votes.views.commentup comment.id %}
                              {% else %}{% url accounts.views.signup %}
                              {% endif %}
-                             "><div class="comment-vote comment-vote-up"></div></a>
+                             "><div class="comment-vote comment-vote-up {% if comment.vote == "U" %}comment-vote-up-on{% endif %}"></div></a>
                       <!--<div class="comment-vote comment-vote-up-on"></div>-->
                     <p id="comment-score">{{ comment.karma }}</p>
                     <a href="
-                             {% if request.user.is_authenticated %}/votedown/{{ comment.id }}
+                             {% if request.user.is_authenticated %}{% url votes.views.commentdown comment.id %}
                              {% else %}{% url accounts.views.signup %}
                              {% endif %}
-                             "><div class="comment-vote comment-vote-down"></div></a>
+                             "><div class="comment-vote comment-vote-down {% if comment.vote == "D" %}comment-vote-down-on{% endif %}"></div></a>
                       <!--<div class="comment-vote comment-vote-down-on"></div>-->
                   </div>
                   {% if comment.author == auth_user  %}

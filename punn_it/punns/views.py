@@ -271,6 +271,15 @@ def single(request, shorturl):
         votesup = CommentVote.objects.filter(comment=comment).filter(vote='U')
         votesdown = CommentVote.objects.filter(comment=comment).filter(vote='D')
         comment.karma = votesup.count() - votesdown.count()
+       
+        if request.user.is_authenticated() and CommentVote.objects.filter(comment=comment).filter(user=request.user).exists():
+          v = CommentVote.objects.filter(comment=comment).filter(user=request.user)
+          if v[0].vote == "U":
+            comment.vote = "U"
+          elif v[0].vote == "D":
+            comment.vote = "D"
+
+
     url = request.build_absolute_uri()
     site_description = settings.MAIN_SITE_DESCRIPTION
     site = get_current_site(request)
