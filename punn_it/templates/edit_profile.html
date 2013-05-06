@@ -23,15 +23,8 @@
            {% trans "Des erreurs se sont glissées. Veuillez réessayer." %}
          </div>
        {% endif %}
-         <div class="control-group{% if user_form.username.errors %} error{% endif %}">
-           <label class="control-label" for="inputUsername">{% trans "Nom d'utilisateur" %}</label>
-           <div class="controls">
-             {{ user_form.username }}
-             {% if user_form.username.errors %}
-             <span class="help-inline">{% for error in user_form.username.errors %}{{ error|escape }}{% endfor %}</span>
-             {% endif %}
-           </div>
-         </div>
+         {% include "horizontal-form.html" with form=user_form %}
+         {% include "horizontal-form.html" with form=userprofile_form %}
          <div class="control-group">
            <div class="controls">
              <button type="submit" class="btn">{% trans "Soumettre" %}</button>
