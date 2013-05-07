@@ -193,10 +193,11 @@ def profile_page(request, user):
 def create(request): 
       from punns.forms import PunnForm
       if request.method == 'POST':
-        form = PunnForm(request.POST)
+        form = PunnForm(request.POST, request.FILES)
         if form.is_valid():
           punn = form.save(commit=False)
           punn.author = request.user
+          punn.status = "P"
           punn.save()
           heading = _(u"Félicitations! Votre contenu est maintenant publié.")
           message = _(u"Vous pouvez dorénavant le partager")
