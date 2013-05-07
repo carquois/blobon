@@ -16,6 +16,14 @@
     {% block content %}
       <div class="container">
         <div class="row">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-block alert-info">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}            
+            </div>
+          {% endfor %}
+        {% endif %}
           <div id="vote-wrapper" class="visible-desktop">
             <a href="{% if request.user.is_authenticated %}
                        {% url votes.views.up punn.id %}
