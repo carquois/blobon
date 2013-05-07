@@ -218,7 +218,7 @@
                              "><div class="comment-vote comment-vote-down {% if comment.vote == "D" %}comment-vote-down-on{% endif %}"></div></a>
                       <!--<div class="comment-vote comment-vote-down-on"></div>-->
                   </div>
-                  {% if comment.author == auth_user  %}
+                  {% if comment.author == request.user  %}
                   <a class="close pull-right" rel="tooltip" title="{% trans "Cliquez ici pour effacer votre commentaire" %}" href="/delete/{{ comment.id }}">&times;</a>
                   {% endif %}
                   <div id="comment-author-avatar">
