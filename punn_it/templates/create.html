@@ -5,6 +5,7 @@
 
 {% block content %}
      <div class="well">
+       <h3>{% trans "Publier du contenu" %}</h3>
        <form class="form-horizontal" method="post" action="{% url punns.views.create %}">{% csrf_token %}
        {% if form.non_field_errors %}
          <div class="alert alert-block alert-error">

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from accounts.models import UserProfile
-from django.forms import ModelForm
+from django.forms import ModelForm, TextInput
 
 class UserCreateForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -27,8 +27,22 @@ class UserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
         fields = ('description', 'avatar', 'domain', 'location', )
+        widgets = {
+            'description': TextInput(attrs={'class': 'input-block-level'}),
+            'domain': TextInput(attrs={'class': 'input-block-level'}),
+            'location': TextInput(attrs={'class': 'input-block-level'}),
+        }
 
 class UserForm(ModelForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', )
+        widgets = {
+            'username': TextInput(attrs={'class': 'input-block-level'}),
+            'first_name': TextInput(attrs={'class': 'input-block-level'}),
+            'last_name': TextInput(attrs={'class': 'input-block-level'}),
+            'email': TextInput(attrs={'class': 'input-block-level'}),
+        }
+
+
+

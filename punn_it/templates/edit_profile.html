@@ -13,6 +13,7 @@
          {% endfor %}
        {% endif %}
      <div class="well">
+       <h3>{% trans "Changez les paramètres de votre compte" %}</h3>
        <form class="form-horizontal" method="post" action="{% url accounts.views.edit_profile %}">{% csrf_token %}
        {% if form.non_field_errors %}
          <div class="alert alert-block alert-error">
