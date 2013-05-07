@@ -12,6 +12,7 @@
            </div>
          {% endfor %}
        {% endif %}
+     <div class="well">
        <form class="form-horizontal" method="post" action="{% url accounts.views.edit_profile %}">{% csrf_token %}
        {% if form.non_field_errors %}
          <div class="alert alert-block alert-error">
@@ -29,5 +30,6 @@
          </div>
          <input type="hidden" name="next" value="{{ next }}" />
        </form>
+     </div>
 {% endblock %}
 
