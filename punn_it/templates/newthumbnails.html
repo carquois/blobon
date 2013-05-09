@@ -62,7 +62,7 @@
 
     
      <div id="wrapper">
-     
+     <div id="thumbnails">
      
      	     
          
@@ -71,12 +71,88 @@
            <div id="content-single" class="content">
            
 	           <div id="content-single-wrapper">
-		           <h1 id="title">Test</h1>
-	               <div id="image-wrapper">
-	                   <a href="#">
-	                   <img id="main-image" src="http://checkdonc.ca/i/KBz.jpg">
-	                   </a>
-	                   </div>
+		           <div id="image-wrapper">
+	                   
+	                   
+	                   <!-- Thumbnails -->
+	                   
+	                         <div class="container">
+        <div class="row">
+         {% block content %}
+          <div id="content" class="span8 transitions-enabled infinite-scroll clearfix">
+           {% for punn in punns %}
+            <div class="thumbs">
+  	      <a href="{{ punn.get_absolute_url }}">
+  	        <!--<span></span>-->
+	       {% thumbnail punn.pic "153x182" crop="center" as im %}
+  	        <img src="{{ im.url }}" alt="{{ punn.title }}"/>
+	       {% endthumbnail %}
+  	      </a>
+  	    </div>
+           {% endfor %}
+          </div>
+         {% endblock %}
+         {% block sidebar %}
+          <div id="sidebar" class="span3 visible-desktop">
+            {% block top-sidebar %}{% endblock %}
+            <!-- 300x250TopRight -->
+	    <div id='div-gpt-ad-1360772351679-0'>
+	      <script type='text/javascript'>
+	        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-0'); });
+	      </script>
+	    </div>
+            <!-- SkyScrapper -->
+            <div id='div-gpt-ad-1363052072029-0' style='width:160px; height:600px;margin-left:60px;margin-top: 20px;margin-bottom: 20px;'>
+              <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363052072029-0'); });
+              </script>
+            </div>
+          </div>
+       {% endblock %}
+        </div>
+      </div> <!-- /container -->
+     {% endblock %}
+      <nav id="page-nav">
+        <a href="?page={{ punns.next_page_number }}"></a>
+      </nav>
+      <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+      <script src="{{ STATIC_URL }}js/jquery.masonry.min.js"></script>
+      <script src="{{ STATIC_URL }}js/jquery.infinitescroll.min.js"></script>
+      <script>
+        $(function(){
+          var $container = $('#content');
+          $container.imagesLoaded(function(){
+            $container.masonry({
+              itemSelector: '.thumbs',
+	      columnWidth: 170,
+	      gutterWidth: 30,
+	      isAnimated: true 
+            });
+          });
+          $container.infinitescroll({
+            navSelector  : '#page-nav',    // selector for the paged navigation 
+            nextSelector : '#page-nav a',  // selector for the NEXT link (to page 2)
+            itemSelector : '.thumbs',     // selector for all items you'll retrieve
+            loading: {
+                finishedMsg: "{% trans 'Chargement terminé' %}",
+                img: '{{ STATIC_URL }}img/loading.gif'
+              }
+            },
+            function( newElements ) {
+              var $newElems = $( newElements ).css({ opacity: 0 });
+              $newElems.imagesLoaded(function(){
+                $newElems.animate({ opacity: 1 });
+                $container.masonry( 'appended', $newElems, true ); 
+              });
+            }
+          );
+        });
+      </script>
+	                   
+	                   <!-- Thumbnails -->
+	                   
+	                   
+	               </div>
 	           </div>
 	           
 	           
@@ -86,29 +162,11 @@
          </div><!-- #main -->
       
        <div id="sidebar">
-	       <div id="top-thumbs">
-		       <a class="thumbnails_images" href="#">
-                   <img class="sidebarThumbs" src="http://checkdonc.ca/i/cache/55/56/5556062c1de4246780d231b6d0f007dc.jpg" width="85" height="90">     
-               </a>
-		       <a class="thumbnails_images" href="#">
-                   <img class="sidebarThumbs" src="http://checkdonc.ca/i/cache/df/1a/df1a53904f799c7afba177b17c36233a.jpg" width="85" height="90">     
-               </a>
-		       <a class="thumbnails_images" href="#">
-                   <img class="sidebarThumbs" src="http://checkdonc.ca/i/cache/9e/55/9e55fac87e91e3c7084cf85e69b6203e.jpg" width="85" height="90">     
-               </a>
-		       <a class="thumbnails_images" href="#">
-                   <img class="sidebarThumbs" src="http://checkdonc.ca/i/cache/51/f1/51f1be7dc4bebed14bc7df01a3ffd298.jpg" width="85" height="90">     
-               </a>
-		       <a class="thumbnails_images" href="#">
-                   <img class="sidebarThumbs" src="http://checkdonc.ca/i/cache/82/96/8296068d29bab48ed9c9675c10e98d6d.jpg" width="85" height="90">     
-               </a>
-		       <a class="thumbnails_images" href="#">
-                   <img class="sidebarThumbs" src="http://checkdonc.ca/i/cache/55/56/5556062c1de4246780d231b6d0f007dc.jpg" width="85" height="90">     
-               </a>                                             
-	       </div>
+	       
 	       <div id="ad"><img src="http://s0.2mdn.net/viewad/3393746/Apr13-Retargeting-Homepage-Boost_Colour-300x250.jpg"></div>
        </div><!-- #sidebar -->
     
+    </div> <!-- #thumbnails -->
     </div> <!-- #wrapper -->
   
   </div><!-- .container-fluid -->
