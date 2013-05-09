@@ -49,12 +49,22 @@ body {
   z-index:4;
 }
 
-#wrapper {
+ #wrapper {
 
+  float: left;
+  margin-left: 0;
+  
+}
+
+ #wrapper #single  {
+	
+  
   float: right;
   margin-left: 53px;
   
 }
+
+
 
 #main-wrap {
   padding-bottom:50px;
@@ -426,7 +436,7 @@ margin-top: -8px;
 
 
 @media (max-width: 979px){
-  #wrapper {
+  #wrapper #single {
   padding:10px!important;
   margin: -8px 0 0 0px;
   }
@@ -448,10 +458,12 @@ margin-top: -8px;
   .navbar {
   margin: 0 -20px 22px -20px;
   }
-  #wrapper {
-  padding: 0px!important;
-  margin: -8px -8px 0 48px;
+  #wrapper #single {
+  float: right;
+  margin: -8px -8px 0 0!important; 
   }
+ 
+  
   #main_container {
   padding:0 0 0 0; 
   }
