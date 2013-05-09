@@ -37,21 +37,24 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_page
 
-
 def index(request):
-      user = User.objects.get(pk=3)
+      if request.META['HTTP_HOST'] != "checkdonc.ca":
+        if UserProfile.objects.filter(domain='http://%s/' % request.META['HTTP_HOST']).exists():
+          user = UserProfile.objects.get(domain='http://%s/' % request.META['HTTP_HOST']).user
+        else:
+          user = User.objects.get(pk=3)
+      else:
+        user = User.objects.get(pk=3)
       punns = paginate(request,
                        Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
                        20)
       site_description = settings.MAIN_SITE_DESCRIPTION
       site = get_current_site(request)
-      auth_user = ""
-      if request.user.is_authenticated():
-        auth_user = request.user
       return render_to_response('base.html',
                                {'user': user, 'site_description': site_description,
-                                'punns': punns, 'site': site, 'auth_user': auth_user},
+                                'punns': punns, 'site': site},
                                 context_instance=RequestContext(request))
+
 def videos(request):
       user = UserProfile.objects.get(pk=3)
       punns = paginate(request,
