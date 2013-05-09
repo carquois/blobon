@@ -295,8 +295,6 @@ def single(request, shorturl):
     url = request.build_absolute_uri()
     site_description = settings.MAIN_SITE_DESCRIPTION
     site = get_current_site(request)
-    
-    
     return render_to_response('single.html', 
                               {'punn': punn, 'latest_punn_list': latest_punn_list,
                                'next_punn': next_punn, 'prev_punn': prev_punn, 

@@ -11,6 +11,8 @@
     <meta name="twitter:url" content="{{ url }}">
     <meta name="twitter:title" content="{{ punn.title }}">
     <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}">
+    <!-- Le canonical url -->
+    <link rel="canonical" href="{{ url }}" />
 {% endblock %}
 {% block title %}{{ punn.title }}{% endblock %}
     {% block content %}
