@@ -19,6 +19,8 @@
     <meta name="twitter:url" content="http://{{ site.domain }}">
     <meta name="twitter:title" content="{{ site.name }}">
     <meta name="twitter:image" content="http://{{ site.domain }}{{ STATIC_URL }}img/avatar.png">
+    <!-- Le canonical url -->
+    <link rel="canonical" href="{{ site.name }}" />
 {% endblock %}
     <script src="{{ STATIC_URL }}js/jquery.dajax.core.js"></script>
 {% block css %}
@@ -136,7 +138,7 @@
             </a>
   	    <a class="brand" href="{% url punns.views.index %}">{{ site.name }}</a>
             <div class="nav-collapse collapse">
-             {% if not auth_user %}
+             {% if not request.user.is_authenticated %}
               <a href="{% url accounts.views.signup %}" class="btn" id="join">{% trans "Rejoindre" %} {{ site.name }}</a>
              {% endif %}
               <ul class="nav" style="display:none">
@@ -144,17 +146,23 @@
                   <a class="piton image" href="/random/"></a>
                 </li>
                 <li>
-                  <a class="piton video" href="{% url punns.views.videos %}"></a>
+                  <a class="piton video" href="#"></a>
                 </li>
                 <li>
-                  <a class="piton crayon" href="/random/"></a>
+                  <a class="piton crayon" href="#"></a>
                 </li>
                 <li>
-                  <a class="piton random" href="/random/"></a>
+                  <a class="piton random" href="#"></a>
                 </li>
               </ul>
               <ul class="nav pull-right">
-		{% if not auth_user %}
+                <li>
+                  <a href="{% url punns.views.create %}">Publish</a>
+                </li>
+                <li>
+                  <a class="piton crayon" href="{% url news.views.all %}"></a>
+                </li>
+		{% if not request.user.is_authenticated %}
                 <li class="dropdown li-items" style="display:none">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Langue" %}: {% trans "Français" %}<b class="caret"></b></a>
 	          <ul class="dropdown-menu">
@@ -162,15 +170,17 @@
                   </ul>
                 </li>
 		{% endif %}
-		{% if auth_user %}
+		{% if request.user.is_authenticated %}
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" href="/{{ user.username }}/">
-                  {% thumbnail auth_user.userprofile.avatar "35" crop="center" as im %}
-                    <img src="{{ im.url }}" alt="{{ auth_user.userprofile.description }}">
+                  {% thumbnail request.user.userprofile.avatar "35" crop="center" as im %}
+                    <img src="{{ im.url }}" alt="{{ request.user.userprofile.description }}">
                   {% endthumbnail %}
                     <b class="caret"></b>
 		  </a>
 	          <ul class="dropdown-menu">
+                    <li><a href="{% url accounts.views.edit_profile %}">{% trans "Paramètres" %}</a></li>
+                    <li class="divider"></li>
                     <li><a href="{% url django.contrib.auth.views.logout %}">{% trans "Se déconnecter" %}</a></li>
                   </ul>
                 </li>

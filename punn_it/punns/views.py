@@ -8,7 +8,7 @@ import urllib2
 from urlparse import urlparse
 from cgi import parse_qs
 
-from accounts.models import UserProfile, UserForm, UserProfileForm
+from accounts.models import UserProfile, UserForm
 from comments.models import Comment
 from comments.forms import CommentForm
 from punns.models import Punn, PunnForm
@@ -18,6 +18,7 @@ from votes.models import PunnVote, CommentVote
 from django import forms
 from django.conf import settings
 from django.contrib import auth
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -33,38 +34,26 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import redirect, render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils import timezone
+from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_page
 
 def index(request):
-      user = User.objects.get(pk=3)
+      if request.META['HTTP_HOST'] != "checkdonc.ca":
+        if UserProfile.objects.filter(domain='http://%s/' % request.META['HTTP_HOST']).exists():
+          user = UserProfile.objects.get(domain='http://%s/' % request.META['HTTP_HOST']).user
+        else:
+          user = User.objects.get(pk=3)
+      else:
+        user = User.objects.get(pk=3)
       punns = paginate(request,
                        Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
                        20)
       site_description = settings.MAIN_SITE_DESCRIPTION
       site = get_current_site(request)
-      auth_user = ""
-      if request.user.is_authenticated():
-        auth_user = request.user
       return render_to_response('base.html',
                                {'user': user, 'site_description': site_description,
-                                'punns': punns, 'site': site, 'auth_user': auth_user},
+                                'punns': punns, 'site': site},
                                 context_instance=RequestContext(request))
-def videos(request):
-      user = UserProfile.objects.get(pk=3)
-      punns = paginate(request,
-                       Punn.objects.filter(author=user).filter(status='P').exclude(youtube_id__isnull=True).exclude(youtube_id='').order_by('-pub_date'),
-                       20)
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      auth_user = ""
-      if request.user.is_authenticated():
-        auth_user = request.user
-      return render_to_response('base.html',
-                               {'user': user, 'site_description': site_description,
-                                'punns': punns, 'site': site, 'auth_user': auth_user},
-                                context_instance=RequestContext(request))
-
-
 
 def draft(request):
       user = UserProfile.objects.get(pk=3)
@@ -175,15 +164,38 @@ def done(request):
 
 def profile_page(request, user):
       user = get_object_or_404(User, username=user)
-      punns = paginate(request,
-                       Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
-                       20)
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      url = request.build_absolute_uri()
-      return render_to_response('profile.html', 
-                                {'user': user, 'site_description': site_description,
-                                 'site': site, 'punns': punns, 'url': url}, 
+      if user.get_profile().domain:
+        return HttpResponseRedirect(user.get_profile().domain)      
+      else:
+        punns = paginate(request,
+                         Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
+                         20)
+        site_description = settings.MAIN_SITE_DESCRIPTION
+        site = get_current_site(request)
+        url = request.build_absolute_uri()
+        return render_to_response('profile.html', 
+                                  {'user': user, 'site_description': site_description,
+                                   'site': site, 'punns': punns, 'url': url}, 
+                                  context_instance=RequestContext(request))
+
+@login_required
+def create(request): 
+      from punns.forms import PunnForm
+      if request.method == 'POST':
+        form = PunnForm(request.POST, request.FILES)
+        if form.is_valid():
+          punn = form.save(commit=False)
+          punn.author = request.user
+          punn.status = "P"
+          punn.save()
+          heading = _(u"Félicitations! Votre contenu est maintenant publié.")
+          message = _(u"Vous pouvez dorénavant le partager")
+          messages.add_message(request, messages.INFO, '<h4 class="alert-heading">%s</h4><p>%s</p><p><a class="btn btn-primary" href="http://www.facebook.com/sharer.php?u=%s">Facebook</a> <a class="btn" href="https://twitter.com/share?text=%s">Twitter</a></p>' % (heading , message, request.build_absolute_uri(punn.get_absolute_url()), punn.title), extra_tags='safe')
+          return HttpResponseRedirect( punn.get_absolute_url() )
+      else:
+        form = PunnForm()
+      return render_to_response('create.html', 
+                                {'form': form}, 
                                 context_instance=RequestContext(request))
 
 @login_required
@@ -271,11 +283,18 @@ def single(request, shorturl):
         votesup = CommentVote.objects.filter(comment=comment).filter(vote='U')
         votesdown = CommentVote.objects.filter(comment=comment).filter(vote='D')
         comment.karma = votesup.count() - votesdown.count()
+       
+        if request.user.is_authenticated() and CommentVote.objects.filter(comment=comment).filter(user=request.user).exists():
+          v = CommentVote.objects.filter(comment=comment).filter(user=request.user)
+          if v[0].vote == "U":
+            comment.vote = "U"
+          elif v[0].vote == "D":
+            comment.vote = "D"
+
+
     url = request.build_absolute_uri()
     site_description = settings.MAIN_SITE_DESCRIPTION
     site = get_current_site(request)
-    
-    
     return render_to_response('single.html', 
                               {'punn': punn, 'latest_punn_list': latest_punn_list,
                                'next_punn': next_punn, 'prev_punn': prev_punn, 

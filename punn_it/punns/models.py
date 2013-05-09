@@ -36,12 +36,12 @@ class Tags(models.Model):
 class Punn(models.Model):
     status = models.CharField(max_length=2, choices=STATUS, null=True, blank=True)
     #Basic infos
-    title = models.CharField(max_length=140)
+    title = models.CharField(verbose_name=_("Titre"), max_length=140)
     base62id = models.CharField(max_length=140, blank=True)
     slug = models.SlugField(max_length=140, blank=True)
     karma = models.IntegerField(default=0)
     views = models.IntegerField(default=0, blank=True)
-    source = models.URLField(max_length=300, blank=True)
+    source = models.URLField(verbose_name=_("Source"), max_length=300, blank=True)
     author = models.ForeignKey(User)
     original_punn = models.ForeignKey('self',  null=True, blank=True)
     content = models.TextField(max_length=10000, blank=True)
@@ -53,7 +53,7 @@ class Punn(models.Model):
     pub_date = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     last_modified = models.DateTimeField(auto_now = True,  null=True, blank=True)
     #Media
-    pic = ImageField(upload_to=get_file_path, null=True, blank=True)
+    pic = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
     def __unicode__(self):
         return self.title
     def save(self):
