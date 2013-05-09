@@ -164,16 +164,19 @@ def done(request):
 
 def profile_page(request, user):
       user = get_object_or_404(User, username=user)
-      punns = paginate(request,
-                       Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
-                       20)
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      url = request.build_absolute_uri()
-      return render_to_response('profile.html', 
-                                {'user': user, 'site_description': site_description,
-                                 'site': site, 'punns': punns, 'url': url}, 
-                                context_instance=RequestContext(request))
+      if user.get_profile().domain:
+        return HttpResponseRedirect(user.get_profile().domain)      
+      else:
+        punns = paginate(request,
+                         Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
+                         20)
+        site_description = settings.MAIN_SITE_DESCRIPTION
+        site = get_current_site(request)
+        url = request.build_absolute_uri()
+        return render_to_response('profile.html', 
+                                  {'user': user, 'site_description': site_description,
+                                   'site': site, 'punns': punns, 'url': url}, 
+                                  context_instance=RequestContext(request))
 
 @login_required
 def create(request): 
