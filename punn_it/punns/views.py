@@ -18,6 +18,7 @@ from votes.models import PunnVote, CommentVote
 from django import forms
 from django.conf import settings
 from django.contrib import auth
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -33,6 +34,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import redirect, render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils import timezone
+from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_page
 
 def index(request):
@@ -49,6 +51,17 @@ def index(request):
                                {'user': user, 'site_description': site_description,
                                 'punns': punns, 'site': site, 'auth_user': auth_user},
                                 context_instance=RequestContext(request))
+
+@login_required
+def delete(request, id):
+      punn = get_object_or_404(Punn, id=id)
+      if request.user == punn.author:
+        punn.delete()
+        messages.add_message(request, messages.INFO, _(u'Votre page a été supprimée'))
+      return HttpResponseRedirect(reverse('punns.views.index'))
+
+
+
 def videos(request):
       user = UserProfile.objects.get(pk=3)
       punns = paginate(request,
