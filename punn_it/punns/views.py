@@ -55,6 +55,31 @@ def index(request):
                                 'punns': punns, 'site': site},
                                 context_instance=RequestContext(request))
 
+@login_required
+def delete(request, id):
+      punn = get_object_or_404(Punn, id=id)
+      if request.user == punn.author:
+        punn.delete()
+        messages.add_message(request, messages.INFO, _(u'Votre page a été supprimée'))
+      return HttpResponseRedirect(reverse('punns.views.index'))
+
+
+
+def videos(request):
+      user = UserProfile.objects.get(pk=3)
+      punns = paginate(request,
+                       Punn.objects.filter(author=user).filter(status='P').exclude(youtube_id__isnull=True).exclude(youtube_id='').order_by('-pub_date'),
+                       20)
+      site_description = settings.MAIN_SITE_DESCRIPTION
+      site = get_current_site(request)
+      auth_user = ""
+      if request.user.is_authenticated():
+        auth_user = request.user
+      return render_to_response('base.html',
+                               {'user': user, 'site_description': site_description,
+                                'punns': punns, 'site': site, 'auth_user': auth_user},
+                                context_instance=RequestContext(request))
+
 def draft(request):
       user = UserProfile.objects.get(pk=3)
       punns = paginate(request,

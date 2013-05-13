@@ -107,6 +107,9 @@
                     <div class="btn-group pull-left">
                       <a rel="tooltip" title="{% trans "Rapporter" %}" href="mailto:gab@checkdonc.ca" class="btn"><i class="icon-flag"></i></a>
                       <a href="#share" role="button" class="btn" data-toggle="modal">{% trans "Partager" %}</a>
+                      {% if request.user.is_authenticated and punn.author == request.user %}
+                      <a href="#delete" role="button" class="btn btn-danger" data-toggle="modal">{% trans "Effacer" %}</a>
+                      {% endif %}
                     </div>
                     <div class="btn-group pull-right">
                       <a rel="tooltip" title="{% trans "Page précédente" %}" href="{{ prev_punn.get_absolute_url }}" class="btn">&larr;</a>
@@ -124,6 +127,19 @@
                     <p>{{ punn.author.first_name }} {{ punn.author.last_name }}</p>
                     <p><a href="/{{ user.username }}/">@{{ user.username }}</a></p>
                     <p id="published-infos">{% trans "Publié" %} {{ punn.pub_date|naturaltime }} {% if punn.source %}{% trans "via" %} <a href="{{ punn.source }}" target="_blank">(Source)</a>{% endif %}</p>
+                  </div>
+                </div>
+                <div id="delete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="deleteLabel">{% trans "Effacer cette page?" %}</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>{% trans "Êtes-vous certain de vouloir faire ça? Vous ne pourrez pas revenir en arrière par la suite." %}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Non non!" %}</button>
+                    <a href="{% url punns.views.delete punn.id %}" class="btn btn-danger">{% trans "Oui, je veux l'effacer" %}</a>
                   </div>
                 </div>
                 <div id="share" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
