@@ -18,11 +18,24 @@ font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", He
 }
 
 
+
 body {
   background-color: #d3d3d3;
   padding: 0px;
   .texture;
 }
+
+
+
+.container {
+  width: 1024px!important;
+  margin: auto;
+}
+
+#container {margin-right:330px;
+	min-height: 200px;
+}
+
 
 .container-fluid {
   max-width: 1180px;
@@ -44,6 +57,7 @@ body {
 	
 }
 
+
 #sidebar { 
   margin-left:-100%;
   width:300px;
@@ -53,12 +67,6 @@ body {
   z-index:4;
 }
 
- #wrapper {
-
-  float: left;
-  margin-left: 0;
-  
-}
 
  #wrapper #single  {
 	
@@ -67,6 +75,7 @@ body {
   margin-left: 53px;
   
 }
+
 
 
 
@@ -86,6 +95,7 @@ body {
   width:100%;
   position:relative; z-index:3;
 }
+
 
 .content {
   margin-right:330px;
@@ -112,9 +122,7 @@ body {
   }
 }
 
-#thumbnails #image-wrapper{
-	background: none;
-}
+
 
 .skyscr {
   margin: 0 auto 0 auto;
@@ -186,13 +194,21 @@ margin-right: 10px;
 
 /* ---------------  Debut page thumbnail -------------------- */
 
+#thumbnails #image-wrapper{
+	background: none;
+	padding: 0;
+}
+
 .thumbs-box {
 border-width: 5px 10px 10px 10px;
 border-image: url('../img/border-image.png') 5 5 12 5 repeat;
-margin-top: 20px;
+margin: 0 20px 20px 0;
 float: left;
 }
 
+#thumbnails #main{
+
+}
 
 .thumbs-single {
 	background: #ffffff;
@@ -250,14 +266,10 @@ width:200px;
     margin-bottom: 30px;
 }
 
-#thumbnails #main{
-	 width:116%!important;
-	
-}
 
 #thumbnails .content {
 	
-	margin-right: 500px;
+	
 	
 }
 
@@ -349,6 +361,10 @@ margin: 0 5px 20px 5px!important;
 
 #single #content-single-wrapper{
 	padding: 15px 0 30px 0;
+}
+
+#thumbnails #content-single-wrapper{
+	padding: 0px 0 30px 0;
 }
 
 #comment-box {
