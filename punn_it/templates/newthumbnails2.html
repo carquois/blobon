@@ -14,8 +14,23 @@
       }
     </style>
    
-    <link rel="stylesheet/less" href="../assets/less/newstyle2.less">
+    <link rel="stylesheet/less" href="../assets/less/newstyle.less">
     <script src="../assets/js/less.js" type="text/javascript"></script>
+    <script src="../js/jquery-1.7.1.min.js"></script>
+    <script src="../assets/js/jquery.masonry.min.js" type="text/javascript"></script>
+    <script>
+	  $(function(){
+	    
+	    $('#container').masonry({
+	      itemSelector: '.box',
+	      // set columnWidth a fraction of the container width
+	      columnWidth: function( containerWidth ) {
+	        return containerWidth / 5;
+	      }
+	    });
+	    
+	  });
+    </script>
     <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -59,7 +74,7 @@
   </div>
     <div id="connect-box-fullwidth">
     <div id="connect-box">
-	  
+	<div id="connect-button"></div>  
     </div>
     </div>
   <div id="connect-box-bottom"></div>
@@ -78,115 +93,137 @@
            <div id="content-single" class="content">
            
 	           <div id="content-single-wrapper">
+		           
 		           <div id="image-wrapper">
 	                  
 	                  
-	                  <!-- Thumbnails -->
+	               <!-- Thumbnails -->
 	                   
-	                         <div class="container-fluid">
+                   <div class="thumbs-content">
+	               <div class="thumbs-box ">
+	               <div class="thumbs-single">
+	  	           <a href="#"><img src="http://checkdonc.ca/i/cache/26/da/26da6a3064a6c57a0115250f173d4d91.jpg" alt="{{ punn.title }}"/></a>
+				   <div class="thumbs-detail">
+				   <div class="thumbs-category-box"><div class="thumbs-category"></div><a>funny</a></div>
+				   <div class="thumbs-separator"></div>
+				   <div class="thumbs-category-box"><div class="thumbs-profil"></div><a>@Gabriel_Dancause</a></div>
+				   <div class="thumbs-separator"></div> 
+				   <div class="thumbs-updown"><div class="thumbs-up"></div>265</div>
+				   <div class="thumbs-updown"><div class="thumbs-comment"></div>265</div>
+				   <div class="clearfix"></div>    
+				   </div>
+		           </div>
+	  	           </div>
+                   </div>
+	                   
+	               <!-- Thumbnails -->	
+	               <!-- Thumbnails -->
+	                   
+                   <div class="thumbs-content">
+	               <div class="thumbs-box">
+	               <div class="thumbs-single">
+	  	           <a href="#"><img src="http://checkdonc.ca/i/cache/26/da/26da6a3064a6c57a0115250f173d4d91.jpg" alt="{{ punn.title }}"/></a>
+				   <div class="thumbs-detail">
+				   <div class="thumbs-category-box"><div class="thumbs-category"></div><a>funny</a></div>
+				   <div class="thumbs-separator"></div>
+				   <div class="thumbs-category-box"><div class="thumbs-profil"></div><a>@Gabriel_Dancause</a></div>
+				   <div class="thumbs-separator"></div> 
+				   <div class="thumbs-updown"><div class="thumbs-up"></div>265</div>
+				   <div class="thumbs-updown"><div class="thumbs-comment"></div>265</div>
+				   <div class="clearfix"></div>    
+				   </div>
+		           </div>
+	  	           </div>
+                   </div>
+	                   
+	               <!-- Thumbnails -->	
+	               
+	               <!-- Thumbnails -->
+	                   
+                   <div class="thumbs-content">
+	               <div class="thumbs-box">
+	               <div class="thumbs-single">
+	  	           <a href="#"><img src="http://checkdonc.ca/i/cache/26/da/26da6a3064a6c57a0115250f173d4d91.jpg" alt="{{ punn.title }}"/></a>
+				   <div class="thumbs-detail">
+				   <div class="thumbs-category-box"><div class="thumbs-category"></div><a>funny</a></div>
+				   <div class="thumbs-separator"></div>
+				   <div class="thumbs-category-box"><div class="thumbs-profil"></div><a>@Gabriel_Dancause</a></div>
+				   <div class="thumbs-separator"></div> 
+				   <div class="thumbs-updown"><div class="thumbs-up"></div>265</div>
+				   <div class="thumbs-updown"><div class="thumbs-comment"></div>265</div>
+				   <div class="clearfix"></div>    
+				   </div>
+		           </div>
+	  	           </div>
+                   </div>
+	                   
+	               <!-- Thumbnails -->	
+	               
+	               	               <!-- Thumbnails -->
+	                   
+                   <div class="thumbs-content">
+	               <div class="thumbs-box">
+	               <div class="thumbs-single">
+	  	           <a href="#"><img src="http://checkdonc.ca/i/cache/26/da/26da6a3064a6c57a0115250f173d4d91.jpg" alt="{{ punn.title }}"/></a>
+				   <div class="thumbs-detail">
+				   <div class="thumbs-category-box"><div class="thumbs-category"></div><a>funny</a></div>
+				   <div class="thumbs-separator"></div>
+				   <div class="thumbs-category-box"><div class="thumbs-profil"></div><a>@Gabriel_Dancause</a></div>
+				   <div class="thumbs-separator"></div> 
+				   <div class="thumbs-updown"><div class="thumbs-up"></div>265</div>
+				   <div class="thumbs-updown"><div class="thumbs-comment"></div>265</div>
+				   <div class="clearfix"></div>    
+				   </div>
+		           </div>
+	  	           </div>
+                   </div>
+	                   
+	               <!-- Thumbnails -->	
+	               
+	               	               <!-- Thumbnails -->
+	                   
+                   <div class="thumbs-content">
+	               <div class="thumbs-box">
+	               <div class="thumbs-single">
+	  	           <a href="#"><img src="http://checkdonc.ca/i/cache/26/da/26da6a3064a6c57a0115250f173d4d91.jpg" alt="{{ punn.title }}"/></a>
+				   <div class="thumbs-detail">
+				   <div class="thumbs-category-box"><div class="thumbs-category"></div><a>funny</a></div>
+				   <div class="thumbs-separator"></div>
+				   <div class="thumbs-category-box"><div class="thumbs-profil"></div><a>@Gabriel_Dancause</a></div>
+				   <div class="thumbs-separator"></div> 
+				   <div class="thumbs-updown"><div class="thumbs-up"></div>265</div>
+				   <div class="thumbs-updown"><div class="thumbs-comment"></div>265</div>
+				   <div class="clearfix"></div>    
+				   </div>
+		           </div>
+	  	           </div>
+                   </div>
+	                   
+	               <!-- Thumbnails -->	
+	               
+	               	               <!-- Thumbnails -->
+	                   
+                   <div class="thumbs-content">
+	               <div class="thumbs-box">
+	               <div class="thumbs-single">
+	  	           <a href="#"><img src="http://checkdonc.ca/i/cache/26/da/26da6a3064a6c57a0115250f173d4d91.jpg" alt="{{ punn.title }}"/></a>
+				   <div class="thumbs-detail">
+				   <div class="thumbs-category-box"><div class="thumbs-category"></div><a>funny</a></div>
+				   <div class="thumbs-separator"></div>
+				   <div class="thumbs-category-box"><div class="thumbs-profil"></div><a>@Gabriel_Dancause</a></div>
+				   <div class="thumbs-separator"></div> 
+				   <div class="thumbs-updown"><div class="thumbs-up"></div>265</div>
+				   <div class="thumbs-updown"><div class="thumbs-comment"></div>265</div>
+				   <div class="clearfix"></div>    
+				   </div>
+		           </div>
+	  	           </div>
+                   </div>
+	                   
+	               <!-- Thumbnails -->	               
 
-         <div id="content">
-	           <div class="thumbs-box">
-	           <div class="thumbs-single">
-	  	       <a href="#">
-	  	       <img src="http://checkdonc.ca/i/cache/26/da/26da6a3064a6c57a0115250f173d4d91.jpg" alt="{{ punn.title }}"/>
-		       </a>
-					 <div class="thumbs-detail">
-					   <div class="thumbs-category-box"><div class="thumbs-category"></div><a>funny</a></div>
-					      <div class="thumbs-separator"></div>
-					   <div class="thumbs-category-box"><div class="thumbs-profil"></div><a>@Gabriel_Dancause</a></div>
-					      <div class="thumbs-separator"></div> 
-					   <div class="thumbs-updown"><div class="thumbs-up"></div>265</div>
-					   <div class="thumbs-updown"><div class="thumbs-comment"></div>265</div>
-					   <div class="clearfix"></div>    
-					 </div>
-		       </div>
-	  	       </div>
-           </div>
-         
-         <div id="content">
-	           <div class="thumbs-box">
-	           <div class="thumbs-single">
-	  	       <a href="#">
-	  	       <img src="http://checkdonc.ca/i/cache/26/da/26da6a3064a6c57a0115250f173d4d91.jpg" alt="{{ punn.title }}"/>
-		       </a>
-					 <div class="thumbs-detail">
-					   <div class="thumbs-category-box"><div class="thumbs-category"></div><a>funny</a></div>
-					      <div class="thumbs-separator"></div>
-					   <div class="thumbs-category-box"><div class="thumbs-profil"></div><a>@Gabriel_Dancause</a></div>
-					      <div class="thumbs-separator"></div> 
-					   <div class="thumbs-updown"><div class="thumbs-up"></div>265</div>
-					   <div class="thumbs-updown"><div class="thumbs-comment"></div>265</div>
-					   <div class="clearfix"></div>    
-					 </div>
-		       </div>
-	  	       </div>
-           </div>
-           
-           <div id="content">
-	           <div class="thumbs-box">
-	           <div class="thumbs-single">
-	  	       <a href="#">
-	  	       <img src="http://checkdonc.ca/i/cache/26/da/26da6a3064a6c57a0115250f173d4d91.jpg" alt="{{ punn.title }}"/>
-		       </a>
-					 <div class="thumbs-detail">
-					   <div class="thumbs-category-box"><div class="thumbs-category"></div><a>funny</a></div>
-					      <div class="thumbs-separator"></div>
-					   <div class="thumbs-category-box"><div class="thumbs-profil"></div><a>@Gabriel_Dancause</a></div>
-					      <div class="thumbs-separator"></div> 
-					   <div class="thumbs-updown"><div class="thumbs-up"></div>265</div>
-					   <div class="thumbs-updown"><div class="thumbs-comment"></div>265</div>
-					   <div class="clearfix"></div>    
-					 </div>
-		       </div>
-	  	       </div>
-           </div>
-         
-
-   
-      
-      </div> <!-- /container -->
-     
-      <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-      <script src="{{ STATIC_URL }}js/jquery.masonry.min.js"></script>
-      <script src="{{ STATIC_URL }}js/jquery.infinitescroll.min.js"></script>
-      <script>
-        $(function(){
-          var $container = $('#content');
-          $container.imagesLoaded(function(){
-            $container.masonry({
-              itemSelector: '.thumbs',
-	      columnWidth: 170,
-	      gutterWidth: 30,
-	      isAnimated: true 
-            });
-          });
-          $container.infinitescroll({
-            navSelector  : '#page-nav',    // selector for the paged navigation 
-            nextSelector : '#page-nav a',  // selector for the NEXT link (to page 2)
-            itemSelector : '.thumbs',     // selector for all items you'll retrieve
-            loading: {
-                finishedMsg: "{% trans 'Chargement terminé' %}",
-                img: '{{ STATIC_URL }}img/loading.gif'
-              }
-            },
-            function( newElements ) {
-              var $newElems = $( newElements ).css({ opacity: 0 });
-              $newElems.imagesLoaded(function(){
-                $newElems.animate({ opacity: 1 });
-                $container.masonry( 'appended', $newElems, true ); 
-              });
-            }
-          );
-        });
-      </script>
 	                   
-	                   <!-- Thumbnails -->
-	                  
-	                  
-	                  
-	                   
-	                   </div>
+	               </div>
 	                   
 	           </div>
 	           
@@ -201,8 +238,8 @@
        <div id="sidebar">
 	      
 	       <div id="ad"><img src="http://s0.2mdn.net/viewad/3393746/Apr13-Retargeting-Homepage-Boost_Colour-300x250.jpg"></div>
-	        <div class="thumbs-box">
-	       <div id="sidebar-nav">
+	        <div class="sidebar-box">
+	        <div id="sidebar-nav">
 		       
 		       <p class="thumbs-separator">
 		       <a>© 2013 Blob on</a>
