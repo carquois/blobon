@@ -265,7 +265,7 @@ De plus, il arrive que l’expertise de la compagnie soit sollicitée par d’au
 
 Notre produit vedette sera une communauté où les utilisateurs vont publier du contenu et être rémunéré. 
 
-Les réseaux sociaux semblent emprunter la direction des compagnies traditionnelles en redistribuant tout les profits avec les actionnaires. Nous voulons révolutionner le modèle en re-distribuant une partie des revenus avec les utilisateurs. En effet, ce sont eux qui crééent du contenu intéressant et qui incitent les autres à aller consommer ce contenu. Il s'agit là de la caractéristique la plus spéciale de notre réseau. 
+Les réseaux sociaux semblent emprunter la direction des compagnies traditionnelles en redistribuant tout les profits avec les actionnaires. Nous voulons révolutionner le modèle en re-distribuant une partie des revenus avec les utilisateurs. En effet, ce sont eux qui créent du contenu intéressant et qui incitent les autres à aller consommer ce contenu. Il s'agit là de la caractéristique la plus spéciale de notre réseau. 
 
 Une autre caractéristique particulière de notre projet est le vote positif ET le vote négatif. Les réseaux traditionnels comme Facebook et Twitter ne comportent que le vote positif (J'aime sur Facebook et le RT sur Twitter). Nous croyons que de permettre le vote négatif sur du contenu comme le font les nouveaux réseaux "tendances" permet d'avoir du contenu de meilleure qualité pour les utilisateurs. Voir Reddit.com et Imgur.com
 
