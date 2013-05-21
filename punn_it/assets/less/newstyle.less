@@ -23,6 +23,7 @@ body {
   background-color: #d3d3d3;
   padding: 0px;
   .texture;
+
 }
 
 
@@ -734,20 +735,14 @@ margin-top: -8px;
 
 /////////////MEDIA QUERIES////////////////
 
-
 @media (max-width: 979px){
- /*
- #wrapper #single {
-  padding:10px!important;
-  margin: -8px 0 0 0px;
-  }
-*/
+  
+  
   .content{
   margin-right:240px;
   }
   #connect-box-bottom {
-	  
-	  margin-bottom: 13px!important;
+  margin-bottom: 13px!important;
   }
   #thumbnails .content{
   margin-right:300px;
@@ -756,22 +751,21 @@ margin-top: -8px;
   padding:0 20px 0 20px; 
   }
   #vote-wrapper {
-	  display:none;
+  display:none;
   }
   #top-thumbs{
   width: 195px; 
   }
   #comment-right-column {
-	  width: 70%;
+  width: 70%;
   }
   #connect-box {
-	  width: auto;
+  width: 100%;
   }
   
-   .thumbs-content {
-	  
-	  width: 43%;
-	  margin-right: 7%;
+  .thumbs-content {
+  width: 43%;
+  margin-right: 7%;
 	  
   }
   .adTop-box{
@@ -780,91 +774,97 @@ margin-top: -8px;
   overflow: visible;
   width: 100%;
   height: 87px;
-  padding: 10px 0 10px 19px;
+
   }
   .adTop{
+  width: 728px;
   margin: 3px auto 3px auto;
-  width: 767px;
   }
   .adTop img{
   width: 728px;
   overflow: visible;
+
   }
   
-  .navbar .btn-navbar{
-  margin-top: 5px;
-  padding: 10px 10px;
-  height: 33px;
-  }
-  
-  .navbar .brand {
-  padding: 11px 20px 10px;
-  }
   
   
 }
 
 @media (max-width: 767px) {
+  body {
+  padding: 0px!important;
+  }
   .navbar {
-  margin: 0 -20px 20px -20px;
+  margin: 0;
   }
-  #wrapper  {
-  float: left!important;
-  margin: 10px -8px 0 14px!important; 
+  .navbar .btn-navbar{
+  padding: 9px 10px;  
+  }
+  .navbar-inner{
+  padding-right: 5px;
+  padding-top: 0px; 
+  }
+  .navbar-inverse .navbar-inner{
+  height: 40px;
   }
   
-  
+  .navbar .btn, .navbar .btn-group {
+  margin-top: 4px;
+  }
   
   #thumbnails .content{
   margin-right:0;
   }
   
-  #main_container {
-  padding:0 0 0 0; 
-  }
   .content {
   margin-right:0px;
   }
   
-  #connect-box {
-  height: 176px;
-  background-position: 50% 26%;
-  background-size: 200%;
+  #connect-box-fullwidth{
+  width: 100%;
   }
-  
+  #connect-box{
+  width: 100%;
+  margin: -9px auto 0 auto;
+  background-position: 50% 90%;
+  background-size: 850px;
+  height: 140px;
+  }  
   .adTop-box{
-  display: block!important;
-  margin: -10px -20px 0 -20px;
   overflow: visible;
-  width: auto;
-  height: 92px;
-  padding: 11px 0 0px 0;
+  width: 100%;
+  height: auto;
+  margin: auto;
+  padding: 0;
+  background-color: #525252;
+  
   }
   .adTop img{
   margin: auto;
-  width: 767px;
+  width: 100%;
   }
   
   .adTop {
   margin: auto;
-  width: 767px;
+  width: 100%;
+  height: auto;
+  max-width: 767px;
   }
   
   #sidebar{
   display: none;
   }
-  
-    #connect-box-fullwidth {
-  width: 108%;
-  margin: 0 -20px 0px -20px;
-  overflow: visible;
-  display: block;
+  .thumbs-content {
+  width: 40%;
+  margin-right: 9%;
   }
-  
-  #connect-box-bottom {
-  width: 767px; 
-  margin: 0 -20px 22px -20px;
+  #main_container {
+  margin: -5px 0 0 0;
+  padding: 0;
   }
+
+  
+
   
   
  
@@ -872,67 +872,7 @@ margin-top: -8px;
 }
 
 @media (max-width: 479px){
-	
-
-  #connect-button {
-  background-size: 1410px;
-  width: 223px;
-  height: 59px;
-  background-position: -2209px -913px;
-  }
-  #connect-button:hover
-  {
-  background-size: 1410px;
-  width: 223px;
-  height: 59px;
-  background-position: -2209px -970px;
-  }
-  #connect-button:active
-  {
-  background-size: 1410px;
-  width: 223px;
-  height: 59px;
-  background-position: -2209px -1030px;
-  }
-  
-    #wrapper  {
-  float: left!important;
-  margin: 10px -8px 0 24px!important; 
-  }
-  
-  .thumbs-content {
-	  
-	  width: 43%;
-	  margin-right: 7%;
-	  
-  }
-  
-  #main_container {
-  padding:0 0 0 0; 
-  }
-  .content {
-  margin-right:0px;
-  }
-  
-  #sidebar{
-  display: none;
-  }
-	
-	
 }
 
 @media (max-width: 319px){
-  #wrapper {
-  padding: 0px!important;
-  margin: -8px -8px 0 -8px;
-  }
-  .content {
-  margin-right:0px;
-  }
-  .adTop-box{
-  display: none;
-  }
-  #sidebar{
-  display: none;
-  }	
 }
