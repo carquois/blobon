@@ -11,34 +11,56 @@
   background: url(@texture);
 }
 
-/* --------------  CSS Base  ---------------- */
+/* --------------  Debut Base  ---------------- */
 
 html * {
 font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 
+
 body {
   background-color: #d3d3d3;
-  padding: 0px; 
+  padding: 0px;
+  .texture;
+
 }
+
+
+
+.container {
+  width: 1024px!important;
+  margin: auto;
+}
+
+#container {margin-right:330px;
+	min-height: 200px;
+}
+
 
 .container-fluid {
-  max-width: 1180px;
-  margin: auto;	
+  max-width: 979px!important;
+  margin: auto;
 }
 
-  #main_container {
+#main_container {
   padding:0 40px 0 40px; 
-  }
+}
 
 .navbar-inverse .navbar-inner {
 
   background-image: url('../img/navbar_background.jpg')!important;
   background-repeat:repeat-x;
   height: 44px;
+  box-shadow:  0px 5px 6px rgba(0, 0, 0, 0.6);
+  z-index: 20;
+  position: relative;
 	
 }
+
+.navbar .nav > li > a {
+  padding: 12px 15px 13px!important;}
+
 
 #sidebar { 
   margin-left:-100%;
@@ -49,12 +71,6 @@ body {
   z-index:4;
 }
 
- #wrapper {
-
-  float: left;
-  margin-left: 0;
-  
-}
 
  #wrapper #single  {
 	
@@ -63,6 +79,7 @@ body {
   margin-left: 53px;
   
 }
+
 
 
 
@@ -83,9 +100,9 @@ body {
   position:relative; z-index:3;
 }
 
+
 .content {
-  .texture;
-  margin-right:330px;
+  margin-right:300px;
 }
 
 #title{
@@ -109,9 +126,8 @@ body {
   }
 }
 
-#thumbnails #image-wrapper{
-	background: none;
-}
+
+
 
 .skyscr {
   margin: 0 auto 0 auto;
@@ -149,12 +165,19 @@ body {
     box-shadow: 0 1px 0 #e7e7e7;
 }
 
-.adTop {
+.adTop-box {
 	padding: 10px 0 10px 0;
 	width: 100%;
 	height: 90px;
 	background-color: #525252;
-/* 	border-bottom: 1px solid #000000; */
+
+}
+
+.adTop {
+	
+	width: 800px;
+	margin: auto;
+	
 }
 
 .navbar-inner {
@@ -179,37 +202,233 @@ float: left;
 margin-right: 10px;
 }
 
-/* --------------  CSS Base  ---------------- */
+/* -------------- Debut bloc connect  ---------------- */
 
-/* --------------  Thumbs  ------------------  */
+
+#connect-box-fullwidth{
+	width: 100%;
+	background-color: #252324;
+    
+}
+#connect-box {
+	
+	width: 1024px;
+	height: 154px;
+	background-color: #252324;
+	margin: -20px auto 0 auto;
+    
+	background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-image: -webkit-linear-gradient(left, 
+    rgba(37,35,36,1) 0%, 
+    rgba(37,35,36,0.9) 10%,
+    rgba(37,35,36,0.5) 20%,
+    
+    rgba(37,35,36,0) 35%,
+    rgba(37,35,36,0) 65%,
+    
+    rgba(37,35,36,0.5) 80%,
+    rgba(37,35,36,0.9) 90%,    
+    rgba(37,35,36,1) 100%
+    ),
+    url('../img/join-header.jpg');
+	
+}
+
+#connect-box-bottom{
+	width: 100%;
+	height: 10px;
+	box-shadow:  0px -6px 7px 0px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+#connect-button{
+	position: relative;
+	top:60%;
+	width: 126px;
+	height: 33px;
+	margin: auto;
+	background-image: url("../img/sprite.png");
+	background-position: -1238px -512px;
+	cursor:pointer;
+	
+}
+
+#connect-button:hover{
+    background-image: url("../img/sprite.png");
+	background-position: -1238px -545px;
+	
+}
+
+#connect-button:active{
+    background-image: url("../img/sprite.png");
+	background-position: -1238px -578px;
+	
+}
+
+/* ---------------  fin bloc connect -------------------- */
+
+
+/* ---------------  Debut page thumbnail -------------------- */
+
+#thumbnails #image-wrapper{
+	background: none;
+	padding: 0;
+}
 
 .thumbs-box {
 border-width: 5px 10px 10px 10px;
 border-image: url('../img/border-image.png') 5 5 12 5 repeat;
-margin-top: 20px;
+margin: 0 20px 20px 0;
 float: left;
+width: 100%;
 }
 
-/* --------------  Thumbs  ------------------  */
+#sidebar-nav-box {
+border-width: 5px 10px 10px 10px;
+border-image: url('../img/border-image.png') 5 5 12 5 repeat;
+margin: 0 20px 20px 0;
+float: left;
+width: 100%;
+}
+
+#thumbnails #main{
+
+}
 
 .thumbs-single {
 	background: #ffffff;
 	padding: 6px;
 }
+
 .thumbs-detail{
+    font-size: 90%;
 	min-height: 35px;
 	display: block;
 }
 
 .thumbs-single img {
-width:200px;
+width:100%;
 }
 
 .row {
 	
 	margin-left: 0px!important;
-	width:90px!important;
+	max-width: 100%!important;
 }
+
+
+#thumbnails .content {
+	
+	
+	
+}
+
+#thumbnails .container-fluid{
+	
+	padding: 0!important;
+	
+}
+
+
+
+#thumbnails #content-single-wrapper {
+margin: 0 5px 20px 5px!important;
+}
+
+.thumbs-category {
+	float: left;	
+	width: 20px;
+	height: 18px;
+	background-color: blue;
+	margin: 0 6px 0 0!important;
+	background: url('../img/sprite.png');
+	background-position: -522px -618px;
+}
+
+.thumbs-profil {
+	float: left;
+	width: 20px;
+	height: 18px;
+	background-color: blue;
+	margin: 0 5px 0 0!important;
+	background: url('../img/sprite.png');
+	background-position: -522px -636px;
+}
+
+.thumbs-up {
+	float: left;
+	width: 20px;
+	height: 18px;
+	background-color: blue;
+	margin: 0 5px 0 0!important;
+	background: url('../img/sprite.png');
+	background-position: -522px -653px;
+}
+
+.thumbs-comment {
+	float: left;
+	width: 20px;
+	height: 18px;
+	background-color: blue;
+	margin: 0 5px 0 0!important;
+	background: url('../img/sprite.png');
+	background-position: -522px -670px;
+}
+
+.thumbs-detail {
+    padding: 10px 0 0 0!important;
+}
+
+.thumbs-updown {
+	width: 60px;
+	float: left;
+	color: #a29b94;
+	font-weight: bold;
+}
+
+.thumbs-separator {
+	border-bottom: 1px solid #c8c8c8;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.thumbs-content{
+	
+	width: 29%;
+	float: left;
+	margin-right: 4%;
+	
+}
+
+
+
+/*
+.fluid .box.col1 {
+width: 16%;
+}
+
+.fluid .box {
+margin: 5px 0.9% 5px 1%;
+padding: 5px 1%;
+}
+
+.box img {
+	
+	width: 100%;
+	height: auto;
+}
+
+.box {
+
+}
+*/
+
+
+/* ---------------  fin page thumbnail -------------------- */
+
 
 /* --------------  CSS Single  ---------------- */
 
@@ -225,6 +444,10 @@ width:200px;
 
 #single #content-single-wrapper{
 	padding: 15px 0 30px 0;
+}
+
+#thumbnails #content-single-wrapper{
+	padding: 0px 0 30px 0;
 }
 
 #comment-box {
@@ -283,11 +506,7 @@ margin-left: -5px;
 float: left;
 }
 
-#image-wrapper img {
-display: block;
-margin-left: auto;
-margin-right: auto;
-}
+
 
 #comment-right-column {
 float: left;
@@ -364,7 +583,7 @@ margin: 10px 0 20px 0;
 margin-top: -8px;
 }
 
-/////VOTE UP - VOTE DOWN///////
+/* ---------------  Debut Vote -------------------- */
 
 .vote-up-down{
   width: 56px;
@@ -420,7 +639,10 @@ margin-top: -8px;
   background-position: @vote-on-x -555px;
 }
   
-/* ---------------  CSS commentaire -------------------- */
+/* ---------------  Fin Vote -------------------- */
+
+  
+/* ---------------  Debut commentaire -------------------- */
 
 #below-content-toolbar {
   margin:0 0 20px 0;
@@ -432,14 +654,14 @@ margin-top: -8px;
 }
 
 
-/* --------------  CSS Single  ---------------- */
+/* ---------------  Fin commentaire -------------------- */
 
 
 
 
 
 
-/* --------------  CSS top-thumbs  ---------------- */
+/* --------------  Debut top-thumbs  ---------------- */
 
 #top-thumbs {
   .texture;
@@ -468,92 +690,189 @@ margin-top: -8px;
   margin-left: -20px!important;
 }
 
+/* --------------  Fin top-thumbs  ---------------- */
 
-/* --------------  CSS top-thumbs  ---------------- */
+/* -------------- Debut CSS sidebar-nav  ---------------- */
+
+#sidebar-nav {
+	
+	width: 92%;
+	padding: 5px 12px 10px 12px;
+	background-color: #ffffff;
+	font-size: 11px;
+}
+
+#sidebar-nav a {
+	
+		margin-right: 9px;
+		color: #a29b94;
+	
+}
+
+#sidebar-nav p {
+		width: 100%;
+		margin-right: 11px;
+		padding-bottom: 4px;
+	
+}
+
+.sidebar-box {
+	
+	border-width: 5px 10px 10px 10px;
+    border-image: url('../img/border-image.png') 5 5 12 5 repeat;
+    margin: 20px 20px 20px -3px;
+    float: left;
+    width: 95%;
+	
+}
+
+/* --------------  Fin CSS sidebar-nav  ---------------- */
 
 
-/* --------------  CSS Sidebar  ---------------- */
+
+
+
 
 /////////////MEDIA QUERIES////////////////
 
-
 @media (max-width: 979px){
-  #wrapper #single {
-  padding:10px!important;
-  margin: -8px 0 0 0px;
-  }
+  
+  
   .content{
   margin-right:240px;
+  }
+  #connect-box-bottom {
+  margin-bottom: 13px!important;
+  }
+  #thumbnails .content{
+  margin-right:300px;
   }
   #main_container {
   padding:0 20px 0 20px; 
   }
   #vote-wrapper {
-	  display:none;
+  display:none;
   }
   #top-thumbs{
   width: 195px; 
   }
   #comment-right-column {
-	  width: 70%;
+  width: 70%;
   }
+  #connect-box {
+  width: 100%;
+  }
+  
+  .thumbs-content {
+  width: 43%;
+  margin-right: 7%;
+	  
+  }
+  .adTop-box{
+  display: block!important;
+  margin: -13px 0 -5px 0;
+  overflow: visible;
+  width: 100%;
+  height: 87px;
+
+  }
+  .adTop{
+  width: 728px;
+  margin: 3px auto 3px auto;
+  }
+  .adTop img{
+  width: 728px;
+  overflow: visible;
+
+  }
+  
+  
+  
 }
 
-@media (max-width: 767px){
+@media (max-width: 767px) {
+  body {
+  padding: 0px!important;
+  }
   .navbar {
-  margin: 0 -20px 22px -20px;
+  margin: 0;
   }
-  #wrapper #single {
-  float: right;
-  margin: -8px -8px 0 0!important; 
+  .navbar .btn-navbar{
+  padding: 9px 10px;  
   }
- 
+  .navbar-inner{
+  padding-right: 5px;
+  padding-top: 0px; 
+  }
+  .navbar-inverse .navbar-inner{
+  height: 40px;
+  }
   
-  #main_container {
-  padding:0 0 0 0; 
+  .navbar .btn, .navbar .btn-group {
+  margin-top: 4px;
   }
+  
+  #thumbnails .content{
+  margin-right:0;
+  }
+  
   .content {
   margin-right:0px;
   }
-  .adTop{
-  display: none;
+  
+  #connect-box-fullwidth{
+  width: 100%;
   }
+  #connect-box{
+  width: 100%;
+  margin: -9px auto 0 auto;
+  background-position: 50% 90%;
+  background-size: 850px;
+  height: 140px;
+  }  
+  .adTop-box{
+  overflow: visible;
+  width: 100%;
+  height: auto;
+  margin: auto;
+  padding: 0;
+  background-color: #525252;
+  
+  }
+  .adTop img{
+  margin: auto;
+  width: 100%;
+  }
+  
+  .adTop {
+  margin: auto;
+  width: 100%;
+  height: auto;
+  max-width: 767px;
+  }
+  
   #sidebar{
   display: none;
-  }	
+  }
+  .thumbs-content {
+  width: 40%;
+  margin-right: 9%;
+  }
+  #main_container {
+  margin: -5px 0 0 0;
+  padding: 0;
+  }
+
+  
+
+  
+  
+ 
+  
 }
 
 @media (max-width: 479px){
-  #wrapper {
-  padding: 0px!important;
-  margin: -8px -8px 0 45px;
-  }
-  #main_container {
-  padding:0 0 0 0; 
-  }
-  .content {
-  margin-right:0px;
-  }
-  .adTop{
-  display: none;
-  }
-  #sidebar{
-  display: none;
-  }	
 }
 
 @media (max-width: 319px){
-  #wrapper {
-  padding: 0px!important;
-  margin: -8px -8px 0 -8px;
-  }
-  .content {
-  margin-right:0px;
-  }
-  .adTop{
-  display: none;
-  }
-  #sidebar{
-  display: none;
-  }	
 }
