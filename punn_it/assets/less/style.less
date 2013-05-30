@@ -1,5 +1,11 @@
 ////// GAB'S  ////////
 
+
+@font-face
+{
+font-family: Chunkfive;
+src: url(../fonts/Chunkfive.woff);
+}
 @nav-height: 60px;
 @back-color: lightgray;
 @back-img:     '../img/back.jpeg';
@@ -44,23 +50,42 @@ body {
 }
 
 #main_container {
-  padding:0 40px 0 40px; 
+   
+}
+
+.nav {
+	float: right;
 }
 
 .navbar-inverse .navbar-inner {
 
   background-image: url('../img/navbar_background.jpg')!important;
+  background-position: 1px;
   background-repeat:repeat-x;
   height: 44px;
-  box-shadow:  0px 5px 6px rgba(0, 0, 0, 0.6);
+  box-shadow:  0px 2px 6px rgba(0,0,0,0.69);
   z-index: 20;
   position: relative;
 	
 }
 
 .navbar .nav > li > a {
-  padding: 12px 15px 13px!important;}
+  padding: 12px 15px 13px!important;
+  }
+  
+.navbar .nav > li > a.dropdown-toggle {
+  padding: 4px 0 0 7px!important;
+  height: 41px;
+  width: 55px;
+}
 
+.navbar .nav .dropdown-toggle .caret {
+margin-top: 16px;
+}
+
+.dropdown-menu {
+margin: 8px 0 0!important;
+}
 
 #sidebar { 
   margin-left:-100%;
@@ -70,9 +95,13 @@ body {
   position:relative;
   z-index:4;
 }
+#wrapper {
+  max-width: 1054px!important;
+  margin: auto;
+}
 
 
- #wrapper #single  {
+#wrapper #single  {
 	
   
   float: right;
@@ -80,8 +109,18 @@ body {
   
 }
 
+.navbar .brand {
+  padding: 10px 0 10px 0;
+  margin-left: 0!important;
+}
 
+.navbar .nav {
+  
+}
 
+li dropdown.dropdown {	
+  
+}
 
 #main-wrap {
   padding-bottom:50px;
@@ -98,6 +137,7 @@ body {
   min-height:650px;
   width:100%;
   position:relative; z-index:3;
+  margin: 0;
 }
 
 
@@ -183,6 +223,7 @@ body {
 .navbar-inner {
   border-radius: 0px;
   webkit-border-radius: 4px;
+  padding: 0;
 }
 
 a {
@@ -246,13 +287,14 @@ margin-right: 10px;
 
 #connect-button{
 	position: relative;
-	top:60%;
+	top:97px;
 	width: 126px;
 	height: 33px;
 	margin: auto;
 	background-image: url("../img/sprite.png");
 	background-position: -1238px -512px;
 	cursor:pointer;
+	display: block;
 	
 }
 
@@ -279,8 +321,10 @@ margin-right: 10px;
 }
 
 .thumbs-box {
+/*
 border-width: 5px 10px 10px 10px;
 border-image: url('../img/border-image.png') 5 5 12 5 repeat;
+*/
 margin: 0 20px 20px 0;
 float: left;
 width: 100%;
@@ -298,9 +342,17 @@ width: 100%;
 
 }
 
+.thumbs-content {
+background-image: url('../img/bottom-border.png');
+background-repeat: no-repeat;
+background-position: center 97%;
+background-size: 100% 11px;
+}
+
 .thumbs-single {
 	background: #ffffff;
 	padding: 6px;
+	border:1px solid #eeeeee;
 }
 
 .thumbs-detail{
@@ -331,6 +383,7 @@ width:100%;
 	padding: 0!important;
 	
 }
+
 
 
 
@@ -390,7 +443,7 @@ margin: 0 5px 20px 5px!important;
 }
 
 .thumbs-separator {
-	border-bottom: 1px solid #c8c8c8;
+	border-bottom: 1px solid #e7e7e7;
     margin-top: 4px;
     margin-bottom: 4px;
 }
@@ -404,27 +457,6 @@ margin: 0 5px 20px 5px!important;
 }
 
 
-
-/*
-.fluid .box.col1 {
-width: 16%;
-}
-
-.fluid .box {
-margin: 5px 0.9% 5px 1%;
-padding: 5px 1%;
-}
-
-.box img {
-	
-	width: 100%;
-	height: auto;
-}
-
-.box {
-
-}
-*/
 
 
 /* ---------------  fin page thumbnail -------------------- */
@@ -686,9 +718,50 @@ margin-top: -8px;
 
 }
 
-.brand {
-  margin-left: -20px!important;
+.navbar .brand {
+  
+  font-family: Chunkfive;
+  margin: 3px 0 0 5px;
+  color: #cbcbcb!important;
+  letter-spacing:1px;
+  font-weight: normal!important;
+
 }
+
+#brand {
+  width: 20%;
+  margin: 0 0 0 5px;
+  }
+
+#publishbox{
+	margin: 0 31%;
+	width:50px;
+	height: 46px;
+	float: left;
+}
+
+.nav-collapse{
+	width: 10%!important;
+}
+
+#publish-button {
+	margin: auto;
+	width: 59px;
+	height: 44px;
+	cursor: pointer;
+	display: block;
+	background-image: url("http://50.116.51.59:8080/static/less/../img/sprite.png");
+	background-position: -1243px -619px;
+}
+
+#publish-button:hover {
+	background-position: -1243px -664px;
+}
+
+#publish-button:active {
+	background-position: -1243px -709px;
+}
+
 
 /* --------------  Fin top-thumbs  ---------------- */
 
@@ -700,6 +773,7 @@ margin-top: -8px;
 	padding: 5px 12px 10px 12px;
 	background-color: #ffffff;
 	font-size: 11px;
+	border: 1px solid #eeeeee;
 }
 
 #sidebar-nav a {
@@ -718,16 +792,20 @@ margin-top: -8px;
 
 .sidebar-box {
 	
-	border-width: 5px 10px 10px 10px;
-    border-image: url('../img/border-image.png') 5 5 12 5 repeat;
-    margin: 20px 20px 20px -3px;
-    float: left;
-    width: 95%;
+  border-width: 5px 10px 10px 10px;
+  margin: 20px 20px 20px -3px;
+  float: left;
+  width: 95%;
+  height: 108px;
+  background-image: url('../img/bottom-border.png');
+  background-repeat: no-repeat;
+  background-position: center 97%;
+  background-size: 100% 11px;
+
 	
 }
 
 /* --------------  Fin CSS sidebar-nav  ---------------- */
-
 
 
 
@@ -748,8 +826,12 @@ margin-top: -8px;
   margin-right:300px;
   }
   #main_container {
-  padding:0 20px 0 20px; 
+  padding:0 20px 0 9px; 
   }
+  .brand {
+	  margin: 5px 0 0 0!important;
+  }
+  
   #vote-wrapper {
   display:none;
   }
@@ -786,8 +868,29 @@ margin-top: -8px;
 
   }
   
+  #publishbox{
+  margin: 0 28%;
+  width:50px;
+  height: 46px;
+  float: left;
+  }
   
+  .navbar .btn-navbar{
+  padding: 11px 10px;
+  margin-right: 17px;
+  }
+  .navbar .container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+  }
+  .navbar .btn, .navbar .btn-group {
+  margin-top: 3px;
+  }
   
+  .navbar .brand {
+  padding: 8px 0 10px 0;
+  margin-left: 0!important;
+  }
 }
 
 @media (max-width: 767px) {
@@ -797,20 +900,21 @@ margin-top: -8px;
   .navbar {
   margin: 0;
   }
-  .navbar .btn-navbar{
-  padding: 9px 10px;  
-  }
+  .navbar .btn-navbar {
+padding: 8px;
+}
   .navbar-inner{
-  padding-right: 5px;
-  padding-top: 0px; 
+  padding:0!important; 
   }
   .navbar-inverse .navbar-inner{
-  height: 40px;
+  height: 44px;
   }
   
   .navbar .btn, .navbar .btn-group {
-  margin-top: 4px;
+  margin-top: 6px;
   }
+  
+  
   
   #thumbnails .content{
   margin-right:0;
@@ -855,17 +959,38 @@ margin-top: -8px;
   display: none;
   }
   .thumbs-content {
-  width: 40%;
-  margin-right: 9%;
+  width: 47%;
+  margin-right: 4%;
   }
+  
+  #image-wrapper .thumbs-content:nth-child(2n+2){
+  margin-right: 0; }
+  
+  #image-wrapper {
+	  margin: 20px 0 0 10px;
+  }
+  
   #main_container {
-  margin: -5px 0 0 0;
+  margin: 0 0 0 0;
   padding: 0;
   }
 
-  
+  #publishbox{
+  margin: 0 2%;
+  width:50px;
+  height: 40px;
+  float: left;
+   display: none;
+   }
+ 
+.navbar .container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+  }
 
-  
+  .brand {
+	  margin: 5px 0 0 0px!important;
+  }
   
  
   
