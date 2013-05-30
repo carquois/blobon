@@ -1,12 +1,11 @@
-{% load thumbnail i18n compress dajaxice_templatetags calculate_age %}
+{% load thumbnail i18n compress calculate_age %}
 <!doctype>
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 <html lang="en">
-<head>
-	<script src="{{ STATIC_URL }}js/jquery.js"></script>
-    {% dajaxice_js_import %}
+  <head>
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{% block description %}{{ site_description }}{% endblock %}">
@@ -28,7 +27,6 @@
 
 
     <!-- Le styles -->
-    <script src="{{ STATIC_URL }}js/jquery.dajax.core.js"></script>
     {% block css %}
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet/less" href="{{ STATIC_URL }}less/style.less">
@@ -168,11 +166,11 @@
       </button>
       <div id="brand"><a class="brand" href="{% url punns.views.index %}">CheckDonc.ca</a></div>
 	      
-	      
-		  <div id="publishbox">
-<a href="{% url punns.views.create %}"><span id="publish-button"></span></a>
-</div>
-
+	    {% if request.user.is_authenticated %}
+		<div id="publishbox">
+		<a href="{% url punns.views.create %}"><span id="publish-button"></span></a>
+		</div>
+		{% endif %}
 	      
 		  
       <div class="nav-collapse collapse pull-right">
@@ -245,12 +243,13 @@
                    <div class="thumbs-content">
 	               <div class="thumbs-box ">
 	               <div class="thumbs-single">
+	               <div class="thumbs-crop">
 	  	           <a href="{{ punn.get_absolute_url }}">
 	  	           {% thumbnail punn.pic "153x182" crop="center" as im %}
 	  	           <img src="{{ im.url }}" alt="{{ punn.title }}"/>
 	  	           {% endthumbnail %}
 		  	       </a>
-				   
+	               </div>
 				   <div class="thumbs-detail">
 				   <div class="thumbs-category-box"><div class="thumbs-category"></div><a>funny</a></div>
 				   <div class="thumbs-separator"></div>
