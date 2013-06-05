@@ -1,60 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Le styles -->
-    <link href="../assets/css/bootstrap.css" rel="stylesheet">
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
-   
-    <link rel="stylesheet/less" href="../assets/less/newstyle.less">
-    <script src="../assets/js/less.js" type="text/javascript"></script>
-    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
-  </head>
-
-<body>
-
-  <div class="adTop">
-  <div id="#" class="hidden-phone skyscr"><img src="http://s0.2mdn.net/viewad/3393746/May13-Retargeting-Homepage-MothersDaySale-728x90.jpg"></div>
-  </div>
-
-  <div class="navbar navbar-inverse">
-      <div class="navbar-inner">
-      
-        <div class="container-fluid">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="#">CheckDonc.ca</a>
-          <div class="nav-collapse collapse pull-right">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
+{% extends "base.html" %}
+{% load i18n thumbnail punn_tags humanize %}
+{% block open-graphs %}
+    <!-- Le open graphs tags -->
+    <meta property="og:title" content="{{ punn.title }}" />
+    <meta property="og:url" content="{{ url }}" />
+    <meta property="og:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}" />
+    <meta property="og:site_name" content="{{ punn.author.first_name }} {{ punn.author.last_name }}" />
+    <!-- Le twitter cards -->
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:url" content="{{ url }}">
+    <meta name="twitter:title" content="{{ punn.title }}">
+    <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}">
+    <!-- Le canonical url -->
+    <link rel="canonical" href="{{ url }}" />
+{% endblock %}
+{% block title %} {{ punn.title }} {% endblock %}
+{% block connect %} {% endblock %}     
+        {% block content %}
+        <div class="container-fluid"></div>
       </div>
   </div>
   
@@ -67,19 +30,23 @@
      
      	<!-- #vote-wrapper -->
 	
-	<div id="vote-wrapper">
-	
-	  <a href="#">
-	    <div id="upbutton" class="vote-up-down up"></div>
-	  </a>
-	
-	    <div class="vote-up-down point"></div>
-	
-	  <a href="#">
-	    <div id="downbutton" class="vote-up-down down"></div>
-	  </a>
-	
-	</div>
+	<div id="vote-wrapper" class="visible-desktop">
+            <a href="{% if request.user.is_authenticated %}
+                       {% url votes.views.up punn.id %}
+                     {% else %}
+                       {% url django.contrib.auth.views.login %}?next={{request.path}}
+                     {% endif %}">
+              <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}"></div>
+            </a>
+            <div class="vote-up-down point"><p style="text-align:center;padding-top:17px;" id="karma">{{ karma }}</p></div>
+            <a href="{% if request.user.is_authenticated %}
+                       {% url votes.views.down punn.id %}
+                     {% else %}
+                       {% url django.contrib.auth.views.login %}?next={{request.path}}
+                     {% endif %}">
+              <div id="downbutton" class="vote-up-down down {% if vote == "D" %} down-on{% endif %}"></div>
+            </a>
+          </div>
 	
 	<!-- #vote-wrapper -->
      
@@ -89,10 +56,10 @@
            <div id="content-single" class="content">
            
 	           <div id="content-single-wrapper">
-		           <h1 id="title">Test</h1>
+		           <h1 id="title">{{ punn.title }}</h1>
 	               <div id="image-wrapper">
-	                   <a href="#">
-	                   <img id="main-image" src="http://checkdonc.ca/i/KBz.jpg">
+	                   <a href="{{ next_punn.get_absolute_url }}">
+	                   <img id="main-image" src="{{ MEDIA_URL }}{{ punn.pic }}">
 	                   </a>
 	                   
 <!-- Debut Section commentaire et share -->
@@ -100,25 +67,32 @@
 	                   <div id="buttons-below-the-content">
 	                   <!-- <div class="separator separator-with-margin"></div> -->
 	                   <div class="btn-toolbar" id="below-content-toolbar">
-	                   <div class="btn-group pull-left">
-	                   <a rel="tooltip" title="" href="mailto:gab@checkdonc.ca" class="btn"><i class="icon-flag"></i></a>
-	                   <a href="#share" role="button" class="btn" data-toggle="modal">Partager</a>
-	                   </div>
-	                   <div class="btn-group pull-right">
-	                   <a rel="tooltip" title="{% trans "Page précédente" %}" href="" class="btn">&larr;</a>
-	                   <a rel="tooltip" title="{% trans "Page suivante" %}" href="" class="btn">&rarr;</a>
-	                   </div>
-	                   </div>
+                    <div class="btn-group pull-left">
+                      <a rel="tooltip" title="{% trans "Rapporter" %}" href="mailto:gab@checkdonc.ca" class="btn"><i class="icon-flag"></i></a>
+                      <a href="#share" role="button" class="btn" data-toggle="modal">{% trans "Partager" %}</a>
+                      {% if request.user.is_authenticated and punn.author == request.user %}
+                      <a href="#delete" role="button" class="btn btn-danger" data-toggle="modal">{% trans "Effacer" %}</a>
+                      {% endif %}
+                    </div>
+                    <div class="btn-group pull-right">
+                      <a rel="tooltip" title="{% trans "Page précédente" %}" href="{{ prev_punn.get_absolute_url }}" class="btn">&larr;</a>
+                      <a rel="tooltip" title="{% trans "Page suivante" %}" href="{{ next_punn.get_absolute_url }}" class="btn">&rarr;</a>
+                    </div>
+                  </div>
 	                   <div style="clear:both;"></div>
 	                   <!-- <div class="separator separator-with-margin"></div> -->
 	                   <div class="pull-left" id="author-avatar">
-	                   <img src="http://checkdonc.ca/i/cache/1e/93/1e93d7adbcdab50a23bfe6ab6ca993b9.jpg" alt="Check Donc Ça ">
-	                   </div>
+                    {% thumbnail punn.author.userprofile.avatar "70" crop="center" as im %}
+                    <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}">
+                    {% endthumbnail %}
+                  </div>
+
 	                   <div class="pull-left" id="informations">
-	                   <p>Check Donc Ça </p>
-	                   <p><a href="/CheckDoncCa/">@CheckDoncCa</a></p>
-	                   <p><a href=""></a></p>
-	                   <p id="published-infos">Publié il y a 6 heures via <a href="http://imgur.com/gallery/oVNF2" target="_blank">(Source)</a></p>
+	                   <p>{{ punn.author.first_name }} {{ punn.author.last_name }}</p>
+	                   <p><a href="/{{ user.username }}/">@{{ user.username }}</a></p>
+
+	                   <p id="published-infos">{% trans "Publié" %} {{ punn.pub_date|naturaltime }} {% if punn.source %}{% trans "via" %} <a href="{{ punn.source }}" target="_blank">(Source)</a>{% endif %}</p>
+
 	                   </div>
 	                   </div>
 	                   
@@ -256,33 +230,25 @@
          
          </div><!-- #main -->
       
-       <div id="sidebar">
-	       <div id="top-thumbs">
-		       <a class="thumbnails_images" href="#">
-                   <img class="sidebarThumbs" src="http://checkdonc.ca/i/cache/55/56/5556062c1de4246780d231b6d0f007dc.jpg" width="85" height="90">     
-               </a>
-		       <a class="thumbnails_images" href="#">
-                   <img class="sidebarThumbs" src="http://checkdonc.ca/i/cache/df/1a/df1a53904f799c7afba177b17c36233a.jpg" width="85" height="90">     
-               </a>
-		       <a class="thumbnails_images" href="#">
-                   <img class="sidebarThumbs" src="http://checkdonc.ca/i/cache/9e/55/9e55fac87e91e3c7084cf85e69b6203e.jpg" width="85" height="90">     
-               </a>
-		       <a class="thumbnails_images" href="#">
-                   <img class="sidebarThumbs" src="http://checkdonc.ca/i/cache/51/f1/51f1be7dc4bebed14bc7df01a3ffd298.jpg" width="85" height="90">     
-               </a>
-		       <a class="thumbnails_images" href="#">
-                   <img class="sidebarThumbs" src="http://checkdonc.ca/i/cache/82/96/8296068d29bab48ed9c9675c10e98d6d.jpg" width="85" height="90">     
-               </a>
-		       <a class="thumbnails_images" href="#">
-                   <img class="sidebarThumbs" src="http://checkdonc.ca/i/cache/55/56/5556062c1de4246780d231b6d0f007dc.jpg" width="85" height="90">     
-               </a>                                             
-	       </div>
-	       <div id="ad"><img src="http://s0.2mdn.net/viewad/3393746/Apr13-Retargeting-Homepage-Boost_Colour-300x250.jpg"></div>
-       </div><!-- #sidebar -->
+      
+     {% block top-sidebar %}
+     <div id="sidebar">
+                {% if latest_punn_list %}
+                  <div id="top-thumbs">
+                  {% for punn in latest_punn_list %}
+                    <a class="thumbnails_images" href="{{ punn.get_absolute_url }}">
+                    {% thumbnail punn.pic "85x90" crop="center" as im %}
+                      <img class="sidebarThumbs" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                    {% endthumbnail %}
+                    </a>
+                  {% endfor %}
+                 </div>
+                {% else %}
+                  <p>No more content</p>
+                {% endif %}
+    </div><!-- #sidebar -->
+     {% endblock %}
     </div> <!-- #single -->
     </div> <!-- #wrapper -->
   
-  </div><!-- .container-fluid -->
-
-</body>
-</html>
+  </div>{% endblock %}<!-- .container-fluid -->

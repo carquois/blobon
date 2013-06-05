@@ -1,4 +1,5 @@
 {% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
 <!doctype>
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -164,11 +165,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <div id="brand"><a class="brand" href="{% url punns.views.index %}">CheckDonc.ca</a></div>
+      <div id="brand"><a class="brand" href="{% url 'punns.views.index' %}">CheckDonc.ca</a></div>
 	      
 	    {% if request.user.is_authenticated %}
 		<div id="publishbox">
-		<a href="{% url punns.views.create %}"><span id="publish-button"></span></a>
+		<a href="{% url 'punns.views.create' %}"><span id="publish-button"></span></a>
 		</div>
 		{% endif %}
 	      
@@ -195,15 +196,15 @@
                     <b class="caret"></b>
 		  </a>
 	          <ul class="dropdown-menu">
-                    <li><a href="{% url accounts.views.edit_profile %}">{% trans "Paramètres" %}</a></li>
+                    <li><a href="{% url 'accounts.views.edit_profile' %}">{% trans "Paramètres" %}</a></li>
                     <li class="divider"></li>
-                    <li><a href="{% url django.contrib.auth.views.logout %}">{% trans "Se déconnecter" %}</a></li>
+                    <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Se déconnecter" %}</a></li>
                   </ul>
                 </li>
 		{% else %}
                 <!--
 <li class="li-items">
-                  <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">{% trans "Se connecter" %}</a>
+                  <a href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Se connecter" %}</a>
                 </li>
 -->
 		{% endif %}
@@ -220,7 +221,7 @@
 {% block connect %}
 <div id="connect-box-fullwidth">
 <div id="connect-box">
-<a href="{% url django.contrib.auth.views.login %}?next={{request.path}}"><span id="connect-button"></span></a>
+<a href="{% url 'socialauth_begin' backend='facebook' %}"><span id="connect-button"></span></a>
 </div>
 </div>
 <div id="connect-box-bottom"></div>
@@ -251,12 +252,14 @@
 		  	       </a>
 	               </div>
 				   <div class="thumbs-detail">
+<div style="display:none">
 				   <div class="thumbs-category-box"><div class="thumbs-category"></div><a>funny</a></div>
 				   <div class="thumbs-separator"></div>
-				   <div class="thumbs-category-box"><div class="thumbs-profil"></div><a>@Gabriel_Dancause</a></div>
+</div>
+				   <div class="thumbs-category-box"><div class="thumbs-profil"></div><a>{{ punn.author.username }}</a></div>
 				   <div class="thumbs-separator"></div> 
-				   <div class="thumbs-updown"><div class="thumbs-up"></div>265</div>
-				   <div class="thumbs-updown"><div class="thumbs-comment"></div>265</div>
+				   <div class="thumbs-updown"><div class="thumbs-up"></div>{{ punn.karma }}</div>
+				   <div class="thumbs-updown"><div class="thumbs-comment"></div>{{ punn.number_of_comments }}</div>
 				   <div class="clearfix"></div>    
 
 </div>
