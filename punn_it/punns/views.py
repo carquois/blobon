@@ -39,26 +39,31 @@ from django.views.decorators.cache import cache_page
 
 def index(request):
       if request.META['HTTP_HOST'] == "blobon.com":
-        return HttpResponseRedirect("http://yay.com")
+          user = ""
+          punns = paginate(request,
+                           Punn.objects.filter(status='P').order_by('-pub_date'),
+                           20)
       elif request.META['HTTP_HOST'] == "checkdonc.ca":
           user = User.objects.get(pk=3)
+          punns = paginate(request,
+                           Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
+                           20)
       elif UserProfile.objects.filter(domain='http://%s/' % request.META['HTTP_HOST']).exists():
           user = UserProfile.objects.get(domain='http://%s/' % request.META['HTTP_HOST']).user
+          punns = paginate(request,
+                           Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
+                           20)
       else:
-        user = User.objects.get(pk=3)
-      punns = paginate(request,
-                       Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
-                       20)
+        return redirect("http://blobon.com")
       for punn in punns:
         votesup = PunnVote.objects.filter(punn=punn).filter(vote='U')
         votesdown = PunnVote.objects.filter(punn=punn).filter(vote='D')
         punn.karma = votesup.count() - votesdown.count()
         punn.number_of_comments = Comment.objects.filter(punn=punn).count()
       site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
       return render_to_response('base.html',
                                {'user': user, 'site_description': site_description,
-                                'punns': punns, 'site': site},
+                                'punns': punns, },
                                 context_instance=RequestContext(request))
 
 @login_required
