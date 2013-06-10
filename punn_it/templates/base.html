@@ -30,9 +30,33 @@
     <!-- Le styles -->
     {% block css %}
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet/less" href="{{ STATIC_URL }}less/style.less">
-    <script src="{{ STATIC_URL }}js/less.js" type="text/javascript"></script>
     <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .the-sidebar {
+          position: absolute;
+          width: 320px;
+          margin-left: 10px;
+      }
+      
+      .the-container {
+          margin-left: 340px;
+      }
+
+      @media (max-width: 979px) {
+        .the-container {
+            margin-left: 0px;
+        }
+      }
+
+    </style>
+
     {% compress css %}
     {% endcompress %}
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -41,18 +65,6 @@
     <![endif]-->
     {% endblock %}
 
-    <script>
-	  $(function(){
-	    
-	    $('#container').masonry({
-	      itemSelector: '.box',
-	      // set columnWidth a fraction of the container width
-	      columnWidth: function( containerWidth ) {
-	        return containerWidth / 5;
-	      }
-	    });
-	    
-	  });
     </script>
     <link href="{{ STATIC_URL }}/css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -128,248 +140,82 @@
         $("[rel='tooltip']").tooltip();
       });
     </script>
-</head>
-
-<body>
-  <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/fr_CA/all.js#xfbml=1&appId=339826172767964";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-
-{% block top-ads %}
-<div class="adTop-box">
-<div class="adTop">
-
-<div id='div-gpt-ad-1363051510706-0' class="hidden-phone skyscr">
-<script type='text/javascript'>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });</script>
-</div>
-
-<div id='div-gpt-ad-1360772351679-1' style='width:320px; height:50px; margin-left: -17px;' class="visible-phone">
-<script type='text/javascript'>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-1'); });</script>
-</div>
-<!-- <img src="http://s0.2mdn.net/viewad/3393746/May13-Retargeting-Homepage-MothersDaySale-728x90.jpg"> -->
-</div><!-- adTop -->
-</div><!-- adTop-box -->
-{% endblock %}
-
-{% block topmenu %}
-<div class="navbar navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div id="brand"><a class="brand" href="{% url 'punns.views.index' %}">CheckDonc.ca</a></div>
-	      
-	    {% if request.user.is_authenticated %}
-		<div id="publishbox">
-		<a href="{% url 'punns.views.create' %}"><span id="publish-button"></span></a>
-		</div>
-		{% endif %}
-	      
-		  
-      <div class="nav-collapse collapse pull-right">
-        <ul class="nav">
-        <!-- navigation-start -->
-                        
-                
-		{% if not request.user.is_authenticated %}
-                <li class="dropdown li-items" style="display:none">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Langue" %}: {% trans "Français" %}<b class="caret"></b></a>
-	          <ul class="dropdown-menu">
-                    <li><a href="#">English</a></li>
-                  </ul>
-                </li>
-		{% endif %}
-		{% if request.user.is_authenticated %}
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" href="/{{ user.username }}/">
-                  {% thumbnail request.user.userprofile.avatar "35" crop="center" as im %}
-                    <img src="{{ im.url }}" alt="{{ request.user.userprofile.description }}">
-                  {% endthumbnail %}
-                    <b class="caret"></b>
-		  </a>
-	          <ul class="dropdown-menu">
-                    <li><a href="{% url 'accounts.views.edit_profile' %}">{% trans "Paramètres" %}</a></li>
-                    <li class="divider"></li>
-                    <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Se déconnecter" %}</a></li>
-                  </ul>
-                </li>
-		{% else %}
-                <!--
-<li class="li-items">
-                  <a href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Se connecter" %}</a>
-                </li>
--->
-		{% endif %}
-
-        <!-- navigation-end -->
-        </ul>
-      </div><!--/.nav-collapse -->
+  </head>
+  <body>
+   <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Project name</a>
+          <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> Username
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Profile</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Sign Out</a></li>
+            </ul>
+          </div>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-{% endblock %}
+                 
+    <div class="the-sidebar visible-desktop">
+      <div class="well sidebar-nav">
 
-{% if not request.user.is_authenticated %}
-{% block connect %}
-<div id="connect-box-fullwidth">
-<div id="connect-box">
-<a href="{% url 'socialauth_begin' backend='facebook' %}"><span id="connect-button"></span></a>
-</div>
-</div>
-<div id="connect-box-bottom"></div>
-{% endblock %}
-{% endif %}
+      </div><!--/.well -->
+    </div><!--/span-->
 
-<div id="main_container" class="container-fluid" >
-<div id="wrapper">
-<div id="thumbnails">
-
-{% block container %}     
-<div id="main">
-<div id="content-single" class="content">
-<div id="content-single-wrapper">
-{% block content %}
-<div id="image-wrapper">	                  
-	                  
-	               <!-- Thumbnails -->	                   
-                   {% for punn in punns %}
-                   <div class="thumbs-content">
-	               <div class="thumbs-box ">
-	               <div class="thumbs-single">
-	               <div class="thumbs-crop">
-	  	           <a href="{{ punn.get_absolute_url }}">
-	  	           {% thumbnail punn.pic "153x182" crop="center" as im %}
-	  	           <img src="{{ im.url }}" alt="{{ punn.title }}"/>
-	  	           {% endthumbnail %}
-		  	       </a>
-	               </div>
-				   <div class="thumbs-detail">
-<div style="display:none">
-				   <div class="thumbs-category-box"><div class="thumbs-category"></div><a>funny</a></div>
-				   <div class="thumbs-separator"></div>
-</div>
-				   <div class="thumbs-category-box"><div class="thumbs-profil"></div><a>{{ punn.author.username }}</a></div>
-				   <div class="thumbs-separator"></div> 
-				   <div class="thumbs-updown"><div class="thumbs-up"></div>{{ punn.karma }}</div>
-				   <div class="thumbs-updown"><div class="thumbs-comment"></div>{{ punn.number_of_comments }}</div>
-				   <div class="clearfix"></div>    
-
-</div>
-</div>
-</div>
-</div>
-{% endfor %}
-<!-- Thumbnails -->	
-	                         
-
-	                   
-	               </div>
-{% endblock %}	                   
-	           </div>
-	           
-	           
-	           
-           </div>
-         
-         <div class="clearfix"></div>
-         
-         </div>
-{% endblock %}
-<!-- #main -->
-       
-       {% block sidebar %}
-       <div id="sidebar">
-	      
-	        <div id="ad">
-	        
-	        <!-- 300x250TopRight -->
-	        <div id='div-gpt-ad-1360772351679-0'>
-	        <script type='text/javascript'>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-0'); });</script>
-	        </div>
-            
-            <!-- SkyScrapper -->
-            <div id='div-gpt-ad-1363052072029-0' style='width:160px; height:600px;margin-left:60px;margin-top: 20px;margin-bottom: 20px;'>
-            <script type='text/javascript'>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363052072029-0'); });</script>
-            </div>
-	        
-	        </div><!-- #ad -->
-	        
-	        <div class="sidebar-box">
-	        <div id="sidebar-nav">
-		       
-		       <p class="thumbs-separator">
-		       <a>© 2013 Blob on</a>
-		       <a>About</a>
-		       <a>Help</a>
-		       <a>Terms</a>
-		       <a>Privacy</a>
-		       </p>
-		       <p class="thumbs-separator">
-		       <a>Blog</a>
-		       <a>Status</a>
-		       <a>Apps</a>
-		       <a>Ressources</a>
-		       <a>Jobs</a>
-		       </p>
-		       <a>Advertisers</a>
-		       <a>Businesses</a>
-		       <a>Media</a>
-		       <a>Developers</a>
-		       
-	       </div>
-	       <div class="clearfix"></div>
-	       </div>
-	       
-	       
-       </div>
-       {% endblock %}
-       <!-- #sidebar -->
-    
-    </div> <!-- #thumbnails -->
-    </div> <!-- #wrapper -->
-
-      <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-      <script src="{{ STATIC_URL }}js/jquery.masonry.min.js"></script>
-      <script src="{{ STATIC_URL }}js/jquery.infinitescroll.min.js"></script>
-      <script>
-        $(function(){
-          var $container = $('#content');
-          $container.imagesLoaded(function(){
-            $container.masonry({
-              itemSelector: '.thumbs',
-	      columnWidth: 170,
-	      gutterWidth: 30,
-	      isAnimated: true 
-            });
-          });
-          $container.infinitescroll({
-            navSelector  : '#page-nav',    // selector for the paged navigation 
-            nextSelector : '#page-nav a',  // selector for the NEXT link (to page 2)
-            itemSelector : '.thumbs',     // selector for all items you'll retrieve
-            loading: {
-                finishedMsg: "{% trans 'Chargement terminé' %}",
-                img: '{{ STATIC_URL }}img/loading.gif'
-              }
-            },
-            function( newElements ) {
-              var $newElems = $( newElements ).css({ opacity: 0 });
-              $newElems.imagesLoaded(function(){
-                $newElems.animate({ opacity: 1 });
-                $container.masonry( 'appended', $newElems, true ); 
-              });
-            }
-          );
-        });
-      </script>
-
-</div><!-- .container-fluid -->
-</body>
+    <div class="container-fluid the-container">
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="hero-unit">
+            <h1>Hello, world!</h1>
+            <p>unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+          </div>
+          <div class="row-fluid">
+            <ul class="thumbnails">
+            {% for punn in punns %}
+            {% if forloop.counter0|divisibleby:3 %}
+            </ul>
+          </div>
+          <div class="row-fluid">
+            <ul class="thumbnails">
+            {% endif %}
+              <li class="span4">
+                <div class="thumbnail">
+                  <img src="http://placehold.it/300x200" alt="">
+                  <div class="caption">
+                    <p>{{ punn.title }}</p>
+                    <p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn">Action</a></p>
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+    </div><!--/.fluid-container-->
+  </body>
 </html>
+
+
