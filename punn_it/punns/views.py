@@ -42,17 +42,17 @@ def index(request):
           user = ""
           punns = paginate(request,
                            Punn.objects.filter(status='P').order_by('-pub_date'),
-                           20)
+                           15)
       elif request.META['HTTP_HOST'] == "checkdonc.ca":
           user = User.objects.get(pk=3)
           punns = paginate(request,
                            Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
-                           20)
+                           15)
       elif UserProfile.objects.filter(domain='http://%s/' % request.META['HTTP_HOST']).exists():
           user = UserProfile.objects.get(domain='http://%s/' % request.META['HTTP_HOST']).user
           punns = paginate(request,
                            Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
-                           20)
+                           15)
       else:
         return redirect("http://blobon.com")
       for punn in punns:
