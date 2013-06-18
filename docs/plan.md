@@ -23,6 +23,12 @@ Technologie des communications et de l’information
 
 *Blobon* est une firme de leaders en technologie de l'information composée d'experts reconnus dans le milieu pour offrir un guichet unique de solutions clé en main en stratégie Web, design, développement, marketing et hébergement. Blobon offre un service complet à toutes les étapes de la conception d'un projet Web ou mobile pour offrir une solution personnalisée et performante.
 
+*Blobon* se divise en deux grandes parties. D'un côté, elle offre des services en technologies de l'information et des communications pour grandes entreprises. De l'autre côté, elle développe un produit qui sera un réseau social avec partage de profit.
+
+Le projet de réseau social est de loin le bout le plus intéressant et celui qui sera le plus couvert dans ce plan d'affaires. Le but est de créer un réseau, un peu comme Facebook ou Twitter, où les gens arrivent se crééent un compte et publient du contenu. La grossse différence entre ces réseaux et nous est qu'eux gardent tous leurs revenus pour eux tandis que nous allons redistribuer nos revenus avec les utilisateurs. 
+
+Ça devient donc très intéressant pour un créateur de contenu (par exemple quelqu'un qui veut se partir un blogue) d'utiliser notre plateforme parce qu'il tirera un revenu de sa participation. Les revenus sont calculés en fonction des pages, donc c'est directement l'auteur de la page qui reçoit un montant pour son contenu.
+
 1.4 Historique de l'entreprise
 -----------
 
@@ -31,7 +37,9 @@ Enregistrée en juin 2012, Blobon est une jeune entreprise née de l’initiativ
 1.5 Mission de l'entreprise
 -----------
 
-Concevoir, designer et vendre des plateformes informatisées clé en main, adaptées aux besoins d’entreprises de toutes tailles.
+Services : Concevoir, designer et vendre des plateformes informatisées clé en main, adaptées aux besoins d’entreprises de toutes tailles et développer.
+
+Produit : Développer une plateforme à la fine pointe de la technologie où les utilisateurs auront droit à une partie des profits. 
 
 1.6 Objectifs généraux
 -----------
@@ -52,11 +60,31 @@ Conquérir le marché québécois des technologies de l’information et des com
 1.7 Échéancier de réalisations
 -----------
 
-Il est difficile pour la compagnie de prévoir précisément son échéancier de réalisation puisque ce dernier serait trop sujet à changement dû aux multiples rencontres nécessaires au démarrage de Blobon en bonne et due forme, lesquelles, amèneront peut-être le projet à être ralentit ou accéléré. Les étapes seront donc présentées chronologiquement, mais sans date d’échéance.
-
 Jusqu’à présent, Blobon a passé les étapes de son incorporation et de la réalisation de son plan d’affaires. Maintenant que les assises légales et administratives de l’entreprise sont en place, Blobon peut s’affairer à rechercher du financement et des subventions. Ces montants substantiels serviront à l’embauche de nouveaux employés et à la location d’un espace de travail plus ergonomique et pouvant accueillir une équipe plus nombreuse.
 
-Toutefois, il faut noter que l’entreprise ne prendra de l’expansion que si ses ressources financières les lui permettent et qu’elle continue de recevoir des contrats à ce rythme. Afin de s’assurer de cette dernière partie de son échéancier d’expansion, Blobon se munira bientôt d’un site Internet corporatif lequel sera partagé au public par une campagne publicitaire Web (Facebook et Checkdonc.ca)
+1er juin : Avoir fini les démarches avec le CLD pour le soutien STA et le prêt FCJE
+
+1er juillet : Sortir la version 1.2 du site incluant les fonctionnalités de publication de contenu
+
+1er août : Engager un programmeur à temps plein
+
+1er septembre : Sortir la version 1.3 du site incluant la version mobile
+
+1er octobre : Migrer l'infrastructure sur « le cloud » 
+
+1er novembre : Sortir la version 1.4 du site incluant les graphiques d'analyse
+
+1er décembre : Appliquer à tous les programmes de subventions disponible pour l'entreprise
+
+1er janvier : Engager une deuxième ressource, un intégrateur
+
+1er février : Lancer une campagne publicitaire sur le Web
+
+1er mars : Avoir atteint 125 000 pages vues par jour
+
+1er avril : Sortir la version 1.5 du site incluant la géolocalisation 
+
+
 
 1.8 Profil des promoteurs
 -----------
@@ -65,37 +93,55 @@ Toutefois, il faut noter que l’entreprise ne prendra de l’expansion que si s
 
 Après plus de 8 ans d'expérience en programmation, en intégration et en gestion de serveur, c'est avec une solide expérience que je me lance en affaires. J'ai aussi plusieurs cours en gestion d'entreprises, en commerce des valeurs mobilières et en fiscalité. J'ai toujours eu la fibre entrepreneuriale et c'est avec beaucoup d'enthousiasme que je me lance dans cette nouvelle aventure. Au point de vue technique, j’ai acquis une expertise concurrentielle en programmation open source.
 
-**Philippe Héroux :**
-
-Avec 7 années d'expérience accumulées comme graphiste et directeur artistique dans la publicité, la promotion, la mode, le cinéma, l'évènementiel et la politique, mon rôle au sein de l’entreprise est de rendre la navigation fluide et le site esthétique. Je m’occupe aussi de personnaliser la plateforme pour rejoindre un public cible en lui créant une identité et en faisant sa promotion via des campagnes publicitaires
-
 1.9 Structure organisationnelle de l'entreprise
 -----------
 
-Blobon est une société enregistrée, par action à capital fermé. Sa raison civile est le 9264-4590 Québec inc. L’entreprise est possédée par 2 actionnaires liés pour le moment sans convention d’actionnaire. La totalité des actions de catégorie E avec droit de vote est possédée par Gabriel alors que 17,5 % des actions de catégorie B appartient à Philippe. Le reste des actions de catégorie B appartient aussi à Gabriel.
+Blobon est une société enregistrée, par action à capital fermé. Sa raison civile est le 9264-4590 Québec inc. L’entreprise est possédée par Gabriel Dancause qui possède toutes les actions votantes.
 
 1.10 Analyse du risque
 -----------
 
+** Vol de l'idée :**
+
+Le risque principal pour le produit vedette de *Blobon* est le vol de l'idée et la réalisation d'un produit semblable par une entreprise concurente. La solution que nous avons développée pour réduire ce risque est de sortir le produit le plus vite possible pour se positionner et profiter du fait que nous serons les premiers à avoir développé un produit de ce type.
+
+
 **Marché :** 
 
-Le principal risque du marché provient de la concurrence. Peu importe où l’économie se dirige, il y aura toujours un besoin d’investissement en TIC. Pour réduire ce risque, Blobon doit continuer à offrir un service se démarquant des autres compagnies du même genre pour continuer d’obtenir des contrats.
+Le principal risque du marché provient de la concurrence. Peu importe où l’économie se dirige, il y aura toujours un besoin d’investissement en TIC. Comme solution, Blobon doit continuer à offrir un service se démarquant des autres compagnies du même genre pour continuer d’obtenir des contrats. 
 
 **Finances :**
 
-Sur le plan financier, les dangers les plus importants sont dans l’expansion des services. En effet, si cette croissance se fait trop rapidement, les revenus supplémentaires pourraient ne pas être en mesure de combler toutes les dépenses encourues. C’est pour cela que Blobon désire croitre avec les contrats qu’elle possède actuellement sans excéder sa capacité de croissance normale.
+Sur le plan financier, les dangers les plus importants sont dans l’expansion des services. En effet, si cette croissance se fait trop rapidement, les revenus supplémentaires pourraient ne pas être en mesure de combler toutes les dépenses encourues. C’est pour cela que Blobon désire croitre avec les contrats qu’elle possède actuellement sans excéder sa capacité de croissance normale. De cette manière, nous avons une solution réaliste à ce risque d'expansion trop rapide.
 
 **Opérations :**
 
-Les risques d’opérations propres à l’entreprise sont très limités, car les services rendus sont selon la demande du client. Client paye pas, non-respect des délais, poursuite judiciaire pour sécurité informatique, réduit par fiabilité des systèmes conçus, création d’une infrastructure ultra sécuritaire support continu en tout temps
-Projet :
+Les risques d’opérations propres à l’entreprise sont très limités, car les services rendus sont selon la demande du client. Client paye pas, non-respect des délais, poursuite judiciaire pour sécurité informatique, réduit par fiabilité des systèmes conçus, création d’une infrastructure ultra sécuritaire support continu en tout temps. Pour réduire les risques d'opérations, *Blobon* s'est doté des meilleurs outils de gestion des opérations disponibles aujourd'hui. Ces outils comportent un système de gestion des tâches relié au système de gestion du code et des fichiers de manière à ce que tout soit relié, et que les dépassements ou problèmes potentiels soient identifiés et réglés de manière efficace.
 
-Il y a inévitablement des risques inhérents au projet. Toutefois, de par la structure organisationnelle de l’entreprise, les promoteurs profitent d’une certaine protection. Le marché des technologies de l’information et des communications est en expansion, mais il se pourrait que cela nuise en quelque sorte au projet, car la concurrence y sera forte. De plus, le domaine étant en continuelle évolution, les promoteurs et employés de Blobon doivent eux aussi se tenir informer et à la fine pointe des technologiques et des techniques autrement, ils seront mis à l’écart. 
+**Concurence et technologie :**
+
+Il y a inévitablement des risques inhérents au projet. Toutefois, de par la structure organisationnelle de l’entreprise, les promoteurs profitent d’une certaine protection. Le marché des technologies de l’information et des communications est en expansion, mais il se pourrait que cela nuise en quelque sorte au projet, car la concurrence y sera forte. Comme solution, comme le domaine est en continuelle évolution, les promoteurs et employés de Blobon seront encouragés à se tenir informé et à la fine pointe des technologiques et des techniques autrement, ils seront mis à l’écart.  
+
+
+En conclusion, comme les risques inhérents aux projets sont des risques calculables et quantifiables, ils sera possible de les circonscrire et de les régler. Une attitude d'action efficace et de réaction doit être adoptée dans la gestion du risque et *Blobon* fera tout en son pouvoir pour que cette attitude devienne une valeur de compagnie.
+
 
 1.11 Consultants professionnels
 -----------
 
 Il arrive parfois que Blobon, malgré les vastes connaissances de ses promoteurs, doive avoir recours aux services de consultants professionnels oeuvrant principalement dans le domaine de l’informatique. Ces derniers sont toujours des contacts des gestionnaires et sont donc rémunérés au travail à un taux horaire flexible. Comme il s’agit d’évènements assez rares, ces charges d’exploitation n’auront pas un impact très important sur le bilan financier, mais sont parfois l’élément manquant primordial à la réussite d’un projet.
+
+**Philippe Héroux :**
+
+Avec 7 années d'expérience accumulées comme graphiste et directeur artistique dans la publicité, la promotion, la mode, le cinéma, l'évènementiel et la politique, mon rôle au sein de l’entreprise est de rendre la navigation fluide et le site esthétique. Je m’occupe aussi de personnaliser la plateforme pour rejoindre un public cible en lui créant une identité et en faisant sa promotion via des campagnes publicitaires
+
+**Benoit Domingue :**
+
+Avec plus de 10 ans d'expérience dans le domaine des technologies de l'information et des communications, plus précisément avec les technologies que *Blobon* utilise. Il valide les technologies, moyens et services utilisés.
+
+**Mathieu Angers :**
+
+Avocat fiscaliste de 10 ans d'expériences, Mathieu s'est occupé de l'incorporation, va s'occuper de l'impôt et des crédits en recherche et développement pour que *Blobon* ait un traitement fiscal avantageux. 
 
 2.- Marché/Plan marketing
 =================
@@ -209,19 +255,40 @@ L’avantage concurrentiel de Blobon est son expertise dans les technologies ope
 2.3.1 Description du produit et du service
 -----------
 
+**Service :**
+
 Blobon peut concevoir une grande variété de plateformes Web et informatiques afin de répondre à tous vos besoins en matière de sites Internet (communautés, forums, espaces publicitaires, etc.) Plus précisément, l’entreprise propose au départ un service de consultation afin de cibler les besoins de son client ce qui permettra de créer la plateforme idéale pour les combler. Pour y arriver, Blobon allie informatique et design dans le but de toujours offrir un produit de qualité, facile d’utilisation et à l’esthétisme irréprochable. Évidemment, un suivi est effectué ainsi qu’une maintenance, lesquels sont définis dans le contrat de service.
 
 De plus, il arrive que l’expertise de la compagnie soit sollicitée par d’autres entreprises pour qui Blobon offrira des services de mentorat et de consultation en informatique et en design
 
+**Produit :**
+
+Notre produit vedette sera une communauté où les utilisateurs vont publier du contenu et être rémunéré. 
+
+Les réseaux sociaux semblent emprunter la direction des compagnies traditionnelles en redistribuant tout les profits avec les actionnaires. Nous voulons révolutionner le modèle en re-distribuant une partie des revenus avec les utilisateurs. En effet, ce sont eux qui créent du contenu intéressant et qui incitent les autres à aller consommer ce contenu. Il s'agit là de la caractéristique la plus spéciale de notre réseau. 
+
+Une autre caractéristique particulière de notre projet est le vote positif ET le vote négatif. Les réseaux traditionnels comme Facebook et Twitter ne comportent que le vote positif (J'aime sur Facebook et le RT sur Twitter). Nous croyons que de permettre le vote négatif sur du contenu comme le font les nouveaux réseaux "tendances" permet d'avoir du contenu de meilleure qualité pour les utilisateurs. Voir Reddit.com et Imgur.com
+
+
 2.3.2 La gestion de prix
 -----------
 
-Blobon offre deux solutions au niveau des prix : un taux horaire de 80 $ ou un tarif en fonction du projet. La charge au projet va être évaluée selon le nombre d’heures requis pour celui-ci et pour son degré de complexité. De plus, Blobon souhaite offrir des contrats de services comprenant des modalités de services d’urgence permettant aux usagers de ses systèmes et plateformes Web d’avoir du support à toute heure. Évidemment, vu la diversité des projets possiblement réalisables par l’entreprise, les clauses
+Blobon offre deux solutions au niveau des prix : un taux horaire de 150 $ ou un tarif en fonction du projet avec une possibilité d'ajuster le taux horaire pour les clients qui apportent un fort volume. La charge au projet va être évaluée selon le nombre d’heures requis pour celui-ci et pour son degré de complexité.
+
+Pour établir le prix d'un projet, *Blobon* se fie à sa grande expérience dans le domaine ainsi qu'à des statistiques approfondies accumulées pendant les années par son actionnaire principal. Pour contrôler le temps et faire afficher les statistiques, *Blobon* dispose d'un logiciel de contrôle du temps et de gestionnaire de tâche qui permet d'ajuster les prix pour les projets subséquents. Pour chaque projet, un montant d'heures est établi et une marge de sécurité est aussi ajouté pour être sûr de rentrer dans les profits à la fin du projet. 
+
+*Blobon* dispose aussi d'un logiciel de « cloud computing » qui permet de faire la comptabilité au fur et à mesure que l'année avance et non seulement une fois par année au rapport d'impôt. 
+
+**Clauses et termes : **
+
+Pour chaque projet dans lequel *Blobon* participe, les termes et les clauses sont sensiblement les mêmes. Trois paiements sont demandés pour le projet. Le premier est avant même le début du code et du travail. Il garantie un minimum. Ensuite, le travail peut commencer. Le deuxième paiement est demandé à la moitié du projet et le dernier paiement est demandé à la remise du code. 
+
+Comme la plupart du temps, ces projets sont accompagnés d'un service d'hébergement et un bloc d'heures pour de futures modifications, les clients payent bien parce qu'ils ne peuvent pas manipuler le code directement eux-mêmes, ils sont donc tributaire d'une bonne entente avec *Blobon*. Depuis le début, les paiements ont été faits en dedans de 30 jours sans problèmes. 
 
 2.3.3 Mise en marché, outils de promotion
 -----------
 
-Afin de s’assurer de percer un marché en pleine expansion avec peu de moyens promotionnels, Blobon utilisera une stratégie de pénétration de marché basée sur la performance et le prix. Pour ce faire, il faudra travailler avec rigueur pour offrir des produits au-delà des attentes du client et ainsi pouvoir se distinguer des concurrents de tailles égales.
+Afin de s’assurer de percer un marché en pleine expansion avec peu de moyens promotionnels, Blobon utilisera une stratégie d'écrémage, i.e. offrir nos services à un prix fort pour attirer les clients qui ont du budget pour faire des projets intéressants. Pour ce faire, il faudra travailler avec rigueur pour offrir des produits au-delà des attentes du client et ainsi pouvoir se distinguer des concurrents de tailles égales.
 
 De plus, comme outil promotionnel principal, Blobon peut miser sur son site Internet Checkdonc.ca, lequel, en plus d’être un bel exemple de réussite, permet la diffusion de publicités. Ce faisant, il assure une entrée de revenus pour une campagne publicitaire, mais aussi un canal de diffusion promotionnel avec une large audience favorable à la réussite de l’entreprise et de ses projets.
 
@@ -332,11 +399,16 @@ Pour maximiser son potentiel et ses chances de réussite, Blobon aurait besoin a
 Poste | Salaire 
 --- | --- 
 Directeur technique (Gabriel) | Dividende
-Directeur Marketing/graphisme (Philippe) | Dividende
-Graphiste | 45 000 $
-Intégrateur technique | 45 000 $
+Graphiste (Phillipe) | Dividende 
+Intégrateur | 45 000 $
 Programmeur | 55 000 $
-Administrateur Système | 55 000 $
-Développeur iOS | 65 000 $
-Développeur Android | 65 000 $
+
+Par la suite, les postes suivant devront être comblés dans l'ordre indiqué quand les revenus augmenteront assez pour le permettre
+
+Ordre d'embauche | Poste | Salaire 
+--- | --- | --- 
+1 | Administrateur Système | 55 000 $
+2 | Graphiste | 45 000 $
+3 | Développeur iOS | 65 000 $
+4 | Développeur Android | 65 000 $
 
