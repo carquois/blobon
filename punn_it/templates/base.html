@@ -136,10 +136,12 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </a>
-  	    <a class="brand" href="{% url punns.views.index %}">{{ site.name }}</a>
+  	    <a class="brand" href="{% url punns.views.index %}">Check Donc Ça</a>
             <div class="nav-collapse collapse">
              {% if not request.user.is_authenticated %}
               <a href="{% url accounts.views.signup %}" class="btn" id="join">{% trans "Rejoindre" %} {{ site.name }}</a>
+             {% else %}
+              <a class="btn" href="{% url punns.views.create %}">Publier du contenu</a>
              {% endif %}
               <ul class="nav" style="display:none">
                 <li>
@@ -156,12 +158,6 @@
                 </li>
               </ul>
               <ul class="nav pull-right">
-                <li>
-                  <a href="{% url punns.views.create %}">Publish</a>
-                </li>
-                <li>
-                  <a class="piton crayon" href="{% url news.views.all %}"></a>
-                </li>
 		{% if not request.user.is_authenticated %}
                 <li class="dropdown li-items" style="display:none">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Langue" %}: {% trans "Français" %}<b class="caret"></b></a>
@@ -179,6 +175,8 @@
                     <b class="caret"></b>
 		  </a>
 	          <ul class="dropdown-menu">
+                    <li><a href="{% url punns.views.profile_page request.user.username %}">{% trans "Voir votre profil" %}</a></li>
+                    <li class="divider"></li>
                     <li><a href="{% url accounts.views.edit_profile %}">{% trans "Paramètres" %}</a></li>
                     <li class="divider"></li>
                     <li><a href="{% url django.contrib.auth.views.logout %}">{% trans "Se déconnecter" %}</a></li>
@@ -207,10 +205,15 @@
            {% for punn in punns %}
             <div class="thumbs">
   	      <a href="{{ punn.get_absolute_url }}">
-  	        <!--<span></span>-->
+	       {% if punn.pic %}
 	       {% thumbnail punn.pic "153x182" crop="center" as im %}
   	        <img src="{{ im.url }}" alt="{{ punn.title }}"/>
 	       {% endthumbnail %}
+	       {% else %}
+	       {% thumbnail punn.author.userprofile.avatar "153x182" crop="center" as im %}
+  	        <img src="{{ im.url }}" alt="{{ punn.title }}"/>
+	       {% endthumbnail %}
+	       {% endif %}
   	      </a>
   	    </div>
            {% endfor %}

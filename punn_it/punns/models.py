@@ -44,11 +44,11 @@ class Punn(models.Model):
     source = models.URLField(verbose_name=_("Source"), max_length=300, blank=True)
     author = models.ForeignKey(User)
     original_punn = models.ForeignKey('self',  null=True, blank=True)
-    content = models.TextField(max_length=10000, blank=True)
+    content = models.TextField(verbose_name=_("Contenu"),max_length=10000, blank=True)
     is_video = models.BooleanField(default=False)
     is_top = models.BooleanField(default=False)
     youtube_id = models.CharField(max_length=50, null=True, blank=True)
-    tags = models.ManyToManyField(Tags)
+    tags = models.ManyToManyField(Tags, null=True, blank=True)
     #Datetime infos
     created = models.DateTimeField(auto_now_add = True)
     pub_date = models.DateTimeField(auto_now_add = True, null=True, blank=True)
