@@ -201,7 +201,16 @@
       <div class="container">
         <div class="row">
          {% block content %}
+         {% if messages %}
+           {% for message in messages %}
+             <div class="alert alert-block alert-info">
+               <button type="button" class="close" data-dismiss="alert">&times;</button>
+               {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+             </div>
+           {% endfor %}
+         {% endif %}
           <div id="content" class="span8 transitions-enabled infinite-scroll clearfix">
+           {% if punns %}
            {% for punn in punns %}
             <div class="thumbs">
   	      <a href="{{ punn.get_absolute_url }}">
@@ -217,6 +226,11 @@
   	      </a>
   	    </div>
            {% endfor %}
+           {% else %}
+  	    <p>
+              {% trans "Il n'y a pas encore de contenu à présenter ici" %}
+  	    </p>
+           {% endif %}
           </div>
          {% endblock %}
          {% block sidebar %}
