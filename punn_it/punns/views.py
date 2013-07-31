@@ -38,15 +38,10 @@ from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_page
 
 def index(request):
-      if request.META['HTTP_HOST'] == "blobon.com":
+      if request.META['HTTP_HOST'] == "checkdonc.ca":
           user = ""
           punns = paginate(request,
                            Punn.objects.filter(status='P').order_by('-pub_date'),
-                           15)
-      elif request.META['HTTP_HOST'] == "checkdonc.ca":
-          user = User.objects.get(pk=3)
-          punns = paginate(request,
-                           Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
                            15)
       elif UserProfile.objects.filter(domain='http://%s/' % request.META['HTTP_HOST']).exists():
           user = UserProfile.objects.get(domain='http://%s/' % request.META['HTTP_HOST']).user
@@ -54,7 +49,7 @@ def index(request):
                            Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
                            15)
       else:
-        return redirect("http://blobon.com")
+        return redirect("http://checkdonc.ca")
       for punn in punns:
         votesup = PunnVote.objects.filter(punn=punn).filter(vote='U')
         votesdown = PunnVote.objects.filter(punn=punn).filter(vote='D')

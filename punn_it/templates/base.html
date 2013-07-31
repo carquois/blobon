@@ -48,6 +48,9 @@
       .the-container {
           margin-left: 340px;
       }
+      .thumb-link {
+          text-align: center;
+      }
 
       @media (max-width: 979px) {
         .the-container {
@@ -183,9 +186,9 @@
       <div class="row-fluid">
         <div class="span12">
           <div class="hero-unit">
-            <h1>Hello, world!</h1>
-            <p>unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+            <h1>{% trans "Salut!" %}</h1>
+            <p>{% trans "La mission de Check Donc Ça est de rassembler le contenu, de le rendre plaisant à naviguer et de partager le profit avec les créateurs" %} </p>
+            <p><a class="btn btn-primary btn-large">{% trans "Joindre la gang" %} &raquo;</a></p>
           </div>
           <div class="row-fluid">
             <ul class="thumbnails">
@@ -198,10 +201,14 @@
             {% endif %}
               <li class="span4">
                 <div class="thumbnail">
-                  <img src="http://placehold.it/300x200" alt="">
+                  <a href="{{ punn.get_absolute_url }}" class="thumb-link">
+	         {% thumbnail punn.pic "300x200" crop="center" as im %}
+  	          <img src="{{ im.url }}" alt="{{ punn.title }}"/>
+	         {% endthumbnail %}
+                  </a>
                   <div class="caption">
                     <p>{{ punn.title }}</p>
-                    <p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn">Action</a></p>
+                    <p><a href="#">@{{ punn.author }}</a></p>
                   </div>
                 </div>
               </li>
@@ -209,35 +216,55 @@
             </ul>
           </div>
           <div class="row-fluid">
-
-
-
-<div class="pagination pagination-centered pagination-large">
-  <ul>
-
-{% if punns.has_previous %}
-    <li>
-            <a href="?page={{ punns.previous_page_number }}">&laquo;</a>
-</li>
-<li><a href="?page={{ punns.previous_page_number }}">{{ punns.previous_page_number }}</a></li>
-        {% else %}
-<li class="disabled"><a href="#">&laquo;</a></li>
-        {% endif %}
-<li class="disabled"><a href="#">
-{% trans "Page" %} {{ punns.number }} {% trans "de" %} {{ punns.paginator.num_pages }}
-</a></li>
-
-{% if punns.has_next %}
-    <li>
-            <a href="?page={{ punns.next_page_number }}">&raquo;</a>
-</li>
-        {% else %}
-<li class="disabled"><a href="#">&raquo;</a></li>
-        {% endif %}
-  </ul>
-</div>
-
-
+            <div class="pagination pagination-centered">
+              <ul>
+              {% if punns.has_previous %}
+                <li>
+                  <a href="?page={{ punns.previous_page_number }}">&laquo;</a>
+                </li>
+                <li><a href="?page=1">1</a></li>
+                <li class="disabled">
+                  <a>...</a>
+                </li>
+                <li>
+                  <a href="?page={{ punns.previous_page_number }}">{{ punns.previous_page_number }}</a>
+                </li>
+                <li class="disabled">
+                  <a>{{ punns.number }}</a>
+                </li>
+                <li>
+                  <a href="?page={{ punns.next_page_number }}">{{ punns.next_page_number }}</a>
+                </li>
+                <li class="disabled">
+                  <a>...</a>
+                </li>
+                <li>
+                  <a href="?page={{ punns.paginator.num_pages }}">{{ punns.paginator.num_pages }}</a>
+                </li>
+                <li>
+                  <a href="?page={{ punns.next_page_number }}">&raquo;</a>
+                </li>
+              {% else %}
+              {% if punns.has_next %}
+                <li class="disabled"><a href="#">&laquo;</a></li>
+                <li><a href="?page=1">1</a></li>
+                <li><a href="?page=2">2</a></li>
+                <li><a href="?page=3">3</a></li>
+                <li><a href="?page=4">4</a></li>
+                <li><a href="?page=5">5</a></li>
+                <li class="disabled">
+                  <a>...</a>
+                </li>
+                <li>
+                  <a href="?page={{ punns.paginator.num_pages }}">{{ punns.paginator.num_pages }}</a>
+                </li>
+                <li>
+                  <a href="?page={{ punns.next_page_number }}">&raquo;</a>
+                </li>
+              {% endif %}
+              {% endif %}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
