@@ -67,7 +67,10 @@
       }
 
     </style>
-
+    <style>
+    {% block additional-css %}
+    {% endblock %}
+    </style>
     {% compress css %}
     {% endcompress %}
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -233,19 +236,22 @@
     <div class="container-fluid the-container">
       <div class="row-fluid">
         <div class="span12">
+          {% block content %}
           {% if not request.user.is_authenticated %}
+          {% block hero-unit %}
           <div class="hero-unit">
             <h1>{% trans "Salut!" %}</h1>
             <p>{% trans "La mission de Check Donc Ça est de rassembler le meilleur contenu du Web, de le rendre plaisant à naviguer." %} </p>
             <p>{% trans "Créez votre compte dès aujourd'hui pour profiter des fonctionalités." %} </p>
             <p><a class="btn btn-primary btn-large">{% trans "Joindre la gang" %} &raquo;</a></p>
           </div>
+          {% endblock %}
           {% else %}
-      <div id='div-gpt-ad-1363051510706-0' class="hidden-phone">
-        <script type='text/javascript'>
-          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
-        </script>
-      </div>
+          <div id='div-gpt-ad-1363051510706-0' class="hidden-phone">
+            <script type='text/javascript'>
+              googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
+            </script>
+          </div>
           {% endif %}
           <div class="row-fluid">
             <ul class="thumbnails">
@@ -323,11 +329,12 @@
               </ul>
             </div>
           </div>
+        {% endblock %}
         </div>
       </div>
       <hr>
       <footer>
-        <p>&copy; Company 2012</p>
+        <p>&copy; Check Donc Ça 2010 - {% now "Y" %}</p>
       </footer>
     </div><!--/.fluid-container-->
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>

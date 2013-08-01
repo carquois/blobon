@@ -1,43 +1,22 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load url from future %}
-
 {% block title %}{% trans "Veuillez vous connecter" %}{% endblock %}
-{% block additional_css %}
-    <style>
-      body {
-        background: url({{ STATIC_URL }}img/blob_bg.gif);
+{% block additional-css %}
+      #facebook-btn {
+        margin-left: 60px;
       }
-
-      a {
-        color:#f4663b;
+      input[type="text"], input[type="password"] {
+        height: 30px;
       }
-      p {
-        color:#828282;
-      }
-      @media (max-width: 479px) {
-        .logo {
-          display:none;
-        }
-      }
-    </style>
 {% endblock %}
-{% block topmenu %}
+{% block hero-unit %}
 {% endblock %}
-{% block top-ads %}
-{% endblock %}
-{% block connect %}
-{% endblock %}
-{% block container %}
-     <div class="centered">
-       <div class="logo"></div>
-       <hr>
-       <h2 class="titre">{% trans "Connectez-vous avec :" %}</h2>
-       <div class="row">
-         <a href="{% url 'socialauth_begin' backend='facebook' %}">
-           <div class="social-btn fb"></div>
+{% block content %}
+     <div class="well">
+       <a id="facebook-btn" href="{% url 'socialauth_begin' backend='facebook' %}" class="btn btn-primary btn-large">
+           {% trans "Connecte-toi avec Facebook" %} <i class="icon-white icon-user"></i>
          </a>
-       </div>
        <hr>
        <form class="form-horizontal" method="post" action="{% url 'django.contrib.auth.views.login' %}">{% csrf_token %}
        {% if form.non_field_errors %}
@@ -75,5 +54,6 @@
        </form>
        <hr>
        <p><small>{% trans 'Pas de compte?' %} <a href="/signup/">{% trans 'Inscrivez-vous.' %}</a></small></p>
+     </div>
 {% endblock %}
 
