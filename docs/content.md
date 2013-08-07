@@ -1,12 +1,39 @@
 Stratégie de contenu
 -----------
 
+Bacon
+Top 10 de shits
+Top Google maps et street view
 Comics
 Enfants
 Fail 
 Win
 Gadget techno
 Trucs de riche
+lyrics
+tabs
+chords
+Vidéos
+Triste
+WTF
+Star Wars
+Products
+
+Design
+Art de rue
+Produits recyclés
+Graphisme, fractal
+Tattoos 
+Photographie
+
+Facebook
+Reddit
+YouTube
+Twitter
+Yahoo Answers
+Urban Dictionary
+SMS
+
 Date du jour événement historique
 Potins. photos de star
 earthporn
