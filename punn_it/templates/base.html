@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{% block description %}{{ site_description }}{% endblock %}">
     <meta name="author" content="">
-    <title>{% block title %}{{ site.name }}{% endblock %}</title>
+    <title>{% block title %}Knobshare{% endblock %}</title>
     {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ site.name }}" />
@@ -40,15 +40,17 @@
         text-align: center;
       }
       .medium-rectangle {
-        padding-left: 10px;
       }
       .skyscrapper {
-        margin-left: 80px;
+        margin-top: 20px;
       }
       #thumbs {
         display:block;
         margin:auto;
       }
+      #paginator {
+        text-align: center;
+      } 
     </style>
     <style>
     {% block additional-css %}
@@ -146,13 +148,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{% url 'punns.views.index' %}">{% trans "Share The World" %}</a>
+          <a class="navbar-brand" href="{% url 'punns.views.index' %}">{% trans "Knobshare" %}</a>
           <div class="nav-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">{% trans "HOT" %}</a></li>
-              <li><a href="#about">{% trans "NEW" %}</a></li>
-              <li><a href="#contact">{% trans "TOP" %}</a></li>
-              {% if request.user.is_authenticated %}
+              <li class="active"><a href="#">{% trans "NEW" %}</a></li>
+              <!--<li><a href="#">{% trans "TOP" %}</a></li>-->
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+            {% if request.user.is_authenticated %}
               <li class="dropdown pull-right">
                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> @{{ request.user.username }}
                   <span class="caret"></span>
@@ -165,7 +168,9 @@
                     <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Se déconnecter" %}</a></li>
                 </ul>
               </li>
-              {% endif %}
+            {% else %}
+              <li><a href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Se connecter" %}</a></li>
+            {% endif %}
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -173,7 +178,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-4">
-            <div class="medium-rectangle">
+            <div class="medium-rectangle visible-desktop">
               <!-- 300x250TopRight -->
               <div id='div-gpt-ad-1360772351679-0'>
                 <script type='text/javascript'>
@@ -181,7 +186,7 @@
                 </script>
               </div>
             </div><!--/.well -->
-            <div class="skyscrapper">
+            <div class="skyscrapper hidden-phone">
               <!-- SkyScrapper -->
               <div id='div-gpt-ad-1363052072029-0' style='width:160px; height:600px;'>
                 <script type='text/javascript'>
@@ -191,13 +196,13 @@
             </div><!--/.well -->
           </div><!--/.col-3 -->
           <div class="col-sm-8">
-            <div class="row">
             {% block content %}
+            <div class="row">
               {% if not request.user.is_authenticated %}
               {% block hero-unit %}
               <div class="jumbotron">
-                <h2>{% trans "Bienvenue sur KnobShare." %}</h2>
-                <p>{% trans "La mission de KnobShare est de rassembler le meilleur contenu et de le rendre plaisant à naviguer." %} </p>
+                <h2>{% trans "Bienvenue sur Knobshare." %}</h2>
+                <p>{% trans "La mission de Knobshare est de rassembler le meilleur contenu et de le rendre plaisant à naviguer." %} </p>
                 <p>{% trans "Créez votre compte dès aujourd'hui pour profiter des fonctionalités." %} </p>
                 <p><a href="{% url 'socialauth_begin' backend='facebook' %}" class="btn btn-primary btn-lg">{% trans "Créez votre compte avec Facebook" %}</a></p>
               </div>
@@ -212,80 +217,34 @@
             {% endif %}
               <div class="col-sm-4">
                 <a href="{{ punn.get_absolute_url }}" class="thumbnail">
-                  <img id="thumbs" src="http://placehold.it/350x350" alt="">
+                  {% if punn.pic %}
+	          {% thumbnail punn.pic "300x300" crop="center" as im %}
+  	          <img id="thumbs" src="{{ im.url }}" alt="{{ punn.title }}"/>
+	          {% endthumbnail %}
+	          {% else %}
+	          {% thumbnail punn.author.userprofile.avatar "300x300" crop="center" as im %}
+  	          <img id="thumbs" src="{{ im.url }}" alt="{{ punn.title }}"/>
+	          {% endthumbnail %}
+	          {% endif %}
                 </a>
               </div>
             {% endfor %}
             </div>
-          </div>
-        </div><!--/.row -->
-      </div><!--/.container -->
-
-<!--
-          <div class="row-fluid">
-            <div class="pagination pagination-centered">
-              <ul>
-              {% if punns.has_previous %}
-                <li>
-                  <a href="?page={{ punns.previous_page_number }}">&laquo;</a>
-                </li>
-                <li><a href="?page=1">1</a></li>
-                <li class="disabled">
-                  <a>...</a>
-                </li>
-                <li>
-                  <a href="?page={{ punns.previous_page_number }}">{{ punns.previous_page_number }}</a>
-                </li>
-                <li class="disabled">
-                  <a>{{ punns.number }}</a>
-                </li>
-                <li>
-                  <a href="?page={{ punns.next_page_number }}">{{ punns.next_page_number }}</a>
-                </li>
-                <li class="disabled">
-                  <a>...</a>
-                </li>
-                <li>
-                  <a href="?page={{ punns.paginator.num_pages }}">{{ punns.paginator.num_pages }}</a>
-                </li>
-                <li>
-                  <a href="?page={{ punns.next_page_number }}">&raquo;</a>
-                </li>
-              {% else %}
-              {% if punns.has_next %}
-                <li class="disabled"><a href="#">&laquo;</a></li>
-                <li><a href="?page=1">1</a></li>
-                <li><a href="?page=2">2</a></li>
-                <li><a href="?page=3">3</a></li>
-                <li><a href="?page=4">4</a></li>
-                <li><a href="?page=5">5</a></li>
-                <li class="disabled">
-                  <a>...</a>
-                </li>
-                <li>
-                  <a href="?page={{ punns.paginator.num_pages }}">{{ punns.paginator.num_pages }}</a>
-                </li>
-                <li>
-                  <a href="?page={{ punns.next_page_number }}">&raquo;</a>
-                </li>
-              {% endif %}
-              {% endif %}
+            <div class="row">
+              <ul class="pager">
+                <li class="previous{% if not punns.has_previous %} disabled{% endif %}"><a href="?page={{ punns.previous_page_number }}">&larr; {% trans "Page précédente" %}</a></li>
+                <li class="next{% if not punns.has_next %} disabled{% endif %}"><a href="?page={{ punns.next_page_number }}">{% trans "Page suivante" %} &rarr;</a></li>
               </ul>
             </div>
-          </div>
-
--->
-
-
-        {% endblock %}
-        </div>
+            {% endblock %}
+          </div><!--/.col-8 -->
+        </div><!--/row -->
+        <hr>
+        <footer>
+          <p>&copy; Check Donc Ça 2010 - {% now "Y" %}</p>
+        </footer>
       </div>
-      <hr>
-      <footer>
-        <p>&copy; Check Donc Ça 2010 - {% now "Y" %}</p>
-      </footer>
-    </div><!--/.fluid-container-->
-    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+      <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
   </body>
 </html>
 
