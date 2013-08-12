@@ -29,8 +29,8 @@
 
     <!-- Le styles -->
     {% block css %}
-    <link href="http://examples.getbootstrap.com/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap-glyphicons.css" rel="stylesheet">
     <style>
       body {
         padding-top: 60px;
@@ -65,7 +65,6 @@
     {% endblock %}
 
     </script>
-    <link href="{{ STATIC_URL }}/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -176,26 +175,11 @@
         </div>
       </div>
       <div class="container">
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="medium-rectangle visible-desktop">
-              <!-- 300x250TopRight -->
-              <div id='div-gpt-ad-1360772351679-0'>
-                <script type='text/javascript'>
-                  googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-0'); });
-                </script>
-              </div>
-            </div><!--/.well -->
-            <div class="skyscrapper hidden-phone">
-              <!-- SkyScrapper -->
-              <div id='div-gpt-ad-1363052072029-0' style='width:160px; height:600px;'>
-                <script type='text/javascript'>
-                  googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363052072029-0'); });
-                </script>
-              </div>
-            </div><!--/.well -->
-          </div><!--/.col-3 -->
-          <div class="col-sm-8">
+
+
+<div class="row">
+  <div class="col-lg-8">
+
             {% block content %}
             <div class="row">
               {% if not request.user.is_authenticated %}
@@ -215,7 +199,7 @@
             </div>
             <div class="row">
             {% endif %}
-              <div class="col-sm-4">
+              <div class="col-lg-4">
                 <a href="{{ punn.get_absolute_url }}" class="thumbnail">
                   {% if punn.pic %}
 	          {% thumbnail punn.pic "300x300" crop="center" as im %}
@@ -238,6 +222,30 @@
             </div>
             {% endblock %}
           </div><!--/.col-8 -->
+  <div class="col-lg-4">
+            <div class="medium-rectangle visible-desktop">
+              <!-- 300x250TopRight -->
+              <div id='div-gpt-ad-1360772351679-0'>
+                <script type='text/javascript'>
+                  googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-0'); });
+                </script>
+              </div>
+            </div><!--/.well -->
+
+            <div class="skyscrapper hidden-phone">
+              <!-- SkyScrapper -->
+              <div id='div-gpt-ad-1363052072029-0' style='width:160px; height:600px;'>
+                <script type='text/javascript'>
+                  googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363052072029-0'); });
+                </script>
+              </div>
+            </div><!--/.well -->
+  </div>
+</div>
+
+
+
+
         </div><!--/row -->
         <hr>
         <footer>

@@ -16,16 +16,13 @@
 {% endblock %}
 {% block title %} {{ punn.title }} {% endblock %}
     {% block additional-css %}
-      #article-content {
-        background: white;
-        margin-top: 10px;
-      }
     {% endblock %}
 {% block content %} 
 <div class="panel">
   <div class="panel-heading">
     <h3 class="panel-title">{{ punn.title }}</h3>
   </div>
+<div class="panel">
   {% if punn.youtube_id %}
   <iframe src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
   {% else %}
@@ -33,10 +30,11 @@
   <a href="{{ next_punn.get_absolute_url }}">
     <img style="width: 100%;" src="{{ MEDIA_URL }}{{ punn.pic }}" />
   </a>
+  </div>
   {% endif %}
   {% endif %}
   {% if content %}
-  <div class="well" id="article-content">
+  <div class="panel">
     {{ content|safe }}
   </div>
   {% endif %}
@@ -51,15 +49,15 @@
                   {% endif %}    
   </a>
   <div class="media-body">
-    <h4 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }}</h4>
-{% trans "Publié" %} {{ punn.pub_date|naturaltime }} {% if punn.source %}{% trans "via" %} <a href="{{ punn.source }}" target="_blank">(Source)</a>{% endif %}
+    <h4 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small></h4>
+<p class="text-muted">{% trans "Publié" %} {{ punn.pub_date|naturaltime }}</p>
   </div>
 </div>
 </div>
 <div class="panel">
 
 <div class="btn-group">
-<a class="btn btn-default btn-lg {% if vote == "U" %} btn-primary{% endif %}" href="
+<a rel="tooltip" title="{% trans "J'aime" %}" class="btn btn-default {% if vote == "U" %} btn-primary{% endif %}" href="
 
 {% if request.user.is_authenticated %}
                        {% url votes.views.up punn.id %}
@@ -69,8 +67,8 @@
 
 
                              ">&#43;</a>
-        <a class="btn btn-default btn-lg" disabled="disabled">{{ karma }}</a>
-        <a class="btn btn-default btn-lg {% if vote == "D" %}btn-primary{% endif %}" href="
+        <a class="btn btn-default" disabled="disabled">{{ karma }}</a>
+        <a rel="tooltip" title="{% trans "Je n'aime pas" %}" class="btn btn-default {% if vote == "D" %}btn-primary{% endif %}" href="
 
 {% if request.user.is_authenticated %}
                        {% url votes.views.down punn.id %}
@@ -82,33 +80,73 @@
 
 
 </div>
-<div class="btn-group pull-right">
-  <button type="button" class="btn btn-default">Favorite</button>
-  <button type="button" class="btn btn-default">RT</button>
-  <button type="button" class="btn btn-default">Rapporter</button>
-  <button type="button" class="btn btn-default">Partager</button>
+  <div class="modal fade" id="delete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Effacer cette page?" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Êtes-vous certain de vouloir faire ça? Vous ne pourrez pas revenir en arrière par la suite." %}</p>
+        </div>
+        <div class="modal-footer">
+<button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Non non!" %}</button>
+                    <a href="{% url punns.views.delete punn.id %}" class="btn btn-danger">{% trans "Oui, je veux l'effacer" %}</a>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+<div class="btn-toolbar pull-right">
+{% if punn.source %}
+<div class="btn-group">
+  <a href="{{ punn.source }}" target="_blank" rel="tooltip" title="{% trans "Source" %}" class="btn btn-default"><span class="glyphicon glyphicon-globe"></span></a>
+</div>
+{% endif %}
+<div class="btn-group">
+  <a rel="tooltip" title="{% trans "Partager" %}" class="btn btn-default"><img src="http://i.imgur.com/t6ktrEI.png" style="width:14px;" /></a>
+</div>
+<div class="btn-group">
+  <a rel="tooltip" title="{% trans "Partager" %}" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span></a>
+  <a rel="tooltip" title="{% trans "Commenter" %}" class="btn btn-default"><span class="glyphicon glyphicon-comment"></span></a>
+</div>
+<div class="btn-group">
+  <a rel="tooltip" title="{% trans "Reprendre" %}" class="btn btn-default"><span class="glyphicon glyphicon-retweet"></span></a>
+  <a rel="tooltip" title="{% trans "Favori" %}" class="btn btn-default"><span class="glyphicon glyphicon-star"></span></a>
+  <a rel="tooltip" title="{% trans "Rapporter" %}" class="btn btn-default"><span class="glyphicon glyphicon-flag"></span></a>
+</div>
+<div class="btn-group">
+{% if request.user.is_authenticated and punn.author == request.user %}
+  <a rel="tooltip" title="{% trans "Effacer" %}" data-toggle="modal" href="#delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                      {% endif %}
+</div>
 </div>
 
 </div>
 
-                {% if comment_list %} 
-          <h2>{% trans "Meilleur commentaire" %}</h2>
+                {% if comment_list %}
+
+ 
+          <h3>{% trans "Meilleur commentaire" %}</h3>
 
 {% for comment in comment_list|dictsortreversed:"karma" %}
 
                 {% if forloop.counter == 2 %}
-                <h2>{% trans "Tous les commentaires" %}</h2>
+                <h3>{% trans "Tous les commentaires" %}</h3>
                 {% endif %}
+<div class="panel">
 <div class="media">
 
 <div class="pull-left btn-group-vertical">
-        <a class="btn btn-default btn-xs {% if comment.vote == "U" %}btn-primary{% endif %}" href="
+        <a class="btn btn-default {% if comment.vote == "U" %}btn-primary{% endif %}" href="
                              {% if request.user.is_authenticated %}{% url votes.views.commentup comment.id %}
                              {% else %}{% url accounts.views.signup %}
                              {% endif %}
                              ">&#43;</a>
-        <a class="btn btn-default btn-xs" disabled="disabled">{{ comment.karma }}</a>
-        <a class="btn btn-default btn-xs {% if comment.vote == "D" %}btn-primary{% endif %}" href="
+        <a class="btn btn-default" disabled="disabled">{{ comment.karma }}</a>
+        <a class="btn btn-default {% if comment.vote == "D" %}btn-primary{% endif %}" href="
                              {% if request.user.is_authenticated %}{% url votes.views.commentdown comment.id %}
                              {% else %}{% url accounts.views.signup %}
                              {% endif %}
@@ -125,7 +163,7 @@
   <a class="pull-left" href="{% url punns.views.profile_page comment.author.username %}">
                   {% if comment.author.userprofile.avatar %}
                   {% thumbnail comment.author.userprofile.avatar "64x64" crop="center" as im %}
-                  <img src="{{ im.url }}" alt="{{ comment.author.first_name }} {{ comment.author.last_name }}"/>
+                  <img src="{{ im.url }}" alt="{{ comment.author.first_name }} {{ comment.author.last_name }}" class="img-rounded"/>
                   {% endthumbnail %}
                   {% endif %}
   </a>
@@ -135,6 +173,7 @@
   </div>
 
 
+</div>
 </div>
 
 {% endfor %}
