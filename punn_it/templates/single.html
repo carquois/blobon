@@ -21,27 +21,140 @@
         margin-top: 10px;
       }
     {% endblock %}
-
-
 {% block content %} 
-<div class="well">
-  <h3>{{ punn.title }}</h3>
+<div class="panel">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ punn.title }}</h3>
+  </div>
+  {% if punn.youtube_id %}
+  <iframe src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+  {% else %}
+  {% if punn.pic %}
+  <a href="{{ next_punn.get_absolute_url }}">
+    <img style="width: 100%;" src="{{ MEDIA_URL }}{{ punn.pic }}" />
+  </a>
+  {% endif %}
+  {% endif %}
+  {% if content %}
+  <div class="well" id="article-content">
+    {{ content|safe }}
+  </div>
+  {% endif %}
+<div class="panel">
 
-{% if punn.youtube_id %}
-                <iframe src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
-               {% else %}
-	        {% if punn.pic %}
-                <a href="{{ next_punn.get_absolute_url }}">
-                  <img src="{{ MEDIA_URL }}{{ punn.pic }}" />
-                </a>
-	        {% endif %}
-	       {% endif %}
-               {% if content %}
-                <div class="well" id="article-content">
-                   {{ content|safe }}
-                </div>
-               {% endif %}
-
-  
+<div class="media">
+  <a class="pull-left" href="{% url punns.views.profile_page punn.author.username %}">
+{% if punn.author.userprofile.avatar %}
+                  {% thumbnail punn.author.userprofile.avatar "64x64" crop="center" as im %}
+                  <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}" class="img-rounded"/>
+                  {% endthumbnail %}
+                  {% endif %}    
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }}</h4>
+{% trans "Publié" %} {{ punn.pub_date|naturaltime }} {% if punn.source %}{% trans "via" %} <a href="{{ punn.source }}" target="_blank">(Source)</a>{% endif %}
+  </div>
 </div>
+</div>
+<div class="panel">
+
+<div class="btn-group">
+<a class="btn btn-default btn-lg {% if vote == "U" %} btn-primary{% endif %}" href="
+
+{% if request.user.is_authenticated %}
+                       {% url votes.views.up punn.id %}
+                     {% else %}
+                       {% url django.contrib.auth.views.login %}?next={{request.path}}
+                     {% endif %}
+
+
+                             ">&#43;</a>
+        <a class="btn btn-default btn-lg" disabled="disabled">{{ karma }}</a>
+        <a class="btn btn-default btn-lg {% if vote == "D" %}btn-primary{% endif %}" href="
+
+{% if request.user.is_authenticated %}
+                       {% url votes.views.down punn.id %}
+                     {% else %}
+                       {% url django.contrib.auth.views.login %}?next={{request.path}}
+                     {% endif %}
+                             ">&#45;</a>
+
+
+
+</div>
+<div class="btn-group pull-right">
+  <button type="button" class="btn btn-default">Favorite</button>
+  <button type="button" class="btn btn-default">RT</button>
+  <button type="button" class="btn btn-default">Rapporter</button>
+  <button type="button" class="btn btn-default">Partager</button>
+</div>
+
+</div>
+
+                {% if comment_list %} 
+          <h2>{% trans "Meilleur commentaire" %}</h2>
+
+{% for comment in comment_list|dictsortreversed:"karma" %}
+
+                {% if forloop.counter == 2 %}
+                <h2>{% trans "Tous les commentaires" %}</h2>
+                {% endif %}
+<div class="media">
+
+<div class="pull-left btn-group-vertical">
+        <a class="btn btn-default btn-xs {% if comment.vote == "U" %}btn-primary{% endif %}" href="
+                             {% if request.user.is_authenticated %}{% url votes.views.commentup comment.id %}
+                             {% else %}{% url accounts.views.signup %}
+                             {% endif %}
+                             ">&#43;</a>
+        <a class="btn btn-default btn-xs" disabled="disabled">{{ comment.karma }}</a>
+        <a class="btn btn-default btn-xs {% if comment.vote == "D" %}btn-primary{% endif %}" href="
+                             {% if request.user.is_authenticated %}{% url votes.views.commentdown comment.id %}
+                             {% else %}{% url accounts.views.signup %}
+                             {% endif %}
+                             ">&#45;</a>
+      </div>
+
+<a href="
+                             {% if request.user.is_authenticated %}{% url votes.views.commentup comment.id %}
+                             {% else %}{% url accounts.views.signup %}
+                             {% endif %}
+                             "><div class="comment-vote comment-vote-up {% if comment.vote == "U" %}comment-vote-up-on{% endif %}"></div></a>
+
+
+  <a class="pull-left" href="{% url punns.views.profile_page comment.author.username %}">
+                  {% if comment.author.userprofile.avatar %}
+                  {% thumbnail comment.author.userprofile.avatar "64x64" crop="center" as im %}
+                  <img src="{{ im.url }}" alt="{{ comment.author.first_name }} {{ comment.author.last_name }}"/>
+                  {% endthumbnail %}
+                  {% endif %}
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading">{{ comment.author.first_name }} {{ comment.author.last_name }}</h4>
+    {{ comment.content|safe }}
+  </div>
+
+
+</div>
+
+{% endfor %}
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
 {% endblock %}
