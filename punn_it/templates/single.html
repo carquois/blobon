@@ -99,6 +99,7 @@
   </div><!-- /.modal -->
 
 
+
 <div class="btn-toolbar pull-right">
 {% if punn.source %}
 <div class="btn-group">
@@ -106,16 +107,13 @@
 </div>
 {% endif %}
 <div class="btn-group">
-  <a rel="tooltip" title="{% trans "Partager" %}" class="btn btn-default"><img src="http://i.imgur.com/t6ktrEI.png" style="width:14px;" /></a>
-</div>
-<div class="btn-group">
-  <a rel="tooltip" title="{% trans "Partager" %}" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span></a>
-  <a rel="tooltip" title="{% trans "Commenter" %}" class="btn btn-default"><span class="glyphicon glyphicon-comment"></span></a>
-</div>
-<div class="btn-group">
-  <a rel="tooltip" title="{% trans "Reprendre" %}" class="btn btn-default"><span class="glyphicon glyphicon-retweet"></span></a>
-  <a rel="tooltip" title="{% trans "Favori" %}" class="btn btn-default"><span class="glyphicon glyphicon-star"></span></a>
-  <a rel="tooltip" title="{% trans "Rapporter" %}" class="btn btn-default"><span class="glyphicon glyphicon-flag"></span></a>
+  <a rel="tooltip" title="{% trans "Partager sur Facebook" %}" class="btn btn-default" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+      'facebook-share-dialog', 
+      'width=626,height=436'); 
+    return false;"><img src="{{ STATIC_URL }}img/facebook.png" style="width:14px;" /></a>
+  <a rel="tooltip" title="{% trans "Partager sur Twitter" %}" class="btn btn-default"><img src="{{ STATIC_URL }}img/twitter.png" style="width:14px;" /></a>
 </div>
 <div class="btn-group">
 {% if request.user.is_authenticated and punn.author == request.user %}
