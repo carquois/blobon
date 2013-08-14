@@ -200,7 +200,7 @@ def profile_page(request, user):
       else:
         punns = paginate(request,
                          Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
-                         20)
+                         15)
         site_description = settings.MAIN_SITE_DESCRIPTION
         site = get_current_site(request)
         url = request.build_absolute_uri()

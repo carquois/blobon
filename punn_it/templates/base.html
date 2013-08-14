@@ -48,6 +48,10 @@
         display:block;
         margin:auto;
       }
+      .centered {
+        display:block;
+        margin:auto;
+      }
       #paginator {
         text-align: center;
       } 
@@ -140,6 +144,9 @@
     </script>
   </head>
   <body>
+
+{% block nav %}
+
       <div class="navbar navbar-fixed-top">
         <div class="container">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
@@ -160,38 +167,40 @@
                   <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="{% url 'punns.views.profile_page' request.user.username %}">{% trans "Voir votre profil" %}</a></li>
+                    <li><a href="{% url 'punns.views.profile_page' request.user.username %}">{% trans "Your profile" %}</a></li>
                     <li class="divider"></li>
-                    <li><a href="{% url 'accounts.views.edit_profile' %}">{% trans "Paramètres" %}</a></li>
+                    <li><a href="{% url 'accounts.views.edit_profile' %}">{% trans "Settings" %}</a></li>
                     <li class="divider"></li>
-                    <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Se déconnecter" %}</a></li>
+                    <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Logout" %}</a></li>
                 </ul>
               </li>
             {% else %}
-              <li><a href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Se connecter" %}</a></li>
+              <li><a href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Login" %}</a></li>
             {% endif %}
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
+            {% endblock %}
       <div class="container">
 
+            {% block container %}
 
 <div class="row">
   <div class="col-lg-8">
 
             {% block content %}
             <div class="row">
-              {% if not request.user.is_authenticated %}
               {% block hero-unit %}
+              {% if not request.user.is_authenticated %}
               <div class="jumbotron">
-                <h2>{% trans "Bienvenue sur Knobshare." %}</h2>
-                <p>{% trans "La mission de Knobshare est de rassembler le meilleur contenu et de le rendre plaisant à naviguer." %} </p>
-                <p>{% trans "Créez votre compte dès aujourd'hui pour profiter des fonctionalités." %} </p>
-                <p><a href="{% url 'socialauth_begin' backend='facebook' %}" class="btn btn-primary btn-lg">{% trans "Créez votre compte avec Facebook" %}</a></p>
+                <h2>{% trans "Welcome to Knobshare." %}</h2>
+                <p class="lead">{% trans "Knobshare is based on a simple yet powerful principle : sharing." %} </p>
+                <p>{% trans "You create or share content and you get paid. It doesn't get any better than that. Create your account today today to start earning money." %} </p>
+                <p><a href="{% url 'socialauth_begin' backend='facebook' %}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-user"></span> {% trans "Create your account with Facebook" %}</a></p>
               </div>
-              {% endblock %}
               {% endif %}
+              {% endblock %}
             </div><!--/.row -->
             <div class="row">
             {% for punn in punns %}
@@ -216,41 +225,59 @@
             </div>
             <div class="row">
               <ul class="pager">
-                <li class="previous{% if not punns.has_previous %} disabled{% endif %}"><a href="?page={{ punns.previous_page_number }}">&larr; {% trans "Page précédente" %}</a></li>
-                <li class="next{% if not punns.has_next %} disabled{% endif %}"><a href="?page={{ punns.next_page_number }}">{% trans "Page suivante" %} &rarr;</a></li>
+                <li class="previous{% if not punns.has_previous %} disabled{% endif %}"><a href="?page={{ punns.previous_page_number }}">&larr; {% trans "Previous" %}</a></li>
+                <li class="next{% if not punns.has_next %} disabled{% endif %}"><a href="?page={{ punns.next_page_number }}">{% trans "Next" %} &rarr;</a></li>
               </ul>
             </div>
+            <div class="row panel">
+ <div id='div-gpt-ad-1363051510706-0'>
+        <script type='text/javascript'>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
+        </script>
+      </div>
+            </div>
+
+
             {% endblock %}
           </div><!--/.col-8 -->
-  <div class="col-lg-4">
-            <div class="medium-rectangle visible-desktop">
+  <div class="col-4">
+            {% block sidebar %}
+
+
+            <div class="panel medium-rectangle hidden-md">
               <!-- 300x250TopRight -->
-              <div id='div-gpt-ad-1360772351679-0'>
+              <div class="centered" id='div-gpt-ad-1360772351679-0' style='width:300px; height:250px;'>
                 <script type='text/javascript'>
                   googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-0'); });
                 </script>
               </div>
             </div><!--/.well -->
+            {% block midsidebar %}
+            {% endblock  %}
 
-            <div class="skyscrapper hidden-phone">
+            <div class="panel skyscrapper hidden-phone">
               <!-- SkyScrapper -->
-              <div id='div-gpt-ad-1363052072029-0' style='width:160px; height:600px;'>
+              <div class="centered" id='div-gpt-ad-1363052072029-0' style='width:160px; height:600px;'>
                 <script type='text/javascript'>
                   googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363052072029-0'); });
                 </script>
               </div>
             </div><!--/.well -->
+            {% endblock  %}
   </div>
 </div>
 
 
 
-
-        </div><!--/row -->
+            {% block footer %}
         <hr>
         <footer>
-          <p>&copy; Check Donc Ça 2010 - {% now "Y" %}</p>
+          <p>&copy; Knobshare 2010 - {% now "Y" %}</p>
         </footer>
+            {% endblock %}
+            {% endblock %}
+
+        </div><!--/row -->
       </div>
       <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
   </body>

@@ -14,18 +14,23 @@
     <meta name="twitter:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
     <meta name="twitter:description" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}">
 {% endblock %}
-{% block navbar %}
-              <div class="grosseEstidColonne" style="margin-bottom: 50px;height:125px;">
-                <div class="span2" style="margin-left:-1px;"> 
-                {% thumbnail user.userprofile.avatar "125" crop="center" as im %}
-                <img src="{{ im.url }}" alt="{{ userprofile.description }}">
-                {% endthumbnail %}
-                </div>
-                <div class="span6" style="margin-left: -30px;"> 
-<h1 style="margin-top:2px; color:#515151; font-family: helvetica-bold, Helvetica, sans-serif;font-size: 22px;">{{ user.first_name }} {{ user.last_name }}</h1>
-<h2 style="margin-top:-27px; color:#606060; font-family: Helvetica, sans-serif;font-size: 18px;">@{{ user.username }}</h2>
-<p style="margin-top:-20px;"><a style=" color:#f9500f; font-family: Helvetica, sans-serif;font-size: 16px;" href="{{ user.userprofile.domain }}">{{ user.userprofile.domain }}</a></p>
-<p style="margin-top:-10px; color:#848484; font-family: Helvetica, sans-serif;font-size: 15px;">{{ user.userprofile.description }}</p>
-                </div>
-              </div>
+ {% block hero-unit %}
+              <div class="jumbotron">
+
+<div class="media">
+{% if user.userprofile.avatar %}
+  <a class="pull-left" href="{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
+            {% thumbnail user.userprofile.avatar "150x150" crop="center" as im %}
+             <img src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" class="img-rounded"/>
+             {% endthumbnail %}
+         {% endif %} 
+  </a>
+  <div class="media-body">
+    <h2 class="media-heading">{{ user.first_name }} {{ user.last_name }}</h2>
+<p>{{ user.userprofile.description }}</p>
+  </div>
+</div>
+</div>
+
+
 {% endblock %}
