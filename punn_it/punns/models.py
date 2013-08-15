@@ -66,6 +66,11 @@ class Punn(models.Model):
     def get_absolute_url(self):
         return ('punns.views.single', [str(self.base62id)])
 
+class Reblog(models.Model):
+    author = models.ForeignKey(User)
+    origin = models.ForeignKey(Punn)
+    new_title = models.CharField(max_length=140,  null=True, blank=True)
+
 class PunnForm(ModelForm):
     title = CharField(label=_('Titre :'), widget=forms.TextInput(attrs={'placeholder': _('Entrez votre titre ici')}))
     source = URLField(label=_('Source :'), widget=forms.HiddenInput(), required=False)
