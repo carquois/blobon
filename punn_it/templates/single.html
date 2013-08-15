@@ -16,31 +16,20 @@
 {% endblock %}
 {% block title %} {{ punn.title }} {% endblock %}
     {% block additional-css %}
+#heading {
+  margin-bottom: 10px;
+}
+#infos {
+  margin-top: 10px;
+  padding: 10px 25px;
+}
+#btn-left {
+  margin-left: 10px;
+}
     {% endblock %}
 {% block content %} 
 <div class="panel">
-  <div class="panel-heading">
-    <h3 class="panel-title">{{ punn.title }}</h3>
-  </div>
-<div class="panel">
-  {% if punn.youtube_id %}
-  <iframe src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
-  {% else %}
-  {% if punn.pic %}
-  <a href="{{ next_punn.get_absolute_url }}">
-    <img style="width: 100%;" src="{{ MEDIA_URL }}{{ punn.pic }}" />
-  </a>
-  </div>
-  {% endif %}
-  {% endif %}
-  {% if content %}
-  <div class="panel">
-    {{ content|safe }}
-  </div>
-  {% endif %}
-<div class="panel">
-
-<div class="media">
+<div class="media" id="heading">
   <a class="pull-left" href="{% url punns.views.profile_page punn.author.username %}">
 {% if punn.author.userprofile.avatar %}
                   {% thumbnail punn.author.userprofile.avatar "64x64" crop="center" as im %}
@@ -50,41 +39,85 @@
   </a>
   <div class="media-body">
     <h4 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small></h4>
-<p class="text-muted">{% trans "Published" %} {{ punn.pub_date|naturaltime }}</p>
-
-{% if punn.source %}
-  <a href="{{ punn.source }}" target="_blank" rel="tooltip" title="{% trans "Source" %}" class="btn btn-default"><span class="glyphicon glyphicon-globe"></span> {% trans "Source" %}</a>
-{% endif %}
-
+    <h3>{{ punn.title }}</h3>
   </div>
 </div>
-</div>
-<div class="panel">
+
+
+  {% if punn.youtube_id %}
+  <iframe src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+  {% else %}
+  {% if punn.pic %}
+  <a href="{{ next_punn.get_absolute_url }}">
+    <img style="width: 100%;" src="{{ MEDIA_URL }}{{ punn.pic }}" />
+  </a>
+  {% endif %}
+  {% endif %}
+  {% if content %}
+    {{ content|safe }}
+  {% endif %}
+<div id="infos" class="panel">
+<div class="row">
 
 <div class="btn-group">
-<a rel="tooltip" title="{% trans "J'aime" %}" class="btn btn-default {% if vote == "U" %} btn-primary{% endif %}" href="
-
+<a rel="tooltip" title="{% trans "Like" %}" class="btn btn-default {% if vote == "U" %} btn-primary{% endif %}" href="
 {% if request.user.is_authenticated %}
                        {% url votes.views.up punn.id %}
                      {% else %}
                        {% url django.contrib.auth.views.login %}?next={{request.path}}
                      {% endif %}
-
-
                              ">&#43;</a>
         <a class="btn btn-default" disabled="disabled">{{ karma }}</a>
-        <a rel="tooltip" title="{% trans "Je n'aime pas" %}" class="btn btn-default {% if vote == "D" %}btn-primary{% endif %}" href="
-
+        <a rel="tooltip" title="{% trans "Dislike" %}" class="btn btn-default {% if vote == "D" %}btn-primary{% endif %}" href="
 {% if request.user.is_authenticated %}
                        {% url votes.views.down punn.id %}
                      {% else %}
                        {% url django.contrib.auth.views.login %}?next={{request.path}}
                      {% endif %}
                              ">&#45;</a>
+</div>
+<div class="btn-group pull-right">
+  <a rel="tooltip" title="{% trans "Reblog" %}" class="btn btn-default" href="#"><span class="glyphicon glyphicon-retweet"></span> {% trans "Reblog" %}</a>
+  <a rel="tooltip" title="{% trans "Favorite" %}"  class="btn btn-default" href="#"><span class="glyphicon glyphicon-star"></span> {% trans "Favorite" %}</a>
+</div>
+</div>
+<hr>
+<div class="row">
+  
+<p class="text-muted">{% trans "Published" %} {{ punn.pub_date|naturaltime }}</p>
+</div>
+<hr>
+<div class="row">
+<div class="btn-toolbar pull-right">
+<div class="btn-group">
+  <a rel="tooltip" title="{% trans "Share on Facebook" %}" class="btn btn-default" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href)); 
+    return false;"><img src="{{ STATIC_URL }}img/facebook.png" /></a>
+  <a rel="tooltip" title="{% trans "Share on Twitter" %}" class="btn btn-default" onclick="
+    window.open(
+      'https://twitter.com/share?url='+encodeURIComponent(location.href)+'&text={{ punn.title|urlencode }}'); 
+    return false;"><img src="{{ STATIC_URL }}img/twitter.png" /></a>
+  <a onclick="
+    window.open(
+      'http://pinterest.com/pin/create/button/?url='+encodeURIComponent(location.href)+'&media=http://{{ site.domain }}{{ MEDIA_URL }}{{ punn.pic }}&description={{ punn.title|urlencode }}'); 
+    return false;" rel="tooltip" title="{% trans "Share on Pinterest" %}" class="btn btn-default"><img src="{{ STATIC_URL }}img/pinterest.png"  /></a>
+  <a href="https://plus.google.com/share?url=http://{{ site.domain }}{{ punn.get_absolute_url|urlencode }}" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" rel="tooltip" title="{% trans "Partager sur Google Plus" %}" class="btn btn-default"><img src="{{ STATIC_URL }}img/google_plus.png" /></a>
 
+</div>
+</div>
+
+
+
+{% if punn.source %}
+  <a href="{{ punn.source }}" target="_blank" rel="tooltip" title="{% trans "Source" %}" class="btn btn-default"><span class="glyphicon glyphicon-globe"></span> {% trans "Source" %}</a>
+{% endif %}
 
 
 </div>
+
+
   <div class="modal fade" id="delete">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -105,36 +138,10 @@
 
 
 
-<div class="btn-toolbar pull-right">
-<div class="btn-group">
-  <a rel="tooltip" title="{% trans "Partager sur Facebook" %}" class="btn btn-default" onclick="
-    window.open(
-      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href)); 
-    return false;"><img src="{{ STATIC_URL }}img/facebook.png" /></a>
-  <a rel="tooltip" title="{% trans "Partager sur Twitter" %}" class="btn btn-default" onclick="
-    window.open(
-      'https://twitter.com/share?url='+encodeURIComponent(location.href)+'&text={{ punn.title|urlencode }}'); 
-    return false;"><img src="{{ STATIC_URL }}img/twitter.png" /></a>
-  <a onclick="
-    window.open(
-      'http://pinterest.com/pin/create/button/?url='+encodeURIComponent(location.href)+'&media=http://{{ site.domain }}{{ MEDIA_URL }}{{ punn.pic }}&description={{ punn.title|urlencode }}'); 
-    return false;" rel="tooltip" title="{% trans "Partager sur Pinterest" %}" class="btn btn-default"><img src="{{ STATIC_URL }}img/pinterest.png"  /></a>
-  <a href="https://plus.google.com/share?url=http://{{ site.domain }}{{ punn.get_absolute_url|urlencode }}" onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" rel="tooltip" title="{% trans "Partager sur Google Plus" %}" class="btn btn-default"><img src="{{ STATIC_URL }}img/google_plus.png" /></a>
-
-</div>
-<div class="btn-group">
-{% if request.user.is_authenticated and punn.author == request.user %}
-  <a rel="tooltip" title="{% trans "Effacer" %}" data-toggle="modal" href="#delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
-                      {% endif %}
-</div>
-</div>
 
 </div>
 
                 {% if comment_list %}
-
- 
           <h3>{% trans "Meilleur commentaire" %}</h3>
 
 {% for comment in comment_list|dictsortreversed:"karma" %}
@@ -205,41 +212,21 @@
 {% block midsidebar %}
 <div class="panel">
 <div class="row">
-  <div class="col-12">
-<p class="text-muted">{% trans "More from" %} @{{ punn.author.username }}</p>
-  </div>
-  <div class="col-lg-4">
-          <a href="#" class="thumbnail">
-            <img src="http://placehold.it/100x100" alt="">
+
+                {% if latest_punn_list %}
+                  {% for punn in latest_punn_list %}
+  <div class="col-xs-4">
+          <a href="{{ punn.get_absolute_url }}" class="thumbnail">
+                    {% thumbnail punn.pic "200x200" crop="center" as im %}
+                      <img id="thumbs" src="{{ im.url }}" alt="{{ punn.title }}" />
+                    {% endthumbnail %}
           </a>
 </div>
-  <div class="col-lg-4">
-          <a href="#" class="thumbnail">
-            <img src="http://placehold.it/100x100" alt="">
-          </a>
-</div>
-  <div class="col-lg-4">
-          <a href="#" class="thumbnail">
-            <img src="http://placehold.it/100x100" alt="">
-          </a>
-</div>
-</div>
-<div class="row">
-  <div class="col-lg-4">
-          <a href="#" class="thumbnail">
-            <img src="http://placehold.it/100x100" alt="">
-          </a>
-</div>
-  <div class="col-lg-4">
-          <a href="#" class="thumbnail">
-            <img src="http://placehold.it/100x100" alt="">
-          </a>
-</div>
-  <div class="col-lg-4">
-          <a href="#" class="thumbnail">
-            <img src="http://placehold.it/100x100" alt="">
-          </a>
-</div>
+                  {% endfor %}
+                {% endif %}
+
+
+
 </div>
 </div>
 
