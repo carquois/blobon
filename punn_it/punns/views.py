@@ -72,11 +72,11 @@ def delete(request, id):
 @login_required
 def reblog(request, id):
       punn = get_object_or_404(Punn, id=id)
-      if Reblog.objects.filter(punn=punn).filter(author=request.user).exists():
-        r = Reblog.objects.filter(punn=punn).filter(author=request.user)
+      if Reblog.objects.filter(origin=punn).filter(author=request.user).exists():
+        r = Reblog.objects.filter(origin=punn).filter(author=request.user)
         r.delete()
       else: 
-        r = Reblog(punn=punn, author=request.user)
+        r = Reblog(origin=punn, author=request.user)
         r.save()
       return HttpResponseRedirect( punn.get_absolute_url() )
 
@@ -332,6 +332,12 @@ def single(request, shorturl):
             comment.vote = "D"
 
 
+    if request.user.is_authenticated() and Reblog.objects.filter(origin=punn).filter(author=request.user).exists():
+          reblog = True
+    else:
+          reblog = False 
+
+
     url = request.build_absolute_uri()
     site_description = settings.MAIN_SITE_DESCRIPTION
     site = get_current_site(request)
@@ -341,7 +347,7 @@ def single(request, shorturl):
                                'content': content, 'comment_list': comment_list,
                                'url': url, 'karma':karma, 'auth_user':auth_user,
                                'vote': vote, 'user': punn.author, 'home': home, 
-                               'site_description': site_description, 'site': site, 'comment_form': comment_form}, 
+                               'site_description': site_description, 'site': site, 'comment_form': comment_form, 'reblog': reblog}, 
                               context_instance=RequestContext(request))
 
 class UserFeed(Feed):

@@ -83,7 +83,7 @@
                              ">&#45;</a>
 </div>
 <div class="btn-group pull-right">
-  <a rel="tooltip" title="{% trans "Reblog" %}" class="btn btn-default" href="#"><span class="glyphicon glyphicon-retweet"></span> {% trans "Reblog" %}</a>
+  <a rel="tooltip" title="{% trans "Reblog" %}" class="btn btn-default {% if reblog %}btn-primary{% endif %}" href="{% url punns.views.reblog punn.id %}"><span class="glyphicon glyphicon-retweet"></span> {% trans "Reblog" %}</a>
   <a rel="tooltip" title="{% trans "Favorite" %}"  class="btn btn-default" href="#"><span class="glyphicon glyphicon-star"></span> {% trans "Favorite" %}</a>
 </div>
 </div>
