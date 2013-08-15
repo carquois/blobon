@@ -11,7 +11,7 @@ from cgi import parse_qs
 from accounts.models import UserProfile, UserForm
 from comments.models import Comment
 from comments.forms import CommentForm
-from punns.models import Punn, PunnForm
+from punns.models import Punn, PunnForm, Reblog
 from punns.utils import BASE10, BASE62, baseconvert
 from votes.models import PunnVote, CommentVote
 
@@ -69,7 +69,16 @@ def delete(request, id):
         messages.add_message(request, messages.INFO, _(u'Votre page a été supprimée'))
       return HttpResponseRedirect(reverse('punns.views.index'))
 
-
+@login_required
+def reblog(request, id):
+      punn = get_object_or_404(Punn, id=id)
+      if Reblog.objects.filter(punn=punn).filter(author=request.user).exists():
+        r = Reblog.objects.filter(punn=punn).filter(author=request.user)
+        r.delete()
+      else: 
+        r = Reblog(punn=punn, author=request.user)
+        r.save()
+      return HttpResponseRedirect( punn.get_absolute_url() )
 
 def videos(request):
       user = UserProfile.objects.get(pk=3)
