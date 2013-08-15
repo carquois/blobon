@@ -83,13 +83,16 @@
                              ">&#45;</a>
 </div>
 <div class="btn-group pull-right">
+  {% if request.user == punn.author %}
+  <a rel="tooltip" title="{% trans "Delete" %}" class="btn btn-danger" href="{% url punns.views.delete punn.id %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}</a>
+  {% else %}
   <a rel="tooltip" title="{% trans "Reblog" %}" class="btn btn-default {% if reblog %}btn-primary{% endif %}" href="{% url punns.views.reblog punn.id %}"><span class="glyphicon glyphicon-retweet"></span> {% trans "Reblog" %}</a>
-  <a rel="tooltip" title="{% trans "Favorite" %}"  class="btn btn-default" href="#"><span class="glyphicon glyphicon-star"></span> {% trans "Favorite" %}</a>
+  {% endif %}
+  <a rel="tooltip" title="{% trans "Favorite" %}"  class="btn btn-default {% if favorite %}btn-primary{% endif %}" href="{% url punns.views.favorite punn.id %}"><span class="glyphicon glyphicon-star"></span> {% trans "Favorite" %}</a>
 </div>
 </div>
 <hr>
 <div class="row">
-  
 <p class="text-muted">{% trans "Published" %} {{ punn.pub_date|naturaltime }}</p>
 </div>
 <hr>

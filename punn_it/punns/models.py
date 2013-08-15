@@ -70,6 +70,10 @@ class Reblog(models.Model):
     author = models.ForeignKey(User)
     origin = models.ForeignKey(Punn)
 
+class Favorite(models.Model):
+    author = models.ForeignKey(User)
+    punn = models.ForeignKey(Punn)
+
 class PunnForm(ModelForm):
     title = CharField(label=_('Titre :'), widget=forms.TextInput(attrs={'placeholder': _('Entrez votre titre ici')}))
     source = URLField(label=_('Source :'), widget=forms.HiddenInput(), required=False)

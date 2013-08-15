@@ -1,4 +1,5 @@
 from punns.models import Punn
+from punns.models import Favorite 
 from punns.models import Tags
 from punns.models import Reblog
 from accounts.models import UserProfile
@@ -12,6 +13,7 @@ admin.site.register(Punn)
 admin.site.register(Post)
 admin.site.register(Tags)
 admin.site.register(Reblog)
+admin.site.register(Favorite)
 admin.site.register(UserProfile)
 admin.site.register(Comment)
 admin.site.register(CommentVote)

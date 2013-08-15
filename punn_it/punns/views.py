@@ -11,7 +11,7 @@ from cgi import parse_qs
 from accounts.models import UserProfile, UserForm
 from comments.models import Comment
 from comments.forms import CommentForm
-from punns.models import Punn, PunnForm, Reblog
+from punns.models import Punn, PunnForm, Reblog, Favorite
 from punns.utils import BASE10, BASE62, baseconvert
 from votes.models import PunnVote, CommentVote
 
@@ -78,6 +78,17 @@ def reblog(request, id):
       else: 
         r = Reblog(origin=punn, author=request.user)
         r.save()
+      return HttpResponseRedirect( punn.get_absolute_url() )
+
+@login_required
+def favorite(request, id):
+      punn = get_object_or_404(Punn, id=id)
+      if Favorite.objects.filter(punn=punn).filter(author=request.user).exists():
+        f = Favorite.objects.filter(punn=punn).filter(author=request.user)
+        f.delete()
+      else:
+        f = Favorite(punn=punn, author=request.user)
+        f.save()
       return HttpResponseRedirect( punn.get_absolute_url() )
 
 def videos(request):
@@ -337,6 +348,11 @@ def single(request, shorturl):
     else:
           reblog = False 
 
+    if request.user.is_authenticated() and Favorite.objects.filter(punn=punn).filter(author=request.user).exists():
+          favorite = True
+    else:
+          favorite = False 
+
 
     url = request.build_absolute_uri()
     site_description = settings.MAIN_SITE_DESCRIPTION
@@ -347,7 +363,8 @@ def single(request, shorturl):
                                'content': content, 'comment_list': comment_list,
                                'url': url, 'karma':karma, 'auth_user':auth_user,
                                'vote': vote, 'user': punn.author, 'home': home, 
-                               'site_description': site_description, 'site': site, 'comment_form': comment_form, 'reblog': reblog}, 
+                               'site_description': site_description, 'site': site, 
+                               'comment_form': comment_form, 'reblog': reblog, 'favorite': favorite}, 
                               context_instance=RequestContext(request))
 
 class UserFeed(Feed):
