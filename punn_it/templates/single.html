@@ -26,9 +26,15 @@
 #btn-left {
   margin-left: 10px;
 }
+#content-holder{
+  padding: 10px;
+}
+.comment-holder{
+  padding: 10px;
+}
     {% endblock %}
 {% block content %} 
-<div class="panel">
+<div class="panel" id="content-holder">
 <div class="media" id="heading">
   <a class="pull-left" href="{% url punns.views.profile_page punn.author.username %}">
 {% if punn.author.userprofile.avatar %}
@@ -38,7 +44,7 @@
                   {% endif %}    
   </a>
   <div class="media-body">
-    <h4 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small></h4>
+    <h5 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small></h5>
     <h3>{{ punn.title }}</h3>
   </div>
 </div>
@@ -142,14 +148,14 @@
 </div>
 
                 {% if comment_list %}
-          <h3>{% trans "Meilleur commentaire" %}</h3>
+          <h3>{% trans "Best comment" %}</h3>
 
 {% for comment in comment_list|dictsortreversed:"karma" %}
 
                 {% if forloop.counter == 2 %}
-                <h3>{% trans "Tous les commentaires" %}</h3>
+                <h3>{% trans "All comments" %}</h3>
                 {% endif %}
-<div class="panel">
+<div class="panel comment-holder">
 <div class="media">
 
 <div class="pull-left btn-group-vertical">
