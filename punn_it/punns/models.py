@@ -33,6 +33,9 @@ class Tags(models.Model):
     def __unicode__(self):
         return self.tag
 
+#class Sub(models.Model):
+
+
 class Punn(models.Model):
     status = models.CharField(max_length=2, choices=STATUS, null=True, blank=True)
     #Basic infos
@@ -69,6 +72,7 @@ class Punn(models.Model):
 class Reblog(models.Model):
     author = models.ForeignKey(User)
     origin = models.ForeignKey(Punn)
+    created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
 
 class Favorite(models.Model):
     author = models.ForeignKey(User)
