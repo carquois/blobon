@@ -34,7 +34,9 @@ class Tags(models.Model):
         return self.tag
 
 #class Sub(models.Model):
-
+#    author = models.ForeignKey(User)
+#    slug = models.SlugField(max_length=140)
+#    created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
 
 class Punn(models.Model):
     status = models.CharField(max_length=2, choices=STATUS, null=True, blank=True)
@@ -77,6 +79,7 @@ class Reblog(models.Model):
 class Favorite(models.Model):
     author = models.ForeignKey(User)
     punn = models.ForeignKey(Punn)
+    created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
 
 class PunnForm(ModelForm):
     title = CharField(label=_('Titre :'), widget=forms.TextInput(attrs={'placeholder': _('Entrez votre titre ici')}))
