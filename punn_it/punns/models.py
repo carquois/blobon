@@ -33,10 +33,10 @@ class Tags(models.Model):
     def __unicode__(self):
         return self.tag
 
-#class Sub(models.Model):
-#    author = models.ForeignKey(User)
-#    slug = models.SlugField(max_length=140)
-#    created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
+class Cat(models.Model):
+    author = models.ForeignKey(User)
+    slug = models.SlugField(max_length=140)
+    created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
 
 class Punn(models.Model):
     status = models.CharField(max_length=2, choices=STATUS, null=True, blank=True)
@@ -48,6 +48,7 @@ class Punn(models.Model):
     views = models.IntegerField(default=0, blank=True)
     source = models.URLField(verbose_name=_("Source"), max_length=300, blank=True)
     author = models.ForeignKey(User)
+    cat = models.ForeignKey(Cat,  null=True, blank=True)
     original_punn = models.ForeignKey('self',  null=True, blank=True)
     content = models.TextField(max_length=10000, blank=True)
     is_video = models.BooleanField(default=False)
