@@ -35,8 +35,13 @@ class Tags(models.Model):
 
 class Cat(models.Model):
     author = models.ForeignKey(User)
-    slug = models.SlugField(max_length=140)
+    slug = models.SlugField(max_length=140, unique=True)
     created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
+    def __unicode__(self):
+        return self.slug
+    @models.permalink
+    def get_absolute_url(self):
+        return ('punns.views.cat', [str(self.slug)])
 
 class Punn(models.Model):
     status = models.CharField(max_length=2, choices=STATUS, null=True, blank=True)
@@ -82,11 +87,19 @@ class Favorite(models.Model):
     punn = models.ForeignKey(Punn)
     created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
 
+class CatForm(ModelForm):
+    slug = CharField(label=_('Category :'), widget=forms.TextInput(attrs={'placeholder': _('Enter the category here.'),
+                                                                          'type': 'text',
+                                                                          'class': 'form-control', }))
+    class Meta:
+        model = Cat 
+        fields = ('slug',)
+
 class PunnForm(ModelForm):
-    title = CharField(label=_('Titre :'), widget=forms.TextInput(attrs={'placeholder': _('Entrez votre titre ici')}))
+    title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.')}))
     source = URLField(label=_('Source :'), widget=forms.HiddenInput(), required=False)
-    author = forms.ModelChoiceField(label=_('Auteur :'), queryset=User.objects.all(), initial=User.objects.get(pk=3))
-    status = forms.CharField(label=_('Statut :'), max_length=2, widget=forms.Select(choices=STATUS), initial='D')
+    author = forms.ModelChoiceField(label=_('Author :'), queryset=User.objects.all(), initial=User.objects.get(pk=3))
+    status = forms.CharField(label=_('Status :'), max_length=2, widget=forms.Select(choices=STATUS), initial='D')
     tags = forms.ModelMultipleChoiceField(queryset=Tags.objects.all())
     class Meta:
         model = Punn

@@ -61,6 +61,14 @@ def index(request):
                                 'punns': punns, },
                                 context_instance=RequestContext(request))
 
+def cat(request, slug):
+      punns = paginate(request,
+                       Punn.objects.filter(status='P').order_by('-pub_date'),
+                       15)
+      return render_to_response('base.html',
+                                {'punns': punns, },
+                                context_instance=RequestContext(request))
+
 @login_required
 def delete(request, id):
       punn = get_object_or_404(Punn, id=id)
@@ -230,6 +238,25 @@ def profile_page(request, user):
                                   context_instance=RequestContext(request))
 
 @login_required
+def createcat(request):
+      from punns.models import CatForm
+      if request.method == 'POST':
+        form = CatForm(request.POST)
+        if form.is_valid():
+          cat = form.save(commit=False)
+          cat.author = request.user
+          cat.save()
+          #heading = _(u"Your page has been published.")
+          #message = _(u"You can now share it.")
+          #messages.add_message(request, messages.INFO, '<h4 class="alert-heading">%s</h4><p>%s</p><p><a class="btn btn-primary" href="http://www.facebook.com/sharer.php?u=%s">Facebook</a> <a class="btn btn-primary" href="https://twitter.com/share?text=%s">Twitter</a></p>' % (heading , message, request.build_absolute_uri(punn.get_absolute_url()), punn.title), extra_tags='safe')
+          return HttpResponseRedirect( cat.get_absolute_url() )
+      else:
+        form = CatForm()
+      return render_to_response('cat.html',
+                                {'form': form},
+                                context_instance=RequestContext(request))
+
+@login_required
 def create(request): 
       from punns.forms import PunnForm
       if request.method == 'POST':
@@ -239,9 +266,9 @@ def create(request):
           punn.author = request.user
           punn.status = "P"
           punn.save()
-          heading = _(u"Félicitations! Votre contenu est maintenant publié.")
-          message = _(u"Vous pouvez dorénavant le partager")
-          messages.add_message(request, messages.INFO, '<h4 class="alert-heading">%s</h4><p>%s</p><p><a class="btn btn-primary" href="http://www.facebook.com/sharer.php?u=%s">Facebook</a> <a class="btn" href="https://twitter.com/share?text=%s">Twitter</a></p>' % (heading , message, request.build_absolute_uri(punn.get_absolute_url()), punn.title), extra_tags='safe')
+          heading = _(u"Your page has been published.")
+          message = _(u"You can now share it.")
+          messages.add_message(request, messages.INFO, '<h4 class="alert-heading">%s</h4><p>%s</p><p><a class="btn btn-primary" href="http://www.facebook.com/sharer.php?u=%s">Facebook</a> <a class="btn btn-primary" href="https://twitter.com/share?text=%s">Twitter</a></p>' % (heading , message, request.build_absolute_uri(punn.get_absolute_url()), punn.title), extra_tags='safe')
           return HttpResponseRedirect( punn.get_absolute_url() )
       else:
         form = PunnForm()

@@ -147,40 +147,45 @@
 
 {% block nav %}
 
-      <div class="navbar navbar-fixed-top">
-        <div class="container">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{% url 'punns.views.index' %}">{% trans "Knobshare" %}</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">{% trans "NEW" %}</a></li>
-              <!--<li><a href="#">{% trans "TOP" %}</a></li>-->
-            </ul>
-            <ul class="nav navbar-nav pull-right">
-            {% if request.user.is_authenticated %}
-              <li class="dropdown pull-right">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> @{{ request.user.username }}
-                  <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
+<nav class="navbar navbar-fixed-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="{% url 'punns.views.index' %}">{% trans "Knobshare" %}</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">{% trans "HOT" %}</a></li>
+      <li><a href="#">{% trans "NEW" %}</a></li>
+      <li><a href="#">{% trans "TOP" %}</a></li>
+
+    </ul>
+{% if request.user.is_authenticated %}
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
+        <ul class="dropdown-menu">
                     <li><a href="{% url 'punns.views.profile_page' request.user.username %}">{% trans "Your profile" %}</a></li>
                     <li class="divider"></li>
                     <li><a href="{% url 'accounts.views.edit_profile' %}">{% trans "Settings" %}</a></li>
                     <li class="divider"></li>
                     <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Logout" %}</a></li>
-                </ul>
-              </li>
+        </ul>
+      </li>
+    </ul>
+              <a class="btn btn-primary navbar-btn navbar-right" href="{% url 'punns.views.create' %}"><span class="glyphicon glyphicon-pencil"></span></a>
             {% else %}
-              <li><a href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Login" %}</a></li>
+              <a class="btn btn-default navbar-btn navbar-right" href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Login" %}</a>
             {% endif %}
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
+  </div><!-- /.navbar-collapse -->
+</nav>
             {% endblock %}
       <div class="container">
 
@@ -188,6 +193,15 @@
 
 <div class="row">
   <div class="col-md-8">
+
+  {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-block alert-info">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+            </div>
+          {% endfor %}
+        {% endif %}
 
             {% block content %}
             <div class="row">
