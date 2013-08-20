@@ -50,32 +50,29 @@ def index(request):
                            15)
       else:
         return redirect("http://knobshare.com")
-      for punn in punns:
-        votesup = PunnVote.objects.filter(punn=punn).filter(vote='U')
-        votesdown = PunnVote.objects.filter(punn=punn).filter(vote='D')
-        punn.karma = votesup.count() - votesdown.count()
-        punn.number_of_comments = Comment.objects.filter(punn=punn).count()
-      site_description = settings.MAIN_SITE_DESCRIPTION
       return render_to_response('base.html',
-                               {'user': user, 'site_description': site_description,
+                               {'user': user,
                                 'punns': punns, },
                                 context_instance=RequestContext(request))
 
 def cat(request, slug):
-      punns = paginate(request,
-                       Punn.objects.filter(status='P').order_by('-pub_date'),
-                       15)
-      return render_to_response('base.html',
-                                {'punns': punns, },
-                                context_instance=RequestContext(request))
+      if request.META['HTTP_HOST'] == "knobshare.com":
+        punns = paginate(request,
+                         Punn.objects.filter(status='P').order_by('-pub_date'),
+                         15)
+        return render_to_response('cat.html',
+                                  {'punns': punns, },
+                                  context_instance=RequestContext(request))
+      else:
+        return redirect("http://knobshare.com")
 
 @login_required
 def delete(request, id):
       punn = get_object_or_404(Punn, id=id)
       if request.user == punn.author:
         punn.delete()
-        messages.add_message(request, messages.INFO, _(u'Votre page a été supprimée'))
-      return HttpResponseRedirect(reverse('punns.views.index'))
+        messages.add_message(request, messages.INFO, _(u'Your page has been deleted'))
+      return HttpResponseRedirect(reverse('punns.views.profile_page', args=[request.user.username]))
 
 @login_required
 def reblog(request, id):
@@ -252,7 +249,7 @@ def createcat(request):
           return HttpResponseRedirect( cat.get_absolute_url() )
       else:
         form = CatForm()
-      return render_to_response('cat.html',
+      return render_to_response('createcat.html',
                                 {'form': form},
                                 context_instance=RequestContext(request))
 

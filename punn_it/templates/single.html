@@ -127,6 +127,7 @@
 </div>
 
 
+
   <div class="modal fade" id="delete">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -149,8 +150,28 @@
 
 
 </div>
+<div class="well">
+
+<form method="post" action="">
+                      {% csrf_token %}
+{{ comment_form.content.errors }}
+  <div class="form-group">
+{{ comment_form.content }}
+  </div>
+
+
+         <div class="control-group">
+           <div class="controls">
+                  <button rel="tooltip" title="{% trans "Submit your comment" %}" class="btn btn-default pull-right" id="comment-submit">{% trans "Submit" %}</button>
+           </div>
+         </div>
+                  </form>
+
+
+
 
                 {% if comment_list %}
+
           <h3>{% trans "Best comment" %}</h3>
 
 {% for comment in comment_list|dictsortreversed:"karma" %}
@@ -201,6 +222,7 @@
 {% endfor %}
 {% endif %}
 
+</div>
 
 
 

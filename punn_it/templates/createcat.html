@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load url from future %}
+{% block title %}{% trans "Knobshare / Create a category" %}{% endblock %}
+{% block additional-css %}
+{% endblock %}
+{% block container %}
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8">
+
+  <div class="well">
+        <h2 class="form-signin-heading">{% block heading %}{% trans "Create a category" %}{% endblock %}</h2>
+
+<form role="form" method="post" action="{% url 'punns.views.createcat' %}">{% csrf_token %}
+{{ form.slug.errors }}
+  <div class="form-group">
+{{ form.slug.label }}
+{{ form.slug }}
+  </div>
+
+         <div class="control-group">
+           <div class="controls">
+             <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
+           </div>
+         </div>
+         <input type="hidden" name="next" value="{{ next }}" />
+       </form>
+
+
+  </div>
+  </div>
+  <div class="col-md-2">
+  </div>
+ </div>
+{% endblock %}
+

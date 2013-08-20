@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n thumbnail %}
+{% block title %}{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}{% endblock %}
+{% block open-graphs %}
+    <!-- Le open graphs tags -->
+    <meta property="og:title" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}" />
+    <meta property="og:url" content="{{ url }}" />
+    <meta property="og:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ user.userprofile.avatar }}" />
+    <meta property="og:site_name" content="{{ user.first_name }} {{ user.last_name }}" />
+    <!-- Le twitter cards -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="{{ url }}">
+    <meta name="twitter:title" content="{{ user.first_name }} {{ user.last_name }} {% trans 'sur' %} {{ site.name }}">
+    <meta name="twitter:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
+    <meta name="twitter:description" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}">
+{% endblock %}
+ {% block hero-unit %}
+
+<div class="page-header">
+  <h1>Example page header <small>Subtext for header</small></h1>
+</div>
+
+{% endblock %}
