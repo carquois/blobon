@@ -1,5 +1,13 @@
 {% extends "base.html" %}
-{% block sidebar %}
-              <div class="box-right">{% include "bigbox.html" %}</div>
-              <div class="box-right">{% include "bigbox.html" %}</div>
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+
+{% block hotnewtop %}
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{% url 'punns.views.index' %}">{% trans "HOT" %}</a></li>
+      <li><a href="#">{% trans "NEW" %}</a></li>
+      <li><a href="#">{% trans "TOP" %}</a></li>
+
+    </ul>
 {% endblock %}
+

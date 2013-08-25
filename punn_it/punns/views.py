@@ -50,10 +50,24 @@ def index(request):
                            15)
       else:
         return redirect("http://knobshare.com")
-      return render_to_response('base.html',
+      return render_to_response('index.html',
                                {'user': user,
                                 'punns': punns, },
                                 context_instance=RequestContext(request))
+
+def new(request):
+      if request.META['HTTP_HOST'] == "knobshare.com":
+          user = ""
+          punns = paginate(request,
+                           Punn.objects.filter(status='P').order_by('-pub_date'),
+                           15)
+      else:
+        return redirect("http://knobshare.com")
+      return render_to_response('new.html',
+                               {'user': user,
+                                'punns': punns, },
+                                context_instance=RequestContext(request))
+
 
 
 
