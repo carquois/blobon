@@ -56,15 +56,15 @@ def index(request):
                                 context_instance=RequestContext(request))
 
 def new(request):
-      if request.META['HTTP_HOST'] == "knobshare.com":
-          user = ""
-          punns = paginate(request,
-                           Punn.objects.filter(status='P').order_by('-pub_date'),
-                           15)
+      if request.META['HTTP_HOST'] == settings.MAIN_SITE_DOMAIN:
+        punns = paginate(request,
+                         Punn.objects.filter(status='P').order_by('-pub_date'),
+                         15)
       else:
-        return redirect("http://knobshare.com")
+        error_msg = _("Looks like this domain is not configured. If you own it, you should add it in your settings")
+        return HttpResponse('<p>%s</p>' % error_msg)
       return render_to_response('new.html',
-                               {'user': user,
+                               {
                                 'punns': punns, },
                                 context_instance=RequestContext(request))
 
@@ -157,49 +157,38 @@ def search(request):
       else:
         return HttpResponseRedirect('http://%s/' % site.domain)
 
-def today(request):
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      punns = paginate(request,
-                       Punn.objects.filter(status='P').filter(pub_date__gte=datetime.date.today()).order_by('-views'),
-                       20)
-      return render_to_response('top.html',
-                                {'site_description': site_description,
-                                 'punns': punns, 'site': site, 't': 'today'},
-                                context_instance=RequestContext(request))
-
-def week(request):
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      punns = paginate(request,
-                       Punn.objects.filter(status='P').filter(pub_date__range=(datetime.date.today() - timedelta(days=7) , datetime.date.today())).order_by('-views'),
-                       20)
-      return render_to_response('top.html',
-                                {'site_description': site_description,
-                                 'punns': punns, 'site': site, 't': 'week'},
-                                context_instance=RequestContext(request))
-
-def month(request):
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      punns = paginate(request,
-                       Punn.objects.filter(status='P').filter(pub_date__range=(datetime.date.today() - timedelta(days=30) , datetime.date.today())).order_by('-views'),
-                       20)
-      return render_to_response('top.html',
-                                {'site_description': site_description,
-                                 'punns': punns, 'site': site, 't': 'month'},
-                                context_instance=RequestContext(request))
-
-def top(request):
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      punns = paginate(request,
-                       Punn.objects.filter(status='P').order_by('-views'),
-                       20)
-      return render_to_response('top.html',
-                                {'site_description': site_description,
-                                 'punns': punns, 'site': site, 't': 'all'},
-                                context_instance=RequestContext(request))
+#def week(request):
+#      punns = paginate(request,
+#                       Punn.objects.filter(status='P').filter(pub_date__range=(datetime.date.today() - timedelta(days=7) , datetime.date.today())).order_by('-views'),
+#                       20)
+#      return render_to_response('top.html',
+#                                {'site_description': site_description,
+#                                 'punns': punns, 'site': site, 't': 'week'},
+#                                context_instance=RequestContext(request))
+#
+#def month(request):
+#      site = get_current_site(request)
+#      punns = paginate(request,
+#                       Punn.objects.filter(status='P').filter(pub_date__range=(datetime.date.today() - timedelta(days=30) , datetime.date.today())).order_by('-views'),
+#                       20)
+#      return render_to_response('top.html',
+#                                {'site_description': site_description,
+#                                 'punns': punns, 'site': site, 't': 'month'},
+#                                context_instance=RequestContext(request))
+#
+#def top(request):
+#      site = get_current_site(request)
+#      punns = paginate(request,
+#                       Punn.objects.filter(status='P').order_by('-views'),
+#                       20)
+#      return render_to_response('top.html',
+#                                {'site_description': site_description,
+#                                 'punns': punns, 'site': site, 't': 'all'},
+#                                context_instance=RequestContext(request))
+#
+#def today(request):
+#                       Punn.objects.filter(status='P').filter(pub_date__gte=datetime.date.today()).order_by('-views'),
+#
 
 
 def random(request):
