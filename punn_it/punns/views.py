@@ -41,7 +41,7 @@ def index(request):
       if request.META['HTTP_HOST'] == "knobshare.com":
           user = ""
           punns = paginate(request,
-                           Punn.objects.filter(status='P').order_by('-pub_date'),
+                           Punn.objects.filter(status='P').filter(is_top=True).order_by('-pub_date'),
                            15)
       elif UserProfile.objects.filter(domain='http://%s/' % request.META['HTTP_HOST']).exists():
           user = UserProfile.objects.get(domain='http://%s/' % request.META['HTTP_HOST']).user
@@ -54,6 +54,8 @@ def index(request):
                                {'user': user,
                                 'punns': punns, },
                                 context_instance=RequestContext(request))
+
+
 
 def cat(request, slug):
       if request.META['HTTP_HOST'] == "knobshare.com":
