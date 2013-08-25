@@ -1,4 +1,5 @@
 from punns.models import Punn
+from earnings.models import Earning
 from punns.models import Favorite 
 from punns.models import Tags
 from punns.models import Cat 
@@ -11,6 +12,7 @@ from news.models import Post
 from django.contrib import admin
 
 admin.site.register(Punn)
+admin.site.register(Earning)
 admin.site.register(Post)
 admin.site.register(Tags)
 admin.site.register(Cat)

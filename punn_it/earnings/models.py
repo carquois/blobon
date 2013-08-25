@@ -1,3 +1,13 @@
 from django.db import models
 
-# Create your models here.
+
+from django.contrib.auth.models import User
+
+class Earning(models.Model):
+    user = models.ForeignKey(User)
+    created = models.DateTimeField(auto_now_add = True)
+    date = models.DateField()
+    amount = models.DecimalField(max_digits=5, decimal_places=2)
+    def __unicode__(self):
+        return "%s - %s " % (self.user, self.amount) 
+
