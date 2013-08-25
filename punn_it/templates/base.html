@@ -196,8 +196,8 @@
 
   {% if messages %}
           {% for message in messages %}
-            <div class="alert alert-block alert-info">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <div class="alert alert-info">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
               {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
             </div>
           {% endfor %}
@@ -237,13 +237,17 @@
               </div>
             {% endfor %}
             </div>
+
+{% if punns.has_previous or punns.has_next %}
+
             <div class="row">
               <ul class="pager">
-                <li class="previous{% if not punns.has_previous %} disabled{% endif %}"><a href="?page={{ punns.previous_page_number }}">&larr; {% trans "Previous" %}</a></li>
-                <li class="next{% if not punns.has_next %} disabled{% endif %}"><a href="?page={{ punns.next_page_number }}">{% trans "Next" %} &rarr;</a></li>
+                <li class="previous{% if not punns.has_previous %} disabled{% endif %}"><a href="{% if punns.has_previous %}?page={{ punns.previous_page_number }}{% endif %}">&larr; {% trans "Previous" %}</a></li>
+                <li class="next{% if not punns.has_next %} disabled{% endif %}"><a href="{% if punns.has_next %}?page={{ punns.next_page_number }}{% endif %}">{% trans "Next" %} &rarr;</a></li>
               </ul>
             </div>
 
+{% endif %}
 
             {% endblock %}
 
