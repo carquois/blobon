@@ -6,7 +6,7 @@ from punns.models import Punn
 class PunnForm(ModelForm):
     class Meta:
         model = Punn
-        fields = ('title', 'pic', 'source', 'content', 'tags', )
+        fields = ('title', 'pic', 'source', 'content', 'publish_on_facebook', )
         widgets = {
             'title': TextInput(attrs={'class': 'input-block-level'}),
             'source': TextInput(attrs={'class': 'input-block-level'}),

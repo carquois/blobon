@@ -58,6 +58,7 @@ class Punn(models.Model):
     content = models.TextField(max_length=10000, blank=True)
     is_video = models.BooleanField(default=False)
     is_top = models.BooleanField(default=False)
+    publish_on_facebook = models.BooleanField(default=False)
     youtube_id = models.CharField(max_length=50, null=True, blank=True)
     tags = models.ManyToManyField(Tags,  null=True, blank=True)
     #Datetime infos

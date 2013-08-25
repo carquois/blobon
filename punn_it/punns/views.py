@@ -263,6 +263,14 @@ def create(request):
           punn.author = request.user
           punn.status = "P"
           punn.save()
+          if punn.publish_on_facebook:
+            from social_auth.models import UserSocialAuth
+            import facebook
+            instance = UserSocialAuth.objects.filter(provider='facebook').filter(user=request.user)
+            graph = facebook.GraphAPI(instance[0].tokens['access_token'])
+            profile = graph.get_object("me")
+            #Fix the link into something more kasher
+            graph.put_object("me", "feed", message="%s http://knobshare.com%s" % (punn.title, punn.get_absolute_url()))
           heading = _(u"Your page has been published.")
           message = _(u"You can now share it.")
           messages.add_message(request, messages.INFO, '<h4 class="alert-heading">%s</h4><p>%s</p><p><a class="btn btn-primary" href="http://www.facebook.com/sharer.php?u=%s">Facebook</a> <a class="btn btn-primary" href="https://twitter.com/share?text=%s">Twitter</a></p>' % (heading , message, request.build_absolute_uri(punn.get_absolute_url()), punn.title), extra_tags='safe')
