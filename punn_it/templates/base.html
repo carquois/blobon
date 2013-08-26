@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{% block description %}{{ site_description }}{% endblock %}">
     <meta name="author" content="">
-    <title>{% block title %}Knobshare{% endblock %}</title>
+    <title>{% block title %}Check Donc Ça{% endblock %}</title>
     {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ site.name }}" />
@@ -157,59 +157,24 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Modal title</h4>
+          <h4 class="modal-title">{% trans "Faites de l'argent" %}</h4>
         </div>
         <div class="modal-body">
 
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-          Collapsible Group Item #1
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-          Collapsible Group Item #2
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-          Collapsible Group Item #3
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-</div>
+<p>{% trans "Imaginez faire de l'argent du confort de votre maison avec votre contenu Web." %}</p>
+<hr>
+<h3>{% trans "Les étapes" %}</h3>
+<ol>
+  <li><a href="{% url "accounts.views.signup" %}">{% trans "Créez votre compte" %}</a></li>
+  <li><a href="{% url "accounts.views.edit_profile" %}">{% trans "Mettez votre profil à jour" %}</a></li>
+  <li><a href="{% url "punns.views.create" %}">{% trans "Créez du contenu" %}</a></li>
+</ol>
+
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Fermer" %}</button>
+          <button type="button" class="btn btn-primary">{% trans "Sauvegarder" %} </button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -227,41 +192,32 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="{% url 'punns.views.index' %}">{% trans "Knobshare" %}</a>
+    <a class="navbar-brand" href="http://checkdonc.ca">{% trans "Check Donc Ça" %}</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
-              <a class="btn btn-default navbar-btn" data-toggle="modal" href="#makeMoney">{% trans "Make money" %}</a>
+              <a class="btn btn-default navbar-btn" data-toggle="modal" href="#makeMoney">{% trans "Faites de l'argent" %}</a>
             {% block hotnewtop %}
             {% endblock %}
 {% if request.user.is_authenticated %}
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-{% thumbnail request.user.userprofile.avatar "30x30" crop="center" as im %}
-             <img src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" id="avatar-menu" />
-             {% endthumbnail %}
-
- <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
         <ul class="dropdown-menu">
-                    <li><a href="{% url 'earnings.views.index' %}">{% trans "Your earnings" %}</a></li>
-                    <li><a href="{% url 'punns.views.profile_page' request.user.username %}">{% trans "Your profile" %}</a></li>
+                    <li><a href="{% url 'punns.views.profile_page' request.user.username %}">{% trans "Votre profil" %}</a></li>
+                    <li><a href="{% url 'earnings.views.index' %}">{% trans "Vos revenus" %}</a></li>
                     <li class="divider"></li>
-                    <li><a href="{% url 'accounts.views.edit_profile' %}">{% trans "Settings" %}</a></li>
+                    <li><a href="{% url 'accounts.views.edit_profile' %}">{% trans "Paramètres" %}</a></li>
                     <li class="divider"></li>
-                    <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Logout" %}</a></li>
+                    <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Se déconnecter" %}</a></li>
         </ul>
       </li>
     </ul>
-              <a class="btn btn-danger navbar-btn navbar-right" href="{% url 'punns.views.create' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Create content" %}</a>
-              <a class="" href="{% url 'punns.views.profile_page' request.user.username %}">
-
-
-</a>
+              <a class="btn btn-primary navbar-btn navbar-right" href="{% url 'punns.views.create' %}"><span class="glyphicon glyphicon-pencil"></span></a>
             {% else %}
-              <a class="btn btn-default navbar-btn navbar-right" href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Login" %}</a>
-            {% endif %}
+              <a class="btn btn-default navbar-btn navbar-right" href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Se connecter" %}</a>
+            {% endif %} 
   </div><!-- /.navbar-collapse -->
 </nav>
             {% endblock %}
@@ -284,13 +240,72 @@
             {% block content %}
             <div class="row">
               {% block hero-unit %}
-              {% if not request.user.is_authenticated %}
+              {% if not request.user.is_authenticated and not user %}
               <div class="jumbotron">
-                <h2>{% trans "Welcome to Knobshare." %}</h2>
-                <p class="lead">{% trans "Knobshare is based on a simple yet powerful principle : sharing." %} </p>
-                <p><a href="{% url 'socialauth_begin' backend='facebook' %}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-user"></span> {% trans "Create your account" %}</a></p>
+                <h2>{% trans "Bienvenue sur Check Donc Ça." %}</h2>
+                <p class="lead">{% trans "Check Donc Ça est basé sur un pricipe simple, mais puissant : le partage." %} </p>
+                <p>{% trans "Partage de contenu = partage de revenu" %} </p>
+                <p><a href="{% url 'socialauth_begin' backend='facebook' %}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-user"></span> {% trans "Créez votre compte" %}</a></p>
               </div>
               {% endif %}
+              {% if user %}
+
+
+              <div class="jumbotron">
+
+<div class="media">
+{% if user.userprofile.avatar %}
+  <a class="pull-left" href="{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
+            {% thumbnail user.userprofile.avatar "150x150" crop="center" as im %}
+             <img src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" class="img-rounded"/>
+             {% endthumbnail %}
+         {% endif %} 
+  </a>
+  <div class="media-body">
+    <h2 class="media-heading">{{ user.first_name }} {{ user.last_name }}
+         {% if request.user == user %} 
+<small><a href="{% url 'accounts.views.edit_profile' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Edit your profile" %}</a></small>
+{% endif %} 
+
+</h2>
+
+{% if user.userprofile.description %}
+    <p>{{ user.userprofile.description }}</p>
+{% endif %}
+{% if user.userprofile.location %}
+    <p>{{ user.userprofile.location }}</p>
+{% endif %}
+{% if user.userprofile.facebook_link %}
+    <p><a href="{{ user.userprofile.facebook_link }}" target="_blank"><img src="{{ STATIC_URL }}img/facebook.png" /></a>
+</p>
+         {% endif %}
+
+  </div>
+</div>
+</div>
+
+{% if user == request.user %}
+<div class="well">
+<h3>{% trans "Quick publish" %}</h3>
+<form role="form" enctype="multipart/form-data" method="post" action="{% url 'punns.views.create' %}">{% csrf_token %}
+  <div class="form-group">
+    {{ quick_publish.title.label_tag }}
+    {{ quick_publish.title }}
+  </div>
+  <div class="form-group">
+    {{ quick_publish.pic.label_tag }}
+    {{ quick_publish.pic }}
+  </div>
+  <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
+</form>
+
+</div>
+{% endif %}
+
+              {% endif %}
+
+              
+
               {% endblock %}
             </div><!--/.row -->
             <div class="row">
@@ -319,8 +334,8 @@
 
             <div class="row">
               <ul class="pager">
-                <li class="previous{% if not punns.has_previous %} disabled{% endif %}"><a href="{% if punns.has_previous %}?page={{ punns.previous_page_number }}{% endif %}">&larr; {% trans "Previous" %}</a></li>
-                <li class="next{% if not punns.has_next %} disabled{% endif %}"><a href="{% if punns.has_next %}?page={{ punns.next_page_number }}{% endif %}">{% trans "Next" %} &rarr;</a></li>
+                <li class="previous{% if not punns.has_previous %} disabled{% endif %}"><a href="{% if punns.has_previous %}?page={{ punns.previous_page_number }}{% endif %}">&larr; {% trans "Préc" %}</a></li>
+                <li class="next{% if not punns.has_next %} disabled{% endif %}"><a href="{% if punns.has_next %}?page={{ punns.next_page_number }}{% endif %}">{% trans "Proch" %} &rarr;</a></li>
               </ul>
             </div>
 

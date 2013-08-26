@@ -1,21 +1,21 @@
 {% extends "settings_base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Add content" %}{% endblock %}
+{% block title %}{% trans "Ajoutez du contenu" %}{% endblock %}
 
 {% block content %}
-       <h3>{% trans "Add content" %}</h3>
+       <h3>{% trans "Ajoutez du contenu" %}</h3>
        <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{% url punns.views.create %}">{% csrf_token %}
        {% if form.non_field_errors %}
          <div class="alert alert-block alert-error">
            <button type="button" class="close" data-dismiss="alert">&times;</button>
-           {% trans "Ooops. Something went wrong. Please try again." %}
+           {% trans "Ooops. Veuillez réessayer." %}
          </div>
        {% endif %}
          {% include "horizontal-form.html" %}
          <div class="control-group">
            <div class="controls">
-             <button type="submit" class="btn btn-primary">{% trans "Submit" %}</button>
+             <button type="submit" class="btn btn-primary">{% trans "Soumettre" %}</button>
            </div>
          </div>
          <input type="hidden" name="next" value="{{ next }}" />

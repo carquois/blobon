@@ -16,6 +16,7 @@ from punns.utils import BASE10, BASE62, baseconvert
 from votes.models import PunnVote, CommentVote
 
 from django import forms
+from django.contrib.auth import authenticate, login
 from django.conf import settings
 from django.contrib import auth
 from django.contrib import messages
@@ -38,7 +39,7 @@ from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_page
 
 def index(request):
-      if request.META['HTTP_HOST'] == "knobshare.com":
+      if request.META['HTTP_HOST'] == settings.MAIN_SITE_DOMAIN:
           user = ""
           punns = paginate(request,
                            Punn.objects.filter(status='P').filter(is_top=True).order_by('-pub_date'),
@@ -55,13 +56,14 @@ def index(request):
                                 'punns': punns, },
                                 context_instance=RequestContext(request))
 
+
 def new(request):
       if request.META['HTTP_HOST'] == settings.MAIN_SITE_DOMAIN:
         punns = paginate(request,
                          Punn.objects.filter(status='P').order_by('-pub_date'),
                          15)
       else:
-        error_msg = _("Looks like this domain is not configured. If you own it, you should add it in your settings")
+        error_msg = _("Quelque chose s'est mal passé. Veuillez réessayer.")
         return HttpResponse('<p>%s</p>' % error_msg)
       return render_to_response('new.html',
                                {

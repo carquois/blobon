@@ -1,7 +1,7 @@
 {% extends "settings_base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Your earnings" %} / {% trans "Knobshare" %}{% endblock %}
+{% block title %}{% trans "Vos revenus" %} / {% trans "Check Donc Ça" %}{% endblock %}
 
 {% block additional_js %}
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
@@ -20,7 +20,7 @@
       ]);
       var annotatedtimeline = new google.visualization.AnnotatedTimeLine(
           document.getElementById('visualization'));
-      annotatedtimeline.draw(data, {'displayRangeSelector': false, 'displayZoomButtons': false});
+      annotatedtimeline.draw(data, {'displayRangeSelector': false});
     }
     
     google.setOnLoadCallback(drawVisualization);
@@ -30,29 +30,24 @@
 {% block content %}
 
 
-       <h3>{% trans "Your earnings" %} <small>@{{ request.user.username }}</small></h3>
+       <h3>{% trans "Vos revenus" %} <small>@{{ request.user.username }}</small></h3>
 <hr>
+{% if earnings %}
 <ul class="list-inline">
         <li>
-<h2>{{ today.total_earned }} <small>$USD</small></h2>
-<p class="lead">{% trans "Today (so far)" %}</p>
-
-</li>
-        <li>
 <h2>{{ last_30_days.total_earned }} <small>$USD</small></h2>
-<p class="lead">{% trans "Last 30 days" %}</p>
+<p class="lead">{% trans "Derniers 30 jours" %}</p>
 
 
 </li>
         <li>
 <h2>{{ all_time.total_earned }} <small>$USD</small></h2>
-<p class="lead">{% trans "All time" %}</p>
+<p class="lead">{% trans "Depuis le début" %}</p>
 
 </li>
       </ul>  
 <hr>
 
-{% if earnings %}
        <div id="visualization" style="width: 590px; height: 400px;"></div>
 
 <hr>
@@ -61,7 +56,7 @@
         <thead>
           <tr>
             <th>{% trans "Date" %}</th>
-            <th>{% trans "Amount" %}</th>
+            <th>{% trans "Montant" %}</th>
           </tr>
         </thead>
         <tbody>
@@ -79,7 +74,7 @@
 
         {% else %}
 
-<p>{% trans "You don't seem to have earnings yet. You must be new here. Come back tomorrow." %}
+<p>{% trans "Les revenus sont calculés une fois par jour. Revenez demain." %}
 
         {% endif %}
 

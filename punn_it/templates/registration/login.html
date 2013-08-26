@@ -1,10 +1,9 @@
 {% extends "settings_base.html" %}
 {% load i18n %}
 {% load url from future %}
-{% block title %}{% trans "Knobshare / Login" %}{% endblock %}
+{% block title %}{% trans "Check Donc Ça" %} / {% trans "Veuillez vous connecter" %}{% endblock %}
 {% block content %}
-        <h2 class="form-signin-heading">{% block heading %}{% trans "Log in to Knobshare" %}{% endblock %}</h2>
+        <h2 class="form-signin-heading">{% block heading %}{% trans "Connectez-vous sur Check Donc Ça" %}{% endblock %}</h2>
         <a href="{% url 'socialauth_begin' backend='facebook' %}" class="btn btn-large btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-user"></span> {% trans "Facebook" %}</a>
-        <a href="{% url 'socialauth_begin' backend='google' %}" class="btn btn-large btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-user"></span> {% trans "Google" %}</a>
 {% endblock %}
 

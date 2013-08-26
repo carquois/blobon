@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from accounts.models import UserProfile
-from django.forms import ModelForm, TextInput
+from django.forms import ModelForm, Textarea, TextInput, CharField
+from django.utils.translation import ugettext as _
 
 class UserCreateForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -24,25 +27,32 @@ class SocialSignupForm(forms.Form):
     avatar = forms.FileField(required=False)
 
 class UserProfileForm(ModelForm):
+    location = CharField(widget=forms.TextInput(attrs={
+                                                    'type': 'text',
+                                                    'class': "form-control"}))
     class Meta:
         model = UserProfile
-        fields = ('description', 'avatar', 'domain', 'location', )
+        fields = ('description', 'avatar', 'location', )
         widgets = {
             'description': TextInput(attrs={'class': 'input-block-level'}),
-            'domain': TextInput(attrs={'class': 'input-block-level'}),
             'location': TextInput(attrs={'class': 'input-block-level'}),
         }
 
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', )
+        fields = ('username', 'first_name', 'last_name',  )
         widgets = {
-            'username': TextInput(attrs={'class': 'input-block-level'}),
+            'username': TextInput(attrs={'type': 'text',
+                                                    'class': "form-control"}),
             'first_name': TextInput(attrs={'class': 'input-block-level'}),
             'last_name': TextInput(attrs={'class': 'input-block-level'}),
-            'email': TextInput(attrs={'class': 'input-block-level'}),
         }
+        labels = {
+            'username': _("Nom d'utilisateur"),
+            'pic': _('Image'),
+        }
+
 
 
 

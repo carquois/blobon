@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "settings_base.html" %}
 {% load i18n %}
 
 {% block title %}{% trans "Changez vos informations" %}{% endblock %}
@@ -12,7 +12,6 @@
            </div>
          {% endfor %}
        {% endif %}
-     <div class="well">
        <h3>{% trans "Changez les paramètres de votre compte" %}</h3>
        <form class="form-horizontal" method="post" action="{% url accounts.views.edit_profile %}">{% csrf_token %}
        {% if form.non_field_errors %}
@@ -31,6 +30,5 @@
          </div>
          <input type="hidden" name="next" value="{{ next }}" />
        </form>
-     </div>
 {% endblock %}
 

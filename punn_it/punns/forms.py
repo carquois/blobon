@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django import forms
 from django.forms import ModelForm, Textarea, TextInput, CharField
 from django.utils.translation import ugettext as _
@@ -15,19 +17,18 @@ class PunnForm(ModelForm):
         }
 
 class QuickPublish(ModelForm):
-    title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.'),
+    title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Entrez votre titre ici'),
                                                     'type': 'text',
                                                     'class': "form-control"}))
     class Meta:
         model = Punn
         fields = ('title', 'pic')
         labels = {
-            'title': _('Title'),
+            'title': _('Titre'),
             'pic': _('Image'),
         }
         help_texts = {
-            'title': _('Enter a title.'),
-            'pic': _('Upload an image.'),
+            'title': _('Entrez un titre'),
         }
 
 
