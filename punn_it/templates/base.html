@@ -256,7 +256,7 @@
         </ul>
       </li>
     </ul>
-              <a class="btn btn-primary navbar-btn navbar-right" href="{% url 'punns.views.create' %}"><span class="glyphicon glyphicon-pencil"></span></a>
+              <a class="btn btn-danger navbar-btn navbar-right" href="{% url 'punns.views.create' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Ajoutez du contenu" %}</a>
             {% else %}
               <a class="btn btn-default navbar-btn navbar-right" href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Se connecter" %}</a>
             {% endif %} 

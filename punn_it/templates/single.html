@@ -15,6 +15,34 @@
     <link rel="canonical" href="{{ url }}" />
 {% endblock %}
 {% block title %} {{ punn.title }} {% endblock %}
+    {% block additional_js %}
+<script>
+                  $(document).ready(function () {
+                    $(document).keydown(function(e) {
+                      if ($(e.target).is('input, textarea')) {
+                      }else{
+                        var url = false;
+                        if (e.which == 37) {
+                          url = "{{ prev_punn.get_absolute_url }}";
+                        }
+                        else if (e.which == 39) {
+                          url = "{{ next_punn.get_absolute_url }}";
+                        }
+                        else if (e.which == 70) {
+                          url = "{% url votes.views.up punn.id %}";
+                        }
+                        else if (e.which == 65) {
+                          url = "{% url votes.views.down punn.id %}";
+                        }
+                        if (url) {
+                          window.location = url;
+                        }
+                      }
+                    });
+                  });
+                </script>
+
+    {% endblock %}
     {% block additional-css %}
 #heading {
   margin-bottom: 10px;
