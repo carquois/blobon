@@ -59,7 +59,10 @@
       }
       #avatar-menu {
         margin: -4px;
-      } 
+      }
+      #sidebar .panel {
+        padding: 10px;
+      }
     </style>
     <style>
     {% block additional-css %}
@@ -161,20 +164,59 @@
         </div>
         <div class="modal-body">
 
-<p>{% trans "Imaginez faire de l'argent du confort de votre maison avec votre contenu Web." %}</p>
+<p>{% trans "Imaginez faire de l'argent du confort de votre maison avec votre contenu Web. Check Donc Ça offre une manière facile et gratuite de générer des revenus grâce à votre contenu en ligne." %}</p>
 <hr>
 <h3>{% trans "Les étapes" %}</h3>
 <ol>
   <li><a href="{% url "accounts.views.signup" %}">{% trans "Créez votre compte" %}</a></li>
   <li><a href="{% url "accounts.views.edit_profile" %}">{% trans "Mettez votre profil à jour" %}</a></li>
   <li><a href="{% url "punns.views.create" %}">{% trans "Créez du contenu" %}</a></li>
+  <li><a href="{% url "earnings.views.index" %}">{% trans "Consultez vos revenus" %}</a></li>
 </ol>
+<hr>
+
+<p>À quelle fréquence payons-nous?</p>
+
+<p>Nous payons quand votre compte est rendu à 100.00$. Nous nous sommes basés sur Google AdSense pour fixer la limite.</p>
+
+<p>Comment payons-nous?</p>
+
+<p>Encore une fois, comme AdSense, nous offrons deux choix de paiement</p>
+
+<p>1- Par chèque qui vous sera envoyé par la poste 2- Par un virement électronique et ce sera déposé directement dans votre compte</p>
+
+<p>Vous pourrez mettre à jour vos informations de paiement lorsque vous aurez atteint le montant du premier virement. (100$)</p>
+
+<p>Quand payons-nous?</p>
+
+<p>Nous payons une fois par mois, lorsque le compte dépasse 100$.</p>
+
+<p>Comment optimiser vos revenus?</p>
+
+<p>Publiez de manière constance. Ne vous gênez-pas sur la fréquence.</p>
+
+<p>Ajoutez une catégorie. </p>
+
+<p>Les catégories fonctionnent un peu comme des sous-communautés (subreddit). Quoique qu'il ne soit pas obligatoire d'assigner une catégorie, il est toutefois fortement recommandé de le faire. De cette manière, vous serez "repris" sur ces pages et ça augmentera le trafic sur votre contenu.</p>
+
+<p>Partagez sur vos réseaux sociaux. Les réseaux sociaux sont la source principale de visites sur le site. Vous pouvez aussi inviter vos amis à participer.</p>
+
+<p>Soyez actif dans la communauté. Votez, commentez, participez. L'interaction est à la base de l'intérêt. Nous en prenons compte dans notre calcul de partage des revenus.</p>
+
+<p>Citez votre source. Les créateurs de contenu méritent le trafic qu'ils obtiendront si vous partagez leur contenu ici. Soyez gentil et citez-les.</p>
+
+<p>N'essayez pas de spammer ou de cliquer sur les pubs</p>
+
+<p>J'vous l'dis là, j'suis pas épais. J'vais vous trouver et vous bannir. ;-)</p>
+
+<p>Love, Gab</p>
+
+
 
 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Fermer" %}</button>
-          <button type="button" class="btn btn-primary">{% trans "Sauvegarder" %} </button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -352,7 +394,7 @@
             </div>
 
           </div><!--/.col-8 -->
-  <div class="col-md-4">
+  <div class="col-md-4" id="sidebar">
             {% block sidebar %}
             <div class="panel medium-rectangle hidden-md">
               <!-- 300x250TopRight -->

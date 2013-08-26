@@ -92,9 +92,9 @@
   {% if request.user == punn.author %}
   <a class="btn btn-danger" href="{% url punns.views.delete punn.id %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}</a>
   {% else %}
-  <a class="btn btn-default {% if reblog %}btn-primary{% endif %}" href="{% url punns.views.reblog punn.id %}"><span class="glyphicon glyphicon-retweet"></span> {% trans "Reblog" %}</a>
+  <a class="btn btn-default {% if reblog %}btn-primary{% endif %}" href="{% url punns.views.reblog punn.id %}"><span class="glyphicon glyphicon-retweet"></span> {% trans "Rebloguer" %}</a>
   {% endif %}
-  <a "  class="btn btn-default {% if favorite %}btn-primary{% endif %}" href="{% url punns.views.favorite punn.id %}"><span class="glyphicon glyphicon-star"></span> {% trans "Favorite" %}</a>
+  <a "  class="btn btn-default {% if favorite %}btn-primary{% endif %}" href="{% url punns.views.favorite punn.id %}"><span class="glyphicon glyphicon-star"></span> {% trans "Favori" %}</a>
 </div>
 </div>
 <hr>
