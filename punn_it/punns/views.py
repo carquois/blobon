@@ -11,11 +11,12 @@ from cgi import parse_qs
 from accounts.models import UserProfile, UserForm
 from comments.models import Comment
 from comments.forms import CommentForm
-from punns.models import Punn, PunnForm
+from punns.models import Punn, PunnForm, Reblog, Favorite
 from punns.utils import BASE10, BASE62, baseconvert
 from votes.models import PunnVote, CommentVote
 
 from django import forms
+from django.contrib.auth import authenticate, login
 from django.conf import settings
 from django.contrib import auth
 from django.contrib import messages
@@ -38,22 +39,50 @@ from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_page
 
 def index(request):
-      if request.META['HTTP_HOST'] != "checkdonc.ca":
-        if UserProfile.objects.filter(domain='http://%s/' % request.META['HTTP_HOST']).exists():
+      if request.META['HTTP_HOST'] == settings.MAIN_SITE_DOMAIN:
+          user = ""
+          punns = paginate(request,
+                           Punn.objects.filter(status='P').filter(is_top=True).order_by('-pub_date'),
+                           15)
+      elif UserProfile.objects.filter(domain='http://%s/' % request.META['HTTP_HOST']).exists():
           user = UserProfile.objects.get(domain='http://%s/' % request.META['HTTP_HOST']).user
-        else:
-          user = User.objects.get(pk=3)
+          punns = paginate(request,
+                           Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
+                           15)
       else:
-        user = User.objects.get(pk=3)
-      punns = paginate(request,
-                       Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
-                       20)
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      return render_to_response('base.html',
-                               {'user': user, 'site_description': site_description,
-                                'punns': punns, 'site': site},
+        return redirect("http://knobshare.com")
+      return render_to_response('index.html',
+                               {'user': user,
+                                'punns': punns, },
                                 context_instance=RequestContext(request))
+
+
+def new(request):
+      if request.META['HTTP_HOST'] == settings.MAIN_SITE_DOMAIN:
+        punns = paginate(request,
+                         Punn.objects.filter(status='P').order_by('-pub_date'),
+                         15)
+      else:
+        error_msg = _("Quelque chose s'est mal passé. Veuillez réessayer.")
+        return HttpResponse('<p>%s</p>' % error_msg)
+      return render_to_response('new.html',
+                               {
+                                'punns': punns, },
+                                context_instance=RequestContext(request))
+
+
+
+
+def cat(request, slug):
+      if request.META['HTTP_HOST'] == "knobshare.com":
+        punns = paginate(request,
+                         Punn.objects.filter(status='P').order_by('-pub_date'),
+                         15)
+        return render_to_response('cat.html',
+                                  {'punns': punns, },
+                                  context_instance=RequestContext(request))
+      else:
+        return redirect("http://knobshare.com")
 
 @login_required
 def delete(request, id):
@@ -66,7 +95,27 @@ def delete(request, id):
         messages.add_message(request, messages.INFO, _(u'La page a été supprimée'))
       return HttpResponseRedirect(reverse('punns.views.index'))
 
+@login_required
+def reblog(request, id):
+      punn = get_object_or_404(Punn, id=id)
+      if Reblog.objects.filter(origin=punn).filter(author=request.user).exists():
+        r = Reblog.objects.filter(origin=punn).filter(author=request.user)
+        r.delete()
+      else: 
+        r = Reblog(origin=punn, author=request.user)
+        r.save()
+      return HttpResponseRedirect( punn.get_absolute_url() )
 
+@login_required
+def favorite(request, id):
+      punn = get_object_or_404(Punn, id=id)
+      if Favorite.objects.filter(punn=punn).filter(author=request.user).exists():
+        f = Favorite.objects.filter(punn=punn).filter(author=request.user)
+        f.delete()
+      else:
+        f = Favorite(punn=punn, author=request.user)
+        f.save()
+      return HttpResponseRedirect( punn.get_absolute_url() )
 
 def videos(request):
       user = UserProfile.objects.get(pk=3)
@@ -113,49 +162,38 @@ def search(request):
       else:
         return HttpResponseRedirect('http://%s/' % site.domain)
 
-def today(request):
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      punns = paginate(request,
-                       Punn.objects.filter(status='P').filter(pub_date__gte=datetime.date.today()).order_by('-views'),
-                       20)
-      return render_to_response('top.html',
-                                {'site_description': site_description,
-                                 'punns': punns, 'site': site, 't': 'today'},
-                                context_instance=RequestContext(request))
-
-def week(request):
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      punns = paginate(request,
-                       Punn.objects.filter(status='P').filter(pub_date__range=(datetime.date.today() - timedelta(days=7) , datetime.date.today())).order_by('-views'),
-                       20)
-      return render_to_response('top.html',
-                                {'site_description': site_description,
-                                 'punns': punns, 'site': site, 't': 'week'},
-                                context_instance=RequestContext(request))
-
-def month(request):
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      punns = paginate(request,
-                       Punn.objects.filter(status='P').filter(pub_date__range=(datetime.date.today() - timedelta(days=30) , datetime.date.today())).order_by('-views'),
-                       20)
-      return render_to_response('top.html',
-                                {'site_description': site_description,
-                                 'punns': punns, 'site': site, 't': 'month'},
-                                context_instance=RequestContext(request))
-
-def top(request):
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      punns = paginate(request,
-                       Punn.objects.filter(status='P').order_by('-views'),
-                       20)
-      return render_to_response('top.html',
-                                {'site_description': site_description,
-                                 'punns': punns, 'site': site, 't': 'all'},
-                                context_instance=RequestContext(request))
+#def week(request):
+#      punns = paginate(request,
+#                       Punn.objects.filter(status='P').filter(pub_date__range=(datetime.date.today() - timedelta(days=7) , datetime.date.today())).order_by('-views'),
+#                       20)
+#      return render_to_response('top.html',
+#                                {'site_description': site_description,
+#                                 'punns': punns, 'site': site, 't': 'week'},
+#                                context_instance=RequestContext(request))
+#
+#def month(request):
+#      site = get_current_site(request)
+#      punns = paginate(request,
+#                       Punn.objects.filter(status='P').filter(pub_date__range=(datetime.date.today() - timedelta(days=30) , datetime.date.today())).order_by('-views'),
+#                       20)
+#      return render_to_response('top.html',
+#                                {'site_description': site_description,
+#                                 'punns': punns, 'site': site, 't': 'month'},
+#                                context_instance=RequestContext(request))
+#
+#def top(request):
+#      site = get_current_site(request)
+#      punns = paginate(request,
+#                       Punn.objects.filter(status='P').order_by('-views'),
+#                       20)
+#      return render_to_response('top.html',
+#                                {'site_description': site_description,
+#                                 'punns': punns, 'site': site, 't': 'all'},
+#                                context_instance=RequestContext(request))
+#
+#def today(request):
+#                       Punn.objects.filter(status='P').filter(pub_date__gte=datetime.date.today()).order_by('-views'),
+#
 
 
 def random(request):
@@ -191,16 +229,38 @@ def done(request):
     return render_to_response('done.html', ctx, RequestContext(request))
 
 def profile_page(request, user):
-      user = get_object_or_404(User, username=user)
-      punns = paginate(request,
-                       Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
-                       20)
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      url = request.build_absolute_uri()
-      return render_to_response('profile.html', 
-                                {'user': user, 'site_description': site_description,
-                                 'site': site, 'punns': punns, 'url': url}, 
+        user = get_object_or_404(User, username=user)
+        punns = paginate(request,
+                         Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
+                         15)
+        site_description = settings.MAIN_SITE_DESCRIPTION
+        site = get_current_site(request)
+        url = request.build_absolute_uri()
+
+        from punns.forms import QuickPublish
+        quick_publish = QuickPublish()
+        return render_to_response('profile.html', 
+                                  {'user': user, 'site_description': site_description,
+                                   'site': site, 'punns': punns, 'url': url, 'quick_publish': quick_publish}, 
+                                  context_instance=RequestContext(request))
+
+@login_required
+def createcat(request):
+      from punns.models import CatForm
+      if request.method == 'POST':
+        form = CatForm(request.POST)
+        if form.is_valid():
+          cat = form.save(commit=False)
+          cat.author = request.user
+          cat.save()
+          #heading = _(u"Your page has been published.")
+          #message = _(u"You can now share it.")
+          #messages.add_message(request, messages.INFO, '<h4 class="alert-heading">%s</h4><p>%s</p><p><a class="btn btn-primary" href="http://www.facebook.com/sharer.php?u=%s">Facebook</a> <a class="btn btn-primary" href="https://twitter.com/share?text=%s">Twitter</a></p>' % (heading , message, request.build_absolute_uri(punn.get_absolute_url()), punn.title), extra_tags='safe')
+          return HttpResponseRedirect( cat.get_absolute_url() )
+      else:
+        form = CatForm()
+      return render_to_response('createcat.html',
+                                {'form': form},
                                 context_instance=RequestContext(request))
 
 @login_required
@@ -213,9 +273,17 @@ def create(request):
           punn.author = request.user
           punn.status = "P"
           punn.save()
-          heading = _(u"Félicitations! Votre contenu est maintenant publié.")
-          message = _(u"Vous pouvez dorénavant le partager")
-          messages.add_message(request, messages.INFO, '<h4 class="alert-heading">%s</h4><p>%s</p><p><a class="btn btn-primary" href="http://www.facebook.com/sharer.php?u=%s">Facebook</a> <a class="btn" href="https://twitter.com/share?text=%s">Twitter</a></p>' % (heading , message, request.build_absolute_uri(punn.get_absolute_url()), punn.title), extra_tags='safe')
+          if punn.publish_on_facebook:
+            from social_auth.models import UserSocialAuth
+            import facebook
+            instance = UserSocialAuth.objects.filter(provider='facebook').filter(user=request.user)
+            graph = facebook.GraphAPI(instance[0].tokens['access_token'])
+            profile = graph.get_object("me")
+            #Fix the link into something more kasher
+            graph.put_object("me", "feed", message="%s http://knobshare.com%s" % (punn.title, punn.get_absolute_url()))
+          heading = _(u"Your page has been published.")
+          message = _(u"You can now share it.")
+          messages.add_message(request, messages.INFO, '<h4 class="alert-heading">%s</h4><p>%s</p><p><a class="btn btn-primary" href="http://www.facebook.com/sharer.php?u=%s">Facebook</a> <a class="btn btn-primary" href="https://twitter.com/share?text=%s">Twitter</a></p>' % (heading , message, request.build_absolute_uri(punn.get_absolute_url()), punn.title), extra_tags='safe')
           return HttpResponseRedirect( punn.get_absolute_url() )
       else:
         form = PunnForm()
@@ -318,6 +386,17 @@ def single(request, shorturl):
             comment.vote = "D"
 
 
+    if request.user.is_authenticated() and Reblog.objects.filter(origin=punn).filter(author=request.user).exists():
+          reblog = True
+    else:
+          reblog = False 
+
+    if request.user.is_authenticated() and Favorite.objects.filter(punn=punn).filter(author=request.user).exists():
+          favorite = True
+    else:
+          favorite = False 
+
+
     url = request.build_absolute_uri()
     site_description = settings.MAIN_SITE_DESCRIPTION
     site = get_current_site(request)
@@ -327,7 +406,8 @@ def single(request, shorturl):
                                'content': content, 'comment_list': comment_list,
                                'url': url, 'karma':karma, 'auth_user':auth_user,
                                'vote': vote, 'user': punn.author, 'home': home, 
-                               'site_description': site_description, 'site': site, 'comment_form': comment_form}, 
+                               'site_description': site_description, 'site': site, 
+                               'comment_form': comment_form, 'reblog': reblog, 'favorite': favorite}, 
                               context_instance=RequestContext(request))
 
 class UserFeed(Feed):

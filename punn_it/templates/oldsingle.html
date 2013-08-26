@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+{% load i18n thumbnail punn_tags humanize %}
+{% block open-graphs %}
+    <!-- Le open graphs tags -->
+    <meta property="og:title" content="{{ punn.title }}" />
+    <meta property="og:url" content="{{ url }}" />
+    <meta property="og:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}" />
+    <meta property="og:site_name" content="{{ punn.author.first_name }} {{ punn.author.last_name }}" />
+    <!-- Le twitter cards -->
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:url" content="{{ url }}">
+    <meta name="twitter:title" content="{{ punn.title }}">
+    <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}">
+    <!-- Le canonical url -->
+    <link rel="canonical" href="{{ url }}" />
+{% endblock %}
+{% block title %}{{ punn.title }}{% endblock %}
+    {% block content %}
+      <div class="container">
+        <div class="row">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-block alert-info">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}            
+            </div>
+          {% endfor %}
+        {% endif %}
+          <div id="vote-wrapper" class="visible-desktop">
+            <a href="{% if request.user.is_authenticated %}
+                       {% url votes.views.up punn.id %}
+                     {% else %}
+                       {% url django.contrib.auth.views.login %}?next={{request.path}}
+                     {% endif %}">
+              <div id="upbutton" class="vote-up-down up{% if vote == "U" %} up-on{% endif %}"></div>
+            </a>
+            <div class="vote-up-down point"><p style="text-align:center;padding-top:17px;" id="karma">{{ karma }}</p></div>
+            <a href="{% if request.user.is_authenticated %}
+                       {% url votes.views.down punn.id %}
+                     {% else %}
+                       {% url django.contrib.auth.views.login %}?next={{request.path}}
+                     {% endif %}">
+              <div id="downbutton" class="vote-up-down down {% if vote == "D" %} down-on{% endif %}"></div>
+            </a>
+          </div>
+          <div class="span9" id="content-single">
+	    <div id="content-single-wrapper">
+              <h1 id="title">{{ punn.title }}</h1>
+	      <div id="image-wrapper">
+	       {% if punn.youtube_id %}
+                <iframe src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+               {% else %}
+	        {% if punn.pic %}
+                <a href="{{ next_punn.get_absolute_url }}">
+                  <img id="main-image" src="{{ MEDIA_URL }}{{ punn.pic }}" />
+                </a>
+	        {% endif %}
+	       {% endif %}
+               {% if content %}
+                <div id="article-content">
+                   {{ content|safe }}
+                </div>
+               {% endif %}
+                <script>
+                  $(document).ready(function () {
+                    $(document).keydown(function(e) {
+                      if ($(e.target).is('input, textarea')) {
+                      }else{
+                        var url = false;
+                        if (e.which == 37) {
+                          url = "{{ prev_punn.get_absolute_url }}";
+                        }
+                        else if (e.which == 39) {
+                          url = "{{ next_punn.get_absolute_url }}";
+                        }
+                        else if (e.which == 82) {
+                          url = "{% url punns.views.random %}"; 
+                        }
+                        {% if request.user.is_authenticated %}
+                        else if (e.which == 70) {
+                          url = "{% url votes.views.up punn.id %}";
+                        }
+                        if (e.which == 65) {
+                          url = "{% url votes.views.down punn.id %}";
+                        }
+                        {% endif %}
+                        if (url) {
+                          window.location = url;
+                        }
+                        if (e.which == 67) {
+                          $("#comment-box").focus();
+			  return false;
+                        }
+                      }
+                    });
+                  });
+                  jQuery(function($){
+                    $('#comment-box').focus(function(){
+                      $(this).attr('rows',5);
+		      return false;
+                    });
+                  }); 
+                </script>
+                <div id="buttons-below-the-content">
+                  <div class="separator separator-with-margin"></div>
+                  <div class="btn-toolbar" id="below-content-toolbar">
+                    <div class="btn-group pull-left">
+                      <a rel="tooltip" title="{% trans "Rapporter" %}" href="mailto:gab@checkdonc.ca" class="btn"><i class="icon-flag"></i></a>
+                      <a href="#share" role="button" class="btn" data-toggle="modal">{% trans "Partager" %}</a>
+                      {% if request.user.is_authenticated and punn.author == request.user %}
+                      <a href="#delete" role="button" class="btn btn-danger" data-toggle="modal">{% trans "Effacer" %}</a>
+                      {% endif %}
+                    </div>
+                    <div class="btn-group pull-right">
+                      <a rel="tooltip" title="{% trans "Page précédente" %}" href="{{ prev_punn.get_absolute_url }}" class="btn">&larr;</a>
+                      <a rel="tooltip" title="{% trans "Page suivante" %}" href="{{ next_punn.get_absolute_url }}" class="btn">&rarr;</a>
+                    </div>
+                  </div>
+                  <div style="clear:both;"></div>
+                  <div class="separator separator-with-margin"></div>
+                  <div class="pull-left" id="author-avatar">
+                    {% thumbnail punn.author.userprofile.avatar "70" crop="center" as im %}
+                    <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}">
+                    {% endthumbnail %}
+                  </div>
+                  <div class="pull-left" id="informations">
+                    <p>{{ punn.author.first_name }} {{ punn.author.last_name }}</p>
+                    <p><a href="/{{ user.username }}/">@{{ user.username }}</a></p>
+                    <p id="published-infos">{% trans "Publié" %} {{ punn.pub_date|naturaltime }} {% if punn.source %}{% trans "via" %} <a href="{{ punn.source }}" target="_blank">(Source)</a>{% endif %}</p>
+                  </div>
+                </div>
+                <div id="delete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="deleteLabel">{% trans "Effacer cette page?" %}</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>{% trans "Êtes-vous certain de vouloir faire ça? Vous ne pourrez pas revenir en arrière par la suite." %}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Non non!" %}</button>
+                    <a href="{% url punns.views.delete punn.id %}" class="btn btn-danger">{% trans "Oui, je veux l'effacer" %}</a>
+                  </div>
+                </div>
+                <div id="share" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">{% trans "Partager" %}</h3>
+                  </div>
+                  <div class="modal-body">
+                    <div class="addthis_toolbox addthis_default_style ">
+                      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                      <a style="padding-left:20px;" class="addthis_button_tweet"></a>
+                      <a class="addthis_button_pinterest_pinit"></a>
+                      <a style="padding-left:10px;" class="addthis_button_google_plusone" g:plusone:size="medium"></a> 
+                      <a class="addthis_counter addthis_pill_style"></a>
+                    </div>
+                    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f31a102440808e2"></script>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Fermer" %}</button>
+                  </div>
+                </div>
+                <div id="comment-block">
+                  <form method="post" action="">
+                      {% csrf_token %}
+                      {{ comment_form.content }}
+                  <a rel="tooltip" title="{% trans "Syntaxe des commentaires" %}" href="#syntax" role="button" class="btn pull-left" data-toggle="modal"><i class="icon-pencil"></i></a>
+                  <button rel="tooltip" title="{% trans "Cliquez ici pour soumettre votre commentaire" %}" class="btn pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
+                  </form>
+                </div>
+                <div style="clear: both;">
+                <div id="syntax" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="syntaxLabel" aria-hidden="true">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="syntaxLabel">{% trans "Syntaxe" %}</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>{% trans "Bonjour les amis," %}</p>
+                    <p>{% trans "Vous allez remarquer que nous avons mis une syntaxe dans les commentaires qui vous permet de formater vos commentaires un peu comme dans un document Word. Vous avez donc accès à mettre du texte en gras, en italique et tout plein d'autres trucs cool comme ceux-là." %}</p>
+                    <p>{% trans "Pour appliquer une syntaxe, vous n'avez qu'à lire plus bas. Sinon, vous pouvez toujours écrire vos commentaires normalement, à la bonne franquette, comme sur Facebook par exemple." %}</p>
+                    <br />
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>{% trans "Vous écrivez :" %}</th>
+                          <th>{% trans "Vous voyez :" %}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>*{% trans "italique" %}*</td>
+                          <td><em>{% trans "italique" %}</em></td>
+                        </tr>
+                        <tr>
+                          <td>**{% trans "gras" %}**</td>
+                          <td><strong>{% trans "gras" %}</strong></td>
+                        </tr>
+                        <tr>
+                          <td>[Check Donc Ça](http://checkdonc.ca)</td>
+                          <td><a href="http://checkdonc.ca" target="_blank">Check Donc Ça</a></td>
+                        </tr>
+                        <tr>
+                          <td>> {% trans "texte cité" %}</td>
+                          <td><blockquote><p>{% trans "texte cité" %}</p></blockquote></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p>{% trans "Pour plus d'exemples :" %} <a href="http://fr.wikipedia.org/wiki/Markdown#Quelques_exemples" target="_blank">Markdown</a></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Fermer" %}</button>
+                  </div>
+                </div>
+                {% if comment_list %} 
+                <div class="best-all-comments">{% trans "Meilleur commentaire" %}</div>
+                {% for comment in comment_list|dictsortreversed:"karma" %}
+                {% if forloop.counter == 2 %}
+                <div class="best-all-comments" id="all-comments">{% trans "Tous les commentaires" %}</div>
+                {% endif %}
+                <div class="separator"></div>
+                <div id="comment-wrapper">   
+                  <div id="vote-comment-wrapper">
+                    <a href="
+                             {% if request.user.is_authenticated %}{% url votes.views.commentup comment.id %}
+                             {% else %}{% url accounts.views.signup %}
+                             {% endif %}
+                             "><div class="comment-vote comment-vote-up {% if comment.vote == "U" %}comment-vote-up-on{% endif %}"></div></a>
+                      <!--<div class="comment-vote comment-vote-up-on"></div>-->
+                    <p id="comment-score">{{ comment.karma }}</p>
+                    <a href="
+                             {% if request.user.is_authenticated %}{% url votes.views.commentdown comment.id %}
+                             {% else %}{% url accounts.views.signup %}
+                             {% endif %}
+                             "><div class="comment-vote comment-vote-down {% if comment.vote == "D" %}comment-vote-down-on{% endif %}"></div></a>
+                      <!--<div class="comment-vote comment-vote-down-on"></div>-->
+                  </div>
+                  {% if comment.author == request.user  %}
+                  <a class="close pull-right" rel="tooltip" title="{% trans "Cliquez ici pour effacer votre commentaire" %}" href="/delete/{{ comment.id }}">&times;</a>
+                  {% endif %}
+                  <div id="comment-author-avatar">
+                    <img src="{{ MEDIA_URL }}{{ comment.author.userprofile.avatar }}">
+                  </div>
+                  <div id="comment-right-column">
+                    <div id="username-comment">{{ comment.author.username }}</div>
+                    <p class="comment-time">{{ comment.created|naturaltime }}</p>
+                    <br />
+                    <div class="comment" style="margin-top:10px;">
+                      {{ comment.content|safe }}
+                    </div>
+                  </div>
+                </div>
+                <div style="clear: both;">                
+                </div>                
+                {% endfor %}
+                {% endif %}
+                <div style="clear: both;">                
+                </div>                
+              </div>
+           </div>
+         </div>
+      </div> <!-- /container -->
+     {% endblock %}
+     {% block top-sidebar %}
+                {% if latest_punn_list %}
+                  <div id="top-thumbs">
+                  {% for punn in latest_punn_list %}
+                    <a class="thumbnails_images" href="{{ punn.get_absolute_url }}">
+                    {% thumbnail punn.pic "85x90" crop="center" as im %}
+                      <img class="sidebarThumbs" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                    {% endthumbnail %}
+                    </a>
+                  {% endfor %}
+                 </div>
+                {% else %}
+                  <p>No more content</p>
+                {% endif %}
+     {% endblock %}
+

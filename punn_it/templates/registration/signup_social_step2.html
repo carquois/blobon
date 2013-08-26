@@ -1,23 +1,7 @@
-{% extends "base.html" %}
-{% load i18n thumbnail %}
-{% load url from future %}
-{% block title %}{% trans 'Se créer un compte / Étape 2' %}{% endblock %}
-{% block additional_css %}
-    <style>
-      body {
-        background: url({{ STATIC_URL }}img/blob_bg.gif);
-      }
-
-      a {
-        color:#f4663b;
-      }
-      p {
-        color:#828282;
-      } 
-    </style>
-{% endblock %}
-{% block topmenu %}
-{% endblock %}
+{% extends "registration/login.html" %}
+{% load i18n %}
+{% block title %}{% trans "Se créer un compte / Étape 2" %}{% endblock %}
+{% block heading %}{% trans "Veuillez vous connecter" %}{% endblock %}
 {% block container %}
      <div class="centered">
        <h2 class="titre">{% trans 'Créez votre compte' %}</h2>

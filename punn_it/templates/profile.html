@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n thumbnail %}
+{% load url from future %}
 {% block title %}{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}{% endblock %}
 {% block open-graphs %}
     <!-- Le open graphs tags -->
@@ -14,18 +15,63 @@
     <meta name="twitter:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
     <meta name="twitter:description" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}">
 {% endblock %}
-{% block top-sidebar %}
-              <div class="well">
-                <div class="thumbnail">
-                  {% if user.userprofile.avatar %}
-                  {% thumbnail user.userprofile.avatar "250x250" crop="center" as im %}
-                  <img src="{{ im.url }}" alt="{{ user.userprofile.description }}">
-                  {% endthumbnail %}
-                  {% endif %}
-                  <div class="caption">
-                    <h3>{{ user.first_name }} {{ user.last_name }}</h3>
-                    <p>{{ user.userprofile.description }}</p>
-                  </div>
-                </div>
-              </div>
+{% block hotnewtop %}
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'punns.views.index' %}">{% trans "HOT" %}</a></li>
+      <li><a href="{% url 'punns.views.new' %}">{% trans "NEW" %}</a></li>
+    </ul>
+{% endblock %}
+
+ {% block hero-unit %}
+              <div class="jumbotron">
+
+<div class="media">
+{% if user.userprofile.avatar %}
+  <a class="pull-left" href="{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
+            {% thumbnail user.userprofile.avatar "150x150" crop="center" as im %}
+             <img src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" class="img-rounded"/>
+             {% endthumbnail %}
+         {% endif %} 
+  </a>
+  <div class="media-body">
+    <h2 class="media-heading">{{ user.first_name }} {{ user.last_name }}
+         {% if request.user == user %} 
+<small><a href="{% url 'accounts.views.edit_profile' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Mettre votre profil à jour" %}</a></small>
+{% endif %} 
+
+</h2>
+
+{% if user.userprofile.description %}
+    <p>{{ user.userprofile.description }}</p>
+{% endif %} 
+{% if user.userprofile.location %}
+    <p>{{ user.userprofile.location }}</p>
+{% endif %} 
+{% if user.userprofile.facebook_link %}
+    <p><a href="{{ user.userprofile.facebook_link }}" target="_blank"><img src="{{ STATIC_URL }}img/facebook.png" /></a>
+</p>
+         {% endif %} 
+
+  </div>
+</div>
+</div>
+
+{% if user == request.user %}
+<div class="well">
+<h3>{% trans "Publication rapide" %}</h3>
+<form role="form" enctype="multipart/form-data" method="post" action="{% url 'punns.views.create' %}">{% csrf_token %}
+  <div class="form-group">
+    {{ quick_publish.title.label_tag }}
+    {{ quick_publish.title }}
+  </div>
+  <div class="form-group">
+    {{ quick_publish.pic.label_tag }}
+    {{ quick_publish.pic }}
+  </div>
+  <button type="submit" class="btn btn-default">{% trans "Soumettre" %}</button>
+</form>
+
+</div>
+{% endif %}
+
 {% endblock %}

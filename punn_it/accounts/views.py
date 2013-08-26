@@ -23,46 +23,64 @@ def signup(request):
         context.update({'error' : True})
     
     return render_to_response("registration/signup.html", context, context_instance=RequestContext(request))
+
+
+def new_association(request):
+    heading = _(u"Congratulations!")
+    message = _(u"A new account has been associated.")
+    messages.add_message(request, messages.INFO, "<strong>%s</strong> %s @%s" % (heading , message, request.user.username), extra_tags='safe')
+    return HttpResponseRedirect(reverse('punns.views.profile_page', args=[request.user.username]))
                                 
 def social_signup_step2(request):
     user = request.user
-    
-    if not user.is_authenticated():
-        return HttpResponseRedirect(reverse('accounts.views.signup'))
-
-    if user.is_authenticated() and not user.get_profile().is_new_from_social:
-        return HttpResponseRedirect(reverse('punns.views.index'))
-
-    if request.POST:
-        form = SocialSignupForm(request.POST, request.FILES or None)
-    else:
-        form = SocialSignupForm(initial={
-            'email' : user.email,
-            'username' : user.username,
-        })
-    
-    if form.is_valid():
-        #set user fields
-        user.username =  form.cleaned_data['username']
-        user.set_password(form.cleaned_data['password']) 
-        
-        #dont save email... always use the one provided by Facebook
-        # user.email = form.cleaned_data['email']
-        user.save()
-        
-        profile = user.get_profile()
-        profile.is_new_from_social = False
-        
-        #if there is a new uploaded avatar, we overwrite it 
-        if form.cleaned_data['avatar']:
-            profile.avatar= form.cleaned_data['avatar']
-        
-        profile.save()
-        
-        #send a welcome message to the templates
-        messages.add_message(request, messages.INFO, _(u'Bienvenue sur Check Donc Ça!'))
-        return HttpResponseRedirect(reverse('punns.views.index'))
-    
+    profile = user.get_profile()
+    profile.is_new_from_social = False
+    profile.save()
+    #send a welcome message to the templates
+    heading = _(u"Welcome to Knobshare")
+    message = _(u"Your username has been set to :")
+    messages.add_message(request, messages.INFO, "<strong>%s</strong> %s @%s" % (heading , message, request.user.username), extra_tags='safe')
+    return HttpResponseRedirect(reverse('punns.views.profile_page', args=[request.user.username]))
+#    
+#    return render_to_response("registration/signup_social_step2.html", {'form': form,}, context_instance=RequestContext(request))
+#    user = request.user
+#    
+#    if not user.is_authenticated():
+#        return HttpResponseRedirect(reverse('accounts.views.signup'))
+#
+#    if user.is_authenticated() and not user.get_profile().is_new_from_social:
+#        return HttpResponseRedirect(reverse('punns.views.index'))
+#
+#    if request.POST:
+#        form = SocialSignupForm(request.POST, request.FILES or None)
+#    else:
+#        form = SocialSignupForm(initial={
+#            'email' : user.email,
+#            'username' : user.username,
+#        })
+#    
+#    if form.is_valid():
+#        #set user fields
+#        user.username =  form.cleaned_data['username']
+#        user.set_password(form.cleaned_data['password']) 
+#        
+#        #dont save email... always use the one provided by Facebook
+#        # user.email = form.cleaned_data['email']
+#        user.save()
+#        
+#        profile = user.get_profile()
+#        profile.is_new_from_social = False
+#        
+#        #if there is a new uploaded avatar, we overwrite it 
+#        if form.cleaned_data['avatar']:
+#            profile.avatar= form.cleaned_data['avatar']
+#        
+#        profile.save()
+#        
+#        #send a welcome message to the templates
+#        messages.add_message(request, messages.INFO, _(u'Bienvenue sur Check Donc Ça!'))
+#        return HttpResponseRedirect(reverse('punns.views.index'))
+#    
     return render_to_response("registration/signup_social_step2.html", {'form': form,}, context_instance=RequestContext(request))
     
 
@@ -89,7 +107,7 @@ def edit_profile(request):
         if userprofile_form.is_valid() and user_form.is_valid():
           userprofile_form.save()
           user_form.save()
-          messages.add_message(request, messages.INFO, _(u"Merci, vos paramètres ont été enregistrés."))
+          messages.add_message(request, messages.INFO, _(u"Thank you! Your settings have been changed."))
           return HttpResponseRedirect(reverse('accounts.views.edit_profile'))
     else:
         userprofile_form = UserProfileForm(instance=request.user.get_profile())
