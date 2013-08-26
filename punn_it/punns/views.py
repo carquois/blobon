@@ -61,6 +61,9 @@ def delete(request, id):
       if request.user == punn.author:
         punn.delete()
         messages.add_message(request, messages.INFO, _(u'Votre page a été supprimée'))
+      elif request.user.is_staff:
+        punn.delete()
+        messages.add_message(request, messages.INFO, _(u'La page a été supprimée'))
       return HttpResponseRedirect(reverse('punns.views.index'))
 
 
@@ -219,6 +222,7 @@ def create(request):
       return render_to_response('create.html', 
                                 {'form': form}, 
                                 context_instance=RequestContext(request))
+
 
 @login_required
 def submit(request): 
