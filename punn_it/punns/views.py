@@ -63,7 +63,7 @@ def new(request):
                          Punn.objects.filter(status='P').order_by('-pub_date'),
                          15)
       else:
-        error_msg = _("Quelque chose s'est mal passé. Veuillez réessayer.")
+        error_msg = _("Oooops. Essayez de nouveau.")
         return HttpResponse('<p>%s</p>' % error_msg)
       return render_to_response('new.html',
                                {
