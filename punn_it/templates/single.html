@@ -39,15 +39,19 @@
   <a class="pull-left" href="{% url punns.views.profile_page punn.author.username %}">
 {% if punn.author.userprofile.avatar %}
                   {% thumbnail punn.author.userprofile.avatar "64x64" crop="center" as im %}
-                  <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}" class="img-rounded"/>
+                  <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}" />
                   {% endthumbnail %}
                   {% endif %}    
   </a>
   <div class="media-body">
-    <h5 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small></h5>
-    <h3>{{ punn.title }}</h3>
+    <h5 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small>
+</h5>
+<p class="text-muted">{% trans "Published" %} {{ punn.pub_date|naturaltime }}</p>
+
   </div>
 </div>
+<hr>
+    <h2>{{ punn.title }}</h2>
 
 
   {% if punn.youtube_id %}
@@ -60,7 +64,9 @@
   {% endif %}
   {% endif %}
   {% if content %}
-    {{ content|safe }}
+<div class="well">
+   <h4> {{ content|safe }}</h4>
+</div>
   {% endif %}
 <div id="infos" class="panel">
 <div class="row">
@@ -84,17 +90,14 @@
 </div>
 <div class="btn-group pull-right">
   {% if request.user == punn.author %}
-  <a rel="tooltip" title="{% trans "Delete" %}" class="btn btn-danger" href="{% url punns.views.delete punn.id %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}</a>
+  <a class="btn btn-danger" href="{% url punns.views.delete punn.id %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}</a>
   {% else %}
-  <a rel="tooltip" title="{% trans "Reblog" %}" class="btn btn-default {% if reblog %}btn-primary{% endif %}" href="{% url punns.views.reblog punn.id %}"><span class="glyphicon glyphicon-retweet"></span> {% trans "Reblog" %}</a>
+  <a class="btn btn-default {% if reblog %}btn-primary{% endif %}" href="{% url punns.views.reblog punn.id %}"><span class="glyphicon glyphicon-retweet"></span> {% trans "Reblog" %}</a>
   {% endif %}
-  <a rel="tooltip" title="{% trans "Favorite" %}"  class="btn btn-default {% if favorite %}btn-primary{% endif %}" href="{% url punns.views.favorite punn.id %}"><span class="glyphicon glyphicon-star"></span> {% trans "Favorite" %}</a>
+  <a "  class="btn btn-default {% if favorite %}btn-primary{% endif %}" href="{% url punns.views.favorite punn.id %}"><span class="glyphicon glyphicon-star"></span> {% trans "Favorite" %}</a>
 </div>
 </div>
 <hr>
-<div class="row">
-<p class="text-muted">{% trans "Published" %} {{ punn.pub_date|naturaltime }}</p>
-</div>
 <hr>
 <div class="row">
 <div class="btn-toolbar pull-right">

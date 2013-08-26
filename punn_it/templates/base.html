@@ -56,6 +56,9 @@
       }
       #paginator {
         text-align: center;
+      }
+      #avatar-menu {
+        margin: -4px;
       } 
     </style>
     <style>
@@ -147,6 +150,72 @@
   </head>
   <body>
 
+
+<!-- Modal -->
+  <div class="modal fade" id="makeMoney" tabindex="-1" role="dialog" aria-labelledby="{% trans "Make money" %}" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Collapsible Group Item #1
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          Collapsible Group Item #2
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          Collapsible Group Item #3
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
 {% block nav %}
 
 <nav class="navbar navbar-fixed-top" role="navigation">
@@ -163,13 +232,20 @@
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
+              <a class="btn btn-default navbar-btn" data-toggle="modal" href="#makeMoney">{% trans "Make money" %}</a>
             {% block hotnewtop %}
             {% endblock %}
 {% if request.user.is_authenticated %}
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+{% thumbnail request.user.userprofile.avatar "30x30" crop="center" as im %}
+             <img src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" id="avatar-menu" />
+             {% endthumbnail %}
+
+ <b class="caret"></b></a>
         <ul class="dropdown-menu">
+                    <li><a href="{% url 'earnings.views.index' %}">{% trans "Your earnings" %}</a></li>
                     <li><a href="{% url 'punns.views.profile_page' request.user.username %}">{% trans "Your profile" %}</a></li>
                     <li class="divider"></li>
                     <li><a href="{% url 'accounts.views.edit_profile' %}">{% trans "Settings" %}</a></li>
@@ -178,7 +254,11 @@
         </ul>
       </li>
     </ul>
-              <a class="btn btn-primary navbar-btn navbar-right" href="{% url 'punns.views.create' %}"><span class="glyphicon glyphicon-pencil"></span></a>
+              <a class="btn btn-danger navbar-btn navbar-right" href="{% url 'punns.views.create' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Create content" %}</a>
+              <a class="" href="{% url 'punns.views.profile_page' request.user.username %}">
+
+
+</a>
             {% else %}
               <a class="btn btn-default navbar-btn navbar-right" href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Login" %}</a>
             {% endif %}
@@ -208,7 +288,6 @@
               <div class="jumbotron">
                 <h2>{% trans "Welcome to Knobshare." %}</h2>
                 <p class="lead">{% trans "Knobshare is based on a simple yet powerful principle : sharing." %} </p>
-                <p>{% trans "You create or share content and you get paid. It doesn't get any better than that. Create your account today today to start earning money." %} </p>
                 <p><a href="{% url 'socialauth_begin' backend='facebook' %}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-user"></span> {% trans "Create your account" %}</a></p>
               </div>
               {% endif %}

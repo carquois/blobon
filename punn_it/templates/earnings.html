@@ -1,0 +1,87 @@
+{% extends "settings_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Your earnings" %} / {% trans "Knobshare" %}{% endblock %}
+
+{% block additional_js %}
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load('visualization', '1', {packages: ['annotatedtimeline']});
+    function drawVisualization() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('date', '{% trans "Date" %}');
+      data.addColumn('number', '{% trans "Earnings" %}');
+      data.addRows([
+
+{% for earning in earnings %}
+        [new Date({{ earning.date|date:"Y" }}, {{ earning.date|date:"n" }} ,{{ earning.date|date:"j" }}), {{ earning.amount }}, ],
+{% endfor %}
+
+      ]);
+      var annotatedtimeline = new google.visualization.AnnotatedTimeLine(
+          document.getElementById('visualization'));
+      annotatedtimeline.draw(data, {'displayRangeSelector': false, 'displayZoomButtons': false});
+    }
+    
+    google.setOnLoadCallback(drawVisualization);
+  </script>
+{% endblock %}
+
+{% block content %}
+
+
+       <h3>{% trans "Your earnings" %} <small>@{{ request.user.username }}</small></h3>
+<hr>
+<ul class="list-inline">
+        <li>
+<h2>{{ today.total_earned }} <small>$USD</small></h2>
+<p class="lead">{% trans "Today (so far)" %}</p>
+
+</li>
+        <li>
+<h2>{{ last_30_days.total_earned }} <small>$USD</small></h2>
+<p class="lead">{% trans "Last 30 days" %}</p>
+
+
+</li>
+        <li>
+<h2>{{ all_time.total_earned }} <small>$USD</small></h2>
+<p class="lead">{% trans "All time" %}</p>
+
+</li>
+      </ul>  
+<hr>
+
+{% if earnings %}
+       <div id="visualization" style="width: 590px; height: 400px;"></div>
+
+<hr>
+
+<table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>{% trans "Date" %}</th>
+            <th>{% trans "Amount" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for earning in earnings %}
+          <tr>
+            <td>{{ earning.date }}</td>
+            <td>{{ earning.amount }}</td>
+          </tr>
+          
+          {% endfor %}
+
+        </tbody>
+      </table>
+
+        {% else %}
+
+<p>{% trans "You don't seem to have earnings yet. You must be new here. Come back tomorrow." %}
+
+        {% endif %}
+
+{% endblock %}
+

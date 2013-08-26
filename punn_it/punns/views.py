@@ -234,9 +234,12 @@ def profile_page(request, user):
         site_description = settings.MAIN_SITE_DESCRIPTION
         site = get_current_site(request)
         url = request.build_absolute_uri()
+
+        from punns.forms import QuickPublish
+        quick_publish = QuickPublish()
         return render_to_response('profile.html', 
                                   {'user': user, 'site_description': site_description,
-                                   'site': site, 'punns': punns, 'url': url}, 
+                                   'site': site, 'punns': punns, 'url': url, 'quick_publish': quick_publish}, 
                                   context_instance=RequestContext(request))
 
 @login_required

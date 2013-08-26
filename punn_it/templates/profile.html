@@ -37,16 +37,65 @@
 {% if user.userprofile.description %}
     <p>{{ user.userprofile.description }}</p>
 {% endif %} 
+{% if user.userprofile.location %}
+    <p>{{ user.userprofile.location }}</p>
+{% endif %} 
 {% if user.userprofile.facebook_link %}
     <p><a href="{{ user.userprofile.facebook_link }}" target="_blank"><img src="{{ STATIC_URL }}img/facebook.png" /></a>
-
-    <a href="{% url 'socialauth_begin' backend='twitter' %}" target="_blank"><img src="{{ STATIC_URL }}img/twitter.png" /></a>
 </p>
          {% endif %} 
+<p>
+<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">
+<span rel="tooltip" title="{% trans "This user is on fire." %}"class="glyphicon glyphicon-fire"></span>
+
+
+</a>
+
+
+
+</p>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
 
   </div>
 </div>
 </div>
 
+{% if user == request.user %}
+<div class="well">
+<h3>{% trans "Quick publish" %}</h3>
+<form role="form" enctype="multipart/form-data" method="post" action="{% url 'punns.views.create' %}">{% csrf_token %}
+  <div class="form-group">
+    {{ quick_publish.title.label_tag }}
+    {{ quick_publish.title }}
+  </div>
+  <div class="form-group">
+    {{ quick_publish.pic.label_tag }}
+    {{ quick_publish.pic }}
+  </div>
+  <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
+</form>
+
+</div>
+{% endif %}
 
 {% endblock %}
