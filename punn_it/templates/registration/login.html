@@ -1,77 +1,9 @@
-{% extends "base.html" %}
+{% extends "settings_base.html" %}
 {% load i18n %}
 {% load url from future %}
-
-{% block title %}{% trans "Veuillez vous connecter" %}{% endblock %}
-{% block additional_css %}
-    <style>
-      body {
-        background: url({{ STATIC_URL }}img/blob_bg.gif);
-      }
-
-      a {
-        color:#f4663b;
-      }
-      p {
-        color:#828282;
-      }
-      @media (max-width: 479px) {
-        .logo {
-          display:none;
-        }
-      }
-    </style>
-{% endblock %}
-{% block topmenu %}
-{% endblock %}
-{% block top-ads %}
-{% endblock %}
-{% block container %}
-     <div class="centered">
-       <div class="logo"></div>
-       <hr>
-       <h2 class="titre">{% trans "Connectez-vous avec :" %}</h2>
-       <div class="row">
-         <a href="{% url 'socialauth_begin' backend='facebook' %}">
-           <div class="social-btn fb"></div>
-         </a>
-       </div>
-       <hr>
-       <form class="form-horizontal" method="post" action="{% url 'django.contrib.auth.views.login' %}">{% csrf_token %}
-       {% if form.non_field_errors %}
-         <div class="alert alert-block alert-error">
-           <button type="button" class="close" data-dismiss="alert">&times;</button>
-           <h4>{% trans 'Erreur' %}</h4>
-           {% trans "Votre nom d'utilisateur et mot de passe ne correspondent pas. S'il vous plaît essayez de nouveau." %}
-         </div>
-
-       {% endif %}
-         <div class="control-group{% if form.username.errors %} error{% endif %}">
-           <label class="control-label" for="inputUsername">{% trans "Nom d'utilisateur" %}</label>
-           <div class="controls">
-             {{ form.username }}
-             {% if form.username.errors %}
-             <span class="help-inline">{% for error in form.username.errors %}{{ error|escape }}{% endfor %}</span>
-             {% endif %}
-           </div>
-         </div>
-         <div class="control-group{% if form.password.errors %} error{% endif %}">
-           <label class="control-label" for="inputError">{% trans "Mot de passe" %}</label>
-           <div class="controls">
-             {{ form.password }}
-             {% if form.password.errors %}
-             <span class="help-inline">{% for error in form.password.errors %}{{ error|escape }}{% endfor %}</span>
-             {% endif %}
-           </div>
-         </div>
-         <div class="control-group">
-           <div class="controls">
-             <button type="submit" class="btn">{% trans "Se connecter" %}</button>
-           </div>
-         </div>
-         <input type="hidden" name="next" value="{{ next }}" />
-       </form>
-       <hr>
-       <p><small>{% trans 'Pas de compte?' %} <a href="/signup/">{% trans 'Inscrivez-vous.' %}</a></small></p>
+{% block title %}{% trans "Check Donc Ça" %} / {% trans "Veuillez vous connecter" %}{% endblock %}
+{% block content %}
+        <h2 class="form-signin-heading">{% block heading %}{% trans "Connectez-vous sur Check Donc Ça" %}{% endblock %}</h2>
+        <a href="{% url 'socialauth_begin' backend='facebook' %}" class="btn btn-large btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-user"></span> {% trans "Facebook" %}</a>
 {% endblock %}
 
