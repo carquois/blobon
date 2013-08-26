@@ -27,8 +27,11 @@ class SocialSignupForm(forms.Form):
     avatar = forms.FileField(required=False)
 
 class UserProfileForm(ModelForm):
-    location = CharField(widget=forms.TextInput(attrs={
+    location = CharField(required=False, widget=forms.TextInput(attrs={
                                                     'type': 'text',
+                                                    'class': "form-control"}))
+    description = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Entrez unen biographie'),
+                                                    'rows': '4',
                                                     'class': "form-control"}))
     class Meta:
         model = UserProfile
@@ -45,14 +48,14 @@ class UserForm(ModelForm):
         widgets = {
             'username': TextInput(attrs={'type': 'text',
                                                     'class': "form-control"}),
-            'first_name': TextInput(attrs={'class': 'input-block-level'}),
-            'last_name': TextInput(attrs={'class': 'input-block-level'}),
+            'first_name': TextInput(attrs={'type': 'text',
+                                                    'class': "form-control"}),
+            'last_name': TextInput(attrs={'type': 'text',
+                                                    'class': "form-control"}),
         }
         labels = {
             'username': _("Nom d'utilisateur"),
             'pic': _('Image'),
         }
-
-
 
 
