@@ -59,7 +59,7 @@
 {% if user == request.user %}
 <div class="well">
 <h3>{% trans "Publication rapide" %}</h3>
-<form role="form" enctype="multipart/form-data" method="post" action="{% url 'punns.views.create' %}">{% csrf_token %}
+<form role="form" enctype="multipart/form-data" method="post" action="{% url 'punns.views.profile_page' request.user.username %}">{% csrf_token %}
   <div class="form-group">
     {{ quick_publish.title.label_tag }}
     {{ quick_publish.title }}

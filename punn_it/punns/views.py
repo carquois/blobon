@@ -238,7 +238,17 @@ def profile_page(request, user):
         url = request.build_absolute_uri()
 
         from punns.forms import QuickPublish
-        quick_publish = QuickPublish()
+
+        quick_publish = QuickPublish(request.POST, request.FILES or None)
+        if request.user.is_authenticated() and quick_publish.is_valid():
+          punn = quick_publish.save(commit=False)
+          punn.author = request.user
+          punn.status = "P"
+          punn.save()
+          #redirect user so a refresh doesn't trigger a double post
+          return HttpResponseRedirect( punn.get_absolute_url() )
+
+
         return render_to_response('profile.html', 
                                   {'user': user, 'site_description': site_description,
                                    'site': site, 'punns': punns, 'url': url, 'quick_publish': quick_publish}, 
@@ -280,7 +290,7 @@ def create(request):
             graph = facebook.GraphAPI(instance[0].tokens['access_token'])
             profile = graph.get_object("me")
             #Fix the link into something more kasher
-            graph.put_object("me", "feed", message="%s http://knobshare.com%s" % (punn.title, punn.get_absolute_url()))
+            graph.put_object("me", "feed", message="%s http://%s%s" % (punn.title, settings.MAIN_SITE_DOMAIN, punn.get_absolute_url()))
           heading = _(u"Your page has been published.")
           message = _(u"You can now share it.")
           messages.add_message(request, messages.INFO, '<h4 class="alert-heading">%s</h4><p>%s</p><p><a class="btn btn-primary" href="http://www.facebook.com/sharer.php?u=%s">Facebook</a> <a class="btn btn-primary" href="https://twitter.com/share?text=%s">Twitter</a></p>' % (heading , message, request.build_absolute_uri(punn.get_absolute_url()), punn.title), extra_tags='safe')

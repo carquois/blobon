@@ -10,10 +10,10 @@ class PunnForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Entrez votre titre ici'),
                                                     'type': 'text',
                                                     'class': "form-control"}))
-    source = CharField(widget=forms.TextInput(attrs={'placeholder': _('Entrez la source de votre contenu'),
+    source = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Entrez la source de votre contenu'),
                                                     'type': 'text',
                                                     'class': "form-control"}))
-    content = CharField(widget=forms.Textarea(attrs={'placeholder': _('Entrez une description'),
+    content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Entrez une description'),
                                                     'rows': '4',
                                                     'class': "form-control"}))
     class Meta:
