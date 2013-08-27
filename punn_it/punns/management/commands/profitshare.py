@@ -12,12 +12,6 @@ def publish(frequency):
     if u.publication_frequency == frequency:
       p = Punn.objects.filter(author = u.user).filter(status='D')
       if p.count() > 0:
-        e = Punn.objects.get(id=p[random.randrange(0,p.count())].pk)
-        e.status = 'P'
-        e.pub_date = datetime.now()
-        e.save()
-        print e
-        print e.id
 
 class Command(BaseCommand):
   args = '<frequency frequency ...>'
@@ -29,8 +23,4 @@ class Command(BaseCommand):
         publish('15m')
       if frequency == '30m':
         publish('30m')
-      if frequency == '1h':
-        publish('1h')
-      if frequency == '3h':
-        publish('3h')
 
