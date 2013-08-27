@@ -85,6 +85,18 @@ def cat(request, slug):
         return redirect("http://knobshare.com")
 
 @login_required
+def hot(request, id):
+      punn = get_object_or_404(Punn, id=id)
+      if request.user.is_staff:
+        if punn.is_top == True:
+          punn.is_top = False 
+          punn.save()
+        else:
+          punn.is_top = True
+          punn.save();
+      return HttpResponseRedirect( punn.get_absolute_url() )
+
+@login_required
 def delete(request, id):
       punn = get_object_or_404(Punn, id=id)
       if request.user == punn.author:
@@ -132,6 +144,17 @@ def videos(request):
                                 'punns': punns, 'site': site, 'auth_user': auth_user},
                                 context_instance=RequestContext(request))
 
+@login_required
+def moderate(request):
+      if request.user.is_staff:
+        punns = paginate(request,
+                         Punn.objects.exclude(author__is_staff=True).order_by('-pub_date'),
+                         20)
+      else:
+        return HttpResponseRedirect(reverse('punns.views.index'))
+      return render_to_response('base.html',
+                                {'punns': punns, },
+                                context_instance=RequestContext(request))
 def draft(request):
       user = UserProfile.objects.get(pk=3)
       punns = paginate(request,

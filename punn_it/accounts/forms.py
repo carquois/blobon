@@ -30,7 +30,7 @@ class UserProfileForm(ModelForm):
     location = CharField(required=False, widget=forms.TextInput(attrs={
                                                     'type': 'text',
                                                     'class': "form-control"}))
-    description = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Entrez unen biographie'),
+    description = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Entrez une biographie'),
                                                     'rows': '4',
                                                     'class': "form-control"}))
     class Meta:

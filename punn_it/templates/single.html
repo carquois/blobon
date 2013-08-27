@@ -117,8 +117,11 @@
                              ">&#45;</a>
 </div>
 <div class="btn-group pull-right">
+  {% if request.user.is_staff %}
+  <a class="btn btn-default {% if punn.is_top %}btn-primary{% endif %}" href="{% url punns.views.hot punn.id %}"><span class="glyphicon glyphicon-fire"></span> {% trans "Hot" %}</a>
+  {% endif %}
   {% if request.user == punn.author %}
-  <a class="btn btn-danger" href="{% url punns.views.delete punn.id %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete" %}</a>
+  <a class="btn btn-danger" href="{% url punns.views.delete punn.id %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Supprimer" %}</a>
   {% else %}
   <a class="btn btn-default {% if reblog %}btn-primary{% endif %}" href="{% url punns.views.reblog punn.id %}"><span class="glyphicon glyphicon-retweet"></span> {% trans "Rebloguer" %}</a>
   {% endif %}
@@ -171,7 +174,6 @@
         </div>
         <div class="modal-footer">
 <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Non non!" %}</button>
->>>>>>> 6c89745625450a32f4e6a405f96a4d201a1e4e29
                     <a href="{% url punns.views.delete punn.id %}" class="btn btn-danger">{% trans "Oui, je veux l'effacer" %}</a>
         </div>
       </div><!-- /.modal-content -->
@@ -204,12 +206,12 @@
 
                 {% if comment_list %}
 
-          <h3>{% trans "Best comment" %}</h3>
+          <h3>{% trans "Meilleur commentaire" %}</h3>
 
 {% for comment in comment_list|dictsortreversed:"karma" %}
 
                 {% if forloop.counter == 2 %}
-                <h3>{% trans "All comments" %}</h3>
+                <h3>{% trans "Tous les commentaires" %}</h3>
                 {% endif %}
 <div class="panel comment-holder">
 <div class="media">
