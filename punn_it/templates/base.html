@@ -400,6 +400,21 @@
               </div>
             </div><!--/.well -->
             {% block midsidebar %}
+{% if latest_comments %}
+            <div class="panel hidden-xs">
+<h4>{% trans "Derniers commentaires" %}</h4>
+<hr>
+<dl>
+{% for comment in latest_comments %}
+
+  <dt><a href="{{comment.punn.get_absolute_url}}">{{ comment.punn.title }}</a></dt>
+  <dd>{{ comment.content|truncatechars:35 }}</dd>
+{% endfor %}
+
+</dl>
+
+            </div>
+            {% endif  %}
             {% endblock  %}
 
             <div class="panel skyscrapper hidden-xs">
