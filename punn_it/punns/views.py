@@ -51,9 +51,10 @@ def index(request):
                            15)
       else:
         return redirect("http://knobshare.com")
+      latest_comments = Comment.objects.all().order_by('-created')[:5]
       return render_to_response('index.html',
                                {'user': user,
-                                'punns': punns, },
+                                'punns': punns, 'latest_comments': latest_comments},
                                 context_instance=RequestContext(request))
 
 
