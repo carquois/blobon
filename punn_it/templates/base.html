@@ -152,30 +152,25 @@
     </script>
   </head>
   <body>
-
-
-<!-- Modal -->
-  <div class="modal fade" id="makeMoney" tabindex="-1" role="dialog" aria-labelledby="{% trans "Make money" %}" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">{% trans "Faites de l'argent" %}</h4>
-        </div>
-        <div class="modal-body">
-
-<p>{% trans "Imaginez faire de l'argent du confort de votre maison avec votre contenu Web. Check Donc Ça offre une manière facile et gratuite de générer des revenus grâce à votre contenu en ligne." %}</p>
-<hr>
-<h3>{% trans "Les étapes" %}</h3>
-<ol>
-  <li><a href="{% url "accounts.views.signup" %}">{% trans "Créez votre compte" %}</a></li>
-  <li><a href="{% url "accounts.views.edit_profile" %}">{% trans "Mettez votre profil à jour" %}</a></li>
-  <li><a href="{% url "punns.views.create" %}">{% trans "Créez du contenu" %}</a></li>
-  <li><a href="{% url "earnings.views.index" %}">{% trans "Consultez vos revenus" %}</a></li>
-</ol>
-<hr>
-
-<p>À quelle fréquence payons-nous?</p>
+    <div class="modal fade" id="makeMoney" tabindex="-1" role="dialog" aria-labelledby="{% trans "Make money" %}" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">{% trans "Faites de l'argent" %}</h4>
+          </div>
+          <div class="modal-body">
+            <p>{% trans "Imaginez faire de l'argent du confort de votre maison avec votre contenu Web. Check Donc Ça offre une manière facile et gratuite de générer des revenus grâce à votre contenu en ligne." %}</p>
+            <hr>
+            <h3>{% trans "Les étapes" %}</h3>
+            <ol>
+              <li><a href="{% url "accounts.views.signup" %}">{% trans "Créez votre compte" %}</a></li>
+              <li><a href="{% url "accounts.views.edit_profile" %}">{% trans "Mettez votre profil à jour" %}</a></li>
+              <li><a href="{% url "punns.views.create" %}">{% trans "Créez du contenu" %}</a></li>
+              <li><a href="{% url "earnings.views.index" %}">{% trans "Consultez vos revenus" %}</a></li>
+            </ol>
+            <hr>
+            <p>À quelle fréquence payons-nous?</p>
 
 <p>Nous payons quand votre compte est rendu à 100.00$. Nous nous sommes basés sur Google AdSense pour fixer la limite.</p>
 
