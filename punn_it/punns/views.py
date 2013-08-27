@@ -291,8 +291,8 @@ def create(request):
             profile = graph.get_object("me")
             #Fix the link into something more kasher
             graph.put_object("me", "feed", message="%s http://%s%s" % (punn.title, settings.MAIN_SITE_DOMAIN, punn.get_absolute_url()))
-          heading = _(u"Your page has been published.")
-          message = _(u"You can now share it.")
+          heading = _(u"Votre page est maintenant publiée.")
+          message = _(u"Vous pouvez la partager.")
           messages.add_message(request, messages.INFO, '<h4 class="alert-heading">%s</h4><p>%s</p><p><a class="btn btn-primary" href="http://www.facebook.com/sharer.php?u=%s">Facebook</a> <a class="btn btn-primary" href="https://twitter.com/share?text=%s">Twitter</a></p>' % (heading , message, request.build_absolute_uri(punn.get_absolute_url()), punn.title), extra_tags='safe')
           return HttpResponseRedirect( punn.get_absolute_url() )
       else:
