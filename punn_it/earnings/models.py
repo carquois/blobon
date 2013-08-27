@@ -1,6 +1,5 @@
 from django.db import models
 
-
 from django.contrib.auth.models import User
 
 class Earning(models.Model):
@@ -8,6 +7,4 @@ class Earning(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     date = models.DateField()
     amount = models.DecimalField(max_digits=5, decimal_places=2)
-    def __unicode__(self):
-        return "%s - %s " % (self.user, self.amount) 
 
