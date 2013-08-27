@@ -1,5 +1,6 @@
 {% extends "settings_base.html" %}
 {% load i18n %}
+{% load l10n %}
 
 {% block title %}{% trans "Vos revenus" %} / {% trans "Check Donc Ça" %}{% endblock %}
 
@@ -10,21 +11,21 @@
     function drawVisualization() {
       var data = new google.visualization.DataTable();
       data.addColumn('date', '{% trans "Date" %}');
-      data.addColumn('number', '{% trans "Earnings" %}');
+      data.addColumn('number', '{% trans "Revenus" %}');
       data.addRows([
-
 {% for earning in earnings %}
-        [new Date({{ earning.date|date:"Y" }}, {{ earning.date|date:"n" }} ,{{ earning.date|date:"j" }}), {{ earning.amount }}, ],
+        [new Date({{ earning.date|date:"Y" }}, {{ earning.date|date:"n" }}, {{ earning.date|date:"j" }}), {{ earning.amount|unlocalize }}],
 {% endfor %}
-
       ]);
+    
       var annotatedtimeline = new google.visualization.AnnotatedTimeLine(
           document.getElementById('visualization'));
-      annotatedtimeline.draw(data, {'displayRangeSelector': false});
+      annotatedtimeline.draw(data, {'displayAnnotations': true, 'displayRangeSelector': false, 'displayZoomButtons': false});
     }
     
     google.setOnLoadCallback(drawVisualization);
   </script>
+
 {% endblock %}
 
 {% block content %}
@@ -48,7 +49,8 @@
       </ul>  
 <hr>
 
-       <div id="visualization" style="width: 590px; height: 400px;"></div>
+<div id="visualization" style="width: 590px; height: 400px;"></div>
+
 
 <hr>
 
@@ -64,7 +66,7 @@
           {% for earning in earnings %}
           <tr>
             <td>{{ earning.date }}</td>
-            <td>{{ earning.amount }}</td>
+            <td>{{ earning.amount }} <small>$USD</small></td>
           </tr>
           
           {% endfor %}
