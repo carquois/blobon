@@ -305,6 +305,8 @@ def create(request):
           punn = form.save(commit=False)
           punn.author = request.user
           punn.status = "P"
+          if request.user.is_staff:
+            punn.is_top = True
           punn.save()
           if punn.publish_on_facebook:
             from social_auth.models import UserSocialAuth
@@ -331,6 +333,9 @@ def submit(request):
         form = PunnForm(request.POST)
         if form.is_valid():
           new_punn = form.save()
+          if request.user.is_staff:
+            new_punn.is_top = True
+            new_punn.save()
           new_punn.source = request.POST['source']
           img_temp = NamedTemporaryFile(delete=True)
           img_temp.write(urllib2.urlopen(request.POST['media']).read())
