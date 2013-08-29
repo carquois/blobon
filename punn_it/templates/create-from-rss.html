@@ -1,0 +1,55 @@
+{% extends "settings_base.html" %}
+{% load i18n %}
+{% load url from future %}
+{% block title %}{% trans "Check Donc Ça / Flux RSS" %}{% endblock %}
+{% block additional_js %}
+<script>
+$(document).ready(function(){
+  $(".close").click(function(){
+    $(".close").parent(".panel").remove();
+  });
+});
+</script>
+{% endblock %}
+{% block additional-css %}
+.panel {
+  padding: 20px;
+}
+{% endblock %}
+{% block content %}
+<form role="form" method="get" action="{% url 'punns.views.create_from_rss' %}">
+
+<div class="form-group">
+    <label for="rssfeed">{% trans "URL du flux RSS" %}</label>
+    <input type="url" class="form-control" name="url" id="rssfeed" placeholder="{% trans "Entrez l'url du flus RSS ici" %}" {% if url %}value="{{ url }}"{% endif %}>
+  </div>
+
+         <div class="control-group">
+           <div class="controls">
+             <button type="submit" class="btn btn-default">{% trans "Soumettre" %}</button>
+           </div>
+         </div>
+       </form>
+
+{% if feed %}
+{% for entry in feed.entries %}
+<div id="form{{ forloop.counter }}"  class="panel">
+<button id="close{{ forloop.counter }}" type="button" class="pull-right close" aria-hidden="true">&times;</button>
+<form role="form" method="post" action="{% url 'punns.views.create_from_rss' %}">{% csrf_token %}
+  <div class="form-group">
+    <label for="title">{% trans "Titre" %}</label>
+    <input type="text" class="form-control" id="title" value="{{ entry.title }}">
+  </div>
+    <img src="{% with entry.img|first as first_image %}
+    {{ first_image|safe }}
+{% endwith %}" width="100%"/>
+  
+             <button type="submit" class="btn btn-default">{% trans "Soumettre" %}</button>
+</form>
+</div>
+
+{% endfor %}
+{% endif %}
+
+{% endblock %}
+

@@ -327,6 +327,27 @@ def create(request):
                                 {'form': form}, 
                                 context_instance=RequestContext(request))
 
+@login_required
+def create_from_rss(request): 
+    if request.method == 'POST':
+          return HttpResponseRedirect("post")
+    elif request.method == 'GET':
+      if request.GET.get('url', ''):
+        url = request.GET.get('url', '')
+        import feedparser
+        from BeautifulSoup import BeautifulSoup
+        feed = feedparser.parse(url)
+        parsed_feed = []
+        for entry in feed.entries:
+          response = urllib2.urlopen(entry.link)
+          soup = BeautifulSoup(response.read())
+          entry.img = []
+          for image in soup.findAll("img"):
+            entry.img.append(image['src'])
+    return render_to_response('create-from-rss.html', 
+                              {'feed': feed, 'url': url, 'parsed_feed': parsed_feed}, 
+                              context_instance=RequestContext(request))
+
 
 @login_required
 def submit(request): 
