@@ -157,56 +157,61 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">{% trans "Faites de l'argent" %}</h4>
+            <h4 class="modal-title">{% trans "Bienvenue sur le nouveau Check Donc Ça." %}</h4>
           </div>
           <div class="modal-body">
-            <p>{% trans "Imaginez faire de l'argent du confort de votre maison avec votre contenu Web. Check Donc Ça offre une manière facile et gratuite de générer des revenus grâce à votre contenu en ligne." %}</p>
-            <hr>
-            <h3>{% trans "Les étapes" %}</h3>
-            <ol>
+
+
+<p>Check Donc Ça est basé sur un principe simple, mais puissant : le partage.</p>
+
+<strong>Partage de contenu = partage de revenu</strong>
+
+<p>Imaginez : faire de l'argent dans le confort de votre maison avec votre contenu Web. Check Donc Ça offre une manière facile et gratuite de générer des revenus grâce à votre contenu en ligne.</p>
+
+<ol>
               <li><a href="{% url "accounts.views.signup" %}">{% trans "Créez votre compte" %}</a></li>
               <li><a href="{% url "accounts.views.edit_profile" %}">{% trans "Mettez votre profil à jour" %}</a></li>
               <li><a href="{% url "punns.views.create" %}">{% trans "Créez du contenu" %}</a></li>
               <li><a href="{% url "earnings.views.index" %}">{% trans "Consultez vos revenus" %}</a></li>
             </ol>
-            <hr>
-            <p>À quelle fréquence payons-nous?</p>
 
-<p>Nous payons quand votre compte est rendu à 100.00$. Nous nous sommes basés sur Google AdSense pour fixer la limite.</p>
+<strong>À quelle fréquence payons-nous?</strong>
+<p>Nous payons quand votre compte atteint 100$. Nous nous sommes basés sur Google AdSense pour fixer la limite.
+Comment payons-nous?</p>
 
-<p>Comment payons-nous?</p>
+<p>Encore une fois, comme AdSense, nous offrons deux choix de paiement :</p>
 
-<p>Encore une fois, comme AdSense, nous offrons deux choix de paiement</p>
+<ol>
+              <li>Par chèque qui vous sera envoyé par la poste</li>
+              <li>Par virement électronique qui sera déposé directement dans votre compte</li>
+            </ol>
+<p>Vous pourrez mettre à jour vos informations de paiement lorsque vous aurez atteint le montant du premier virement (100$).</p>
 
-<p>1- Par chèque qui vous sera envoyé par la poste 2- Par un virement électronique et ce sera déposé directement dans votre compte</p>
 
-<p>Vous pourrez mettre à jour vos informations de paiement lorsque vous aurez atteint le montant du premier virement. (100$)</p>
 
-<p>Quand payons-nous?</p>
+<strong>Quand payons-nous?</strong>
 
 <p>Nous payons une fois par mois, lorsque le compte dépasse 100$.</p>
 
-<p>Comment optimiser vos revenus?</p>
 
-<p>Publiez de manière constance. Ne vous gênez-pas sur la fréquence.</p>
+<strong>Comment optimiser vos revenus?</strong>
+<ul>
+	<li>Publiez de manière constante. Ne vous gênez pas sur la fréquence.</li>
 
-<p>Ajoutez une catégorie. </p>
+	<li>Ajoutez une catégorie. Les catégories fonctionnent un peu comme des sous-communautés (subreddit). Quoiqu'il ne soit pas obligatoire d'assigner une catégorie, il est toutefois fortement recommandé de le faire. De cette manière, vous serez «repris» sur ces pages, ce qui augmentera le trafic sur votre contenu.</li>
+	<li>Partagez sur vos réseaux sociaux. Les réseaux sociaux sont la source principale de visites sur le site. Vous pouvez aussi inviter vos amis à participer.</li>
 
-<p>Les catégories fonctionnent un peu comme des sous-communautés (subreddit). Quoique qu'il ne soit pas obligatoire d'assigner une catégorie, il est toutefois fortement recommandé de le faire. De cette manière, vous serez "repris" sur ces pages et ça augmentera le trafic sur votre contenu.</p>
+	<li>Soyez actif dans la communauté. Votez, commentez, participez. L'interaction est à la base de l'intérêt. Nous en prenons compte dans notre calcul de partage des revenus.</li>
 
-<p>Partagez sur vos réseaux sociaux. Les réseaux sociaux sont la source principale de visites sur le site. Vous pouvez aussi inviter vos amis à participer.</p>
+	<li>Citez votre source. Les créateurs de contenu méritent le trafic qu'ils obtiendront si vous partagez leur contenu ici. Soyez gentil et citez-les.</li>
 
-<p>Soyez actif dans la communauté. Votez, commentez, participez. L'interaction est à la base de l'intérêt. Nous en prenons compte dans notre calcul de partage des revenus.</p>
+</ul>
 
-<p>Citez votre source. Les créateurs de contenu méritent le trafic qu'ils obtiendront si vous partagez leur contenu ici. Soyez gentil et citez-les.</p>
+<p>Et n'essayez pas de spammer. J'vous l'dis là, j'suis pas épais. J'vais vous trouver et vous bannir. ;-)</p>
 
-<p>N'essayez pas de spammer ou de cliquer sur les pubs</p>
 
-<p>J'vous l'dis là, j'suis pas épais. J'vais vous trouver et vous bannir. ;-)</p>
 
 <p>Love, Gab</p>
-
-
 
 
         </div>
@@ -434,7 +439,13 @@
             {% block footer %}
         <hr>
         <footer>
-          <p>&copy; Knobshare 2010 - {% now "Y" %}</p>
+<ul class="list-inline">
+  <li>
+         &copy; Check Donc Ça {% now "Y" %}
+</li>
+  <li><a href="{% url "news.views.all" %}">{% trans "Blogue" %}</a></li>
+  <li><a href="mailto:gab@checkdonc.ca" target="_top">{% trans "Nous joindre" %}</a></li>
+</ul>
         </footer>
             {% endblock %}
             {% endblock %}
