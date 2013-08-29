@@ -20,4 +20,5 @@ django-extensions==1.0.3
 facebook-sdk==0.4.0
 Werkzeug==0.8.3
 raven==3.3.2
+BeautifulSoup==3.2.1
 feedparser==5.1.3
