@@ -3,13 +3,6 @@
 {% load url from future %}
 {% block title %}{% trans "Check Donc Ça / Flux RSS" %}{% endblock %}
 {% block additional_js %}
-<script>
-$(document).ready(function(){
-  $(".close").click(function(){
-    $(".close").parent(".panel").remove();
-  });
-});
-</script>
 {% endblock %}
 {% block additional-css %}
 .panel {
@@ -34,17 +27,30 @@ $(document).ready(function(){
 {% if feed %}
 {% for entry in feed.entries %}
 <div id="form{{ forloop.counter }}"  class="panel">
+
+<script>
+$(document).ready(function(){
+  $("#close{{ forloop.counter }}").click(function(){
+    $("#form{{ forloop.counter }}").remove();
+  });
+  $("#submit{{ forloop.counter }}").click(function(){
+    $("#form{{ forloop.counter }}").remove();
+  });
+});
+</script>
+
 <button id="close{{ forloop.counter }}" type="button" class="pull-right close" aria-hidden="true">&times;</button>
 <form role="form" method="post" action="{% url 'punns.views.create_from_rss' %}">{% csrf_token %}
   <div class="form-group">
     <label for="title">{% trans "Titre" %}</label>
     <input type="text" class="form-control" id="title" value="{{ entry.title }}">
   </div>
-    <img src="{% with entry.img|first as first_image %}
-    {{ first_image|safe }}
-{% endwith %}" width="100%"/>
-  
-             <button type="submit" class="btn btn-default">{% trans "Soumettre" %}</button>
+{% with entry.img|first as first_image %}
+    <img src="{{ first_image }}" width="100%"/>
+             <input type="hidden" name="media" value="{{ first_image|safe }}"> 
+{% endwith %}
+             <input type="hidden" name="source" value="{{ entry.link }}"> 
+             <button id="submit{{ forloop.counter }}" type="submit" class="btn btn-default">{% trans "Soumettre" %}</button>
 </form>
 </div>
 
