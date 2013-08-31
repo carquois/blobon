@@ -327,6 +327,43 @@ def create(request):
                                 {'form': form}, 
                                 context_instance=RequestContext(request))
 
+@login_required
+def create_from_rss(request): 
+    if request.method == 'POST':
+      punn = Punn(title=request.POST['title'], author=request.user, source=request.POST['source'])
+      if request.user.is_staff:
+          punn.is_top = True
+      punn.status = "D"
+      punn.save()
+      img_temp = NamedTemporaryFile(delete=True)
+      img_temp.write(urllib2.urlopen(request.POST['media']).read())
+      img_temp.flush()
+      filename = urlparse(request.POST['media']).path.split('/')[-1]
+      ext = filename.split('.')[-1]
+      prefix = punn.base62id
+      filename = "%s.%s" % (prefix, ext)
+      punn.pic.save(filename, File(img_temp))
+      return HttpResponseRedirect( punn.get_absolute_url() )
+    elif request.method == 'GET':
+      if request.GET.get('url', ''):
+        url = request.GET.get('url', '')
+        import feedparser
+        from BeautifulSoup import BeautifulSoup
+        feed = feedparser.parse(url)
+        parsed_feed = []
+        for entry in feed.entries:
+          response = urllib2.urlopen(entry.link)
+          soup = BeautifulSoup(response.read())
+          entry.img = []
+          for image in soup.findAll("img"):
+            entry.img.append(image['src'])
+        return render_to_response('create-from-rss.html', 
+                                  {'feed': feed, 'url': url, 'parsed_feed': parsed_feed}, 
+                                  context_instance=RequestContext(request))
+    return render_to_response('create-from-rss.html', 
+                              {}, 
+                              context_instance=RequestContext(request))
+
 
 @login_required
 def submit(request): 

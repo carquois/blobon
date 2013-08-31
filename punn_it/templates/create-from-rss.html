@@ -1,0 +1,61 @@
+{% extends "settings_base.html" %}
+{% load i18n %}
+{% load url from future %}
+{% block title %}{% trans "Check Donc Ça / Flux RSS" %}{% endblock %}
+{% block additional_js %}
+{% endblock %}
+{% block additional-css %}
+.panel {
+  padding: 20px;
+}
+{% endblock %}
+{% block content %}
+<form role="form" method="get" action="{% url 'punns.views.create_from_rss' %}">
+
+<div class="form-group">
+    <label for="rssfeed">{% trans "URL du flux RSS" %}</label>
+    <input type="url" class="form-control" name="url" id="rssfeed" placeholder="{% trans "Entrez l'url du flus RSS ici" %}" {% if url %}value="{{ url }}"{% endif %}>
+  </div>
+
+         <div class="control-group">
+           <div class="controls">
+             <button type="submit" class="btn btn-default">{% trans "Soumettre" %}</button>
+           </div>
+         </div>
+       </form>
+
+{% if feed %}
+{% for entry in feed.entries %}
+<div id="form{{ forloop.counter }}"  class="panel">
+
+<script>
+$(document).ready(function(){
+  $("#close{{ forloop.counter }}").click(function(){
+    $("#form{{ forloop.counter }}").remove();
+  });
+  $("#submit{{ forloop.counter }}").click(function(){
+    $("#form{{ forloop.counter }}").remove();
+  });
+});
+</script>
+
+<button id="close{{ forloop.counter }}" type="button" class="pull-right close" aria-hidden="true">&times;</button>
+<form target="_blank" role="form" method="post" action="{% url 'punns.views.create_from_rss' %}">{% csrf_token %}
+  <div class="form-group">
+    <label for="title">{% trans "Titre" %}</label>
+    <input type="text" class="form-control" name="title" value="{{ entry.title }}">
+  </div>
+{% with entry.img|first as first_image %}
+    <img src="{{ first_image }}" width="100%"/>
+             <input type="hidden" name="media" value="{{ first_image|safe }}"> 
+{% endwith %}
+             <input type="hidden" name="source" value="{{ entry.link }}"> 
+             <button id="submit{{ forloop.counter }}" type="submit" class="btn btn-default">{% trans "Soumettre" %}</button>
+</form>
+</div>
+
+{% endfor %}
+{% endif %}
+
+{% endblock %}
+
