@@ -40,10 +40,10 @@ $(document).ready(function(){
 </script>
 
 <button id="close{{ forloop.counter }}" type="button" class="pull-right close" aria-hidden="true">&times;</button>
-<form role="form" method="post" action="{% url 'punns.views.create_from_rss' %}">{% csrf_token %}
+<form target="_blank" role="form" method="post" action="{% url 'punns.views.create_from_rss' %}">{% csrf_token %}
   <div class="form-group">
     <label for="title">{% trans "Titre" %}</label>
-    <input type="text" class="form-control" id="title" value="{{ entry.title }}">
+    <input type="text" class="form-control" name="title" value="{{ entry.title }}">
   </div>
 {% with entry.img|first as first_image %}
     <img src="{{ first_image }}" width="100%"/>
