@@ -36,10 +36,12 @@
 {% if earnings %}
 <ul class="list-inline">
         <li>
+<h2>{{ today.total_earned }} <small>$USD</small></h2>
+<p class="lead">{% trans "Aujourd'hui" %}</p>
+</li>
+        <li>
 <h2>{{ last_30_days.total_earned }} <small>$USD</small></h2>
 <p class="lead">{% trans "Derniers 30 jours" %}</p>
-
-
 </li>
         <li>
 <h2>{{ all_time.total_earned }} <small>$USD</small></h2>
@@ -51,29 +53,7 @@
 
 <div id="visualization" style="width: 590px; height: 400px;"></div>
 
-
 <hr>
-
-<table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th>{% trans "Date" %}</th>
-            <th>{% trans "Montant" %}</th>
-          </tr>
-        </thead>
-        <tbody>
-
-          {% for earning in earnings %}
-          <tr>
-            <td>{{ earning.date }}</td>
-            <td>{{ earning.amount }} <small>$USD</small></td>
-          </tr>
-          
-          {% endfor %}
-
-        </tbody>
-      </table>
-
         {% else %}
 
 <p>{% trans "Les revenus sont calculés une fois par jour. Revenez demain." %}

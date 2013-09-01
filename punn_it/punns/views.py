@@ -300,6 +300,9 @@ def createcat(request):
 @login_required
 def create(request): 
       from punns.forms import PunnForm
+      from earnings.models import Earning
+      from datetime import datetime
+      from decimal import Decimal
       if request.method == 'POST':
         form = PunnForm(request.POST, request.FILES)
         if form.is_valid():
@@ -309,6 +312,8 @@ def create(request):
           if request.user.is_staff:
             punn.is_top = True
           punn.save()
+          e = Earning(user=request.user, amount=Decimal("0.02"), date=datetime.now())
+          e.save()
           if punn.publish_on_facebook:
             from social_auth.models import UserSocialAuth
             import facebook
@@ -438,10 +443,15 @@ def single(request, shorturl):
     #save new comment before querying for comments related to this punn
     comment_form = CommentForm(request.POST or None)
     if request.user.is_authenticated() and comment_form.is_valid():
+        from earnings.models import Earning
+        from datetime import datetime
+        from decimal import Decimal
         comment = comment_form.save(commit=False)
         comment.punn = punn
         comment.author = request.user
         comment.save()
+        e = Earning(user=request.user, amount=Decimal("0.01"), date=datetime.now())
+        e.save()
         #redirect user so a refresh doesn't trigger a double post
         return HttpResponseRedirect( punn.get_absolute_url() )
         
