@@ -365,7 +365,17 @@ Comment payons-nous?</p>
             </div>
             <div class="row">
             {% endif %}
-              <div class="col-xs-4">
+              <div class="col-xs-4 panel">
+<h6>
+                  {% if punn.author.userprofile.avatar %}
+                <a href="{% url "punns.views.profile_page" punn.author.username %}">
+{% thumbnail punn.author.userprofile.avatar "20x20" crop="center" as im %}
+  	          <img src="{{ im.url }}" alt=""/>
+	          {% endthumbnail %}
+	          {% endif %}
+                </a>
+
+{{ punn.author.first_name }} {{ punn.author.last_name }}</h6>
                 <a href="{{ punn.get_absolute_url }}" class="thumbnail">
                   {% if punn.pic %}
 	          {% thumbnail punn.pic "300x300" crop="center" as im %}
@@ -377,6 +387,15 @@ Comment payons-nous?</p>
 	          {% endthumbnail %}
 	          {% endif %}
                 </a>
+<ul class="list-inline">
+  <li><span class="glyphicon glyphicon-arrow-up"></span> {{ punn.score }}</li>
+{% if punn.number_of_comments != 0 %}
+  <li><span class="glyphicon glyphicon-comment"></span> {{ punn.number_of_comments }}</li>
+            {% endif %}
+{% if punn.cat %}
+  <li><span class="glyphicon glyphicon-tag"></span> <a href="{% url "punns.views.cat" punn.cat %}">{{ punn.cat }}</a></li>
+            {% endif %}
+</ul>
               </div>
             {% endfor %}
             </div>
@@ -421,7 +440,7 @@ Comment payons-nous?</p>
 <dl>
 {% for comment in latest_comments %}
 
-  <dt><a href="{{comment.punn.get_absolute_url}}">{{ comment.punn.title }}</a></dt>
+  <dt><a href="{{comment.punn.get_absolute_url}}#comments">{{ comment.punn.title }}</a></dt>
   <dd>{{ comment.content|truncatechars:35 }}</dd>
 {% endfor %}
 

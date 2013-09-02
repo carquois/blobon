@@ -11,7 +11,7 @@ from cgi import parse_qs
 from accounts.models import UserProfile, UserForm
 from comments.models import Comment
 from comments.forms import CommentForm
-from punns.models import Punn, PunnForm, Reblog, Favorite
+from punns.models import Punn, PunnForm, Reblog, Favorite, Cat
 from punns.utils import BASE10, BASE62, baseconvert
 from votes.models import PunnVote, CommentVote
 
@@ -38,19 +38,21 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_page
 
+
+def attach_infos(punns):
+      for punn in punns:
+          votesup = PunnVote.objects.filter(punn=punn).filter(vote='U')
+          votesdown = PunnVote.objects.filter(punn=punn).filter(vote='D')
+          punn.score = votesup.count() - votesdown.count()
+      return punns
+
+
 def index(request):
-      if request.META['HTTP_HOST'] == settings.MAIN_SITE_DOMAIN:
-          user = ""
-          punns = paginate(request,
-                           Punn.objects.filter(status='P').filter(is_top=True).order_by('-pub_date'),
-                           15)
-      elif UserProfile.objects.filter(domain='http://%s/' % request.META['HTTP_HOST']).exists():
-          user = UserProfile.objects.get(domain='http://%s/' % request.META['HTTP_HOST']).user
-          punns = paginate(request,
-                           Punn.objects.filter(author=user).filter(status='P').order_by('-pub_date'),
-                           15)
-      else:
-        return redirect("http://knobshare.com")
+      user = ""
+      punns = paginate(request,
+                       Punn.objects.filter(status='P').filter(is_top=True).annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
+                       15)
+      punns = attach_infos(punns)
       latest_comments = Comment.objects.all().order_by('-created')[:5]
       return render_to_response('index.html',
                                {'user': user,
@@ -59,31 +61,26 @@ def index(request):
 
 
 def new(request):
-      if request.META['HTTP_HOST'] == settings.MAIN_SITE_DOMAIN:
-        punns = paginate(request,
-                         Punn.objects.filter(status='P').order_by('-pub_date'),
-                         15)
-      else:
-        error_msg = _("Oooops. Essayez de nouveau.")
-        return HttpResponse('<p>%s</p>' % error_msg)
+      punns = paginate(request,
+                       Punn.objects.filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
+                       15)
+      punns = attach_infos(punns)
       return render_to_response('new.html',
-                               {
-                                'punns': punns, },
+                                {'punns': punns, },
                                 context_instance=RequestContext(request))
 
 
 
 
 def cat(request, slug):
-      if request.META['HTTP_HOST'] == "knobshare.com":
-        punns = paginate(request,
-                         Punn.objects.filter(status='P').order_by('-pub_date'),
-                         15)
-        return render_to_response('cat.html',
-                                  {'punns': punns, },
-                                  context_instance=RequestContext(request))
-      else:
-        return redirect("http://knobshare.com")
+      cat = get_object_or_404(Cat, slug=slug)
+      punns = paginate(request,
+                       Punn.objects.filter(status='P').filter(cat=cat).annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
+                       15)
+      punns = attach_infos(punns)
+      return render_to_response('cat.html',
+                                {'punns': punns, 'cat': cat},
+                                context_instance=RequestContext(request))
 
 @login_required
 def hot(request, id):
