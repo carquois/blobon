@@ -311,6 +311,8 @@ def create(request):
           punn.save()
           e = Earning(user=request.user, amount=Decimal("0.02"), date=datetime.now())
           e.save()
+          vote = PunnVote(punn=punn, user=request.user, vote='U')
+          vote.save()
           if punn.publish_on_facebook:
             from social_auth.models import UserSocialAuth
             import facebook
@@ -447,6 +449,8 @@ def single(request, shorturl):
         comment.punn = punn
         comment.author = request.user
         comment.save()
+        vote = CommentVote(comment=comment, user=request.user, vote='U')
+        vote.save()
         e = Earning(user=request.user, amount=Decimal("0.01"), date=datetime.now())
         e.save()
         #redirect user so a refresh doesn't trigger a double post
