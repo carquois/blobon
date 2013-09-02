@@ -58,7 +58,8 @@
         text-align: center;
       }
       #avatar-menu {
-        margin: -4px;
+        margin-top: -4px;
+        margin-left: -6px;
       }
       #sidebar .panel {
         padding: 10px;
@@ -245,7 +246,15 @@ Comment payons-nous?</p>
 {% if request.user.is_authenticated %}
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+{% if request.user.userprofile.avatar %}
+            {% thumbnail request.user.userprofile.avatar "27x27" crop="center" as im %}
+             <img src="{{ im.url }}" alt="{{ request.user.first_name }} {{ request.user.last_name }}" id="avatar-menu" /> <b class="caret"></b>
+             {% endthumbnail %}
+{% else %}
+        <span class="glyphicon glyphicon-user"></span> <b class="caret"></b>
+{% endif %}
+</a>
         <ul class="dropdown-menu">
                     <li><a href="{% url 'punns.views.profile_page' request.user.username %}">{% trans "Votre profil" %}</a></li>
                     <li><a href="{% url 'earnings.views.index' %}">{% trans "Vos revenus" %}</a></li>
