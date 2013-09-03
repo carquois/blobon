@@ -48,7 +48,7 @@ Produit : Développer une plateforme à la fine pointe de la technologie où les
 **À court terme (1 ou 2 ans) :** 
 
 Mettre sur pied une équipe composée de programmeurs et d'intégrateurs pour développer le plus rapidement les fonctionnalités de la plateforme. 
-Être locataire d'un bureau capable de recevoir 6 travailleurs à temps plein. 
+6 travailleurs à temps plein en télé-travail. 
 
 **À moyen terme (5 ans) :**
 
@@ -142,7 +142,7 @@ Avec plus de 10 ans d'expérience dans le domaine des technologies de l'informat
 
 **Mathieu Angers :**
 
-Avocat fiscaliste de 10 ans d'expériences, Mathieu s'est occupé de l'incorporation, va s'occuper de l'impôt et des crédits en recherche et développement pour que *Blobon* ait un traitement fiscal avantageux. 
+Avocat fiscaliste de 10 ans d'expériences spécialiste en recherche et developement, Mathieu s'est occupé de l'incorporation, va s'occuper de l'impôt et des crédits en recherche et développement pour que *Blobon* ait un traitement fiscal avantageux. 
 
 2.- Marché/Plan marketing
 =================
@@ -172,7 +172,7 @@ Le secteur des TIC a crû plus rapidement que l'ensemble de l'économie en 2011.
 
 Blobon cherche principalement à desservir le secteur géographique de Montréal et de la Rive-Sud. En effet, la variable géographique du marché cible est un élément important à prendre en considération puisqu'elle permet d'établir des communications plus directes et plus personnelles avec ses clients vu la proximité des opérations. Bien que le secteur géographique ciblé soit Montréal, Blobon n'écarte pas l'opportunité d'effectuer du Télé-Travail pour grandir son marché cible.
 
-Pour Blobon, un client typique s'avère être une entreprise spécialisée de moyenne à grosse taille. Elle requiert une bonne popularité sur les médias sociaux tels que Facebook et Twitter. Un tel client amène Blobon à développer des plateformes Web plus complexes et amène plus de visibilité à l’entreprise vu l’effervescence des médias sociaux.
+Pour Blobon, un client typique s'avère être une entreprise de moyenne à grosse taille de tout genre ; commerce de détail, entreprise de service financier, cabinet d'avocat, etc. Elle requiert une bonne popularité sur les médias sociaux tels que Facebook et Twitter. Un tel client amène Blobon à développer des plateformes Web plus complexes et amène plus de visibilité à l’entreprise vu l’effervescence des médias sociaux.
 
 
 Blobon segmente son marché cible en considérant deux aspects : le degré de spécialisation d’une entreprise et le besoin de popularité. Voyez par exemple où l’entreprise situerait un laboratoire sur cette carte perceptuelle.
