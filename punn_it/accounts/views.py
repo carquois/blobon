@@ -26,8 +26,8 @@ def signup(request):
 
 
 def new_association(request):
-    heading = _(u"Congratulations!")
-    message = _(u"A new account has been associated.")
+    heading = _(u"Bravo!")
+    message = _(u"Un nouveau compte a été associé.")
     messages.add_message(request, messages.INFO, "<strong>%s</strong> %s @%s" % (heading , message, request.user.username), extra_tags='safe')
     return HttpResponseRedirect(reverse('punns.views.profile_page', args=[request.user.username]))
                                 
@@ -37,8 +37,8 @@ def social_signup_step2(request):
     profile.is_new_from_social = False
     profile.save()
     #send a welcome message to the templates
-    heading = _(u"Welcome to Knobshare")
-    message = _(u"Your username has been set to :")
+    heading = _(u"Bienvenue")
+    message = _(u"Votre nom d'utilisateur est :")
     messages.add_message(request, messages.INFO, "<strong>%s</strong> %s @%s" % (heading , message, request.user.username), extra_tags='safe')
     return HttpResponseRedirect(reverse('punns.views.profile_page', args=[request.user.username]))
 #    
@@ -107,7 +107,7 @@ def edit_profile(request):
         if userprofile_form.is_valid() and user_form.is_valid():
           userprofile_form.save()
           user_form.save()
-          messages.add_message(request, messages.INFO, _(u"Thank you! Your settings have been changed."))
+          messages.add_message(request, messages.INFO, _(u"Merci. Vos paramètres ont été enregistrés."))
           return HttpResponseRedirect(reverse('accounts.views.edit_profile'))
     else:
         userprofile_form = UserProfileForm(instance=request.user.get_profile())
