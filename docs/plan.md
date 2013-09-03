@@ -23,11 +23,12 @@ Technologie des communications et de l’information
 
 *Blobon* est une firme de leaders en technologie de l'information composée d'experts reconnus dans le milieu pour offrir un guichet unique de solutions clé en main en stratégie Web, design, développement, marketing et hébergement. Blobon offre un service complet à toutes les étapes de la conception d'un projet Web ou mobile pour offrir une solution personnalisée et performante.
 
-*Blobon* se divise en deux grandes parties. D'un côté, elle offre des services en technologies de l'information et des communications pour grandes entreprises. De l'autre côté, elle développe un produit qui sera un réseau social avec partage de profit.
+*Blobon* se divise en deux grandes parties. D'un côté, elle offre des services en technologies de l'information et des communications pour grandes entreprises, tel l'analyse des besoins du client, la création de sites web, la gestion de serveurs, l'organisation de publicité en ligne et différents services de mentorat et de consultation en informatique et en design. De l'autre côté, elle développe un produit qui sera un réseau social avec partage de profit.
 
 Le projet de réseau social est de loin le bout le plus intéressant et celui qui sera le plus couvert dans ce plan d'affaires. Le but est de créer un réseau, un peu comme Facebook ou Twitter, où les gens arrivent se crééent un compte et publient du contenu. La grossse différence entre ces réseaux et nous est qu'eux gardent tous leurs revenus pour eux tandis que nous allons redistribuer nos revenus avec les utilisateurs. 
 
 Ça devient donc très intéressant pour un créateur de contenu (par exemple quelqu'un qui veut se partir un blogue) d'utiliser notre plateforme parce qu'il tirera un revenu de sa participation. Les revenus sont calculés en fonction des pages, donc c'est directement l'auteur de la page qui reçoit un montant pour son contenu.
+
 
 1.4 Historique de l'entreprise
 -----------
