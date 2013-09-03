@@ -347,6 +347,15 @@ def create_from_rss(request):
       prefix = punn.base62id
       filename = "%s.%s" % (prefix, ext)
       punn.pic.save(filename, File(img_temp))
+      if request.POST['draft'] == "facebook":
+        from social_auth.models import UserSocialAuth
+        import facebook
+        import os
+        instance = UserSocialAuth.objects.filter(provider='facebook').filter(user=request.user)
+        graph = facebook.GraphAPI(instance[0].tokens['access_token'])
+        os.chdir(settings.MEDIA_ROOT)
+        response = graph.put_photo(open(str(punn.pic.name)), '%s\n\nhttp://%s%s' % (punn.title, settings.MAIN_SITE_DOMAIN, punn.get_absolute_url() ))
+        messages.add_message(request, messages.INFO, _(u"Votre image a été publiée <a href='https://www.facebook.com/photo.php?fbid=%s'>sur Facebook</a>'" % response['post_id']), extra_tags='safe') 
       return HttpResponseRedirect( punn.get_absolute_url() )
     elif request.method == 'GET':
       if request.GET.get('url', ''):

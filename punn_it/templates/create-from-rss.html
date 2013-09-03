@@ -49,6 +49,20 @@ $(document).ready(function(){
     <img src="{{ first_image }}" width="100%"/>
              <input type="hidden" name="media" value="{{ first_image|safe }}"> 
 {% endwith %}
+
+<div class="radio">
+  <label>
+    <input type="radio" name="draft" value="draft" checked>
+    Publish to draft
+  </label>
+</div>
+<div class="radio">
+  <label>
+    <input type="radio" name="draft" value="facebook">
+    Publish image to Facebook
+  </label>
+</div>
+
              <input type="hidden" name="source" value="{{ entry.link }}"> 
              <button id="submit{{ forloop.counter }}" type="submit" class="btn btn-default">{% trans "Soumettre" %}</button>
 </form>
