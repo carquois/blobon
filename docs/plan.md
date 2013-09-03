@@ -23,7 +23,7 @@ Technologie des communications et de l’information
 
 *Blobon* est une firme de leaders en technologie de l'information composée d'experts reconnus dans le milieu pour offrir un guichet unique de solutions clé en main en stratégie Web, design, développement, marketing et hébergement. Blobon offre un service complet à toutes les étapes de la conception d'un projet Web ou mobile pour offrir une solution personnalisée et performante.
 
-*Blobon* se divise en deux grandes parties. D'un côté, elle offre des services en technologies de l'information et des communications pour grandes entreprises, tel l'analyse des besoins du client, la création de sites web, la gestion de serveurs, l'organisation de publicité en ligne et différents services de mentorat et de consultation en informatique et en design. De l'autre côté, elle développe un produit qui sera un réseau social avec partage de profit.
+*Blobon* se divise en deux grandes parties. D'un côté, elle offre des services en technologies de l'information et des communications pour grandes entreprises, tel l'analyse des besoins du client, architecture Web, intégration, programmation, gestion de serveurs, optimisation SEO, organisation de publicité en ligne et différents services de mentorat et de consultation en informatique et en design. De l'autre côté, elle développe un produit qui sera un réseau social avec partage de profit.
 
 Le projet de réseau social est de loin le bout le plus intéressant et celui qui sera le plus couvert dans ce plan d'affaires. Le but est de créer un réseau, un peu comme Facebook ou Twitter, où les gens arrivent se crééent un compte et publient du contenu. La grossse différence entre ces réseaux et nous est qu'eux gardent tous leurs revenus pour eux tandis que nous allons redistribuer nos revenus avec les utilisateurs. 
 
@@ -205,11 +205,15 @@ Revenu d’entreprise :  93 300 $
 
 **MEGAVOLT :**
 
+Produits et services offerts : analyse et stratégie Web, architecture Web, design, intégration, programmation, rédaction de contenus pour le Web et optimisation SEO.
+
 Forces : Qualité de produit, variétés des supports, bon service à la clientèle, site web corporatif dynamique, bien établi (1997).
 
 Faiblesses : Pas de spécialisation technique ou technologique avant-gardiste comme marque de commerce.
 
 **ADVISO :**
+
+Produits et services offerts : conception de site Web, référencement, marketing Internet, stratégie médias sociaux, gestion de projet, formation  et conférence.
 
 Forces : Service d’optimisation et de stratégie en plus de la conception de plateformes, branding de qualité.
 
@@ -217,11 +221,15 @@ Faiblesses : Davantage axé sur la consultation et le management que sur la cré
 
 **TOUCHÉ PHD :**
 
+Produits et services offerts : stratégie/planification média, placement média, gestion/contrôle des investissements média, marketing par moteur de recherche et recherche média.
+
 Forces : Entreprise en croissance, interaction avec la communauté.
 
 Faiblesses : Site web corporatif de moins bonne qualité (visuel,branding,etc.).
 
 **SID LEE :**
+
+Produits et services offerts : branding, publicité, contenus, marketing intéractif et marketing expérienciel
 
 Forces : Reconnue pour sa créativité dans le milieu, bonne qualité du produit,
 
