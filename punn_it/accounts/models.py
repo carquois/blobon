@@ -58,6 +58,8 @@ class UserProfile(models.Model):
     is_new_from_social = models.BooleanField(default=False)
     created_with_provider = models.CharField(blank=True, max_length=100)
     
+    fan_page_access_token = models.CharField(max_length=260, blank=True)
+    
     def __unicode__(self):
         return self.description
 

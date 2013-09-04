@@ -133,6 +133,7 @@
 <div class="btn-group">
   {% if request.user.is_staff %}
   <a class="btn btn-default {% if punn.is_top %}btn-primary{% endif %}" href="{% url punns.views.hot punn.id %}"><span class="glyphicon glyphicon-fire"></span> {% trans "Hot" %}</a>
+  <a class="btn btn-default" href="http://checkdonc.ca/admin/punns/punn/{{ punn.id }}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Modifier" %}</a>
   {% endif %}
   {% if request.user == punn.author %}
   <a class="btn btn-danger" href="{% url punns.views.delete punn.id %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Supprimer" %}</a>
