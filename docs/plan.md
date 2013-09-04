@@ -104,7 +104,25 @@ Selon nôtre évaluation de la croissance actuelle cet objectif est réaliste, d
 
 **Gabriel Dancause :**
 
-Après plus de 8 ans d'expérience en programmation, en intégration et en gestion de serveur, c'est avec une solide expérience que je me lance en affaires. J'ai aussi plusieurs cours en gestion d'entreprises, en commerce des valeurs mobilières et en fiscalité. J'ai toujours eu la fibre entrepreneuriale et c'est avec beaucoup d'enthousiasme que je me lance dans cette nouvelle aventure. Au point de vue technique, j’ai acquis une expertise concurrentielle en programmation open source.
+Après plus de 8 ans d'expérience en programmation, en intégration et en gestion de serveur, c'est avec une solide expérience que je me lance en affaires. J'ai aussi plusieurs cours en gestion d'entreprises, en commerce des valeurs mobilières et en fiscalité. J'ai toujours eu la fibre entrepreneuriale et c'est avec beaucoup d'enthousiasme que je me lance dans cette nouvelle aventure. 
+
+Forces : 
+
+Connaissances poussées en programmation, principalement open source.
+
+Sociable, bon entregent et facilité a créer des contacts.
+
+Intéressé par les nouvelles technologies, en constante formation.
+
+
+
+Faiblesses :
+
+J'ai un peu de difficulté à me lever le matin :-)
+
+Comptabilité
+
+Trop de tâches différentes à accomplir, il faudrait plus d'employé pour me permettre de me concentrer sur le plus important.
 
 1.9 Structure organisationnelle de l'entreprise
 -----------
