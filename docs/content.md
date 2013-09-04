@@ -6,8 +6,6 @@ http://imgur.com/r/QuotesPorn
 
 http://imgur.com/r/DestructionPorn
 
-http://imgur.com/r/NewsPorn
-
 http://imgur.com/r/EarthPorn
 
 http://imgur.com/r/AdrenalinePorn
