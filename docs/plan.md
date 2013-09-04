@@ -124,6 +124,23 @@ Comptabilité
 
 Trop de tâches différentes à accomplir, il faudrait plus d'employé pour me permettre de me concentrer sur le plus important.
 
+Diplômes : 
+
+Certificat en informatique à l'UQAM ­ Montréal (2008)
+
+Cours relatif au Manuel sur les normes de conduite Institut Canadien des valeurs
+mobilières ­ (Montréal (2006)
+
+Cours sur le commerce des Valeurs Mobilières Institut Canadien des valeurs
+mobilières ­ (Montréal (2006)
+
+Spécialisation Java au collège Maisonneuve ­ Montréal (2007)
+
+Cours Actions et Obligations à DayTrader Canada ­ (Montréal (2007)
+
+Technique de son à l'Institut Trébas ­ (Montréal (2002)
+
+
 1.9 Structure organisationnelle de l'entreprise
 -----------
 
