@@ -234,15 +234,31 @@ La clientèle visée par Blobon est une entreprise qui désire démarrer un proj
 
 Actuellement, les contrats en cours à titre de services conseils rapportent à l’entreprise environ 6 000 $ par mois en augmentation. Pour ce qui est de la publicité du site Checkdonc.ca, elle est pour le moment à environ 1000 $ par mois.
 
+Scénario optimiste : 
+
 Comme l’affichage sur Checkdonc.ca est en augmentation constante, et que le public atteint croit de manière exponentielle, on évalue à 10 % la croissance du revenu de publicité par mois.
 
 On peut donc estimer un revenu annuel de :
 
 Service-conseil : 72 000 $
 
-Publicité :  21 300 $
+Publicité : 21 300 $
 
-Revenu d’entreprise :  93 300 $
+Revenu d’entreprise : 93 300 $
+
+
+
+Scénario pessimiste : 
+
+Imaginons la perte d'un client (15% des revenus) et la baisse de revenu publicitaire de 50% du à une diminution de la fréquentation.
+
+Le revenu annuel serait alors : 
+
+Service-conseil : 61 200 $
+
+Publicité : 6000 $
+
+Revenu d’entreprise : 67 200 $
 
 2.2 Analyse de la concurrence
 -----------
