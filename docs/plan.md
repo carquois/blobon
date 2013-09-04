@@ -372,7 +372,7 @@ La technique utilisée par Blobon lors de l’exécution d’un contrat est cell
 
 2. Analyse des besoins et des exigences du projet.
 
-3. Conception de maquettes en fils de fer du prototype.
+3. Conception de maquettes en fils de fer (wireframe)du prototype.
 
 4. Approbation et modification des idées avec le client.
 
