@@ -45,14 +45,15 @@ Produit : Développer une plateforme à la fine pointe de la technologie où les
 1.6 Objectifs généraux
 -----------
 
-**À court terme (1 ou 2 ans) :** 
+**À court terme (1 ou 2 ans) :**
 
-Mettre sur pied une équipe composée de programmeurs et d'intégrateurs pour développer le plus rapidement les fonctionnalités de la plateforme. 
-6 travailleurs à temps plein en télé-travail. 
+Mettre sur pied une équipe composée de programmeurs et d'intégrateurs pour développer le plus rapidement les fonctionnalités de la plateforme.  Engager 2 travailleurs à temps plein. Le télé-travail sera privilégié car il permet d'attirer les gens les plus compétents qui désirent les meilleurs conditions de travail en plus de réduire les coûts (location de bureau, équipements informatiques, lignes téléphoniques etc.) ce qui aide aussi à d'offrir des salaires compétitifs. Cela permet aussi une meilleure gestion des absences et des retards. Pour superviser le travail des employés différentes applications Web seront utilisés tel Asana, un gestionnaire de tache qui aide amélioré la communication et la collaboration au sein d'une équipe, Github pour la gestion des différents codes (chaque modification au code est enregistrée et détaillée permettant de suivre le travail des employés) et freshbook qui est une solution de comptabilité basés sur le cloud simple et facile à utiliser.
+
+À moyen terme (5 ans) 
 
 **À moyen terme (5 ans) :**
 
-S’établir dans un espace à bureaux ouvert au grand public afin d’y recevoir ses clients et d’en rejoindre des nouveaux.
+Augmenter les revenus par un accroissement soutenu du trafic de 5% par mois sur les sites du réseau. Accroître le nombres de clients et fidéliser ces derniers. Aller chercher de plus gros contrat pour augmenter la visibilité de l'entreprise.
 
 **À long terme (10 ans) :**
 
@@ -61,30 +62,41 @@ Conquérir le marché québécois des technologies de l’information et des com
 1.7 Échéancier de réalisations
 -----------
 
-Jusqu’à présent, Blobon a passé les étapes de son incorporation et de la réalisation de son plan d’affaires. Maintenant que les assises légales et administratives de l’entreprise sont en place, Blobon peut s’affairer à rechercher du financement et des subventions. Ces montants substantiels serviront à l’embauche de nouveaux employés et à la location d’un espace de travail plus ergonomique et pouvant accueillir une équipe plus nombreuse.
+Jusqu’à présent, Blobon a passé les étapes de son incorporation et de la réalisation de son plan d’affaires. Maintenant que les assises légales et administratives de l’entreprise sont en place, Blobon peut s’affairer à rechercher du financement et des subventions. Ces montants substantiels serviront à l’embauche de nouveaux employés et à l'achat d'équipement.
 
-1er juin : Avoir fini les démarches avec le CLD pour le soutien STA et le prêt FCJE
+1er juin : Avoir fini les démarches avec le CLD pour le soutien STA et le prêt FCJE - Fait
 
-1er juillet : Sortir la version 1.2 du site incluant les fonctionnalités de publication de contenu
+1er juillet : Sortir la version 1.2 du site incluant les fonctionnalités de publication de contenu - Fait
 
-1er août : Engager un programmeur à temps plein
+1er août : Engager un programmeur à temps plein - Fait
 
-1er septembre : Sortir la version 1.3 du site incluant la version mobile
+1er septembre : Sortir la version 1.3 du site incluant la version mobile - Fait
 
-1er octobre : Migrer l'infrastructure sur « le cloud » 
+La version 1.3 inclus la version mobile, un outils plus rapide pour générer du contenu pour l'administrateur et un outil de modération des commentaires plus efficace et user-friendly.
 
-1er novembre : Sortir la version 1.4 du site incluant les graphiques d'analyse
+1er octobre : Migrer l'infrastructure sur « le cloud »
+
+Pour diminuer les coûts, économiser de l'énergie et pour des questions de sécurité infrastructure devra être migrer vers "le cloud".
+
+1er novembre : Sortir la version 1.4 du site incluant la géolocalisation
+
+Les utilisateurs pourront indiquer où ils se trouvent grâce à système de géolocalisation.
 
 1er décembre : Appliquer à tous les programmes de subventions disponible pour l'entreprise
 
+Nous nous servons du site www.fundica.com pour trouver les subventions appropriées pour notre entreprise et nous avons déjà entamer des démarches auprès du PARI, le programme d'aide à la recherche industrielle.
+
 1er janvier : Engager une deuxième ressource, un intégrateur
+
+Il sera en charge d'intégrer les maquettes aux différents sites des clients et du réseaux.
 
 1er février : Lancer une campagne publicitaire sur le Web
 
+Le but est de générer plus de trafic sur les sites du réseau et d'aller chercher de nouveaux clients du même coup. Nous allons donc nous servir du trafic générer pour augmenter notre visibilité et de cette façon attirer de nouveaux clients.
+
 1er mars : Avoir atteint 125 000 pages vues par jour
 
-1er avril : Sortir la version 1.5 du site incluant la géolocalisation 
-
+Selon nôtre évaluation de la croissance actuelle cet objectif est réaliste, de plus l'ajout constant de fonctionnalités et le lancement de la campagne publicitaire attirerons certainement plus de trafic.
 
 
 1.8 Profil des promoteurs
