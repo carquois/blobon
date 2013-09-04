@@ -407,8 +407,12 @@ La technique utilisée par Blobon lors de l’exécution d’un contrat est cell
 
 Les couts de production engagés lors de l’exécution d’un contrat sont peu nombreux et surtout constitués de salaires, mais d’autres dépenses peuvent être engagées. Par exemple, chaque site Web développé nécessite un serveur et un système de sauvegarde en cas de coupure de service.
 
-Pour ce qui est des frais fixes, ils sont un peu plus nombreux, mais beaucoup moins importants. La conception des designs se fait grâce à l’aide du logiciel Photoshop, duquel une licence est requise. Puis, pour travailler sur le Web, des connexions internet illimitées sont nécessaires. La situation de l’entreprise ne requiert pas de loyer pour le moment, mais l’emménagement de l’entreprise dans un bureau commercial est projeté dans un avenir à court terme. Nous avons joint en annexe des graphiques démontrant les avantages d’exploiter une entreprise en TIC à Montréal comparé aux autres grandes métropoles d’Amérique du Nord en 2011.
- 
+Pour ce qui est des frais fixes, ils sont un peu plus nombreux, mais beaucoup moins importants. La conception des designs se fait grâce à l’aide du logiciel Photoshop, duquel une licence est requise. Puis, pour travailler sur le Web, des connexions internet illimitées sont nécessaires. Nous avons joint en annexe des graphiques démontrant les avantages d’exploiter une entreprise en TIC à Montréal comparé aux autres grandes métropoles d’Amérique du Nord en 2011.
+
+3.1.3 Bénéfices
+
+Selon nos calculs actuels le pourcentage de bénéfices brut par projet s'établit aux alentours de 90%
+
 3.1.4 Normes de qualité
 -----------
 
