@@ -444,7 +444,7 @@ Papiers d’incorporation.
 
 Équipement requis | Coût relatif estimatif à l’acquisition 
 --- | --- 
-Bureau | 2000 $/mois
+Bureau | 1000 $/mois
 Connexion Internet | 300 $/mois
 5 serveurs | 150 $/mois
 Licences | 5000 $/année
