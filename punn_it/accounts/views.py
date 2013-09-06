@@ -9,7 +9,30 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from accounts.forms import UserCreateForm, SocialSignupForm, UserProfileForm, UserForm
+from twython import Twython
 
+APP_KEY = 'rNUqZzZRzkwoPaXYytpFgQ'
+APP_SECRET = 'CeDVT0e35vbs2KUBzQq6tQijdUfC4NL3XRmO12ZDyeA'
+
+
+def twitter(request):
+    twitter = Twython(APP_KEY, APP_SECRET)
+    auth = twitter.get_authentication_tokens(callback_url='http://1200cv.org/twitter-success')
+    request.session['oauth_token'] = auth['oauth_token']
+    request.session['oauth_token_secret'] = auth['oauth_token_secret']
+    return HttpResponseRedirect(auth['auth_url'])
+
+def twitter_success(request):
+    twitter = Twython(APP_KEY, APP_SECRET, request.session['oauth_token'], request.session['oauth_token_secret'])
+    final_step = twitter.get_authorized_tokens(request.GET.get("oauth_verifier", None))
+    OAUTH_TOKEN = final_step['oauth_token']
+    OAUTH_TOKEN_SECRET = final_step['oauth_token_secret']
+    twitter = Twython(APP_KEY, APP_SECRET,
+                  OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+    twitter.update_status(status='Ben oui!')
+    return render_to_response("twitter.html", 
+                              {},
+                              context_instance=RequestContext(request))
 
 def signup(request):
     if request.user.is_authenticated() and request.user.get_profile().is_new_from_social:
