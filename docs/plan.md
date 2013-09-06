@@ -45,14 +45,15 @@ Produit : Développer une plateforme à la fine pointe de la technologie où les
 1.6 Objectifs généraux
 -----------
 
-**À court terme (1 ou 2 ans) :** 
+**À court terme (1 ou 2 ans) :**
 
-Mettre sur pied une équipe composée de programmeurs et d'intégrateurs pour développer le plus rapidement les fonctionnalités de la plateforme. 
-6 travailleurs à temps plein en télé-travail. 
+Mettre sur pied une équipe composée de programmeurs et d'intégrateurs pour développer le plus rapidement les fonctionnalités de la plateforme.  Engager 2 travailleurs à temps plein. Le télé-travail sera privilégié car il permet d'attirer les gens les plus compétents qui désirent les meilleurs conditions de travail en plus de réduire les coûts (location de bureau, équipements informatiques, lignes téléphoniques etc.) ce qui aide aussi à d'offrir des salaires compétitifs. Cela permet aussi une meilleure gestion des absences et des retards. Pour superviser le travail des employés différentes applications Web seront utilisés tel Asana, un gestionnaire de tache qui aide amélioré la communication et la collaboration au sein d'une équipe, Github pour la gestion des différents codes (chaque modification au code est enregistrée et détaillée permettant de suivre le travail des employés) et freshbook qui est une solution de comptabilité basés sur le cloud simple et facile à utiliser.
+
+À moyen terme (5 ans) 
 
 **À moyen terme (5 ans) :**
 
-S’établir dans un espace à bureaux ouvert au grand public afin d’y recevoir ses clients et d’en rejoindre des nouveaux.
+Augmenter les revenus par un accroissement soutenu du trafic de 5% par mois sur les sites du réseau. Accroître le nombres de clients et fidéliser ces derniers. Aller chercher de plus gros contrat pour augmenter la visibilité de l'entreprise.
 
 **À long terme (10 ans) :**
 
@@ -61,30 +62,41 @@ Conquérir le marché québécois des technologies de l’information et des com
 1.7 Échéancier de réalisations
 -----------
 
-Jusqu’à présent, Blobon a passé les étapes de son incorporation et de la réalisation de son plan d’affaires. Maintenant que les assises légales et administratives de l’entreprise sont en place, Blobon peut s’affairer à rechercher du financement et des subventions. Ces montants substantiels serviront à l’embauche de nouveaux employés et à la location d’un espace de travail plus ergonomique et pouvant accueillir une équipe plus nombreuse.
+Jusqu’à présent, Blobon a passé les étapes de son incorporation et de la réalisation de son plan d’affaires. Maintenant que les assises légales et administratives de l’entreprise sont en place, Blobon peut s’affairer à rechercher du financement et des subventions. Ces montants substantiels serviront à l’embauche de nouveaux employés et à l'achat d'équipement.
 
-1er juin : Avoir fini les démarches avec le CLD pour le soutien STA et le prêt FCJE
+1er juin : Avoir fini les démarches avec le CLD pour le soutien STA et le prêt FCJE - Fait
 
-1er juillet : Sortir la version 1.2 du site incluant les fonctionnalités de publication de contenu
+1er juillet : Sortir la version 1.2 du site incluant les fonctionnalités de publication de contenu - Fait
 
-1er août : Engager un programmeur à temps plein
+1er août : Engager un programmeur à temps plein - Fait
 
-1er septembre : Sortir la version 1.3 du site incluant la version mobile
+1er septembre : Sortir la version 1.3 du site incluant la version mobile - Fait
 
-1er octobre : Migrer l'infrastructure sur « le cloud » 
+La version 1.3 inclus la version mobile, un outils plus rapide pour générer du contenu pour l'administrateur et un outil de modération des commentaires plus efficace et user-friendly.
 
-1er novembre : Sortir la version 1.4 du site incluant les graphiques d'analyse
+1er octobre : Migrer l'infrastructure sur « le cloud »
+
+Pour diminuer les coûts, économiser de l'énergie et pour des questions de sécurité infrastructure devra être migrer vers "le cloud".
+
+1er novembre : Sortir la version 1.4 du site incluant la géolocalisation
+
+Les utilisateurs pourront indiquer où ils se trouvent grâce à système de géolocalisation.
 
 1er décembre : Appliquer à tous les programmes de subventions disponible pour l'entreprise
 
+Nous nous servons du site www.fundica.com pour trouver les subventions appropriées pour notre entreprise et nous avons déjà entamer des démarches auprès du PARI, le programme d'aide à la recherche industrielle.
+
 1er janvier : Engager une deuxième ressource, un intégrateur
+
+Il sera en charge d'intégrer les maquettes aux différents sites des clients et du réseaux.
 
 1er février : Lancer une campagne publicitaire sur le Web
 
+Le but est de générer plus de trafic sur les sites du réseau et d'aller chercher de nouveaux clients du même coup. Nous allons donc nous servir du trafic générer pour augmenter notre visibilité et de cette façon attirer de nouveaux clients.
+
 1er mars : Avoir atteint 125 000 pages vues par jour
 
-1er avril : Sortir la version 1.5 du site incluant la géolocalisation 
-
+Selon nôtre évaluation de la croissance actuelle cet objectif est réaliste, de plus l'ajout constant de fonctionnalités et le lancement de la campagne publicitaire attirerons certainement plus de trafic.
 
 
 1.8 Profil des promoteurs
@@ -92,7 +104,42 @@ Jusqu’à présent, Blobon a passé les étapes de son incorporation et de la r
 
 **Gabriel Dancause :**
 
-Après plus de 8 ans d'expérience en programmation, en intégration et en gestion de serveur, c'est avec une solide expérience que je me lance en affaires. J'ai aussi plusieurs cours en gestion d'entreprises, en commerce des valeurs mobilières et en fiscalité. J'ai toujours eu la fibre entrepreneuriale et c'est avec beaucoup d'enthousiasme que je me lance dans cette nouvelle aventure. Au point de vue technique, j’ai acquis une expertise concurrentielle en programmation open source.
+Après plus de 8 ans d'expérience en programmation, en intégration et en gestion de serveur, c'est avec une solide expérience que je me lance en affaires. J'ai aussi plusieurs cours en gestion d'entreprises, en commerce des valeurs mobilières et en fiscalité. J'ai toujours eu la fibre entrepreneuriale et c'est avec beaucoup d'enthousiasme que je me lance dans cette nouvelle aventure. 
+
+Forces : 
+
+Connaissances poussées en programmation, principalement open source.
+
+Sociable, bon entregent et facilité a créer des contacts.
+
+Intéressé par les nouvelles technologies, en constante formation.
+
+
+
+Faiblesses :
+
+J'ai un peu de difficulté à me lever le matin :-)
+
+Comptabilité
+
+Trop de tâches différentes à accomplir, il faudrait plus d'employé pour me permettre de me concentrer sur le plus important.
+
+Diplômes : 
+
+Certificat en informatique à l'UQAM ­ Montréal (2008)
+
+Cours relatif au Manuel sur les normes de conduite Institut Canadien des valeurs
+mobilières ­ (Montréal (2006)
+
+Cours sur le commerce des Valeurs Mobilières Institut Canadien des valeurs
+mobilières ­ (Montréal (2006)
+
+Spécialisation Java au collège Maisonneuve ­ Montréal (2007)
+
+Cours Actions et Obligations à DayTrader Canada ­ (Montréal (2007)
+
+Technique de son à l'Institut Trébas ­ (Montréal (2002)
+
 
 1.9 Structure organisationnelle de l'entreprise
 -----------
@@ -187,15 +234,31 @@ La clientèle visée par Blobon est une entreprise qui désire démarrer un proj
 
 Actuellement, les contrats en cours à titre de services conseils rapportent à l’entreprise environ 6 000 $ par mois en augmentation. Pour ce qui est de la publicité du site Checkdonc.ca, elle est pour le moment à environ 1000 $ par mois.
 
+Scénario optimiste : 
+
 Comme l’affichage sur Checkdonc.ca est en augmentation constante, et que le public atteint croit de manière exponentielle, on évalue à 10 % la croissance du revenu de publicité par mois.
 
 On peut donc estimer un revenu annuel de :
 
 Service-conseil : 72 000 $
 
-Publicité :  21 300 $
+Publicité : 21 300 $
 
-Revenu d’entreprise :  93 300 $
+Revenu d’entreprise : 93 300 $
+
+
+
+Scénario pessimiste : 
+
+Imaginons la perte d'un client (15% des revenus) et la baisse de revenu publicitaire de 50% du à une diminution de la fréquentation.
+
+Le revenu annuel serait alors : 
+
+Service-conseil : 61 200 $
+
+Publicité : 6000 $
+
+Revenu d’entreprise : 67 200 $
 
 2.2 Analyse de la concurrence
 -----------
@@ -325,7 +388,7 @@ La technique utilisée par Blobon lors de l’exécution d’un contrat est cell
 
 2. Analyse des besoins et des exigences du projet.
 
-3. Conception de maquettes en fils de fer du prototype.
+3. Conception de maquettes en fils de fer (wireframe)du prototype.
 
 4. Approbation et modification des idées avec le client.
 
@@ -342,10 +405,14 @@ La technique utilisée par Blobon lors de l’exécution d’un contrat est cell
 3.1.2 Coûts de production
 -----------
 
-Les couts de production engagés lors de l’exécution d’un contrat sont peu nombreux et surtout constitués de salaires, mais d’autres dépenses peuvent être engagées. Par exemple, chaque site Web développé nécessite un serveur et un système de sauvegarde en cas de coupure de service.
+Les coûts de production engagés lors de l’exécution d’un contrat sont peu nombreux et surtout constitués de salaires, mais d’autres dépenses peuvent être engagées. Par exemple, chaque site Web développé nécessite un serveur et un système de sauvegarde en cas de coupure de service.
 
-Pour ce qui est des frais fixes, ils sont un peu plus nombreux, mais beaucoup moins importants. La conception des designs se fait grâce à l’aide du logiciel Photoshop, duquel une licence est requise. Puis, pour travailler sur le Web, des connexions internet illimitées sont nécessaires. La situation de l’entreprise ne requiert pas de loyer pour le moment, mais l’emménagement de l’entreprise dans un bureau commercial est projeté dans un avenir à court terme. Nous avons joint en annexe des graphiques démontrant les avantages d’exploiter une entreprise en TIC à Montréal comparé aux autres grandes métropoles d’Amérique du Nord en 2011.
- 
+Pour ce qui est des frais fixes, ils sont un peu plus nombreux, mais beaucoup moins importants. La conception des designs se fait grâce à l’aide du logiciel Photoshop, duquel une licence est requise. Puis, pour travailler sur le Web, des connexions internet illimitées sont nécessaires. Nous avons joint en annexe des graphiques démontrant les avantages d’exploiter une entreprise en TIC à Montréal comparé aux autres grandes métropoles d’Amérique du Nord en 2011.
+
+3.1.3 Bénéfices
+
+Selon nos calculs actuels le pourcentage de bénéfices brut par projet s'établit aux alentours de 90%
+
 3.1.4 Normes de qualité
 -----------
 
@@ -377,7 +444,7 @@ Papiers d’incorporation.
 
 Équipement requis | Coût relatif estimatif à l’acquisition 
 --- | --- 
-Bureau | 2000 $/mois
+Bureau | 1000 $/mois
 Connexion Internet | 300 $/mois
 5 serveurs | 150 $/mois
 Licences | 5000 $/année
