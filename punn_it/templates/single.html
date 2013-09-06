@@ -72,10 +72,12 @@
                   {% endif %}    
   </a>
   <div class="media-body">
-    <h5 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small>
+    <h5 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small> 
+{% if punn.author.userprofile.fan_page_access_token %}
+<div class="fb-like" data-href="{{ punn.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+{% endif %}    
 </h5>
 <p class="text-muted">{% trans "Publié" %} {{ punn.pub_date|naturaltime }}{% if punn.source %} via <a href="{{ punn.source }}" target="_blank">Source</a>{% endif %}</p>
-
   </div>
 </div>
 <hr>

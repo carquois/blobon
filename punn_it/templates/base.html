@@ -43,6 +43,9 @@
       }
       .medium-rectangle {
       }
+      .facebook-like-box {
+        text-align: center;
+      }
       .skyscrapper {
         margin-top: 20px;
       }
@@ -442,6 +445,9 @@ Comment payons-nous?</p>
                 </script>
               </div>
             </div><!--/.well -->
+
+
+
             {% block midsidebar %}
 {% if latest_comments %}
             <div class="panel hidden-xs">
@@ -459,6 +465,33 @@ Comment payons-nous?</p>
             </div>
             {% endif  %}
             {% endblock  %}
+
+<div class="panel panel-warning hidden-md">
+  <div class="panel-heading">
+    <h3 class="panel-title">Page en vedette</h3>
+  </div>
+  <div class="panel-body facebook-like-box">
+              <fb:like-box href="https://www.facebook.com/architectureftw" width="300" show_faces="true" header="false" stream="false" show_border="true"></fb:like-box>
+  </div>
+  <div class="panel-footer"><a data-toggle="modal" href="#yourPageHere" >Annoncez votre page ici</a></div>
+</div>
+
+  <div class="modal fade" id="yourPageHere" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Annoncez sur Check Donc Ça</h4>
+        </div>
+        <div class="modal-body">
+          <p>Nous sommes en période de test pour ce genre de publicité.</p> <p>Si vous voulez annoncer ici, envoyez-moi un courriel au <a href"mailto:gab@checkdonc.ca">Gab@CheckDonc.ca</a>. Comme c'est le début, vous pourriez profiter d'un tarif préférentiel.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
             <div class="panel skyscrapper hidden-xs">
               <!-- SkyScrapper -->
