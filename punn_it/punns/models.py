@@ -97,12 +97,9 @@ class CatForm(ModelForm):
         fields = ('slug',)
 
 class PunnForm(ModelForm):
-    title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.')}))
+    title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.'), 'class': 'form-control'}))
     source = URLField(label=_('Source :'), widget=forms.HiddenInput(), required=False)
-    author = forms.ModelChoiceField(label=_('Author :'), queryset=User.objects.all(), initial=User.objects.get(pk=3))
-    status = forms.CharField(label=_('Status :'), max_length=2, widget=forms.Select(choices=STATUS), initial='D')
-    tags = forms.ModelMultipleChoiceField(queryset=Tags.objects.all())
     class Meta:
         model = Punn
-        fields = ('title', 'author', 'status', 'tags')
+        fields = ('title', )
 

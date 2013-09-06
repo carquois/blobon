@@ -72,10 +72,12 @@
                   {% endif %}    
   </a>
   <div class="media-body">
-    <h5 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small>
+    <h5 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small> 
+{% if punn.author.userprofile.fan_page_access_token %}
+<div class="fb-like" data-href="{{ punn.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+{% endif %}    
 </h5>
-<p class="text-muted">{% trans "Published" %} {{ punn.pub_date|naturaltime }}</p>
-
+<p class="text-muted">{% trans "Publié" %} {{ punn.pub_date|naturaltime }}{% if punn.source %} via <a href="{{ punn.source }}" target="_blank">Source</a>{% endif %}</p>
   </div>
 </div>
 <hr>
@@ -116,47 +118,37 @@
                      {% endif %}
                              ">&#45;</a>
 </div>
-<div class="btn-group pull-right">
-  {% if request.user.is_staff %}
-  <a class="btn btn-default {% if punn.is_top %}btn-primary{% endif %}" href="{% url punns.views.hot punn.id %}"><span class="glyphicon glyphicon-fire"></span> {% trans "Hot" %}</a>
-  {% endif %}
-  {% if request.user == punn.author %}
-  <a class="btn btn-danger" href="{% url punns.views.delete punn.id %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Supprimer" %}</a>
-  {% endif %}
-  <a "  class="btn btn-default {% if favorite %}btn-primary{% endif %}" href="{% url punns.views.favorite punn.id %}"><span class="glyphicon glyphicon-star"></span> {% trans "Favori" %}</a>
+<div class="pull-right">
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<fb:like href="http://checkdonc.ca{{ punn.get_absolute_url }}" width="110" layout="button_count" show_faces="false" send="false"></fb:like>
+
 </div>
 </div>
-<hr>
+
+  {% if request.user.is_staff or request.user == punn.author %}
 <hr>
 <div class="row">
 <div class="btn-toolbar pull-right">
 <div class="btn-group">
-  <a rel="tooltip" title="{% trans "Share on Facebook" %}" class="btn btn-default" onclick="
-    window.open(
-      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href)); 
-    return false;"><img src="{{ STATIC_URL }}img/facebook.png" /></a>
-  <a rel="tooltip" title="{% trans "Share on Twitter" %}" class="btn btn-default" onclick="
-    window.open(
-      'https://twitter.com/share?url='+encodeURIComponent(location.href)+'&text={{ punn.title|urlencode }}'); 
-    return false;"><img src="{{ STATIC_URL }}img/twitter.png" /></a>
-  <a onclick="
-    window.open(
-      'http://pinterest.com/pin/create/button/?url='+encodeURIComponent(location.href)+'&media=http://{{ site.domain }}{{ MEDIA_URL }}{{ punn.pic }}&description={{ punn.title|urlencode }}'); 
-    return false;" rel="tooltip" title="{% trans "Share on Pinterest" %}" class="btn btn-default"><img src="{{ STATIC_URL }}img/pinterest.png"  /></a>
-  <a href="https://plus.google.com/share?url=http://{{ site.domain }}{{ punn.get_absolute_url|urlencode }}" onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" rel="tooltip" title="{% trans "Partager sur Google Plus" %}" class="btn btn-default"><img src="{{ STATIC_URL }}img/google_plus.png" /></a>
-
+  {% if request.user.is_staff %}
+  <a class="btn btn-default {% if punn.is_top %}btn-primary{% endif %}" href="{% url punns.views.hot punn.id %}"><span class="glyphicon glyphicon-fire"></span> {% trans "Hot" %}</a>
+  <a class="btn btn-default" href="http://checkdonc.ca/admin/punns/punn/{{ punn.id }}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Modifier" %}</a>
+  {% endif %}
+  {% if request.user == punn.author %}
+  <a class="btn btn-danger" href="{% url punns.views.delete punn.id %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Supprimer" %}</a>
+  {% endif %}
 </div>
 </div>
 
-
-
-{% if punn.source %}
-  <a href="{{ punn.source }}" target="_blank" rel="tooltip" title="{% trans "Source" %}" class="btn btn-default"><span class="glyphicon glyphicon-globe"></span> {% trans "Source" %}</a>
-{% endif %}
-
-
 </div>
+  {% endif %}
+
+
+
+
 
 
 

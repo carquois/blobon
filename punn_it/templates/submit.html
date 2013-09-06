@@ -1,42 +1,37 @@
-{% extends "submit_base.html" %}
-
+{% extends "settings_base.html" %}
 {% load i18n %}
 
 {% block content %}
     <div class="well">
-      <div class="row">
-        <div class="span2">
-          <img src="{{ image }}" class="thumbnail">
-        </div>
-        <form action="/submit/" method="post" class=>{% csrf_token %}
-          <div class="span4">
-            {{ form.author.errors }}
-            {{ form.author.label_tag }}
-            {{ form.author }}
 
-            {{ form.title.errors }}
-            {{ form.title.label_tag }}
-            {{ form.title }}
+<form role="form" method="post" action="/submit/">{% csrf_token %}
+{{ form.title.errors }}
+  <div class="form-group">
+{{ form.title.label }}
+{{ form.title }}
+  </div>
 
-            {{ form.status.errors }}
-            {{ form.status.label_tag }}
-            {{ form.status }}
-          </div>
-          <div class="span4">
-            {{ form.tags.errors }}
-            {{ form.tags.label_tag }}
-            {{ form.tags }}
+<img src="{{ image }}" style="max-width:400px;">
+
 
             {{ form.source }}
             <input type="hidden" name="media" value="{{ image }}" id="media" />
             <input type="hidden" name="is_video" value="{{ is_video }}" id="is_video" />
             <br />
-            <button type="submit" class="btn">Submit</button>
-          </div>
-        </form>
+
+ <div class="control-group">
+           <div class="controls">
+             <button type="submit" class="btn btn-default">{% trans "Soumettre" %}</button>
+           </div>
+         </div>
+         <input type="hidden" name="next" value="{{ next }}" />
+       </form>
+
         <script>
           $('#id_title').focus();
         </script>
       </div>
     </div>
 {% endblock %}
+  </body>
+</html>
