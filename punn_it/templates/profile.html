@@ -47,8 +47,12 @@
 {% if user.userprofile.location %}
     <p>{{ user.userprofile.location }}</p>
 {% endif %} 
+    <p>
 {% if user.userprofile.facebook_link %}
-    <p><a href="{{ user.userprofile.facebook_link }}" target="_blank"><img src="{{ STATIC_URL }}img/facebook.png" /></a>
+<a href="{{ user.userprofile.facebook_link }}" target="_blank"><img src="{{ STATIC_URL }}img/facebook.png" /></a>
+{% if user.userprofile.twitter_link %}
+    <a href="{{ user.userprofile.twitter_link }}" target="_blank"><img src="{{ STATIC_URL }}img/twitter.png" /></a>
+         {% endif %} 
 </p>
          {% endif %} 
 

@@ -9,6 +9,9 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from accounts.forms import UserCreateForm, SocialSignupForm, UserProfileForm, UserForm
+from django.conf import settings
+from django.contrib import messages
+
 from twython import Twython
 
 APP_KEY = 'rNUqZzZRzkwoPaXYytpFgQ'
@@ -17,9 +20,7 @@ APP_SECRET = 'CeDVT0e35vbs2KUBzQq6tQijdUfC4NL3XRmO12ZDyeA'
 @login_required
 def twitter(request):
     twitter = Twython(APP_KEY, APP_SECRET)
-    auth = twitter.get_authentication_tokens(callback_url='http://1200cv.org/twitter-success')
-    del request.session['oauth_token']
-    del request.session['oauth_token_secret']
+    auth = twitter.get_authentication_tokens(callback_url='http://%s/twitter-success' % settings.MAIN_SITE_DOMAIN)
     request.session['oauth_token'] = auth['oauth_token']
     request.session['oauth_token_secret'] = auth['oauth_token_secret']
     return HttpResponseRedirect(auth['auth_url'])
@@ -35,10 +36,11 @@ def twitter_success(request):
     profile.save()
     twitter = Twython(APP_KEY, APP_SECRET,
                   profile.twitter_oauth_token, profile.twitter_oauth_token_secret)
-    twitter.update_status(status='Test')
-    return render_to_response("twitter.html", 
-                              {},
-                              context_instance=RequestContext(request))
+    response = twitter.verify_credentials()
+    profile.twitter_link = "https://twitter.com/%s" % response['screen_name']
+    profile.save()
+    messages.add_message(request, messages.INFO, _(u'Votre compte Twitter @%s a été associé.') % response['screen_name'])
+    return HttpResponseRedirect(reverse('punns.views.profile_page', args=[request.user.username]))
 
 def signup(request):
     if request.user.is_authenticated() and request.user.get_profile().is_new_from_social:
