@@ -14,22 +14,28 @@ from twython import Twython
 APP_KEY = 'rNUqZzZRzkwoPaXYytpFgQ'
 APP_SECRET = 'CeDVT0e35vbs2KUBzQq6tQijdUfC4NL3XRmO12ZDyeA'
 
-
+@login_required
 def twitter(request):
     twitter = Twython(APP_KEY, APP_SECRET)
     auth = twitter.get_authentication_tokens(callback_url='http://1200cv.org/twitter-success')
+    del request.session['oauth_token']
+    del request.session['oauth_token_secret']
     request.session['oauth_token'] = auth['oauth_token']
     request.session['oauth_token_secret'] = auth['oauth_token_secret']
     return HttpResponseRedirect(auth['auth_url'])
 
+@login_required
 def twitter_success(request):
     twitter = Twython(APP_KEY, APP_SECRET, request.session['oauth_token'], request.session['oauth_token_secret'])
     final_step = twitter.get_authorized_tokens(request.GET.get("oauth_verifier", None))
-    OAUTH_TOKEN = final_step['oauth_token']
-    OAUTH_TOKEN_SECRET = final_step['oauth_token_secret']
+    user = request.user
+    profile = user.get_profile()
+    profile.twitter_oauth_token = final_step['oauth_token'] 
+    profile.twitter_oauth_token_secret = final_step['oauth_token_secret'] 
+    profile.save()
     twitter = Twython(APP_KEY, APP_SECRET,
-                  OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
-    twitter.update_status(status='Ben oui!')
+                  profile.twitter_oauth_token, profile.twitter_oauth_token_secret)
+    twitter.update_status(status='Test')
     return render_to_response("twitter.html", 
                               {},
                               context_instance=RequestContext(request))

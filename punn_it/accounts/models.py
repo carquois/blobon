@@ -59,6 +59,9 @@ class UserProfile(models.Model):
     created_with_provider = models.CharField(blank=True, max_length=100)
     
     fan_page_access_token = models.CharField(max_length=260, blank=True)
+
+    twitter_oauth_token = models.CharField(max_length=100, blank=True)
+    twitter_oauth_token_secret = models.CharField(max_length=100, blank=True)
     
     def __unicode__(self):
         return self.description
