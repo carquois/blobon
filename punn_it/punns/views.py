@@ -382,7 +382,7 @@ def create_from_rss(request):
 
 @login_required
 def submit(request): 
-    from punns.models import SubmitForm
+    from punns.forms import SubmitForm
     if request.method == 'POST':
         form = SubmitForm(request.POST)
         if form.is_valid():

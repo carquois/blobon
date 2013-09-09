@@ -62,6 +62,8 @@ class UserProfile(models.Model):
 
     twitter_oauth_token = models.CharField(max_length=100, blank=True)
     twitter_oauth_token_secret = models.CharField(max_length=100, blank=True)
+
+    fr_user = models.ForeignKey(User, related_name='french_related_user', blank=True, null=True)  
     
     def __unicode__(self):
         return self.description
