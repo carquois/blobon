@@ -382,8 +382,9 @@ def create_from_rss(request):
 
 @login_required
 def submit(request): 
+    from punns.models import SubmitForm
     if request.method == 'POST':
-        form = PunnForm(request.POST)
+        form = SubmitForm(request.POST)
         if form.is_valid():
           new_punn = form.save(commit=False)
           new_punn.author = request.user
@@ -412,10 +413,10 @@ def submit(request):
       title = request.GET.get('title', '') 
       image = request.GET.get('media', '') 
       is_video = request.GET.get('is_video', '') 
-      form = PunnForm(initial={'source':source, 'title':title, 'image': image, 'is_video':is_video})
+      form = SubmitForm(initial={'source':source, 'title':title, 'image': image, 'is_video':is_video})
       return render_to_response('submit.html', {'image': image, 'form': form, 'is_video': is_video}, context_instance=RequestContext(request))
     else:
-      form = PunnForm()
+      form = SubmitForm()
     return render_to_response('submit.html', {'form': form}, context_instance=RequestContext(request))
 
 def single(request, shorturl):

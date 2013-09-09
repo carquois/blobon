@@ -5,6 +5,12 @@
     <div class="well">
 
 <form role="form" method="post" action="/submit/">{% csrf_token %}
+{{ form.translated_title.errors }}
+  <div class="form-group">
+{{ form.translated_title.label }}
+{{ form.translated_title }}
+  </div>
+
 {{ form.title.errors }}
   <div class="form-group">
 {{ form.title.label }}

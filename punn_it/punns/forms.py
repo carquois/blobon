@@ -6,6 +6,14 @@ from django.utils.translation import ugettext as _
 
 from punns.models import Punn
 
+class SubmitForm(ModelForm):
+    title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.'), 'class': 'form-control'}))
+    translated_title = CharField(label=_('Title translated :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your translation here.'), 'class': 'form-control'}))
+    source = URLField(label=_('Source :'), widget=forms.HiddenInput(), required=False)
+    class Meta:
+        model = Punn
+        fields = ('title', 'translated_title', )
+
 class PunnForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Entrez votre titre ici'),
                                                     'type': 'text',
