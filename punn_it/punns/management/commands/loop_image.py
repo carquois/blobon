@@ -36,7 +36,7 @@ def publish_twitter_image(punn):
         twitter = Twython(APP_KEY, APP_SECRET,
                   up.twitter_oauth_token, up.twitter_oauth_token_secret)
         photo = open(str(punn.pic.name), 'rb')
-        twitter.update_status_with_media(status=punn.title.encode('utf-8'), media=photo)
+        twitter.update_status_with_media(status="%s\n\nMore --> http://%s/%s\n\n" % (punn.title.encode('utf-8'), settings.MAIN_SITE_DOMAIN, punn.author.username), media=photo)
 
 def publish_facebook_image(punn):
       up = UserProfile.objects.get(user=punn.author)
