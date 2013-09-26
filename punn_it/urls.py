@@ -1,4 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.defaults import *
+from django.views.generic.simple import direct_to_template
 from django.conf import settings
 from django.contrib import admin
 from punns.views import UserFeed
@@ -47,6 +49,8 @@ urlpatterns = patterns('',
     url(r'^reblog/(?P<id>.*)/$', 'punns.views.reblog'),
     url(r'^favorite/(?P<id>.*)/$', 'punns.views.favorite'),
     url(r'^p/(?P<shorturl>.*)/$', 'punns.views.single'),
+    url(r'^privacy/$', direct_to_template, { 'template': 'privacy.html' }),
+    url(r'^tos/$', direct_to_template, { 'template': 'tos.html' }),
     url(r'^c/(?P<shorturl>.)/$', 'punns.views.comment'),
     url(r'^s/$', 'punns.views.search'),
     url(r'^f/(?P<username>.*)/$', UserFeed()),
