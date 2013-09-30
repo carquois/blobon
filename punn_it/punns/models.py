@@ -37,6 +37,7 @@ class Cat(models.Model):
     author = models.ForeignKey(User)
     slug = models.SlugField(max_length=140, unique=True)
     created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
+    is_top_level = models.BooleanField(default=False)
     def __unicode__(self):
         return self.slug
     @models.permalink
