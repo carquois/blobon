@@ -27,14 +27,14 @@ class Command(BaseCommand):
       if p.count() >= 1:
         punn = p[0]
         publish_draft(punn)
-        #publish_facebook_link(punn)
+        publish_facebook_link(punn)
         publish_twitter_link(punn)
         if punn.translated_title and up.fr_user: 
           punn.is_top = False
           punn.save()
           new_punn = Punn(title=punn.translated_title, author= up.fr_user, original_punn = punn, pic=punn.pic, source=punn.source, is_top=True)
           publish_draft(new_punn)
-          #publish_facebook_link(new_punn)
+          publish_facebook_link(new_punn)
           publish_twitter_link(new_punn)
 
 
