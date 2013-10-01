@@ -54,8 +54,9 @@ def index(request):
                        15)
       punns = attach_infos(punns)
       latest_comments = Comment.objects.all().order_by('-created')[:5]
+      cats = Cat.objects.all()
       return render_to_response('index.html',
-                               {'user': user,
+                               {'user': user, 'cats': cats,
                                 'punns': punns, 'latest_comments': latest_comments},
                                 context_instance=RequestContext(request))
 

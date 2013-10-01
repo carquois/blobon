@@ -388,11 +388,9 @@ Comment payons-nous?</p>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#">Hahaha</a></li>
-            <li><a href="#">Autour du monde</a></li>
-            <li><a href="#">Auto</a></li>
-            <li><a href="#">Art</a></li>
-            <li><a href="#">Histoire</a></li>
+            {% for cat in cats %} 
+            <li><a href="{% url "punns.views.cat" cat.slug %}">{{ cat.slug }}</a></li>
+            {% endfor %}
           </ul>
         </div><!-- /.navbar-collapse -->
       </nav>
