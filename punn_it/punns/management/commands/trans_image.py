@@ -27,17 +27,25 @@ class Command(BaseCommand):
       os.chdir(settings.MEDIA_ROOT)
       if p.count() >= 1:
         punn = p[0]
-        publish_draft(punn)
-        publish_twitter_image(punn)
-        if punn.translated_title and up.fr_user: 
-          punn.is_top = False
-          punn.save()
-          new_punn = Punn(title=punn.translated_title, author= up.fr_user, original_punn = punn, pic=punn.pic, source=punn.source, is_top=True)
-          publish_draft(new_punn)
-          publish_twitter_image(new_punn)
-          publish_facebook_image(new_punn)
-        publish_facebook_image(punn)
-        
+        ext = punn.pic.name.split('.')[-1]
+        if ext != "gif":
+          publish_draft(punn)
+          publish_facebook_image(punn)
+          if punn.translated_title and up.fr_user: 
+            punn.is_top = False
+            punn.save()
+            new_punn = Punn(title=punn.translated_title, author= up.fr_user, original_punn = punn, pic=punn.pic, source=punn.source, is_top=True)
+            publish_draft(new_punn)
+            publish_twitter_image(new_punn)
+            publish_facebook_image(new_punn)
+          publish_twitter_image(punn)
+        elif ext == "gif":
+            publish_draft(punn)
+            if punn.translated_title and up.fr_user:
+              punn.is_top = False
+              punn.save()
+              new_punn = Punn(title=punn.translated_title, author= up.fr_user, original_punn = punn, pic=punn.pic, source=punn.source, is_top=True)
+              publish_draft(new_punn)
 
 def publish_draft(punn):
         punn.status = "P"

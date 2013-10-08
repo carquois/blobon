@@ -309,7 +309,7 @@ Comment payons-nous?</p>
                 <h2>{% trans "Bienvenue sur Check Donc Ça." %}</h2>
                 <p class="lead">{% trans "Check Donc Ça est basé sur un principe simple, mais puissant : le partage." %} </p>
                 <p>{% trans "Partage de contenu = partage de revenu" %} </p>
-                <p><a href="{% url 'socialauth_begin' backend='facebook' %}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-user"></span> {% trans "Créez votre compte" %}</a></p>
+                <p><a href="{% url "accounts.views.signup" %}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-user"></span> {% trans "Créez votre compte" %}</a></p>
               </div>
               {% endif %}
               {% if user %}
@@ -516,7 +516,7 @@ Comment payons-nous?</p>
 </li>
   <li><a href="{% url "news.views.all" %}">{% trans "Blogue" %}</a></li>
   <li><a href="http://checkdonc.ca/tos">{% trans "Conditions d'utilisation" %}</a></li>
-  <li><a href="http://checkdonc.ca/privacy">{% trans "politique de confidentialitéB" %}</a></li>
+  <li><a href="http://checkdonc.ca/privacy">{% trans "Politique de confidentialité" %}</a></li>
   <li><a href="mailto:gab@checkdonc.ca" target="_top">{% trans "Nous joindre" %}</a></li>
 </ul>
         </footer>

@@ -78,6 +78,12 @@ img{
                   {% endthumbnail %}
                   {% endif %}    
   </a>
+
+<div class="btn-group pull-right">
+  <a href="{{ prev_punn.get_absolute_url }}" class="btn btn-default">&larr;</a>
+  <a href="{{ next_punn.get_absolute_url }}" class="btn btn-default">&rarr;</a>
+</div>
+
   <div class="media-body">
     <h5 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small> 
 {% if punn.author.userprofile.fan_page_access_token %}
