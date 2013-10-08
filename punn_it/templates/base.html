@@ -373,6 +373,30 @@ Comment payons-nous?</p>
               {% endblock %}
             </div><!--/.row -->
             <div class="row">
+
+ <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            {% for cat in cats %} 
+            <li><a href="{% url "punns.views.cat" cat.slug %}">{{ cat.slug }}</a></li>
+            {% endfor %}
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+
+            </div><!--/.row -->
+            <div class="row">
             {% for punn in punns %}
             {% if forloop.counter0|divisibleby:3 %}
             </div>
