@@ -21,5 +21,18 @@
          <input type="hidden" name="next" value="{{ next }}" />
        </form>
 
+<script src="{{ STATIC_URL }}js/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({selector:'textarea', 
+                      language : 'fr_FR',
+                      menubar : false,
+                      toolbar: "bold italic underline | blockquote numlist bullist link unlink media image | code",
+                      plugins: "code link media image paste",
+                      paste_text_sticky: true,
+                      paste_text_sticky_default: true,
+                      resize: false,
+                     });
+    </script>
+
 {% endblock %}
 
