@@ -437,16 +437,16 @@ def single(request, shorturl):
       home = punn.author.userprofile.domain
     else:
       home = "http://checkdonc.ca"
-    latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=punn.author).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:6]
+    latest_punn_list = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:6]
     next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]
     prev_punn = ""
     next_punn = ""
     if Punn.objects.filter(pub_date__lt=punn.pub_date).order_by('-pub_date').exclude(pk=punn.id)[:1]:
-      next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(author=punn.author).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:1]
+      next_punn_query = Punn.objects.filter(pub_date__lt=punn.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=punn.id)[:1]
       if (next_punn_query.count() > 0):
         next_punn = next_punn_query[0] 
     if Punn.objects.filter(pub_date__gt=punn.pub_date).order_by('pub_date').exclude(pk=punn.id)[:1]:
-      prev_punn_query = Punn.objects.filter(pub_date__gt=punn.pub_date).filter(author=punn.author).filter(status='P').order_by('pub_date').exclude(pk=punn.id)[:1]
+      prev_punn_query = Punn.objects.filter(pub_date__gt=punn.pub_date).filter(is_top=True).filter(status='P').order_by('pub_date').exclude(pk=punn.id)[:1]
       if (prev_punn_query.count() > 0):
         prev_punn = prev_punn_query[0] 
     content = ""
