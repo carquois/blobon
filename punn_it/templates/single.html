@@ -199,7 +199,12 @@ img{
 
          <div class="control-group">
            <div class="controls">
-                  <button rel="tooltip" title="{% trans "Submit your comment" %}" class="btn btn-default pull-right" id="comment-submit">{% trans "Submit" %}</button>
+{% if request.user.is_authenticated %}
+                  <button rel="tooltip" title="{% trans "Soumettre votre commentaire" %}" class="btn btn-default pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
+                             {% else %}
+<a href="{% url accounts.views.signup %}" title="{% trans "Soumettre votre commentaire" %}" class="btn btn-default pull-right" id="comment-submit">{% trans "Soumettre" %}</a>
+                             {% endif %}
+
            </div>
          </div>
                   </form>
