@@ -15,6 +15,7 @@ from punns.utils import BASE10, BASE62, baseconvert
 #Others
 import uuid
 import os
+from random import choice
 from sorl.thumbnail import ImageField
 
 STATUS = (
@@ -72,14 +73,31 @@ class Punn(models.Model):
     pic = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
     def __unicode__(self):
         return self.title
+    
     def save(self):
-        super(Punn, self).save()
         if not self.base62id:
-            self.base62id = baseconvert(str(self.id),BASE10,BASE62)
-            self.save()
+            self.base62id = Punn.generate_unique_id()
+
+        return super(Punn, self).save()
+
     @models.permalink
     def get_absolute_url(self):
         return ('punns.views.single', [str(self.base62id)])
+
+    @classmethod
+    def generate_unique_id(cls):
+        chars = ('abcdefghijklmnopqrstuvwxyz1234567890')
+        id_exists = False
+        while not id_exists:
+            rnd_str=""
+            for i in range(8):
+                rnd_str = rnd_str + choice(chars)
+            try:
+                punn = cls.objects.get(base62id=rnd_str)
+                id_exists = True
+            except cls.DoesNotExist:
+                return rnd_str
+
 
 class Reblog(models.Model):
     author = models.ForeignKey(User)
