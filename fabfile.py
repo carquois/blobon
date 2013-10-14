@@ -80,7 +80,7 @@ def get_mysql_db():
     get('/tmp/%s.sql.gz' % filename, '/tmp/%s.sql.gz' % filename)
 
     #load sql
-    local('zcat /tmp/%(filename)s.sql.gz | mysql -u %(user)s -h %(host)s -p%(password)s %(database)s' % {
+    local('gunzip -c /tmp/%(filename)s.sql.gz | mysql -u %(user)s -h %(host)s -p%(password)s %(database)s' % {
         'user' : django_settings.DATABASES['default']['USER'],
         'password' : django_settings.DATABASES['default']['PASSWORD'],
         'host' : django_settings.DATABASES['default']['HOST'],
@@ -121,9 +121,7 @@ def get_recent_media():
     remote_dir = os.path.join(env.project_root, "media")
     local_dir = os.path.join(PROJECT_DIR, "punn_it", "media")
     
-    
-    run("touch -d '%s' timestampfile" % (datetime.now()-timedelta(days=3)).strftime('%Y-%m-%d %H:%M:%S'))
-    local('ssh root@%(host)s "find %(remote_dir)s -maxdepth 1 -newer timestampfile -print0"  | rsync -av  --no-relative --files-from=- root@%(host)s:/  %(local_dir)s' % {
+    local('ssh root@%(host)s "find %(remote_dir)s -type f -ctime -1 -maxdepth 1"  | rsync -av  --no-relative --files-from=- root@%(host)s:/  %(local_dir)s' % {
         'host' : env.host,
         'local_dir' : local_dir,
         'remote_dir' : remote_dir,
