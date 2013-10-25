@@ -78,13 +78,19 @@ img{
                   {% endthumbnail %}
                   {% endif %}    
   </a>
+
+<div class="btn-group pull-right">
+  <a href="{{ prev_punn.get_absolute_url }}" class="btn btn-default">&larr;</a>
+  <a href="{{ next_punn.get_absolute_url }}" class="btn btn-default">&rarr;</a>
+</div>
+
   <div class="media-body">
     <h5 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small> 
 {% if punn.author.userprofile.fan_page_access_token %}
 <div class="fb-like" data-href="{{ punn.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false"></div>
 {% endif %}    
 </h5>
-<p class="text-muted">{% trans "Publié" %} {{ punn.pub_date|naturaltime }}{% if punn.source %} via <a href="{{ punn.source }}" target="_blank">Source</a>{% endif %}{% if punn.original_punn %} {% trans "reblogué à partir de" %} <a href="{% url punns.views.profile_page punn.original_punn.author.username %}">@{{ punn.original_punn.author }}</a>{% endif %}</p>
+<p class="text-muted">{% trans "Publié" %} {{ punn.pub_date|naturaltime }}{% if punn.source %} via <a href="{{ punn.source }}" target="_blank">Source</a>{% endif %}</p>
   </div>
 </div>
 <hr>
@@ -96,7 +102,7 @@ img{
   {% else %}
   {% if punn.pic %}
   <a href="{{ next_punn.get_absolute_url }}">
-    <img style="width: 100%;" src="{{ MEDIA_URL }}{{ punn.pic }}" />
+    <img style="width: 100%;" src="{{ MEDIA_URL }}{{ punn.pic }}" alt="{{ punn.title }}" />
   </a>
   {% endif %}
   {% endif %}
@@ -193,7 +199,12 @@ img{
 
          <div class="control-group">
            <div class="controls">
-                  <button rel="tooltip" title="{% trans "Submit your comment" %}" class="btn btn-default pull-right" id="comment-submit">{% trans "Submit" %}</button>
+{% if request.user.is_authenticated %}
+                  <button rel="tooltip" title="{% trans "Soumettre votre commentaire" %}" class="btn btn-default pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
+                             {% else %}
+<a href="{% url accounts.views.signup %}" title="{% trans "Soumettre votre commentaire" %}" class="btn btn-default pull-right" id="comment-submit">{% trans "Soumettre" %}</a>
+                             {% endif %}
+
            </div>
          </div>
                   </form>
