@@ -6,7 +6,7 @@
     <meta property="og:url" content="{{ url }}" />
 {% if punn.pic %}
                   {% thumbnail punn.pic "250x250" crop="center" as im %}
-    <meta property="og:image" content="http://checkdonc.ca{{ im.url }}" />
+    <meta property="og:image" content="{{ im.url }}" />
                   {% endthumbnail %}
                   {% endif %}
     <meta property="og:site_name" content="{{ punn.author.first_name }} {{ punn.author.last_name }}" />
@@ -14,7 +14,7 @@
     <meta name="twitter:card" content="photo">
     <meta name="twitter:url" content="{{ url }}">
     <meta name="twitter:title" content="{{ punn.title }}">
-    <meta name="twitter:image" content="http://checkdonc.ca{{ MEDIA_URL }}{{ punn.pic }}">
+    <meta name="twitter:image" content="{{ MEDIA_URL }}{{ punn.pic }}">
     <!-- Le canonical url -->
     <link rel="canonical" href="{{ url }}" />
 {% endblock %}
