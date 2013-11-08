@@ -48,6 +48,9 @@
 
     {% endblock %}
     {% block additional-css %}
+#nav-above-top-sidebar {
+  margin-bottom: 10px;
+}
 #heading {
   margin-bottom: 10px;
 }
@@ -265,26 +268,20 @@ img{
 {% endif %}
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
-
 
 {% endblock %}
 
-{% block midsidebar %}
+{% block topsidebar %}
+<div id="nav-above-top-sidebar">
+  <a href="{{ prev_punn.get_absolute_url }}" class="btn btn-default">&larr; {% trans "Préc" %}</a>
+  <a href="{{ next_punn.get_absolute_url }}" class="btn btn-primary">{% trans "Proch" %} &rarr;</a>
+</div>
 <div class="panel">
+
 <div class="row">
+
+
 
                 {% if latest_punn_list %}
                   {% for punn in latest_punn_list %}
