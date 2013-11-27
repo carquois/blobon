@@ -1,0 +1,32 @@
+{% extends "single.html" %}
+{% load i18n thumbnail punn_tags humanize %}
+{% block title %} {{ album.title }} {% endblock %}
+{% block content %} 
+
+
+  {% if album.title %}
+    <h1>{{ album.title }}</h1>
+  {% endif %}
+  {% if album.content %}
+    {{ album.content|safe }}
+  {% endif %}
+{% for link in links %}
+
+    <h2>{{ link.punn.title }}</h2>
+
+  {% if link.punn.youtube_id %}
+  <iframe width="480" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+  {% else %}
+  {% if link.punn.pic %}
+    <img style="width: 100%;" src="{{ MEDIA_URL }}{{ link.punn.pic }}" alt="{{ link.punn.title }}" />
+  {% endif %}
+  {% endif %}
+  {% if content %}
+   <h4> {{ content|safe }}</h4>
+  {% endif %}
+
+{% endfor %}
+
+{% endblock %}
+
+

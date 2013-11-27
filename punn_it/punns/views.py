@@ -11,7 +11,7 @@ from cgi import parse_qs
 from accounts.models import UserProfile, UserForm
 from comments.models import Comment
 from comments.forms import CommentForm
-from punns.models import Punn, PunnForm, Reblog, Favorite, Cat
+from punns.models import Punn, PunnForm, Reblog, Favorite, Cat, Album, Link
 from punns.utils import BASE10, BASE62, baseconvert
 from votes.models import PunnVote, CommentVote
 
@@ -418,6 +418,13 @@ def submit(request):
     else:
       form = SubmitForm()
     return render_to_response('submit.html', {'form': form}, context_instance=RequestContext(request))
+
+def album(request, shorturl):
+    album = get_object_or_404(Album, base62id=shorturl)
+    links = Link.objects.filter(album=album).order_by('order')
+    return render_to_response('album.html',
+                              {'links': links, 'album': album},
+                              context_instance=RequestContext(request))
 
 def single(request, shorturl):
     punn = get_object_or_404(Punn, base62id=shorturl)

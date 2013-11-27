@@ -98,6 +98,47 @@ class Punn(models.Model):
             except cls.DoesNotExist:
                 return rnd_str
 
+class Album(models.Model):
+    base62id = models.CharField(max_length=140, blank=True)
+    title = models.CharField(verbose_name=_("Titre"), max_length=140)
+    content = models.TextField(verbose_name=_("Contenu"),max_length=10000, blank=True)
+    author = models.ForeignKey(User)
+    created_date = models.DateTimeField(auto_now_add = True, null=True)
+    last_modified_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
+    def __unicode__(self):
+        return str(self.id)
+
+    def save(self):
+        if not self.base62id:
+            self.base62id = Album.generate_unique_id()
+        return super(Album, self).save()
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('punns.views.album', [str(self.base62id)])
+
+    @classmethod
+    def generate_unique_id(cls):
+        chars = ('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890')
+        id_exists = False
+        while not id_exists:
+            rnd_str=""
+            for i in range(8):
+                rnd_str = rnd_str + choice(chars)
+            try:
+                album = cls.objects.get(base62id=rnd_str)
+                id_exists = True
+            except cls.DoesNotExist:
+                return rnd_str
+
+class Link(models.Model):
+    punn = models.ForeignKey(Punn)
+    album = models.ForeignKey(Album)
+    order = models.PositiveIntegerField()
+    created_date = models.DateTimeField(auto_now_add = True, null=True)
+    last_modified_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
+    def __unicode__(self):
+        return str(self.id)
 
 class Reblog(models.Model):
     author = models.ForeignKey(User)
