@@ -18,15 +18,12 @@ class PunnForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Entrez votre titre ici'),
                                                     'type': 'text',
                                                     'class': "form-control"}))
-    source = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Entrez la source de votre contenu'),
-                                                    'type': 'text',
-                                                    'class': "form-control"}))
     content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Entrez une description'),
                                                     'rows': '4',
                                                     'class': "form-control"}))
     class Meta:
         model = Punn
-        fields = ('title', 'pic', 'source', 'content', )
+        fields = ('title', 'pic', 'content', )
         labels = {
             'title': _('Titre'),
             'pic': _('Image'),

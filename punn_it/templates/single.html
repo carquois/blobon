@@ -72,7 +72,7 @@ img{
 }
     {% endblock %}
 {% block content %} 
-<div class="panel" id="content-holder">
+<div class="" id="content-holder">
 <div class="media" id="heading">
   <a class="pull-left" href="{% url punns.views.profile_page punn.author.username %}">
 {% if punn.author.userprofile.avatar %}
@@ -112,9 +112,7 @@ img{
   {% endif %}
   {% endif %}
   {% if content %}
-<div class="well">
-   <h4> {{ content|safe }}</h4>
-</div>
+   <p> {{ content|safe }}</p>
   {% endif %}
 <div id="infos" class="panel">
 <div class="row">
@@ -192,7 +190,7 @@ img{
 
 
 </div>
-<div class="well" id="comments">
+<div class="" id="comments">
 
 <form method="post" action="">
                       {% csrf_token %}

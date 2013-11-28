@@ -49,7 +49,7 @@ class Cat(models.Model):
 class Punn(models.Model):
     status = models.CharField(max_length=2, choices=STATUS, null=True, blank=True)
     #Basic infos
-    title = models.CharField(verbose_name=_("Titre"), max_length=140)
+    title = models.CharField(verbose_name=_("Titre"), max_length=140, blank=True)
     translated_title = models.CharField(verbose_name=_("Titre traduit"), max_length=140, blank=True)
     base62id = models.CharField(max_length=140, blank=True)
     slug = models.SlugField(max_length=140, blank=True)
