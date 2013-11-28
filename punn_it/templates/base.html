@@ -35,6 +35,13 @@
         padding-top: 60px;
         padding-bottom: 40px;
       }
+
+.punn_pic {
+  text-align: center;
+}
+#pic {
+  max-width: 728px;
+}
       .thumb-link {
         text-align: center;
       }
@@ -383,8 +390,9 @@ Comment payons-nous?</p>
             </div><!--/.row -->
             <div class="row">
 
+              {% block cats %}
 
- <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -404,10 +412,14 @@ Comment payons-nous?</p>
           </ul>
         </div><!-- /.navbar-collapse -->
       </nav>
+              {% endblock %}
 
             </div><!--/.row -->
             <div class="row">
 
+              {% block blog %}
+              {% endblock %}
+              {% block thumbs %}
             {% for punn in punns %}
             {% if forloop.counter0|divisibleby:3 %}
             </div>
@@ -446,6 +458,7 @@ Comment payons-nous?</p>
 </ul>
               </div>
             {% endfor %}
+            {% endblock %}
             </div>
 
 {% if punns.has_previous or punns.has_next %}

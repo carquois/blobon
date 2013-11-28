@@ -105,7 +105,9 @@ img{
   {% else %}
   {% if punn.pic %}
   <a href="{{ next_punn.get_absolute_url }}">
-    <img style="width: 100%;" src="{{ MEDIA_URL }}{{ punn.pic }}" alt="{{ punn.title }}" />
+<div class="punn_pic">
+<img id="pic" src="{{ MEDIA_URL }}{{ punn.pic }}" class="img-responsive" alt="{{ punn.title }}">
+</div>
   </a>
   {% endif %}
   {% endif %}

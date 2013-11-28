@@ -28,6 +28,11 @@ class UserProfile(models.Model):
     domain = models.URLField(verbose_name=_('Site Web'), max_length=50, blank=True)
     location = models.CharField(verbose_name=_('Localisation'), max_length=50, blank=True)
     pro_user = models.BooleanField(default=True)
+    DISPLAY_CHOICES = (
+        ('th', 'Thumbs'),
+        ('bl', 'Blog'),
+    )
+    display_type = models.CharField(default="th", max_length=2, choices=DISPLAY_CHOICES)
     LANGUAGES_CHOICES = (
         ('en', 'English'),
         ('fr', 'Français'),
