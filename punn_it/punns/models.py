@@ -158,6 +158,20 @@ class CatForm(ModelForm):
         model = Cat 
         fields = ('slug',)
 
+class LinkForm(ModelForm):
+    class Meta:
+        model = Link 
+        fields = ['album', 'punn', 'order', ]
+
+class AlbumForm(ModelForm):
+    title = CharField(label=_('Titre :'), widget=forms.TextInput(attrs={'placeholder': _('Entrez votre titre ici'),
+                                                                          'type': 'text',
+                                                                          'class': 'form-control', }))
+    class Meta:
+        model = Album 
+        fields = ('title', )
+
+
 class PunnForm(ModelForm):
     title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.'), 'class': 'form-control'}))
     source = URLField(label=_('Source :'), widget=forms.HiddenInput(), required=False)

@@ -269,10 +269,14 @@ def profile_page(request, user):
           #redirect user so a refresh doesn't trigger a double post
           return HttpResponseRedirect( punn.get_absolute_url() )
 
+        from punns.models import AlbumForm
+        form = AlbumForm()
 
+        from punns.models import LinkForm
+        linkform = LinkForm()
         return render_to_response('profile.html', 
                                   {'user': user, 'site_description': site_description,
-                                   'site': site, 'punns': punns, 'url': url, 'quick_publish': quick_publish}, 
+                                   'site': site, 'punns': punns, 'url': url, 'quick_publish': quick_publish, 'form': form, 'linkform': linkform}, 
                                   context_instance=RequestContext(request))
 
 @login_required
@@ -284,13 +288,26 @@ def createcat(request):
           cat = form.save(commit=False)
           cat.author = request.user
           cat.save()
-          #heading = _(u"Your page has been published.")
-          #message = _(u"You can now share it.")
-          #messages.add_message(request, messages.INFO, '<h4 class="alert-heading">%s</h4><p>%s</p><p><a class="btn btn-primary" href="http://www.facebook.com/sharer.php?u=%s">Facebook</a> <a class="btn btn-primary" href="https://twitter.com/share?text=%s">Twitter</a></p>' % (heading , message, request.build_absolute_uri(punn.get_absolute_url()), punn.title), extra_tags='safe')
           return HttpResponseRedirect( cat.get_absolute_url() )
       else:
         form = CatForm()
       return render_to_response('createcat.html',
+                                {'form': form},
+                                context_instance=RequestContext(request))
+
+@login_required
+def createalbum(request):
+      from punns.models import AlbumForm
+      if request.method == 'POST':
+        form = AlbumForm(request.POST)
+        if form.is_valid():
+          album = form.save(commit=False)
+          album.author = request.user
+          album.save()
+          return HttpResponseRedirect( album.get_absolute_url() )
+      else:
+        form = AlbumForm()
+      return render_to_response('createalbum.html',
                                 {'form': form},
                                 context_instance=RequestContext(request))
 

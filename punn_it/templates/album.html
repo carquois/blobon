@@ -1,6 +1,23 @@
 {% extends "single.html" %}
 {% load i18n thumbnail punn_tags humanize %}
 {% block title %} {{ album.title }} {% endblock %}
+{% block open-graphs %}
+    <meta property="og:title" content="{{ album.title }}" />
+    <meta property="og:url" content="http://checkdonc.ca{{ album.get_absolute_url }}" />
+    <meta property="og:site_name" content="{{ album.author.first_name }} {{ album.author.last_name }}" />
+    <meta property="og:description" content="{{ album.content }}" />
+{% if links.0.punn.pic %}
+                  {% thumbnail links.0.punn.pic "250x250" crop="center" as im %}
+    <meta property="og:image" content="{{ im.url }}" />
+    <meta name="twitter:image" content="{{ im.url }}">
+                  {% endthumbnail %}
+                  {% endif %}
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:url" content="{{ album.get_absolute_url }}">
+    <meta name="twitter:title" content="{{ album.title }}">
+    <!-- Le canonical url -->
+    <link rel="canonical" href="http://checkdonc.ca{{ album.get_absolute_url }}" />
+{% endblock %}
 {% block content %} 
 
 
@@ -12,7 +29,7 @@
   {% endif %}
 {% for link in links %}
 
-    <h2>{{ link.punn.title }}</h2>
+    <h3>{{ link.punn.title }}</h3>
 
   {% if link.punn.youtube_id %}
   <iframe width="480" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
@@ -26,6 +43,26 @@
   {% endif %}
 
 {% endfor %}
+
+<hr>
+
+{% if request.user.is_staff %}
+  <a class="btn btn-default" href="http://checkdonc.ca/admin/punns/album/{{ album.id }}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Modifier" %}</a>
+  {% endif %}
+<div class="pull-right">
+
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<fb:like href="http://checkdonc.ca{{ album.get_absolute_url }}" width="110" layout="button_count" show_faces="false" send="false"></fb:like>
+
+</div>
+<hr>
+
+<div style="text-align: center;">
+<div class="fb-comments" data-href="http://checkdonc.ca{{ album.get_absolute_url }}" data-numposts="5" data-colorscheme="light"></div>
+</div>
 
 {% endblock %}
 

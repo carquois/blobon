@@ -30,7 +30,7 @@ class Command(BaseCommand):
         if punn.translated_title and up.fr_user: 
           punn.is_top = False
           punn.save()
-          new_punn = Punn(title=punn.translated_title, author= up.fr_user, original_punn = punn, pic=punn.pic, source=punn.source, is_top=True)
+          new_punn = Punn(title=punn.translated_title, author= up.fr_user, original_punn = punn, pic=punn.pic, source=punn.source, is_top=False)
           publish_draft(new_punn)
 
 

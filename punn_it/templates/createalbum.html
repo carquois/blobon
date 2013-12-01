@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load url from future %}
+{% block title %}{% trans "Créez un album" %}{% endblock %}
+{% block additional-css %}
+{% endblock %}
+{% block container %}
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8">
+
+  <div class="well">
+        <h2 class="form-signin-heading">{% block heading %}{% trans "Créez un album" %}{% endblock %}</h2>
+
+<form role="form" method="post" action="{% url 'punns.views.createalbum' %}">{% csrf_token %}
+{{ form.title.errors }}
+  <div class="form-group">
+{{ form.title.label }}
+{{ form.title }}
+  </div>
+
+         <div class="control-group">
+           <div class="controls">
+             <button type="submit" class="btn btn-default">{% trans "Soumettre" %}</button>
+           </div>
+         </div>
+         <input type="hidden" name="next" value="{{ next }}" />
+       </form>
+
+
+  </div>
+  </div>
+  <div class="col-md-2">
+  </div>
+ </div>
+{% endblock %}
+

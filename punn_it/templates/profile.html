@@ -104,8 +104,9 @@
   {% else %}
   {% if punn.pic %}
 <div class="punn_pic">
+<a href="{{ punn.get_absolute_url }}">
 <img id="pic" src="{{ MEDIA_URL }}{{ punn.pic }}" class="img-responsive" alt="{{ punn.title }}">
-
+</a>
 </div>
 
 
@@ -122,9 +123,30 @@
 <fb:like href="http://checkdonc.ca{{ punn.get_absolute_url }}" width="110" layout="button_count" show_faces="false" send="false"></fb:like>
 <div class="pull-right">
   {% if request.user.is_staff %}
+  <a class="btn btn-default" data-toggle="modal" data-target="#myModal" href="#"><span class="glyphicon glyphicon-retweet"></span> {% trans "Ajouter à un album" %}</a>
   <a class="btn btn-default" href="http://checkdonc.ca/admin/punns/punn/{{ punn.id }}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Modifier" %}</a>
   {% endif %}
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        {{ form }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 {% endfor %}
