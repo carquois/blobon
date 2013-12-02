@@ -30,6 +30,23 @@ class PunnForm(ModelForm):
             'content': _('Description'),
         }
 
+class UniversalForm(ModelForm):
+    title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Entrez votre titre ici'),
+                                                    'type': 'text',
+                                                    'class': "form-control"}))
+    content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _("Parle-moi de toi"),
+                                                    'rows': '4',
+                                                    'class': "form-control"}))
+    class Meta:
+        model = Punn
+        fields = ('title', 'pic', 'content', )
+        labels = {
+            'title': _('Titre'),
+            'pic': _('Image'),
+            'content': _('Description'),
+        }
+
+
 class QuickPublish(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Entrez votre titre ici'),
                                                     'type': 'text',

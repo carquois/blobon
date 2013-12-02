@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load url from future %}
+{% block title %}{% trans "Créez un album" %}{% endblock %}
+{% block additional-css %}
+{% endblock %}
+{% block container %}
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8">
+
+  <div class="well">
+        <h2 class="form-signin-heading">{% block heading %}{% trans "Créez un album" %}{% endblock %}</h2>
+
+<form role="form" method="post" action="{% url 'punns.views.universal' %}">{% csrf_token %}
+{{ form }}
+
+<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-camera"></span></button>
+
+         <button type="submit" class="btn btn-primary pull-right">{% trans "Publier" %}</button>
+         <input type="hidden" name="next" value="{{ next }}" />
+       </form>
+
+
+  </div>
+<script>
+     $(document).ready(function(){
+
+
+$("#id_title").hide();
+$("#id_pic").hide();
+$("label").hide();
+
+    $('#id_title').focus(function(){
+        $(this).attr('rows', '4');
+    });
+});
+</script>
+
+  </div>
+  <div class="col-md-2">
+  </div>
+ </div>
+{% endblock %}
+

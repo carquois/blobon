@@ -295,6 +295,21 @@ def createcat(request):
                                 {'form': form},
                                 context_instance=RequestContext(request))
 
+
+@login_required
+def universal(request):
+      from punns.forms import UniversalForm
+      if request.method == 'POST':
+        form = UniversalForm(request.POST)
+        if form.is_valid():
+          punn = form.save()
+          return HttpResponseRedirect( "/" )
+      else:
+        form = UniversalForm()
+      return render_to_response('universal.html',
+                                {'form': form},
+                                context_instance=RequestContext(request))
+
 @login_required
 def createalbum(request):
       from punns.models import AlbumForm

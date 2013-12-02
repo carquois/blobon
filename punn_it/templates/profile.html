@@ -116,17 +116,17 @@
    <p> {{ punn.content|markdown|safe }}</p>
   {% endif %}
 <hr>
+<div class="pull-right">
 
-<a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://checkdonc.ca{{ punn.get_absolute_url }}" data-text="{{ punn.title }}" data-via="Checkdoncca">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
 <fb:like href="http://checkdonc.ca{{ punn.get_absolute_url }}" width="110" layout="button_count" show_faces="false" send="false"></fb:like>
-<div class="pull-right">
+</div>
   {% if request.user.is_staff %}
   <a class="btn btn-default" data-toggle="modal" data-target="#myModal" href="#"><span class="glyphicon glyphicon-retweet"></span> {% trans "Ajouter à un album" %}</a>
   <a class="btn btn-default" href="http://checkdonc.ca/admin/punns/punn/{{ punn.id }}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Modifier" %}</a>
   {% endif %}
-</div>
 
 
 <!-- Modal -->
