@@ -8,13 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{% block description %}{% trans "Lancez un blogue ou créez un site Web gratuitement en quelques secondes." %}{% endblock %}">
     <meta name="author" content="">
+
     <title>{% block title %}Check Donc Ça{% endblock %}</title>
+
     {% block open-graphs %}
     <meta property="og:title" content="Check Donc Ça" />
     <meta property="og:url" content="http://checkdonc.ca" />
     <meta property="og:image" content="http://checkdonc.ca{{ STATIC_URL }}img/avatar.png" />
     <meta property="og:description" content="{% trans "Lancez un blogue ou créez un site Web gratuitement en quelques secondes." %}"/>
-    <meta property="fb:app_id" content="378058345602851" />
     <meta name="twitter:card" content="photo">
     <meta name="twitter:url" content="http://checkdonc.ca">
     <meta name="twitter:title" content="Check Donc Ça">
@@ -23,11 +24,13 @@
     <link rel="canonical" href="http://checkdonc.ca" />
     {% endblock %}
     {% endblock %}
-
+    <meta property="fb:app_id" content="378058345602851" />
+    <meta property="og:type" content="website" />
     {% block additional_js %}
     {% endblock %}
 
     <!-- Le styles -->
+
     {% block css %}
     {% block bootstrap %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
@@ -38,13 +41,12 @@
         padding-top: 60px;
         padding-bottom: 40px;
       }
-
-.punn_pic {
-  text-align: center;
-}
-#pic {
-  max-width: 728px;
-}
+      .punn_pic {
+        text-align: center;
+      }
+      #pic {
+        max-width: 728px;
+      }
       .thumb-link {
         text-align: center;
       }
@@ -156,17 +158,17 @@
     </script>
   </head>
   <body>
- 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/fr_CA/all.js#xfbml=1&appId=378058345602851";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
- 
-    <div class="modal fade" id="makeMoney" tabindex="-1" role="dialog" aria-labelledby="{% trans "Make money" %}" aria-hidden="true">
+    <div id="fb-root"></div>
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/fr_CA/all.js#xfbml=1&appId=378058345602851";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+    <div class="modal fade" id="makeMoney" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -174,72 +176,45 @@
             <h4 class="modal-title">{% trans "Bienvenue sur le nouveau Check Donc Ça." %}</h4>
           </div>
           <div class="modal-body">
-
-
-<p>Check Donc Ça est basé sur un principe simple, mais puissant : le partage.</p>
-
-<strong>Partage de contenu = partage de revenu</strong>
-
-<p>Imaginez : faire de l'argent dans le confort de votre maison avec votre contenu Web. Check Donc Ça offre une manière facile et gratuite de générer des revenus grâce à votre contenu en ligne.</p>
-
-<ol>
+            <p>Check Donc Ça est basé sur un principe simple, mais puissant : le partage.</p>
+            <strong>Partage de contenu = partage de revenu</strong>
+            <p>Imaginez : faire de l'argent dans le confort de votre maison avec votre contenu Web. Check Donc Ça offre une manière facile et gratuite de générer des revenus grâce à votre contenu en ligne.</p>
+            <ol>
               <li><a href="{% url "accounts.views.signup" %}">{% trans "Créez votre compte" %}</a></li>
               <li><a href="{% url "accounts.views.edit_profile" %}">{% trans "Mettez votre profil à jour" %}</a></li>
               <li><a href="{% url "punns.views.create" %}">{% trans "Créez du contenu" %}</a></li>
               <li><a href="{% url "earnings.views.index" %}">{% trans "Consultez vos revenus" %}</a></li>
             </ol>
-
-<strong>À quelle fréquence payons-nous?</strong>
-<p>Nous payons quand votre compte atteint 100$. Nous nous sommes basés sur Google AdSense pour fixer la limite.
+            <strong>À quelle fréquence payons-nous?</strong>
+            <p>Nous payons quand votre compte atteint 100$. Nous nous sommes basés sur Google AdSense pour fixer la limite.
 Comment payons-nous?</p>
-
-<p>Encore une fois, comme AdSense, nous offrons deux choix de paiement :</p>
-
-<ol>
+            <p>Encore une fois, comme AdSense, nous offrons deux choix de paiement :</p>
+            <ol>
               <li>Par chèque qui vous sera envoyé par la poste</li>
               <li>Par virement électronique qui sera déposé directement dans votre compte</li>
             </ol>
-<p>Vous pourrez mettre à jour vos informations de paiement lorsque vous aurez atteint le montant du premier virement (100$).</p>
-
-
-
-<strong>Quand payons-nous?</strong>
-
-<p>Nous payons une fois par mois, lorsque le compte dépasse 100$.</p>
-
-
-<strong>Comment optimiser vos revenus?</strong>
-<ul>
-	<li>Publiez de manière constante. Ne vous gênez pas sur la fréquence.</li>
-
-	<li>Ajoutez une catégorie. Les catégories fonctionnent un peu comme des sous-communautés (subreddit). Quoiqu'il ne soit pas obligatoire d'assigner une catégorie, il est toutefois fortement recommandé de le faire. De cette manière, vous serez «repris» sur ces pages, ce qui augmentera le trafic sur votre contenu.</li>
-	<li>Partagez sur vos réseaux sociaux. Les réseaux sociaux sont la source principale de visites sur le site. Vous pouvez aussi inviter vos amis à participer.</li>
-
-	<li>Soyez actif dans la communauté. Votez, commentez, participez. L'interaction est à la base de l'intérêt. Nous en prenons compte dans notre calcul de partage des revenus.</li>
-
-	<li>Citez votre source. Les créateurs de contenu méritent le trafic qu'ils obtiendront si vous partagez leur contenu ici. Soyez gentil et citez-les.</li>
-
-</ul>
-
-<p>Et n'essayez pas de spammer. J'vous l'dis là, j'suis pas épais. J'vais vous trouver et vous bannir. ;-)</p>
-
-
-
-<p>Love, Gab</p>
-
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Fermer" %}</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-
-{% block nav %}
-
-<div class="navbar navbar-inverse navbar-fixed-top">
+            <p>Vous pourrez mettre à jour vos informations de paiement lorsque vous aurez atteint le montant du premier virement (100$).</p>
+            <strong>Quand payons-nous?</strong>
+            <p>Nous payons une fois par mois, lorsque le compte dépasse 100$.</p>
+            <strong>Comment optimiser vos revenus?</strong>
+            <ul>
+	      <li>Publiez de manière constante. Ne vous gênez pas sur la fréquence.</li>
+	      <li>Ajoutez une catégorie. Les catégories fonctionnent un peu comme des sous-communautés (subreddit). Quoiqu'il ne soit pas obligatoire d'assigner une catégorie, il est toutefois fortement recommandé de le faire. De cette manière, vous serez «repris» sur ces pages, ce qui augmentera le trafic sur votre contenu.</li>
+	      <li>Partagez sur vos réseaux sociaux. Les réseaux sociaux sont la source principale de visites sur le site. Vous pouvez aussi inviter vos amis à participer.</li>
+	      <li>Soyez actif dans la communauté. Votez, commentez, participez. L'interaction est à la base de l'intérêt. Nous en prenons compte dans notre calcul de partage des revenus.</li>
+	      <li>Citez votre source. Les créateurs de contenu méritent le trafic qu'ils obtiendront si vous partagez leur contenu ici. Soyez gentil et citez-les.</li>
+            </ul>
+            <p>Et n'essayez pas de spammer. J'vous l'dis là, j'suis pas épais. J'vais vous trouver et vous bannir. ;-)</p>
+            <p>Love, Gab</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Fermer" %}</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    {% block nav %}
+    <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -247,240 +222,203 @@ Comment payons-nous?</p>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-    <a class="navbar-brand" href="http://checkdonc.ca">{% trans "Check Donc Ça" %}</a>
+          <a class="navbar-brand" href="http://checkdonc.ca">{% trans "Check Donc Ça" %}</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
           </ul>
-{% if request.user.is_authenticated %}
-    <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-{% if request.user.userprofile.avatar %}
-            {% thumbnail request.user.userprofile.avatar "27x27" crop="center" as im %}
-             <img src="{{ im.url }}" alt="{{ request.user.first_name }} {{ request.user.last_name }}" id="avatar-menu" /> 
-             {% endthumbnail %}{{ request.user.first_name }} {{ request.user.last_name }}<b class="caret"></b>
-{% else %}
-        <span class="glyphicon glyphicon-user"></span> <b class="caret"></b>
-{% endif %}
-</a>
-        <ul class="dropdown-menu">
-                    <li><a href="{% url 'punns.views.profile_page' request.user.username %}">{% trans "Votre profil" %}</a></li>
-                    <li><a href="{% url 'earnings.views.index' %}">{% trans "Vos revenus" %}</a></li>
-                    <li class="divider"></li>
-                    <li><a href="{% url 'accounts.views.edit_profile' %}">{% trans "Paramètres" %}</a></li>
-                    <li class="divider"></li>
-                    <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Se déconnecter" %}</a></li>
-        </ul>
-      </li>
-    </ul>
-              <a class="btn btn-danger navbar-btn navbar-right" href="{% url 'punns.views.create' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Ajoutez du contenu" %}</a>
-            {% else %}
-              <a class="btn btn-default navbar-btn navbar-right" href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Se connecter" %}</a>
-              <a class="btn btn-default navbar-btn" data-toggle="modal" href="#makeMoney">{% trans "Faites de l'argent" %}</a>
-            {% endif %} 
-
+          {% if request.user.is_authenticated %}
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              {% if request.user.userprofile.avatar %}
+                {% thumbnail request.user.userprofile.avatar "27x27" crop="center" as im %}
+                <img src="{{ im.url }}" alt="{{ request.user.first_name }} {{ request.user.last_name }}" id="avatar-menu" /> 
+                {% endthumbnail %}{{ request.user.first_name }} {{ request.user.last_name }}<b class="caret"></b>
+              {% else %}
+                <span class="glyphicon glyphicon-user"></span> <b class="caret"></b>
+              {% endif %}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'punns.views.profile_page' request.user.username %}">{% trans "Votre profil" %}</a></li>
+              <li><a href="{% url 'earnings.views.index' %}">{% trans "Vos revenus" %}</a></li>
+              <li class="divider"></li>
+              <li><a href="{% url 'accounts.views.edit_profile' %}">{% trans "Paramètres" %}</a></li>
+              <li class="divider"></li>
+              <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Se déconnecter" %}</a></li>
+            </ul>
+            </li>
+          </ul>
+          <a class="btn btn-danger navbar-btn navbar-right" href="{% url 'punns.views.create' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Ajoutez du contenu" %}</a>
+          {% else %}
+            <a class="btn btn-default navbar-btn navbar-right" href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Se connecter" %}</a>
+            <a class="btn btn-default navbar-btn" data-toggle="modal" href="#makeMoney">{% trans "Faites de l'argent" %}</a>
+          {% endif %} 
         </div><!--/.nav-collapse -->
-      </div>
-    </div>
-
-
-            {% endblock %}
-<div style="background: lightgrey;padding: 7px; margin-top: -10px;margin-bottom: 10px;">
-
-<div id='div-gpt-ad-1363051510706-0' style='width:728px; height:90px;' class="hidden-xs centered">
+      </div><!--/.contaimer -->
+    </div><!--/.navbar-fixed-top -->
+    {% endblock %}
+    <div style="background: lightgrey;padding: 7px; margin-top: -10px;margin-bottom: 10px;">
+      <div id='div-gpt-ad-1363051510706-0' style='width:728px; height:90px;' class="hidden-xs centered">
         <script type='text/javascript'>
           googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
         </script>
       </div>
-
-<div id='div-gpt-ad-1360772351679-1' style='width:320px; height:50px;' class="visible-xs centered">
+      <div id='div-gpt-ad-1360772351679-1' style='width:320px; height:50px;' class="visible-xs centered">
         <script type='text/javascript'>
           googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-1'); });
         </script>
       </div>
-
-</div>
-      <div class="container">
-
-            {% block container %}
-
-
-
-<div class="row">
-
-  <div class="col-md-8">
-
-  {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-info">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
-            </div>
-          {% endfor %}
-        {% endif %}
-
-            {% block content %}
-            <div class="row">
-              {% block hero-unit %}
-              {% if not request.user.is_authenticated and not user %}
-              <div class="jumbotron">
-                <h2>{% trans "Bienvenue sur Check Donc Ça." %}</h2>
-                <p class="lead">{% trans "Check Donc Ça est basé sur un principe simple, mais puissant : le partage." %} </p>
-                <p>{% trans "Partage de contenu = partage de revenu" %} </p>
-                <p><a href="{% url "accounts.views.signup" %}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-user"></span> {% trans "Créez votre compte" %}</a></p>
+    </div>
+    <div class="container">
+    {% block container %}
+      <div class="row">
+        <div class="col-md-8">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
               </div>
+            {% endfor %}
+          {% endif %}
+          {% block content %}
+          <div class="row">
+            {% block hero-unit %}
+              {% if not request.user.is_authenticated and not user %}
+                <div class="jumbotron">
+                  <h2>{% trans "Bienvenue sur Check Donc Ça." %}</h2>
+                  <p class="lead">{% trans "Check Donc Ça est basé sur un principe simple, mais puissant : le partage." %} </p>
+                  <p>{% trans "Partage de contenu = partage de revenu" %} </p>
+                  <p><a href="{% url "accounts.views.signup" %}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-user"></span> {% trans "Créez votre compte" %}</a></p>
+                </div>
               {% endif %}
               {% if user %}
-
-
-              <div class="jumbotron">
-
-<div class="media">
-{% if user.userprofile.avatar %}
-  <a class="pull-left" href="{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
-            {% thumbnail user.userprofile.avatar "150x150" crop="center" as im %}
-             <img src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" class="img-rounded"/>
-             {% endthumbnail %}
-         {% endif %} 
-  </a>
-  <div class="media-body">
-    <h2 class="media-heading">{{ user.first_name }} {{ user.last_name }}
-         {% if request.user == user %} 
-<small><a href="{% url 'accounts.views.edit_profile' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Edit your profile" %}</a></small>
-{% endif %} 
-
-</h2>
-
-{% if user.userprofile.description %}
-    <p>{{ user.userprofile.description }}</p>
-{% endif %}
-{% if user.userprofile.location %}
-    <p>{{ user.userprofile.location }}</p>
-{% endif %}
-{% if user.userprofile.facebook_link %}
-    <p><a href="{{ user.userprofile.facebook_link }}" target="_blank"><img src="{{ STATIC_URL }}img/facebook.png" alt="facebook logo" /></a>
-</p>
-         {% endif %}
-
-  </div>
-</div>
-</div>
-
-{% if user == request.user %}
-<div class="well">
-<h3>{% trans "Quick publish" %}</h3>
-<form role="form" enctype="multipart/form-data" method="post" action="{% url 'punns.views.create' %}">{% csrf_token %}
-  <div class="form-group">
-    {{ quick_publish.title.label_tag }}
-    {{ quick_publish.title }}
-  </div>
-  <div class="form-group">
-    {{ quick_publish.pic.label_tag }}
-    {{ quick_publish.pic }}
-  </div>
-  <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
-</form>
-
-</div>
-{% endif %}
-
+                <div class="jumbotron">
+                  <div class="media">
+                    {% if user.userprofile.avatar %}
+                    <a class="pull-left" href="{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
+                      {% thumbnail user.userprofile.avatar "150x150" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" class="img-rounded"/>
+                      {% endthumbnail %}
+                    {% endif %} 
+                    </a>
+                    <div class="media-body">
+                      <h2 class="media-heading">{{ user.first_name }} {{ user.last_name }}
+                        {% if request.user == user %} 
+                          <small><a href="{% url 'accounts.views.edit_profile' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Edit your profile" %}</a></small>
+                        {% endif %} 
+                      </h2>
+                      {% if user.userprofile.description %}
+                        <p>{{ user.userprofile.description }}</p>
+                      {% endif %}
+                      {% if user.userprofile.location %}
+                        <p>{{ user.userprofile.location }}</p>
+                      {% endif %}
+                      {% if user.userprofile.facebook_link %}
+                        <p><a href="{{ user.userprofile.facebook_link }}" target="_blank"><img src="{{ STATIC_URL }}img/facebook.png" alt="facebook logo" /></a>
+                        </p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                {% if user == request.user %}
+                  <div class="well">
+                    <h3>{% trans "Quick publish" %}</h3>
+                    <form role="form" enctype="multipart/form-data" method="post" action="{% url 'punns.views.create' %}">{% csrf_token %}
+                      <div class="form-group">
+                        {{ quick_publish.title.label_tag }}
+                        {{ quick_publish.title }}
+                      </div>
+                      <div class="form-group">
+                        {{ quick_publish.pic.label_tag }}
+                        {{ quick_publish.pic }}
+                      </div>
+                      <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
+                    </form>
+                  </div>
+                {% endif %}
               {% endif %}
-
-              
-
-              {% endblock %}
-            </div><!--/.row -->
-            <div class="row">
-
-              {% block cats %}
-
-    <nav class="navbar navbar-default" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav">
-            {% for cat in cats %} 
-            <li><a href="{% url "punns.views.cat" cat.slug %}">{{ cat.slug }}</a></li>
-            {% endfor %}
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </nav>
-              {% endblock %}
-
-            </div><!--/.row -->
-            <div class="row">
-
-              {% block blog %}
-              {% endblock %}
-              {% block thumbs %}
-            {% for punn in punns %}
-            {% if forloop.counter0|divisibleby:3 %}
-            </div>
-            <div class="row">
-            {% endif %}
-              <div class="col-xs-4 panel">
-<h6>
-                  {% if punn.author.userprofile.avatar %}
-                <a href="{% url "punns.views.profile_page" punn.author.username %}">
-{% thumbnail punn.author.userprofile.avatar "20x20" crop="center" as im %}
-  	          <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}"/>
-	          {% endthumbnail %}
-	          {% endif %}
-                </a>
-
-{{ punn.author.first_name }} {{ punn.author.last_name }}</h6>
-                <a href="{{ punn.get_absolute_url }}" class="thumbnail">
-                  {% if punn.pic %}
-	          {% thumbnail punn.pic "300x300" crop="center" as im %}
-  	          <img class="thumbs" src="{{ im.url }}" alt="{{ punn.title }}"/>
-	          {% endthumbnail %}
-	          {% else %}
-	          {% thumbnail punn.author.userprofile.avatar "300x300" crop="center" as im %}
-  	          <img class="thumbs" src="{{ im.url }}" alt="{{ punn.title }}"/>
-	          {% endthumbnail %}
-	          {% endif %}
-                </a>
-<ul class="list-inline">
-  <li><span class="glyphicon glyphicon-arrow-up"></span> {{ punn.score }}</li>
-{% if punn.number_of_comments != 0 %}
-  <li><span class="glyphicon glyphicon-comment"></span> {{ punn.number_of_comments }}</li>
-            {% endif %}
-{% if punn.cat %}
-  <li><span class="glyphicon glyphicon-tag"></span> <a href="{% url "punns.views.cat" punn.cat %}">{{ punn.cat }}</a></li>
-            {% endif %}
-</ul>
-              </div>
-            {% endfor %}
             {% endblock %}
-            </div>
-
-{% if punns.has_previous or punns.has_next %}
-
-            <div class="row">
-              <ul class="pager">
-                <li class="previous{% if not punns.has_previous %} disabled{% endif %}"><a href="{% if punns.has_previous %}?page={{ punns.previous_page_number }}{% endif %}">&larr; {% trans "Préc" %}</a></li>
-                <li class="next{% if not punns.has_next %} disabled{% endif %}"><a href="{% if punns.has_next %}?page={{ punns.next_page_number }}{% endif %}">{% trans "Proch" %} &rarr;</a></li>
+          </div><!--/.row -->
+          <div class="row">
+            {% block cats %}
+            <nav class="navbar navbar-default" role="navigation">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                  {% for cat in cats %} 
+                    <li><a href="{% url "punns.views.cat" cat.slug %}">{{ cat.slug }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </nav>
+            {% endblock %}
+          </div><!--/.row -->
+          <div class="row">
+            {% block blog %}
+            {% endblock %}
+            {% block thumbs %}
+              {% for punn in punns %}
+                {% if forloop.counter0|divisibleby:3 %}
+          </div>
+          <div class="row">
+                {% endif %}
+            <div class="col-xs-4 panel">
+              <h6>
+                {% if punn.author.userprofile.avatar %}
+                  <a href="{% url "punns.views.profile_page" punn.author.username %}">
+                    {% thumbnail punn.author.userprofile.avatar "20x20" crop="center" as im %}
+  	              <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}"/>
+	            {% endthumbnail %}
+	        {% endif %}
+                  </a>
+                {{ punn.author.first_name }} {{ punn.author.last_name }}</h6>
+                  <a href="{{ punn.get_absolute_url }}" class="thumbnail">
+                    {% if punn.pic %}
+	              {% thumbnail punn.pic "300x300" crop="center" as im %}
+  	                <img class="thumbs" src="{{ im.url }}" alt="{{ punn.title }}"/>
+	              {% endthumbnail %}
+	            {% else %}
+	              {% thumbnail punn.author.userprofile.avatar "300x300" crop="center" as im %}
+  	                <img class="thumbs" src="{{ im.url }}" alt="{{ punn.title }}"/>
+	              {% endthumbnail %}
+	            {% endif %}
+                  </a>
+              <ul class="list-inline">
+                <li><span class="glyphicon glyphicon-arrow-up"></span> {{ punn.score }}</li>
+                  {% if punn.number_of_comments != 0 %}
+                    <li><span class="glyphicon glyphicon-comment"></span> {{ punn.number_of_comments }}</li>
+                  {% endif %}
+                  {% if punn.cat %}
+                    <li><span class="glyphicon glyphicon-tag"></span> <a href="{% url "punns.views.cat" punn.cat %}">{{ punn.cat }}</a></li>
+                  {% endif %}
               </ul>
             </div>
-
-{% endif %}
-
+              {% endfor %}
             {% endblock %}
-
-
-          </div><!--/.col-8 -->
-  <div class="col-md-4" id="sidebar">
-            {% block sidebar %}
+          </div>
+          {% if punns.has_previous or punns.has_next %}
+          <div class="row">
+            <ul class="pager">
+              <li class="previous{% if not punns.has_previous %} disabled{% endif %}"><a href="{% if punns.has_previous %}?page={{ punns.previous_page_number }}{% endif %}">&larr; {% trans "Préc" %}</a></li>
+              <li class="next{% if not punns.has_next %} disabled{% endif %}"><a href="{% if punns.has_next %}?page={{ punns.next_page_number }}{% endif %}">{% trans "Proch" %} &rarr;</a></li>
+            </ul>
+          </div>
+          {% endif %}
+            {% endblock %}
+        </div><!--/.col-8 -->
+        <div class="col-md-4" id="sidebar">
+          {% block sidebar %}
             {% block topsidebar %}
             {% endblock  %}
             <div class="panel medium-rectangle hidden-md">
@@ -490,91 +428,75 @@ Comment payons-nous?</p>
                   googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-0'); });
                 </script>
               </div>
-            </div><!--/.well -->
-
-
-
-            {% block midsidebar %}
-{% if latest_comments %}
-            <div class="panel hidden-xs">
-<h4>{% trans "Derniers commentaires" %}</h4>
-<hr>
-<dl>
-{% for comment in latest_comments %}
-
-  <dt><a href="{{comment.punn.get_absolute_url}}#comments">{{ comment.punn.title }}</a></dt>
-  <dd>{{ comment.content|truncatechars:35 }}</dd>
-{% endfor %}
-
-</dl>
-
             </div>
-            {% endif  %}
+            {% block midsidebar %}
+              {% if latest_comments %}
+                <div class="panel hidden-xs">
+                  <h4>{% trans "Derniers commentaires" %}</h4>
+                  <hr>
+                  <dl>
+                    {% for comment in latest_comments %}
+                    <dt><a href="{{comment.punn.get_absolute_url}}#comments">{{ comment.punn.title }}</a></dt>
+                    <dd>{{ comment.content|truncatechars:35 }}</dd>
+                    {% endfor %}
+                  </dl>
+                </div>
+              {% endif  %}
             {% endblock  %}
-
-<div class="panel panel-warning hidden-md">
-  <div class="panel-heading">
-    <h3 class="panel-title">Page en vedette</h3>
-  </div>
-  <div class="panel-body facebook-like-box">
-              <fb:like-box href="https://www.facebook.com/checkdoncca" width="300" show_faces="true" header="false" stream="false" show_border="true"></fb:like-box>
-  </div>
-  <div class="panel-footer"><a data-toggle="modal" href="#yourPageHere" >Annoncez votre page ici</a></div>
-</div>
-
-  <div class="modal fade" id="yourPageHere" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Annoncez sur Check Donc Ça</h4>
+          <div class="panel panel-warning hidden-md">
+            <div class="panel-heading">
+              <h3 class="panel-title">Page en vedette</h3>
+            </div>
+            <div class="panel-body facebook-like-box">
+              <div class="fb-like-box" data-href="https://www.facebook.com/checkdoncca" data-width="300" data-height="250" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
+            </div>
+            <div class="panel-footer"><a data-toggle="modal" href="#yourPageHere" >Annoncez votre page ici</a></div>
+          </div>
+          <div class="modal fade" id="yourPageHere" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Annoncez sur Check Donc Ça</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Nous sommes en période de test pour ce genre de publicité.</p> <p>Si vous voulez annoncer ici, envoyez-moi un courriel au <a href="mailto:gab@checkdonc.ca">Gab@CheckDonc.ca</a>. Comme c'est le début, vous pourriez profiter d'un tarif préférentiel.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+          <div class="panel skyscrapper hidden-xs">
+            <!-- SkyScrapper -->
+            <div class="centered" id='div-gpt-ad-1363052072029-0' style='width:160px; height:600px;'>
+              <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363052072029-0'); });
+              </script>
+            </div>
+          </div><!--/.well -->
+          {% endblock  %}
         </div>
-        <div class="modal-body">
-          <p>Nous sommes en période de test pour ce genre de publicité.</p> <p>Si vous voulez annoncer ici, envoyez-moi un courriel au <a href"mailto:gab@checkdonc.ca">Gab@CheckDonc.ca</a>. Comme c'est le début, vous pourriez profiter d'un tarif préférentiel.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-            <div class="panel skyscrapper hidden-xs">
-              <!-- SkyScrapper -->
-              <div class="centered" id='div-gpt-ad-1363052072029-0' style='width:160px; height:600px;'>
-                <script type='text/javascript'>
-                  googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363052072029-0'); });
-                </script>
-              </div>
-            </div><!--/.well -->
-            {% endblock  %}
-  </div>
-</div>
-
-
-
-            {% block footer %}
+      </div>
+      {% block footer %}
         <hr>
         <footer>
-<ul class="list-inline">
-  <li>
-         &copy; Check Donc Ça {% now "Y" %}
-</li>
-  <li><a href="{% url "news.views.all" %}">{% trans "Blogue" %}</a></li>
-  <li><a href="http://checkdonc.ca/tos">{% trans "Conditions d'utilisation" %}</a></li>
-  <li><a href="http://checkdonc.ca/privacy">{% trans "Politique de confidentialité" %}</a></li>
-  <li><a href="mailto:gab@checkdonc.ca" target="_top">{% trans "Nous joindre" %}</a></li>
-</ul>
+          <ul class="list-inline">
+            <li>
+              &copy; Check Donc Ça {% now "Y" %}
+            </li>
+            <li><a href="{% url "news.views.all" %}">{% trans "Blogue" %}</a></li>
+            <li><a href="http://checkdonc.ca/tos">{% trans "Conditions d'utilisation" %}</a></li>
+            <li><a href="http://checkdonc.ca/privacy">{% trans "Politique de confidentialité" %}</a></li>
+            <li><a href="mailto:gab@checkdonc.ca" target="_top">{% trans "Nous joindre" %}</a></li>
+          </ul>
         </footer>
-            {% endblock %}
-            {% endblock %}
-
-        </div><!--/row -->
-      </div>
-      {% block bootstrap-js %}
-      <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
       {% endblock %}
+    {% endblock %}
+    </div><!--/row -->
+    {% block bootstrap-js %}
+      <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    {% endblock %}
   </body>
 </html>
-
-

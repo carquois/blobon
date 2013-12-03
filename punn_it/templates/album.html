@@ -1,6 +1,7 @@
 {% extends "single.html" %}
-{% load i18n thumbnail punn_tags humanize %}
+{% load i18n markup thumbnail punn_tags humanize %}
 {% block title %} {{ album.title }} {% endblock %}
+{% block description %}{{ album.content }}{% endblock %}
 {% block open-graphs %}
     <meta property="og:title" content="{{ album.title }}" />
     <meta property="og:url" content="http://checkdonc.ca{{ album.get_absolute_url }}" />
@@ -25,7 +26,7 @@
     <h1>{{ album.title }}</h1>
   {% endif %}
   {% if album.content %}
-    {{ album.content|safe }}
+    {{ album.content|markdown }}
   {% endif %}
 {% for link in links %}
 
