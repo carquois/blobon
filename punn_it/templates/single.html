@@ -12,7 +12,7 @@
     <meta property="og:site_name" content="{{ punn.author.first_name }} {{ punn.author.last_name }}" />
     <!-- Le twitter cards -->
     <meta name="twitter:card" content="photo">
-    <meta name="twitter:url" content="{{ url }}">
+    <meta name="twitter:url" content="http://checkdonc.ca{{ punn.get_absolute_url }}">
     <meta name="twitter:title" content="{{ punn.title }}">
     <meta name="twitter:image" content="{{ MEDIA_URL }}{{ punn.pic }}">
     <!-- Le canonical url -->
@@ -89,10 +89,10 @@ img{
 
   <div class="media-body">
     <h5 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small> 
+</h5>
 {% if punn.author.userprofile.fan_page_access_token %}
 <div class="fb-like" data-href="{{ punn.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false"></div>
 {% endif %}    
-</h5>
 <p class="text-muted">{% trans "Publié" %} {{ punn.pub_date|naturaltime }}{% if punn.source %} via <a href="{{ punn.source }}" target="_blank">Source</a>{% endif %}</p>
   </div>
 </div>
@@ -118,15 +118,15 @@ img{
 <div class="row">
 
 <div class="btn-group">
-<a rel="tooltip" title="{% trans "Like" %}" class="btn btn-default {% if vote == "U" %} btn-primary{% endif %}" href="
+<a data-rel="tooltip" title="{% trans "Like" %}" class="btn btn-default {% if vote == "U" %} btn-primary{% endif %}" href="
 {% if request.user.is_authenticated %}
                        {% url votes.views.up punn.id %}
                      {% else %}
                        {% url django.contrib.auth.views.login %}?next={{request.path}}
                      {% endif %}
                              ">&#43;</a>
-        <a class="btn btn-default" disabled="disabled">{{ karma }}</a>
-        <a rel="tooltip" title="{% trans "Dislike" %}" class="btn btn-default {% if vote == "D" %}btn-primary{% endif %}" href="
+        <a class="btn btn-default">{{ karma }}</a>
+        <a data-rel="tooltip" title="{% trans "Dislike" %}" class="btn btn-default {% if vote == "D" %}btn-primary{% endif %}" href="
 {% if request.user.is_authenticated %}
                        {% url votes.views.down punn.id %}
                      {% else %}
@@ -139,7 +139,7 @@ img{
 <a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
-<fb:like href="http://checkdonc.ca{{ punn.get_absolute_url }}" width="110" layout="button_count" show_faces="false" send="false"></fb:like>
+<div class="fb-like" data-href="http://checkdonc.ca{{ punn.get_absolute_url }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 
 </div>
 </div>
@@ -192,7 +192,7 @@ img{
 </div>
 <div class="" id="comments">
 
-<form method="post" action="">
+<form method="post" action="{% url punns.views.single punn.base62id %}">
                       {% csrf_token %}
 {{ comment_form.content.errors }}
   <div class="form-group">
@@ -203,7 +203,7 @@ img{
          <div class="control-group">
            <div class="controls">
 {% if request.user.is_authenticated %}
-                  <button rel="tooltip" title="{% trans "Soumettre votre commentaire" %}" class="btn btn-default pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
+                  <button data-rel="tooltip" title="{% trans "Soumettre votre commentaire" %}" class="btn btn-default pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
                              {% else %}
 <a href="{% url accounts.views.signup %}" title="{% trans "Soumettre votre commentaire" %}" class="btn btn-default pull-right" id="comment-submit">{% trans "Soumettre" %}</a>
                              {% endif %}
@@ -233,7 +233,7 @@ img{
                              {% else %}{% url accounts.views.signup %}
                              {% endif %}
                              ">&#43;</a>
-        <a class="btn btn-default" disabled="disabled">{{ comment.karma }}</a>
+        <a class="btn btn-default">{{ comment.karma }}</a>
         <a class="btn btn-default {% if comment.vote == "D" %}btn-primary{% endif %}" href="
                              {% if request.user.is_authenticated %}{% url votes.views.commentdown comment.id %}
                              {% else %}{% url accounts.views.signup %}
@@ -288,7 +288,7 @@ img{
   <div class="col-xs-4">
           <a href="{{ punn.get_absolute_url }}" class="thumbnail">
                     {% thumbnail punn.pic "200x200" crop="center" as im %}
-                      <img id="thumbs" src="{{ im.url }}" alt="{{ punn.title }}" />
+                      <img class="thumbs" src="{{ im.url }}" alt="{{ punn.title }}" />
                     {% endthumbnail %}
           </a>
 </div>

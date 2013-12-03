@@ -4,6 +4,9 @@
 {% block title %}{% trans "Créez un album" %}{% endblock %}
 {% block additional-css %}
 {% endblock %}
+{% block bootstrap %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/css/bootstrap.min.css">
+{% endblock %}
 {% block container %}
 <div class="row">
   <div class="col-md-2">
@@ -11,30 +14,50 @@
   <div class="col-md-8">
 
   <div class="well">
-        <h2 class="form-signin-heading">{% block heading %}{% trans "Créez un album" %}{% endblock %}</h2>
+
+<!--
 
 <form role="form" method="post" action="{% url 'punns.views.universal' %}">{% csrf_token %}
-{{ form }}
+<small id="title-add-label" class="pull-right"><p class="text-primary">Add a title</p></small>
+<textarea id="content" class="form-control" rows="1" placeholder="{% trans "Parle-moi de toi" %}"></textarea>
 
-<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-camera"></span></button>
 
-         <button type="submit" class="btn btn-primary pull-right">{% trans "Publier" %}</button>
+<div id="pic-input" class="fileinput fileinput-new" data-provides="fileinput">
+  <span class="btn btn-default btn-file"><span class="fileinput-new"> <span class="glyphicon glyphicon-camera"></span></span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+  <span class="fileinput-filename"></span>
+  <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+</div>
+
+         <button id="submit-btn" type="submit" class="btn btn-primary pull-right">{% trans "Publier" %}</button>
          <input type="hidden" name="next" value="{{ next }}" />
        </form>
+-->
+
+
+<div class="btn-group btn-group-justified">
+
+   <a class="btn btn-default"><span class="glyphicon glyphicon-camera"> Photo</a>
+
+</div>
+
+
+
 
 
   </div>
 <script>
      $(document).ready(function(){
+        $('#pic-input').hide();
+        $('#submit-btn').hide();
+        $('#title-add-label').hide();
 
-
-$("#id_title").hide();
-$("#id_pic").hide();
-$("label").hide();
-
-    $('#id_title').focus(function(){
+    $('#content').focus(function(){
         $(this).attr('rows', '4');
+        $('#pic-input').show();
+        $('#submit-btn').show();
+        $('#title-add-label').show();
     });
+
 });
 </script>
 
@@ -43,4 +66,6 @@ $("label").hide();
   </div>
  </div>
 {% endblock %}
-
+{% block bootstrap-js %}
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js"></script>
+{% endblock %}
