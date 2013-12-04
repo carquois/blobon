@@ -13,7 +13,9 @@ from votes.models import CommentVote, PunnVote
 from news.models import Post
 from django.contrib import admin
 
-admin.site.register(Punn)
+class PunnAdmin(admin.ModelAdmin):
+    exclude = ('original_punn',)
+admin.site.register(Punn, PunnAdmin)
 admin.site.register(Link)
 admin.site.register(Album)
 admin.site.register(Earning)
