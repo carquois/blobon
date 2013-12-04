@@ -1,70 +1,56 @@
 {% extends "single.html" %}
 {% load i18n markup thumbnail punn_tags humanize %}
-{% block title %} {{ album.title }} {% endblock %}
-{% block description %}{{ album.content }}{% endblock %}
-{% block open-graphs %}
+  {% block title %} {{ album.title }} {% endblock %}
+  {% block description %}{{ album.content }}{% endblock %}
+  {% block open-graphs %}
     <meta property="og:title" content="{{ album.title }}" />
     <meta property="og:url" content="http://checkdonc.ca{{ album.get_absolute_url }}" />
     <meta property="og:site_name" content="{{ album.author.first_name }} {{ album.author.last_name }}" />
     <meta property="og:description" content="{{ album.content }}" />
-{% if links.0.punn.pic %}
-                  {% thumbnail links.0.punn.pic "250x250" crop="center" as im %}
+  {% if links.0.punn.pic %}
+    {% thumbnail links.0.punn.pic "250x250" crop="center" as im %}
     <meta property="og:image" content="{{ im.url }}" />
     <meta name="twitter:image" content="{{ im.url }}">
-                  {% endthumbnail %}
-                  {% endif %}
+    {% endthumbnail %}
+  {% endif %}
     <meta name="twitter:card" content="photo">
     <meta name="twitter:url" content="{{ album.get_absolute_url }}">
     <meta name="twitter:title" content="{{ album.title }}">
     <!-- Le canonical url -->
     <link rel="canonical" href="http://checkdonc.ca{{ album.get_absolute_url }}" />
-{% endblock %}
-{% block content %} 
-
-
-  {% if album.title %}
-    <h1>{{ album.title }}</h1>
-  {% endif %}
-  {% if album.content %}
-    {{ album.content|markdown }}
-  {% endif %}
-{% for link in links %}
-
-    <h3>{{ link.punn.title }}</h3>
-
-  {% if link.punn.youtube_id %}
-  <iframe width="480" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
-  {% else %}
-  {% if link.punn.pic %}
-    <img style="width: 100%;" src="{{ MEDIA_URL }}{{ link.punn.pic }}" alt="{{ link.punn.title }}" />
-  {% endif %}
-  {% endif %}
-  {% if content %}
-   <p> {{ content|safe }}</p>
-  {% endif %}
-<hr>
-{% endfor %}
-
-<hr>
-
-{% if request.user.is_staff %}
-  <a class="btn btn-default" href="http://checkdonc.ca/admin/punns/album/{{ album.id }}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Modifier" %}</a>
-  {% endif %}
-<div class="pull-right">
-
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-<fb:like href="http://checkdonc.ca{{ album.get_absolute_url }}" width="110" layout="button_count" show_faces="false" send="false"></fb:like>
-
-</div>
-<hr>
-
-<div style="text-align: center;">
-<div class="fb-comments" data-href="http://checkdonc.ca{{ album.get_absolute_url }}" data-numposts="5" data-colorscheme="light"></div>
-</div>
-
-{% endblock %}
-
-
+  {% endblock %}
+  {% block content %} 
+    {% if album.title %}
+      <h1>{{ album.title }}</h1>
+    {% endif %}
+    {% if album.content %}
+      {{ album.content|markdown }}
+    {% endif %}
+    {% for link in links %}
+      <h3>{{ link.punn.title }}</h3>
+      {% if link.punn.youtube_id %}
+        <iframe width="480" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+      {% else %}
+      {% if link.punn.pic %}
+        <img style="width: 100%;" src="{{ MEDIA_URL }}{{ link.punn.pic }}" alt="{{ link.punn.title }}" />
+      {% endif %}
+      {% endif %}
+    {% if content %}
+      <p> {{ content|safe }}</p>
+    {% endif %}
+    <hr>
+    {% endfor %}
+    <hr>
+    {% if request.user.is_staff %}
+      <a class="btn btn-default" href="http://checkdonc.ca/admin/punns/album/{{ album.id }}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Modifier" %}</a>
+    {% endif %}
+    <div class="pull-right">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      <div class="fb-like" data-href="http://checkdonc.ca{{ album.get_absolute_url }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+    </div>
+    <hr>
+    <div style="text-align: center;">
+      <div class="fb-comments" data-href="http://checkdonc.ca{{ album.get_absolute_url }}" data-numposts="5" data-colorscheme="light"></div>
+    </div>
+  {% endblock %}

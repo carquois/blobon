@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load i18n thumbnail markup %}
 {% load url from future %}
-{% block title %}{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}{% endblock %}
-{% block open-graphs %}
+  {% block title %}{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}{% endblock %}
+  {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}" />
     <meta property="og:url" content="{{ url }}" />
@@ -14,144 +14,121 @@
     <meta name="twitter:title" content="{{ user.first_name }} {{ user.last_name }} {% trans 'sur' %} {{ site.name }}">
     <meta name="twitter:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
     <meta name="twitter:description" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}">
-{% endblock %}
-
-    {% block additional-css %}
-.punn_pic {
-  text-align: center;
-}
-#pic {
-  max-width: 728px;
-}
-{% endblock %}
-
-{% block hotnewtop %}
+  {% endblock %}
+  {% block additional-css %}
+      .punn_pic {
+        text-align: center;
+      }
+      #pic {
+        max-width: 728px;
+      }
+  {% endblock %}
+  {% block hotnewtop %}
     <ul class="nav navbar-nav">
       <li><a href="{% url 'punns.views.index' %}">{% trans "HOT" %}</a></li>
       <li><a href="{% url 'punns.views.new' %}">{% trans "NEW" %}</a></li>
     </ul>
-{% endblock %}
-
-
-
- {% block hero-unit %}
-              <div class="jumbotron">
-
-<div class="media">
-{% if user.userprofile.avatar %}
-  <a class="pull-left" href="{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
+  {% endblock %}
+  {% block hero-unit %}
+    <div class="jumbotron">
+      <div class="media">
+        {% if user.userprofile.avatar %}
+          <a class="pull-left" href="{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
             {% thumbnail user.userprofile.avatar "150x150" crop="center" as im %}
-             <img src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" class="img-rounded"/>
-             {% endthumbnail %}
-         {% endif %} 
-  </a>
-  <div class="media-body">
-    <h2 class="media-heading">{{ user.first_name }} {{ user.last_name }}
-         {% if request.user == user %} 
-<small><a href="{% url 'accounts.views.edit_profile' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Mettre votre profil à jour" %}</a></small>
-{% endif %} 
-
-</h2>
-
-{% if user.userprofile.description %}
-    <p>{{ user.userprofile.description }}</p>
-{% endif %} 
-{% if user.userprofile.location %}
-    <p>{{ user.userprofile.location }}</p>
-{% endif %} 
-    <p>
-{% if user.userprofile.facebook_link %}
-<a href="{{ user.userprofile.facebook_link }}" target="_blank"><img src="{{ STATIC_URL }}img/facebook.png" /></a>
-{% if user.userprofile.twitter_link %}
-    <a href="{{ user.userprofile.twitter_link }}" target="_blank"><img src="{{ STATIC_URL }}img/twitter.png" /></a>
-         {% endif %} 
-</p>
-         {% endif %} 
-
-  </div>
-</div>
-</div>
-
-{% if user == request.user %}
-<div class="well">
-<h3>{% trans "Publication rapide" %}</h3>
-<form role="form" enctype="multipart/form-data" method="post" action="{% url 'punns.views.profile_page' request.user.username %}">{% csrf_token %}
-  <div class="form-group">
-    {{ quick_publish.title.label_tag }}
-    {{ quick_publish.title }}
-  </div>
-  <div class="form-group">
-    {{ quick_publish.pic.label_tag }}
-    {{ quick_publish.pic }}
-  </div>
-  <button type="submit" class="btn btn-default">{% trans "Soumettre" %}</button>
-</form>
-
-</div>
-{% endif %}
-
-{% endblock %}
-{% block cats %}
-{% endblock %}
-{% block thumbs %}
-{% endblock %}
-{% block blog %}
-
-{% for punn in punns %}
-    <a href="{{ punn.get_absolute_url }}"><h2>{{ punn.title }}</h2></a>
-  {% if punn.youtube_id %}
-  <iframe width="480" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
-  {% else %}
-  {% if punn.pic %}
-<div class="punn_pic">
-<a href="{{ punn.get_absolute_url }}">
-<img id="pic" src="{{ MEDIA_URL }}{{ punn.pic }}" class="img-responsive" alt="{{ punn.title }}">
-</a>
-</div>
-
-
-  {% endif %}
-  {% endif %}
-  {% if punn.content %}
-   <p> {{ punn.content|markdown|safe }}</p>
-  {% endif %}
-<hr>
-<div class="pull-right">
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://checkdonc.ca{{ punn.get_absolute_url }}" data-text="{{ punn.title }}" data-via="Checkdoncca">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-<fb:like href="http://checkdonc.ca{{ punn.get_absolute_url }}" width="110" layout="button_count" show_faces="false" send="false"></fb:like>
-</div>
-  {% if request.user.is_staff %}
-  <a class="btn btn-default" data-toggle="modal" data-target="#myModal" href="#"><span class="glyphicon glyphicon-retweet"></span> {% trans "Ajouter à un album" %}</a>
-  <a class="btn btn-default" href="http://checkdonc.ca/admin/punns/punn/{{ punn.id }}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Modifier" %}</a>
-  {% endif %}
-
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              <img src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" class="img-rounded"/>
+            {% endthumbnail %}
+        {% endif %} 
+          </a>
+        <div class="media-body">
+          <h2 class="media-heading">{{ user.first_name }} {{ user.last_name }}
+            {% if request.user == user %} 
+              <small><a href="{% url 'accounts.views.edit_profile' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Mettre votre profil à jour" %}</a></small>
+            {% endif %} 
+          </h2>
+          {% if user.userprofile.description %}
+            <p>{{ user.userprofile.description }}</p>
+          {% endif %} 
+          {% if user.userprofile.location %}
+            <p>{{ user.userprofile.location }}</p>
+          {% endif %} 
+          <p>
+            {% if user.userprofile.facebook_link %}
+              <a href="{{ user.userprofile.facebook_link }}" target="_blank"><img src="{{ STATIC_URL }}img/facebook.png" /></a>
+              {% if user.userprofile.twitter_link %}
+                <a href="{{ user.userprofile.twitter_link }}" target="_blank"><img src="{{ STATIC_URL }}img/twitter.png" /></a>
+              {% endif %} 
+          </p>
+            {% endif %} 
+        </div>
       </div>
-      <div class="modal-body">
-        {{ form }}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-{% endfor %}
-
-
-{% endblock %}
+    </div>
+    {% if user == request.user %}
+    <div class="well">
+      <h3>{% trans "Publication rapide" %}</h3>
+      <form role="form" enctype="multipart/form-data" method="post" action="{% url 'punns.views.profile_page' request.user.username %}">{% csrf_token %}
+        <div class="form-group">
+          {{ quick_publish.title.label_tag }}
+          {{ quick_publish.title }}
+        </div>
+        <div class="form-group">
+          {{ quick_publish.pic.label_tag }}
+          {{ quick_publish.pic }}
+        </div>
+        <button type="submit" class="btn btn-default">{% trans "Soumettre" %}</button>
+      </form>    
+    </div>
+    {% endif %}
+  {% endblock %} 
+  {% block cats %}
+  {% endblock %}
+  {% block thumbs %}
+  {% endblock %}
+  {% block blog %}
+    {% for punn in punns %}
+      <a href="{{ punn.get_absolute_url }}"><h2>{{ punn.title }}</h2></a>
+      {% if punn.youtube_id %}
+        <iframe width="480" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+      {% else %}
+        {% if punn.pic %}
+          <div class="punn_pic">
+            <a href="{{ punn.get_absolute_url }}">
+              <img id="pic" src="{{ MEDIA_URL }}{{ punn.pic }}" class="img-responsive" alt="{{ punn.title }}">
+            </a>
+          </div>
+        {% endif %}
+      {% endif %}
+      {% if punn.content %}
+        <p> {{ punn.content|markdown|safe }}</p>
+      {% endif %}
+      <hr>
+    <div class="pull-right">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://checkdonc.ca{{ punn.get_absolute_url }}" data-text="{{ punn.title }}" data-via="Checkdoncca">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      <fb:like href="http://checkdonc.ca{{ punn.get_absolute_url }}" width="110" layout="button_count" show_faces="false" send="false"></fb:like>
+    </div>
+    {% if request.user.is_staff %}
+      <a class="btn btn-default" data-toggle="modal" data-target="#myModal" href="#"><span class="glyphicon glyphicon-retweet"></span> {% trans "Ajouter à un album" %}</a>
+      <a class="btn btn-default" href="http://checkdonc.ca/admin/punns/punn/{{ punn.id }}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Modifier" %}</a>
+    {% endif %}
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          </div>
+          <div class="modal-body">
+            {{ form }}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    {% endfor %}
+  {% endblock %}
 
 
