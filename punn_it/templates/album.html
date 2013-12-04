@@ -35,8 +35,8 @@
         <img style="width: 100%;" src="{{ MEDIA_URL }}{{ link.punn.pic }}" alt="{{ link.punn.title }}" />
       {% endif %}
       {% endif %}
-    {% if content %}
-      <p> {{ content|safe }}</p>
+    {% if link.punn.content %}
+      <p> {{ link.punn.content|markdown }}</p>
     {% endif %}
     <hr>
     {% endfor %}
