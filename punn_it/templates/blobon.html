@@ -6,8 +6,38 @@
 {% block leaderboard %}
 {% endblock %}
 {% block container %}
-<div style="padding:20px;">
+<div style="padding:20px;text-align: center;">
 <img src="http://i.imgur.com/QXoXHev.jpg" class="img-responsive" />
+  <p id="explanation">{% trans "Create a free blog and in just a few seconds" %}</p>
+  <p id="incentive">{% trans "Give us your email and we'll notify you as soon as we're ready" %}</p>
+</ul>
+<a id="invitation" class="btn btn-primary">{% trans "Request an invitation" %}</a>
+
+<form id="invitation-form" role="form" action="{% url "punns.views.index" %}" method="post">{% csrf_token %}
+  <div class="form-group">
+{{ form.email }} 
+  </div>
+  <button type="submit" class="btn btn-primary">{% trans "Submit" %}</button>
+</form>
+
 </div>
+
+
+<script>
+
+$( document ).ready(function() {
+  $("#invitation-form").hide(); 
+  $("#incentive").hide(); 
+});
+
+$( "#invitation" ).click(function() {
+  $("#invitation-form").show(); 
+  $("#incentive").show(); 
+  $("#invitation").hide(); 
+  $("#explanation").hide(); 
+});
+
+</script>
+
 {% endblock %}
 

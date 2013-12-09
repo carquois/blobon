@@ -38,6 +38,8 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_page
 
+from notifications.forms import InvitationForm
+from notifications.models import Invitation
 
 def attach_infos(punns):
       for punn in punns:
@@ -48,21 +50,29 @@ def attach_infos(punns):
 
 
 def index(request):
-#      if request.META['HTTP_HOST'] == "blobon.com":
-#        return render_to_response('blobon.html',
-#                                  {},
-#                                  context_instance=RequestContext(request))
-      user = ""
-      punns = paginate(request,
-                       Punn.objects.filter(status='P').filter(is_top=True).annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
-                       15)
-      punns = attach_infos(punns)
-      latest_comments = Comment.objects.all().order_by('-created')[:5]
-      cats = Cat.objects.filter(is_top_level=True)
-      return render_to_response('index.html',
-                               {'user': user, 'cats': cats,
-                                'punns': punns, 'latest_comments': latest_comments},
-                                context_instance=RequestContext(request))
+      if request.META['HTTP_HOST'] == "blobon.com":
+        if request.method == 'POST':
+            form = InvitationForm(request.POST)
+            if form.is_valid():
+                invitation = form.save()
+        else:
+            form = InvitationForm()
+        return render_to_response('blobon.html',
+                                  {'form': form},
+                                   context_instance=RequestContext(request))
+      elif request.META['HTTP_HOST'] == "www.blobon.com":
+        return HttpResponseRedirect("http://blobon.com")
+#      user = ""
+#      punns = paginate(request,
+#                       Punn.objects.filter(status='P').filter(is_top=True).annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
+#                       15)
+#      punns = attach_infos(punns)
+#      latest_comments = Comment.objects.all().order_by('-created')[:5]
+#      cats = Cat.objects.filter(is_top_level=True)
+#      return render_to_response('index.html',
+#                               {'user': user, 'cats': cats,
+#                                'punns': punns, 'latest_comments': latest_comments},
+#                                context_instance=RequestContext(request))
 
 
 def new(request):

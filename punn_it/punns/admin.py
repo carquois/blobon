@@ -8,6 +8,7 @@ from punns.models import Album
 from punns.models import Link
 from accounts.models import UserProfile
 from comments.models import Comment
+from notifications.models import Invitation
 from images.models import Image
 from votes.models import CommentVote, PunnVote
 from news.models import Post
@@ -17,6 +18,7 @@ class PunnAdmin(admin.ModelAdmin):
     exclude = ('original_punn',)
 admin.site.register(Punn, PunnAdmin)
 admin.site.register(Link)
+admin.site.register(Invitation)
 admin.site.register(Album)
 admin.site.register(Earning)
 admin.site.register(Post)
