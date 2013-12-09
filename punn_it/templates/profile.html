@@ -15,54 +15,46 @@
     <meta name="twitter:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
     <meta name="twitter:description" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}">
 {% endblock %}
-{% block hotnewtop %}
-    <ul class="nav navbar-nav">
-      <li><a href="{% url 'punns.views.index' %}">{% trans "HOT" %}</a></li>
-      <li><a href="{% url 'punns.views.new' %}">{% trans "NEW" %}</a></li>
-    </ul>
-{% endblock %}
 
- {% block hero-unit %}
-              <div class="jumbotron">
 
-<div class="media">
-{% if user.userprofile.avatar %}
-  <a class="pull-left" href="{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
-            {% thumbnail user.userprofile.avatar "150x150" crop="center" as im %}
-             <img src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" class="img-rounded"/>
-             {% endthumbnail %}
-         {% endif %} 
-  </a>
-  <div class="media-body">
-    <h2 class="media-heading">{{ user.first_name }} {{ user.last_name }}
-         {% if request.user == user %} 
-<small><a href="{% url 'accounts.views.edit_profile' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Mettre votre profil à jour" %}</a></small>
-{% endif %} 
+ 
+ {% block profileEntete %}
+		 	<!--page profil entete-->
+			 	
+			 	<div class="pageProfilEntete fondDegrade coinsRonds pad20">
+			 		{% if user.userprofile.avatar %}
+			 		<div class="pageprofileAvatar">
+			 			{% thumbnail user.userprofile.avatar "150x150" crop="center" as im %}
+			 			<img src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" class="img-thumbnail">
+			 			{% endthumbnail %}
+       			    {% endif %} 
+			 		</div>
+			 		<h2>{{ user.first_name }} {{ user.last_name }}</h2>
+			 		{% if user.userprofile.description %}
+					    <p>{{ user.userprofile.description }}</p>
+					{% endif %} 
+					{% if user.userprofile.location %}
+					    <p>{{ user.userprofile.location }}</p>
+					{% endif %} 	
+					{% if user.userprofile.facebook_link %}
+			 		<a href="{{ user.userprofile.facebook_link }}" target="_blank"><span class="iconePageProfil iconeTwitter"></span></a>
+			 		{% endif %} 
+			 		{% if user.userprofile.twitter_link %}
+			 		<a href="{{ user.userprofile.twitter_link }}" target="_blank"><span class="iconePageProfil iconeFacebook"></span></a>
+			 		{% endif %} 
+			 		<!--<a href="#"><span class="iconePageProfil iconeGooglePlus"></span></a>-->
+			 		
+			 		
+			 	</div>
+			 	
+			 	<!--fin page profil entete-->
 
-</h2>
 
-{% if user.userprofile.description %}
-    <p>{{ user.userprofile.description }}</p>
-{% endif %} 
-{% if user.userprofile.location %}
-    <p>{{ user.userprofile.location }}</p>
-{% endif %} 
-    <p>
-{% if user.userprofile.facebook_link %}
-<a href="{{ user.userprofile.facebook_link }}" target="_blank"><img src="{{ STATIC_URL }}img/facebook.png" /></a>
-{% if user.userprofile.twitter_link %}
-    <a href="{{ user.userprofile.twitter_link }}" target="_blank"><img src="{{ STATIC_URL }}img/twitter.png" /></a>
-         {% endif %} 
-</p>
-         {% endif %} 
 
-  </div>
-</div>
-</div>
 
 {% if user == request.user %}
-<div class="well">
-<h3>{% trans "Publication rapide" %}</h3>
+<div class="well fondDegrade coinsRonds pad20 blanc">
+<h3 class="fontBlobon">{% trans "Publication rapide" %}</h3>
 <form role="form" enctype="multipart/form-data" method="post" action="{% url 'punns.views.profile_page' request.user.username %}">{% csrf_token %}
   <div class="form-group">
     {{ quick_publish.title.label_tag }}
@@ -78,4 +70,4 @@
 </div>
 {% endif %}
 
-{% endblock %}
+ {% endblock %}

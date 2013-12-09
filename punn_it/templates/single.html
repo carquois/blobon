@@ -51,9 +51,7 @@
 #nav-above-top-sidebar {
   margin-bottom: 10px;
 }
-#heading {
-  margin-bottom: 10px;
-}
+
 #infos {
   margin-top: 10px;
   padding: 10px 25px;
@@ -61,9 +59,7 @@
 #btn-left {
   margin-left: 10px;
 }
-#content-holder{
-  padding: 10px;
-}
+ 
 .comment-holder{
   padding: 10px;
 }
@@ -71,9 +67,28 @@ img{
   max-width: 720px;
 }
     {% endblock %}
+ 
 {% block content %} 
 <div class="panel" id="content-holder">
-<div class="media" id="heading">
+
+<div class="tagCat bg{{ punn.cat }} ombrageTexte">{{ punn.cat }}</div>
+
+    <div class="titreSingle">{{ punn.title }}</div>
+
+
+  {% if punn.youtube_id %}
+  <iframe width="480" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+  {% else %}
+  {% if punn.pic %}
+  <a href="{{ next_punn.get_absolute_url }}">
+    <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ punn.pic }}" alt="{{ punn.title }}" />
+  </a>
+  
+  
+  {% endif %}
+  {% endif %}
+  
+  <div class="media" id="heading">
   <a class="pull-left" href="{% url punns.views.profile_page punn.author.username %}">
 {% if punn.author.userprofile.avatar %}
                   {% thumbnail punn.author.userprofile.avatar "64x64" crop="center" as im %}
@@ -96,19 +111,8 @@ img{
 <p class="text-muted">{% trans "Publié" %} {{ punn.pub_date|naturaltime }}{% if punn.source %} via <a href="{{ punn.source }}" target="_blank">Source</a>{% endif %}</p>
   </div>
 </div>
-<hr>
-    <h2>{{ punn.title }}</h2>
 
 
-  {% if punn.youtube_id %}
-  <iframe width="480" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
-  {% else %}
-  {% if punn.pic %}
-  <a href="{{ next_punn.get_absolute_url }}">
-    <img style="width: 100%;" src="{{ MEDIA_URL }}{{ punn.pic }}" alt="{{ punn.title }}" />
-  </a>
-  {% endif %}
-  {% endif %}
   {% if content %}
 <div class="well">
    <h4> {{ content|safe }}</h4>
@@ -116,24 +120,7 @@ img{
   {% endif %}
 <div id="infos" class="panel">
 <div class="row">
-
-<div class="btn-group">
-<a rel="tooltip" title="{% trans "Like" %}" class="btn btn-default {% if vote == "U" %} btn-primary{% endif %}" href="
-{% if request.user.is_authenticated %}
-                       {% url votes.views.up punn.id %}
-                     {% else %}
-                       {% url django.contrib.auth.views.login %}?next={{request.path}}
-                     {% endif %}
-                             ">&#43;</a>
-        <a class="btn btn-default" disabled="disabled">{{ karma }}</a>
-        <a rel="tooltip" title="{% trans "Dislike" %}" class="btn btn-default {% if vote == "D" %}btn-primary{% endif %}" href="
-{% if request.user.is_authenticated %}
-                       {% url votes.views.down punn.id %}
-                     {% else %}
-                       {% url django.contrib.auth.views.login %}?next={{request.path}}
-                     {% endif %}
-                             ">&#45;</a>
-</div>
+ 
 <div class="pull-right">
 
 <a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr">Tweet</a>
@@ -144,24 +131,7 @@ img{
 </div>
 </div>
 
-  {% if request.user.is_staff or request.user == punn.author %}
-<hr>
-<div class="row">
-<div class="btn-toolbar pull-right">
-<div class="btn-group">
-  {% if request.user.is_staff %}
-  <a class="btn btn-default {% if punn.is_top %}btn-primary{% endif %}" href="{% url punns.views.hot punn.id %}"><span class="glyphicon glyphicon-fire"></span> {% trans "Hot" %}</a>
-  <a class="btn btn-default" href="http://checkdonc.ca/admin/punns/punn/{{ punn.id }}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Modifier" %}</a>
-  {% endif %}
-  {% if request.user == punn.author %}
-  <a class="btn btn-danger" href="{% url punns.views.delete punn.id %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Supprimer" %}</a>
-  {% endif %}
-</div>
-</div>
-
-</div>
-  {% endif %}
-
+  
 
 
 

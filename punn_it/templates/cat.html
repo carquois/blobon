@@ -14,10 +14,74 @@
     <meta name="twitter:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
     <meta name="twitter:description" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}">
 {% endblock %}
- {% block hero-unit %}
+ {% block content %}
+	       		
+	       		<!-- liste thumbnails -->
+	       		<div class="col-md-12 noPad" style="margin-bottom: 20px;">
+	       			
+	       			<div class="headerCategorie bg{{ cat.slug }} ombrageTexte pad5">
+	        		
+	        		<span>{{ cat.slug }}</span>
+	        		
+	        		
+	        	</div>
+	       			
 
-<div class="page-header">
-  <h1>{{ cat.slug }}</h1>
-</div>
+	       			<!-- boucle pour 1 thumbnails -->
+	       			{% for punn in punns %}
+	       			<a href="{{ punn.get_absolute_url }}">
+	       			{% if forloop.counter|divisibleby:3 %}
+		       			<div class="contenantImageThumb  " style="float:left;position: relative;">
+		       			{% else %}	
+		       			<div class="contenantImageThumb  margeDroiteThumb" style="float:left;position: relative;">
+						{% endif %}	
+							<div class="overThumb" >
+									
+									{% if punn.title|length >= 60 %}
+									<div class="titre3small ombrageTexte centreVertical">{{ punn.title }}</div> 
+									{% else %}	
+									<div class="titre3 ombrageTexte centreVertical">{{ punn.title }}</div> 
+									{% endif %}	
 
-{% endblock %}
+								
+							</div>
+		       				
+		       					
+		       					 {% thumbnail punn.pic "222x240" crop="center" as im %}
+					  	          <img id="thumbs" src="{{ im.url }}" class="Thumb-general " alt="{{ punn.title }}"/>
+						         {% endthumbnail %}
+		       				
+		       					
+								
+		       			</div>
+	       		</a>
+	       			{% if forloop.counter|divisibleby:3 %}
+	       			<div style="clear: both; margin-bottom: 30px;"></div>
+	       			{% endif %}
+	       			
+	       			{% if forloop.counter == 6 %}
+
+					<div id='div-gpt-ad-1363051510706-0' style='width:728px; height:90px;' class="hidden-xs centered">
+					        <script type='text/javascript'>
+					          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
+					        </script>
+					</div>	
+					<div style="clear: both; margin-bottom: 30px;"></div>
+					
+					{% endif %}
+	       			
+
+	       			{% endfor %}
+					<!-- FIN boucle pour 1 thumbnails -->
+	       			
+	 	       		 
+
+
+	       			
+	       		</div>
+	       		<!-- liste thumbnails -->
+	       		
+	       		<div style="clear: both; margin-bottom: 30px;"></div>
+	       		
+	       		
+	       		   {% endblock %}
