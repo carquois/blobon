@@ -51,15 +51,20 @@ def attach_infos(punns):
 
 def index(request):
       if request.META['HTTP_HOST'] == "blobon.com":
-        if request.method == 'POST':
-            form = InvitationForm(request.POST)
-            if form.is_valid():
-                invitation = form.save()
+        if request.user.is_authenticated():
+          return render_to_response('dashboard.html',
+                                    {},
+                                    context_instance=RequestContext(request))
         else:
-            form = InvitationForm()
-        return render_to_response('blobon.html',
-                                  {'form': form},
-                                   context_instance=RequestContext(request))
+          if request.method == 'POST':
+              form = InvitationForm(request.POST)
+              if form.is_valid():
+                  invitation = form.save()
+          else:
+              form = InvitationForm()
+          return render_to_response('blobon.html',
+                                    {'form': form},
+                                     context_instance=RequestContext(request))
       elif request.META['HTTP_HOST'] == "www.blobon.com":
         return HttpResponseRedirect("http://blobon.com")
 #      user = ""
