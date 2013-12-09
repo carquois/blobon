@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{% block description %}{{ site_description }}{% endblock %}">
     <meta name="author" content="">
-    <title>{% block title %}Blob on{% endblock %}</title>
+    <title>{% block title %}Check Donc ça{% endblock %}</title>
     {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ site.name }}" />
@@ -81,8 +81,8 @@
     <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}/ico/apple-touch-icon-57-precomposed.png">-->
-    <link rel="shortcut icon" href="{{ STATIC_URL }}/ico/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}/ico/favicon.png">-->
         <!-- Le analytics -->
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -150,7 +150,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top navBG">
       <div class="container">
       	<div class="logoCheck">
-         <a class="navbar-brand enteteCheck" href="#">Blob on?</a>
+         <a class="navbar-brand enteteCheck" href="#">Check donc ça</a>
          <div class="typeEntete"><a href="#">Photos</a>  | <a href="#">Vidéos</a> |  <a href="#">Blogues</a></div> 
         </div><!--/.nav-collapse -->
         <div class="navbar-header">
@@ -216,16 +216,16 @@
 					  	          <img id="thumbs" src="{{ im.url }}" class="Thumb-general " alt="{{ punn.title }}"/>
 						         {% endthumbnail %}
 		       				
-		       					
+		       					{% if punn.cat %}
 		       					<div class="tagCat bg{{ punn.cat }} ombrageTexte">{{ punn.cat }}</div>
-								
+								{% endif %}	
 		       			</div>
 	       		</a>
 	       			{% if forloop.counter|divisibleby:3 %}
 	       			<div style="clear: both; margin-bottom: 30px;"></div>
 	       			{% endif %}
 	       			
-	       			{% if forloop.counter == 6 %}
+	       			{% if forloop.counter == 3 %}
 
 					<div id='div-gpt-ad-1363051510706-0' style='width:728px; height:90px;' class="hidden-xs centered">
 					        <script type='text/javascript'>
@@ -315,6 +315,9 @@
 	         <div class="panel-body facebook-like-box" style="background-color:#FFFFFF; padding:5px">
               <fb:like-box href="https://www.facebook.com/checkdoncca" width="355" show_faces="true" header="false" stream="false" show_border="false" class=" fb_iframe_widget" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=378058345602851&amp;header=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fcheckdoncca&amp;locale=fr_CA&amp;sdk=joey&amp;show_border=false&amp;show_faces=true&amp;stream=false&amp;width=355"><span style="vertical-align: bottom; width: 355px; height: 241px;"><iframe name="f342599564" width="355px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:like_box Facebook Social Plugin" src="http://www.facebook.com/plugins/like_box.php?app_id=378058345602851&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D27%23cb%3Df1d831cfb4%26domain%3Dcheckdonc.ca%26origin%3Dhttp%253A%252F%252Fcheckdonc.ca%252Ffe6febc3%26relation%3Dparent.parent&amp;header=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fcheckdoncca&amp;locale=fr_CA&amp;sdk=joey&amp;show_border=false&amp;show_faces=true&amp;stream=false&amp;width=355" style="border: none; visibility: visible; width: 355px; height: 241px;" class=""></iframe></span></fb:like-box>
  			 </div>
+ 			 
+ 			 <div class="fb-recommendations" data-app-id="378058345602851" data-site="checkdonc.ca" data-action="likes" data-width="300" data-height="600" data-max-age="7" data-colorscheme="light" data-header="true"></div>
+
 	        
 	        </div>
 	         <!--Fin Colonne de droite -->

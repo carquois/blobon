@@ -75,12 +75,13 @@ def new(request):
 
 def cat(request, slug):
       cat = get_object_or_404(Cat, slug=slug)
+      cats = Cat.objects.filter(is_top_level=True)
       punns = paginate(request,
                        Punn.objects.filter(status='P').filter(cat=cat).annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
                        15)
       punns = attach_infos(punns)
       return render_to_response('cat.html',
-                                {'punns': punns, 'cat': cat},
+                                {'punns': punns, 'cat': cat, 'cats': cats},
                                 context_instance=RequestContext(request))
 
 @login_required
@@ -421,6 +422,7 @@ def submit(request):
 
 def single(request, shorturl):
     punn = get_object_or_404(Punn, base62id=shorturl)
+    cats = Cat.objects.filter(is_top_level=True)
     votesup = PunnVote.objects.filter(punn=punn).filter(vote='U')
     votesdown = PunnVote.objects.filter(punn=punn).filter(vote='D')
     karma = votesup.count() - votesdown.count()
@@ -508,7 +510,7 @@ def single(request, shorturl):
                                'content': content, 'comment_list': comment_list,
                                'url': url, 'karma':karma, 'auth_user':auth_user,
                                'vote': vote, 'user': punn.author, 'home': home, 
-                               'site_description': site_description, 'site': site, 
+                               'site_description': site_description, 'site': site, 'cats': cats, 
                                'comment_form': comment_form, 'reblog': reblog, 'favorite': favorite}, 
                               context_instance=RequestContext(request))
 

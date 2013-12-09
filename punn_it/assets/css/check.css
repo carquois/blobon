@@ -5955,11 +5955,8 @@ body {
   }
 }
 .logoCheck {
-  background: url(../img/checkdoncca.png) no-repeat;
   width: 100%;
   min-height: 60px;
-  padding-left: 60px;
-  margin-left: 15px;
 }
 .enteteCheck {
   color: white;
