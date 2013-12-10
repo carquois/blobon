@@ -31,7 +31,7 @@ class Command(BaseCommand):
         if punn.translated_title and up.fr_user: 
           punn.is_top = False
           punn.save()
-          new_punn = Punn(title=punn.translated_title, author= up.fr_user, original_punn = punn, pic=punn.pic, source=punn.source, is_top=True)
+          new_punn = Punn(title=punn.translated_title, author= up.fr_user, original_punn = punn, pic=punn.pic, source=punn.source, is_top=True, youtube_id=punn.youtube_id)
           publish_draft(new_punn)
           publish_twitter_link(new_punn)
 
