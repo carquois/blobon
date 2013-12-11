@@ -1,0 +1,88 @@
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% trans "Create a free blog." %}{% endblock %}">
+    <meta name="author" content="">
+    <title>{% block title %}Blobon{% endblock %}</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
+    <link href="{{ STATIC_URL }}css/bootstrap-glyphicons.css" rel="stylesheet">
+    {% block additional-css %}
+    {% endblock %}
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10970225-13']);
+      _gaq.push(['_setCustomVar',
+            1, 
+	    'author_id',
+            '{{ user.id }}', 
+            3
+        ]);
+      _gaq.push(['_setCustomVar',
+            2, 
+	    'author_username',
+            '{{ user.username }}', 
+            3
+        ]);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script type='text/javascript'>
+      var googletag = googletag || {};
+      googletag.cmd = googletag.cmd || [];
+      (function() {
+        var gads = document.createElement('script');
+        gads.async = true;
+        gads.type = 'text/javascript';
+        var useSSL = 'https:' == document.location.protocol;
+        gads.src = (useSSL ? 'https:' : 'http:') + 
+        '//www.googletagservices.com/tag/js/gpt.js';
+        var node = document.getElementsByTagName('script')[0];
+        node.parentNode.insertBefore(gads, node);
+      })();
+    </script>
+    <script type='text/javascript'>
+      googletag.cmd.push(function() {
+        googletag.defineSlot('/17303639/300x250TopRight', [[300, 250], [300, 600]], 'div-gpt-ad-1360772351679-0').addService(googletag.pubads());
+        googletag.defineSlot('/17303639/MobileLeaderboardBelowTheContent', [320, 50], 'div-gpt-ad-1360772351679-1').addService(googletag.pubads());
+        googletag.defineSlot('/17303639/Leaderboard', [728, 90], 'div-gpt-ad-1363051510706-0').addService(googletag.pubads());
+        googletag.defineSlot('/17303639/SkyScrapper', [160, 600], 'div-gpt-ad-1363052072029-0').addService(googletag.pubads());
+	googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+      });
+    </script>
+    <!-- To initialize the tooltips -->
+    <script type="text/javascript">
+      $(function () {
+        $("a[data-rel]").tooltip();
+      });
+    </script>
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/fr_CA/all.js#xfbml=1&appId=378058345602851";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+    {% block nav %}
+    {% endblock %}
+
+
+    {% block container %}
+    {% endblock %}
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>    
+  </body>
+</html>
