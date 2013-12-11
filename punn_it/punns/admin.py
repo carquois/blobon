@@ -13,11 +13,13 @@ from images.models import Image
 from votes.models import CommentVote, PunnVote
 from news.models import Post
 from django.contrib import admin
+from blogs.models import Blog
 
 class PunnAdmin(admin.ModelAdmin):
     exclude = ('original_punn',)
 admin.site.register(Punn, PunnAdmin)
 admin.site.register(Link)
+admin.site.register(Blog)
 admin.site.register(Invitation)
 admin.site.register(Album)
 admin.site.register(Earning)

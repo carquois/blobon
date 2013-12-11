@@ -1,0 +1,460 @@
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% trans "Lancez un blogue ou créez un site Web gratuitement en quelques secondes." %}{% endblock %}">
+    <meta name="author" content="">
+
+    <title>{% block title %}Check Donc Ça{% endblock %}</title>
+
+    {% block open-graphs %}
+    <meta property="og:title" content="Check Donc Ça" />
+    <meta property="og:url" content="http://checkdonc.ca" />
+    <meta property="og:image" content="http://checkdonc.ca{{ STATIC_URL }}img/avatar.png" />
+    <meta property="og:description" content="{% trans "Lancez un blogue ou créez un site Web gratuitement en quelques secondes." %}"/>
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:url" content="http://checkdonc.ca">
+    <meta name="twitter:title" content="Check Donc Ça">
+    <meta name="twitter:image" content="http://checkdonc.ca{{ STATIC_URL }}img/avatar.png">
+    {% block canonical %}
+    <link rel="canonical" href="http://checkdonc.ca" />
+    {% endblock %}
+    {% endblock %}
+    <meta property="fb:app_id" content="378058345602851" />
+    <meta property="og:type" content="website" />
+    {% block additional_js %}
+    {% endblock %}
+    {% block fonts %}
+    {% endblock %}
+
+    <!-- Le styles -->
+
+    {% block css %}
+    {% block bootstrap %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
+    {% endblock %}
+    <link href="{{ STATIC_URL }}css/bootstrap-glyphicons.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .punn_pic {
+        text-align: center;
+      }
+      #pic {
+        max-width: 728px;
+      }
+      .thumb-link {
+        text-align: center;
+      }
+      .medium-rectangle {
+      }
+      .facebook-like-box {
+        text-align: center;
+      }
+      .skyscrapper {
+        margin-top: 20px;
+      }
+      .thumbs {
+        display:block;
+        margin:auto;
+      }
+      .centered {
+        display:block;
+        margin:auto;
+      }
+      #paginator {
+        text-align: center;
+      }
+      #avatar-menu {
+        margin-top: -4px;
+        margin-left: -6px;
+      }
+      #sidebar .panel {
+        padding: 10px;
+      }
+    </style>
+    <style>
+    {% block additional-css %}
+    {% endblock %}
+    </style>
+    {% compress css %}
+    {% endcompress %}
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {% endblock %}
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}/ico/favicon.png">
+        <!-- Le analytics -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10970225-13']);
+      _gaq.push(['_setCustomVar',
+            1, 
+	    'author_id',
+            '{{ user.id }}', 
+            3
+        ]);
+      _gaq.push(['_setCustomVar',
+            2, 
+	    'author_username',
+            '{{ user.username }}', 
+            3
+        ]);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    {% if request.user.is_authenticated %}
+        _gaq.push(['_setCustomVar', 3, 'uid', '{{request.user.pk}}', 1]);
+        _gaq.push(['_setCustomVar', 4, 'gender', '{{request.user.get_profile.gender}}', 1]);
+        {% if request.user.get_profile.birthdate %}
+        _gaq.push(['_setCustomVar', 5, 'age', '{{request.user.get_profile.birthdate|age}}', 1]);
+        {% endif %}
+    {% endif %}
+      
+    </script>
+    <script type='text/javascript'>
+      var googletag = googletag || {};
+      googletag.cmd = googletag.cmd || [];
+      (function() {
+        var gads = document.createElement('script');
+        gads.async = true;
+        gads.type = 'text/javascript';
+        var useSSL = 'https:' == document.location.protocol;
+        gads.src = (useSSL ? 'https:' : 'http:') + 
+        '//www.googletagservices.com/tag/js/gpt.js';
+        var node = document.getElementsByTagName('script')[0];
+        node.parentNode.insertBefore(gads, node);
+      })();
+    </script>
+    <script type='text/javascript'>
+      googletag.cmd.push(function() {
+        googletag.defineSlot('/17303639/300x250TopRight', [[300, 250], [300, 600]], 'div-gpt-ad-1360772351679-0').addService(googletag.pubads());
+        googletag.defineSlot('/17303639/MobileLeaderboardBelowTheContent', [320, 50], 'div-gpt-ad-1360772351679-1').addService(googletag.pubads());
+        googletag.defineSlot('/17303639/Leaderboard', [728, 90], 'div-gpt-ad-1363051510706-0').addService(googletag.pubads());
+        googletag.defineSlot('/17303639/SkyScrapper', [160, 600], 'div-gpt-ad-1363052072029-0').addService(googletag.pubads());
+	googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+      });
+    </script>
+    <!-- To initialize the tooltips -->
+    <script type="text/javascript">
+      $(function () {
+        $("a[data-rel]").tooltip();
+      });
+    </script>
+  </head>
+  <body>
+    <div id="fb-root"></div>
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/fr_CA/all.js#xfbml=1&appId=378058345602851";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+    {% block nav %}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://checkdonc.ca">{% trans "Check Donc Ça" %}</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+          {% if request.user.is_authenticated %}
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              {% if request.user.userprofile.avatar %}
+                {% thumbnail request.user.userprofile.avatar "27x27" crop="center" as im %}
+                <img src="{{ im.url }}" alt="{{ request.user.first_name }} {{ request.user.last_name }}" id="avatar-menu" /> 
+                {% endthumbnail %}{{ request.user.first_name }} {{ request.user.last_name }}<b class="caret"></b>
+              {% else %}
+                <span class="glyphicon glyphicon-user"></span> <b class="caret"></b>
+              {% endif %}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'punns.views.profile_page' request.user.username %}">{% trans "Votre profil" %}</a></li>
+              <li><a href="{% url 'earnings.views.index' %}">{% trans "Vos revenus" %}</a></li>
+              <li class="divider"></li>
+              <li><a href="{% url 'accounts.views.edit_profile' %}">{% trans "Paramètres" %}</a></li>
+              <li class="divider"></li>
+              <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Se déconnecter" %}</a></li>
+            </ul>
+            </li>
+          </ul>
+          <a class="btn btn-danger navbar-btn navbar-right" href="{% url 'punns.views.create' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Ajoutez du contenu" %}</a>
+          {% else %}
+            <a class="btn btn-default navbar-btn navbar-right" href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Se connecter" %}</a>
+            <a class="btn btn-default navbar-btn" data-toggle="modal" href="#makeMoney">{% trans "Faites de l'argent" %}</a>
+          {% endif %} 
+        </div><!--/.nav-collapse -->
+      </div><!--/.contaimer -->
+    </div><!--/.navbar-fixed-top -->
+    {% endblock %}
+    {% block leaderboard %}
+    <div style="background: lightgrey;padding: 7px; margin-top: -10px;margin-bottom: 10px;">
+      <div id='div-gpt-ad-1363051510706-0' style='width:728px; height:90px;' class="hidden-xs centered">
+        <script type='text/javascript'>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
+        </script>
+      </div>
+      <div id='div-gpt-ad-1360772351679-1' style='width:320px; height:50px;' class="visible-xs centered">
+        <script type='text/javascript'>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-1'); });
+        </script>
+      </div>
+    </div>
+    {% endblock %}
+    <div class="container">
+    {% block container %}
+      <div class="row">
+        <div class="col-md-8">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+              </div>
+            {% endfor %}
+          {% endif %}
+          {% block content %}
+          <div class="row">
+            {% block hero-unit %}
+              {% if not request.user.is_authenticated and not user %}
+                <div class="jumbotron">
+                  <h2>{% trans "Bienvenue sur Check Donc Ça." %}</h2>
+                  <p class="lead">{% trans "Check Donc Ça est basé sur un principe simple, mais puissant : le partage." %} </p>
+                  <p>{% trans "Partage de contenu = partage de revenu" %} </p>
+                  <p><a href="{% url "accounts.views.signup" %}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-user"></span> {% trans "Créez votre compte" %}</a></p>
+                </div>
+              {% endif %}
+              {% if user %}
+                <div class="jumbotron">
+                  <div class="media">
+                    {% if user.userprofile.avatar %}
+                    <a class="pull-left" href="{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
+                      {% thumbnail user.userprofile.avatar "150x150" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" class="img-rounded"/>
+                      {% endthumbnail %}
+                    {% endif %} 
+                    </a>
+                    <div class="media-body">
+                      <h2 class="media-heading">{{ user.first_name }} {{ user.last_name }}
+                        {% if request.user == user %} 
+                          <small><a href="{% url 'accounts.views.edit_profile' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Edit your profile" %}</a></small>
+                        {% endif %} 
+                      </h2>
+                      {% if user.userprofile.description %}
+                        <p>{{ user.userprofile.description }}</p>
+                      {% endif %}
+                      {% if user.userprofile.location %}
+                        <p>{{ user.userprofile.location }}</p>
+                      {% endif %}
+                      {% if user.userprofile.facebook_link %}
+                        <p><a href="{{ user.userprofile.facebook_link }}" target="_blank"><img src="{{ STATIC_URL }}img/facebook.png" alt="facebook logo" /></a>
+                        </p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                {% if user == request.user %}
+                  <div class="well">
+                    <h3>{% trans "Quick publish" %}</h3>
+                    <form role="form" enctype="multipart/form-data" method="post" action="{% url 'punns.views.create' %}">{% csrf_token %}
+                      <div class="form-group">
+                        {{ quick_publish.title.label_tag }}
+                        {{ quick_publish.title }}
+                      </div>
+                      <div class="form-group">
+                        {{ quick_publish.pic.label_tag }}
+                        {{ quick_publish.pic }}
+                      </div>
+                      <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
+                    </form>
+                  </div>
+                {% endif %}
+              {% endif %}
+            {% endblock %}
+          </div><!--/.row -->
+          <div class="row">
+            {% block cats %}
+            <nav class="navbar navbar-default" role="navigation">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                  {% for cat in cats %} 
+                    <li><a href="{% url "punns.views.cat" cat.slug %}">{{ cat.slug }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </nav>
+            {% endblock %}
+          </div><!--/.row -->
+          <div class="row">
+            {% block blog %}
+            {% endblock %}
+            {% block thumbs %}
+              {% for punn in punns %}
+                {% if forloop.counter0|divisibleby:3 %}
+          </div>
+          <div class="row">
+                {% endif %}
+            <div class="col-xs-4 panel">
+              <h6>
+                {% if punn.author.userprofile.avatar %}
+                  <a href="{% url "punns.views.profile_page" punn.author.username %}">
+                    {% thumbnail punn.author.userprofile.avatar "20x20" crop="center" as im %}
+  	              <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}"/>
+	            {% endthumbnail %}
+	        {% endif %}
+                  </a>
+                {{ punn.author.first_name }} {{ punn.author.last_name }}</h6>
+                  <a href="{{ punn.get_absolute_url }}" class="thumbnail">
+                    {% if punn.pic %}
+	              {% thumbnail punn.pic "300x300" crop="center" as im %}
+  	                <img class="thumbs" src="{{ im.url }}" alt="{{ punn.title }}"/>
+	              {% endthumbnail %}
+	            {% else %}
+	              {% thumbnail punn.author.userprofile.avatar "300x300" crop="center" as im %}
+  	                <img class="thumbs" src="{{ im.url }}" alt="{{ punn.title }}"/>
+	              {% endthumbnail %}
+	            {% endif %}
+                  </a>
+              <ul class="list-inline">
+                <li><span class="glyphicon glyphicon-arrow-up"></span> {{ punn.score }}</li>
+                  {% if punn.number_of_comments != 0 %}
+                    <li><span class="glyphicon glyphicon-comment"></span> {{ punn.number_of_comments }}</li>
+                  {% endif %}
+                  {% if punn.cat %}
+                    <li><span class="glyphicon glyphicon-tag"></span> <a href="{% url "punns.views.cat" punn.cat %}">{{ punn.cat }}</a></li>
+                  {% endif %}
+              </ul>
+            </div>
+              {% endfor %}
+            {% endblock %}
+          </div>
+          {% if punns.has_previous or punns.has_next %}
+          <div class="row">
+            <ul class="pager">
+              <li class="previous{% if not punns.has_previous %} disabled{% endif %}"><a href="{% if punns.has_previous %}?page={{ punns.previous_page_number }}{% endif %}">&larr; {% trans "Préc" %}</a></li>
+              <li class="next{% if not punns.has_next %} disabled{% endif %}"><a href="{% if punns.has_next %}?page={{ punns.next_page_number }}{% endif %}">{% trans "Proch" %} &rarr;</a></li>
+            </ul>
+          </div>
+          {% endif %}
+            {% endblock %}
+        </div><!--/.col-8 -->
+        <div class="col-md-4" id="sidebar">
+          {% block sidebar %}
+            {% block topsidebar %}
+            {% endblock  %}
+            <div class="panel medium-rectangle hidden-md">
+              <!-- 300x250TopRight -->
+              <div class="centered" id='div-gpt-ad-1360772351679-0' style='width:300px; height:250px;'>
+                <script type='text/javascript'>
+                  googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-0'); });
+                </script>
+              </div>
+            </div>
+            {% block midsidebar %}
+              {% if latest_comments %}
+                <div class="panel hidden-xs">
+                  <h4>{% trans "Derniers commentaires" %}</h4>
+                  <hr>
+                  <dl>
+                    {% for comment in latest_comments %}
+                    <dt><a href="{{comment.punn.get_absolute_url}}#comments">{{ comment.punn.title }}</a></dt>
+                    <dd>{{ comment.content|truncatechars:35 }}</dd>
+                    {% endfor %}
+                  </dl>
+                </div>
+              {% endif  %}
+            {% endblock  %}
+          <div class="panel panel-warning hidden-md">
+            <div class="panel-body facebook-like-box">
+              <div class="fb-like-box" data-href="https://www.facebook.com/checkdoncca" data-width="300" data-height="250" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
+              <div class="fb-recommendations" data-app-id="378058345602851" data-site="checkdonc.ca" data-action="likes" data-width="300" data-height="600" data-max-age="7" data-colorscheme="light" data-header="true"></div>
+            </div>
+            <div class="panel-footer"><a data-toggle="modal" href="#yourPageHere" >Annoncez votre page ici</a></div>
+          </div>
+          <div class="modal fade" id="yourPageHere" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Annoncez sur Check Donc Ça</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Nous sommes en période de test pour ce genre de publicité.</p> <p>Si vous voulez annoncer ici, envoyez-moi un courriel au <a href="mailto:gab@checkdonc.ca">Gab@CheckDonc.ca</a>. Comme c'est le début, vous pourriez profiter d'un tarif préférentiel.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+          <div class="panel skyscrapper hidden-xs">
+            <!-- SkyScrapper -->
+            <div class="centered" id='div-gpt-ad-1363052072029-0' style='width:160px; height:600px;'>
+              <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363052072029-0'); });
+              </script>
+            </div>
+          </div><!--/.well -->
+          {% endblock  %}
+        </div>
+      </div>
+      {% block footer %}
+        <hr>
+        <footer>
+          <ul class="list-inline">
+            <li>
+              &copy; Check Donc Ça {% now "Y" %}
+            </li>
+            <li><a href="{% url "news.views.all" %}">{% trans "Blogue" %}</a></li>
+            <li><a href="http://checkdonc.ca/tos">{% trans "Conditions d'utilisation" %}</a></li>
+            <li><a href="http://checkdonc.ca/privacy">{% trans "Politique de confidentialité" %}</a></li>
+            <li><a href="mailto:gab@checkdonc.ca" target="_top">{% trans "Nous joindre" %}</a></li>
+          </ul>
+        </footer>
+      {% endblock %}
+    {% endblock %}
+    </div><!--/row -->
+    {% block bootstrap-js %}
+      <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    {% endblock %}
+  </body>
+</html>

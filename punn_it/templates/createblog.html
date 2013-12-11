@@ -1,0 +1,23 @@
+{% extends "dashboard.html" %}
+{% load i18n %}
+{% load url from future %}
+{% block container %}
+
+  <div class="well">
+
+<form role="form" method="post" action="{% url 'blogs.views.createblog' %}">{% csrf_token %}
+
+ {% include "forms.html" with form=form %}
+
+
+         <div class="control-group">
+           <div class="controls">
+             <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
+           </div>
+         </div>
+       </form>
+
+
+ </div>
+{% endblock %}
+
