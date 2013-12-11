@@ -17,7 +17,7 @@ STATUS = (
 class Blog(models.Model):
     creator = models.ForeignKey(User, null=True)
     status = models.CharField(max_length=2, choices=STATUS)
-    slug = models.SlugField(verbose_name=_("URL"), max_length=30)
+    slug = models.SlugField(verbose_name=_("URL"), max_length=30, unique=True)
     title = models.CharField(verbose_name=_("Title"), max_length=140)
     password = models.CharField(verbose_name=_("Password"), max_length=140, blank=True)
     def __unicode__(self):

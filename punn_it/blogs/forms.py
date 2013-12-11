@@ -15,5 +15,5 @@ class BlogForm(ModelForm):
                                                     'class': "form-control"}))
     class Meta:
         model = Blog 
-        fields = ('title', 'slug', 'status', )
+        fields = ('title', 'slug', )
 

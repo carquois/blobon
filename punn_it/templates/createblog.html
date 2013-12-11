@@ -1,23 +1,66 @@
 {% extends "dashboard.html" %}
 {% load i18n %}
 {% load url from future %}
+{% block additional-css %}
+  <style>
+    #createwell {
+      max-width:739px;
+      padding:1px 20px 0px 20px;
+    }
+  </style>
+{% endblock %}
 {% block container %}
 
-  <div class="well">
+  <div class="container" id="createwell">
+  <h2>{% trans "Create a new blog" %}</h2>
 
-<form role="form" method="post" action="{% url 'blogs.views.createblog' %}">{% csrf_token %}
+ {% if form.errors %}
 
- {% include "forms.html" with form=form %}
+{% for key, value in form.errors.items %}
 
-
-         <div class="control-group">
-           <div class="controls">
-             <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
-           </div>
-         </div>
-       </form>
+<div class="alert alert-danger alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <strong>{% trans "Error!" %}</strong> {{ value }}
+</div>
 
 
- </div>
+        {% endfor %}
+        {% endif %}
+
+  <form class="form-horizontal" role="form" method="post" action="{% url 'blogs.views.createblog' %}">{% csrf_token %}
+    <div class="form-group">
+      <label for="id_title">{% trans "Title"%}</label>
+      {{ form.title }}
+      <p class="help-block">{% trans "(ie. My Travel Blog, Kim Jong Looking at things, Big Kahuna Burger)" %}</p>
+    </div>
+    <div class="form-group">
+     <label for="id_slug">URL</label>
+     <div class="input-group"> 
+      {{ form.slug }}<span class="input-group-addon">.Blobon.com</span>
+     </div>
+    </div>
+    <div class="form-group">
+     <div class="input-group">
+      <table border="0" cellspacing="0" cellpadding="0" style="margin-bottom:15px;">
+        <tbody>
+          <tr>
+            <td valign="top" style="padding-right:5px;"><input type="checkbox" id="id_status" name="status"></td>
+            <td valign="top"><label id="labelclic" for="id_status">{% trans "Protect this blog with a password" %}</label><p style="margin:1px 0 0 0; font-weigh: normal; font-size: 11px; color:#777777;">This blog can only be viewed by people who enter this password:</p></td>
+          </tr>
+        </tbody>
+      </table>
+     <div id="forclick">
+       <input class="text_field" style="width:260px; margin-left:20px;" id="propassword" name="propassword" type="text" value="">
+     </div>
+     </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <button type="submit" class="btn btn-primary">{% trans "Create your blog" %}</button>
+      </div>
+    </div>
+  </form>
+  </div>
 {% endblock %}
 
+   

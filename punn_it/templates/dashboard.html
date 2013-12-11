@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "dashboard_base.html" %}
 {% load i18n %}
 {% load url from future %}
 {% block nav %}
@@ -33,17 +33,38 @@
         <div class="col-md-3">
 {% block sidebar %}
 <ul class="nav nav-pills nav-stacked">
-  <li class="active"><a href="#">Dashboard</a></li>
-  <li><a href="#">All my blogs</a></li>
+  <li class="active"><a href="#">{% trans "All my blogs" %}</a></li>
   <li><a href="#">Stats</a></li>
 </ul>
 {% endblock %}
 
 </div>
         <div class="col-md-9">
+{% if messages %}
+            {% for message in messages %}
+<div class="alert alert-info alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+</div>
+            {% endfor %}
+          {% endif %}
 {% block content %}
 
-ajouter un listing de tous les blogs
+
+{% for blog in blogs %}
+<div class="panel panel-default">
+<div class="panel-heading">
+    <h3 class="panel-title">{{ blog.title }}</h3>
+  </div>
+  <div class="panel-body">
+        <button type="button" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-cog"></span> {% trans "Dashboard" %}</button>
+<button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-pencil"></span> {% trans "Add a post" %}</button>
+        <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-globe"></span> {% trans "View blog" %}</button>
+        <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-wrench"></span> {% trans "Change look" %}</button>
+        <button type="button" class="btn btn-xs btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete this blog" %}</button>  
+  </div>
+</div>
+{% endfor %}
 
 <a href="/createblog/" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-plus"></span> {% trans "Create a new blog" %}</a>
 {% endblock %}

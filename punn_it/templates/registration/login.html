@@ -3,13 +3,22 @@
 {% load url from future %}
 {% block title %}{% trans "Sign in to Blobon" %}{% endblock %}
 {% block additional-css %}
-
+<style>
 body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #eee;
 }
+img {
+  position: relative;
+}
 
+.btn-block {
+  display: block;
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+}
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -44,7 +53,12 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-
+#login-form{
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+</style>
 {% endblock %}
 {% block leaderboard %}
 {% endblock %}
@@ -52,25 +66,31 @@ body {
 {% endblock %}
 
 {% block container %}
-    <div class="content">
+    <div class="container" center; >
+      <div style="padding:1px; text-align: center;">
+        <img src="http://i.imgur.com/QXoXHev.jpg" class="img-responsive" />     
+      </div>
+      <div class="content">
         {% if form.errors %}
-            <div class="alert alert-block fade in">
-                <a class="close" data-dismiss="alert" href="#">×</a>
-                <p><strong>{% trans "Oh snap!" %}</strong> {% trans "Please enter a correct username and password. Note that both fields are case-sensitive." %}</p>
-            </div>
+
+<div class="alert alert-warning alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <strong>{% trans "Error!" %}</strong> {% trans "Please enter a correct username and password. Note that both fields are case-sensitive." %}
+</div>
+
+
         {% endif %}
-        <form action="{% url "django.contrib.auth.views.login" %}" method="post" id="login-form">{% csrf_token %}
+        <form action="{% url 'django.contrib.auth.views.login' %}" method="post" id="login-form">{% csrf_token %}
             <fieldset>
-                <legend>{% trans 'Log in' %}</legend>
-                {% for field in form %}
-                    {% include 'registration/form_field.html' %}
-                {% endfor %}
+                <h2 class="form-signin-heading">Please sign in</h2>
+               
+{{ form }} 
+                
                 <div class="actions">
-                    <input type="submit" class="btn primary" value="{% trans 'Log in' %}">&nbsp;<button type="reset" class="btn">{% trans 'Cancel' %}</button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" value="{% trans 'Log in' %}">Sign in</button>
                 </div>
             </fieldset>
         </form>
-        <p><a href="{% url "django.contrib.auth.views.password_reset" %}">{% trans "Reset my password" %}</a></p>
         <script type="text/javascript">
             $(function(){
                 $(".alert-message").alert();
@@ -80,7 +100,7 @@ body {
             });
             document.forms[1].elements[2].focus();
         </script>
+      </div>
     </div>
 {% endblock %}
-
 
