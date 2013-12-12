@@ -1,0 +1,34 @@
+{% extends "dashboard.html" %}
+{% load i18n %}
+{% load url from future %}
+  {% block additional-css %}
+  {% endblock %}
+  {% block container %}
+    <div class="container" id="createwell">
+      <div class="panel panel-default">
+        <div class="panel-body"> 
+          <h2>{% trans "Create a new blog" %}</h2>
+          {% if form.errors %}
+            {% for key, value in form.errors.title %}
+              <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{% trans "Error!" %}</strong> <p>{% trans "- A title is required" %}</p>
+              </div>
+            {% endfor %}
+            {% for key, value in form.errors.slug %}
+              <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{% trans "Error!" %}</strong> <p>{% trans "- A url is required" %}</p>
+              </div>
+            {% endfor %}
+          {% endif %}
+          <form class="form-horizontal" id="newblog" role="form" method="post" action="{% url 'pages.views.createpage' %}">{% csrf_token %}
+                {{ form }}
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+
+   
