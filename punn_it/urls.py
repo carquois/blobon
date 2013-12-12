@@ -4,16 +4,16 @@ from django.views.generic.simple import direct_to_template
 from django.conf import settings
 from django.contrib import admin
 from punns.views import UserFeed
-from dajaxice.core import dajaxice_autodiscover, dajaxice_config
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from dajaxice.core import dajaxice_autodiscover, dajaxice_config
 
 dajaxice_autodiscover()
 admin.autodiscover()
 
 urlpatterns = patterns('',
     url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
+    url(r'^accounts/login/$', 'accounts.views.custom_login'),
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout',
                           {'next_page': '/'}),
     url(r'^settings/profile/$', 'accounts.views.edit_profile'),
