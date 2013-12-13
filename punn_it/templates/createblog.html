@@ -1,0 +1,80 @@
+{% extends "dashboard.html" %}
+{% load i18n %}
+{% load url from future %}
+  {% block additional-css %}
+    <style>
+      #createwell {
+        max-width:739px;
+        padding:1px 20px 0px 20px;
+      }
+      #labelclic {
+        padding:2px 0px 0px 4px;
+      }
+      .createbutton {
+        padding:5px 0px 0px 0px;
+      }
+      #newblog{
+        padding:0px 10px 0px 10px;
+      }
+    </style>
+  {% endblock %}
+  {% block container %}
+    <div class="container" id="createwell">
+      <div class="panel panel-default">
+        <div class="panel-body"> 
+          <h2>{% trans "Create a new blog" %}</h2>
+          {% if form.errors %}
+            {% for key, value in form.errors.title %}
+              <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{% trans "Error!" %}</strong> <p>{% trans "- A title is required" %}</p>
+              </div>
+            {% endfor %}
+            {% for key, value in form.errors.slug %}
+              <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{% trans "Error!" %}</strong> <p>{% trans "- A url is required" %}</p>
+              </div>
+            {% endfor %}
+          {% endif %}
+          <form class="form-horizontal" id="newblog" role="form" method="post" action="{% url 'blogs.views.createblog' %}">{% csrf_token %}
+            <div class="form-group">
+              <label for="id_title">{% trans "Title"%}</label>
+                {{ form.title }}
+                <p class="help-block">{% trans "(ie. My Travel Blog, Kim Jong Looking at things, Big Kahuna Burger)" %}</p>
+            </div>
+            <div class="form-group">
+              <label for="id_slug">URL</label>
+              <div class="input-group"> 
+                {{ form.slug }}<span class="input-group-addon" id="urlending">.Blobon.com</span>
+              </div>
+              <p class="help-block">{% trans "(You can always change it later)" %}</p>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="checkbox" id="id_status" name="status">
+                <label id="labelclic" for="id_status">{% trans "Protect this blog with a password" %}</label>
+              </div>
+            </div>
+            <div class="form-group" id="passtest">
+              <p style="margin:1px 0 0 0; font-weigh: normal; font-size: 12px; color:#777777;">{% trans "Enter the password here:"%}</p>
+              <input class="form-control" style="width:260px;" id="propassword" name="propassword" type="text" value="">
+            </div>
+            <div class="control-group createbutton">
+              <div class="controls" id="test">
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Create your blog" %}</button>
+                <button type="button" class="btn btn-danger" id="cancel"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      $('#propassword').click(function() {
+        $('#id_status').prop( "checked", true );
+      });
+    </script>
+  {% endblock %}
+
+   

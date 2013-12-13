@@ -8,18 +8,24 @@ from punns.models import Album
 from punns.models import Link
 from accounts.models import UserProfile
 from comments.models import Comment
+from notifications.models import Invitation
 from images.models import Image
 from votes.models import CommentVote, PunnVote
-from news.models import Post
 from django.contrib import admin
+from blogs.models import Blog
+from posts.models import Post
+from pages.models import Page
 
 class PunnAdmin(admin.ModelAdmin):
     exclude = ('original_punn',)
 admin.site.register(Punn, PunnAdmin)
 admin.site.register(Link)
+admin.site.register(Post)
+admin.site.register(Page)
+admin.site.register(Blog)
+admin.site.register(Invitation)
 admin.site.register(Album)
 admin.site.register(Earning)
-admin.site.register(Post)
 admin.site.register(Tags)
 admin.site.register(Cat)
 admin.site.register(Reblog)

@@ -1,0 +1,8 @@
+{% load i18n %}
+<div class="clearfix"> 
+    <div class="controls {% if field.errors %} control-group error{% endif %}">
+      <input type="text" id="id_username" class="form-control" name="Username" maxlength="30" placeholder="{% trans "Username" %}" required="" autofocus="">
+      <input type="password" id="id_password" name="Password" class="form-control" placeholder="{% trans "Password" %}" required="">
+        <span class="help-block">{{ field.help_text }}</span>
+    </div>
+</div>

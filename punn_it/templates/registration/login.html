@@ -1,11 +1,120 @@
-{% extends "settings_base.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 {% load url from future %}
-{% block title %}{% trans "Check Donc Ça" %} / {% trans "Veuillez vous connecter" %}{% endblock %}
-{% block content %}
-        <h2 class="form-signin-heading">{% block heading %}{% trans "Connectez-vous sur Check Donc Ça" %}{% endblock %}</h2>
-{% block pitch %}
-{% endblock %}
-        <a href="{% url 'socialauth_begin' backend='facebook' %}" class="btn btn-large btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-user"></span> {% trans "Facebook" %}</a>
-{% endblock %}
+  {% block title %}{% trans "Sign in to Blobon" %}{% endblock %}
+  {% block additional-css %}
+    <style>
+    body {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      background-color: #eee;
+    }
+    .blobon {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 100%;
+      position: relative;
+    }
+    .signinform{
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .imagetop {
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-block {
+      display: block;
+      width: 100%;
+      padding-right: 0;
+      padding-left: 0;
+    }
+    .form-signin {
+      max-width: 330px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+    .form-signin .form-signin-heading,
+    .form-signin .checkbox {
+      margin-bottom: 0px;
+    }
+    .form-signin .checkbox {
+      font-weight: normal;
+    }
+    .form-signin .form-control {
+      position: relative;
+      font-size: 16px;
+      height: auto;
+      padding: 5px;
+      -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+    }
+    .form-signin .form-control:focus {
+      z-index: 2;
+    }
+    .form-signin input[type="text"] {
+      margin-bottom: -1px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .form-signin input[type="password"] {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+    #login-form{
+      max-width: 330px;
+      padding: 5px;
+      margin: 0 auto;
+    }
+    </style>
+  {% endblock %}
+  {% block leaderboard %}
+  {% endblock %}
+  {% block nav %}
+  {% endblock %}
+  {% block container %}
+    <div class="container" center; >
+      <div class="imagetop" >
+        <img src="http://i.imgur.com/QXoXHev.jpg" class="img-responsive blobon" />     
+      </div>
+      <div class="content signinform">
+        {% if form.errors %}
+        <div class="alert alert-warning alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <strong>{% trans "Error!" %}</strong> {% trans "Please enter a correct username and password. Note that both fields are case-sensitive." %}
+        </div>
+        {% endif %}
+        <form class="form-horizontal" role="form" action="{% url 'django.contrib.auth.views.login' %}" method="post" id="login-form">{% csrf_token %}
+          <fieldset>
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <div class="form-group">
+              <label for="id_username">{% trans "Username:" %}</label>
+              <div class="username-field">
+                <input class="form-control" type="text" id="id_username" name="username" maxlength="30" placeholder="{% trans "Username" %}">
+              </div>
+              <label for="id_password">{% trans "Password:" %}</label>
+              <div class="password-field">
+                <input class="form-control" type="password" id="id_password" name="password" placeholder="{% trans "Password" %}">
+              </div>
+            </div>
+            <div class="actions">
+              <button class="btn btn-lg btn-primary btn-block" type="submit" value="{% trans 'Log in' %}">{% trans "Sign in" %}</button>
+            </div>
+          </fieldset>
+        </form>
+        <script type="text/javascript">
+            $(function(){
+                $(".alert-message").alert();
+                $('#mainForm').submit(function(){
+                    $('#submit').button('loading');
+                })
+            });
+            document.forms[1].elements[2].focus();
+        </script>
+      </div>
+    </div>
+  {% endblock %}
 

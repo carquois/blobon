@@ -1,0 +1,77 @@
+{% extends "dashboard.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block content %}
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">{% trans "Pages" %}<a href="#" class="btn btn-default btn-xs pull-right">{% trans "Add new" %}</a></div>
+  <div class="panel-body">
+    <p><a href="#">{% trans "All" %}</a> ({{ pages|length }})</p>
+  </div>
+
+
+<table class="table table-striped">
+<colgroup>
+          <col class="col-xs-7">
+          <col class="col-xs-1">
+          <col class="col-xs-1">
+          <col class="col-xs-1">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>{% trans "Title" %}</th>
+            <th>{% trans "Author" %}</th>
+            <th>{% trans "Stats" %}</th>
+            <th>{% trans "Date" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+
+{% for page in pages %}
+          
+<tr>
+            <td>{{ page.title }}</td>
+            <td>{{ page.author }}</td>
+            <td><small>{% trans "Coming soon" %}</small></td>
+            <td>{{ page.created }}</td>
+          </tr>
+
+{% endfor %}
+
+        </tbody>
+      </table>
+
+</div>
+
+
+{% endblock %}
+
+{% block sidebar %}
+<ul class="nav nav-pills nav-stacked">
+  <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> {% trans "Dashboard" %}</a></li>
+
+ <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <span class="glyphicon glyphicon-pushpin"></span> {% trans "Posts" %} <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+  <li><a href="#">{% trans "All posts" %}</a></li>
+  <li><a href="#">{% trans "Add new" %}</a></li>
+    </ul>
+  </li>
+
+ <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <span class="glyphicon glyphicon-file"></span> {% trans "Pages" %} <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+  <li><a href="#">{% trans "All pages" %}</a></li>
+  <li><a href="#">{% trans "Add new" %}</a></li>
+    </ul>
+  </li>
+
+  <li><a href="#"><span class="glyphicon glyphicon-comment"></span> {% trans "Comments" %}</a></li>
+</ul>
+{% endblock %}

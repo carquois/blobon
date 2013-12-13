@@ -11,11 +11,19 @@ from django.utils.translation import ugettext as _
 from accounts.forms import UserCreateForm, SocialSignupForm, UserProfileForm, UserForm
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.views import login
 
 from twython import Twython
 
 APP_KEY = 'rNUqZzZRzkwoPaXYytpFgQ'
 APP_SECRET = 'CeDVT0e35vbs2KUBzQq6tQijdUfC4NL3XRmO12ZDyeA'
+
+
+def custom_login(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('punns.views.index'))
+    else:
+        return login(request)
 
 @login_required
 def twitter(request):

@@ -28,12 +28,15 @@
     <meta property="og:type" content="website" />
     {% block additional_js %}
     {% endblock %}
+    {% block fonts %}
+    {% endblock %}
 
     <!-- Le styles -->
 
     {% block css %}
     {% block bootstrap %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
     {% endblock %}
     <link href="{{ STATIC_URL }}css/bootstrap-glyphicons.css" rel="stylesheet">
     <style>

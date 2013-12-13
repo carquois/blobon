@@ -1,13 +1,52 @@
-{% extends "base.html" %}
+{% extends "dashboard_base.html" %}
 {% load thumbnail i18n compress calculate_age %}
 {% load url from future %}
-{% block nav %}
-{% endblock %}
-{% block leaderboard %}
-{% endblock %}
-{% block container %}
-<div style="padding:20px;">
-<img src="http://i.imgur.com/QXoXHev.jpg" class="img-responsive" />
+  {% block additional-css %}
+    <style>
+      .invitation {
+        max-width:739px;
+        margin-left: auto;
+        margin-right: auto;
+        padding:2px 2px 2px 2px;
+      }
+      #bloboninviteimg {
+       max-width:100%;
+       margin-left: auto;
+       margin-right: auto;
+       position: relative;
+      }
+      .topimage {
+       max-width:700px;
+       margin-left: auto;
+       margin-right: auto;
+      }
+    </style>
+  {% endblock %}
+  {% block nav %}
+  {% endblock %}
+  {% block leaderboard %}
+  {% endblock %}
+  {% block container %}
+
+{% if messages %}
+            {% for message in messages %}
+<div class="alert alert-info alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
 </div>
-{% endblock %}
+            {% endfor %}
+          {% endif %}
+
+    <div style="padding:20px;text-align: center;">
+      <div class="topimage">
+        <img src="http://i.imgur.com/QXoXHev.jpg" class="img-responsive" id="bloboninviteimg"/>
+      </div>
+      <form id="invitation-form" role="form" action="{% url "punns.views.index" %}" method="post">{% csrf_token %}
+        <div class="form-group invitation">
+        {{ form.email }} 
+        </div>
+        <button type="submit" class="btn btn-warning">{% trans "Request an invitation" %}</button>
+      </form>
+    </div>
+  {% endblock %}
 
