@@ -38,11 +38,14 @@
       #id_title {
       height: 30px;
       } 
+      #createwell{
+      padding-top: 10px;
+      }
     </style>  
   {% endblock %}
   {% block container %}
     <div class="container" id="createwell">
-      <div class="panel panel-default">
+      <div class="panel panel-default newblog">
         <div class="panel-body"> 
           <h2>{% trans "Create a new blog" %}</h2>
           {% if form.errors %}
