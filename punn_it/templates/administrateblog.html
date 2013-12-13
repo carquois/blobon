@@ -6,40 +6,40 @@
 
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading">Panel heading</div>
+  <div class="panel-heading">{% trans "Pages" %}<a href="#" class="btn btn-default btn-xs pull-right">{% trans "Add new" %}</a></div>
   <div class="panel-body">
-    <p>...</p>
+    <p><a href="#">{% trans "All" %}</a> ({{ pages|length }})</p>
   </div>
 
 
 <table class="table table-striped">
+<colgroup>
+          <col class="col-xs-7">
+          <col class="col-xs-1">
+          <col class="col-xs-1">
+          <col class="col-xs-1">
+        </colgroup>
         <thead>
           <tr>
             <th>{% trans "Title" %}</th>
             <th>{% trans "Author" %}</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th>{% trans "Stats" %}</th>
+            <th>{% trans "Date" %}</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+
+{% for page in pages %}
+          
+<tr>
+            <td>{{ page.title }}</td>
+            <td>{{ page.author }}</td>
+            <td><small>{% trans "Coming soon" %}</small></td>
+            <td>{{ page.created }}</td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+
+{% endfor %}
+
         </tbody>
       </table>
 

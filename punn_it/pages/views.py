@@ -11,20 +11,24 @@ from django.utils.translation import ugettext as _
 
 from pages.forms import PageForm
 from pages.models import Page
+from blogs.models import Blog 
 
 @login_required
-def createpage(request):
+def createpage(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
       if request.method == 'POST':
         form = PageForm(request.POST)
         if form.is_valid():
           page = form.save(commit=False)
           page.author = request.user
+          if blog.creator == request.user:
+            page.blog = blog
           page.save()
           messages.add_message(request, messages.INFO, _(u"Your page has been created"))
           return HttpResponseRedirect('/')
       else:
         form = PageForm()
       return render_to_response('createpage.html',
-                                {'form': form},
+                                {'form': form, 'blog': blog},
                                 context_instance=RequestContext(request))
 

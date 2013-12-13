@@ -9,12 +9,15 @@ from django.utils.translation import ugettext as _
 
 from sorl.thumbnail import ImageField
 
+from blogs.models import Blog
+
 STATUS = (
     ('P', 'Publish'),
     ('D', 'Draft'),
 )
 
 class Page(models.Model):
+    blog = models.ForeignKey(Blog, null=True)
     author = models.ForeignKey(User, null=True)
     status = models.CharField(max_length=2, choices=STATUS)
     title = models.CharField(verbose_name=_("Title"), max_length=140, blank=True)

@@ -10,6 +10,7 @@ from django.utils.translation import ugettext as _
 
 from blogs.forms import BlogForm
 from blogs.models import Blog
+from pages.models import Page
 
 @login_required
 def createblog(request):
@@ -35,8 +36,9 @@ def createblog(request):
 @login_required
 def administrateblog(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
+      pages = Page.objects.filter(blog=blog)
       return render_to_response('administrateblog.html',
-                                {'blog': blog},
+                                {'blog': blog, 'pages': pages},
                                 context_instance=RequestContext(request))
 
 @login_required

@@ -4,17 +4,17 @@ from django import forms
 from django.forms import ModelForm, Textarea, TextInput, CharField, URLField
 from django.utils.translation import ugettext as _
 
-from posts.models import Post
+from posts.models import BlogPost
 
-class PostForm(ModelForm):
-    title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Enter a title'),
+class BlogPostForm(ModelForm):
+    title = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Title (optional)'),
                                                     'type': 'text',
                                                     'class': "form-control"}))
-    content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Say something clever'),
+    content = CharField(widget=forms.Textarea(attrs={
                                                     'rows': '4',
                                                     'class': "form-control"}))
 
     class Meta:
-        model = Post
-        fields = ('title', 'content', )
+        model = BlogPost 
+        fields = ('title', 'content', 'status')
 

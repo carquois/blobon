@@ -51,6 +51,7 @@
               <h3 class="panel-title">{{ blog.title }}</h3>
             </div>
             <div class="panel-body">
+              <p><small><em>{{ blog.slug }}.blobon.com</em></small></p>
               <a href="{% url 'blogs.views.administrateblog' blog.slug %}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-cog"></span> {% trans "Dashboard" %}</a>
               <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-pencil"></span> {% trans "Add a post" %}</button>
               <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-globe"></span> {% trans "Visit blog" %}</button>
