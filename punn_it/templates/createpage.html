@@ -62,8 +62,8 @@
               </div>
             {% endfor %}
           {% endif %}
-          <form class="form-horizontal" id="newblog" role="form" method="post" action="{% url 'pages.views.createpage' blog.slug %}">{% csrf_token %}
-          <label for="id_title">Title:</label>
+           <form class="form-horizontal" id="newblog" role="form" method="post" action="{% url 'pages.views.createpage' blog.slug %}">{% csrf_token %}         
+           <label for="id_title">Title:</label>
            {{ form.title }}
             <div id="alerts"></div> 
             <div class="btn-toolbar" data-role="editor-toolbar" data-target="#id_content">
