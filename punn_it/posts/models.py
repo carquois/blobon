@@ -45,16 +45,27 @@ class Image(Post):
     karma = models.IntegerField(default=0)
     views = models.IntegerField(default=0, blank=True)
     source = models.URLField(verbose_name=_("Source"), max_length=300, blank=True)
-    original_punn = models.ForeignKey('self',  null=True, blank=True)
     content = models.TextField(verbose_name=_("Contenu"),max_length=10000, blank=True)
     is_video = models.BooleanField(default=False)
     is_top = models.BooleanField(default=False)
     publish_on_facebook = models.BooleanField(default=False)
     youtube_id = models.CharField(max_length=50, null=True, blank=True)
     pic = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
+    pub_date = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     def __unicode__(self):
         return self.title
 
 
+class Album(Post):
+    base62id = models.CharField(max_length=140, blank=True)
+    title = models.CharField(verbose_name=_("Titre"), max_length=140)
+    content = models.TextField(verbose_name=_("Contenu"),max_length=10000, blank=True)
+    def __unicode__(self):
+        return str(self.id)
 
-
+class Link(models.Model):
+    image = models.ForeignKey(Image)
+    album = models.ForeignKey(Album)
+    order = models.PositiveIntegerField()
+    def __unicode__(self):
+        return str(self.id)

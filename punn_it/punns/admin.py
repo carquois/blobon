@@ -14,6 +14,7 @@ from votes.models import CommentVote, PunnVote
 from django.contrib import admin
 from blogs.models import Blog
 from posts.models import Post
+from posts.models import Image
 from pages.models import Page
 
 class PunnAdmin(admin.ModelAdmin):
