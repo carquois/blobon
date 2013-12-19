@@ -1,18 +1,18 @@
 {% extends "base.html" %}
-{% load i18n thumbnail punn_tags humanize markup %}
-  {% block open-graphs %}
+{% load i18n thumbnail punn_tags humanize %}
+{% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ punn.title }}" />
     <meta property="og:url" content="{{ url }}" />
-    {% if punn.pic %}
-      {% thumbnail punn.pic "250x250" crop="center" as im %}
+{% if punn.pic %}
+                  {% thumbnail punn.pic "250x250" crop="center" as im %}
     <meta property="og:image" content="{{ im.url }}" />
-      {% endthumbnail %}
-    {% endif %}
+                  {% endthumbnail %}
+                  {% endif %}
     <meta property="og:site_name" content="{{ punn.author.first_name }} {{ punn.author.last_name }}" />
     <!-- Le twitter cards -->
     <meta name="twitter:card" content="photo">
-    <meta name="twitter:url" content="http://checkdonc.ca{{ punn.get_absolute_url }}">
+    <meta name="twitter:url" content="{{ url }}">
     <meta name="twitter:title" content="{{ punn.title }}">
     <meta name="twitter:image" content="{{ MEDIA_URL }}{{ punn.pic }}">
     <!-- Le canonical url -->
@@ -70,18 +70,18 @@ img{
  
 {% block content %} 
 <div id='div-gpt-ad-1363051510706-0' style='width:728px; height:90px;' class="hidden-xs centered">
-					        <script type='text/javascript'>
-					          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
-					        </script>
-</div>	
+                                                <script type='text/javascript'>
+                                                  googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
+                                                </script>
+</div>        
 <div class="mobileBigBox" id='div-gpt-ad-1360772351679-1'>
-				        <script type='text/javascript'>
-				          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-1'); });
-				        </script>
-					</div>
+                                        <script type='text/javascript'>
+                                          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-1'); });
+                                        </script>
+                                        </div>
 <div style="clear: both; margin-bottom: 10px;"></div>
-					
-					
+                                        
+                                        
 <div class="panel" id="content-holder">
 
 {% if punn.cat %}
@@ -135,7 +135,7 @@ img{
 <div id="infos" class="panel">
 <div class="row">
  
-		  <div class="pull-right">
+                  <div class="pull-right">
             <a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             <div class="fb-like" data-href="http://checkdonc.ca{{ punn.get_absolute_url }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
@@ -157,14 +157,14 @@ img{
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title">{% trans "Effacer cette page?" %}</h4>
-        {% if request.user.is_staff or request.user == punn.author %}
-          <hr>
-          <div class="row">
-            <div class="btn-toolbar pull-right">
-              <div class="btn-group">
-                {% if request.user.is_staff %}
-                  <a class="btn btn-default {% if punn.is_top %}btn-primary{% endif %}" href="{% url punns.views.hot punn.id %}"><span class="glyphicon glyphicon-fire"></span> {% trans "Hot" %}</a>
-                  <a class="btn btn-default" href="http://checkdonc.ca/admin/punns/punn/{{ punn.id }}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Modifier" %}</a>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Êtes-vous certain de vouloir faire ça? Vous ne pourrez pas revenir en arrière par la suite." %}</p>
+        </div>
+        <div class="modal-footer">
+<button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Non non!" %}</button>
+                    <a href="{% url punns.views.delete punn.id %}" class="btn btn-danger">{% trans "Oui, je veux l'effacer" %}</a>
+        </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
@@ -207,114 +207,81 @@ img{
                 {% if forloop.counter == 2 %}
                 <h3>{% trans "Tous les commentaires" %}</h3>
                 {% endif %}
-                {% if request.user == punn.author %}
-                  <a class="btn btn-danger" href="{% url punns.views.delete punn.id %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Supprimer" %}</a>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-        {% endif %}
-        <div class="modal fade" id="delete">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">{% trans "Effacer cette page?" %}</h4>
-              </div>
-              <div class="modal-body">
-                <p>{% trans "Êtes-vous certain de vouloir faire ça? Vous ne pourrez pas revenir en arrière par la suite." %}</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Non non!" %}</button>
-                <a href="{% url punns.views.delete punn.id %}" class="btn btn-danger">{% trans "Oui, je veux l'effacer" %}</a>
-              </div>
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-      </div>
-      <div class="" id="comments">
-        <form method="post" action="{% url punns.views.single punn.base62id %}">
-          {% csrf_token %}
-          {{ comment_form.content.errors }}
-          <div class="form-group">
-            {{ comment_form.content }}
-          </div>
-          <div class="control-group">
-            <div class="controls">
-              {% if request.user.is_authenticated %}
-                <button data-rel="tooltip" title="{% trans "Soumettre votre commentaire" %}" class="btn btn-default pull-right" id="comment-submit">{% trans "Soumettre" %}</button>
-              {% else %}
-                <a href="{% url accounts.views.signup %}" title="{% trans "Soumettre votre commentaire" %}" class="btn btn-default pull-right" id="comment-submit">{% trans "Soumettre" %}</a>
-              {% endif %}
-            </div>
-          </div>
-        </form>
-        {% if comment_list %}
-          <h3>{% trans "Meilleur commentaire" %}</h3>
-          {% for comment in comment_list|dictsortreversed:"karma" %}
-            {% if forloop.counter == 2 %}
-              <h3>{% trans "Tous les commentaires" %}</h3>
-            {% endif %}
-            <div class="panel comment-holder">
-              <div class="media">
-                <div class="pull-left btn-group-vertical">
-                  <a class="btn btn-default {% if comment.vote == "U" %}btn-primary{% endif %}" href="
-                                       {% if request.user.is_authenticated %}{% url votes.views.commentup comment.id %}
-                                       {% else %}{% url accounts.views.signup %}
-                                       {% endif %}
-                                       ">&#43;</a>
-                  <a class="btn btn-default">{{ comment.karma }}</a>
-                  <a class="btn btn-default {% if comment.vote == "D" %}btn-primary{% endif %}" href="
-                                       {% if request.user.is_authenticated %}{% url votes.views.commentdown comment.id %}
-                                       {% else %}{% url accounts.views.signup %}
-                                       {% endif %}
-                                       ">&#45;</a>
-                </div>
+<div class="panel comment-holder">
+<div class="media">
 
-                <a href="
+<div class="pull-left btn-group-vertical">
+        <a class="btn btn-default {% if comment.vote == "U" %}btn-primary{% endif %}" href="
+                             {% if request.user.is_authenticated %}{% url votes.views.commentup comment.id %}
+                             {% else %}{% url accounts.views.signup %}
+                             {% endif %}
+                             ">&#43;</a>
+        <a class="btn btn-default" disabled="disabled">{{ comment.karma }}</a>
+        <a class="btn btn-default {% if comment.vote == "D" %}btn-primary{% endif %}" href="
+                             {% if request.user.is_authenticated %}{% url votes.views.commentdown comment.id %}
+                             {% else %}{% url accounts.views.signup %}
+                             {% endif %}
+                             ">&#45;</a>
+      </div>
+
+<a href="
                              {% if request.user.is_authenticated %}{% url votes.views.commentup comment.id %}
                              {% else %}{% url accounts.views.signup %}
                              {% endif %}
                              "><div class="comment-vote comment-vote-up {% if comment.vote == "U" %}comment-vote-up-on{% endif %}"></div></a>
 
 
-                <a class="pull-left" href="{% url punns.views.profile_page comment.author.username %}">
+  <a class="pull-left" href="{% url punns.views.profile_page comment.author.username %}">
                   {% if comment.author.userprofile.avatar %}
-                    {% thumbnail comment.author.userprofile.avatar "64x64" crop="center" as im %}
-                      <img src="{{ im.url }}" alt="{{ comment.author.first_name }} {{ comment.author.last_name }}" class="img-rounded"/>
-                    {% endthumbnail %}
+                  {% thumbnail comment.author.userprofile.avatar "64x64" crop="center" as im %}
+                  <img src="{{ im.url }}" alt="{{ comment.author.first_name }} {{ comment.author.last_name }}" class="img-rounded"/>
+                  {% endthumbnail %}
                   {% endif %}
-                </a>
-                <div class="media-body">
-                  <h4 class="media-heading">{{ comment.author.first_name }} {{ comment.author.last_name }}</h4>
-                  {{ comment.content|safe }}
-                </div>
-              </div>
-            </div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-  {% endblock %}
-  {% block topsidebar %}
-    <div id="nav-above-top-sidebar">
-      <a href="{{ prev_punn.get_absolute_url }}" class="btn btn-default">&larr; {% trans "Préc" %}</a>
-      <a href="{{ next_punn.get_absolute_url }}" class="btn btn-primary">{% trans "Proch" %} &rarr;</a>
-    </div>
-    <div class="panel">
-      <div class="row">
-        {% if latest_punn_list %}
-          {% for punn in latest_punn_list %}
-            <div class="col-xs-4">
-              <a href="{{ punn.get_absolute_url }}" class="thumbnail">
-                {% thumbnail punn.pic "200x200" crop="center" as im %}
-                  <img class="thumbs" src="{{ im.url }}" alt="{{ punn.title }}" />
-                {% endthumbnail %}
-              </a>
-            </div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-  {% endblock  %}
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading">{{ comment.author.first_name }} {{ comment.author.last_name }}</h4>
+    {{ comment.content|safe }}
+  </div>
 
+
+</div>
+</div>
+
+{% endfor %}
+{% endif %}
+
+</div>
+</div>
+
+{% endblock %}
+
+{% block topsidebar %}
+<div id="nav-above-top-sidebar">
+  <a href="{{ prev_punn.get_absolute_url }}" class="btn btn-default">&larr; {% trans "Préc" %}</a>
+  <a href="{{ next_punn.get_absolute_url }}" class="btn btn-primary">{% trans "Proch" %} &rarr;</a>
+</div>
+<div class="panel">
+
+<div class="row">
+
+
+
+                {% if latest_punn_list %}
+                  {% for punn in latest_punn_list %}
+  <div class="col-xs-4">
+          <a href="{{ punn.get_absolute_url }}" class="thumbnail">
+                    {% thumbnail punn.pic "200x200" crop="center" as im %}
+                      <img id="thumbs" src="{{ im.url }}" alt="{{ punn.title }}" />
+                    {% endthumbnail %}
+          </a>
+</div>
+                  {% endfor %}
+                {% endif %}
+
+
+
+</div>
+</div>
+
+
+{% endblock  %}
