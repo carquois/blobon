@@ -26,6 +26,7 @@ class Migration(DataMigration):
                         publish_on_facebook = punn.publish_on_facebook, 
                         youtube_id = punn.youtube_id,
                         pic = punn.pic,
+                        id = punn.id,
                         pub_date = punn.pub_date)
           i.save() 
 

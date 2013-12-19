@@ -4,8 +4,7 @@ from punns.models import Favorite
 from punns.models import Tags
 from punns.models import Cat 
 from punns.models import Reblog
-from punns.models import Album
-from punns.models import Link
+from posts.models import Link
 from accounts.models import UserProfile
 from comments.models import Comment
 from notifications.models import Invitation
@@ -15,6 +14,7 @@ from django.contrib import admin
 from blogs.models import Blog
 from posts.models import Post
 from posts.models import Image
+from posts.models import Album
 from pages.models import Page
 
 class PunnAdmin(admin.ModelAdmin):

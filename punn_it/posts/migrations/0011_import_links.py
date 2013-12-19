@@ -9,35 +9,14 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
         # Note: Remember to use orm['appname.ModelName'] rather than "from appname.models..."
-        for album in orm['punns.Album'].objects.all():
-          a = orm.Album(author = album.author,
-                        base62id = album.base62id,
-                        title = album.title,
-                        content = album.content,
-                        created = album.created_date,
-                        last_modified = album.last_modified_date,
-                        id = album.id)
-          a.save()
-
-#class Link(models.Model):
-#    punn = models.ForeignKey(Punn)
-#    album = models.ForeignKey(Album)
-#    order = models.PositiveIntegerField()
-#    created_date = models.DateTimeField(auto_now_add = True, null=True)
-#    last_modified_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
-
-#    base62id = models.CharField(max_length=140, blank=True)
-#    title = models.CharField(verbose_name=_("Titre"), max_length=140)
-#    content = models.TextField(verbose_name=_("Contenu"),max_length=10000, blank=True)
-#    author = models.ForeignKey(User)
-#    created_date = models.DateTimeField(auto_now_add = True, null=True)
-#    last_modified_date = models.DateTimeField(auto_now = True,  null=True, blank=True)
-#
-#class Album(Post):
-#    base62id = models.CharField(max_length=140, blank=True)
-#    title = models.CharField(verbose_name=_("Titre"), max_length=140)
-#    content = models.TextField(verbose_name=_("Contenu"),max_length=10000, blank=True)
-
+        for link in orm['punns.Link'].objects.all():
+          image = orm.Image.objects.get(id=link.punn.id)
+          album = orm.Album.objects.get(id=link.album.id)
+          i = orm.Link(image = image,
+                       album = album,
+                       id= link.id,
+                       order = link.order)
+          i.save()
 
     def backwards(self, orm):
         "Write your backwards methods here."
