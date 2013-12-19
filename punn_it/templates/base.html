@@ -210,7 +210,6 @@
           <a class="btn btn-danger navbar-btn navbar-right" href="{% url 'punns.views.create' %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Ajoutez du contenu" %}</a>
           {% else %}
             <a class="btn btn-default navbar-btn navbar-right" href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">{% trans "Se connecter" %}</a>
-            <a class="btn btn-default navbar-btn" data-toggle="modal" href="#makeMoney">{% trans "Faites de l'argent" %}</a>
           {% endif %} 
         </div><!--/.nav-collapse -->
       </div><!--/.contaimer -->
@@ -245,14 +244,6 @@
           {% block content %}
           <div class="row">
             {% block hero-unit %}
-              {% if not request.user.is_authenticated and not user %}
-                <div class="jumbotron">
-                  <h2>{% trans "Bienvenue sur Check Donc Ça." %}</h2>
-                  <p class="lead">{% trans "Check Donc Ça est basé sur un principe simple, mais puissant : le partage." %} </p>
-                  <p>{% trans "Partage de contenu = partage de revenu" %} </p>
-                  <p><a href="{% url "accounts.views.signup" %}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-user"></span> {% trans "Créez votre compte" %}</a></p>
-                </div>
-              {% endif %}
               {% if user %}
                 <div class="jumbotron">
                   <div class="media">
@@ -303,25 +294,6 @@
           </div><!--/.row -->
           <div class="row">
             {% block cats %}
-            <nav class="navbar navbar-default" role="navigation">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-              </div>
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                  {% for cat in cats %} 
-                    <li><a href="{% url "punns.views.cat" cat.slug %}">{{ cat.slug }}</a></li>
-                  {% endfor %}
-                </ul>
-              </div><!-- /.navbar-collapse -->
-            </nav>
             {% endblock %}
           </div><!--/.row -->
           <div class="row">
