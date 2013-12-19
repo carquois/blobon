@@ -1,0 +1,631 @@
+
+
+@font-face {
+    font-family: 'novecento_wide_bookbold';
+    src: url('novecentowide-bold-webfont.eot');
+    src: url('novecentowide-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('novecentowide-bold-webfont.woff') format('woff'),
+         url('novecentowide-bold-webfont.ttf') format('truetype'),
+         url('novecentowide-bold-webfont.svg#novecento_wide_bookbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.fontBlobon{
+    font-family: 'novecento_wide_bookbold';
+}
+
+.blanc{
+  color:white;
+}
+
+// Couleur des catégories
+// --------------------------------------------------
+@couleurHot:#ff8c40;
+@couleurActu:#fc0000;
+@couleurMonde:#057ffc;
+@couleurArt:#ffdf00;
+@couleurTechno:#a1a1a1;
+@couleurAnimaux:#00b94e;
+@couleurSports:#417cbf;
+@couleurMoteurs:#ba0101;
+@couleurBouffe:#27e9ff;
+@couleurCeleb:#c200c0;
+
+
+
+ 
+body{
+  background-color:#f6f6f6;
+ }
+
+.bgBlanc{
+  background-color:white;
+}
+
+.bgNoir{
+  background-color:#000;
+}
+
+.pad5{
+  padding:5px;
+}
+
+.pad15{
+  padding:15px;
+}
+
+.pad20{
+  padding:20px;
+}
+
+.pad30{
+  padding:30px; 
+}
+
+.noPad{
+  padding:0px;
+}
+
+.margeDroiteThumb{
+  margin-right:2.4em;
+}
+
+
+
+
+@media (max-width: 550px)  {
+    .bt-faites{
+      display:none;
+    }
+}
+
+
+
+
+.logoCheck{
+  background:url(../img/checkdoncca.png) no-repeat;
+  width: 100%;
+  min-height:60px;
+  padding-left:60px;
+  margin-left:15px;
+
+   
+  
+}
+
+.enteteCheck{
+  color:white;
+  font-size:2em;
+  padding-top:0.7em;
+  letter-spacing:-0.05em;
+  a{
+    color:white;
+    }
+}
+.navBG{
+    background:url(../img/bg-nav.png) repeat-x;
+    background-color:#000;
+
+}
+
+.bt-faites{
+  background-color:#393939;
+  font-family: 'novecento_wide_bookbold';
+  float:right;
+  color:white;
+  margin-top:0.9em;
+  
+}
+
+.typeEntete{
+  float:right;
+  margin-top:0.9em;
+  font-family: 'novecento_wide_bookbold';
+  color:white;
+
+  a{
+    color:white;
+    
+  }
+}
+
+
+.nav-Couleur(@couleur){
+   
+  -moz-box-shadow: inset @couleur 0 -4px 0 0;
+  -webkit-box-shadow: inset @couleur -4px 0 0;
+  box-shadow: inset @couleur 0 -4px 0 0;
+  
+}
+
+
+.nav-Hot{
+   
+  .nav-Couleur(@couleurHot);
+  
+}
+
+.nav-Humour{
+   
+  .nav-Couleur(@couleurHot);
+  
+}
+
+.nav-Histoire{
+   
+  .nav-Couleur(@couleurMoteurs);
+  
+}
+
+
+
+.nav-Actu{ 
+   
+  .nav-Couleur(@couleurActu);
+  
+}
+
+.nav-Monde{
+   
+  .nav-Couleur(@couleurMonde);
+  
+}
+
+.nav-Arts{
+   
+  .nav-Couleur(@couleurArt);
+  
+}
+
+.nav-Techno{
+   
+  .nav-Couleur(@couleurTechno);
+  
+}
+
+.nav-Animaux{
+   
+  .nav-Couleur(@couleurAnimaux);
+  
+}
+
+.nav-Sports{
+   
+  .nav-Couleur(@couleurSports);
+  
+}
+
+.nav-Moteurs{
+   
+  .nav-Couleur(@couleurMoteurs);
+  
+}
+
+.nav-Bouffe{
+   
+  .nav-Couleur(@couleurBouffe);
+  
+}
+
+.nav-Celeb{
+   
+  .nav-Couleur(@couleurCeleb);
+  
+}
+
+
+
+.titreSectionCharbon{
+    font-family: 'novecento_wide_bookbold';
+    color:#333333;
+    font-size:1.2em;
+    width:100%;
+    padding-bottom:5px;
+    margin-bottom:10px;
+    border-bottom:1px solid #b5b5b5;
+    
+
+}
+
+.DerniersBilletsItem{
+  padding-bottom:10px;
+  border-bottom:1px solid  #b5b5b5;
+  margin-bottom:8px;
+}
+
+.dateBilletListe{
+   font-family: 'novecento_wide_bookbold';
+   font-size:0.75em;
+   color:#000;
+   margin-bottom:2px;
+
+  
+}
+
+.titreBilletListe{
+  font-size:1.1em;
+  color:#000;
+}
+
+
+.hotAccueil{
+  width:240px;
+  height:250px;
+}
+
+.contenantImageLarge{
+  -webkit-border-radius: 3px;
+border-radius: 3px;
+  
+}
+
+.Thumb-general{
+ border: 1px solid @thumbnail-border;
+ // border-radius: @thumbnail-border-radius;
+ //.transition(all .2s ease-in-out);
+ -webkit-border-radius: 3px;
+border-radius: 3px;
+
+}
+
+.overThumb{
+  background-color: rgba(0, 0, 0, 0.6);
+  position:absolute;
+  bottom:0px;
+  height:242px;
+  color:white;
+  padding:10px;
+  
+ width:100%;
+ -webkit-border-radius: 3px 3px 3px 3px;
+  border-radius: 3px 3px 3px 3px;
+  opacity:0;
+  cursor:pointer;
+   transition: opacity .5s ease-out;
+    -moz-transition: opacity .5s ease-out;
+    -webkit-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;
+  
+
+  
+}
+
+.overThumb:hover{
+  opacity:1;
+   transition: opacity .2s ease-in;
+    -moz-transition: opacity .2s ease-in;
+    -webkit-transition: opacity .2s ease-in;
+    -o-transition: opacity .2s ease-in;
+    
+}
+
+.overThumbLarge{
+  background-color: rgba(0, 0, 0, 0.6);
+  position:absolute;
+  bottom:0px;
+  height:33%;
+  color:white;
+  padding:10px;
+ 
+  width:100%;
+}
+
+.centreVertical{
+    display: -webkit-flexbox;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  text-align: left;
+  height:100%;
+  
+}
+
+
+.titre1{
+  font-family: 'novecento_wide_bookbold';
+  font-size:3em;
+}
+
+.titre2{
+  font-family: 'novecento_wide_bookbold';
+  font-size:2em;
+}
+
+.titre3{
+  font-family: 'novecento_wide_bookbold';
+  font-size:1.5em;
+}
+
+.titre3small{
+  font-family: 'novecento_wide_bookbold';
+  font-size:1.2em;
+}
+
+
+.bordureGrise{
+  border:1px solid #d0d0d0;
+}
+
+//tag images de catégorie
+.tagCat{
+   font-family: 'novecento_wide_bookbold';
+  font-size:12px;
+  color:white;
+  padding:2px;
+  position:absolute;
+  top:0;
+  left:0;
+  margin-top:5px;
+  margin-left:5px;
+  
+
+}
+
+.tagCatSingle{
+   font-family: 'novecento_wide_bookbold';
+  font-size:12px;
+  color:white;
+  padding:2px;
+  margin-bottom:10px;
+  
+  
+
+}
+
+
+.bgHot{
+  background-color:@couleurHot;
+}
+
+.bgHumour{
+  background-color:@couleurHot;
+}
+
+.bgHistoire{
+  background-color:@couleurMoteurs;
+}
+
+
+.bgActu{
+  background-color:@couleurActu;
+}
+
+.bgMonde{
+  background-color:@couleurMonde;
+}
+
+.bgArts{
+  background-color:@couleurArt;
+}
+
+.bgTechno{
+  background-color:@couleurTechno;
+}
+
+.bgAnimaux{
+  background-color:@couleurAnimaux;
+}
+
+.bgSports{
+  background-color:@couleurSports;
+}
+
+.bgMoteurs{
+  background-color:@couleurMoteurs;
+}
+
+.bgBouffe{
+  background-color:@couleurBouffe;
+}
+
+.bgCeleb{
+  background-color:@couleurCeleb;
+}
+
+#colonnegauche #colonnedroite{
+  margin-bottom:30px;
+}
+
+#boitelogin{
+  width:100%; 
+  min-height:250px;
+  border:1px solid #3d3d3d;
+  color:white;
+  margin-bottom:15px;
+  font-family: 'novecento_wide_bookbold';
+  h3, h4{
+    font-family: 'novecento_wide_bookbold';
+ 
+  }
+ 
+}
+
+.nomProfil{
+  padding-left:58px;
+  min-height:48px;
+  font-size:1.5em;
+  line-height:1.3em;
+  margin-bottom:20px;
+  
+}
+
+.iconeProfil{
+  width:36px;
+  height:36px;
+  margin-right:20px;
+  float:left;
+  background:url(../img/edicioIcone.png) no-repeat;
+
+}
+
+.IconeVoirProfil{
+  background-position:-19px -17px;
+}
+
+.IconeRevenusProfil{
+  background-position:-72px -14px;
+}
+
+.IconeParametresProfil{
+  background-position:-121px -17px;
+}
+
+.lienProfil a{
+  font-size:19px;
+  color:white;
+  
+
+}
+
+.bigBox{
+  padding:30px;
+  padding-top:0px;
+  
+}
+
+#footer{
+  background-color:#000;
+  padding:30px;
+  min-height:100px;
+  margin-top:100px;
+  color:white;
+  a{
+    color:white;
+  }
+}
+
+.ombrage{
+    -webkit-box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.2);
+box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.ombrageTexte{
+  text-shadow: 1px 1px 1px #000000;
+filter: dropshadow(color=#000000, offx=1, offy=1);
+}
+
+
+.headerCategorie{
+  color:white;
+  span{
+      font-family: 'novecento_wide_bookbold';
+      font-size:2em;
+      padding:5px;
+
+  }
+  
+  margin-bottom:20px;
+}
+
+.fondDegrade{
+   background: #393939; /* Old browsers */
+  background: -moz-linear-gradient(top, #393939 0%, #1b1b1b 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#393939), color-stop(100%,#1b1b1b)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #393939 0%,#1b1b1b 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #393939 0%,#1b1b1b 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #393939 0%,#1b1b1b 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #393939 0%,#1b1b1b 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#393939', endColorstr='#1b1b1b',GradientType=0 ); /* IE6-9 */
+  
+}
+
+.coinsRonds{
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.pageProfilEntete{
+  width:100%;
+  min-height:200px;
+  color:white;
+
+  h2{
+    margin-top:0px;
+    font-size:2em;
+    font-family: 'novecento_wide_bookbold';
+  }
+  p{
+    font-size:1.2em;
+  }
+  
+}
+.pageprofileAvatar{
+  .pull-left();
+  margin-right:20px;
+  margin-bottom:20px;
+}
+ 
+.iconePageProfil{
+  width:45px;
+  height:45px;
+  margin-right:20px;
+  margin-top:20px;
+  float:left;
+  background:url(../img/edicioIcone.png) no-repeat;
+ 
+}
+
+.iconeTwitter{
+  background-position:-26px -80px;
+}
+
+.iconeFacebook{
+  background-position:-104px -80px;
+}
+
+.iconeGooglePlus{
+  background-position:-184px -80px;
+}
+
+
+.titreSingle{
+  font-family: 'novecento_wide_bookbold', serif;
+  font-size:2.3em;
+  margin-bottom:20px;
+  margin-top:20px;
+}
+
+/* Smartphones  ----------- */
+@media only screen 
+and (max-width : 320px) {
+  
+  #colonnedroite{
+    display:none;
+  }
+  
+  .navBG{
+    background:none;
+    background-color:black;
+  }
+
+  .typeEntete{
+    display:none;
+  }
+  
+  .titre1 {
+    font-family: 'novecento_wide_bookbold';
+    font-size: 1.3em;
+  }
+  
+  #derniersBlogues{
+    margin-top:20px;
+  }
+  
+  .titreSingle{
+  font-family: 'Copse', serif;
+  font-size:2em;
+  margin-bottom:20px;
+}
+
+//   
+  
+}
+
+
+

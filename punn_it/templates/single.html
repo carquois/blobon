@@ -17,123 +17,146 @@
     <meta name="twitter:image" content="{{ MEDIA_URL }}{{ punn.pic }}">
     <!-- Le canonical url -->
     <link rel="canonical" href="{{ url }}" />
-  {% endblock %}
-  {% block title %} {{ punn.title }} {% endblock %}
-  {% block additional_js %}
-    <script>
-      $(document).ready(function () {
-        $(document).keydown(function(e) {
-          if ($(e.target).is('input, textarea')) {
-          }else{
-            var url = false;
-            if (e.which == 37) {
-              url = "{{ prev_punn.get_absolute_url }}";
-            }
-            else if (e.which == 39) {
-              url = "{{ next_punn.get_absolute_url }}";
-            }
-            else if (e.which == 70) {
-              url = "{% url votes.views.up punn.id %}";
-            }
-            else if (e.which == 65) {
-              url = "{% url votes.views.down punn.id %}";
-            }
-            if (url) {
-              window.location = url;
-            }
-          }
-        });
-      });
-    </script>
-  {% endblock %}
-  {% block additional-css %}
-      #nav-above-top-sidebar {
-        margin-bottom: 10px;
-      }
-      #heading {
-        margin-bottom: 10px;
-      }
-      #infos {
-        margin-top: 10px;
-        padding: 10px 25px;
-      }
-      #btn-left {
-        margin-left: 10px;
-      }
-      #content-holder{
-        padding: 10px;
-      }
-      .comment-holder{
-        padding: 10px;
-      }
-      img{
-        max-width: 720px;
-      }
-  {% endblock %}
-  {% block content %} 
-    <div class="" id="content-holder">
-      <div class="media" id="heading">
-        <a class="pull-left" href="{% url punns.views.profile_page punn.author.username %}">
-          {% if punn.author.userprofile.avatar %}
-            {% thumbnail punn.author.userprofile.avatar "64x64" crop="center" as im %}
-              <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}" />
-            {% endthumbnail %}
-          {% endif %}    
-        </a>
-        <div class="btn-group pull-right hidden-lg">
-          <a href="{{ prev_punn.get_absolute_url }}" class="btn btn-default">&larr;</a>
-          <a href="{{ next_punn.get_absolute_url }}" class="btn btn-default">&rarr;</a>
-        </div>
-        <div class="media-body">
-          <h5 class="media-heading">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small> 
-          </h5>
-          {% if punn.author.userprofile.fan_page_access_token %}
-            <div class="fb-like" data-href="{{ punn.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false"></div>
-          {% endif %}    
-          <p class="text-muted">{% trans "Publié" %} {{ punn.pub_date|naturaltime }}{% if punn.source %} via <a href="{{ punn.source }}" target="_blank">Source</a>{% endif %}</p>
-        </div>
-      </div>
-      <hr>
-      <h2>{{ punn.title }}</h2>
-      {% if punn.youtube_id %}
-        <iframe width="480" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
-      {% else %}
-        {% if punn.pic %}
-          <a href="{{ next_punn.get_absolute_url }}">
-            <div class="punn_pic">
-            <img id="pic" src="{{ MEDIA_URL }}{{ punn.pic }}" class="img-responsive" alt="{{ punn.title }}">
-            </div>
-          </a>
-        {% endif %}
-      {% endif %}
-      {% if content %}
-        <p> {{ content|safe }}</p>
-      {% endif %}
-      <div id="infos" class="panel">
-        <div class="row">
-          <div class="btn-group">
-            <a data-rel="tooltip" title="{% trans "Like" %}" class="btn btn-default {% if vote == "U" %} btn-primary{% endif %}" href="
-              {% if request.user.is_authenticated %}
-                {% url votes.views.up punn.id %}
-              {% else %}
-                {% url django.contrib.auth.views.login %}?next={{request.path}}
-              {% endif %} ">&#43;
-            </a>
-            <a class="btn btn-default">{{ karma }}</a>
-            <a data-rel="tooltip" title="{% trans "Dislike" %}" class="btn btn-default {% if vote == "D" %}btn-primary{% endif %}" href="
-              {% if request.user.is_authenticated %}
-                {% url votes.views.down punn.id %}
-              {% else %}
-                {% url django.contrib.auth.views.login %}?next={{request.path}}
-              {% endif %} ">&#45;
-            </a>
-          </div>
-          <div class="pull-right">
+{% endblock %}
+{% block title %} {{ punn.title }} {% endblock %}
+    {% block additional_js %}
+<script>
+                  $(document).ready(function () {
+                    $(document).keydown(function(e) {
+                      if ($(e.target).is('input, textarea')) {
+                      }else{
+                        var url = false;
+                        if (e.which == 37) {
+                          url = "{{ prev_punn.get_absolute_url }}";
+                        }
+                        else if (e.which == 39) {
+                          url = "{{ next_punn.get_absolute_url }}";
+                        }
+                        else if (e.which == 70) {
+                          url = "{% url votes.views.up punn.id %}";
+                        }
+                        else if (e.which == 65) {
+                          url = "{% url votes.views.down punn.id %}";
+                        }
+                        if (url) {
+                          window.location = url;
+                        }
+                      }
+                    });
+                  });
+                </script>
+
+    {% endblock %}
+    {% block additional-css %}
+#nav-above-top-sidebar {
+  margin-bottom: 10px;
+}
+
+#infos {
+  margin-top: 10px;
+  padding: 10px 25px;
+}
+#btn-left {
+  margin-left: 10px;
+}
+ 
+.comment-holder{
+  padding: 10px;
+}
+img{
+  max-width: 720px;
+}
+    {% endblock %}
+ 
+{% block content %} 
+<div id='div-gpt-ad-1363051510706-0' style='width:728px; height:90px;' class="hidden-xs centered">
+					        <script type='text/javascript'>
+					          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
+					        </script>
+</div>	
+<div class="mobileBigBox" id='div-gpt-ad-1360772351679-1'>
+				        <script type='text/javascript'>
+				          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-1'); });
+				        </script>
+					</div>
+<div style="clear: both; margin-bottom: 10px;"></div>
+					
+					
+<div class="panel" id="content-holder">
+
+{% if punn.cat %}
+<a href="{% url punns.views.cat punn.cat.slug %}" style="text-decoration:none;"><div class="tagCat bg{{ punn.cat }} ombrageTexte" style="position: relative; ">{{ punn.cat }}</div></a>
+{% endif %}
+    <div class="titreSingle">{{ punn.title }}</div>
+
+
+  {% if punn.youtube_id %}
+  <iframe width="480" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+  {% else %}
+  {% if punn.pic %}
+  <a href="{{ next_punn.get_absolute_url }}">
+    <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ punn.pic }}" alt="{{ punn.title }}" />
+  </a>
+  
+  
+  {% endif %}
+  {% endif %}
+  
+  <div class="media" id="heading">
+  <a class="pull-left" href="{% url punns.views.profile_page punn.author.username %}">
+{% if punn.author.userprofile.avatar %}
+                  {% thumbnail punn.author.userprofile.avatar "64x64" crop="center" as im %}
+                  <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}" />
+                  {% endthumbnail %}
+                  {% endif %}    
+  </a>
+
+<div class="btn-group pull-right">
+  <a href="{{ prev_punn.get_absolute_url }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span></a>
+  <a href="{{ next_punn.get_absolute_url }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+
+  <div class="media-body fontBlobon">
+    <h5 class="media-heading fontBlobon" style="margin-right: 10px;">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small> 
+{% if punn.author.userprofile.fan_page_access_token %}
+<div class="fb-like" data-href="{{ punn.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+{% endif %}    
+</h5>
+<p class="text-muted">{% trans "Publié" %} {{ punn.pub_date|naturaltime }}{% if punn.source %} via <a href="{{ punn.source }}" target="_blank">Source</a>{% endif %}</p>
+  </div>
+</div>
+
+
+  {% if content %}
+<div class="well">
+   <h4> {{ content|safe }}</h4>
+</div>
+  {% endif %}
+<div id="infos" class="panel">
+<div class="row">
+ 
+		  <div class="pull-right">
             <a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             <div class="fb-like" data-href="http://checkdonc.ca{{ punn.get_absolute_url }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
           </div>
-        </div>
+          
+          
+</div>
+
+  
+
+
+
+
+
+
+  <div class="modal fade" id="delete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Effacer cette page?" %}</h4>
         {% if request.user.is_staff or request.user == punn.author %}
           <hr>
           <div class="row">
@@ -142,6 +165,47 @@
                 {% if request.user.is_staff %}
                   <a class="btn btn-default {% if punn.is_top %}btn-primary{% endif %}" href="{% url punns.views.hot punn.id %}"><span class="glyphicon glyphicon-fire"></span> {% trans "Hot" %}</a>
                   <a class="btn btn-default" href="http://checkdonc.ca/admin/punns/punn/{{ punn.id }}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Modifier" %}</a>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
+
+</div>
+<div class="well" id="comments" style="min-height: 120px;">
+
+<form method="post" action="">
+                      {% csrf_token %}
+{{ comment_form.content.errors }}
+  <div class="form-group">
+{{ comment_form.content }}
+  </div>
+
+
+         <div class="control-group">
+           <div class="controls">
+{% if request.user.is_authenticated %}
+                  <button rel="tooltip" title="{% trans "Soumettre votre commentaire" %}" class="btn btn-default pull-right fontBlobon" id="comment-submit">{% trans "Soumettre" %}</button>
+                             {% else %}
+<a href="{% url accounts.views.signup %}" title="{% trans "Soumettre votre commentaire" %}" class="btn btn-default pull-right fontBlobon" id="comment-submit">{% trans "Soumettre" %}</a>
+                             {% endif %}
+
+           </div>
+         </div>
+                  </form>
+
+
+
+
+                {% if comment_list %}
+
+          <h3>{% trans "Meilleur commentaire" %}</h3>
+
+{% for comment in comment_list|dictsortreversed:"karma" %}
+
+                {% if forloop.counter == 2 %}
+                <h3>{% trans "Tous les commentaires" %}</h3>
                 {% endif %}
                 {% if request.user == punn.author %}
                   <a class="btn btn-danger" href="{% url punns.views.delete punn.id %}"><span class="glyphicon glyphicon-trash"></span> {% trans "Supprimer" %}</a>
