@@ -60,6 +60,31 @@ def index(request):
                                 'punns': punns, 'latest_comments': latest_comments},
                                 context_instance=RequestContext(request))
 
+def pics(request):
+      user = ""
+      punns = paginate(request,
+                       Punn.objects.filter(status='P').filter(youtube_id="").annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
+                       15)
+      punns = attach_infos(punns)
+      latest_comments = Comment.objects.all().order_by('-created')[:5]
+      cats = Cat.objects.filter(is_top_level=True)
+      return render_to_response('index.html',
+                               {'user': user, 'cats': cats,
+                                'punns': punns, 'latest_comments': latest_comments},
+                                context_instance=RequestContext(request))
+def videos(request):
+      user = ""
+      punns = paginate(request,
+                       Punn.objects.filter(status='P').filter(youtube_id!="").annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
+                       15)
+      punns = attach_infos(punns)
+      latest_comments = Comment.objects.all().order_by('-created')[:5]
+      cats = Cat.objects.filter(is_top_level=True)
+      return render_to_response('index.html',
+                               {'user': user, 'cats': cats,
+                                'punns': punns, 'latest_comments': latest_comments},
+                                context_instance=RequestContext(request))
+
 
 def new(request):
       punns = paginate(request,
@@ -252,6 +277,7 @@ def done(request):
 
 def profile_page(request, user):
         user = get_object_or_404(User, username=user)
+        cats = Cat.objects.filter(is_top_level=True)
         punns = paginate(request,
                          Punn.objects.filter(author=user).filter(status='P').annotate(number_of_comments=Count('comment')).order_by('-pub_date'),
                          15)
@@ -272,7 +298,7 @@ def profile_page(request, user):
 
 
         return render_to_response('profile.html', 
-                                  {'user': user, 'site_description': site_description,
+                                  {'user': user, 'site_description': site_description, 'cats': cats,
                                    'site': site, 'punns': punns, 'url': url, 'quick_publish': quick_publish}, 
                                   context_instance=RequestContext(request))
 

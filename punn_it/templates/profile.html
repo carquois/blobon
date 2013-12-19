@@ -36,25 +36,42 @@
 					{% if user.userprofile.location %}
 					    <p>{{ user.userprofile.location }}</p>
 					{% endif %} 	
-					{% if user.userprofile.facebook_link %}
-			 		<a href="{{ user.userprofile.facebook_link }}" target="_blank"><span class="iconePageProfil iconeTwitter"></span></a>
-			 		{% endif %} 
-			 		{% if user.userprofile.twitter_link %}
-			 		<a href="{{ user.userprofile.twitter_link }}" target="_blank"><span class="iconePageProfil iconeFacebook"></span></a>
-			 		{% endif %} 
+					
+					{% if user == request.user %}
+					
+					
+ 		       		 <div style="float:left;width:200px;  margin-top: 20px;"><div class="iconeProfil IconeParametresProfil" style="margin-right:10px"></div><div class="lienProfil ombrageTexte fontBlobon"><a href="{% url 'accounts.views.edit_profile' %}">Paramètres</a> </div></div>
+					
+					{% else %}
+					<div style="height:50px;">
+						{% if user.userprofile.facebook_link %}
+				 		<a href="{{ user.userprofile.facebook_link }}" target="_blank"><span class="iconePageProfil iconeTwitter"></span></a>
+				 		{% endif %} 
+				 		{% if user.userprofile.twitter_link %}
+				 		<a href="{{ user.userprofile.twitter_link }}" target="_blank"><span class="iconePageProfil iconeFacebook"></span></a>
+				 		{% endif %} 
+				 	</div>
+				 	{% endif %} 
 			 		<!--<a href="#"><span class="iconePageProfil iconeGooglePlus"></span></a>-->
 			 		
 			 		
 			 	</div>
 			 	
+			 	<div style="clear: both; margin-bottom: 20px;"></div>
 			 	<!--fin page profil entete-->
 
 
 
 
+
+
+ {% endblock %}
+ 
+ 
+{% block boiteProfil %}
 {% if user == request.user %}
-<div class="well fondDegrade coinsRonds pad20 blanc">
-<h3 class="fontBlobon">{% trans "Publication rapide" %}</h3>
+<div class="fondDegrade coinsRonds pad20 blanc">
+<h3 class="fontBlobon" style="margin-top:0px;">{% trans "Publication rapide" %}</h3>
 <form role="form" enctype="multipart/form-data" method="post" action="{% url 'punns.views.profile_page' request.user.username %}">{% csrf_token %}
   <div class="form-group">
     {{ quick_publish.title.label_tag }}
@@ -68,6 +85,51 @@
 </form>
 
 </div>
-{% endif %}
 
+<div style="clear: both; margin-bottom: 20px;"></div>
+
+{% else %}
+
+	{% if request.user.is_authenticated %}
+		        	<div id="boitelogin" class="pad15 fondDegrade">
+		        		{% if request.user.userprofile.avatar %}
+	            			{% thumbnail request.user.userprofile.avatar "50x50" crop="center" as im %}
+		       				<div class="nomProfil ombrageTexte" style="background:url({{ im.url }}) no-repeat">{{ request.user.first_name }}<br/>{{ request.user.last_name }}</div>
+							 {% endthumbnail %}
+						{% endif %}	
+						<div class="iconeProfil IconeVoirProfil"></div><div class="lienProfil ombrageTexte"><a href="{% url 'punns.views.profile_page' request.user.username %}">Votre profil</a> </div>
+						<div style="clear: both; margin-bottom: 15px;"></div>
+		       			
+					 
+		       			
+						<div class="iconeProfil IconeParametresProfil"></div><div class="lienProfil ombrageTexte"><a href="{% url 'accounts.views.edit_profile' %}">Paramètres</a> </div>
+						
+						<a href="{% url 'punns.views.create' %}"> <button type="button" class="btn btn-danger btn-lg ombrageTexte" style="margin-top:30px;margin-left:-15px">Ajoutez du contenu</button></a>
+	
+		       		</div>
+		{% else %}
+		       		
+		       		<div id="boitelogin" class="pad15" style="text-align: center">
+		       		
+		       		<div class="lienProfil ombrageTexte" style="margin-bottom: 10px; font-size: 18px;">
+		       		Quoi!? Vous n'êtes pas membre?
+		       		</div>
+		       		<a href="{% url "accounts.views.signup" %}" class="btn btn-danger btn-lg ombrageTexte" style="margin-bottom:30px;margin-left:-15px"> {% trans "Créez votre compte" %}</a>
+		        	<div class="lienProfil ombrageTexte" style="margin-bottom: 10px; font-size: 18px;">
+		       		Mais oui j'suis déjà membre!
+		       		</div>
+		        	<a class="btn btn-danger btn-lg ombrageTexte" href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}" style="margin-bottom:30px;margin-left:-15px">{% trans "Se connecter" %}</a>
+		       		
+		       		</div>
+		       		
+	{% endif %}
+
+
+
+
+ 
+{% endif %}
+ 
+ 
+	       		
  {% endblock %}

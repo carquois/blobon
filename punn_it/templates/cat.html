@@ -18,13 +18,20 @@
 	       		
 	       		<!-- liste thumbnails -->
 	       		<div class="col-md-12 noPad" style="margin-bottom: 20px;">
+	       				
+	       			<div class="mobileBigBox" id='div-gpt-ad-1360772351679-1'>
+				        <script type='text/javascript'>
+				          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-1'); });
+				        </script>
+					</div>
 	       			
 	       			<div class="headerCategorie bg{{ cat.slug }} ombrageTexte pad5">
 	        		
 	        		<span>{{ cat.slug }}</span>
 	        		
 	        		
-	        	</div>
+	        		</div>
+	        		
 	       			
 
 	       			<!-- boucle pour 1 thumbnails -->
@@ -55,18 +62,16 @@
 								
 		       			</div>
 	       		</a>
-	       			{% if forloop.counter|divisibleby:3 %}
-	       			<div style="clear: both; margin-bottom: 30px;"></div>
-	       			{% endif %}
+	       		 
 	       			
-	       			{% if forloop.counter == 6 %}
+	       			{% if forloop.counter == 3 %}
 
-					<div id='div-gpt-ad-1363051510706-0' style='width:728px; height:90px;' class="hidden-xs centered">
+					<div id='div-gpt-ad-1363051510706-0' style='width:728px; height:90px;' class="hidden-xs centered hidden-md">
 					        <script type='text/javascript'>
 					          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
 					        </script>
 					</div>	
-					<div style="clear: both; margin-bottom: 30px;"></div>
+					
 					
 					{% endif %}
 	       			
@@ -74,6 +79,17 @@
 	       			{% endfor %}
 					<!-- FIN boucle pour 1 thumbnails -->
 	       			
+				{% if punns.has_previous or punns.has_next %}
+<div style="clear: both; margin-bottom: 30px;"></div>
+		            <div class="row">
+		              <ul class="pager">
+		                <li class="previous{% if not punns.has_previous %} disabled{% endif %}"><a href="{% if punns.has_previous %}?page={{ punns.previous_page_number }}{% endif %}" style="font-size:24px; margin-left: 20px;"><span class="glyphicon glyphicon-chevron-left" ></span></a></li>
+		                <li class="next{% if not punns.has_next %} disabled{% endif %}"><a href="{% if punns.has_next %}?page={{ punns.next_page_number }}{% endif %}" style="font-size:24px;margin-right:20px;"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+		              </ul>
+		            </div>
+
+				{% endif %}
+	       		
 	 	       		 
 
 

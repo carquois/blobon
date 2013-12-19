@@ -81,8 +81,8 @@
     <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="{{ STATIC_URL }}/ico/favicon.png">-->
+    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="{{ STATIC_URL }}/ico/favicon.png">
         <!-- Le analytics -->
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -145,14 +145,26 @@
       });
     </script>
   </head>
-  <body>
+  <body>    
+    <div id="fb-root"></div>
+
+  	<script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/fr_CA/all.js#xfbml=1&appId=378058345602851";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+  	
   	{% block nav %}
     <div class="navbar navbar-inverse navbar-fixed-top navBG">
       <div class="container">
+       <a class="navbar-brand enteteCheck" href="{% url "punns.views.index" %}">
       	<div class="logoCheck">
-         <a class="navbar-brand enteteCheck" href="#">Check donc ça</a>
-         <div class="typeEntete"><a href="#">Photos</a>  | <a href="#">Vidéos</a> |  <a href="#">Blogues</a></div> 
-        </div><!--/.nav-collapse -->
+        Check donc ça
+         <div class="typeEntete"><a href="{% url "punns.views.pics" %}">Photos</a>  | <a href="{% url "punns.views.videos" %}">Vidéos</a></div> 
+        </div></a><!--/.nav-collapse -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
@@ -176,30 +188,39 @@
     <!--fin nav -->
     {% endblock %}
     <!-- contenant -->
-    <div class="container ombrage"   style="margin-top:60px;">
-    	
+ 
+    <div id="principaleContenant" class="container ombrage" >
+    		
+    		 		 
     	<div class="row bgBlanc">
     		
     		<!--Colonne de gauche -->
 	        <div id="colonnegauche" class="col-md-8 bgBlanc pad20" >
+	        	
 	        	 {% block profileEntete %}
 	        	 {% endblock %}
 				
 				 {% block content %}
-	       		
+	      
 	       		<!-- liste thumbnails -->
 	       		<div class="col-md-12 noPad" style="margin-bottom: 20px;">
 	       			
-	       			
+	       			<div class="mobileBigBox" id='div-gpt-ad-1360772351679-1'>
+				        <script type='text/javascript'>
+				          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-1'); });
+				        </script>
+					</div>
 
 	       			<!-- boucle pour 1 thumbnails -->
 	       			{% for punn in punns %}
 	       			<a href="{{ punn.get_absolute_url }}">
-	       			{% if forloop.counter|divisibleby:3 %}
-		       			<div class="contenantImageThumb  " style="float:left;position: relative;">
+	       				{% if forloop.counter|divisibleby:3 %}
+		       			<div class="contenantImageThumb  ">
 		       			{% else %}	
-		       			<div class="contenantImageThumb  margeDroiteThumb" style="float:left;position: relative;">
+		       			<div class="contenantImageThumb  margeDroiteThumb" >
 						{% endif %}	
+						
+							{% if punn.pic %}
 							<div class="overThumb" >
 									
 									{% if punn.title|length >= 60 %}
@@ -210,30 +231,51 @@
 
 								
 							</div>
+							{% else %}
+							<div class="overThumbBlog">
+									
+									{% if punn.title|length >= 60 %}
+									<div class="titre3small ombrageTexte centreVertical">{{ punn.title }}</div> 
+									{% else %}	
+									<div class="titre3 ombrageTexte centreVertical">{{ punn.title }}</div> 
+									{% endif %}	
+
+								
+							</div>
+							
+							{% endif %}	
 		       				
-		       					
+		       					{% if punn.pic %}
 		       					 {% thumbnail punn.pic "222x240" crop="center" as im %}
 					  	          <img id="thumbs" src="{{ im.url }}" class="Thumb-general " alt="{{ punn.title }}"/>
 						         {% endthumbnail %}
+						         {% else %}
+						          <div style="width:224px; height:242px;" class="fondDegrade Thumb-general"></div>
+						        {% endif %}	
 		       				
 		       					{% if punn.cat %}
-		       					<div class="tagCat bg{{ punn.cat }} ombrageTexte">{{ punn.cat }}</div>
+		       					<a href="{% url "punns.views.cat" punn.cat.slug  %}" style="text-decoration:none;"><div class="tagCat bg{{ punn.cat }} ombrageTexte">{{ punn.cat }}</div></a>
+								{% endif %}	
+								
+								{% if punn.youtube_id %}
+								<div class="catVideo"><span class="glyphicon glyphicon-film"></span></div>
 								{% endif %}	
 		       			</div>
 	       		</a>
 	       			{% if forloop.counter|divisibleby:3 %}
-	       			<div style="clear: both; margin-bottom: 30px;"></div>
+	       			 
 	       			{% endif %}
 	       			
 	       			{% if forloop.counter == 3 %}
 
-					<div id='div-gpt-ad-1363051510706-0' style='width:728px; height:90px;' class="hidden-xs centered">
+					
+					<div id='div-gpt-ad-1363051510706-0' style='width:728px; height:90px; clear:both;margin-bottom: 10px;' class=" centered hidden-xs  hidden-md">
 					        <script type='text/javascript'>
 					          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
 					        </script>
+					  
 					</div>	
-					<div style="clear: both; margin-bottom: 30px;"></div>
-					
+					 
 					{% endif %}
 	       			
 
@@ -242,12 +284,23 @@
 	       			
 	 	       		 
 
+				{% if punns.has_previous or punns.has_next %}
+					<div style="clear: both; margin-bottom: 30px;"></div>
 
+		            <div class="row">
+		              <ul class="pager">
+		                <li class="previous{% if not punns.has_previous %} disabled{% endif %}"><a href="{% if punns.has_previous %}?page={{ punns.previous_page_number }}{% endif %}" style="font-size:24px; margin-left: 20px;"><span class="glyphicon glyphicon-chevron-left" ></span></a></li>
+		                <li class="next{% if not punns.has_next %} disabled{% endif %}"><a href="{% if punns.has_next %}?page={{ punns.next_page_number }}{% endif %}" style="font-size:24px;margin-right:20px;"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+		              </ul>
+		            </div>
+
+				{% endif %}
+	       		
 	       			
 	       		</div>
 	       		<!-- liste thumbnails -->
 	       		
-	       		<div style="clear: both; margin-bottom: 30px;"></div>
+	       		<div style="  margin-bottom: 30px;"></div>
 	       		
 	       		
 	       		   {% endblock %}
@@ -268,6 +321,8 @@
 	        <!--Colonne de droite -->
 	        <div id="colonnedroite" class="col-md-4 bgNoir pad15" style="min-height: 1550px;">
 	        	
+	        	
+	        	{% block boiteProfil %}
 	        	{% if request.user.is_authenticated %}
 	        	<div id="boitelogin" class="pad15 fondDegrade">
 	        		{% if request.user.userprofile.avatar %}
@@ -282,7 +337,7 @@
 	       			
 					<div class="iconeProfil IconeParametresProfil"></div><div class="lienProfil ombrageTexte"><a href="{% url 'accounts.views.edit_profile' %}">Paramètres</a> </div>
 					
-					<a href="{% url 'punns.views.create' %}"> <button type="button" class="btn btn-danger btn-lg ombrageTexte" style="margin-top:30px;margin-left:-15px">Ajoutez du contenu</button></a>
+					<a href="{% url 'punns.views.create' %}"> <button id="btAjoutContenu" type="button" class="btn btn-danger btn-lg ombrageTexte centered">Ajoutez du contenu</button></a>
 
 	       		</div>
 	       		{% else %}
@@ -302,6 +357,8 @@
 	       		
 	       		{% endif %}
 	       		
+	       		{% endblock %}
+	       		
 	       		<div class="bigBox">
 					<div class="centered" id='div-gpt-ad-1360772351679-0' style='width:300px; height:250px;'>
                 <script type='text/javascript'>
@@ -316,7 +373,7 @@
               <fb:like-box href="https://www.facebook.com/checkdoncca" width="355" show_faces="true" header="false" stream="false" show_border="false" class=" fb_iframe_widget" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=378058345602851&amp;header=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fcheckdoncca&amp;locale=fr_CA&amp;sdk=joey&amp;show_border=false&amp;show_faces=true&amp;stream=false&amp;width=355"><span style="vertical-align: bottom; width: 355px; height: 241px;"><iframe name="f342599564" width="355px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:like_box Facebook Social Plugin" src="http://www.facebook.com/plugins/like_box.php?app_id=378058345602851&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D27%23cb%3Df1d831cfb4%26domain%3Dcheckdonc.ca%26origin%3Dhttp%253A%252F%252Fcheckdonc.ca%252Ffe6febc3%26relation%3Dparent.parent&amp;header=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fcheckdoncca&amp;locale=fr_CA&amp;sdk=joey&amp;show_border=false&amp;show_faces=true&amp;stream=false&amp;width=355" style="border: none; visibility: visible; width: 355px; height: 241px;" class=""></iframe></span></fb:like-box>
  			 </div>
  			 
- 			 <div class="fb-recommendations" data-app-id="378058345602851" data-site="checkdonc.ca" data-action="likes" data-width="300" data-height="600" data-max-age="7" data-colorscheme="light" data-header="true"></div>
+ 			 <div class="fb-recommendations" style="background-color:#FFFFFF; margin-top:10px" data-app-id="378058345602851" data-site="checkdonc.ca" data-action="likes" data-width="360" data-height="600" data-max-age="7" data-colorscheme="light" data-header="true"></div>
 
 	        
 	        </div>
@@ -326,7 +383,7 @@
       
 
     	
-    	
+    	<!-- x -->
     </div><!--/container -->
     
     
@@ -337,12 +394,12 @@
       <div class="container">
       	<ul class="list-inline">
 		  <li>
-		         © Check Donc Ça 2013
+		         &copy; Check Donc Ça {% now "Y" %}
 		</li>
-		  <li><a href="/news/">Blogue</a></li>
-		  <li><a href="http://checkdonc.ca/tos">Conditions d'utilisation</a></li>
-		  <li><a href="http://checkdonc.ca/privacy">Politique de confidentialité</a></li>
-		  <li><a href="mailto:gab@checkdonc.ca" target="_top">Nous joindre</a></li>
+		 <li><a href="{% url "news.views.all" %}">{% trans "Blogue" %}</a></li>
+		 <li><a href="http://checkdonc.ca/tos">{% trans "Conditions d'utilisation" %}</a></li>
+		 <li><a href="http://checkdonc.ca/privacy">{% trans "Politique de confidentialité" %}</a></li>
+		 <li><a href="mailto:gab@checkdonc.ca" target="_top">{% trans "Nous joindre" %}</a></li>
 		</ul>
       </div>
     </div>
