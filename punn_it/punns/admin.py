@@ -15,6 +15,7 @@ from blogs.models import Blog
 from posts.models import Post
 from posts.models import Image
 from posts.models import Album
+from posts.models import Video 
 from pages.models import Page
 
 class PunnAdmin(admin.ModelAdmin):
@@ -22,6 +23,7 @@ class PunnAdmin(admin.ModelAdmin):
 admin.site.register(Punn, PunnAdmin)
 admin.site.register(Link)
 admin.site.register(Post)
+admin.site.register(Video)
 admin.site.register(Page)
 admin.site.register(Blog)
 admin.site.register(Invitation)

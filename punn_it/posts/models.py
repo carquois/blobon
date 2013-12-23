@@ -77,6 +77,13 @@ class Image(Post):
     def __unicode__(self):
         return self.title
 
+class Video(Post):
+    video_title = models.CharField(verbose_name=_("Title"), max_length=140, blank=True)
+    content = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
+    youtube_id = models.CharField(max_length=50, null=True, blank=True)
+    def __unicode__(self):
+        return str(self.id)
+
 class Album(Post):
     title = models.CharField(verbose_name=_("Titre"), max_length=140)
     content = models.TextField(verbose_name=_("Contenu"),max_length=10000, blank=True)
