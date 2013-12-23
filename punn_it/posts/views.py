@@ -3,6 +3,7 @@
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect, render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib import messages
@@ -11,6 +12,58 @@ from django.utils.translation import ugettext as _
 
 from posts.forms import BlogPostForm
 from posts.models import BlogPost, Album, Link, Post
+
+from blogs.models import Blog
+
+def index(request):
+      if request.META['HTTP_HOST'] == "blobon.com":
+        if request.user.is_authenticated():
+          blogs = Blog.objects.filter(creator=request.user)
+          return render_to_response('dashboard.html',
+                                    {'blogs': blogs},
+                                    context_instance=RequestContext(request))
+        else:
+          if request.method == 'POST':
+              form = InvitationForm(request.POST)
+              if form.is_valid():
+                  invitation = form.save()
+                  messages.add_message(request, messages.INFO, _(u'Thank you for your interest in the project. %s has been added to our queue and we will contact you as soon as we can' % invitation.email))
+          else:
+              form = InvitationForm()
+          return render_to_response('blobon.html',
+                                    {'form': form},
+                                     context_instance=RequestContext(request))
+      else:
+        user = ""
+        posts = paginate(request,
+                         Post.objects.order_by('-pub_date'),
+                         15)
+        #posts= attach_infos(posts)
+        #latest_comments = Comment.objects.all().order_by('-created')[:5]
+        #cats = Cat.objects.filter(is_top_level=True)
+        return render_to_response('index.html',
+                                 {'user': user,
+                                  'posts': posts, },
+                                  context_instance=RequestContext(request))
+
+def pics(request):
+      user = ""
+      posts = paginate(request,
+                       Post.objects.order_by('-pub_date'),
+                       15)
+      #punns = attach_infos(punns)
+      #latest_comments = Comment.objects.all().order_by('-created')[:5]
+      #cats = Cat.objects.filter(is_top_level=True)
+      return render_to_response('index.html',
+                               {'posts': posts, },
+                                context_instance=RequestContext(request))
+
+
+def single(request):
+        return render_to_response('single.html',
+                                  {},
+                                  context_instance=RequestContext(request))
+
 
 #class Post(models.Model):
 #    author = models.ForeignKey(User, null=True)
@@ -84,3 +137,16 @@ def createblogpost(request):
       return render_to_response('createblogpost.html',
                                 {},
                                 context_instance=RequestContext(request))
+
+###UTILS###
+#Une fonction pour paginer une liste d'objets
+def paginate(request, list_of_objects, number_of_items):
+    paginator = Paginator(list_of_objects, number_of_items)
+    page = request.GET.get('page')
+    try:
+      paginated_objects = paginator.page(page)
+    except PageNotAnInteger:
+      paginated_objects = paginator.page(1)
+    except EmptyPage:
+      paginated_objects = paginator.page(paginator.num_pages)
+    return paginated_objects

@@ -1,40 +1,78 @@
 # -*- coding: utf-8 -*-
 import datetime
 from south.db import db
-from south.v2 import DataMigration
+from south.v2 import SchemaMigration
 from django.db import models
 
-class Migration(DataMigration):
+
+class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        "Write your forwards methods here."
-        # Note: Remember to use orm['appname.ModelName'] rather than "from appname.models..."
+        # Adding model 'Link'
+        db.create_table('posts_link', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('image', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['posts.Image'])),
+            ('album', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['posts.Album'])),
+            ('order', self.gf('django.db.models.fields.PositiveIntegerField')()),
+        ))
+        db.send_create_signal('posts', ['Link'])
 
-        for punn in orm['punns.Punn'].objects.all():
-          i = orm.Image(author = punn.author,
-                        created = punn.created,
-                        last_modified = punn.last_modified,
-                        status = punn.status,
-                        title = punn.title,
-                        translated_title = punn.translated_title,
-                        base62id = punn.base62id,
-                        slug = punn.slug,
-                        karma = punn.karma,
-                        views = punn.views,
-                        source = punn.source,
-                        content = punn.content,
-                        is_video = punn.is_video,
-                        is_top = punn.is_top,
-                        publish_on_facebook = punn.publish_on_facebook,
-                        youtube_id = punn.youtube_id,
-                        pic = punn.pic,
-                        id = punn.id,
-                        pub_date = punn.pub_date)
-          i.save()
+        # Adding model 'Album'
+        db.create_table('posts_album', (
+            ('post_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['posts.Post'], unique=True, primary_key=True)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=140)),
+            ('content', self.gf('django.db.models.fields.TextField')(max_length=10000, blank=True)),
+        ))
+        db.send_create_signal('posts', ['Album'])
+
+        # Adding field 'Post.pub_date'
+        db.add_column('posts_post', 'pub_date',
+                      self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, null=True, blank=True),
+                      keep_default=False)
+
+        # Adding field 'Post.base62id'
+        db.add_column('posts_post', 'base62id',
+                      self.gf('django.db.models.fields.CharField')(default='', max_length=140, blank=True),
+                      keep_default=False)
+
+        # Deleting field 'BlogPost.pub_date'
+        db.delete_column('posts_blogpost', 'pub_date')
+
+        # Deleting field 'Image.original_punn'
+        db.delete_column('posts_image', 'original_punn_id')
+
+        # Deleting field 'Image.base62id'
+        db.delete_column('posts_image', 'base62id')
 
 
     def backwards(self, orm):
-        "Write your backwards methods here."
+        # Deleting model 'Link'
+        db.delete_table('posts_link')
+
+        # Deleting model 'Album'
+        db.delete_table('posts_album')
+
+        # Deleting field 'Post.pub_date'
+        db.delete_column('posts_post', 'pub_date')
+
+        # Deleting field 'Post.base62id'
+        db.delete_column('posts_post', 'base62id')
+
+        # Adding field 'BlogPost.pub_date'
+        db.add_column('posts_blogpost', 'pub_date',
+                      self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, null=True, blank=True),
+                      keep_default=False)
+
+        # Adding field 'Image.original_punn'
+        db.add_column('posts_image', 'original_punn',
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['posts.Image'], null=True, blank=True),
+                      keep_default=False)
+
+        # Adding field 'Image.base62id'
+        db.add_column('posts_image', 'base62id',
+                      self.gf('django.db.models.fields.CharField')(default='', max_length=140, blank=True),
+                      keep_default=False)
+
 
     models = {
         'auth.group': {
@@ -128,80 +166,7 @@ class Migration(DataMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'last_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
             'pub_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'})
-        },
-        'punns.album': {
-            'Meta': {'object_name': 'Album'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'base62id': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
-            'content': ('django.db.models.fields.TextField', [], {'max_length': '10000', 'blank': 'True'}),
-            'created_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_modified_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '140'})
-        },
-        'punns.cat': {
-            'Meta': {'object_name': 'Cat'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_top_level': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '140'}),
-            'top_level_cat': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Cat']", 'null': 'True', 'blank': 'True'})
-        },
-        'punns.favorite': {
-            'Meta': {'object_name': 'Favorite'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'punn': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Punn']"})
-        },
-        'punns.link': {
-            'Meta': {'object_name': 'Link'},
-            'album': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Album']"}),
-            'created_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_modified_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
-            'order': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'punn': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Punn']"})
-        },
-        'punns.punn': {
-            'Meta': {'object_name': 'Punn'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'base62id': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
-            'cat': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Cat']", 'null': 'True', 'blank': 'True'}),
-            'content': ('django.db.models.fields.TextField', [], {'max_length': '10000', 'blank': 'True'}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_top': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'is_video': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'karma': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'last_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
-            'original_punn': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Punn']", 'null': 'True', 'blank': 'True'}),
-            'pic': ('sorl.thumbnail.fields.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'pub_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
-            'publish_on_facebook': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '140', 'blank': 'True'}),
-            'source': ('django.db.models.fields.URLField', [], {'max_length': '300', 'blank': 'True'}),
-            'status': ('django.db.models.fields.CharField', [], {'max_length': '2', 'null': 'True', 'blank': 'True'}),
-            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['punns.Tags']", 'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
-            'translated_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
-            'views': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
-            'youtube_id': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'})
-        },
-        'punns.reblog': {
-            'Meta': {'object_name': 'Reblog'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'origin': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Punn']"})
-        },
-        'punns.tags': {
-            'Meta': {'object_name': 'Tags'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'tag': ('django.db.models.fields.CharField', [], {'max_length': '140'})
         }
     }
 
-    complete_apps = ['posts', 'punns', 'posts']
-    symmetrical = True
+    complete_apps = ['posts']

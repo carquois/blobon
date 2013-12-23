@@ -9,28 +9,16 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
         # Note: Remember to use orm['appname.ModelName'] rather than "from appname.models..."
-
-        for punn in orm['punns.Punn'].objects.all():
-          i = orm.Image(author = punn.author,
-                        created = punn.created,
-                        last_modified = punn.last_modified,
-                        status = punn.status,
-                        title = punn.title,
-                        translated_title = punn.translated_title,
-                        base62id = punn.base62id,
-                        slug = punn.slug,
-                        karma = punn.karma,
-                        views = punn.views,
-                        source = punn.source,
-                        content = punn.content,
-                        is_video = punn.is_video,
-                        is_top = punn.is_top,
-                        publish_on_facebook = punn.publish_on_facebook,
-                        youtube_id = punn.youtube_id,
-                        pic = punn.pic,
-                        id = punn.id,
-                        pub_date = punn.pub_date)
-          i.save()
+        for album in orm['punns.Album'].objects.all():
+          a = orm.Album(author = album.author,
+                        pub_date = album.created_date,
+                        base62id = album.base62id,
+                        title = album.title,
+                        content = album.content,
+                        created = album.created_date,
+                        last_modified = album.last_modified_date,
+                        id = album.id)
+          a.save()
 
 
     def backwards(self, orm):

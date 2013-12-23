@@ -160,10 +160,10 @@
           {% block nav %}
     <div class="navbar navbar-inverse navbar-fixed-top navBG">
       <div class="container">
-       <a class="navbar-brand enteteCheck" href="{% url "punns.views.index" %}">
+       <a class="navbar-brand enteteCheck" href="{% url "posts.views.index" %}">
               <div class="logoCheck">
         Check donc ça
-         <div class="typeEntete"><a href="{% url "punns.views.pics" %}">Photos</a>  | <a href="{% url "punns.views.videos" %}">Vidéos</a></div> 
+         <div class="typeEntete"><a href="{% url "posts.views.pics" %}">Photos</a>  | <a href="{% url "punns.views.videos" %}">Vidéos</a></div> 
         </div></a><!--/.nav-collapse -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -212,7 +212,7 @@
                                         </div>
 
                                        <!-- boucle pour 1 thumbnails -->
-                                       {% for punn in punns %}
+                                       {% for post in posts %}
                                        <a href="{{ punn.get_absolute_url }}">
                                                {% if forloop.counter|divisibleby:3 %}
                                                <div class="contenantImageThumb  ">
