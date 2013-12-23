@@ -28,6 +28,7 @@ class Post(models.Model):
     last_modified = models.DateTimeField(auto_now = True,  null=True, blank=True)
     pub_date = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     base62id = models.CharField(max_length=140, blank=True)
+    blog = models.ForeignKey(Blog, null=True)
 
     def save(self):
         if not self.base62id:
@@ -53,7 +54,6 @@ class Post(models.Model):
                 return rnd_str
     
 class BlogPost(Post):
-    blog = models.ForeignKey(Blog, null=True)
     title = models.CharField(verbose_name=_("Title"), max_length=140, blank=True)
     content = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
     status = models.CharField(max_length=2, choices=STATUS, default="P")
