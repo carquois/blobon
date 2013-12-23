@@ -9,16 +9,15 @@ from django.contrib import messages
 from django.utils.translation import ugettext as _
 
 
-from pages.forms import PageForm
-from pages.models import Page
 from blogs.models import Blog 
+from categories.models import Category
 
 @login_required
-def createpage(request, slug):
+def createcat(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       if request.method == 'POST':
-        page = Page(author = request.user)
-        page.blog = blog
+        cat = Category(author = request.user)
+        cat.blog = blog
         if request.POST['id_status']:
           if request.POST['id_status'] == "P":
             page.status = "P"

@@ -15,7 +15,7 @@
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet"> 
     <link href="http://mindmup.github.io/bootstrap-wysiwyg/index.css" rel="stylesheet">
     <style>
-      #id_content {
+      #content {
         max-height: 250px;
         height: 250px;
         background-color: white;
@@ -35,11 +35,33 @@
         outline: none;
         overflow:scroll; max-height:300px
       }
-      #id_title {
-      height: 30px;
+      #title {
+        max-height: 30px;
+        height: 30px;
+        background-color: white;
+        border-collapse: separate;
+        border: 1px solid rgb(204, 204, 204);
+        padding: 4px;
+        box-sizing: content-box;
+        -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+        box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+        -webkit-user-modify: read-write;
+        word-wrap: break-word;
+        -webkit-line-break: after-white-space;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+        outline: none;
       } 
       #createwell{
-      padding-top: 10px;
+        padding-top: 10px;
+      }
+      #publishnow{
+        padding-top: 4px;
+      }
+      #content{
+        padding-bottom: 5px;
       }
     </style>  
   {% endblock %}
@@ -47,73 +69,69 @@
     <div class="container" id="createwell">
       <div class="panel panel-default newblog">
         <div class="panel-body"> 
-          <h2>{% trans "Create a new blog" %}</h2>
-          {% if form.errors %}
-            {% for key, value in form.errors.title %}
-              <div class="alert alert-danger alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>{% trans "Error!" %}</strong> <p>{% trans "- A title is required" %}</p>
-              </div>
-            {% endfor %}
-            {% for key, value in form.errors.slug %}
-              <div class="alert alert-danger alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>{% trans "Error!" %}</strong> <p>{% trans "- A url is required" %}</p>
-              </div>
-            {% endfor %}
-          {% endif %}
-          <form class="form-horizontal" id="newblog" role="form" method="post" action="{% url 'pages.views.createpage' blog.slug %}">{% csrf_token %}
-          <label for="id_title">Title:</label>
-           {{ form.title }}
+          <h2>{% trans "Create a new page" %}</h2>
+           <h5>{% trans "Title:" %}</h5>
+           <div id="title"></div>
             <div id="alerts"></div> 
-            <div class="btn-toolbar" data-role="editor-toolbar" data-target="#id_content">
+            <div class="btn-toolbar" data-role="editor-toolbar" data-target="#content">
               <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
+                <a class="btn dropdown-toggle" data-toggle="dropdown" title="{% trans "Font Size" %}"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
-                  <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
-                  <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+                  <li><a data-edit="fontSize 5"><font size="5">{% trans "Huge" %}</font></a></li>
+                  <li><a data-edit="fontSize 3"><font size="3">{% trans "Normal" %}</font></a></li>
+                  <li><a data-edit="fontSize 1"><font size="1">{% trans "Small" %}</font></a></li>
                 </ul>
               </div>
               <div class="btn-group">
-                <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
-                <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
-                <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
-                <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
+                <a class="btn" data-edit="bold" title="{% trans "Bold (Ctrl/Cmd+B)" %}"><i class="icon-bold"></i></a>
+                <a class="btn" data-edit="italic" title="{% trans "Italic (Ctrl/Cmd+I)" %}"><i class="icon-italic"></i></a>
+                <a class="btn" data-edit="strikethrough" title="{% trans "Strikethrough" %}"><i class="icon-strikethrough"></i></a>
+                <a class="btn" data-edit="underline" title="{% trans "Underline (Ctrl/Cmd+U)" %}"><i class="icon-underline"></i></a>
               </div> 
               <div class="btn-group">
-              <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ul"></i></a>
-              <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ol"></i></a>
+              <a class="btn" data-edit="insertunorderedlist" title="{% trans "Bullet list" %}"><i class="icon-list-ul"></i></a>
+              <a class="btn" data-edit="insertorderedlist" title="{% trans "Number list" %}"><i class="icon-list-ol"></i></a>
               </div>
               <div class="btn-group">
-                <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
-                <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
-                <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
-                <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
+                <a class="btn" data-edit="justifyleft" title="{% trans "Align Left (Ctrl/Cmd+L)" %}"><i class="icon-align-left"></i></a>
+                <a class="btn" data-edit="justifycenter" title="{% trans "Center (Ctrl/Cmd+E)" %}"><i class="icon-align-center"></i></a>
+                <a class="btn" data-edit="justifyright" title="{% trans "Align Right (Ctrl/Cmd+R)" %}"><i class="icon-align-right"></i></a>
+                <a class="btn" data-edit="justifyfull" title="{% trans "Justify (Ctrl/Cmd+J)" %}"><i class="icon-align-justify"></i></a>
               </div>
               <div class="btn-group">
-                <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture"></i></a>
+	        	  <a class="btn dropdown-toggle" data-toggle="dropdown" title="{% trans "Hyperlink" %}"><i class="icon-link"></i></a>
+		            <div class="dropdown-menu input-append">
+			            <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
+			            <button class="btn" type="button">{% trans "Add" %}</button>
+              </div>
+        <a class="btn" data-edit="unlink" title="{% trans "Remove Hyperlink" %}"><i class="icon-cut"></i></a>
+      </div>
+              <div class="btn-group">
+                <a class="btn" id="pictureBtn" data-toggle="tooltip" data-placement="top" title data-original-title="{% trans "Insert picture (or just drag and drop)" %}"><i class="icon-picture"></i></a>
                 <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
               </div>
               <div class="btn-group">
-                <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
-                <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
+                <a class="btn" data-edit="undo" title="{% trans "Undo (Ctrl/Cmd+Z)" %}"><i class="icon-undo"></i></a>
+                <a class="btn" data-edit="redo" title="{% trans "Redo (Ctrl/Cmd+Y)" %}"><i class="icon-repeat"></i></a>
               </div>
-              <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
+              <input style="display: none;" type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
             </div>       
-            <label for="id_content">Content:</label>
-            <div id="id_content"></div>            
-
-            <tr><th><label for="id_status">Status:</label></th><td><select name="status" id="id_status">
-              <option value="" selected="selected">---------</option>
-              <option value="P">Publish</option>
-              <option value="D">Draft</option>
-            </select></td></tr>
-            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
+            <h5>{% trans "Content:" %}</h5>
+            <div id="content"></div>            
+            <form class="form-horizontal" id="newpage" role="form" method="post" action="{% url 'pages.views.createpage' blog.slug %}">{% csrf_token %}
+            <button type="submit" style="display: none;" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
           </form>
+        <button id="savedraft" class="btn btn-default"><span class="glyphicon glyphicon-save"></span> {% trans "Save Draft" %}</button>
+        <button id="publishnow" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Publish Now" %}</button>
+        <button id="appendtest2" style="display: none;" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "test2" %}</button>
         </div>
       </div>
-    </div>
+ <div id="test3"></div>  
+ </div>
+
+   <!-- Script for bootstrap wysiwyg
+
+        ================================================== -->
    <script>
    $(function(){
      function initToolbarBootstrapBindings() {
@@ -134,8 +152,8 @@
         overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
       });
       if ("onwebkitspeechchange"  in document.createElement("input")) {
-        var id_contentOffset = $('#id_content').offset();
-        $('#voiceBtn').css('position','absolute').offset({top: id_contentOffset.top, left: id_contentOffset.left+$('#id_content').innerWidth()-35});
+        var id_contentOffset = $('#content').offset();
+        $('#voiceBtn').css('position','absolute').offset({top: id_contentOffset.top, left: id_contentOffset.left+$('#content').innerWidth()-35});
       } else {
         $('#voiceBtn').hide();
       }
@@ -150,10 +168,55 @@
 		 '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
 	};
     initToolbarBootstrapBindings();  
-	$('#id_content').wysiwyg({ fileUploadError: showErrorAlert} );
+	$('#content').wysiwyg({ fileUploadError: showErrorAlert} );
     window.prettyPrint && prettyPrint();
     });
     </script> 
+
+   <!-- Script for form filling
+
+        ================================================== -->
+    <script>
+      $(document).ready(function() {
+        $('#appendtest2').click(function () { 
+          var titleform2 = $('#title').text();  
+          var contentform2 = $('#content').cleanHtml();
+            $('#test3').append(contentform2);
+        });  
+      });
+    </script>
+    <script>
+      $(document).ready(function() {
+        $('#publishnow').click(function () { 
+          var titleform_p = $('#title').text();  
+          var contentform_p = $('#content').cleanHtml();
+          var status_p = "P";
+           $('#newpage').append( '<input type="text" style="display: none;" id="id_title" name="id_title" value="' + (titleform_p) + '">' );
+           $('#newpage').append( '<input type="text" style="display: none;" name="id_content" id="id_content" value="' + (contentform_p) + '">' );
+           $('#newpage').append( '<input type="text" style="display: none;" id="id_status" name="id_status" value="' + (status_p) + '">' );
+             $('#newpage').submit();
+        });  
+      });
+    </script>
+    <script>
+      $(document).ready(function() {
+        $('#savedraft').click(function () { 
+          var titleform_d = $('#title').text();  
+          var contentform_d = $('#content').cleanHtml();
+          var status_d = "D";
+           $('#newpage').append( '<input type="text" style="display: none;" id="id_title" name="id_title" value="' + (titleform_d) + '">' );
+           $('#newpage').append( '<input type="text" style="display: none;" name="id_content" id="id_content" value="' + (contentform_d) + '">' );
+           $('#newpage').append( '<input type="text" style="display: none;" id="id_status" name="id_status" value="' + (status_d) + '">' );
+             $('#newpage').submit();
+        });  
+      });
+    </script>
+
+<script>
+$('#pictureBtn').mouseover(function () {
+   $('#pictureBtn').tooltip('show');
+});
+</script>
  {% endblock %}
  {% block bootstrap-js %}
  {% endblock %}
