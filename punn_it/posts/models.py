@@ -55,6 +55,19 @@ class Image(Post):
     def __unicode__(self):
         return self.title
 
+    @classmethod
+    def generate_unique_id(cls):
+        chars = ('abcdefghijklmnopqrstuvwxyz1234567890')
+        id_exists = False
+        while not id_exists:
+            rnd_str=""
+            for i in range(8):
+                rnd_str = rnd_str + choice(chars)
+            try:
+                punn = cls.objects.get(base62id=rnd_str)
+                id_exists = True
+            except cls.DoesNotExist:
+                return rnd_str
 
 class Album(Post):
     base62id = models.CharField(max_length=140, blank=True)
@@ -62,6 +75,21 @@ class Album(Post):
     content = models.TextField(verbose_name=_("Contenu"),max_length=10000, blank=True)
     def __unicode__(self):
         return str(self.id)
+
+    @classmethod
+    def generate_unique_id(cls):
+        chars = ('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890')
+        id_exists = False
+        while not id_exists:
+            rnd_str=""
+            for i in range(8):
+                rnd_str = rnd_str + choice(chars)
+            try:
+                album = cls.objects.get(base62id=rnd_str)
+                id_exists = True
+            except cls.DoesNotExist:
+                return rnd_str
+
 
 class Link(models.Model):
     image = models.ForeignKey(Image)

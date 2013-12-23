@@ -10,6 +10,12 @@
   {% endblock %}
   {% block additional-css %}
     <style>
+      textarea {
+      resize: none;
+      }
+      #imagetype {
+      padding:15px 15px 5px 15px;
+      }
       #model1 {
       padding:5px 5px 5px 5px;
       text-align: center;
@@ -47,37 +53,32 @@
       margin-right: auto;
       }
       #modelalbum1 {
-      padding:5px 5px 5px 5px;
+      padding:5px 15px 5px 15px;
       }
       #modelalbum2 {
-      padding:5px 5px 5px 5px;
+      padding:5px 15px 5px 15px;
       }
       #modelalbum3 {
-      padding:5px 5px 5px 5px;
+      padding:5px 15px 5px 15px;
       }  
-      #uploadimagelink {
-      padding:5px 5px 5px 5px;
-      text-align: center;
-      cursor: pointer;
-      }
-      #createalbumlink {
-      padding:5px 5px 5px 5px;
-      text-align: center;
-      cursor: pointer;
-      }
       #createalbumform {
-      padding:5px 5px 5px 5px;
+      padding:15px 15px 5px 15px;
       display: none;
       }
       #uploadimageform {
-      padding:5px 5px 5px 5px;
+      padding:5px 15px 5px 15px;
       display: none;
+      }
+      #textform {
+      padding:10px 15px 5px 15px;
       }
       #uploadimage {
       padding:5px 5px 5px 5px;
       }
       #uploadPreview{
       padding:5px 5px 5px 5px;
+      margin-left:auto;
+      margin-right:auto;
       }
       #modelalbumselectcancel{
       padding:15px 0px 0px 0px;
@@ -85,13 +86,66 @@
       }
       #uploadPreview_al_1{
       padding:5px 5px 5px 5px;
-      vertical-align:center;
+      margin-left: auto;
+      margin-right: auto;
       }
       #uploadPreview_al_2{
       padding:5px 5px 5px 5px;
-      vertical-align:center;
+      margin-left: auto;
+      margin-right: auto;
       }
-      #image_al_1_form{
+      #uploadPreview_al2_1{
+      padding:5px 5px 5px 5px;
+      margin-left: auto;
+      margin-right: auto;
+      }
+      #uploadPreview_al2_2{
+      padding:5px 5px 5px 5px;
+      margin-left: auto;
+      margin-right: auto;
+      }
+      #uploadPreview_al2_3{
+      padding:5px 5px 5px 5px;
+      margin-left: auto;
+      margin-right: auto;
+      }
+      #uploadPreview_al2_4{
+      padding:5px 5px 5px 5px;
+      margin-left: auto;
+      margin-right: auto;
+      }
+      #uploadPreview_al3_1{
+      padding:5px 5px 5px 5px;
+      margin-left: auto;
+      margin-right: auto;
+      }
+      #uploadPreview_al3_2{
+      padding:5px 5px 5px 5px;
+      margin-left: auto;
+      margin-right: auto;
+      }
+      #uploadPreview_al3_3{
+      padding:5px 5px 5px 5px;
+      margin-left: auto;
+      margin-right: auto;
+      }
+      #uploadPreview_al3_4{
+      padding:5px 5px 5px 5px;
+      margin-left: auto;
+      margin-right: auto;
+      }
+      #uploadPreview_al3_5{
+      padding:5px 5px 5px 5px;
+      margin-left: auto;
+      margin-right: auto;
+      }
+      #uploadPreview_al3_6{
+      padding:5px 5px 5px 5px;
+      margin-left: auto;
+      margin-right: auto;
+      }
+      #newtext{
+      padding:0px 0px 15px 0px;
       }
       #image_al_2_form{
       }
@@ -143,6 +197,10 @@
           {% endfor %}
         {% endif %}
         {% block content %}
+
+
+{{ request.POST }}
+
               <!-- Nav tabs -->
           <div class="panel panel-default"> 
             <div class="panel-body">
@@ -157,38 +215,55 @@
               </ul>
               <!-- Tab panes -->
               <div class="tab-content">
-                <div class="tab-pane active" id="text">  test  </div>
+                <div class="tab-pane active" id="text">
+                  <div class="row">
+                    <div class="col-md-12" id="textform">
+                      <form enctype="multipart/form-data" id="newtext" role="form" method="post" action="{% url 'posts.views.createimage' %}">{% csrf_token %}
+                        <textarea class="form-control input-block-level" rows="4" id="id_content" name="id_content" placeholder="{% trans "Write a new post" %}" autofocus></textarea>
+                      </form>
+                      <div class="btn-group">
+                        <a class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title data-original-title="{% trans "Add a Image" %}"><span class="glyphicon glyphicon-picture"></span></a>
+                        <a class="btn btn-default btn-xs" title="{% trans "Add an Place" %}"><span class="glyphicon glyphicon-globe"></span></a>
+                      </div>
+                     <button id="submittext" class="btn btn-primary btn-xs pull-right"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
+                    </div>
+                  </div>
+                </div>
                 <div class="tab-pane fade" id="image">
                     <div class="row">
-                      <div class="col-md-4 col-md-offset-2" id="uploadimagelink">{% trans "Upload Images" %}</div>
-                      <div class="col-md-4" id="createalbumlink">{% trans "Create An Album" %}</div>
-                      <div class="col-md-12" id="createalbumform">
-                        <div class="col-md-4" id="model1"><img class="img-responsive" src="http://i.imgur.com/A5Bn64f.png" id="imgmodel1"/></div>
-                        <div class="col-md-4" id="model2"><img class="img-responsive" src="http://i.imgur.com/1dbtonU.png" id="imgmodel2"/></div>
-                        <div class="col-md-4" id="model3"><img class="img-responsive" src="http://i.imgur.com/m54W9dE.png" id="imgmodel3"/></div>
+                      <div class="col-md-12" id="imagetype">
+                        <div class="btn-group btn-group-justified">
+                          <a class="btn btn-default" id="uploadimagelink" role="button">{% trans "Upload Images" %}</a>
+                          <a class="btn btn-default" id="createalbumlink" role="button">{% trans "Create An Album" %}</a>
+                        </div>
+                      </div>
+                      <div class="col-md-12" style="display: none" id="createalbumform">
+                        <div class="btn-group btn-group-justified">
+                          <a class="btn btn-default" id="model1" role="button"><img class="img-responsive" src="http://i.imgur.com/A5Bn64f.png" id="imgmodel1"/></a>
+                          <a class="btn btn-default" id="model2" role="button"><img class="img-responsive" src="http://i.imgur.com/1dbtonU.png" id="imgmodel2"/></a>
+                          <a class="btn btn-default" id="model3" role="button"><img class="img-responsive" src="http://i.imgur.com/m54W9dE.png" id="imgmodel3"/></a>
+                        </div>
                         <span id="modelalbumselectcancel" class="glyphicon glyphicon-remove-circle pull-right"></span>
                       </div>
-                      <div class="col-md-12" style="display: none" id="modelalbum1">
-                        <div class="panel panel-default">
-                          <div class="panel-body">
-                            <form id="newimagealbum1" role="form" method="post" action="{% url 'posts.views.createimage' %}">{% csrf_token %}
+                      <div class="col-md-12 " style="display: none" id="modelalbum1">
+                            <form enctype="multipart/form-data" id="newimagealbum1" role="form" method="post" action="{% url 'posts.views.createimage' %}">{% csrf_token %}
                               <div class="form-group">
                                 <label for="id_title">{% trans "Title:" %}</label>
-                                <input class="form-control" type="text" id="id_title" name="id_title">
+                                <input class="form-control input-block-level album1title" type="text" id="id_title" name="id_title" autofocus>
                               </div>
                               <div class="row" id="rowform_al_2img">
                                 <div class="col-md-6" id="image_al_1_form">
                                   <div class="form-group">
-                                    <label for="id_album_1_image_1">{% trans "Image:" %}</label>
+                                    <label for="id_album_1_image_1">{% trans "Image 1:" %}</label>
                                     <img class="img-responsive" id="uploadPreview_al_1" />
-                                    <input class="form-control" type="file" id="id_album_1_image_1" name="id_album_1_image_1" onchange="PreviewImageal1_1();">
+                                    <input class="form-control input-block-level" type="file" id="id_album_1_image_1" name="id_album_1_image_1" onchange="PreviewImageal1_1();">
                                   </div>
                                 </div>
                                 <div class="col-md-6" id="image_al_2_form">
                                   <div class="form-group">
-                                    <label for="id_album_1_image_2">{% trans "Image:" %}</label>
+                                    <label for="id_album_1_image_2">{% trans "Image 2:" %}</label>
                                     <img class="img-responsive" id="uploadPreview_al_2" />
-                                    <input class="form-control" type="file" id="id_album_1_image_2" name="id_album_1_image_2" onchange="PreviewImageal1_2();">
+                                    <input class="form-control input-block-level" type="file" id="id_album_1_image_2" name="id_album_1_image_2" onchange="PreviewImageal1_2();">
                                   </div>                           
                                 </div>
                               </div>
@@ -201,44 +276,40 @@
                                 </select>
                               </div>
                             </form>
-                            <button id="submitimagealbum1form" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
-                            <button id="cancelimagealbum1form" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
-                          </div>
-                        </div>
+                            <button id="cancelimagealbum1form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+                            <button id="submitimagealbum1form" class="btn btn-primary btn-xs pull-right"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
                       </div>
                       <div class="col-md-12" style="display: none" id="modelalbum2">
-                        <div class="panel panel-default">
-                          <div class="panel-body">
-                            <form id="newimagealbum2" role="form" method="post" action="{% url 'posts.views.createimage' %}">{% csrf_token %}
+                            <form enctype="multipart/form-data" id="newimagealbum2" role="form" method="post" action="{% url 'posts.views.createimage' %}">{% csrf_token %}
                               <div class="form-group">
                                 <label for="id_title">{% trans "Title:" %}</label>
-                                <input class="form-control" type="text" id="id_title" name="id_title">
+                                <input class="form-control input-block-level album2title" type="text" id="id_title" name="id_title" autofocus>
                               </div>
                               <div class="form-group">
+                                <label for="id_album_2_image_1">{% trans "Image 1:" %}</label>
                                 <img class="img-responsive" id="uploadPreview_al2_1" />
-                                <label for="id_album_2_image_1">{% trans "Image:" %}</label>
-                                <input class="form-control" type="file" id="id_album_2_image_1" name="id_album_2_image_1" onchange="PreviewImageal2_1();">
+                                <input class="form-control input-block-level" type="file" id="id_album_2_image_1" name="id_album_2_image_1" onchange="PreviewImageal2_1();">
                               </div>
                               <div class="row" id="rowform_al_4img">
                                 <div class="col-md-4" id="image_al2_2_form">
                                   <div class="form-group">
-                                    <label for="id_album_2_image_2">{% trans "Image:" %}</label>
+                                    <label for="id_album_2_image_2">{% trans "Image 2:" %}</label>
                                     <img class="img-responsive" id="uploadPreview_al2_2" />
-                                    <input class="form-control" type="file" id="id_album_2_image_2" name="id_album_2_image_2" onchange="PreviewImageal2_2();">
+                                    <input class="form-control input-block-level" type="file" id="id_album_2_image_2" name="id_album_2_image_2" onchange="PreviewImageal2_2();">
                                   </div>
                                 </div>
                                 <div class="col-md-4" id="image_al2_3_form">
                                   <div class="form-group">
-                                    <label for="id_album_2_image_3">{% trans "Image:" %}</label>
+                                    <label for="id_album_2_image_3">{% trans "Image 3:" %}</label>
                                     <img class="img-responsive" id="uploadPreview_al2_3" />
-                                    <input class="form-control" type="file" id="id_album_2_image_3" name="id_album_2_image_3" onchange="PreviewImageal2_3();">
+                                    <input class="form-control input-block-level" type="file" id="id_album_2_image_3" name="id_album_2_image_3" onchange="PreviewImageal2_3();">
                                   </div>
                                 </div>
                                 <div class="col-md-4" id="image_al2_4_form">
                                   <div class="form-group">
-                                    <label for="id_album_2_image_4">{% trans "Image:" %}</label>
+                                    <label for="id_album_2_image_4">{% trans "Image 4:" %}</label>
                                     <img class="img-responsive" id="uploadPreview_al2_4" />
-                                    <input class="form-control" type="file" id="id_album_2_image_4" name="id_album_2_image_4" onchange="PreviewImageal2_4();">
+                                    <input class="form-control input-block-level" type="file" id="id_album_2_image_4" name="id_album_2_image_4" onchange="PreviewImageal2_4();">
                                   </div>
                                 </div>
                               </div>
@@ -251,62 +322,58 @@
                                 </select>
                               </div>
                             </form>
-                            <button id="submitimagealbum2form" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
-                            <button id="cancelimagealbum2form" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
-                          </div>
-                        </div>
+                            <button id="cancelimagealbum2form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+                            <button id="submitimagealbum2form" class="btn btn-primary btn-xs pull-right"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
                       </div>
                       <div class="col-md-12" style="display: none" id="modelalbum3">
-                        <div class="panel panel-default">
-                          <div class="panel-body">
-                            <form id="newimagealbum3" role="form" method="post" action="{% url 'posts.views.createimage' %}">{% csrf_token %}
+                            <form enctype="multipart/form-data" id="newimagealbum3" role="form" method="post" action="{% url 'posts.views.createimage' %}">{% csrf_token %}
                               <div class="form-group">
                                 <label for="id_title">{% trans "Title:" %}</label>
-                                <input class="form-control" type="text" id="id_title" name="id_title">
+                                <input class="form-control input-block-level album3title" type="text" id="id_title" name="id_title" autofocus>
                               </div>
                               <div class="row" id="rowform_al_6_1img">
                                 <div class="col-md-4" id="image_al3_1_form">
                                   <div class="form-group">
-                                    <label for="id_album_3_image_1">{% trans "Image:" %}</label>
+                                    <label for="id_album_3_image_1">{% trans "Image 1:" %}</label>
                                     <img class="img-responsive" id="uploadPreview_al3_1" />
-                                    <input class="form-control" type="file" id="id_album_3_image_1" name="id_album_3_image_1" onchange="PreviewImageal3_1();">
+                                    <input class="form-control input-block-level" type="file" id="id_album_3_image_1" name="id_album_3_image_1" onchange="PreviewImageal3_1();">
                                   </div>
                                 </div>
                                 <div class="col-md-4" id="image_al3_2_form">
                                   <div class="form-group">
-                                    <label for="id_album_3_image_2">{% trans "Image:" %}</label>
+                                    <label for="id_album_3_image_2">{% trans "Image 2:" %}</label>
                                     <img class="img-responsive" id="uploadPreview_al3_2" />
-                                    <input class="form-control" type="file" id="id_album_3_image_2" name="id_album_3_image_2" onchange="PreviewImageal3_2();">
+                                    <input class="form-control input-block-level" type="file" id="id_album_3_image_2" name="id_album_3_image_2" onchange="PreviewImageal3_2();">
                                   </div>
                                 </div>
                                 <div class="col-md-4" id="image_al3_3_form">
                                   <div class="form-group">
-                                    <label for="id_album_3_image_3">{% trans "Image:" %}</label>
+                                    <label for="id_album_3_image_3">{% trans "Image 3:" %}</label>
                                     <img class="img-responsive" id="uploadPreview_al3_3" />
-                                    <input class="form-control" type="file" id="id_album_3_image_3" name="id_album_3_image_3" onchange="PreviewImageal3_3();">
+                                    <input class="form-control input-block-level" type="file" id="id_album_3_image_3" name="id_album_3_image_3" onchange="PreviewImageal3_3();">
                                   </div>
                                 </div>
                               </div>
                               <div class="row" id="rowform_al_6_2img">
                                 <div class="col-md-4" id="image_al3_4_form">
                                   <div class="form-group">
-                                    <label for="id_album_3_image_4">{% trans "Image:" %}</label>
+                                    <label for="id_album_3_image_4">{% trans "Image 4:" %}</label>
                                     <img class="img-responsive" id="uploadPreview_al3_4" />
-                                    <input class="form-control" type="file" id="id_album_3_image_4" name="id_album_3_image_4" onchange="PreviewImageal3_4();">
+                                    <input class="form-control input-block-level" type="file" id="id_album_3_image_4" name="id_album_3_image_4" onchange="PreviewImageal3_4();">
                                   </div>
                                 </div>
                                 <div class="col-md-4" id="image_al3_5_form">
                                   <div class="form-group">
-                                    <label for="id_album_3_image_5">{% trans "Image:" %}</label>
+                                    <label for="id_album_3_image_5">{% trans "Image 5:" %}</label>
                                     <img class="img-responsive" id="uploadPreview_al3_5" />
-                                    <input class="form-control" type="file" id="id_album_3_image_5" name="id_album_3_image_5" onchange="PreviewImageal3_5();">
+                                    <input class="form-control input-block-level" type="file" id="id_album_3_image_5" name="id_album_3_image_5" onchange="PreviewImageal3_5();">
                                   </div>
                                 </div>
                                 <div class="col-md-4" id="image_al3_6_form">
                                   <div class="form-group">
-                                    <label for="id_album_3_image_6">{% trans "Image:" %}</label>
+                                    <label for="id_album_3_image_6">{% trans "Image 6:" %}</label>
                                     <img class="img-responsive" id="uploadPreview_al3_6" />
-                                    <input class="form-control" type="file" id="id_album_3_image_6" name="id_album_3_image_6" onchange="PreviewImageal3_6();">
+                                    <input class="form-control input-block-level" type="file" id="id_album_3_image_6" name="id_album_3_image_6" onchange="PreviewImageal3_6();">
                                   </div>
                                 </div>
                               </div>
@@ -319,23 +386,19 @@
                                 </select>
                               </div>
                             </form>
-                            <button id="submitimagealbum3form" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
-                            <button id="cancelimagealbum3form" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
-                          </div>
-                        </div>
+                            <button id="cancelimagealbum3form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+                            <button id="submitimagealbum3form" class="btn btn-primary btn-xs pull-right"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
                       </div>
                       <div class="col-md-12" style="display: none" id="uploadimageform">
-                        <div class="panel panel-default">
-                          <div class="panel-body">
-                            <form id="newimage" role="form" method="post" action="{% url 'posts.views.createimage' %}">{% csrf_token %}
+                            <form enctype="multipart/form-data" id="newimage" role="form" method="post" action="{% url 'posts.views.createimage' %}">{% csrf_token %}
                               <div class="form-group">
                                 <label for="id_title">{% trans "Title:" %}</label>
-                                <input class="form-control" type="text" id="id_title" name="id_title">
+                                <input class="form-control input-block-level imgtitle" type="text" id="id_title" name="id_title" autofocus>
                               </div>
                               <div class="form-group">
-                                <img class="img-responsive" id="uploadPreview" />
                                 <label for="id_image">{% trans "Image:" %}</label>
-                                <input class="form-control" type="file" id="id_image" name="id_image" onchange="PreviewImage();">
+                                <img class="img-responsive" id="uploadPreview" />
+                                <input class="form-control input-block-level" type="file" id="id_image" name="id_image" onchange="PreviewImage();">
                               </div>
                               <div class="form-group">
                                 <label for="id_category">{% trans "Category:" %}</label>
@@ -346,10 +409,8 @@
                                 </select>
                               </div>
                             </form>
-                            <button id="submitimageform" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
-                            <button id="cancelimageform" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
-                          </div>
-                        </div>
+                            <button id="cancelimageform" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+                            <button id="submitimageform" class="btn btn-primary btn-xs pull-right"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
                       </div>
                     </div>
                 </div>
@@ -384,33 +445,341 @@
 
     <script>
       $('#createalbumlink').click(function() {
-        $('#createalbumlink').hide();
-        $('#uploadimagelink').hide();
+        $('#imagetype').hide();
         $('#createalbumform').show();
     });
     </script>
     <script>
       $('#uploadimagelink').click(function() {
-        $('#createalbumlink').hide();
-        $('#uploadimagelink').hide();
+        $('#imagetype').hide();
         $('#uploadimageform').show();
     });
     </script>
     <script>
+      $('#uploadimagelink').click(function() {
+        setTimeout(function() { 
+          $(".imgtitle").focus();
+        },10);
+      });
+    </script>
+    <script>
+      $('#model1').click(function() {
+        setTimeout(function() { 
+          $(".album1title").focus();
+        },10);
+      });
+    </script>
+    <script>
+      $('#model2').click(function() {
+        setTimeout(function() { 
+          $(".album2title").focus();
+        },10);
+      });
+    </script>
+    <script>
+      $('#model3').click(function() {
+        setTimeout(function() { 
+          $(".album3title").focus();
+        },10);
+      });
+    </script>
+    <script>
+      $('#tabbar a:first').click(function() {
+        setTimeout(function() {
+          $('#id_content').focus();
+        },10);
+      });
+    </script>
+    <script>
+      $('#tabbar a[href="#text"]').click(function() {
+        $("#uploadPreview").remove();
+        $('#id_image').before( '<img class="img-responsive" id="uploadPreview" />' );
+        $("#uploadPreview_al_1").remove();
+        $("#uploadPreview_al_2").remove();
+        $('#id_album_1_image_1').before( '<img class="img-responsive" id="uploadPreview_al_1" />' );
+        $('#id_album_1_image_2').before( '<img class="img-responsive" id="uploadPreview_al_2" />' );
+        $("#uploadPreview_al2_1").remove();
+        $("#uploadPreview_al2_2").remove();
+        $("#uploadPreview_al2_3").remove();
+        $("#uploadPreview_al2_4").remove();
+        $('#id_album_2_image_1').before( '<img class="img-responsive" id="uploadPreview_al2_1" />' );
+        $('#id_album_2_image_2').before( '<img class="img-responsive" id="uploadPreview_al2_2" />' );
+        $('#id_album_2_image_3').before( '<img class="img-responsive" id="uploadPreview_al2_3" />' );
+        $('#id_album_2_image_4').before( '<img class="img-responsive" id="uploadPreview_al2_4" />' );
+        $("#uploadPreview_al3_1").remove();
+        $("#uploadPreview_al3_2").remove();
+        $("#uploadPreview_al3_3").remove();
+        $("#uploadPreview_al3_4").remove();
+        $("#uploadPreview_al3_5").remove();
+        $("#uploadPreview_al3_6").remove();
+        $('#id_album_3_image_1').before( '<img class="img-responsive" id="uploadPreview_al3_1" />' );
+        $('#id_album_3_image_2').before( '<img class="img-responsive" id="uploadPreview_al3_2" />' );
+        $('#id_album_3_image_3').before( '<img class="img-responsive" id="uploadPreview_al3_3" />' );
+        $('#id_album_3_image_4').before( '<img class="img-responsive" id="uploadPreview_al3_4" />' );
+        $('#id_album_3_image_5').before( '<img class="img-responsive" id="uploadPreview_al3_5" />' );
+        $('#id_album_3_image_6').before( '<img class="img-responsive" id="uploadPreview_al3_6" />' );
+        $('#newimage').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum1').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum2').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum3').each(function(){
+          this.reset();
+        });
+      });
+    </script>
+    <script>
+      $('#tabbar a[href="#image"]').click(function() {
+        $('#newtext').each(function(){
+          this.reset();
+        });
+      });
+    </script>
+    <script>
+      $('#tabbar a[href="#video"]').click(function() {
+        $("#uploadPreview").remove();
+        $('#id_image').before( '<img class="img-responsive" id="uploadPreview" />' );
+        $("#uploadPreview_al_1").remove();
+        $("#uploadPreview_al_2").remove();
+        $('#id_album_1_image_1').before( '<img class="img-responsive" id="uploadPreview_al_1" />' );
+        $('#id_album_1_image_2').before( '<img class="img-responsive" id="uploadPreview_al_2" />' );
+        $("#uploadPreview_al2_1").remove();
+        $("#uploadPreview_al2_2").remove();
+        $("#uploadPreview_al2_3").remove();
+        $("#uploadPreview_al2_4").remove();
+        $('#id_album_2_image_1').before( '<img class="img-responsive" id="uploadPreview_al2_1" />' );
+        $('#id_album_2_image_2').before( '<img class="img-responsive" id="uploadPreview_al2_2" />' );
+        $('#id_album_2_image_3').before( '<img class="img-responsive" id="uploadPreview_al2_3" />' );
+        $('#id_album_2_image_4').before( '<img class="img-responsive" id="uploadPreview_al2_4" />' );
+        $("#uploadPreview_al3_1").remove();
+        $("#uploadPreview_al3_2").remove();
+        $("#uploadPreview_al3_3").remove();
+        $("#uploadPreview_al3_4").remove();
+        $("#uploadPreview_al3_5").remove();
+        $("#uploadPreview_al3_6").remove();
+        $('#id_album_3_image_1').before( '<img class="img-responsive" id="uploadPreview_al3_1" />' );
+        $('#id_album_3_image_2').before( '<img class="img-responsive" id="uploadPreview_al3_2" />' );
+        $('#id_album_3_image_3').before( '<img class="img-responsive" id="uploadPreview_al3_3" />' );
+        $('#id_album_3_image_4').before( '<img class="img-responsive" id="uploadPreview_al3_4" />' );
+        $('#id_album_3_image_5').before( '<img class="img-responsive" id="uploadPreview_al3_5" />' );
+        $('#id_album_3_image_6').before( '<img class="img-responsive" id="uploadPreview_al3_6" />' );
+        $('#newimage').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum1').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum2').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum3').each(function(){
+          this.reset();
+        });
+        $('#newtext').each(function(){
+          this.reset();
+        });
+      });
+    </script>
+    <script>
+      $('#tabbar a[href="#audio"]').click(function() {
+        $("#uploadPreview").remove();
+        $('#id_image').before( '<img class="img-responsive" id="uploadPreview" />' );
+        $("#uploadPreview_al_1").remove();
+        $("#uploadPreview_al_2").remove();
+        $('#id_album_1_image_1').before( '<img class="img-responsive" id="uploadPreview_al_1" />' );
+        $('#id_album_1_image_2').before( '<img class="img-responsive" id="uploadPreview_al_2" />' );
+        $("#uploadPreview_al2_1").remove();
+        $("#uploadPreview_al2_2").remove();
+        $("#uploadPreview_al2_3").remove();
+        $("#uploadPreview_al2_4").remove();
+        $('#id_album_2_image_1').before( '<img class="img-responsive" id="uploadPreview_al2_1" />' );
+        $('#id_album_2_image_2').before( '<img class="img-responsive" id="uploadPreview_al2_2" />' );
+        $('#id_album_2_image_3').before( '<img class="img-responsive" id="uploadPreview_al2_3" />' );
+        $('#id_album_2_image_4').before( '<img class="img-responsive" id="uploadPreview_al2_4" />' );
+        $("#uploadPreview_al3_1").remove();
+        $("#uploadPreview_al3_2").remove();
+        $("#uploadPreview_al3_3").remove();
+        $("#uploadPreview_al3_4").remove();
+        $("#uploadPreview_al3_5").remove();
+        $("#uploadPreview_al3_6").remove();
+        $('#id_album_3_image_1').before( '<img class="img-responsive" id="uploadPreview_al3_1" />' );
+        $('#id_album_3_image_2').before( '<img class="img-responsive" id="uploadPreview_al3_2" />' );
+        $('#id_album_3_image_3').before( '<img class="img-responsive" id="uploadPreview_al3_3" />' );
+        $('#id_album_3_image_4').before( '<img class="img-responsive" id="uploadPreview_al3_4" />' );
+        $('#id_album_3_image_5').before( '<img class="img-responsive" id="uploadPreview_al3_5" />' );
+        $('#id_album_3_image_6').before( '<img class="img-responsive" id="uploadPreview_al3_6" />' );
+        $('#newimage').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum1').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum2').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum3').each(function(){
+          this.reset();
+        });
+        $('#newtext').each(function(){
+          this.reset();
+        });
+      });
+    </script>
+    <script>
+      $('#tabbar a[href="#link"]').click(function() {
+        $("#uploadPreview").remove();
+        $('#id_image').before( '<img class="img-responsive" id="uploadPreview" />' );
+        $("#uploadPreview_al_1").remove();
+        $("#uploadPreview_al_2").remove();
+        $('#id_album_1_image_1').before( '<img class="img-responsive" id="uploadPreview_al_1" />' );
+        $('#id_album_1_image_2').before( '<img class="img-responsive" id="uploadPreview_al_2" />' );
+        $("#uploadPreview_al2_1").remove();
+        $("#uploadPreview_al2_2").remove();
+        $("#uploadPreview_al2_3").remove();
+        $("#uploadPreview_al2_4").remove();
+        $('#id_album_2_image_1').before( '<img class="img-responsive" id="uploadPreview_al2_1" />' );
+        $('#id_album_2_image_2').before( '<img class="img-responsive" id="uploadPreview_al2_2" />' );
+        $('#id_album_2_image_3').before( '<img class="img-responsive" id="uploadPreview_al2_3" />' );
+        $('#id_album_2_image_4').before( '<img class="img-responsive" id="uploadPreview_al2_4" />' );
+        $("#uploadPreview_al3_1").remove();
+        $("#uploadPreview_al3_2").remove();
+        $("#uploadPreview_al3_3").remove();
+        $("#uploadPreview_al3_4").remove();
+        $("#uploadPreview_al3_5").remove();
+        $("#uploadPreview_al3_6").remove();
+        $('#id_album_3_image_1').before( '<img class="img-responsive" id="uploadPreview_al3_1" />' );
+        $('#id_album_3_image_2').before( '<img class="img-responsive" id="uploadPreview_al3_2" />' );
+        $('#id_album_3_image_3').before( '<img class="img-responsive" id="uploadPreview_al3_3" />' );
+        $('#id_album_3_image_4').before( '<img class="img-responsive" id="uploadPreview_al3_4" />' );
+        $('#id_album_3_image_5').before( '<img class="img-responsive" id="uploadPreview_al3_5" />' );
+        $('#id_album_3_image_6').before( '<img class="img-responsive" id="uploadPreview_al3_6" />' );
+        $('#newimage').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum1').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum2').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum3').each(function(){
+          this.reset();
+        });
+        $('#newtext').each(function(){
+          this.reset();
+        });
+      });
+    </script>
+    <script>
+      $('#tabbar a[href="#question"]').click(function() {
+        $("#uploadPreview").remove();
+        $('#id_image').before( '<img class="img-responsive" id="uploadPreview" />' );
+        $("#uploadPreview_al_1").remove();
+        $("#uploadPreview_al_2").remove();
+        $('#id_album_1_image_1').before( '<img class="img-responsive" id="uploadPreview_al_1" />' );
+        $('#id_album_1_image_2').before( '<img class="img-responsive" id="uploadPreview_al_2" />' );
+        $("#uploadPreview_al2_1").remove();
+        $("#uploadPreview_al2_2").remove();
+        $("#uploadPreview_al2_3").remove();
+        $("#uploadPreview_al2_4").remove();
+        $('#id_album_2_image_1').before( '<img class="img-responsive" id="uploadPreview_al2_1" />' );
+        $('#id_album_2_image_2').before( '<img class="img-responsive" id="uploadPreview_al2_2" />' );
+        $('#id_album_2_image_3').before( '<img class="img-responsive" id="uploadPreview_al2_3" />' );
+        $('#id_album_2_image_4').before( '<img class="img-responsive" id="uploadPreview_al2_4" />' );
+        $("#uploadPreview_al3_1").remove();
+        $("#uploadPreview_al3_2").remove();
+        $("#uploadPreview_al3_3").remove();
+        $("#uploadPreview_al3_4").remove();
+        $("#uploadPreview_al3_5").remove();
+        $("#uploadPreview_al3_6").remove();
+        $('#id_album_3_image_1').before( '<img class="img-responsive" id="uploadPreview_al3_1" />' );
+        $('#id_album_3_image_2').before( '<img class="img-responsive" id="uploadPreview_al3_2" />' );
+        $('#id_album_3_image_3').before( '<img class="img-responsive" id="uploadPreview_al3_3" />' );
+        $('#id_album_3_image_4').before( '<img class="img-responsive" id="uploadPreview_al3_4" />' );
+        $('#id_album_3_image_5').before( '<img class="img-responsive" id="uploadPreview_al3_5" />' );
+        $('#id_album_3_image_6').before( '<img class="img-responsive" id="uploadPreview_al3_6" />' );
+        $('#newimage').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum1').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum2').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum3').each(function(){
+          this.reset();
+        });
+        $('#newtext').each(function(){
+          this.reset();
+        });
+      });
+    </script>
+    <script>
+      $('#tabbar a[href="#lieu"]').click(function() {
+        $("#uploadPreview").remove();
+        $('#id_image').before( '<img class="img-responsive" id="uploadPreview" />' );
+        $("#uploadPreview_al_1").remove();
+        $("#uploadPreview_al_2").remove();
+        $('#id_album_1_image_1').before( '<img class="img-responsive" id="uploadPreview_al_1" />' );
+        $('#id_album_1_image_2').before( '<img class="img-responsive" id="uploadPreview_al_2" />' );
+        $("#uploadPreview_al2_1").remove();
+        $("#uploadPreview_al2_2").remove();
+        $("#uploadPreview_al2_3").remove();
+        $("#uploadPreview_al2_4").remove();
+        $('#id_album_2_image_1').before( '<img class="img-responsive" id="uploadPreview_al2_1" />' );
+        $('#id_album_2_image_2').before( '<img class="img-responsive" id="uploadPreview_al2_2" />' );
+        $('#id_album_2_image_3').before( '<img class="img-responsive" id="uploadPreview_al2_3" />' );
+        $('#id_album_2_image_4').before( '<img class="img-responsive" id="uploadPreview_al2_4" />' );
+        $("#uploadPreview_al3_1").remove();
+        $("#uploadPreview_al3_2").remove();
+        $("#uploadPreview_al3_3").remove();
+        $("#uploadPreview_al3_4").remove();
+        $("#uploadPreview_al3_5").remove();
+        $("#uploadPreview_al3_6").remove();
+        $('#id_album_3_image_1').before( '<img class="img-responsive" id="uploadPreview_al3_1" />' );
+        $('#id_album_3_image_2').before( '<img class="img-responsive" id="uploadPreview_al3_2" />' );
+        $('#id_album_3_image_3').before( '<img class="img-responsive" id="uploadPreview_al3_3" />' );
+        $('#id_album_3_image_4').before( '<img class="img-responsive" id="uploadPreview_al3_4" />' );
+        $('#id_album_3_image_5').before( '<img class="img-responsive" id="uploadPreview_al3_5" />' );
+        $('#id_album_3_image_6').before( '<img class="img-responsive" id="uploadPreview_al3_6" />' );
+        $('#newimage').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum1').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum2').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum3').each(function(){
+          this.reset();
+        });
+        $('#newtext').each(function(){
+          this.reset();
+        });
+      });
+    </script>
+    <script>
       $('#litext').click(function() {
-        $('#createalbumlink').show();
-        $('#uploadimagelink').show();
+        $('#imagetype').show();
         $('#uploadimageform').hide();
         $('#createalbumform').hide();
         $('#modelalbum1').hide();
         $('#modelalbum2').hide();
         $('#modelalbum3').hide();
+        $('#newimage').each(function(){
+          this.reset();
+        });
     });
     </script>
     <script>
       $('#livideo').click(function() {
-        $('#createalbumlink').show();
-        $('#uploadimagelink').show();
+        $('#imagetype').show();
         $('#uploadimageform').hide();
         $('#createalbumform').hide();
         $('#modelalbum1').hide();
@@ -420,129 +789,170 @@
     </script>
     <script>
       $('#liaudio').click(function() {
-        $('#createalbumlink').show();
-        $('#uploadimagelink').show();
+        $('#imagetype').show();
         $('#uploadimageform').hide();
         $('#createalbumform').hide();
         $('#modelalbum1').hide();
         $('#modelalbum2').hide();
         $('#modelalbum3').hide();
-    });
+      });
     </script>
     <script>
       $('#lilink').click(function() {
-        $('#createalbumlink').show();
-        $('#uploadimagelink').show();
+        $('#imagetype').show();
         $('#uploadimageform').hide();
         $('#createalbumform').hide();
         $('#modelalbum1').hide();
         $('#modelalbum2').hide();
         $('#modelalbum3').hide();
-    });
+      });
     </script>
     <script>
       $('#liquestion').click(function() {
-        $('#createalbumlink').show();
-        $('#uploadimagelink').show();
+        $('#imagetype').show();
         $('#uploadimageform').hide();
         $('#createalbumform').hide();
         $('#modelalbum1').hide();
         $('#modelalbum2').hide();
         $('#modelalbum3').hide();
-    });
+      });
     </script>
     <script>
       $('#lilieu').click(function() {
-        $('#createalbumlink').show();
-        $('#uploadimagelink').show();
+        $('#imagetype').show();
         $('#uploadimageform').hide();
         $('#createalbumform').hide();
         $('#modelalbum1').hide();
         $('#modelalbum2').hide();
         $('#modelalbum3').hide();
-    });
+      });
     </script>
     <script>
       $('#cancelimageform').click(function() {
-        $('#createalbumlink').show();
-        $('#uploadimagelink').show();
+        $('#imagetype').show();
         $('#uploadimageform').hide();
         $('#createalbumform').hide();
-    });
+      });
+    </script>
+    <script>
+      $('#cancelimageform').click(function() {
+        $("#uploadPreview").remove();
+        $('#id_image').before( '<img class="img-responsive" id="uploadPreview" />' );
+        $('#newimage').each(function(){
+          this.reset();
+        });
+      });
+    </script>
+    <script>
+      $('#submittext').click(function() {
+        $('#newtext').submit();
+      });
     </script>
     <script>
       $('#submitimageform').click(function() {
         $('#newimage').submit();
-    });
+      });
     </script>
     <script>
       $('#submitimagealbum1form').click(function() {
         $('#newimagealbum1').submit();
-    });
+      });
     </script>
     <script>
       $('#cancelimagealbum1form').click(function() {
         $('#createalbumform').show();
         $('#modelalbum1').hide();
-    });
+        $("#uploadPreview_al_1").remove();
+        $("#uploadPreview_al_2").remove();
+        $('#id_album_1_image_1').before( '<img class="img-responsive" id="uploadPreview_al_1" />' );
+        $('#id_album_1_image_2').before( '<img class="img-responsive" id="uploadPreview_al_2" />' );
+        $('#newimagealbum1').each(function(){
+          this.reset();
+        });
+      });
     </script>
     <script>
       $('#submitimagealbum3form').click(function() {
         $('#newimagealbum3').submit();
-    });
+      });
     </script>
     <script>
       $('#cancelimagealbum3form').click(function() {
         $('#createalbumform').show();
         $('#modelalbum3').hide();
-    });
+        $("#uploadPreview_al3_1").remove();
+        $("#uploadPreview_al3_2").remove();
+        $("#uploadPreview_al3_3").remove();
+        $("#uploadPreview_al3_4").remove();
+        $("#uploadPreview_al3_5").remove();
+        $("#uploadPreview_al3_6").remove();
+        $('#id_album_3_image_1').before( '<img class="img-responsive" id="uploadPreview_al3_1" />' );
+        $('#id_album_3_image_2').before( '<img class="img-responsive" id="uploadPreview_al3_2" />' );
+        $('#id_album_3_image_3').before( '<img class="img-responsive" id="uploadPreview_al3_3" />' );
+        $('#id_album_3_image_4').before( '<img class="img-responsive" id="uploadPreview_al3_4" />' );
+        $('#id_album_3_image_5').before( '<img class="img-responsive" id="uploadPreview_al3_5" />' );
+        $('#id_album_3_image_6').before( '<img class="img-responsive" id="uploadPreview_al3_6" />' );
+        $('#newimagealbum3').each(function(){
+          this.reset();
+        });
+      });
     </script>
     <script>
       $('#model1').click(function() {
         $('#createalbumform').hide();
         $('#modelalbum1').show();
-    });
+      });
     </script>
     <script>
       $('#submitimagealbum2form').click(function() {
         $('#newimagealbum2').submit();
-    });
+      });
     </script>
     <script>
       $('#cancelimagealbum2form').click(function() {
         $('#createalbumform').show();
         $('#modelalbum2').hide();
-    });
+        $("#uploadPreview_al2_1").remove();
+        $("#uploadPreview_al2_2").remove();
+        $("#uploadPreview_al2_3").remove();
+        $("#uploadPreview_al2_4").remove();
+        $('#id_album_2_image_1').before( '<img class="img-responsive" id="uploadPreview_al2_1" />' );
+        $('#id_album_2_image_2').before( '<img class="img-responsive" id="uploadPreview_al2_2" />' );
+        $('#id_album_2_image_3').before( '<img class="img-responsive" id="uploadPreview_al2_3" />' );
+        $('#id_album_2_image_4').before( '<img class="img-responsive" id="uploadPreview_al2_4" />' );
+        $('#newimagealbum2').each(function(){
+          this.reset();
+        });
+      });
     </script>
     <script>
       $('#model2').click(function() {
         $('#createalbumform').hide();
         $('#modelalbum2').show();
-    });
+      });
     </script>
     <script>
       $('#submitimagealbum3form').click(function() {
         $('#newimagealbum3').submit();
-    });
+      });
     </script>
     <script>
       $('#cancelimagealbum3form').click(function() {
         $('#createalbumform').show();
         $('#modelalbum3').hide();
-    });
+      });
     </script>
     <script>
       $('#model3').click(function() {
         $('#createalbumform').hide();
         $('#modelalbum3').show();
-    });
+      });
     </script>
     <script>
       $('#modelalbumselectcancel').click(function() {
         $('#createalbumform').hide();
-        $('#uploadimagelink').show();
-        $('#createalbumlink').show();
-    });
+        $('#imagetype').show();
+      });
     </script>
     <script>
       $(document).ready(function() {
