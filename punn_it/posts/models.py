@@ -60,6 +60,15 @@ class BlogPost(Post):
     def __unicode__(self):
         return self.title
 
+class BlogComment(Post):
+    comment = models.TextField(verbose_name=_("Content"),max_length=10000)
+    email = models.EmailField(verbose_name=_("Email"))
+    name = models.CharField(verbose_name=_("Name"), max_length=140)
+    website = models.URLField(verbose_name=_("Website"), max_length=300, blank=True)
+    notify_me = models.BooleanField(default=False)
+    def __unicode__(self):
+        return self.title
+
 class Image(Post):
     status = models.CharField(max_length=2, choices=STATUS, null=True, blank=True)
     title = models.CharField(verbose_name=_("Titre"), max_length=140, blank=True)
