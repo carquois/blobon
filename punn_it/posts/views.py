@@ -47,17 +47,20 @@ def index(request):
                                   context_instance=RequestContext(request))
 
 def pics(request):
-      user = ""
       posts = paginate(request,
                        Post.objects.order_by('-pub_date'),
                        15)
-      #punns = attach_infos(punns)
-      #latest_comments = Comment.objects.all().order_by('-created')[:5]
-      #cats = Cat.objects.filter(is_top_level=True)
       return render_to_response('index.html',
                                {'posts': posts, },
                                 context_instance=RequestContext(request))
 
+def videos(request):
+      posts = paginate(request,
+                       Post.objects.filter(youtube_id!="").order_by('-pub_date'),
+                       15)
+      return render_to_response('index.html',
+                               {'posts': posts},
+                                context_instance=RequestContext(request))
 
 def single(request):
         return render_to_response('single.html',

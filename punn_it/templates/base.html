@@ -163,7 +163,7 @@
        <a class="navbar-brand enteteCheck" href="{% url "posts.views.index" %}">
               <div class="logoCheck">
         Check donc ça
-         <div class="typeEntete"><a href="{% url "posts.views.pics" %}">Photos</a>  | <a href="{% url "punns.views.videos" %}">Vidéos</a></div> 
+         <div class="typeEntete"><a href="{% url "posts.views.pics" %}">Photos</a>  | <a href="{% url "posts.views.videos" %}">Vidéos</a></div> 
         </div></a><!--/.nav-collapse -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -213,14 +213,14 @@
 
                                        <!-- boucle pour 1 thumbnails -->
                                        {% for post in posts %}
-                                       <a href="{{ punn.get_absolute_url }}">
+                                       <a href="{{ post.get_absolute_url }}">
                                                {% if forloop.counter|divisibleby:3 %}
                                                <div class="contenantImageThumb  ">
                                                {% else %}        
                                                <div class="contenantImageThumb  margeDroiteThumb" >
                                                 {% endif %}        
                                                 
-                                                        {% if punn.pic %}
+                                                        {% if post.pic %}
                                                         <div class="overThumb" >
                                                                         
                                                                         {% if punn.title|length >= 60 %}
