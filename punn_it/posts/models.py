@@ -11,6 +11,8 @@ from sorl.thumbnail import ImageField
 
 from blogs.models import Blog
 
+from random import choice
+
 STATUS = (
     ('P', 'Publish'),
     ('D', 'Draft'),

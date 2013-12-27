@@ -12,6 +12,8 @@ from blogs.forms import BlogForm
 from blogs.models import Blog
 from pages.models import Page
 
+from posts.models import BlogComment
+
 @login_required
 def createblog(request):
       if request.method == 'POST':
@@ -37,8 +39,9 @@ def createblog(request):
 def administrateblog(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       pages = Page.objects.filter(blog=blog)
+      num_of_comments = BlogComment.objects.filter(blog=blog).count()
       return render_to_response('administrateblog.html',
-                                {'blog': blog, 'pages': pages},
+                                {'blog': blog, 'pages': pages, 'num_of_comments': num_of_comments},
                                 context_instance=RequestContext(request))
 
 @login_required
