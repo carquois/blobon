@@ -15,6 +15,9 @@ from posts.models import BlogPost, Album, Link, Post
 
 from blogs.models import Blog
 
+from notifications.forms import InvitationForm
+from notifications.models import Invitation
+
 def index(request):
       if request.META['HTTP_HOST'] == "blobon.com":
         if request.user.is_authenticated():
@@ -33,6 +36,14 @@ def index(request):
           return render_to_response('blobon.html',
                                     {'form': form},
                                      context_instance=RequestContext(request))
+      elif Blog.objects.filter(custom_domain=request.META['HTTP_HOST']).exists():
+          blog = Blog.objects.get(custom_domain=request.META['HTTP_HOST'])
+          posts = paginate(request,
+                         Post.objects.filter(blog=blog).order_by('-pub_date'),
+                         15)
+          return render_to_response('index.html',
+                                    {'posts': posts, },
+                                    context_instance=RequestContext(request))
       else:
         user = ""
         posts = paginate(request,

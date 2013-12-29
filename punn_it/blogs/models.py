@@ -25,6 +25,7 @@ class Blog(models.Model):
     slug = models.SlugField(verbose_name=_("URL"), max_length=30, unique=True)
     title = models.CharField(verbose_name=_("Title"), max_length=140)
     password = models.CharField(verbose_name=_("Password"), max_length=140, blank=True)
+    custom_domain = models.CharField(verbose_name=_("Custom domain"), max_length=200, blank=True, unique=True)
     def __unicode__(self):
         return self.title
 

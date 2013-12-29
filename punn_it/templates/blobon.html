@@ -41,7 +41,7 @@
       <div class="topimage">
         <img src="http://i.imgur.com/QXoXHev.jpg" class="img-responsive" id="bloboninviteimg"/>
       </div>
-      <form id="invitation-form" role="form" action="{% url "punns.views.index" %}" method="post">{% csrf_token %}
+      <form id="invitation-form" role="form" action="{% url "posts.views.index" %}" method="post">{% csrf_token %}
         <div class="form-group invitation">
         {{ form.email }} 
         </div>

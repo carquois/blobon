@@ -9,30 +9,11 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
         # Note: Remember to use orm['appname.ModelName'] rather than "from appname.models..."
-        
-        
-        for punn in orm['punns.Punn'].objects.all():
-          i = orm.Image(author = punn.author,
-                        created = punn.created,
-                        last_modified = punn.last_modified,
-                        status = punn.status,
-                        title = punn.title,
-                        translated_title = punn.translated_title,
-                        base62id = punn.base62id,
-                        slug = punn.slug,
-                        karma = punn.karma,
-                        views = punn.views,
-                        source = punn.source,
-                        content = punn.content,
-                        is_video = punn.is_video,
-                        is_top = punn.is_top,
-                        publish_on_facebook = punn.publish_on_facebook,
-                        youtube_id = punn.youtube_id,
-                        pic = punn.pic,
-                        id = punn.id,
-                        pub_date = punn.pub_date)
-          i.save()
-
+        b = orm.Blog(is_open=True, slug="checkdoncca", title="Check Donc Ça", custom_domain="checkdonc.ca")
+        b.save()
+        for post in orm['posts.Post'].objects.all():
+          post.blog = b
+          post.save()
 
     def backwards(self, orm):
         "Write your backwards methods here."
@@ -70,11 +51,24 @@ class Migration(DataMigration):
         'blogs.blog': {
             'Meta': {'object_name': 'Blog'},
             'creator': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'}),
+            'custom_domain': ('django.db.models.fields.CharField', [], {'max_length': '300', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_open': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '30'}),
-            'status': ('django.db.models.fields.CharField', [], {'max_length': '2'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '140'})
+        },
+        'comments.comment': {
+            'Meta': {'object_name': 'Comment'},
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
+            'base62id': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
+            'content': ('django.db.models.fields.TextField', [], {'max_length': '10000'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'karma': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['comments.Comment']", 'null': 'True', 'blank': 'True'}),
+            'pub_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
+            'punn': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Punn']"})
         },
         'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
@@ -89,9 +83,17 @@ class Migration(DataMigration):
             'post_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['posts.Post']", 'unique': 'True', 'primary_key': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '140'})
         },
+        'posts.blogcomment': {
+            'Meta': {'object_name': 'BlogComment', '_ormbases': ['posts.Post']},
+            'comment': ('django.db.models.fields.TextField', [], {'max_length': '10000'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '140'}),
+            'notify_me': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'post_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['posts.Post']", 'unique': 'True', 'primary_key': 'True'}),
+            'website': ('django.db.models.fields.URLField', [], {'max_length': '300', 'blank': 'True'})
+        },
         'posts.blogpost': {
             'Meta': {'object_name': 'BlogPost', '_ormbases': ['posts.Post']},
-            'blog': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['blogs.Blog']", 'null': 'True'}),
             'content': ('django.db.models.fields.TextField', [], {'max_length': '10000', 'blank': 'True'}),
             'post_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['posts.Post']", 'unique': 'True', 'primary_key': 'True'}),
             'status': ('django.db.models.fields.CharField', [], {'default': "'P'", 'max_length': '2'}),
@@ -125,10 +127,18 @@ class Migration(DataMigration):
             'Meta': {'object_name': 'Post'},
             'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'}),
             'base62id': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
+            'blog': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['blogs.Blog']", 'null': 'True'}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'last_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
             'pub_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'})
+        },
+        'posts.video': {
+            'Meta': {'object_name': 'Video', '_ormbases': ['posts.Post']},
+            'content': ('django.db.models.fields.TextField', [], {'max_length': '10000', 'blank': 'True'}),
+            'post_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['posts.Post']", 'unique': 'True', 'primary_key': 'True'}),
+            'video_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
+            'youtube_id': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'})
         },
         'punns.album': {
             'Meta': {'object_name': 'Album'},
@@ -204,5 +214,5 @@ class Migration(DataMigration):
         }
     }
 
-    complete_apps = ['posts', 'punns', 'posts']
+    complete_apps = ['posts', 'punns', 'comments', 'blogs']
     symmetrical = True
