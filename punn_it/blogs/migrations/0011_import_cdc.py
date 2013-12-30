@@ -9,11 +9,13 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
         # Note: Remember to use orm['appname.ModelName'] rather than "from appname.models..."
-        b = orm.Blog(is_open=True, slug="checkdoncca", title="Check Donc Ça", custom_domain="checkdonc.ca")
+        a = orm['auth.User'].objects.get(username="gab")
+        b = orm.Blog(is_open=True, slug="checkdoncca", title="Check Donc Ça", custom_domain="checkdonc.ca", creator=a)
         b.save()
         for post in orm['posts.Post'].objects.all():
           post.blog = b
           post.save()
+
 
     def backwards(self, orm):
         "Write your backwards methods here."
@@ -57,18 +59,6 @@ class Migration(DataMigration):
             'password': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '30'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '140'})
-        },
-        'comments.comment': {
-            'Meta': {'object_name': 'Comment'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'base62id': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
-            'content': ('django.db.models.fields.TextField', [], {'max_length': '10000'}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'karma': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['comments.Comment']", 'null': 'True', 'blank': 'True'}),
-            'pub_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
-            'punn': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Punn']"})
         },
         'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
@@ -139,80 +129,8 @@ class Migration(DataMigration):
             'post_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['posts.Post']", 'unique': 'True', 'primary_key': 'True'}),
             'video_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
             'youtube_id': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'})
-        },
-        'punns.album': {
-            'Meta': {'object_name': 'Album'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'base62id': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
-            'content': ('django.db.models.fields.TextField', [], {'max_length': '10000', 'blank': 'True'}),
-            'created_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_modified_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '140'})
-        },
-        'punns.cat': {
-            'Meta': {'object_name': 'Cat'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_top_level': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '140'}),
-            'top_level_cat': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Cat']", 'null': 'True', 'blank': 'True'})
-        },
-        'punns.favorite': {
-            'Meta': {'object_name': 'Favorite'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'punn': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Punn']"})
-        },
-        'punns.link': {
-            'Meta': {'object_name': 'Link'},
-            'album': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Album']"}),
-            'created_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_modified_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
-            'order': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'punn': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Punn']"})
-        },
-        'punns.punn': {
-            'Meta': {'object_name': 'Punn'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'base62id': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
-            'cat': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Cat']", 'null': 'True', 'blank': 'True'}),
-            'content': ('django.db.models.fields.TextField', [], {'max_length': '10000', 'blank': 'True'}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_top': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'is_video': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'karma': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'last_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
-            'original_punn': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Punn']", 'null': 'True', 'blank': 'True'}),
-            'pic': ('sorl.thumbnail.fields.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'pub_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
-            'publish_on_facebook': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '140', 'blank': 'True'}),
-            'source': ('django.db.models.fields.URLField', [], {'max_length': '300', 'blank': 'True'}),
-            'status': ('django.db.models.fields.CharField', [], {'max_length': '2', 'null': 'True', 'blank': 'True'}),
-            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['punns.Tags']", 'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
-            'translated_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'blank': 'True'}),
-            'views': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
-            'youtube_id': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'})
-        },
-        'punns.reblog': {
-            'Meta': {'object_name': 'Reblog'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'origin': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['punns.Punn']"})
-        },
-        'punns.tags': {
-            'Meta': {'object_name': 'Tags'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'tag': ('django.db.models.fields.CharField', [], {'max_length': '140'})
         }
     }
 
-    complete_apps = ['posts', 'punns', 'comments', 'blogs']
+    complete_apps = ['auth', 'posts', 'blogs']
     symmetrical = True

@@ -11,7 +11,7 @@ from django.utils.translation import ugettext as _
 
 
 from posts.forms import BlogPostForm
-from posts.models import BlogPost, Album, Link, Post
+from posts.models import BlogPost, Album, Link, Post, Image
 
 from blogs.models import Blog
 
@@ -39,7 +39,7 @@ def index(request):
       elif Blog.objects.filter(custom_domain=request.META['HTTP_HOST']).exists():
           blog = Blog.objects.get(custom_domain=request.META['HTTP_HOST'])
           posts = paginate(request,
-                         Post.objects.filter(blog=blog).order_by('-pub_date'),
+                         Image.objects.filter(blog=blog).order_by('-pub_date'),
                          15)
           return render_to_response('index.html',
                                     {'posts': posts, },

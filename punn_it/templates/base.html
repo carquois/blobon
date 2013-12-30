@@ -220,13 +220,13 @@
                                                <div class="contenantImageThumb  margeDroiteThumb" >
                                                 {% endif %}        
                                                 
-                                                        {% if post.pic %}
+                                                        {% if post.image.pic %}
                                                         <div class="overThumb" >
                                                                         
-                                                                        {% if punn.title|length >= 60 %}
-                                                                        <div class="titre3small ombrageTexte centreVertical">{{ punn.title }}</div> 
+                                                                        {% if post.title|length >= 60 %}
+                                                                        <div class="titre3small ombrageTexte centreVertical">{{ post.title }}</div> 
                                                                         {% else %}        
-                                                                        <div class="titre3 ombrageTexte centreVertical">{{ punn.title }}</div> 
+                                                                        <div class="titre3 ombrageTexte centreVertical">{{ post.title }}</div> 
                                                                         {% endif %}        
 
                                                                 
@@ -234,10 +234,10 @@
                                                         {% else %}
                                                         <div class="overThumbBlog">
                                                                         
-                                                                        {% if punn.title|length >= 60 %}
-                                                                        <div class="titre3small ombrageTexte centreVertical">{{ punn.title }}</div> 
+                                                                        {% if post.title|length >= 60 %}
+                                                                        <div class="titre3small ombrageTexte centreVertical">{{ post.title }}</div> 
                                                                         {% else %}        
-                                                                        <div class="titre3 ombrageTexte centreVertical">{{ punn.title }}</div> 
+                                                                        <div class="titre3 ombrageTexte centreVertical">{{ post.title }}</div> 
                                                                         {% endif %}        
 
                                                                 
@@ -245,19 +245,19 @@
                                                         
                                                         {% endif %}        
                                                        
-                                                               {% if punn.pic %}
-                                                                {% thumbnail punn.pic "222x240" crop="center" as im %}
-                                                            <img id="thumbs" src="{{ im.url }}" class="Thumb-general " alt="{{ punn.title }}"/>
+                                                               {% if post.image.pic %}
+                                                                {% thumbnail post.pic "222x240" crop="center" as im %}
+                                                            <img id="thumbs" src="{{ im.url }}" class="Thumb-general " alt="{{ post.title }}"/>
                                                          {% endthumbnail %}
                                                          {% else %}
                                                           <div style="width:224px; height:242px;" class="fondDegrade Thumb-general"></div>
                                                         {% endif %}        
                                                        
-                                                               {% if punn.cat %}
+                                                               {% if post.cat %}
                                                                <a href="{% url "punns.views.cat" punn.cat.slug  %}" style="text-decoration:none;"><div class="tagCat bg{{ punn.cat }} ombrageTexte">{{ punn.cat }}</div></a>
                                                                 {% endif %}        
                                                                 
-                                                                {% if punn.youtube_id %}
+                                                                {% if post.youtube_id %}
                                                                 <div class="catVideo"><span class="glyphicon glyphicon-film"></span></div>
                                                                 {% endif %}        
                                                </div>
@@ -284,13 +284,13 @@
                                        
                                          
 
-                                {% if punns.has_previous or punns.has_next %}
+                                {% if posts.has_previous or posts.has_next %}
                                         <div style="clear: both; margin-bottom: 30px;"></div>
 
                             <div class="row">
                               <ul class="pager">
-                                <li class="previous{% if not punns.has_previous %} disabled{% endif %}"><a href="{% if punns.has_previous %}?page={{ punns.previous_page_number }}{% endif %}" style="font-size:24px; margin-left: 20px;"><span class="glyphicon glyphicon-chevron-left" ></span></a></li>
-                                <li class="next{% if not punns.has_next %} disabled{% endif %}"><a href="{% if punns.has_next %}?page={{ punns.next_page_number }}{% endif %}" style="font-size:24px;margin-right:20px;"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                                <li class="previous{% if not posts.has_previous %} disabled{% endif %}"><a href="{% if posts.has_previous %}?page={{ posts.previous_page_number }}{% endif %}" style="font-size:24px; margin-left: 20px;"><span class="glyphicon glyphicon-chevron-left" ></span></a></li>
+                                <li class="next{% if not posts.has_next %} disabled{% endif %}"><a href="{% if posts.has_next %}?page={{ posts.next_page_number }}{% endif %}" style="font-size:24px;margin-right:20px;"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
                               </ul>
                             </div>
 
