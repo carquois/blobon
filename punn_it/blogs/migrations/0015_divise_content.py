@@ -15,96 +15,96 @@ class Migration(DataMigration):
         b = orm.Blog(is_open=True, slug="rockandpics", title="Rock and Pics", custom_domain="rockandpics.com", creator=gab)
         b.save()
 
-        for post in orm['blogs.Post'].filter(author__username="gabrieldancause"):
+        for post in orm['blogs.Post'].objects.filter(author__username="gabrieldancause"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="furfurfurfur"):
+        for post in orm['blogs.Post'].objects.filter(author__username="furfurfurfur"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="SocialHighlights"):
+        for post in orm['blogs.Post'].objects.filter(author__username="SocialHighlights"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="rockandpics"):
+        for post in orm['blogs.Post'].objects.filter(author__username="rockandpics"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="h.ford"):
+        for post in orm['blogs.Post'].objects.filter(author__username="h.ford"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="misterhistory"):
+        for post in orm['blogs.Post'].objects.filter(author__username="misterhistory"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="Dali"):
+        for post in orm['blogs.Post'].objects.filter(author__username="Dali"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="JohnnyGadgets"):
+        for post in orm['blogs.Post'].objects.filter(author__username="JohnnyGadgets"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="LittleFurBall"):
+        for post in orm['blogs.Post'].objects.filter(author__username="LittleFurBall"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="FamousQuotes"):
+        for post in orm['blogs.Post'].objects.filter(author__username="FamousQuotes"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="AlbumCover"):
+        for post in orm['blogs.Post'].objects.filter(author__username="AlbumCover"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="ExplosionAndDestruction"):
+        for post in orm['blogs.Post'].objects.filter(author__username="ExplosionAndDestruction"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="adrenaline"):
+        for post in orm['blogs.Post'].objects.filter(author__username="adrenaline"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="Friendzoned"):
+        for post in orm['blogs.Post'].objects.filter(author__username="Friendzoned"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="AbandonedPlaces"):
+        for post in orm['blogs.Post'].objects.filter(author__username="AbandonedPlaces"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="LegoMaster"):
+        for post in orm['blogs.Post'].objects.filter(author__username="LegoMaster"):
           post.blog = b 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="ArtOfAllKinds"):
+        for post in orm['blogs.Post'].objects.filter(author__username="ArtOfAllKinds"):
           post.blog = b 
           post.save()
 
         c = orm.Blog(is_open=True, slug="qqpart", title="Quelque part", custom_domain="qqpart.com", creator=gab)
         c.save()
         
-        for post in orm['blogs.Post'].filter(author__username="qqpart_old"):
+        for post in orm['blogs.Post'].objects.filter(author__username="qqpart_old"):
           post.blog = c 
           post.save()
 
-        for post in orm['blogs.Post'].filter(author__username="qqpart"):
+        for post in orm['blogs.Post'].objects.filter(author__username="qqpart"):
           post.blog = c 
           post.save()
 
         d = orm.Blog(is_open=True, slug="somewr", title="Somewhere", custom_domain="somewr.com", creator=gab)
         d.save()
 
-        for post in orm['blogs.Post'].filter(author__username="somewr"):
+        for post in orm['blogs.Post'].objects.filter(author__username="somewr"):
           post.blog = d 
           post.save()
 
         e = orm.Blog(is_open=True, slug="gab", title="Gabriel Dancause", custom_domain="gabrieldancause.com", creator=gab)
         e.save()
 
-        for post in orm['blogs.Post'].filter(author__username="gab"):
+        for post in orm['blogs.Post'].objects.filter(author__username="gab"):
           post.blog = e 
           post.save()
 

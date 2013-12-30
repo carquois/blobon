@@ -17,7 +17,6 @@
            <ul class="nav navbar-nav">
            </ul>
            <ul class="nav navbar-nav navbar-right">
-             <li><a href=""><span class="glyphicon glyphicon-pencil"></span> {% trans "New post" %}</a></li>
              <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Logout" %}</a></li>
            </ul>
          </div><!--/.nav-collapse -->
@@ -31,7 +30,6 @@
         {% block sidebar %}
           <ul class="nav nav-pills nav-stacked">
             <li class="active"><a href="#">{% trans "All my blogs" %}</a></li>
-            <li><a href="#">Stats</a></li>
             </ul>
         {% endblock %}
         </div>
@@ -54,7 +52,6 @@
               <p><small><em>{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}</em></small></p>
               <a href="{% url 'blogs.views.administrateblog' blog.slug %}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-cog"></span> {% trans "Dashboard" %}</a>
               <a href="http://{{ blog.slug }}.blobon.com" class="btn btn-xs btn-default" target="_blank"><span class="glyphicon glyphicon-globe"></span> {% trans "Visit blog" %}</a>
-              <button type="button" class="btn btn-xs btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span> {% trans "Delete this blog" %}</button>  
             </div>
           </div>
         {% endfor %}
