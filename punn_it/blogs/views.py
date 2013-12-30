@@ -104,7 +104,7 @@ def single(request):
 #        return self.title
 
 @login_required
-def createimage(request):
+def newpost(request):
       if request.FILES.get('id_album_1_image_1', False) and request.FILES.get('id_album_1_image_2', False):
         messages.add_message(request, messages.INFO, _(u"album a deux images"))
         if request.POST.get('id_title', False):
@@ -159,8 +159,9 @@ def administrateblog(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       posts = Post.objects.filter(blog=blog).order_by('-pub_date')[:5]
       pages = Page.objects.filter(blog=blog)[:5]
+      categories = Category.objects.filter(blog=blog)
       return render_to_response('administrateblog.html',
-                                {'blog': blog, 'posts': posts, 'pages': pages },
+                                {'blog': blog, 'posts': posts, 'pages': pages , 'categories': categories},
                                 context_instance=RequestContext(request))
 
 @login_required
