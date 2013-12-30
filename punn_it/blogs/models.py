@@ -50,8 +50,8 @@ class Page(models.Model):
 class Category(models.Model):
     author = models.ForeignKey(User)
     blog = models.ForeignKey(Blog, null=True)
-    name = models.CharField(verbose_name=_("Name"), max_length=140)
-    description = models.CharField(verbose_name=_("Description"), max_length=1000)
+    name = models.CharField(verbose_name=_("Name"), max_length=140, null=True, blank=True)
+    description = models.CharField(verbose_name=_("Description"), max_length=1000, null=True, blank=True)
     slug = models.SlugField(max_length=140, unique=True)
     created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     top_level_cat = models.ForeignKey('self',  null=True, blank=True)
@@ -61,8 +61,8 @@ class Category(models.Model):
 class Tag(models.Model):
     author = models.ForeignKey(User)
     blog = models.ForeignKey(Blog, null=True)
-    name = models.CharField(verbose_name=_("Name"), max_length=140)
-    description = models.CharField(verbose_name=_("Description"), max_length=1000)
+    name = models.CharField(verbose_name=_("Name"), max_length=140, null=True, blank=True)
+    description = models.CharField(verbose_name=_("Description"), max_length=1000, null=True, blank=True)
     slug = models.SlugField(max_length=140, unique=True)
     created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     def __unicode__(self):

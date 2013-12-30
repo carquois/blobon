@@ -105,7 +105,9 @@ def single(request):
 
 @login_required
 def newpost(request):
-      if request.FILES.get('id_album_1_image_1', False) and request.FILES.get('id_album_1_image_2', False):
+      if request.FILES.get('id_image', False):
+        messages.add_message(request, messages.INFO, _(u"single image"))
+      elif request.FILES.get('id_album_1_image_1', False) and request.FILES.get('id_album_1_image_2', False):
         messages.add_message(request, messages.INFO, _(u"album a deux images"))
         if request.POST.get('id_title', False):
           title = request.POST.get('id_title')
@@ -168,10 +170,49 @@ def administrateblog(request, slug):
 def administrateposts(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       posts = Post.objects.filter(blog=blog).order_by('-pub_date')
-      return render_to_response('administrateposts.html',
+      return render_to_response('administrateblog.html',
                                 {'blog': blog, 'posts': posts, },
                                 context_instance=RequestContext(request))
 
+@login_required
+def administratepages(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      posts = Post.objects.filter(blog=blog).order_by('-pub_date')
+      return render_to_response('administrateblog.html',
+                                {'blog': blog, 'posts': posts, },
+                                context_instance=RequestContext(request))
+
+@login_required
+def administratecomments(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      posts = Post.objects.filter(blog=blog).order_by('-pub_date')
+      return render_to_response('administrateblog.html',
+                                {'blog': blog, 'posts': posts, },
+                                context_instance=RequestContext(request))
+
+@login_required
+def administratecategories(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      posts = Post.objects.filter(blog=blog).order_by('-pub_date')
+      return render_to_response('administrateblog.html',
+                                {'blog': blog, 'posts': posts, },
+                                context_instance=RequestContext(request))
+
+@login_required
+def administratetags(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      posts = Post.objects.filter(blog=blog).order_by('-pub_date')
+      return render_to_response('administrateblog.html',
+                                {'blog': blog, 'posts': posts, },
+                                context_instance=RequestContext(request))
+
+@login_required
+def administratesettings(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      posts = Post.objects.filter(blog=blog).order_by('-pub_date')
+      return render_to_response('administrateblog.html',
+                                {'blog': blog, 'posts': posts, },
+                                context_instance=RequestContext(request))
 
 @login_required
 def createpage(request, slug):

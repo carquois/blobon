@@ -120,9 +120,9 @@
           <div class="panel panel-default"> 
             <div class="panel-body">
               <ul class="nav nav-tabs nav-justified" id="tabbar">
-                <li class="active" id="litext"><a href="#text" data-toggle="tab">{% trans "Text" %}</a></li>
-                <li id="liimage"><a href="#image" data-toggle="tab">{% trans "Image" %}</a></li>
-                <li id="livideo"><a href="#video" data-toggle="tab">{% trans "Video" %}</a></li>
+                <li class="active" id="litext"><a href="#text" data-toggle="tab"><span class="glyphicon glyphicon-font"></span> {% trans "Text" %}</a></li>
+                <li id="liimage"><a href="#image" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span> {% trans "Image" %}</a></li>
+                <li id="livideo"><a href="#video" data-toggle="tab"><span class="glyphicon glyphicon-film"></span> {% trans "Video" %}</a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="text">
@@ -170,7 +170,6 @@
                                       </div>
                                     </div>
                                   </div>
-                                </div>
                                 <div class="col-md-6" id="image_al_2_form">
                                   <div class="form-group">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -183,15 +182,17 @@
                                     </div>
                                   </div>
                                 </div>
-                              
+                              </div>
+                                {% if categories %}
                               <div class="form-group" id="cate_al1">
                                 <label for="id_category">{% trans "Category:" %}</label>
                                 <select id="id_category">
-                                  <option>{% trans "Travel" %}</option>
-                                  <option>{% trans "Photography" %}</option>
-                                  <option>{% trans "Art" %}</option>
+                                {% for category in categories %}
+                                  <option>{{ category.name }}</option>
+                                {% endfor %}
                                 </select>
                               </div>
+                                {% endif %}
                             </form>
                             <button id="submitimagealbum1form" class="btn btn-primary btn-xs pull-right"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
                             <button id="cancelimagealbum1form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
@@ -254,14 +255,16 @@
                                 </div>
                               </div>
                               <hr>
-                              <div class="form-group" id="cate_al2">
-                                <label for="id_category_al2">{% trans "Category:" %}</label>
-                                <select id="id_category_al2">
-                                  <option>{% trans "Travel" %}</option>
-                                  <option>{% trans "Photography" %}</option>
-                                  <option>{% trans "Art" %}</option>
+                                {% if categories %}
+                              <div class="form-group" id="cate_al1">
+                                <label for="id_category">{% trans "Category:" %}</label>
+                                <select id="id_category">
+                                {% for category in categories %}
+                                  <option>{{ category.name }}</option>
+                                {% endfor %}
                                 </select>
                               </div>
+                                {% endif %}
                             </form>
                             <button id="submitimagealbum2form" class="btn btn-primary btn-xs pull-right"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
                             <button id="cancelimagealbum2form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
@@ -813,27 +816,11 @@
   {% block sidebar %}
     <ul class="nav nav-pills nav-stacked">
       <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> {% trans "Dashboard" %}</a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <span class="glyphicon glyphicon-pushpin"></span> {% trans "Posts" %} <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="#">{% trans "All posts" %}</a></li>
-          <li><a href="#">{% trans "Add new" %}</a></li>
-          <li><a href="#">{% trans "Categories" %}</a></li>
-          <li><a href="#">{% trans "Tags" %}</a></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <span class="glyphicon glyphicon-file"></span> {% trans "Pages" %} <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="#">{% trans "All pages" %}</a></li>
-          <li><a href="#">{% trans "Add new" %}</a></li>
-        </ul>
-      </li>
+      <li><a href="#"><span class="glyphicon glyphicon-pushpin"></span> {% trans "Posts" %}</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-file"></span> {% trans "Pages" %}</a></li>
       <li><a href="#"><span class="glyphicon glyphicon-comment"></span> {% trans "Comments" %} <span class="badge">{{ num_of_comments }}</span></a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-folder-open"></span> {% trans "Categories" %}</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-tag"></span> {% trans "Tags" %}</a></li>
       <li><a href="#"><span class="glyphicon glyphicon-cog"></span> {% trans "Settings" %}</a></li>
     </ul>
   {% endblock %}
