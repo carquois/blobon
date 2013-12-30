@@ -11,8 +11,7 @@ from notifications.models import Invitation
 from images.models import Image
 from votes.models import CommentVote, PunnVote
 from django.contrib import admin
-from blogs.models import Blog
-from posts.models import Post
+from blogs.models import Blog, Tag, Category, Post
 from posts.models import Image
 from posts.models import Album
 from posts.models import Video 
@@ -22,10 +21,12 @@ class PunnAdmin(admin.ModelAdmin):
     exclude = ('original_punn',)
 admin.site.register(Punn, PunnAdmin)
 admin.site.register(Link)
-admin.site.register(Post)
 admin.site.register(Video)
-admin.site.register(Page)
 admin.site.register(Blog)
+admin.site.register(Page)
+admin.site.register(Tag)
+admin.site.register(Category)
+admin.site.register(Post)
 admin.site.register(Invitation)
 admin.site.register(Album)
 admin.site.register(Earning)

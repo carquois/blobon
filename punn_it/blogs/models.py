@@ -77,7 +77,7 @@ class Post(models.Model):
     blog = models.ForeignKey(Blog, null=True)
     title = models.CharField(verbose_name=_("Title"), max_length=140, blank=True)
     content = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
-    status = models.CharField(max_length=2, choices=STATUS, default="P")
+    status = models.CharField(max_length=2, choices=STATUS, default="P", null=True)
     translated_title = models.CharField(verbose_name=_("Titre traduit"), max_length=140, blank=True)
     slug = models.SlugField(max_length=140, blank=True)
     karma = models.IntegerField(default=0)
@@ -118,6 +118,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, null=True)
+    blog = models.ForeignKey(Blog, null=True)
     comment = models.TextField(verbose_name=_("Content"),max_length=10000)
     email = models.EmailField(verbose_name=_("Email"))
     name = models.CharField(verbose_name=_("Name"), max_length=140)
