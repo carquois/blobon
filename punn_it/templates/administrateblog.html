@@ -20,6 +20,9 @@
       #imagetype {
         padding:15px 15px 5px 15px;
       }
+      #videoform {
+        padding:10px 5px 5px 5px;
+      }
       .model {
         padding:5px 5px 5px 5px;
         text-align: center;
@@ -107,12 +110,36 @@
         margin-right: auto;
       }
       #newtext{
-        padding:0px 0px 15px 0px;
+        padding:0px 0px 10px 0px;
+      }
+      #newvideo{
+        padding:0px 0px 10px 0px;
       }
       .boutonplace-image{
         padding:5px 0px 0px 0px;
       }
-
+      .moreformating{
+        font-size:x-small;
+        padding:5px 15px 5px 0px;
+        cursor: pointer;
+      }
+      .addtitle{
+        font-size:x-small;
+        padding:5px 0px 5px 15px;
+        cursor: pointer;
+      }
+      #addedtitle_post{
+        padding:0px 15px 5px 15px;
+      }
+      #addtitle_post_cancel{
+        cursor: pointer;
+      }
+      #addedtitle_video{
+        padding:0px 15px 5px 15px;
+      }
+      #addtitle_video_cancel{
+        cursor: pointer;
+      }
     </style>
   {% endblock %}
 
@@ -129,6 +156,18 @@
                   <div class="row">
                     <div class="col-md-12" id="textform">
                       <form enctype="multipart/form-data" id="newtext" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
+                        <div class="row" id="addedtitle_post" style="display: none"> 
+                          <label for="id_title">{% trans "Title:" %}</label><span id="addtitle_post_cancel" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                          <input class="form-control input-block-level" type="text" id="id_title" name="id_title" placeholder="{% trans "Write your title here" %}" autofocus>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 addtitle" id="addtitle_post">
+                            <a id="addtitletopost"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Title" %}</a>
+                          </div>
+                          <div class="col-md-6 moreformating pull-right" id="moreformating_post">
+                            <a class="pull-right"><span class="glyphicon glyphicon-plus"></span> {% trans "More Formating Option" %}</a>
+                          </div>
+                        </div>
                         <textarea class="form-control input-block-level" rows="4" id="id_content" name="id_content" placeholder="{% trans "Write a new post" %}" autofocus></textarea>
                       </form>
                      <button id="submittext" class="btn btn-primary btn-xs pull-right"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
@@ -399,7 +438,25 @@
                       </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="video"> 3 </div>
+                <div class="tab-pane fade" id="video">
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3" id="videoform">
+                      <form enctype="multipart/form-data" id="newvideo" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
+                        <div class="row" id="addedtitle_video" style="display: none">
+                          <label for="id_title">{% trans "Title:" %}</label><span id="addtitle_video_cancel" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                          <input class="form-control input-block-level video_title" type="text" id="id_title" name="id_title" placeholder="{% trans "Write your title here" %}" autofocus>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 addtitle" id="addtitle_video">
+                            <a id="addtitletovideo"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Title" %}</a>
+                          </div>
+                        </div>
+                        <input class="form-control input-block-level" type="url" id="id_video_url" name="id_video_url" placeholder="{% trans "Copy a Youtube URL here" %}" autofocus>
+                      </form>
+                     <button id="submitvideo" class="btn btn-primary btn-xs pull-right"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
+                    </div>
+                  </div> 
+                </div>
               </div>
             </div>
           </div>
@@ -531,6 +588,8 @@
         });
         $('#newimagealbum3').each(function(){
           this.reset();
+        $('#addtitle_video').show();
+        $('#addedtitle_video').hide();
         });
       });
     </script>
@@ -538,6 +597,10 @@
       $('#tabbar a[href="#image"]').click(function() {
         $('#newtext').each(function(){
           this.reset();
+        $('#addtitle_post').show();
+        $('#addedtitle_post').hide();
+        $('#addtitle_video').show();
+        $('#addedtitle_video').hide();
         });
       });
     </script>
@@ -558,86 +621,8 @@
         });
         $('#newtext').each(function(){
           this.reset();
-        });
-      });
-    </script>
-    <script>
-      $('#tabbar a[href="#audio"]').click(function() {
-        $(".fileinput-preview").empty();
-        $('#newimage').each(function(){
-          this.reset();
-        });
-        $('#newimagealbum1').each(function(){
-          this.reset();
-        });
-        $('#newimagealbum2').each(function(){
-          this.reset();
-        });
-        $('#newimagealbum3').each(function(){
-          this.reset();
-        });
-        $('#newtext').each(function(){
-          this.reset();
-        });
-      });
-    </script>
-    <script>
-      $('#tabbar a[href="#link"]').click(function() {
-        $(".fileinput-preview").empty();
-        $('#newimage').each(function(){
-          this.reset();
-        });
-        $('#newimagealbum1').each(function(){
-          this.reset();
-        });
-        $('#newimagealbum2').each(function(){
-          this.reset();
-        });
-        $('#newimagealbum3').each(function(){
-          this.reset();
-        });
-        $('#newtext').each(function(){
-          this.reset();
-        });
-      });
-    </script>
-    <script>
-      $('#tabbar a[href="#question"]').click(function() {
-        $(".fileinput-preview").empty();
-        $('#newimage').each(function(){
-          this.reset();
-        });
-        $('#newimagealbum1').each(function(){
-          this.reset();
-        });
-        $('#newimagealbum2').each(function(){
-          this.reset();
-        });
-        $('#newimagealbum3').each(function(){
-          this.reset();
-        });
-        $('#newtext').each(function(){
-          this.reset();
-        });
-      });
-    </script>
-    <script>
-      $('#tabbar a[href="#lieu"]').click(function() {
-        $(".fileinput-preview").empty();
-        $('#newimage').each(function(){
-          this.reset();
-        });
-        $('#newimagealbum1').each(function(){
-          this.reset();
-        });
-        $('#newimagealbum2').each(function(){
-          this.reset();
-        });
-        $('#newimagealbum3').each(function(){
-          this.reset();
-        });
-        $('#newtext').each(function(){
-          this.reset();
+        $('#addtitle_post').show();
+        $('#addedtitle_post').hide();
         });
       });
     </script>
@@ -649,6 +634,8 @@
         $('#modelalbum1').hide();
         $('#modelalbum2').hide();
         $('#modelalbum3').hide();
+        $('#addtitle_video').show();
+        $('#addedtitle_video').hide();
         $('#newimage').each(function(){
           this.reset();
         });
@@ -662,47 +649,9 @@
         $('#modelalbum1').hide();
         $('#modelalbum2').hide();
         $('#modelalbum3').hide();
+        $('#addtitle_post').show();
+        $('#addedtitle_post').hide();
     });
-    </script>
-    <script>
-      $('#liaudio').click(function() {
-        $('#imagetype').show();
-        $('#uploadimageform').hide();
-        $('#createalbumform').hide();
-        $('#modelalbum1').hide();
-        $('#modelalbum2').hide();
-        $('#modelalbum3').hide();
-      });
-    </script>
-    <script>
-      $('#lilink').click(function() {
-        $('#imagetype').show();
-        $('#uploadimageform').hide();
-        $('#createalbumform').hide();
-        $('#modelalbum1').hide();
-        $('#modelalbum2').hide();
-        $('#modelalbum3').hide();
-      });
-    </script>
-    <script>
-      $('#liquestion').click(function() {
-        $('#imagetype').show();
-        $('#uploadimageform').hide();
-        $('#createalbumform').hide();
-        $('#modelalbum1').hide();
-        $('#modelalbum2').hide();
-        $('#modelalbum3').hide();
-      });
-    </script>
-    <script>
-      $('#lilieu').click(function() {
-        $('#imagetype').show();
-        $('#uploadimageform').hide();
-        $('#createalbumform').hide();
-        $('#modelalbum1').hide();
-        $('#modelalbum2').hide();
-        $('#modelalbum3').hide();
-      });
     </script>
     <script>
       $('#cancelimageform').click(function() {
@@ -807,6 +756,62 @@
       $('#modelalbumselectcancel').click(function() {
         $('#createalbumform').hide();
         $('#imagetype').show();
+      });
+    </script>
+    <script>
+      $('#addtitle_post').click(function() {
+        $('#addtitle_post').hide();
+        $('#addedtitle_post').show();
+      });
+    </script>
+    <script>
+      $('#addtitle_post').click(function() {
+        setTimeout(function() { 
+          $('#id_title').focus();
+        },10);
+      });
+    </script>
+    <script>
+      $('#addtitle_post_cancel').click(function() {
+        setTimeout(function() { 
+          $('#id_content').focus();
+        },10);
+      });
+    </script>
+
+    <script>
+      $('#addtitle_post_cancel').click(function() {
+        $('#addtitle_post').show();
+        $('#addedtitle_post').hide();
+        $('#id_title').reset();
+      });
+    </script>
+    <script>
+      $('#addtitle_video').click(function() {
+        $('#addtitle_video').hide();
+        $('#addedtitle_video').show();
+      });
+    </script>
+    <script>
+      $('#addtitle_video').click(function() {
+        setTimeout(function() { 
+          $(".video_title").focus();
+        },10);
+      });
+    </script>
+    <script>
+      $('#addtitle_video_cancel').click(function() {
+        setTimeout(function() { 
+          $('#id_video_url').focus();
+        },10);
+      });
+    </script>
+
+    <script>
+      $('#addtitle_video_cancel').click(function() {
+        $('#addtitle_video').show();
+        $('#addedtitle_video').hide();
+        $('#id_title').reset();
       });
     </script>
     <script>
