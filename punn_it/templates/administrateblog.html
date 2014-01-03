@@ -5,14 +5,13 @@
   {% block additional-js %}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script> 
     <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/google-code-prettify/prettify.js"></script>
     <script src="http://mindmup.github.io/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js"></script>
   {% endblock %}
   {% block additional-css %}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/css/bootstrap-theme.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js"></script>
     <style>
       textarea {
         resize: none;
@@ -53,13 +52,12 @@
         margin-bottom: 5px;
         margin-top: 5px;
       }
-
-
-      #id_albumcontent_1{
+      #id_title{
         max-width:763px;
         min-width:200px;
       }
-      #id_title{
+
+      #id_albumcontent_1{
         max-width:763px;
         min-width:200px;
       }
@@ -67,6 +65,7 @@
         max-width:763px;
         min-width:200px;
       }
+
       .album2title{
         max-width:763px;
         min-width:200px;
@@ -156,7 +155,7 @@
                   <div class="row">
                     <div class="col-md-12" id="textform">
                       <form enctype="multipart/form-data" id="newtext" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
-                        <div class="row" id="addedtitle_post" style="display: none"> 
+                        <div class="title" id="addedtitle_post" style="display: none"> 
                           <label for="id_title">{% trans "Title:" %}</label><span id="addtitle_post_cancel" class="glyphicon glyphicon-remove-circle pull-right"></span>
                           <input class="form-control input-block-level" type="text" id="id_title" name="id_title" placeholder="{% trans "Write your title here" %}" autofocus>
                         </div>
@@ -168,9 +167,9 @@
                             <a class="pull-right"><span class="glyphicon glyphicon-plus"></span> {% trans "More Formating Option" %}</a>
                           </div>
                         </div>
-                        <textarea class="form-control input-block-level" rows="4" id="id_content" name="id_content" placeholder="{% trans "Write a new post" %}" autofocus></textarea>
-                      </form>
-                     <button id="submittext" class="btn btn-primary btn-xs pull-right"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
+                        <textarea class="form-control input-block-level post_content" rows="4" id="id_content" name="id_content" placeholder="{% trans "Write a new post" %}" autofocus></textarea>
+                       </form>
+                     <button id="submittext" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
                     </div>
                   </div>
                 </div>
@@ -451,9 +450,9 @@
                             <a id="addtitletovideo"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Title" %}</a>
                           </div>
                         </div>
-                        <input class="form-control input-block-level" type="url" id="id_video_url" name="id_video_url" placeholder="{% trans "Copy a Youtube URL here" %}" autofocus>
+                        <input class="form-control input-block-level video_url" type="url" id="id_video_url" name="id_video_url" placeholder="{% trans "Copy a Youtube URL here" %}" autofocus>
                       </form>
-                     <button id="submitvideo" class="btn btn-primary btn-xs pull-right"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
+                     <button id="submitvideo" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
                     </div>
                   </div> 
                 </div>
@@ -586,21 +585,30 @@
         $('#newimagealbum2').each(function(){
           this.reset();
         });
+        $('#newvideo').each(function(){
+          this.reset();
+        });
         $('#newimagealbum3').each(function(){
           this.reset();
         $('#addtitle_video').show();
         $('#addedtitle_video').hide();
+        $('#submitvideo').prop("disabled", true);
         });
       });
     </script>
     <script>
       $('#tabbar a[href="#image"]').click(function() {
+        $('#newvideo').each(function(){
+          this.reset();
+        });
         $('#newtext').each(function(){
           this.reset();
         $('#addtitle_post').show();
         $('#addedtitle_post').hide();
         $('#addtitle_video').show();
         $('#addedtitle_video').hide();
+        $('#submittext').prop("disabled", true);
+        $('#submitvideo').prop("disabled", true);
         });
       });
     </script>
@@ -623,6 +631,7 @@
           this.reset();
         $('#addtitle_post').show();
         $('#addedtitle_post').hide();
+        $('#submittext').prop("disabled", true);
         });
       });
     </script>
@@ -651,7 +660,10 @@
         $('#modelalbum3').hide();
         $('#addtitle_post').show();
         $('#addedtitle_post').hide();
-    });
+        setTimeout(function() { 
+          $('#id_video_url').focus();
+        },10);
+      });
     </script>
     <script>
       $('#cancelimageform').click(function() {
@@ -671,6 +683,11 @@
     <script>
       $('#submittext').click(function() {
         $('#newtext').submit();
+      });
+    </script>
+    <script>
+      $('#submitvideo').click(function() {
+        $('#newvideo').submit();
       });
     </script>
     <script>
@@ -787,13 +804,13 @@
       });
     </script>
     <script>
-      $('#addtitle_video').click(function() {
+      $('#addtitletovideo').click(function() {
         $('#addtitle_video').hide();
         $('#addedtitle_video').show();
       });
     </script>
     <script>
-      $('#addtitle_video').click(function() {
+      $('#addtitletovideo').click(function() {
         setTimeout(function() { 
           $(".video_title").focus();
         },10);
@@ -819,6 +836,30 @@
         setTimeout(function() {
           $("litext").trigger('click');
         },10);
+      });
+    </script>
+    <script>
+      $(document).ready(function(){
+        $(".post_content").keyup(function() {
+        if($(this).val() != '') {
+          $('#submittext').prop("disabled", false);
+          }
+        else {
+          $('#submittext').prop("disabled", true);
+        }
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function(){
+        $(".video_url").keyup(function() {
+        if($(this).val() != '') {
+          $('#submitvideo').prop("disabled", false);
+          }
+        else {
+          $('#submitvideo').prop("disabled", true);
+        }
+        });
       });
     </script>
   {% endblock %}
