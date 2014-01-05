@@ -157,13 +157,13 @@
                       <form enctype="multipart/form-data" id="newtext" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
                         <div class="title" id="addedtitle_post" style="display: none"> 
                           <label for="id_title">{% trans "Title:" %}</label><span id="addtitle_post_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
-                          <input class="form-control input-block-level" type="text" id="id_title" name="id_title" placeholder="{% trans "Write your title here" %}" autofocus>
+                          <input class="form-control input-block-level post_title" type="text" id="id_title" name="id_title" placeholder="{% trans "Write your title here" %}" autofocus>
                         </div>
                         <div class="row">
                           <div class="col-md-3 addtitle" id="addtitle_post">
                             <a id="addtitletopost" title="{% trans "Add a Title to Your Post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
                           </div>
-                          <div class="col-md-3 col-md-offset-3 moreformating pull-right" id="moreformating_post">
+                          <div class="col-md-3 col-md-offset-3 moreformating pull-right" id="moreformating_post" style="display: none">
                             <a class="pull-right" id="moreformating" title="{% trans "Get More Formating Options" %}"><span class="glyphicon glyphicon-plus"></span> {% trans "Formating Options" %}</a>
                           </div>
                         </div>
@@ -187,7 +187,7 @@
                           <a class="btn btn-default model" id="model2" title="{% trans "Create a 4 Images Album" %}" role="button"><img class="img-responsive imgmodel" src="http://i.imgur.com/1dbtonU.png" id="imgmodel2"/></a>
                           <a class="btn btn-default model" id="model3" title="{% trans "Create a 6 Images Album" %}" role="button"><img class="img-responsive imgmodel" src="http://i.imgur.com/m54W9dE.png" id="imgmodel3"/></a>
                         </div>
-                        <span id="modelalbumselectcancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                        <span id="modelalbumselectcancel" title="{% trans "Cancel Album" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                       </div>
                       <div class="col-md-12 modelalbum" style="display: none" id="modelalbum1">
                             <form enctype="multipart/form-data" id="newimagealbum1" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
@@ -629,10 +629,10 @@
         });
         $('#newtext').each(function(){
           this.reset();
+        });
         $('#addtitle_post').show();
         $('#addedtitle_post').hide();
         $('#submittext').prop("disabled", true);
-        });
       });
     </script>
     <script>
@@ -816,7 +816,7 @@
       $('#addtitle_post_cancel').click(function() {
         $('#addtitle_post').show();
         $('#addedtitle_post').hide();
-        $('#id_title').reset();
+        $('#newtext input[name=id_title]').val('');
       });
     </script>
     <script>
@@ -844,7 +844,7 @@
       $('#addtitle_video_cancel').click(function() {
         $('#addtitle_video').show();
         $('#addedtitle_video').hide();
-        $('#id_title').reset();
+        $('#newvideo input[name=id_title]').val('');
       });
     </script>
     <script>
