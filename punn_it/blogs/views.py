@@ -15,6 +15,9 @@ from blogs.models import Blog, Page, Tag, Category, Post
 from notifications.forms import InvitationForm
 from notifications.models import Invitation
 
+
+from django.forms import ModelForm, Textarea, TextInput, CharField, URLField
+
 def index(request):
       request.subdomain = None
       host = request.META.get('HTTP_HOST', '')
@@ -89,24 +92,12 @@ def single(request):
                                   context_instance=RequestContext(request))
 
 
-#class Post(models.Model):
-#    author = models.ForeignKey(User, null=True)
-#    created = models.DateTimeField(auto_now_add = True)
-#    last_modified = models.DateTimeField(auto_now = True,  null=True, blank=True)
-#
-#class Image(Post):
-#    status = models.CharField(max_length=2, choices=STATUS, null=True, blank=True)
-#    title = models.CharField(verbose_name=_("Titre"), max_length=140, blank=True)
-#    base62id = models.CharField(max_length=140, blank=True)
-#    slug = models.SlugField(max_length=140, blank=True)
-#    pic = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
-#    def __unicode__(self):
-#        return self.title
-
 @login_required
 def newpost(request):
       if request.FILES.get('id_image', False):
         messages.add_message(request, messages.INFO, _(u"single image"))
+        image = request.FILES.get('id_image')
+        
       elif request.FILES.get('id_album_1_image_1', False) and request.FILES.get('id_album_1_image_2', False):
         messages.add_message(request, messages.INFO, _(u"album a deux images"))
         if request.POST.get('id_title', False):
@@ -209,9 +200,11 @@ def administratetags(request, slug):
 @login_required
 def administratesettings(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
+      from blogs.forms import SettingsForm
+      form = SettingsForm(request.POST or None, blog=blog)
       posts = Post.objects.filter(blog=blog).order_by('-pub_date')
-      return render_to_response('administrateblog.html',
-                                {'blog': blog, 'posts': posts, },
+      return render_to_response('administratesettings.html',
+                                {'blog': blog, 'posts': posts, 'form': form},
                                 context_instance=RequestContext(request))
 
 @login_required

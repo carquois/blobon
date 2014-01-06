@@ -115,7 +115,6 @@ class Post(models.Model):
             except cls.DoesNotExist:
                 return rnd_str
 
-
 class Comment(models.Model):
     post = models.ForeignKey(Post, null=True)
     blog = models.ForeignKey(Blog, null=True)

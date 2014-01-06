@@ -17,3 +17,16 @@ class BlogForm(ModelForm):
         model = Blog 
         fields = ('title', 'slug', )
 
+class SettingsForm(ModelForm):
+    title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Enter your title'),
+                                                    'type': 'text',
+                                                    'class': "form-control"}))
+    slug = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your blog adress'),
+                                                    'type': 'text',
+                                                    'class': "form-control"}))
+    custom_domain = CharField(widget=forms.TextInput(attrs={'placeholder': _('Enter a custom URL'),
+                                                    'type': 'text',
+                                                    'class': "form-control"}))
+    class Meta:
+        model = Blog 
+        fields = ('title', 'slug', 'custom_domain', )
