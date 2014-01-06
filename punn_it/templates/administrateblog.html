@@ -35,14 +35,14 @@
         margin-right: auto;
       }
       .bigimgpreview {
+        padding:5px 5px 5px 5px;
         display: block;
         position: relative;
         width: auto;
         height: auto;
         margin-bottom: 5px;
         margin-top: 5px;
-        max-width:763px;
-        min-width:200px;
+        max-width:100%;
       }
       .smallimgpreview {
         margin-bottom: 5px;
@@ -122,6 +122,11 @@
         padding:5px 15px 5px 0px;
         cursor: pointer;
       }
+      .addcomment{
+        font-size:x-small;
+        padding:5px 15px 5px 0px;
+        cursor: pointer;
+      }
       .addtitle{
         font-size:x-small;
         padding:5px 0px 5px 15px;
@@ -137,6 +142,15 @@
         padding:0px 15px 5px 15px;
       }
       #addtitle_video_cancel{
+        cursor: pointer;
+      }
+      #addtitle_image_cancel{
+        cursor: pointer;
+      }
+      #addedtitle_image{
+        padding:10px 15px 5px 15px;
+      }
+      #addcomment_image_cancel{
         cursor: pointer;
       }
     </style>
@@ -405,22 +419,28 @@
                       </div>
                       <div class="col-md-12" style="display: none" id="uploadimageform">
                             <form enctype="multipart/form-data" id="newimage" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
-                              <div class="form-group">
-                                <label for="id_title">{% trans "Title:" %}</label>
-                                <input class="form-control input-block-level imgtitle" type="text" id="id_title" name="id_title" autofocus>
+                              <div class="row">
+                                <div class="col-md-3 addtitle" id="addtitle_img">
+                                  <a id="addtitletoimage" title="{% trans "Add a Title to Your Image" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
+                                </div>
+                                <div class="col-md-3 col-md-offset-3 addcomment pull-right" id="addcomment_image">
+                                  <a class="pull-right" id="addcommenttoimage" title="{% trans "Add a Comment to Your Image" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Comment" %}</a>
+                                </div>
                               </div>
-                              <div class="row" id="rowformimgbig">
-                                <div class="form-group" id="bigpreview">
+                              <div class="title" id="addedtitle_image" style="display: none"> 
+                                <label for="id_title">Title:</label><span id="addtitle_image_cancel" title="Cancel Title" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                                <input class="form-control input-block-level image_title" type="text" id="id_title" name="id_title" placeholder="Write your title here" autofocus>
+                              </div>
+                                <div class="form-group row" id="bigpreview">
                                     <div class="fileinput fileinput-new col-md-12" id="image_form" data-provides="fileinput">
                                        <div>
                                           <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" id="id_image" name="id_image"></span>
                                           <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                         </div>
                                       <div class="fileinput-preview thumbnail bigimgpreview singleimgpreview" id="imgprev"data-trigger="fileinput" style="width: 100%; height: 370px;" id="album2_prev_1"></div>
-                                      <textarea class="form-control input-block-level" rows="4" id="id_imagecontent" name="id_imagecontent" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                      <div id=addedcomment_image style="display: none"><textarea class="form-control input-block-level image_content" rows="4" id="id_imagecontent" name="id_imagecontent" placeholder="{% trans "Write something about this image" %}" autofocus></textarea><span id="addcomment_image_cancel" title="{% trans "Cancel Comment" %}" class="glyphicon glyphicon-remove-circle pull-right"></span></div>
                                     </div>
                                 </div>
-                              </div>
                                 {% if categories %}
                               <div class="form-group" id="cate_image">
                                 <label for="id_category">{% trans "Category:" %}</label>
@@ -592,6 +612,10 @@
           this.reset();
         $('#addtitle_video').show();
         $('#addedtitle_video').hide();
+        $('#addtitle_img').show();
+        $('#addedtitle_image').hide();
+        $('#addedcomment_image').hide();
+        $('#addcomment_image').show();
         $('#submitvideo').prop("disabled", true);
         });
       });
@@ -632,6 +656,10 @@
         });
         $('#addtitle_post').show();
         $('#addedtitle_post').hide();
+        $('#addtitle_img').show();
+        $('#addedtitle_image').hide();
+        $('#addedcomment_image').hide();
+        $('#addcomment_image').show();
         $('#submittext').prop("disabled", true);
       });
     </script>
@@ -678,6 +706,10 @@
         $('#imagetype').show();
         $('#uploadimageform').hide();
         $('#createalbumform').hide();
+        $('#addtitle_img').show();
+        $('#addedtitle_image').hide();
+        $('#addedcomment_image').hide();
+        $('#addcomment_image').show();
         $('#submitimageform').prop("disabled", true);
         $('.fileinput-exists').click();
       });
@@ -798,10 +830,36 @@
       });
     </script>
     <script>
+      $('#addtitle_img').click(function() {
+        $('#addtitle_img').hide();
+        $('#addedtitle_image').show();
+      });
+    </script>
+    <script>
+      $('#addcomment_image').click(function() {
+        $('#addcomment_image').hide();
+        $('#addedcomment_image').show();
+      });
+    </script>
+    <script>
       $('#addtitle_post').click(function() {
         setTimeout(function() { 
           $('#id_title').focus();
         },10);
+      });
+    </script>
+    <script>
+      $('#addtitle_img').click(function() {
+        setTimeout(function() { 
+          $(".image_title").focus();
+        },10);
+      });
+    </script>
+    <script>
+      $('#addcomment_image').click(function() {
+        setTimeout(function() { 
+          $('#id_imagecontent').focus();
+        },15);
       });
     </script>
     <script>
@@ -811,12 +869,25 @@
         },10);
       });
     </script>
-
     <script>
       $('#addtitle_post_cancel').click(function() {
         $('#addtitle_post').show();
         $('#addedtitle_post').hide();
         $('#newtext input[name=id_title]').val('');
+      });
+    </script>
+    <script>
+      $('#addtitle_image_cancel').click(function() {
+        $('#addtitle_img').show();
+        $('#addedtitle_image').hide();
+        $('#newimage input[name=id_title]').val('');
+      });
+    </script>
+    <script>
+      $('#addcomment_image_cancel').click(function() {
+        $('#addcomment_image').show();
+        $('#addedcomment_image').hide();
+        $('#newimage textarea[name=id_imagecontent]').val('');
       });
     </script>
     <script>
@@ -950,6 +1021,8 @@
         $('#show_all_pages').tooltip({container: 'body'});
         $('#add_new_post').tooltip({container: 'body'});
         $('#add_new_page').tooltip({container: 'body'});
+        $('#addtitletoimage').tooltip({container: 'body'});
+        $('#addcommenttoimage').tooltip({container: 'body'});
       });
     </script>
   {% endblock %}
