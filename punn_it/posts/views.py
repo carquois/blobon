@@ -8,6 +8,7 @@ from django.shortcuts import redirect, render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib import messages
 from django.utils.translation import ugettext as _
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 from posts.forms import BlogPostForm
@@ -164,3 +165,4 @@ def paginate(request, list_of_objects, number_of_items):
     except EmptyPage:
       paginated_objects = paginator.page(paginator.num_pages)
     return paginated_objects
+

@@ -160,16 +160,22 @@ def administrateblog(request, slug):
 def administrateposts(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       posts = Post.objects.filter(blog=blog).order_by('-pub_date')
-      return render_to_response('administrateblog.html',
+      posts = paginate(request,
+                       Post.objects.filter(blog=blog).order_by('-pub_date'),
+                       15)
+      return render_to_response('administrateposts.html',
                                 {'blog': blog, 'posts': posts, },
                                 context_instance=RequestContext(request))
 
 @login_required
 def administratepages(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      posts = Post.objects.filter(blog=blog).order_by('-pub_date')
-      return render_to_response('administrateblog.html',
-                                {'blog': blog, 'posts': posts, },
+      pages = Page.objects.filter(blog=blog).order_by('-pub_date')
+      pages = paginate(request,
+                       Page.objects.order_by('-pub_date'),
+                       15)
+      return render_to_response('administratepages.html',
+                                {'blog': blog, 'pages': pages, },
                                 context_instance=RequestContext(request))
 
 @login_required
