@@ -9,12 +9,11 @@ from django.template import RequestContext
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 
-from blogs.forms import BlogForm
+from blogs.forms import BlogForm, SettingsForm
 from blogs.models import Blog, Page, Tag, Category, Post
 
 from notifications.forms import InvitationForm
 from notifications.models import Invitation
-
 
 from django.forms import ModelForm, Textarea, TextInput, CharField, URLField
 
@@ -200,11 +199,15 @@ def administratetags(request, slug):
 @login_required
 def administratesettings(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      from blogs.forms import SettingsForm
-      form = SettingsForm(request.POST or None, blog=blog)
-      posts = Post.objects.filter(blog=blog).order_by('-pub_date')
+      if request.method == 'POST':
+        form = SettingsForm(request.POST, instance=blog,)
+        if form.is_valid():
+          blog = form.save()
+        return HttpResponseRedirect(reverse('blogs.views.administratesettings', args=(blog.slug,)))
+      else:
+        form = SettingsForm(instance=blog,)
       return render_to_response('administratesettings.html',
-                                {'blog': blog, 'posts': posts, 'form': form},
+                                {'blog': blog, 'form': form, },
                                 context_instance=RequestContext(request))
 
 @login_required

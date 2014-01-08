@@ -154,7 +154,7 @@
         cursor: pointer;
       }
       #addedtitle_post{
-        padding:0px 15px 5px 15px;
+        padding:0px 0px 5px 0px;
       }
       #addtitle_post_cancel{
         cursor: pointer;
@@ -169,11 +169,20 @@
         cursor: pointer;
       }
       #addedtitle_image{
-        padding:10px 15px 5px 15px;
+        padding:10px 0px 5px 0px;
       }
       #addcomment_image_cancel{
+        padding:5px 0px 0px 0px;
         cursor: pointer;
       }
+      #addcomment_video_cancel{
+        padding:5px 0px 0px 0px;
+        cursor: pointer;
+      }
+      #addedcomment_video{
+        padding:5px 15px 5px 15px;  
+      }
+
     </style>
   {% endblock %}
 
@@ -441,10 +450,10 @@
                       <div class="col-xs-12" style="display: none" id="uploadimageform">
                             <form enctype="multipart/form-data" id="newimage" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
                               <div class="row">
-                                <div class="col-md-3 addtitle" id="addtitle_img">
+                                <div class="col-xs-3 addtitle" id="addtitle_img">
                                   <a id="addtitletoimage" title="{% trans "Add a Title to Your Image" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
                                 </div>
-                                <div class="col-md-3 col-md-offset-3 addcomment pull-right" id="addcomment_image">
+                                <div class="col-xs-3 col-xs-offset-3 addcomment pull-right" id="addcomment_image">
                                   <a class="pull-right" id="addcommenttoimage" title="{% trans "Add a Comment to Your Image" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Comment" %}</a>
                                 </div>
                               </div>
@@ -480,18 +489,25 @@
                 </div>
                 <div class="tab-pane fade" id="video">
                   <div class="row">
-                    <div class="col-md-6 col-md-offset-3" id="videoform">
+                    <div class="col-xs-6 col-xs-offset-3" id="videoform">
                       <form enctype="multipart/form-data" id="newvideo" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
+                        <div class="row">
+                          <div class="col-xs-3 addtitle" id="addtitle_video">
+                            <a id="addtitletovideo" title="{% trans "Add a Title to Your Video" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Title" %}</a>
+                          </div>
+                          <div class="col-xs-3 col-xs-offset-3 addcomment pull-right" id="addcomment_video">
+                            <a id="addcommenttovideo" title="{% trans "Add a Comment to Your Video" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Comment" %}</a>
+                          </div>
+                        </div>
                         <div class="row" id="addedtitle_video" style="display: none">
                           <label for="id_title">{% trans "Title:" %}</label><span id="addtitle_video_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                           <input class="form-control input-block-level video_title" type="text" id="id_title" name="id_title" placeholder="{% trans "Write your title here" %}" autofocus>
                         </div>
-                        <div class="row">
-                          <div class="col-md-12 addtitle" id="addtitle_video">
-                            <a id="addtitletovideo" title="{% trans "Add a Title to Your Video" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Title" %}</a>
-                          </div>
-                        </div>
                         <input class="form-control input-block-level video_url" type="url" id="id_video_url" name="id_video_url" placeholder="{% trans "Copy a Youtube URL here" %}" autofocus>
+                        <div class="row" id="addedcomment_video" style="display: none">
+                          <textarea class="form-control input-block-level video_content" rows="4" id="id_videocontent" name="id_videocontent" placeholder="Write something about this video" autofocus=""></textarea>
+                          <span id="addcomment_video_cancel" title="Cancel Comment" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                        </div>
                       </form>
                      <button id="submitvideo" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
                     </div>
@@ -504,7 +520,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Posts" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_post" title="{% trans "Add a New Post" %}">{% trans "Add new" %}</a></div>
               <div class="panel-body">
-                <p><a href="#" id="show_all_posts" title="{% trans "Show All Posts" %}">{% trans "All" %}</a> ({{ posts|length }})</p>
+                <p><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="show_all_posts" title="{% trans "Show All Posts" %}">{% trans "All" %}</a> ({{ posts|length }})</p>
             </div>
             <table class="table table-striped">
               <colgroup>
@@ -537,7 +553,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Pages" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_page" title="{% trans "Add a New Page" %}">{% trans "Add new" %}</a></div>
               <div class="panel-body">
-                <p><a href="#" id="show_all_pages" title="{% trans "Show All Pages" %}">{% trans "All" %}</a> ({{ pages|length }})</p>
+                <p><a href="{% url 'blogs.views.administratepages' blog.slug %}" id="show_all_pages" title="{% trans "Show All Pages" %}">{% trans "All" %}</a> ({{ pages|length }})</p>
             </div>
             <table class="table table-striped">
               <colgroup>
@@ -633,6 +649,8 @@
           this.reset();
         $('#addtitle_video').show();
         $('#addedtitle_video').hide();
+        $('#addcomment_video').show();
+        $('#addedcomment_video').hide();
         $('#addtitle_img').show();
         $('#addedtitle_image').hide();
         $('#addedcomment_image').hide();
@@ -652,6 +670,8 @@
         $('#addedtitle_post').hide();
         $('#addtitle_video').show();
         $('#addedtitle_video').hide();
+        $('#addcomment_video').show();
+        $('#addedcomment_video').hide();
         $('#submittext').prop("disabled", true);
         $('#submitvideo').prop("disabled", true);
         });
@@ -863,6 +883,12 @@
       });
     </script>
     <script>
+      $('#addcomment_video').click(function() {
+        $('#addcomment_video').hide();
+        $('#addedcomment_video').show();
+      });
+    </script>
+    <script>
       $('#addtitle_post').click(function() {
         setTimeout(function() { 
           $('#id_title').focus();
@@ -880,6 +906,13 @@
       $('#addcomment_image').click(function() {
         setTimeout(function() { 
           $('#id_imagecontent').focus();
+        },15);
+      });
+    </script>
+    <script>
+      $('#addcomment_video').click(function() {
+        setTimeout(function() { 
+          $('#id_videocontent').focus();
         },15);
       });
     </script>
@@ -909,6 +942,13 @@
         $('#addcomment_image').show();
         $('#addedcomment_image').hide();
         $('#newimage textarea[name=id_imagecontent]').val('');
+      });
+    </script>
+    <script>
+      $('#addcomment_video_cancel').click(function() {
+        $('#addcomment_video').show();
+        $('#addedcomment_video').hide();
+        $('#newvideo textarea[name=id_videocontent]').val('');
       });
     </script>
     <script>
@@ -1044,18 +1084,22 @@
         $('#add_new_page').tooltip({container: 'body'});
         $('#addtitletoimage').tooltip({container: 'body'});
         $('#addcommenttoimage').tooltip({container: 'body'});
+        $('#addcommenttovideo').tooltip({container: 'body'});
+        $('#addcomment_video_cancel').tooltip({container: 'body'});
+        $('#addcomment_image_cancel').tooltip({container: 'body'});
+        $('#addtitle_video_cancel').tooltip({container: 'body'});
       });
     </script>
   {% endblock %}
   {% block sidebar %}
     <ul class="nav nav-pills nav-stacked">
-      <li class="active"><a href="#" id="dashboard_button" title="{% trans "Manage Your Blogs" %}"><span class="glyphicon glyphicon-home"></span> {% trans "Dashboard" %}</a></li>
-      <li><a href="#" id="posts_button" title="{% trans "Manage Your Posts" %}"><span class="glyphicon glyphicon-pushpin"></span> {% trans "Posts" %}</a></li>
-      <li><a href="#" id="pages_button" title="{% trans "Manage Your Pages" %}"><span class="glyphicon glyphicon-file"></span> {% trans "Pages" %}</a></li>
-      <li><a href="#" id="comments_button" title="{% trans "Moderate Comments" %}"><span class="glyphicon glyphicon-comment"></span> {% trans "Comments" %} <span class="badge">{{ num_of_comments }}</span></a></li>
-      <li><a href="#" id="categories_button" title="{% trans "Create, Modify or Delete Categories" %}"><span class="glyphicon glyphicon-folder-open"></span> {% trans "Categories" %}</a></li>
-      <li><a href="#" id="tags_button" title="{% trans "Create, Modify or Delete Tags" %}"><span class="glyphicon glyphicon-tag"></span> {% trans "Tags" %}</a></li>
-      <li><a href="{% url 'blogs.views.administratesettings' blog.slug %}" id="settings_button" title="{% trans "Change Your Settings" %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Settings" %}</a></li>
+      <li class="active"><a href="{% url 'blogs.views.administrateblog' blog.slug %}" id="dashboard_button" title="{% trans "Manage Your Blogs" %}"><span class="glyphicon glyphicon-home"></span> {% trans "Dashboard" %}</a></li>
+      <li><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="posts_button" title="{% trans "Manage Your Posts" %}"><span class="glyphicon glyphicon-pushpin"></span> {% trans "Posts" %}</a></li>
+      <li><a href="{% url 'blogs.views.administratepages' blog.slug %}" id="pages_button" title="{% trans "Manage Your Pages" %}"><span class="glyphicon glyphicon-file"></span> {% trans "Pages" %}</a></li>
+      <li><a href="{% url 'blogs.views.administratecomments' blog.slug %}" id="comments_button" title="{% trans "Moderate Comments" %}"><span class="glyphicon glyphicon-comment"></span> {% trans "Comments" %} <span class="badge">{{ num_of_comments }}</span></a></li>
+      <li><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="categories_button" title="{% trans "Create, Modify or Delete Categories" %}"><span class="glyphicon glyphicon-folder-open"></span> {% trans "Categories" %}</a></li>
+      <li><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="tags_button" title="{% trans "Create, Modify or Delete Tags" %}"><span class="glyphicon glyphicon-tag"></span> {% trans "Tags" %}</a></li>
+      <li {% block settings-active %}{% endblock %}><a href="{% url 'blogs.views.administratesettings' blog.slug %}" id="settings_button" title="{% trans "Change Your Settings" %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Settings" %}</a></li>
     </ul>
     <script type="text/javascript">
       $(function () {
