@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.utils.translation import ugettext as _
 
 from blogs.forms import BlogForm, SettingsForm
-from blogs.models import Blog, Page, Tag, Category, Post
+from blogs.models import Blog, Page, Tag, Category, Post, Comment
 
 from notifications.forms import InvitationForm
 from notifications.models import Invitation
@@ -181,9 +181,9 @@ def administratepages(request, slug):
 @login_required
 def administratecomments(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      posts = Post.objects.filter(blog=blog).order_by('-pub_date')
-      return render_to_response('administrateblog.html',
-                                {'blog': blog, 'posts': posts, },
+      comments = Comment.objects.filter(blog=blog).order_by('?')
+      return render_to_response('administratecomments.html',
+                                {'blog': blog, 'comments': comments, },
                                 context_instance=RequestContext(request))
 
 @login_required
