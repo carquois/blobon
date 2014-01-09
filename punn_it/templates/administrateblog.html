@@ -1096,8 +1096,8 @@
       <li {% block posts-active %}{% endblock %}><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="posts_button" title="{% trans "Manage Your Posts" %}"><span class="glyphicon glyphicon-pushpin"></span> {% trans "Posts" %}</a></li>
       <li {% block pages-active %}{% endblock %}><a href="{% url 'blogs.views.administratepages' blog.slug %}" id="pages_button" title="{% trans "Manage Your Pages" %}"><span class="glyphicon glyphicon-file"></span> {% trans "Pages" %}</a></li>
       <li {% block comments-active %}{% endblock %}><a href="{% url 'blogs.views.administratecomments' blog.slug %}" id="comments_button" title="{% trans "Moderate Comments" %}"><span class="glyphicon glyphicon-comment"></span> {% trans "Comments" %} <span class="badge">{{ num_of_comments }}</span></a></li>
-      <li><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="categories_button" title="{% trans "Create, Modify or Delete Categories" %}"><span class="glyphicon glyphicon-folder-open"></span> {% trans "Categories" %}</a></li>
-      <li><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="tags_button" title="{% trans "Create, Modify or Delete Tags" %}"><span class="glyphicon glyphicon-tag"></span> {% trans "Tags" %}</a></li>
+      <li {% block categories-active %}{% endblock %}><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="categories_button" title="{% trans "Create, Modify or Delete Categories" %}"><span class="glyphicon glyphicon-folder-open"></span> {% trans "Categories" %}</a></li>
+      <li {% block tags-active %}{% endblock %}><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="tags_button" title="{% trans "Create, Modify or Delete Tags" %}"><span class="glyphicon glyphicon-tag"></span> {% trans "Tags" %}</a></li>
       <li {% block settings-active %}{% endblock %}><a href="{% url 'blogs.views.administratesettings' blog.slug %}" id="settings_button" title="{% trans "Change Your Settings" %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Settings" %}</a></li>
     </ul>
     <script type="text/javascript">

@@ -189,9 +189,9 @@ def administratecomments(request, slug):
 @login_required
 def administratecategories(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      posts = Post.objects.filter(blog=blog).order_by('-pub_date')
-      return render_to_response('administrateblog.html',
-                                {'blog': blog, 'posts': posts, },
+      categories = Category.objects.filter(blog=blog).order_by('?')
+      return render_to_response('administratecategories.html',
+                                {'blog': blog, 'categories': categories, },
                                 context_instance=RequestContext(request))
 
 @login_required
