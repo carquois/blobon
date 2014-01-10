@@ -11,10 +11,7 @@ from django.utils.translation import ugettext as _
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-from posts.forms import BlogPostForm
-from posts.models import BlogPost, Album, Link, Post, Image
-
-from blogs.models import Blog
+from blogs.models import Blog, Post
 
 from notifications.forms import InvitationForm
 from notifications.models import Invitation

@@ -99,7 +99,7 @@ class Post(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('posts.views.single', [str(self.base62id)])
+        return ('blogs.views.single', [str(self.base62id)])
 
     @classmethod
     def generate_unique_id(cls):
@@ -124,7 +124,7 @@ class Comment(models.Model):
     website = models.URLField(verbose_name=_("Website"), max_length=300, blank=True)
     notify_me = models.BooleanField(default=False)
     def __unicode__(self):
-        return self.title
+        return self.comment
 
 #class Video(Post):
 #    video_title = models.CharField(verbose_name=_("Title"), max_length=140, blank=True)

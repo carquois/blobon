@@ -1,0 +1,18 @@
+{% extends "administrateblog.html" %}
+{% load i18n %}
+{% load url from future %}
+{% block dashboard-active %}{% endblock %}
+{% block settings-active %}class="active"{% endblock %}
+
+{% block content %}
+
+
+
+<form action="{% url "blogs.views.administratesettings" blog.slug %}" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}
+
+

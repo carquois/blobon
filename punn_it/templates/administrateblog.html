@@ -517,9 +517,12 @@
           </div>
 
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Latest posts" %}</div>
+            <div class="panel-heading">{% trans "Last post" %}
+                <a href="{% url 'blogs.views.administrateposts' blog.slug %}" class="btn btn-default btn-xs manageposts pull-right" title="{% trans "Manage Your Posts" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
+                <a href="#" class="btn btn-default btn-xs addnewpost pull-right" title="{% trans "Add a New Post" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
+            </div>
               <div class="panel-body">
-                <p><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="show_all_posts" title="{% trans "Show All Posts" %}">{% trans "All" %}</a> ({{ posts|length }})</p>
+                <p><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="show_all_posts" title="{% trans "Show All Posts" %}">{% trans "All" %}</a> ({{ posts.paginator.num_pages }})</p>
             </div>
             <table class="table table-striped">
               <colgroup>
@@ -539,7 +542,7 @@
               <tbody>
               {% for post in posts %}
                 <tr>
-                  <td>{{ post.title }}</td>
+                  <td><p><a href="{{ post.get_absolute_url }}" target="_blank" id="view_this_post" title="{% trans "View This Post" %}">{{ post.title }}</a></p></td>
                   <td>{{ post.author }}</td>
                   <td><small>{% trans "Coming soon" %}</small></td>
                   <td>{{ post.pub_date }}</td>
@@ -550,9 +553,12 @@
           </div>
 
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Latest pages" %}</div>
+            <div class="panel-heading">{% trans "Last page" %}
+                <a href="{% url 'blogs.views.administratepages' blog.slug %}" class="btn btn-default btn-xs managepages pull-right" title="{% trans "Manage Your Pages" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
+                <a href="#" class="btn btn-default btn-xs addnewpage pull-right" title="{% trans "Add a New Page" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
+            </div>
               <div class="panel-body">
-                <p><a href="{% url 'blogs.views.administratepages' blog.slug %}" id="show_all_pages" title="{% trans "Show All Pages" %}">{% trans "All" %}</a> ({{ pages|length }})</p>
+                <p><a href="{% url 'blogs.views.administratepages' blog.slug %}" id="show_all_pages" title="{% trans "Show All Pages" %}">{% trans "All" %}</a> ({{ pages.paginator.num_pages }})</p>
             </div>
             <table class="table table-striped">
               <colgroup>
@@ -572,7 +578,7 @@
               <tbody>
               {% for page in pages %}          
                 <tr>
-                  <td>{{ page.title }}</td>
+                  <td><p><a href="{{ page.get_absolute_url }}" target="_blank" id="view_this_page" title="{% trans "View This Page" %}">{{ page.title }}</a></p></td>
                   <td>{{ page.author }}</td>
                   <td><small>{% trans "Coming soon" %}</small></td>
                   <td>{{ page.created }}</td>
@@ -581,6 +587,103 @@
               </tbody>
             </table>
           </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Last Comment" %}
+                <a href="{% url 'blogs.views.administratecomments' blog.slug %}" class="btn btn-default btn-xs managecomments pull-right" title="{% trans "Moderate Comments" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
+            </div>
+              <div class="panel-body">
+                <p><a href="{% url 'blogs.views.administratecomments' blog.slug %}" id="show_all_comments" title="{% trans "Show All Comments" %}">{% trans "All" %}</a> ({{ comments.paginator.num_pages }})</p>
+            </div>
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-4">
+                <col class="col-xs-4">
+                <col class="col-xs-2">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>{% trans "Comment" %}
+                  </th>
+                  <th>{% trans "Post" %}</th>
+                  <th>{% trans "Email" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for comment in comments %}
+                <tr>
+                  <td><p><a href="{{ comment.post.get_absolute_url }}" target="_blank" id="view_this_comment" title="{% trans "View Related Post" %}">{{ comment.comment }}</a></p></td>
+                  <td>{{ comment.post }}
+                  </td>
+                  <td>{{ comment.email }}
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>         
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Your Categories" %}
+                <a href="{% url 'blogs.views.administratecategories' blog.slug %}" class="btn btn-default btn-xs managecategoriess pull-right" title="{% trans "Manage Your Categoriess" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
+                <a href="#" class="btn btn-default btn-xs addnewcategory pull-right" title="{% trans "Add a New Category" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>    
+            </div>
+              <div class="panel-body">
+                <p><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="show_all_categories" title="{% trans "Show All Categories" %}">{% trans "All" %}</a> ({{ pages|length }})</p>
+            </div>
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-2">
+                <col class="col-xs-8">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>{% trans "Name" %}</th>
+                  <th>{% trans "Description" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for category in categories %}
+                <tr>
+                  <td>{{ category.name }}
+                  </td>
+                  <td>{{ category.description }}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Your Tags" %}
+                <a href="{% url 'blogs.views.administratetags' blog.slug %}" class="btn btn-default btn-xs managetags pull-right" title="{% trans "Manage Your Tags" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
+                <a href="#" class="btn btn-default btn-xs addnewpage pull-right" title="{% trans "Add a New Tag" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
+            </div>
+              <div class="panel-body">
+                <p><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="show_all_tags" title="{% trans "Show All Tags" %}">{% trans "All" %}</a> ({{ pages|length }})</p>
+            </div>
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-2">
+                <col class="col-xs-8">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>{% trans "Name" %}</th>
+                  <th>{% trans "Description" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for tag in tags %}
+                <tr>
+                  <td>{{ tag.name }}
+                  </td>
+                  <td>{{ tag.description }}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>          
+          </div>
+
 
     <script>
       $('#createalbumlink').click(function() {
@@ -1077,8 +1180,8 @@
         $('#texttab').tooltip({container: 'body'});
         $('#imagetab').tooltip({container: 'body'});
         $('#videotab').tooltip({container: 'body'});
-        $('#show_all_posts').tooltip({container: 'body'});
-        $('#show_all_pages').tooltip({container: 'body'});
+        $('#show_all_posts').tooltip({container: 'body', placement: 'bottom'});
+        $('#show_all_pages').tooltip({container: 'body', placement: 'bottom'});
         $('#add_new_post').tooltip({container: 'body'});
         $('#add_new_page').tooltip({container: 'body'});
         $('#addtitletoimage').tooltip({container: 'body'});
@@ -1087,6 +1190,24 @@
         $('#addcomment_video_cancel').tooltip({container: 'body'});
         $('#addcomment_image_cancel').tooltip({container: 'body'});
         $('#addtitle_video_cancel').tooltip({container: 'body'});
+        $('#show_all_comments').tooltip({container: 'body', placement: 'bottom'});
+        $('#show_all_categories').tooltip({container: 'body', placement: 'bottom'});
+        $('#show_all_tags').tooltip({container: 'body', placement: 'bottom'});
+        $('#add_new_comment').tooltip({container: 'body'});
+        $('#add_new_tag').tooltip({container: 'body'});
+        $('#add_new_category').tooltip({container: 'body'});
+        $('#view_this_post').tooltip({container: 'body', placement: 'bottom'});
+        $('#view_this_page').tooltip({container: 'body', placement: 'bottom'});
+        $('#view_this_comment').tooltip({container: 'body', placement: 'bottom'});
+        $(".addnewpost").tooltip({container: 'body'});
+        $(".addnewpage").tooltip({container: 'body'});
+        $(".addnewcategory").tooltip({container: 'body'});
+        $(".addnewtag").tooltip({container: 'body'});
+        $(".manageposts").tooltip({container: 'body'});
+        $(".managepages").tooltip({container: 'body'});
+        $(".managecategories").tooltip({container: 'body'});
+        $(".managetags").tooltip({container: 'body'});
+        $(".managecomments").tooltip({container: 'body'});
       });
     </script>
   {% endblock %}

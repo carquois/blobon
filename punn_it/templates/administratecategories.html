@@ -1,0 +1,68 @@
+{% extends "administrateblog.html" %}
+{% load i18n %}
+{% load url from future %}
+    {% block additional-css %}
+    <style>
+      .edit_buttons {
+        padding: 10px;0px;5px;0px;
+      }
+    </style>
+  {% endblock %}
+  {% block dashboard-active %}{% endblock %}
+  {% block categories-active %}class="active"{% endblock %}
+  {% block content %}
+          <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Categories" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_category" title="{% trans "Add a New Category" %}">{% trans "Add new" %}</a></div>
+              <div class="panel-body">
+              </div>
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-2">
+                <col class="col-xs-8">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>{% trans "Name" %}</th>
+                  <th>{% trans "Description" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for category in categories %}
+                <tr>
+                  <td>{{ category.name }}
+                    <div class="edit_buttons">
+                      <button type="button" class="btn btn-default btn-xs edit_category" title="{% trans "Modify This Category" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</button>
+                      <button type="button" class="btn btn-default btn-xs delete_category" title="{% trans "Delete This Category" %}" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</button>
+                    </div>
+                  </td>
+                  <td>{{ category.description }}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+  <div class="modal fade" id="delete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Delete Category" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Are you Sure You Want to Delete This Category?" %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
+          <a href="" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script type="text/javascript">
+      $(function () {
+        $('#add_new_category').tooltip({container: 'body'});
+        $(".edit_category").tooltip({container: 'body', placement: 'bottom'});
+        $(".delete_category").tooltip({container: 'body', placement: 'bottom'});
+      });
+    </script>
+  {% endblock %}

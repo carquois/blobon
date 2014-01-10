@@ -6,16 +6,17 @@ from punns.models import Cat
 from punns.models import Reblog
 from posts.models import Link
 from accounts.models import UserProfile
-from comments.models import Comment
+from blogs.models import Comment
 from notifications.models import Invitation
 from images.models import Image
 from votes.models import CommentVote, PunnVote
 from django.contrib import admin
 from blogs.models import Blog, Tag, Category, Post
+from blogs.models import Page
 from posts.models import Image
 from posts.models import Album
 from posts.models import Video 
-from pages.models import Page
+from blogs.models import Page
 
 class PunnAdmin(admin.ModelAdmin):
     exclude = ('original_punn',)

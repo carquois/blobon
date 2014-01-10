@@ -85,10 +85,91 @@ def videos(request):
                                {'posts': posts},
                                 context_instance=RequestContext(request))
 
-def single(request):
-        return render_to_response('single.html',
-                                  {},
-                                  context_instance=RequestContext(request))
+def single(request, shorturl):
+    post = get_object_or_404(Post, base62id=shorturl)
+    #cats = Cat.objects.filter(is_top_level=True)
+    #votesup = PunnVote.objects.filter(punn=punn).filter(vote='U')
+    #votesdown = PunnVote.objects.filter(punn=punn).filter(vote='D')
+    #karma = votesup.count() - votesdown.count()
+    #auth_user = ""
+    #vote = ""
+    #if request.user.is_authenticated():
+    #  auth_user = request.user
+    #  if PunnVote.objects.filter(punn=punn).filter(user=auth_user):
+    #    if PunnVote.objects.filter(punn=punn).filter(user=auth_user).filter(vote='U'):
+    #      vote = 'U'
+    #    else:
+    #      vote = 'D'
+    #if punn.author.userprofile.domain:
+    #  home = punn.author.userprofile.domain
+    #else:
+    #  home = "http://checkdonc.ca"
+    latest_post_list = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:6]
+    next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]
+    prev_post = ""
+    next_post = ""
+    if Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]:
+      next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
+      if (next_post_query.count() > 0):
+        next_post = next_post_query[0]
+    if Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).order_by('pub_date').exclude(pk=post.id)[:1]:
+      prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(is_top=True).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
+      if (prev_post_query.count() > 0):
+        prev_post = prev_post_query[0]
+    #content = ""
+    #if punn.content:
+    #    content = linkify(punn.content)
+    #    content = markdown.markdown(content)
+
+    ##save new comment before querying for comments related to this punn
+    #comment_form = CommentForm(request.POST or None)
+    #if request.user.is_authenticated() and comment_form.is_valid():
+    #    from earnings.models import Earning
+    #    from datetime import datetime
+    #    from decimal import Decimal
+    #    comment = comment_form.save(commit=False)
+    #    comment.punn = punn
+    #    comment.author = request.user
+    #    comment.save()
+    #    vote = CommentVote(comment=comment, user=request.user, vote='U')
+    #    vote.save()
+    #    e = Earning(user=request.user, amount=Decimal("0.01"), date=datetime.now())
+    #    e.save()
+    #    #redirect user so a refresh doesn't trigger a double post
+    #    return HttpResponseRedirect( punn.get_absolute_url() )
+
+    #comment_list = Comment.objects.filter(punn=punn).order_by('-pub_date')
+    #for comment in comment_list:
+    #    comment.content = linkify(comment.content)
+    #    comment.content = markdown.markdown(comment.content)
+    #    votesup = CommentVote.objects.filter(comment=comment).filter(vote='U')
+    #    votesdown = CommentVote.objects.filter(comment=comment).filter(vote='D')
+    #    comment.karma = votesup.count() - votesdown.count()
+
+    #    if request.user.is_authenticated() and CommentVote.objects.filter(comment=comment).filter(user=request.user).exists():
+    #      v = CommentVote.objects.filter(comment=comment).filter(user=request.user)
+    #      if v[0].vote == "U":
+    #        comment.vote = "U"
+    #      elif v[0].vote == "D":
+    #        comment.vote = "D"
+
+    #if request.user.is_authenticated() and Reblog.objects.filter(origin=punn).filter(author=request.user).exists():
+    #      reblog = True
+    #else:
+    #      reblog = False
+
+    #if request.user.is_authenticated() and Favorite.objects.filter(punn=punn).filter(author=request.user).exists():
+    #      favorite = True
+    #else:
+    #      favorite = False
+
+    #url = request.build_absolute_uri()
+    #site_description = settings.MAIN_SITE_DESCRIPTION
+    #site = get_current_site(request)
+    return render_to_response('single.html',
+                              {'post': post, 'latest_post_list': latest_post_list,
+                               'next_post': next_post, 'prev_post': prev_post,},
+                              context_instance=RequestContext(request))
 
 
 @login_required
@@ -149,11 +230,19 @@ def createblog(request):
 @login_required
 def administrateblog(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      posts = Post.objects.filter(blog=blog).order_by('-pub_date')[:5]
-      pages = Page.objects.filter(blog=blog)[:5]
+      posts = paginate(request,
+                       Post.objects.filter(blog=blog).order_by('-pub_date'),
+                       1)
+      pages = paginate(request,
+                       Page.objects.order_by('-pub_date'),
+                       1)
+      comments = paginate(request,
+                       Comment.objects.order_by('-id'),
+                       1)
       categories = Category.objects.filter(blog=blog)
+      tags = Tag.objects.filter(blog=blog)
       return render_to_response('administrateblog.html',
-                                {'blog': blog, 'posts': posts, 'pages': pages , 'categories': categories},
+                                {'blog': blog, 'posts': posts, 'pages': pages , 'comments': comments , 'categories': categories, 'tags': tags },
                                 context_instance=RequestContext(request))
 
 @login_required
@@ -181,7 +270,9 @@ def administratepages(request, slug):
 @login_required
 def administratecomments(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      comments = Comment.objects.filter(blog=blog).order_by('?')
+      comments = paginate(request,
+                       Comment.objects.order_by('-id'),
+                       15)
       return render_to_response('administratecomments.html',
                                 {'blog': blog, 'comments': comments, },
                                 context_instance=RequestContext(request))
@@ -197,9 +288,9 @@ def administratecategories(request, slug):
 @login_required
 def administratetags(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      posts = Post.objects.filter(blog=blog).order_by('-pub_date')
-      return render_to_response('administrateblog.html',
-                                {'blog': blog, 'posts': posts, },
+      tags = Tag.objects.filter(blog=blog).order_by('?')
+      return render_to_response('administratetags.html',
+                                {'blog': blog, 'tags': tags, },
                                 context_instance=RequestContext(request))
 
 @login_required
@@ -239,7 +330,16 @@ def createpage(request, slug):
                                   {'blog': blog},
                                   context_instance=RequestContext(request))
 
-
+@login_required
+def deletepost(request, id):
+      post = get_object_or_404(Post, id=id)
+      if request.user == post.author:
+        post.delete()
+        messages.add_message(request, messages.INFO, _(u'Your page has been deleted'))
+      elif request.user.is_staff:
+        post.delete()
+        messages.add_message(request, messages.INFO, _(u'The page has been deleted'))
+      return HttpResponseRedirect(reverse('blogs.views.administrateblog'))
 ###UTILS###
 #Une fonction pour paginer une liste d'objets
 def paginate(request, list_of_objects, number_of_items):
