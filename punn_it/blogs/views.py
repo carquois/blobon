@@ -239,8 +239,8 @@ def administrateblog(request, slug):
       comments = paginate(request,
                        Comment.objects.order_by('-id'),
                        1)
-      categories = Category.objects.filter(blog=blog)
-      tags = Tag.objects.filter(blog=blog)
+      categories = Category.objects.filter(blog=blog).order_by('-id')
+      tags = Tag.objects.filter(blog=blog).order_by('-id')
       return render_to_response('administrateblog.html',
                                 {'blog': blog, 'posts': posts, 'pages': pages , 'comments': comments , 'categories': categories, 'tags': tags },
                                 context_instance=RequestContext(request))
@@ -280,7 +280,7 @@ def administratecomments(request, slug):
 @login_required
 def administratecategories(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      categories = Category.objects.filter(blog=blog).order_by('?')
+      categories = Category.objects.filter(blog=blog).order_by('-id')
       return render_to_response('administratecategories.html',
                                 {'blog': blog, 'categories': categories, },
                                 context_instance=RequestContext(request))
@@ -288,7 +288,7 @@ def administratecategories(request, slug):
 @login_required
 def administratetags(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      tags = Tag.objects.filter(blog=blog).order_by('?')
+      tags = Tag.objects.filter(blog=blog).order_by('-id')
       return render_to_response('administratetags.html',
                                 {'blog': blog, 'tags': tags, },
                                 context_instance=RequestContext(request))

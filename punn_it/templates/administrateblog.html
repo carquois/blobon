@@ -517,7 +517,7 @@
           </div>
 
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Last post" %}
+            <div class="panel-heading">{% trans "Last Post" %}
                 <a href="{% url 'blogs.views.administrateposts' blog.slug %}" class="btn btn-default btn-xs manageposts pull-right" title="{% trans "Manage Your Posts" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
                 <a href="#" class="btn btn-default btn-xs addnewpost pull-right" title="{% trans "Add a New Post" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
             </div>
@@ -553,7 +553,7 @@
           </div>
 
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Last page" %}
+            <div class="panel-heading">{% trans "Last Page" %}
                 <a href="{% url 'blogs.views.administratepages' blog.slug %}" class="btn btn-default btn-xs managepages pull-right" title="{% trans "Manage Your Pages" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
                 <a href="#" class="btn btn-default btn-xs addnewpage pull-right" title="{% trans "Add a New Page" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
             </div>
@@ -623,6 +623,8 @@
               </tbody>
             </table>         
           </div>
+        <div class="row cate_tag">
+         <div class="col-md-6">
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Your Categories" %}
                 <a href="{% url 'blogs.views.administratecategories' blog.slug %}" class="btn btn-default btn-xs managecategoriess pull-right" title="{% trans "Manage Your Categoriess" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
@@ -653,6 +655,8 @@
               </tbody>
             </table>
           </div>
+         </div>
+         <div class="col-md-6">
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Your Tags" %}
                 <a href="{% url 'blogs.views.administratetags' blog.slug %}" class="btn btn-default btn-xs managetags pull-right" title="{% trans "Manage Your Tags" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
@@ -683,7 +687,9 @@
               </tbody>
             </table>          
           </div>
-
+         </div>
+        </div>
+      
 
     <script>
       $('#createalbumlink').click(function() {

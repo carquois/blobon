@@ -18,6 +18,19 @@ class BlogForm(ModelForm):
         fields = ('title', 'slug', )
 
 class SettingsForm(ModelForm):
+    title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your blog title'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    'autofocus':'on'}))
+    slug = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your blog adress'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+    password = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your blog password'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+    custom_domain = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your custom domain'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
     class Meta:
         model = Blog 
         fields = ('title', 'slug', 'password', 'custom_domain', )
