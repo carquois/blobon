@@ -234,8 +234,16 @@
                       </div>
                       <div class="col-md-12 modelalbum" style="display: none" id="modelalbum1">
                             <form enctype="multipart/form-data" id="newimagealbum1" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
-                              <div class="form-group">
-                                <label for="id_title">{% trans "Title:" %}</label>
+                              <div class="row">
+                                <div class="col-xs-3 addtitle" id="addtitle_al_1">
+                                  <a id="addtitletoal1" title="{% trans "Add a Title to Your Album" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
+                                </div>
+                                <div class="col-xs-3 col-xs-offset-3 addcomment pull-right" id="addcomment_al_1">
+                                  <a class="pull-right" id="addcommenttoal1" title="{% trans "Add a Comment to Your Images" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Comments" %}</a>
+                                </div>
+                              </div>
+                              <div class="form-group" style="display: none" id="addedtitle_al_1">
+                                <label for="id_title">{% trans "Title:" %}</label><span id="addtitle_al1_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                                 <input class="form-control input-block-level album1title" type="text" id="id_title" name="id_title" autofocus>
                               </div>
                               <div class="row" id="rowform_al_2img">
@@ -247,7 +255,9 @@
                                         <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                       </div>
                                       <div class="fileinput-preview thumbnail medimgpreview" id="med1" data-trigger="fileinput"></div>
+                                      <div class="form-group addedcoment_al_1" style="display: none">
                                       <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_1" name="id_albumcontent_1" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                      </div>
                                       </div>
                                     </div>
                                   </div>
@@ -259,8 +269,10 @@
                                         <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                       </div>
                                       <div class="fileinput-preview thumbnail medimgpreview" id="med2" data-trigger="fileinput"></div>
-                                      <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_2" name="id_albumcontent_2" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                     <div class="form-group addedcoment_al_1" style="display: none">
+                                        <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_2" name="id_albumcontent_2" placeholder="{% trans "Write something about this image" %}" autofocus></textarea><span id="addcomment_al1_cancel" title="{% trans "Cancel Comments" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                                     </div>
+                                   </div>
                                   </div>
                                 </div>
                               </div>
@@ -280,8 +292,16 @@
                       </div>
                       <div class="col-xs-12 modelalbum" style="display: none" id="modelalbum2">
                             <form enctype="multipart/form-data" id="newimagealbum2" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
-                              <div class="form-group">
-                                <label for="id_title">{% trans "Title:" %}</label>
+                              <div class="row">
+                                <div class="col-xs-3 addtitle" id="addtitle_al_2">
+                                  <a id="addtitletoal2" title="{% trans "Add a Title to Your Album" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
+                                </div>
+                                <div class="col-xs-3 col-xs-offset-3 addcomment pull-right" id="addcomment_al_2">
+                                  <a class="pull-right" id="addcommenttoal2" title="{% trans "Add a Comment to Your Images" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Comments" %}</a>
+                                </div>
+                              </div>
+                              <div class="form-group" style="display: none" id="addedtitle_al_2">
+                                <label for="id_title">{% trans "Title:" %}</label><span id="addtitle_al2_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                                 <input class="form-control input-block-level album2title" type="text" id="id_title" name="id_title" autofocus>
                               </div>
                               <div class="row" id="rowform_al_4imgbig">
@@ -292,7 +312,9 @@
                                           <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                         </div>
                                       <div class="fileinput-preview thumbnail bigimgpreview album2preview" id="preview_al_2_1" data-trigger="fileinput" id="album2_prev_1"></div>
-                                      <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_1" name="id_albumcontent_1" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                      <div class="form-group addedcoment_al_2" style="display: none">
+                                        <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_1" name="id_albumcontent_1" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                      </div>
                                     </div>
                                 </div>
                               </div>
@@ -306,7 +328,9 @@
                                         <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                       </div>
                                       <div class="fileinput-preview thumbnail smallimgpreview album2preview" id="preview_al_2_2"  data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
-                                      <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_2" name="id_albumcontent_2" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                      <div class="form-group addedcoment_al_2" style="display: none">
+                                        <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_2" name="id_albumcontent_2" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -318,8 +342,10 @@
                                         <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                      </div>
                                       <div class="fileinput-preview thumbnail smallimgpreview album2preview" id="preview_al_2_3"  data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
-                                      <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_3" name="id_albumcontent_3" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
-                                    </div>
+                                     <div class="form-group addedcoment_al_2" style="display: none">
+                                        <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_3" name="id_albumcontent_3" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                     </div>
+                                   </div>
                                   </div>
                                 </div>
                                 <div class="col-sm-4" id="image_al2_4_form">
@@ -330,8 +356,10 @@
                                         <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                      </div>
                                       <div class="fileinput-preview thumbnail smallimgpreview album2preview" id="preview_al_2_4" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
-                                      <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_4" name="id_albumcontent_4" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                      <div class="form-group addedcoment_al_2" style="display: none">
+                                        <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_4" name="id_albumcontent_4" placeholder="{% trans "Write something about this image" %}" autofocus></textarea><span id="addcomment_al2_cancel" title="{% trans "Cancel Comments" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                                     </div>
+                                   </div>
                                   </div>
                                 </div>
                               </div>
@@ -352,8 +380,16 @@
                       </div>
                       <div class="col-xs-12 modelalbum" style="display: none" id="modelalbum3">
                             <form enctype="multipart/form-data" id="newimagealbum3" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
-                              <div class="form-group">
-                                <label for="id_title">{% trans "Title:" %}</label>
+                              <div class="row">
+                                <div class="col-xs-3 addtitle" id="addtitle_al_3">
+                                  <a id="addtitletoal3" title="{% trans "Add a Title to Your Album" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
+                                </div>
+                                <div class="col-xs-3 col-xs-offset-3 addcomment pull-right" id="addcomment_al_3">
+                                  <a class="pull-right" id="addcommenttoal3" title="{% trans "Add a Comment to Your Images" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Comments" %}</a>
+                                </div>
+                              </div>
+                              <div class="form-group" style="display: none" id="addedtitle_al_3">
+                                <label for="id_title">{% trans "Title:" %}</label><span id="addtitle_al3_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                                 <input class="form-control input-block-level album3title" type="text" id="id_title" name="id_title" autofocus>
                               </div>
                               <div class="row" id="rowform_al_6_1img">
@@ -365,8 +401,10 @@
                                         <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                      </div>
                                       <div class="fileinput-preview thumbnail smallimgpreview album3preview" id="preview_al_3_1"  data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
-                                      <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_1" name="id_albumcontent_1" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                      <div class="form-group addedcoment_al_3" style="display: none">
+                                        <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_1" name="id_albumcontent_1" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
                                     </div>
+                                   </div>
                                   </div>
                                 </div>
                                 <div class="col-sm-4" id="image_al3_2_form">
@@ -377,8 +415,10 @@
                                         <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                      </div>
                                       <div class="fileinput-preview thumbnail smallimgpreview album3preview" id="preview_al_3_2" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
-                                      <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_2" name="id_albumcontent_2" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                      <div class="form-group addedcoment_al_3" style="display: none">
+                                        <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_2" name="id_albumcontent_2" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
                                     </div>
+                                   </div>
                                   </div>
                                 </div>
                                 <div class="col-sm-4" id="image_al3_3_form">
@@ -389,10 +429,11 @@
                                         <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                      </div>
                                       <div class="fileinput-preview thumbnail smallimgpreview album3preview" id="preview_al_3_3" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
-                                      <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_3" name="id_albumcontent_3" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                      <div class="form-group addedcoment_al_3" style="display: none">
+                                        <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_3" name="id_albumcontent_3" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
                                     </div>
                                   </div>
-
+                                 </div>
                                 </div>
                               </div>
                               <div class="row" id="rowform_al_6_2img">
@@ -404,9 +445,11 @@
                                         <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                      </div>
                                       <div class="fileinput-preview thumbnail smallimgpreview album3preview" id="preview_al_3_4" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
-                                      <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_4" name="id_albumcontent_4" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                      <div class="form-group addedcoment_al_3" style="display: none">
+                                        <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_4" name="id_albumcontent_4" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
                                     </div>
                                   </div>
+                                 </div>
                                 </div>
                                 <div class="col-sm-4" id="image_al3_5_form">
                                   <div class="form-group">
@@ -416,9 +459,11 @@
                                         <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                      </div>
                                       <div class="fileinput-preview thumbnail smallimgpreview album3preview" id="preview_al_3_5" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
-                                      <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_5" name="id_albumcontent_5" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                      <div class="form-group addedcoment_al_3" style="display: none">
+                                        <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_5" name="id_albumcontent_5" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
                                     </div>
                                   </div>
+                                 </div>
                                 </div>
                                 <div class="col-sm-4" id="image_al3_6_form">
                                   <div class="form-group">                                    <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -427,9 +472,11 @@
                                         <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                      </div>
                                       <div class="fileinput-preview thumbnail smallimgpreview album3preview" id="preview_al_3_6" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
-                                      <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_6" name="id_albumcontent_6" placeholder="{% trans "Write something about this image" %}" autofocus></textarea>
+                                      <div class="form-group addedcoment_al_3" style="display: none">
+                                        <textarea class="form-control input-block-level" rows="4" id="id_albumcontent_6" name="id_albumcontent_6" placeholder="{% trans "Write something about this image" %}" autofocus></textarea><span id="addcomment_al3_cancel" title="{% trans "Cancel Comments" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                                     </div>
                                   </div>
+                                 </div>
                                 </div>
                               </div>
                                 {% if categories %}
@@ -457,7 +504,7 @@
                                 </div>
                               </div>
                               <div class="title" id="addedtitle_image" style="display: none"> 
-                                <label for="id_title">Title:</label><span id="addtitle_image_cancel" title="Cancel Title" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                                <label for="id_title">Title:</label><span id="addtitle_image_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                                 <input class="form-control input-block-level image_title" type="text" id="id_title" name="id_title" placeholder="Write your title here" autofocus>
                               </div>
                                 <div class="form-group row" id="bigpreview">
@@ -631,7 +678,7 @@
                 <a href="#" class="btn btn-default btn-xs addnewcategory pull-right" title="{% trans "Add a New Category" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>    
             </div>
               <div class="panel-body">
-                <p><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="show_all_categories" title="{% trans "Show All Categories" %}">{% trans "All" %}</a> ({{ pages|length }})</p>
+                <p><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="show_all_categories" title="{% trans "Show All Categories" %}">{% trans "All" %}</a> ({{ categories|length }})</p>
             </div>
             <table class="table table-striped">
               <colgroup>
@@ -663,7 +710,7 @@
                 <a href="#" class="btn btn-default btn-xs addnewpage pull-right" title="{% trans "Add a New Tag" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
             </div>
               <div class="panel-body">
-                <p><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="show_all_tags" title="{% trans "Show All Tags" %}">{% trans "All" %}</a> ({{ pages|length }})</p>
+                <p><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="show_all_tags" title="{% trans "Show All Tags" %}">{% trans "All" %}</a> ({{ tags|length }})</p>
             </div>
             <table class="table table-striped">
               <colgroup>
@@ -763,6 +810,15 @@
         $('#addedtitle_image').hide();
         $('#addedcomment_image').hide();
         $('#addcomment_image').show();
+        $('#addcomment_al_1').show();
+        $(".addedcoment_al_1").hide();
+        $('#addcomment_al_2').show();
+        $(".addedcoment_al_2").hide();
+        $('#addcomment_al_3').show();
+        $(".addedcoment_al_3").hide();
+        $('#addedtitle_al_1').hide();
+        $('#addedtitle_al_2').hide();
+        $('#addedtitle_al_3').hide();
         $('#submitvideo').prop("disabled", true);
         });
       });
@@ -809,6 +865,15 @@
         $('#addedtitle_image').hide();
         $('#addedcomment_image').hide();
         $('#addcomment_image').show();
+        $('#addcomment_al_1').show();
+        $(".addedcoment_al_1").hide();
+        $('#addcomment_al_2').show();
+        $(".addedcoment_al_2").hide();
+        $('#addcomment_al_3').show();
+        $(".addedcoment_al_3").hide();
+        $('#addedtitle_al_1').hide();
+        $('#addedtitle_al_2').hide();
+        $('#addedtitle_al_3').hide();
         $('#submittext').prop("disabled", true);
       });
     </script>
@@ -896,6 +961,9 @@
         $(".fileinput-preview").empty();
         $('#createalbumform').show();
         $('#modelalbum1').hide();
+        $('#addcomment_al_1').show();
+        $(".addedcoment_al_1").hide();
+        $('#addedtitle_al_1').hide();
         $('.fileinput-exists').click();
         $('#submitimagealbum1form').prop("disabled", true);
         $('#newimagealbum1').each(function(){
@@ -913,6 +981,9 @@
         $(".fileinput-preview").empty();
         $('#createalbumform').show();
         $('#modelalbum3').hide();
+        $('#addedtitle_al_3').hide();
+        $('#addcomment_al_3').show();
+        $(".addedcoment_al_3").hide();
         $('.fileinput-exists').click();
         $('#submitimagealbum3form').prop("disabled", true);
         $('#newimagealbum3').each(function(){
@@ -936,6 +1007,9 @@
         $(".fileinput-preview").empty();
         $('#createalbumform').show();
         $('#modelalbum2').hide();
+        $('#addedtitle_al_2').hide();
+        $('#addcomment_al_2').show();
+        $(".addedcoment_al_2").hide();
         $('.fileinput-exists').click();
         $('#submitimagealbum2form').prop("disabled", true);
         $('#newimagealbum2').each(function(){
@@ -952,12 +1026,6 @@
     <script>
       $('#submitimagealbum3form').click(function() {
         $('#newimagealbum3').submit();
-      });
-    </script>
-    <script>
-      $('#cancelimagealbum3form').click(function() {
-        $('#createalbumform').show();
-        $('#modelalbum3').hide();
       });
     </script>
     <script>
@@ -996,6 +1064,33 @@
         $('#addedcomment_video').show();
       });
     </script>
+
+
+    <script>
+      $('#addcommenttoal1').click(function() {
+        $('#addcomment_al_1').hide();
+        $(".addedcoment_al_1").show();
+      });
+    </script>
+    <script>
+      $('#addcommenttoal2').click(function() {
+        $('#addcomment_al_2').hide();
+        $(".addedcoment_al_2").show();
+      });
+    </script>
+
+    <script>
+      $('#addcommenttoal3').click(function() {
+        $('#addcomment_al_3').hide();
+        $(".addedcoment_al_3").show();
+      });
+    </script>
+
+
+
+
+
+
     <script>
       $('#addtitle_post').click(function() {
         setTimeout(function() { 
@@ -1073,13 +1168,51 @@
       });
     </script>
     <script>
+      $('#addtitletoal1').click(function() {
+        $('#addtitle_al_1').hide();
+        $('#addedtitle_al_1').show();
+      });
+    </script>
+    <script>
+      $('#addtitletoal2').click(function() {
+        $('#addtitle_al_2').hide();
+        $('#addedtitle_al_2').show();
+      });
+    </script>
+    <script>
+      $('#addtitletoal3').click(function() {
+        $('#addtitle_al_3').hide();
+        $('#addedtitle_al_3').show();
+      });
+    </script>
+    <script>
+      $('#addtitletoal1').click(function() {
+        setTimeout(function() { 
+          $(".album1title").focus();
+        },10);
+      });
+    </script>
+    <script>
+      $('#addtitletoal2').click(function() {
+        setTimeout(function() { 
+          $(".album2title").focus();
+        },10);
+      });
+    </script>
+    <script>
+      $('#addtitletoal3').click(function() {
+        setTimeout(function() { 
+          $(".album3title").focus();
+        },10);
+      });
+    </script>
+    <script>
       $('#addtitle_video_cancel').click(function() {
         setTimeout(function() { 
           $('#id_video_url').focus();
         },10);
       });
     </script>
-
     <script>
       $('#addtitle_video_cancel').click(function() {
         $('#addtitle_video').show();
@@ -1087,6 +1220,73 @@
         $('#newvideo input[name=id_title]').val('');
       });
     </script>
+
+
+
+    <script>
+      $('#addtitle_al1_cancel').click(function() {
+        $('#addtitle_al_1').show();
+        $('#addedtitle_al_1').hide();
+        $('#newimagealbum1 input[name=id_title]').val('');
+      });
+    </script>
+
+
+    <script>
+      $('#addtitle_al2_cancel').click(function() {
+        $('#addtitle_al_2').show();
+        $('#addedtitle_al_2').hide();
+        $('#newimagealbum2 input[name=id_title]').val('');
+      });
+    </script>
+
+
+    <script>
+      $('#addtitle_al3_cancel').click(function() {
+        $('#addtitle_al_3').show();
+        $('#addedtitle_al_3').hide();
+        $('#newimagealbum3 input[name=id_title]').val('');
+      });
+    </script>
+
+
+    <script>
+      $('#addcomment_al1_cancel').click(function() {
+        $('#addcomment_al_1').show();
+        $(".addedcoment_al_1").hide();
+        $('#newimagealbum1 textarea[name=id_albumcontent_1]').val('');
+        $('#newimagealbum1 textarea[name=id_albumcontent_2]').val('');
+      });
+    </script>
+
+
+    <script>
+      $('#addcomment_al2_cancel').click(function() {
+        $('#addcomment_al_2').show();
+        $(".addedcoment_al_2").hide();
+        $('#newimagealbum2 textarea[name=id_albumcontent_1]').val('');
+        $('#newimagealbum2 textarea[name=id_albumcontent_2]').val('');
+        $('#newimagealbum2 textarea[name=id_albumcontent_3]').val('');
+        $('#newimagealbum2 textarea[name=id_albumcontent_4]').val('');
+      });
+    </script>
+
+
+    <script>
+      $('#addcomment_al3_cancel').click(function() {
+        $('#addcomment_al_3').show();
+        $(".addedcoment_al_3").hide();
+        $('#newimagealbum3 textarea[name=id_albumcontent_1]').val('');
+        $('#newimagealbum3 textarea[name=id_albumcontent_2]').val('');
+        $('#newimagealbum3 textarea[name=id_albumcontent_3]').val('');
+        $('#newimagealbum3 textarea[name=id_albumcontent_4]').val('');
+        $('#newimagealbum3 textarea[name=id_albumcontent_5]').val('');
+        $('#newimagealbum3 textarea[name=id_albumcontent_6]').val('');
+      });
+    </script>
+
+
+
     <script>
       $(document).ready(function() {
         setTimeout(function() {
@@ -1191,11 +1391,22 @@
         $('#add_new_post').tooltip({container: 'body'});
         $('#add_new_page').tooltip({container: 'body'});
         $('#addtitletoimage').tooltip({container: 'body'});
+        $('#addtitletoal3').tooltip({container: 'body'});
+        $('#addtitletoal2').tooltip({container: 'body'});
+        $('#addtitletoal1').tooltip({container: 'body'});
         $('#addcommenttoimage').tooltip({container: 'body'});
         $('#addcommenttovideo').tooltip({container: 'body'});
+        $('#addcommenttoal3').tooltip({container: 'body'});
+        $('#addcommenttoal2').tooltip({container: 'body'});
+        $('#addcommenttoal1').tooltip({container: 'body'});
         $('#addcomment_video_cancel').tooltip({container: 'body'});
         $('#addcomment_image_cancel').tooltip({container: 'body'});
-        $('#addtitle_video_cancel').tooltip({container: 'body'});
+        $('#addcomment_al1_cancel').tooltip({container: 'body'});
+        $('#addcomment_al2_cancel').tooltip({container: 'body'});
+        $('#addcomment_a3_cancel').tooltip({container: 'body'});
+        $('#addtitle_al1_cancel').tooltip({container: 'body'});
+        $('#addtitle_al2_cancel').tooltip({container: 'body'});
+        $('#addtitle_al3_cancel').tooltip({container: 'body'});
         $('#show_all_comments').tooltip({container: 'body', placement: 'bottom'});
         $('#show_all_categories').tooltip({container: 'body', placement: 'bottom'});
         $('#show_all_tags').tooltip({container: 'body', placement: 'bottom'});
