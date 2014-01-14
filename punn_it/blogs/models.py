@@ -32,6 +32,7 @@ class Blog(models.Model):
     title = models.CharField(verbose_name=_("Title"), max_length=140)
     password = models.CharField(verbose_name=_("Password"), max_length=140, blank=True)
     custom_domain = models.CharField(verbose_name=_("Custom domain"), max_length=300, blank=True)
+    description = models.CharField(verbose_name=_("Description"), max_length=500, blank=True)
     def __unicode__(self):
         return self.title
 
@@ -89,6 +90,7 @@ class Post(models.Model):
     publish_on_facebook = models.BooleanField(default=False)
     youtube_id = models.CharField(max_length=50, null=True, blank=True)
     pic = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
+    pic_1 = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
     def __unicode__(self):
         return self.title
 

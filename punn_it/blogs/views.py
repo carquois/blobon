@@ -9,7 +9,7 @@ from django.template import RequestContext
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 
-from blogs.forms import BlogForm, SettingsForm
+from blogs.forms import BlogForm, SettingsForm, PostForm
 from blogs.models import Blog, Page, Tag, Category, Post, Comment
 
 from notifications.forms import InvitationForm
@@ -38,7 +38,7 @@ def index(request):
           else:
               form = InvitationForm()
           return render_to_response('blobon.html',
-                                    {'form': form},
+                                    {'form': form, },
                                      context_instance=RequestContext(request))
       elif Blog.objects.filter(custom_domain=host).exists():
           blog = Blog.objects.get(custom_domain=host)
@@ -241,8 +241,9 @@ def administrateblog(request, slug):
                        1)
       categories = Category.objects.filter(blog=blog).order_by('-id')
       tags = Tag.objects.filter(blog=blog).order_by('-id')
+      post_form = PostForm()
       return render_to_response('administrateblog.html',
-                                {'blog': blog, 'posts': posts, 'pages': pages , 'comments': comments , 'categories': categories, 'tags': tags },
+                                {'blog': blog, 'posts': posts, 'pages': pages , 'comments': comments , 'categories': categories, 'tags': tags, 'post_form': post_form},
                                 context_instance=RequestContext(request))
 
 @login_required
@@ -331,15 +332,14 @@ def createpage(request, slug):
                                   context_instance=RequestContext(request))
 
 @login_required
-def deletepost(request, id):
+def deletepost(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
       post = get_object_or_404(Post, id=id)
-      if request.user == post.author:
+      if request.user == blog.creator:
         post.delete()
-        messages.add_message(request, messages.INFO, _(u'Your page has been deleted'))
       elif request.user.is_staff:
         post.delete()
-        messages.add_message(request, messages.INFO, _(u'The page has been deleted'))
-      return HttpResponseRedirect(reverse('blogs.views.administrateblog'))
+      return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
 ###UTILS###
 #Une fonction pour paginer une liste d'objets
 def paginate(request, list_of_objects, number_of_items):

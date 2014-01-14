@@ -18,6 +18,9 @@
       .under_text {
         padding:10px;
       }
+      textarea {
+        resize: none;
+      }
     </style>
     {% endblock %}
 {% block content %}
@@ -49,6 +52,13 @@
         <div class="under_text"><small><em>Write the url of your custom domain here</em></small></div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-12 form_section" id="settings_description">
+        {{ form.description.label_tag }}<span id="info_description" class="glyphicon glyphicon-question-sign pull-right info" title="{% trans "Info About Blog Description" %}"data-toggle="modal" data-target="#info_description_modal"></span>
+        {{ form.description }}
+        <div class="under_text"><small><em>Describe your blog here</em></small></div>
+        </div>
+      </div>
     </form>
     <div class="settings_submit">
       <button type="submit" class="btn btn-default" id=submitsettings title="{% trans "Submit Your Settings" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
@@ -75,7 +85,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">{% trans "Title" %}</h4>
+          <h4 class="modal-title">{% trans "Slug" %}</h4>
         </div>
         <div class="modal-body">
           <p>{% trans "A slug is the part of a URL which identifies a page..." %}</p>
@@ -91,7 +101,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">{% trans "Title" %}</h4>
+          <h4 class="modal-title">{% trans "Password" %}</h4>
         </div>
         <div class="modal-body">
           <p>{% trans "If you don't want your blog to be seen by all... " %}</p>
@@ -107,10 +117,26 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">{% trans "Title" %}</h4>
+          <h4 class="modal-title">{% trans "Custom domain" %}</h4>
         </div>
         <div class="modal-body">
           <p>{% trans "If you have your own custom domain...  If you want one :..." %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="info_description_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Description" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "This section is to wrtite a small description of your blog..." %}</p>
         </div>
         <div class="modal-footer">
           <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
@@ -136,6 +162,7 @@
         $('#info_slug').tooltip({container: 'body'});
         $('#info_password').tooltip({container: 'body'});
         $('#info_custom_domain').tooltip({container: 'body'});
+        $('#info_description').tooltip({container: 'body'});
       });
     </script>
 
