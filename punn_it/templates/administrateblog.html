@@ -245,7 +245,7 @@
                                   <a class="pull-right" id="addcommenttoal1" title="{% trans "Add a Comment to Your Images" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Comments" %}</a>
                                 </div>
                               </div>
-                              <div class="form-group" style="display: none" id="addedtitle_al_1">
+                              <div class="col-md-12 form-group" style="display: none" id="addedtitle_al_1">
                                 {{ post_form.title.label_tag }}<span id="addtitle_al1_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                                 {{ post_form.title }}
                               </div>
@@ -549,7 +549,6 @@
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Last Post" %}
                 <a href="{% url 'blogs.views.administrateposts' blog.slug %}" class="btn btn-default btn-xs manageposts pull-right" title="{% trans "Manage Your Posts" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
-                <a href="#" class="btn btn-default btn-xs addnewpost pull-right" title="{% trans "Add a New Post" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
             </div>
               <div class="panel-body">
                 <p><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="show_all_posts" title="{% trans "Show All Posts" %}">{% trans "All" %}</a> ({{ posts.paginator.num_pages }})</p>
@@ -585,7 +584,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Last Page" %}
                 <a href="{% url 'blogs.views.administratepages' blog.slug %}" class="btn btn-default btn-xs managepages pull-right" title="{% trans "Manage Your Pages" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
-                <a href="#" class="btn btn-default btn-xs addnewpage pull-right" title="{% trans "Add a New Page" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
+                <a href="#" class="btn btn-default btn-xs addnewpage pull-right" title="{% trans "Add a New Page" %}" style="display: none"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
             </div>
               <div class="panel-body">
                 <p><a href="{% url 'blogs.views.administratepages' blog.slug %}" id="show_all_pages" title="{% trans "Show All Pages" %}">{% trans "All" %}</a> ({{ pages.paginator.num_pages }})</p>
@@ -658,7 +657,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Your Categories" %}
                 <a href="{% url 'blogs.views.administratecategories' blog.slug %}" class="btn btn-default btn-xs managecategoriess pull-right" title="{% trans "Manage Your Categoriess" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
-                <a href="#" class="btn btn-default btn-xs addnewcategory pull-right" title="{% trans "Add a New Category" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>    
+                <a href="#" class="btn btn-default btn-xs addnewcategory pull-right" title="{% trans "Add a New Category" %}" style="display: none"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>    
             </div>
               <div class="panel-body">
                 <p><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="show_all_categories" title="{% trans "Show All Categories" %}">{% trans "All" %}</a> ({{ categories|length }})</p>
@@ -690,7 +689,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Your Tags" %}
                 <a href="{% url 'blogs.views.administratetags' blog.slug %}" class="btn btn-default btn-xs managetags pull-right" title="{% trans "Manage Your Tags" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
-                <a href="#" class="btn btn-default btn-xs addnewpage pull-right" title="{% trans "Add a New Tag" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
+                <a href="#" class="btn btn-default btn-xs addnewpage pull-right" title="{% trans "Add a New Tag" %}" style="display: none"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
             </div>
               <div class="panel-body">
                 <p><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="show_all_tags" title="{% trans "Show All Tags" %}">{% trans "All" %}</a> ({{ tags|length }})</p>
@@ -802,6 +801,9 @@
         $('#addedtitle_al_1').hide();
         $('#addedtitle_al_2').hide();
         $('#addedtitle_al_3').hide();
+        $('#addtitle_al_1').show();
+        $('#addtitle_al_2').show();
+        $('#addtitle_al_3').show();
         $('#submitvideo').prop("disabled", true);
         });
       });
@@ -848,6 +850,9 @@
         $('#addedtitle_image').hide();
         $('#addedcomment_image').hide();
         $('#addcomment_image').show();
+        $('#addtitle_al_1').show();
+        $('#addtitle_al_2').show();
+        $('#addtitle_al_3').show();
         $('#addcomment_al_1').show();
         $(".addedcoment_al_1").hide();
         $('#addcomment_al_2').show();

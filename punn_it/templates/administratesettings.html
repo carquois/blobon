@@ -30,31 +30,33 @@
     <form enctype="multipart/form-data" action="{% url "blogs.views.administratesettings" blog.slug %}" method="post" id=newsettings>{% csrf_token %}
       <div class="row">
         <div class="col-md-6 form_section" id="settings_title">
-        {{ form.title.label_tag }}<span id="info_title" class="glyphicon glyphicon-question-sign pull-right info" title="{% trans "Info About Title" %}" data-toggle="modal" data-target="#info_title_modal"></span>
+        {{ form.title.label_tag }}<a id="info_title" class="pull-right info" title="{% trans "More Info About Title" %}" data-toggle="modal" data-target="#info_title_modal">{% trans "More info" %}</a>
         {{ form.title }}
         <div class="under_text"><small><em>Write your new title here</em></small></div>
         </div>
         <div class="col-md-6 form_section" id="settings_slug">
-        {{ form.slug.label_tag }}<span id="info_slug" class="glyphicon glyphicon-question-sign pull-right info" title="{% trans "What is a Slug" %}" data-toggle="modal" data-target="#info_slug_modal"></span>
-        {{ form.slug }}
+        {{ form.slug.label_tag }}<a id="info_slug" class="pull-right info" title="{% trans "What is a Slug" %}" data-toggle="modal" data-target="#info_slug_modal">{% trans "More info" %}</a>
+        <div class="input-group">
+        {{ form.slug }}<span class="input-group-addon" id="urlending">.Blobon.com</span>
+       </div>
         <div class="under_text"><small><em>Write your new slug here</em></small></div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6 form_section" id="settings_password">
-        {{ form.password.label_tag }}<span id="info_password" class="glyphicon glyphicon-question-sign pull-right info" title="{% trans "Why Should I Need a Password" %}"data-toggle="modal" data-target="#info_password_modal"></span>
+        {{ form.password.label_tag }}<a id="info_password" class="pull-right info" title="{% trans "Why Should I Need a Password" %}"data-toggle="modal" data-target="#info_password_modal">{% trans "More info" %}</a>
         {{ form.password }}
         <div class="under_text"><small><em>Write your new password here</em></small></div>
         </div>
         <div class="col-md-6 form_section" id="settings_custom_domain">
-        {{ form.custom_domain.label_tag }}<span id="info_custom_domain" class="glyphicon glyphicon-question-sign pull-right info" title="{% trans "Info About Customs Domains" %}" data-toggle="modal" data-target="#info_custom_domain_modal"></span>
+        {{ form.custom_domain.label_tag }}<a id="info_custom_domain" class="pull-right info" title="{% trans "Info About Customs Domains" %}" data-toggle="modal" data-target="#info_custom_domain_modal">{% trans "More info" %}</a>
         {{ form.custom_domain }}
         <div class="under_text"><small><em>Write the url of your custom domain here</em></small></div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12 form_section" id="settings_description">
-        {{ form.description.label_tag }}<span id="info_description" class="glyphicon glyphicon-question-sign pull-right info" title="{% trans "Info About Blog Description" %}"data-toggle="modal" data-target="#info_description_modal"></span>
+        {{ form.description.label_tag }}<a id="info_description" class="pull-right info" title="{% trans "Info About Blog Description" %}"data-toggle="modal" data-target="#info_description_modal">{% trans "More info" %}</a>
         {{ form.description }}
         <div class="under_text"><small><em>Describe your blog here</em></small></div>
         </div>
