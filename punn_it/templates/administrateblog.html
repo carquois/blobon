@@ -281,12 +281,7 @@
                               </div>
                                 {% if categories %}
                               <div class="form-group" id="cate_al1">
-                                <label for="id_category">{% trans "Category:" %}</label>
-                                <select class="cate_al_1" id="id_category" title="{% trans "Choose a Category" %}">
-                                {% for category in categories %}
-                                  <option>{{ category.name }}</option>
-                                {% endfor %}
-                                </select>
+                               {{ post_form.category.label_tag }} {{ post_form.category }}
                               </div>
                                 {% endif %}
                             </form>
@@ -369,12 +364,7 @@
                               <hr>
                                 {% if categories %}
                               <div class="form-group" id="cate_al2">
-                                <label for="id_category">{% trans "Category:" %}</label>
-                                <select class="cate_al_2" id="id_category" title="{% trans "Choose a Category" %}">
-                                {% for category in categories %}
-                                  <option>{{ category.name }}</option>
-                                {% endfor %}
-                                </select>
+                               {{ post_form.category.label_tag }} {{ post_form.category }}
                               </div>
                                 {% endif %}
                             </form>
@@ -484,12 +474,7 @@
                               </div>
                                 {% if categories %}
                               <div class="form-group" id="cate_al3">
-                                <label for="id_category">{% trans "Category:" %}</label>
-                                <select class="cate_al_3" id="id_category" title="{% trans "Choose a Category" %}">
-                                {% for category in categories %}
-                                  <option>{{ category.name }}</option>
-                                {% endfor %}
-                                </select>
+                               {{ post_form.category.label_tag }} {{ post_form.category }}
                               </div>
                                 {% endif %}
                             </form>
@@ -507,27 +492,22 @@
                                 </div>
                               </div>
                               <div class="title" id="addedtitle_image" style="display: none"> 
-                                <label for="id_title">Title:</label><span id="addtitle_image_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
-                                <input class="form-control input-block-level image_title" type="text" id="id_title" name="id_title" placeholder="Write your title here" autofocus>
+                                {{ post_form.title.label_tag }}<span id="addtitle_image_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                                {{ post_form.title }}
                               </div>
                                 <div class="form-group row" id="bigpreview">
                                     <div class="fileinput fileinput-new col-xs-12" id="image_form" data-provides="fileinput">
                                        <div>
-                                          <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" id="id_image" name="id_image"></span>
+                                          <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic }}</span>
                                           <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                         </div>
                                       <div class="fileinput-preview thumbnail bigimgpreview singleimgpreview" id="imgprev"data-trigger="fileinput" id="album2_prev_1"></div>
-                                      <div id=addedcomment_image style="display: none"><textarea class="form-control input-block-level image_content" rows="4" id="id_imagecontent" name="id_imagecontent" placeholder="{% trans "Write something about this image" %}" autofocus></textarea><span id="addcomment_image_cancel" title="{% trans "Cancel Comment" %}" class="glyphicon glyphicon-remove-circle pull-right"></span></div>
+                                      <div id=addedcomment_image style="display: none">{{ post_form.content_0 }}<span id="addcomment_image_cancel" title="{% trans "Cancel Comment" %}" class="glyphicon glyphicon-remove-circle pull-right"></span></div>
                                     </div>
                                 </div>
                                 {% if categories %}
                               <div class="form-group" id="cate_image">
-                                <label for="id_category">{% trans "Category:" %}</label>
-                                <select class="cate_img" id="id_category" title="{% trans "Choose a Category" %}">
-                                {% for category in categories %}
-                                  <option>{{ category.name }}</option>
-                                {% endfor %}
-                                </select>
+                               {{ post_form.category.label_tag }} {{ post_form.category }}
                               </div>
                                 {% endif %}
                             </form>
@@ -549,12 +529,12 @@
                           </div>
                         </div>
                         <div class="row" id="addedtitle_video" style="display: none">
-                          <label for="id_title">{% trans "Title:" %}</label><span id="addtitle_video_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
-                          <input class="form-control input-block-level video_title" type="text" id="id_title" name="id_title" placeholder="{% trans "Write your title here" %}" autofocus>
+                          {{ post_form.title.label_tag }}<span id="addtitle_video_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                          {{ post_form.title }}
                         </div>
-                        <input class="form-control input-block-level video_url" type="url" id="id_video_url" name="id_video_url" placeholder="{% trans "Copy a Youtube URL here" %}" autofocus>
+                          {{ post_form.youtube_url }}
                         <div class="row" id="addedcomment_video" style="display: none">
-                          <textarea class="form-control input-block-level video_content" rows="4" id="id_videocontent" name="id_videocontent" placeholder="Write something about this video" autofocus=""></textarea>
+                          {{ post_form.content_video }}
                           <span id="addcomment_video_cancel" title="Cancel Comment" class="glyphicon glyphicon-remove-circle pull-right"></span>
                         </div>
                       </form>
@@ -1140,21 +1120,24 @@
       $('#addtitle_image_cancel').click(function() {
         $('#addtitle_img').show();
         $('#addedtitle_image').hide();
-        $('#newimage input[name=id_title]').val('');
+        $('#newimage input[name=title]').val('');
       });
     </script>
     <script>
       $('#addcomment_image_cancel').click(function() {
         $('#addcomment_image').show();
         $('#addedcomment_image').hide();
-        $('#newimage textarea[name=id_imagecontent]').val('');
+        $('#newimage textarea[name=content_0]').val('');
       });
     </script>
     <script>
       $('#addcomment_video_cancel').click(function() {
         $('#addcomment_video').show();
         $('#addedcomment_video').hide();
-        $('#newvideo textarea[name=id_videocontent]').val('');
+        $('#newvideo textarea[name=content_video]').val('');
+        setTimeout(function() { 
+          $('#id_youtube_url').focus();
+        });
       });
     </script>
     <script>
@@ -1212,7 +1195,7 @@
     <script>
       $('#addtitle_video_cancel').click(function() {
         setTimeout(function() { 
-          $('#id_video_url').focus();
+          $('#id_youtube_url').focus();
         },10);
       });
     </script>
@@ -1220,7 +1203,7 @@
       $('#addtitle_video_cancel').click(function() {
         $('#addtitle_video').show();
         $('#addedtitle_video').hide();
-        $('#newvideo input[name=id_title]').val('');
+        $('#newvideo input[name=title]').val('');
       });
     </script>
 
@@ -1299,7 +1282,7 @@
     </script>
     <script>
       $(document).ready(function(){
-        $(".post_content").keyup(function() {
+        $('#id_content').keyup(function() {
         if($(this).val() != '') {
           $('#submittext').prop("disabled", false);
           }
@@ -1311,7 +1294,7 @@
     </script>
     <script>
       $(document).ready(function(){
-        $(".video_url").keyup(function() {
+        $('#id_youtube_url').keyup(function() {
         if($(this).val() != '') {
           $('#submitvideo').prop("disabled", false);
           }

@@ -4,7 +4,7 @@ from django import forms
 from django.forms import ModelForm, Textarea, TextInput, CharField, URLField
 from django.utils.translation import ugettext as _
 
-from blogs.models import Blog, Post
+from blogs.models import Blog, Post, Category
 
 class BlogForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Enter your title'),
@@ -89,6 +89,15 @@ class PostForm(ModelForm):
                                                     'rows': '5',
                                                     'class': "form-control setting_form input-block-level smallprev",
                                                     'autofocus':'on'}))
+    content_video = CharField(widget=forms.Textarea(attrs={'placeholder': _('Write something about this video'),
+                                                    'type': 'text',
+                                                    'rows': '3',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    'autofocus':'on'}))
+    youtube_url = CharField(widget=forms.TextInput(attrs={'placeholder': _('Copy a Youtube url here'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    'autofocus':'on'}))
     class Meta:
         model = Post 
-        fields = ('title','content','content_1','content_2','content_3','content_4','content_5','content_6', 'pic', 'pic_1','pic_2','pic_3','pic_4','pic_5','pic_6', )
+        fields = ('title','content','content_0','content_01','content_1','content_2','content_3','content_4','content_5','content_6','content_video', 'pic','pic_1','pic_2','pic_3','pic_4','pic_5','pic_6','youtube_url','category', )

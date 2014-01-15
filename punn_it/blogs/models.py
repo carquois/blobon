@@ -105,6 +105,9 @@ class Post(models.Model):
     content_4 = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
     content_5 = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
     content_6 = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
+    content_video = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
+    youtube_url = models.URLField(verbose_name=_("YoutubeURL"), max_length=300, blank=True)
+    category = models.ForeignKey(Category, null=True)
     def __unicode__(self):
         return self.title
 
