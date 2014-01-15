@@ -90,7 +90,21 @@ class Post(models.Model):
     publish_on_facebook = models.BooleanField(default=False)
     youtube_id = models.CharField(max_length=50, null=True, blank=True)
     pic = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
+    pic_0 = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
     pic_1 = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
+    pic_2 = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
+    pic_3 = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
+    pic_4 = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
+    pic_5 = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
+    pic_6 = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
+    content_0 = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
+    content_01 = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
+    content_1 = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
+    content_2 = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
+    content_3 = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
+    content_4 = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
+    content_5 = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
+    content_6 = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
     def __unicode__(self):
         return self.title
 

@@ -332,13 +332,15 @@ def createpage(request, slug):
                                   context_instance=RequestContext(request))
 
 @login_required
-def deletepost(request, slug):
-      blog = get_object_or_404(Blog, slug=slug)
+def deletepost(request, id):
       post = get_object_or_404(Post, id=id)
-      if request.user == blog.creator:
+      blog = post.blog
+      if request.user == post.author:
         post.delete()
+        messages.add_message(request, messages.INFO, _(u"The post has been deleted"))
       elif request.user.is_staff:
         post.delete()
+        messages.add_message(request, messages.INFO, _(u"The post has been deleted"))
       return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
 ###UTILS###
 #Une fonction pour paginer une liste d'objets

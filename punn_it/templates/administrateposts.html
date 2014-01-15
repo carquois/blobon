@@ -45,11 +45,6 @@
                   <td><small>{% trans "Coming soon..." %}</small></td>
                   <td>{{ post.pub_date }}</td>
                 </tr>
-              {% endfor %}
-              </tbody>
-            </table>
-          </div>
-
   <div class="modal fade" id="delete">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -62,11 +57,16 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
-          <a href="" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
+          <a href="{% url 'blogs.views.deletepost' post.id %}" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
         </div>
       </div>
     </div>
   </div>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
 
 
     <ul class="pager">
