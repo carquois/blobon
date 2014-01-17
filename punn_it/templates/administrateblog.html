@@ -189,6 +189,24 @@
     </style>
   {% endblock %}
   {% block content %}
+
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}</strong>{{ field.name }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
           <div class="panel panel-default"> 
             <div class="panel-body">
               <ul class="nav nav-tabs nav-justified" id="tabbar">
@@ -200,7 +218,7 @@
                 <div class="tab-pane active" id="text">
                   <div class="row">
                     <div class="col-md-12" id="textform">
-                      <form enctype="multipart/form-data" id="newtext" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
+                      <form enctype="multipart/form-data" id="newtext" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
                         <div class="title" id="addedtitle_post" style="display: none"> 
                           {{ post_form.title.label_tag }}<span id="addtitle_post_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                           {{ post_form.title }}
@@ -236,7 +254,7 @@
                         <span id="modelalbumselectcancel" title="{% trans "Cancel Album" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                       </div>
                       <div class="col-md-12 modelalbum" style="display: none" id="modelalbum1">
-                            <form enctype="multipart/form-data" id="newimagealbum1" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
+                            <form enctype="multipart/form-data" id="newimagealbum1" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
                               <div class="row">
                                 <div class="col-xs-3 addtitle" id="addtitle_al_1">
                                   <a id="addtitletoal1" title="{% trans "Add a Title to Your Album" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
@@ -261,10 +279,10 @@
                                       <div class="form-group addedcoment_al_1" style="display: none">
                                         {{ post_form.content_0 }}
                                       </div>
-                                      </div>
                                     </div>
                                   </div>
-                                <div class="col-md-6" id="image_al_2_form">
+                                </div>
+                                <div class="col-md-6" id="image_al_1_form">
                                   <div class="form-group">
                                     <div class="fileinput fileinput-new col-xs-12" data-provides="fileinput">
                                       <div>
@@ -272,10 +290,10 @@
                                         <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
                                       </div>
                                       <div class="fileinput-preview thumbnail medimgpreview" id="med2" data-trigger="fileinput"></div>
-                                     <div class="form-group addedcoment_al_1" style="display: none">
-                                        {{ post_form.content_01 }}<span id="addcomment_al1_cancel" title="{% trans "Cancel Comments" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                                      <div class="form-group addedcoment_al_1" style="display: none">
+                                        {{ post_form.content_01 }}
+                                      </div>
                                     </div>
-                                   </div>
                                   </div>
                                 </div>
                               </div>
@@ -289,7 +307,7 @@
                             <button id="cancelimagealbum1form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
                       </div>
                       <div class="col-xs-12 modelalbum" style="display: none" id="modelalbum2">
-                            <form enctype="multipart/form-data" id="newimagealbum2" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
+                            <form enctype="multipart/form-data" id="newimagealbum2" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
                               <div class="row">
                                 <div class="col-xs-3 addtitle" id="addtitle_al_2">
                                   <a id="addtitletoal2" title="{% trans "Add a Title to Your Album" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
@@ -372,7 +390,7 @@
                             <button id="cancelimagealbum2form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
                       </div>
                       <div class="col-xs-12 modelalbum" style="display: none" id="modelalbum3">
-                            <form enctype="multipart/form-data" id="newimagealbum3" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
+                            <form enctype="multipart/form-data" id="newimagealbum3" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
                               <div class="row">
                                 <div class="col-xs-3 addtitle" id="addtitle_al_3">
                                   <a id="addtitletoal3" title="{% trans "Add a Title to Your Album" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
@@ -482,7 +500,7 @@
                             <button id="cancelimagealbum3form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
                       </div>
                       <div class="col-xs-12" style="display: none" id="uploadimageform">
-                            <form enctype="multipart/form-data" id="newimage" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
+                            <form enctype="multipart/form-data" id="newimage" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
                               <div class="row">
                                 <div class="col-xs-3 addtitle" id="addtitle_img">
                                   <a id="addtitletoimage" title="{% trans "Add a Title to Your Image" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
@@ -519,7 +537,7 @@
                 <div class="tab-pane fade" id="video">
                   <div class="row">
                     <div class="col-xs-6 col-xs-offset-3" id="videoform">
-                      <form enctype="multipart/form-data" id="newvideo" role="form" method="post" action="{% url 'blogs.views.newpost' %}">{% csrf_token %}
+                      <form enctype="multipart/form-data" id="newvideo" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
                         <div class="row">
                           <div class="col-xs-3 addtitle" id="addtitle_video">
                             <a id="addtitletovideo" title="{% trans "Add a Title to Your Video" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Title" %}</a>

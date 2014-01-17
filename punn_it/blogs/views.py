@@ -168,35 +168,55 @@ def single(request, shorturl):
     #site = get_current_site(request)
     return render_to_response('single.html',
                               {'post': post, 'latest_post_list': latest_post_list,
-                               'next_post': next_post, 'prev_post': prev_post,},
+                               'next_post': next_post, 'prev_post': prev_post,
+                               'user': post.author,},
                               context_instance=RequestContext(request))
 
 
+
+
 @login_required
-def newpost(request):
-      if request.FILES.get('id_image', False):
-        messages.add_message(request, messages.INFO, _(u"single image"))
-        image = request.FILES.get('id_image')
-        
-      elif request.FILES.get('id_album_1_image_1', False) and request.FILES.get('id_album_1_image_2', False):
-        messages.add_message(request, messages.INFO, _(u"album a deux images"))
-        if request.POST.get('id_title', False):
-          title = request.POST.get('id_title')
+def newpost(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      form = PostForm(request.POST or None, request.FILES or None)
+      if request.method == 'POST':
+        if form.is_valid():
+          post = form.save(commit=False)
+          post.author = request.user
+          post.blog = blog
+          post.save()
+          return HttpResponseRedirect( post.get_absolute_url() )
+      return render_to_response('administrateblog.html', {'form': form})
+#      else:
+#        form = PostForm()
+#        messages.add_message(request, messages.INFO, _(u"WTF"))
+#      return HttpResponseRedirect(reverse('blogs.views.administrateblog', args=(blog.slug,)))
+     # return render_to_response('administrateblog.html',
+     #                           {'blog': blog},
+     #                           context_instance=RequestContext(request))
+#      if request.FILES.get('id_image', False):
+#        messages.add_message(request, messages.INFO, _(u"single image"))
+#        image = request.FILES.get('id_image')
+#        
+#      elif request.FILES.get('id_album_1_image_1', False) and request.FILES.get('id_album_1_image_2', False):
+#        messages.add_message(request, messages.INFO, _(u"album a deux images"))
+#        if request.POST.get('id_title', False):
+#          title = request.POST.get('id_title')
 #        image1 = Image(author=request.user)
 #        image1.save()
 #        f1 = request.FILES['id_album_1_image_1']
 #        album_1_image_2 = request.FILES['id_album_1_image_2']
          
 #        return HttpResponseRedirect("/")
-      elif request.POST.get('id_album_2_image_1', False) and request.POST.get('id_album_2_image_2', False) and request.POST.get('id_album_2_image_3', False) and request.POST.get('id_album_2_image_4', False):
-        messages.add_message(request, messages.INFO, _(u"album a 4 images"))
-      elif request.POST.get('id_album_3_image_1', False) and request.POST.get('id_album_3_image_2', False) and request.POST.get('id_album_3_image_3', False) and request.POST.get('id_album_3_image_4', False) and request.POST.get('id_album_3_image_5', False) and request.POST.get('id_album_3_image_6', False):
-        messages.add_message(request, messages.INFO, _(u"album a 6 images"))
-      else:
-        messages.add_message(request, messages.INFO, _(u"what t f"))
-      return render_to_response('dashboard.html',
-                                {},
-                                context_instance=RequestContext(request))
+#      elif request.POST.get('id_album_2_image_1', False) and request.POST.get('id_album_2_image_2', False) and request.POST.get('id_album_2_image_3', False) and request.POST.get('id_album_2_image_4', False):
+#        messages.add_message(request, messages.INFO, _(u"album a 4 images"))
+#      elif request.POST.get('id_album_3_image_1', False) and request.POST.get('id_album_3_image_2', False) and request.POST.get('id_album_3_image_3', False) and request.POST.get('id_album_3_image_4', False) and request.POST.get('id_album_3_image_5', False) and request.POST.get('id_album_3_image_6', False):
+#        messages.add_message(request, messages.INFO, _(u"album a 6 images"))
+#      else:
+#        messages.add_message(request, messages.INFO, _(u"what t f"))
+#      return render_to_response('dashboard.html',
+#                                {},
+#                                context_instance=RequestContext(request))
 
 
 @login_required
@@ -337,7 +357,7 @@ def deletepost(request, id):
       blog = post.blog
       if request.user == post.author:
         post.delete()
-        messages.add_message(request, messages.INFO, _(u"The post has been deleted"))
+        messages.add_message(request, messages.INFO, _(u"Your post has been deleted"))
       elif request.user.is_staff:
         post.delete()
         messages.add_message(request, messages.INFO, _(u"The post has been deleted"))

@@ -7,6 +7,11 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
 
+from punns.utils import BASE10, BASE62, baseconvert
+
+import uuid
+import os
+from random import choice
 from sorl.thumbnail import ImageField
 
 PRIVACY = (
@@ -88,14 +93,14 @@ class Post(models.Model):
     is_top = models.BooleanField(default=False)
     publish_on_facebook = models.BooleanField(default=False)
     youtube_id = models.CharField(max_length=50, null=True, blank=True)
-    pic = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
-    pic_0 = ImageField(verbose_name=_("Image_0"), upload_to=get_file_path, null=True, blank=True)
-    pic_1 = ImageField(verbose_name=_("Image_1"), upload_to=get_file_path, null=True, blank=True)
-    pic_2 = ImageField(verbose_name=_("Image_2"), upload_to=get_file_path, null=True, blank=True)
-    pic_3 = ImageField(verbose_name=_("Image_3"), upload_to=get_file_path, null=True, blank=True)
-    pic_4 = ImageField(verbose_name=_("Image_4"), upload_to=get_file_path, null=True, blank=True)
-    pic_5 = ImageField(verbose_name=_("Image_5"), upload_to=get_file_path, null=True, blank=True)
-    pic_6 = ImageField(verbose_name=_("Image_6"), upload_to=get_file_path, null=True, blank=True)
+    pic = ImageField(verbose_name=_("Image"), upload_to=get_file_path, blank=True)
+    pic_0 = ImageField(verbose_name=_("Image_0"), upload_to=get_file_path, blank=True)
+    pic_1 = ImageField(verbose_name=_("Image_1"), upload_to=get_file_path, blank=True)
+    pic_2 = ImageField(verbose_name=_("Image_2"), upload_to=get_file_path, blank=True)
+    pic_3 = ImageField(verbose_name=_("Image_3"), upload_to=get_file_path, blank=True)
+    pic_4 = ImageField(verbose_name=_("Image_4"), upload_to=get_file_path, blank=True)
+    pic_5 = ImageField(verbose_name=_("Image_5"), upload_to=get_file_path, blank=True)
+    pic_6 = ImageField(verbose_name=_("Image_6"), upload_to=get_file_path, blank=True)
     content_0 = models.TextField(verbose_name=_("Content_0"),max_length=10000, blank=True)
     content_01 = models.TextField(verbose_name=_("Content_01"),max_length=10000, blank=True)
     content_1 = models.TextField(verbose_name=_("Content_1"),max_length=10000, blank=True)
@@ -106,7 +111,7 @@ class Post(models.Model):
     content_6 = models.TextField(verbose_name=_("Content_6"),max_length=10000, blank=True)
     content_video = models.TextField(verbose_name=_("Content_video"),max_length=10000, blank=True)
     youtube_url = models.URLField(verbose_name=_("YoutubeURL"), max_length=300, blank=True)
-    category = models.ForeignKey(Category, null=True)
+    category = models.ForeignKey(Category, null=True, blank=True)
     def __unicode__(self):
         return self.title
 
