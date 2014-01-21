@@ -100,6 +100,121 @@ img{
   
   
   {% endif %}
+  {% if post.pic_0 %}
+   <div class="row">
+     <div class="col-md-6">  
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_0 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_0 %}
+         <div class="img_content">{{ post.content_0 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-6"> 
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_01 %}
+         <div class="img_content">{{ post.content_01 }}</div>
+       {% endif %}
+     </div>
+   </div>
+
+
+  {% endif %}
+  {% if post.pic_04 %}
+   <div class="row">
+     <div class="col-md-12" style="text-align: center;">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_0 %}
+         <div class="img_content">{{ post.content_0 }}</div>
+       {% endif %}
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_1 %}
+         <div class="img_content">{{ post.content_1 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_2 %}
+         <div class="img_content">{{ post.content_2 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_04 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_3 %}
+         <div class="img_content">{{ post.content_3 }}</div>
+       {% endif %}
+     </div>
+   </div>
+
+  {% endif %}
+  {% if post.pic_6 %}
+   <div class="row">
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_1 %}
+         <div class="img_content">{{ post.content_1 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_2 %}
+         <div class="img_content">{{ post.content_2 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_3 %}
+         <div class="img_content">{{ post.content_3 }}</div>
+       {% endif %}
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_4 %}
+         <div class="img_content">{{ post.content_4 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_5 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_5 %}
+         <div class="img_content">{{ post.content_5 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_6 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_6 %}
+         <div class="img_content">{{ post.content_6 }}</div>
+       {% endif %}
+     </div>
+   </div>
+  {% endif %}
   {% endif %}
   
   <div class="media" id="heading">

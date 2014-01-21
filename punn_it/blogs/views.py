@@ -219,6 +219,7 @@ def newpost(request, slug):
 #                                context_instance=RequestContext(request))
 
 
+
 @login_required
 def createalbum(request):
       post = request.POST
@@ -327,7 +328,20 @@ def administratesettings(request, slug):
       return render_to_response('administratesettings.html',
                                 {'blog': blog, 'form': form, },
                                 context_instance=RequestContext(request))
-
+@login_required
+def editpost(request, id):
+      post = get_object_or_404(Post, id=id)
+      blog = post.blog
+      if request.method == 'POST':
+        form = PostForm(request.POST, instance=post,)
+        if form.is_valid():
+          post = form.save()
+        return HttpResponseRedirect(reverse('blogs.views.editpost', args=(post.id,)))
+      else:
+        form = PostForm(instance=post,)
+      return render_to_response('editpost.html',
+                                {'blog': blog, 'form': form,'post': post },
+                                context_instance=RequestContext(request))
 @login_required
 def createpage(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
@@ -352,7 +366,17 @@ def createpage(request, slug):
                                   context_instance=RequestContext(request))
 
 
-
+#@login_required
+#def savepost(request, id):
+#      post = get_object_or_404(Post, id=id)
+#      blog = post.blog
+#      if request.user == post.author:
+#        post.save()
+#        messages.add_message(request, messages.INFO, _(u"Your post has been saveed"))
+#      elif request.user.is_staff:
+#        post.save()
+#        messages.add_message(request, messages.INFO, _(u"The post has been saveed"))
+#      return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
 
 @login_required
 def deletepost(request, id):

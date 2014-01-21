@@ -79,6 +79,13 @@ def get_file_path_6(instance, filename):
     filename = "%s_%s.%s" % (prefix, variable, ext)
     return os.path.join('', filename)
 
+def get_file_path_7(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('7')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
 class Blog(models.Model):
     creator = models.ForeignKey(User, null=True)
     is_open = models.BooleanField(default=False)
@@ -150,6 +157,7 @@ class Post(models.Model):
     pic_4 = ImageField(verbose_name=_("Image_4"), upload_to=get_file_path_4, null=True, blank=True)
     pic_5 = ImageField(verbose_name=_("Image_5"), upload_to=get_file_path_5, null=True, blank=True)
     pic_6 = ImageField(verbose_name=_("Image_6"), upload_to=get_file_path_6, null=True, blank=True)
+    pic_04 = ImageField(verbose_name=_("Image_04"), upload_to=get_file_path_7, null=True, blank=True)
     content_0 = models.TextField(verbose_name=_("Content_0"),max_length=10000, blank=True)
     content_01 = models.TextField(verbose_name=_("Content_01"),max_length=10000, blank=True)
     content_1 = models.TextField(verbose_name=_("Content_1"),max_length=10000, blank=True)

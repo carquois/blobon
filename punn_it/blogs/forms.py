@@ -101,4 +101,4 @@ class PostForm(ModelForm):
                                                     'autofocus':'on'}))
     class Meta:
         model = Post 
-        fields = ('title','content','content_0','content_01','content_1','content_2','content_3','content_4','content_5','content_6','content_video', 'pic','pic_0','pic_1','pic_2','pic_3','pic_4','pic_5','pic_6','youtube_url','category', )
+        fields = ('title','content','content_0','content_01','content_1','content_2','content_3','content_4','content_5','content_6','content_video', 'pic','pic_0','pic_04','pic_1','pic_2','pic_3','pic_4','pic_5','pic_6','youtube_url','category', )
