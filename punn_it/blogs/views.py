@@ -351,6 +351,9 @@ def createpage(request, slug):
                                   {'blog': blog},
                                   context_instance=RequestContext(request))
 
+
+
+
 @login_required
 def deletepost(request, id):
       post = get_object_or_404(Post, id=id)

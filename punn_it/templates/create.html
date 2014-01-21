@@ -5,7 +5,7 @@
 
 {% block content %}
        <h3>{% trans "Ajoutez du contenu" %}</h3>
-       <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{% url punns.views.create %}">{% csrf_token %}
+       <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{% url blogs.views.create %}">{% csrf_token %}
        {% if form.non_field_errors %}
          <div class="alert alert-block alert-error">
            <button type="button" class="close" data-dismiss="alert">&times;</button>

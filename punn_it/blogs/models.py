@@ -30,6 +30,55 @@ def get_file_path(instance, filename):
     filename = "%s.%s" % (prefix, ext)
     return os.path.join('', filename)
 
+def get_file_path_0(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('0')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_1(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('1')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_2(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('2')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_3(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('3')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_4(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('4')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_5(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('5')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_6(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('6')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
 class Blog(models.Model):
     creator = models.ForeignKey(User, null=True)
     is_open = models.BooleanField(default=False)
@@ -93,14 +142,14 @@ class Post(models.Model):
     is_top = models.BooleanField(default=False)
     publish_on_facebook = models.BooleanField(default=False)
     youtube_id = models.CharField(max_length=50, null=True, blank=True)
-    pic = ImageField(verbose_name=_("Image"), upload_to=get_file_path, blank=True)
-    pic_0 = ImageField(verbose_name=_("Image_0"), upload_to=get_file_path, blank=True)
-    pic_1 = ImageField(verbose_name=_("Image_1"), upload_to=get_file_path, blank=True)
-    pic_2 = ImageField(verbose_name=_("Image_2"), upload_to=get_file_path, blank=True)
-    pic_3 = ImageField(verbose_name=_("Image_3"), upload_to=get_file_path, blank=True)
-    pic_4 = ImageField(verbose_name=_("Image_4"), upload_to=get_file_path, blank=True)
-    pic_5 = ImageField(verbose_name=_("Image_5"), upload_to=get_file_path, blank=True)
-    pic_6 = ImageField(verbose_name=_("Image_6"), upload_to=get_file_path, blank=True)
+    pic = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
+    pic_0 = ImageField(verbose_name=_("Image_0"), upload_to=get_file_path_0, null=True, blank=True)
+    pic_1 = ImageField(verbose_name=_("Image_1"), upload_to=get_file_path_1, null=True, blank=True)
+    pic_2 = ImageField(verbose_name=_("Image_2"), upload_to=get_file_path_2, null=True, blank=True)
+    pic_3 = ImageField(verbose_name=_("Image_3"), upload_to=get_file_path_3, null=True, blank=True)
+    pic_4 = ImageField(verbose_name=_("Image_4"), upload_to=get_file_path_4, null=True, blank=True)
+    pic_5 = ImageField(verbose_name=_("Image_5"), upload_to=get_file_path_5, null=True, blank=True)
+    pic_6 = ImageField(verbose_name=_("Image_6"), upload_to=get_file_path_6, null=True, blank=True)
     content_0 = models.TextField(verbose_name=_("Content_0"),max_length=10000, blank=True)
     content_01 = models.TextField(verbose_name=_("Content_01"),max_length=10000, blank=True)
     content_1 = models.TextField(verbose_name=_("Content_1"),max_length=10000, blank=True)
