@@ -5,7 +5,7 @@
     <meta property="og:title" content="{{ post.title }}" />
     <meta property="og:url" content="{{ url }}" />
 {% if post.pic %}
-                  {% thumbnail post.pic "250x250" crop="center" as im %}
+                  {% thumbnail post.pic "400x300" crop="center" as im %}
     <meta property="og:image" content="{{ im.url }}" />
                   {% endthumbnail %}
                   {% endif %}
@@ -66,6 +66,17 @@
 img{
   max-width: 720px;
 }
+
+#fb-root {
+    display: none;
+}
+
+/* To fill the container and nothing else */
+
+.fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {
+    width: 100% !important;
+}
+
     {% endblock %}
  
 {% block content %} 
@@ -243,7 +254,7 @@ img{
 
 
   {% if content %}
-<div class="well">
+<div>
    <h4> {{ content|safe }}</h4>
 </div>
   {% endif %}
@@ -262,111 +273,10 @@ img{
   
 
 
-
-
-
-
-  <div class="modal fade" id="delete">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">{% trans "Effacer cette page?" %}</h4>
-        </div>
-        <div class="modal-body">
-          <p>{% trans "Êtes-vous certain de vouloir faire ça? Vous ne pourrez pas revenir en arrière par la suite." %}</p>
-        </div>
-        <div class="modal-footer">
-<button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Non non!" %}</button>
-                    <a href="" class="btn btn-danger">{% trans "Oui, je veux l'effacer" %}</a>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-
-
-
-</div>
-<div class="well" id="comments" style="min-height: 120px;">
-
-<form method="post" action="">
-                      {% csrf_token %}
-{{ comment_form.content.errors }}
-  <div class="form-group">
-{{ comment_form.content }}
-  </div>
-
-
-         <div class="control-group">
-           <div class="controls">
-{% if request.user.is_authenticated %}
-                  <button rel="tooltip" title="{% trans "Soumettre votre commentaire" %}" class="btn btn-default pull-right fontBlobon" id="comment-submit">{% trans "Soumettre" %}</button>
-                             {% else %}
-<a href="{% url accounts.views.signup %}" title="{% trans "Soumettre votre commentaire" %}" class="btn btn-default pull-right fontBlobon" id="comment-submit">{% trans "Soumettre" %}</a>
-                             {% endif %}
-
-           </div>
-         </div>
-                  </form>
-
-
-
-
-                {% if comment_list %}
-
-          <h3>{% trans "Meilleur commentaire" %}</h3>
-
-{% for comment in comment_list|dictsortreversed:"karma" %}
-
-                {% if forloop.counter == 2 %}
-                <h3>{% trans "Tous les commentaires" %}</h3>
-                {% endif %}
-<div class="panel comment-holder">
-<div class="media">
-
-<div class="pull-left btn-group-vertical">
-        <a class="btn btn-default {% if comment.vote == "U" %}btn-primary{% endif %}" href="
-                             {% if request.user.is_authenticated %}{% url votes.views.commentup comment.id %}
-                             {% else %}{% url accounts.views.signup %}
-                             {% endif %}
-                             ">&#43;</a>
-        <a class="btn btn-default" disabled="disabled">{{ comment.karma }}</a>
-        <a class="btn btn-default {% if comment.vote == "D" %}btn-primary{% endif %}" href="
-                             {% if request.user.is_authenticated %}{% url votes.views.commentdown comment.id %}
-                             {% else %}{% url accounts.views.signup %}
-                             {% endif %}
-                             ">&#45;</a>
-      </div>
-
-<a href="
-                             {% if request.user.is_authenticated %}{% url votes.views.commentup comment.id %}
-                             {% else %}{% url accounts.views.signup %}
-                             {% endif %}
-                             "><div class="comment-vote comment-vote-up {% if comment.vote == "U" %}comment-vote-up-on{% endif %}"></div></a>
-
-
-  <a class="pull-left" href="{% url post.views.profile_page comment.author.username %}">
-                  {% if comment.author.userprofile.avatar %}
-                  {% thumbnail comment.author.userprofile.avatar "64x64" crop="center" as im %}
-                  <img src="{{ im.url }}" alt="{{ comment.author.first_name }} {{ comment.author.last_name }}" class="img-rounded"/>
-                  {% endthumbnail %}
-                  {% endif %}
-  </a>
-  <div class="media-body">
-    <h4 class="media-heading">{{ comment.author.first_name }} {{ comment.author.last_name }}</h4>
-    {{ comment.content|safe }}
-  </div>
-
-
 </div>
 </div>
 
-{% endfor %}
-{% endif %}
-
-</div>
-</div>
+<div class="fb-comments" data-href="http://checkdonc.ca{{ post.get_absolute_url }}" data-numposts="5" data-colorscheme="light"></div>
 
 {% endblock %}
 
