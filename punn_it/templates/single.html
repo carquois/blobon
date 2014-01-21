@@ -2,23 +2,23 @@
 {% load i18n thumbnail punn_tags humanize %}
 {% block open-graphs %}
     <!-- Le open graphs tags -->
-    <meta property="og:title" content="{{ punn.title }}" />
+    <meta property="og:title" content="{{ post.title }}" />
     <meta property="og:url" content="{{ url }}" />
-{% if punn.pic %}
-                  {% thumbnail punn.pic "250x250" crop="center" as im %}
+{% if post.pic %}
+                  {% thumbnail post.pic "250x250" crop="center" as im %}
     <meta property="og:image" content="{{ im.url }}" />
                   {% endthumbnail %}
                   {% endif %}
-    <meta property="og:site_name" content="{{ punn.author.first_name }} {{ punn.author.last_name }}" />
+    <meta property="og:site_name" content="{{ post.author.first_name }} {{ post.author.last_name }}" />
     <!-- Le twitter cards -->
     <meta name="twitter:card" content="photo">
     <meta name="twitter:url" content="{{ url }}">
-    <meta name="twitter:title" content="{{ punn.title }}">
-    <meta name="twitter:image" content="{{ MEDIA_URL }}{{ punn.pic }}">
+    <meta name="twitter:title" content="{{ post.title }}">
+    <meta name="twitter:image" content="{{ MEDIA_URL }}{{ post.pic }}">
     <!-- Le canonical url -->
     <link rel="canonical" href="{{ url }}" />
 {% endblock %}
-{% block title %} {{ punn.title }} {% endblock %}
+{% block title %} {{ post.title }} {% endblock %}
     {% block additional_js %}
 <script>
                   $(document).ready(function () {
@@ -27,16 +27,16 @@
                       }else{
                         var url = false;
                         if (e.which == 37) {
-                          url = "{{ prev_punn.get_absolute_url }}";
+                          url = "{{ prev_post.get_absolute_url }}";
                         }
                         else if (e.which == 39) {
-                          url = "{{ next_punn.get_absolute_url }}";
+                          url = "{{ next_post.get_absolute_url }}";
                         }
                         else if (e.which == 70) {
-                          url = "{% url votes.views.up punn.id %}";
+                          url = "{% url votes.views.up post.id %}";
                         }
                         else if (e.which == 65) {
-                          url = "{% url votes.views.down punn.id %}";
+                          url = "{% url votes.views.down post.id %}";
                         }
                         if (url) {
                           window.location = url;
@@ -84,45 +84,160 @@ img{
                                         
 <div class="panel" id="content-holder">
 
-{% if punn.cat %}
-<a href="{% url punns.views.cat punn.cat.slug %}" style="text-decoration:none;"><div class="tagCat bg{{ punn.cat }} ombrageTexte" style="position: relative; ">{{ punn.cat }}</div></a>
+{% if post.cat %}
+<a href="{% url post.views.cat post.cat.slug %}" style="text-decoration:none;"><div class="tagCat bg{{ post.cat }} ombrageTexte" style="position: relative; ">{{ post.cat }}</div></a>
 {% endif %}
-    <div class="titreSingle">{{ punn.title }}</div>
+    <div class="titreSingle">{{ post.title }}</div>
 
 
-  {% if punn.youtube_id %}
-  <iframe width="480" height="360" src="http://www.youtube.com/embed/{{ punn.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+  {% if post.youtube_id %}
+  <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
   {% else %}
-  {% if punn.pic %}
-  <a href="{{ next_punn.get_absolute_url }}">
-    <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ punn.pic }}" alt="{{ punn.title }}" />
+  {% if post.pic %}
+  <a href="{{ next_post.get_absolute_url }}">
+    <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
   </a>
   
   
   {% endif %}
+  {% if post.pic_0 %}
+   <div class="row">
+     <div class="col-md-6">  
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_0 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_0 %}
+         <div class="img_content">{{ post.content_0 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-6"> 
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_01 %}
+         <div class="img_content">{{ post.content_01 }}</div>
+       {% endif %}
+     </div>
+   </div>
+
+
+  {% endif %}
+  {% if post.pic_04 %}
+   <div class="row">
+     <div class="col-md-12" style="text-align: center;">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_0 %}
+         <div class="img_content">{{ post.content_0 }}</div>
+       {% endif %}
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_1 %}
+         <div class="img_content">{{ post.content_1 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_2 %}
+         <div class="img_content">{{ post.content_2 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_04 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_3 %}
+         <div class="img_content">{{ post.content_3 }}</div>
+       {% endif %}
+     </div>
+   </div>
+
+  {% endif %}
+  {% if post.pic_6 %}
+   <div class="row">
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_1 %}
+         <div class="img_content">{{ post.content_1 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_2 %}
+         <div class="img_content">{{ post.content_2 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_3 %}
+         <div class="img_content">{{ post.content_3 }}</div>
+       {% endif %}
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_4 %}
+         <div class="img_content">{{ post.content_4 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_5 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_5 %}
+         <div class="img_content">{{ post.content_5 }}</div>
+       {% endif %}
+     </div>
+     <div class="col-md-4">
+       <a href="{{ next_post.get_absolute_url }}">
+         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_6 }}" alt="{{ post.title }}" />
+       </a>
+       {% if post.content_6 %}
+         <div class="img_content">{{ post.content_6 }}</div>
+       {% endif %}
+     </div>
+   </div>
+  {% endif %}
   {% endif %}
   
   <div class="media" id="heading">
-  <a class="pull-left" href="{% url punns.views.profile_page punn.author.username %}">
-{% if punn.author.userprofile.avatar %}
-                  {% thumbnail punn.author.userprofile.avatar "64x64" crop="center" as im %}
-                  <img src="{{ im.url }}" alt="{{ punn.author.first_name }} {{ punn.author.last_name }}" />
+  <a class="pull-left" href="#">
+{% if post.author.userprofile.avatar %}
+                  {% thumbnail post.author.userprofile.avatar "64x64" crop="center" as im %}
+                  <img src="{{ im.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }}" />
                   {% endthumbnail %}
                   {% endif %}    
   </a>
 
 <div class="btn-group pull-right">
-  <a href="{{ prev_punn.get_absolute_url }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span></a>
-  <a href="{{ next_punn.get_absolute_url }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span></a>
+  <a href="{{ prev_post.get_absolute_url }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span></a>
+  <a href="{{ next_post.get_absolute_url }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div>
 
   <div class="media-body fontBlobon">
-    <h5 class="media-heading fontBlobon" style="margin-right: 10px;">{{ punn.author.first_name }} {{ punn.author.last_name }} <small>@{{ punn.author.username }}</small> 
-{% if punn.author.userprofile.fan_page_access_token %}
-<div class="fb-like" data-href="{{ punn.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+    <h5 class="media-heading fontBlobon" style="margin-right: 10px;">{{ post.author.first_name }} {{ post.author.last_name }} <small>@{{ post.author.username }}</small> 
+{% if post.author.userprofile.fan_page_access_token %}
+<div class="fb-like" data-href="{{ post.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false"></div>
 {% endif %}    
 </h5>
-<p class="text-muted">{% trans "Publié" %} {{ punn.pub_date|naturaltime }}{% if punn.source %} via <a href="{{ punn.source }}" target="_blank">Source</a>{% endif %}</p>
+<p class="text-muted">{% trans "Publié" %} {{ post.pub_date|naturaltime }}{% if post.source %} via <a href="{{ post.source }}" target="_blank">Source</a>{% endif %}</p>
   </div>
 </div>
 
@@ -138,7 +253,7 @@ img{
                   <div class="pull-right">
             <a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            <div class="fb-like" data-href="http://checkdonc.ca{{ punn.get_absolute_url }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+            <div class="fb-like" data-href="http://checkdonc.ca{{ post.get_absolute_url }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
           </div>
           
           
@@ -163,7 +278,7 @@ img{
         </div>
         <div class="modal-footer">
 <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Non non!" %}</button>
-                    <a href="{% url punns.views.delete punn.id %}" class="btn btn-danger">{% trans "Oui, je veux l'effacer" %}</a>
+                    <a href="" class="btn btn-danger">{% trans "Oui, je veux l'effacer" %}</a>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -231,7 +346,7 @@ img{
                              "><div class="comment-vote comment-vote-up {% if comment.vote == "U" %}comment-vote-up-on{% endif %}"></div></a>
 
 
-  <a class="pull-left" href="{% url punns.views.profile_page comment.author.username %}">
+  <a class="pull-left" href="{% url post.views.profile_page comment.author.username %}">
                   {% if comment.author.userprofile.avatar %}
                   {% thumbnail comment.author.userprofile.avatar "64x64" crop="center" as im %}
                   <img src="{{ im.url }}" alt="{{ comment.author.first_name }} {{ comment.author.last_name }}" class="img-rounded"/>
@@ -257,8 +372,8 @@ img{
 
 {% block topsidebar %}
 <div id="nav-above-top-sidebar">
-  <a href="{{ prev_punn.get_absolute_url }}" class="btn btn-default">&larr; {% trans "Préc" %}</a>
-  <a href="{{ next_punn.get_absolute_url }}" class="btn btn-primary">{% trans "Proch" %} &rarr;</a>
+  <a href="{{ prev_post.get_absolute_url }}" class="btn btn-default">&larr; {% trans "Préc" %}</a>
+  <a href="{{ next_post.get_absolute_url }}" class="btn btn-primary">{% trans "Proch" %} &rarr;</a>
 </div>
 <div class="panel">
 
@@ -266,12 +381,12 @@ img{
 
 
 
-                {% if latest_punn_list %}
-                  {% for punn in latest_punn_list %}
+                {% if latest_post_list %}
+                  {% for post in latest_post_list %}
   <div class="col-xs-4">
-          <a href="{{ punn.get_absolute_url }}" class="thumbnail">
-                    {% thumbnail punn.pic "200x200" crop="center" as im %}
-                      <img id="thumbs" src="{{ im.url }}" alt="{{ punn.title }}" />
+          <a href="{{ post.get_absolute_url }}" class="thumbnail">
+                    {% thumbnail post.pic "200x200" crop="center" as im %}
+                      <img id="thumbs" src="{{ im.url }}" alt="{{ post.title }}" />
                     {% endthumbnail %}
           </a>
 </div>

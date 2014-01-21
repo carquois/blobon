@@ -16,5 +16,5 @@ class PageForm(ModelForm):
 
     class Meta:
         model = Page 
-        fields = ('title', 'content', 'status')
+        fields = ('title', 'content', )
 
