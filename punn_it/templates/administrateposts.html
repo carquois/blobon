@@ -1,0 +1,100 @@
+{% extends "administrateblog.html" %}
+{% load i18n %}
+{% load url from future %}
+  {% block additional-css %}
+    <style>
+      .edit_buttons {
+        padding: 10px;0px;5px;0px;
+      }
+    </style>
+  {% endblock %}
+  {% block dashboard-active %}{% endblock %}
+  {% block posts-active %}class="active"{% endblock %}
+  {% block content %}
+          <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Posts" %}<a href="{% url 'blogs.views.administrateblog' blog.slug %}" class="btn btn-default btn-xs pull-right" id="add_new_post" title="{% trans "Add a New Post" %}">{% trans "Add new" %}</a></div>
+              <div class="panel-body">
+              </div>
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-7">
+                <col class="col-xs-1">
+                <col class="col-xs-1">
+                <col class="col-xs-1">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>{% trans "Title" %}
+                  </th>
+                  <th>{% trans "Author" %}</th>
+                  <th>{% trans "Stats" %}</th>
+                  <th>{% trans "Date" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for post in posts %}
+                <tr>
+                  <td>{{ post.title }}
+                    <div class="edit_buttons">
+                      <a href="{% url 'blogs.views.editpost' post.id %}" class="btn btn-default btn-xs edit_post" title="{% trans "Modify This Post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
+                      <a href="#" class="btn btn-default btn-xs delete_post" title="{% trans "Delete This Post" %}" data-toggle="modal" data-target="#{{ post.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
+                      <a href="{{ post.get_absolute_url }}" target="_blank" class="btn btn-default btn-xs view_post" title="{% trans "View This Post" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "View" %}</a>
+                    </div>
+                  </td>
+                  <td>{{ post.author }}</td>
+                  <td><small>{% trans "Coming soon..." %}</small></td>
+                  <td>{{ post.pub_date }}</td>
+                </tr>
+  <div class="modal fade" id="{{ post.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Delete Post" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Are you Sure You Want to Delete This Post : " %}{{ post.title }}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
+          <a href="{% url 'blogs.views.deletepost' post.id %}" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+
+
+    <ul class="pager">
+    <div class="row">
+      <div class="col-md-4">
+        {% if posts.has_previous %}
+            <li><a class="pull-left" href="?page={{ posts.previous_page_number }}">{% trans "Previous" %}</a></li>
+        {% endif %}
+      </div>
+      <div class="col-md-4">
+        <span class="current">
+            {% trans "Page" %} {{ posts.number }} {% trans "of" %} {{ posts.paginator.num_pages }}
+        </span>
+      </div>
+      <div class="col-md-4">
+        {% if posts.has_next %}
+           <li><a class="pull-right" href="?page={{ posts.next_page_number }}">{% trans "Next" %}</a></li>
+        {% endif %}
+      </div>
+    </div>
+    </ul>
+    <script type="text/javascript">
+      $(function () {
+        $('#show_all_posts').tooltip({container: 'body'});
+        $('#add_new_post').tooltip({container: 'body'});
+        $(".edit_post").tooltip({container: 'body', placement: 'bottom'});
+        $(".delete_post").tooltip({container: 'body', placement: 'bottom'});
+        $(".view_post").tooltip({container: 'body', placement: 'bottom'});
+      });
+    </script>
+  {% endblock %}

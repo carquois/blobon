@@ -17,18 +17,22 @@ from blogs.models import Blog
 def createpage(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       if request.method == 'POST':
-        form = PageForm(request.POST)
-        if form.is_valid():
-          page = form.save(commit=False)
-          page.author = request.user
-          if blog.creator == request.user:
-            page.blog = blog
-          page.save()
-          messages.add_message(request, messages.INFO, _(u"Your page has been created"))
-          return HttpResponseRedirect('/')
+        page = Page(author = request.user)
+        page.blog = blog
+        if request.POST['id_status']:
+          if request.POST['id_status'] == "P":
+            page.status = "P"
+          else:
+            page.status = "D"
+        if request.POST['id_content']:
+          page.content = request.POST['id_content']
+        if request.POST['id_title']:
+          page.title = request.POST['id_title']
+        page.save()
+        messages.add_message(request, messages.INFO, _(u"Your page has been created"))
+        return HttpResponseRedirect('/')
       else:
-        form = PageForm()
-      return render_to_response('createpage.html',
-                                {'form': form, 'blog': blog},
-                                context_instance=RequestContext(request))
+        return render_to_response('createpage.html',
+                                  {'blog': blog},
+                                  context_instance=RequestContext(request))
 
