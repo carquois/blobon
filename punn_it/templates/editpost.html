@@ -3,26 +3,31 @@
 {% load url from future %}
   {% block dashboard-active %}{% endblock %}
   {% block posts-active %}class="active"{% endblock %}
+  {% block additional-js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/google-code-prettify/prettify.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js"></script>
+  {% endblock %}
+  {% block additional-css %}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/css/bootstrap.min.css">
+  {% endblock %}
 {% block content %}
 
 
     <form enctype="multipart/form-data" action="{% url "blogs.views.editpost" post.id %}" method="post" id=savedpost>{% csrf_token %}
       <div class="row">
-        {{ form.title }}
+        {{ form.title.label_tag }} :{{ form.title }}
       </div>
   {% if post.pic %}
-      <div class="form-group row" id="bigpreview">
-        <div class="fileinput fileinput-new col-xs-12" id="image_form" data-provides="fileinput">
+
+
           <div>
-            <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic }}</span>
-            <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+           {{ form.pic.label_tag }} :{{form.pic }}
           </div>
-          <div class="fileinput-preview thumbnail bigimgpreview singleimgpreview" id="imgprev" data-trigger="fileinput" id="album2_prev_1">
-            <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
-          </div>
-          <div>{{ post_form.content_0 }}</div>
-        </div>
-      </div>
+          <div>{{ form.content_0.label_tag }} :{{ form.content_0 }}</div>
   {% endif %}
   {% if post.pic_0 %}
       <div class="row" id="rowform_al_2img">
