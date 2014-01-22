@@ -26,7 +26,7 @@ class Command(BaseCommand):
       p = Post.objects.filter(author=u).filter(status="D").order_by('-pub_date')[:1]
       if p.count() >= 1:
         post = p[0]
-        publish_draft(psot)
+        publish_draft(post)
         publish_facebook_link(post)
         publish_twitter_link(post)
         if post.translated_title and up.fr_user:
