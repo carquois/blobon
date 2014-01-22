@@ -8,6 +8,11 @@ from django.shortcuts import redirect, render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib import messages
 from django.utils.translation import ugettext as _
+from django.core.files.temp import NamedTemporaryFile
+import urllib2
+from urlparse import urlparse
+from django.core.files import File
+from cgi import parse_qs
 
 from blogs.forms import BlogForm, SettingsForm, PostForm
 from blogs.models import Blog, Page, Tag, Category, Post, Comment
@@ -387,6 +392,7 @@ def submit(request):
         form = SubmitForm(request.POST)
         if form.is_valid():
           new_post = form.save(commit=False)
+          new_post.blog = request.user.userprofile.main_blog
           new_post.author = request.user
           if request.user.is_staff:
             new_post.is_top = True
@@ -407,7 +413,7 @@ def submit(request):
             p = parse_qs(query.query)
             new_post.youtube_id = p['v'][0]
             new_post.save()
-            return HttpResponseRedirect( new_post.get_absolute_url() )
+          return HttpResponseRedirect( new_post.get_absolute_url() )
         #  return render_to_response('success.html', {"post": new_post}, context_instance=RequestContext(request))
     elif request.method == 'GET':
       source = request.GET.get('url', '') 

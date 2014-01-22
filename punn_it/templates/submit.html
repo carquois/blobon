@@ -4,7 +4,7 @@
 {% block content %}
     <div class="well">
 
-<form role="form" method="post" action="/blogs/submit/">{% csrf_token %}
+<form role="form" method="post" action="{% url blogs.views.submit %}">{% csrf_token %}
 {{ form.title.errors }}
   <div class="form-group">
 {{ form.title.label }}

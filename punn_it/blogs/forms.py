@@ -23,7 +23,7 @@ class SubmitForm(ModelForm):
     source = URLField(label=_('Source :'), widget=forms.HiddenInput(), required=False)
     class Meta:
         model = Post
-        fields = ('title', 'translated_title', )
+        fields = ('title', 'translated_title',)
 
 class SettingsForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your blog title'),

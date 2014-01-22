@@ -37,3 +37,18 @@ def publish_draft(post):
         post.is_top = True 
         post.pub_date = datetime.now()
         post.save()
+
+def publish_twitter_link(post):
+      up = UserProfile.objects.get(user=post.author)
+      if up.twitter_oauth_token:
+        twitter = Twython(APP_KEY, APP_SECRET,
+                  up.twitter_oauth_token, up.twitter_oauth_token_secret)
+        twitter.update_status(status="%s\n\nhttp://%s%s" % (post.title.encode('utf-8') , settings.MAIN_SITE_DOMAIN, post.get_absolute_url() ))
+
+def publish_facebook_link(post):
+      up = UserProfile.objects.get(user=post.author)
+      graph = facebook.GraphAPI(up.fan_page_access_token)
+      profile = graph.get_object("me")
+      graph.put_object("me", "feed", link="http://%s%s" % (settings.MAIN_SITE_DOMAIN, post.get_absolute_url() ))
+
+
