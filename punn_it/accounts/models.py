@@ -11,6 +11,7 @@ from django.utils.translation import ugettext as _
 
 from social_auth.signals import socialauth_registered
 
+from blogs.models import Blog
 
 class UserForm(ModelForm):
     username = CharField(help_text="Don't worry, you can change it later.")
@@ -69,6 +70,7 @@ class UserProfile(models.Model):
     twitter_oauth_token_secret = models.CharField(max_length=100, blank=True)
 
     fr_user = models.ForeignKey(User, related_name='french_related_user', blank=True, null=True)  
+    main_blog = models.ForeignKey(Blog, blank=True, null=True)  
     
     def __unicode__(self):
         return self.description
