@@ -52,11 +52,11 @@ class PostForm(ModelForm):
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
                                                     'autofocus':'on'}))
-    source = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Write your title here'),
+    source = URLField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Your source'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
                                                     'autofocus':'on'}))
-    artist = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Write your title here'),
+    artist = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Write artist name here'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
                                                     'autofocus':'on'}))
