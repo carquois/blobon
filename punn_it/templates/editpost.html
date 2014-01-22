@@ -1,28 +1,116 @@
-{% extends "administrateblog.html" %}
+{% extends "administrateposts.html" %}
 {% load i18n %}
 {% load url from future %}
-  {% block additional-css %}
-    <style>
-      .edit_buttons {
-        padding: 10px;0px;5px;0px;
-      }
-    </style>
-  {% endblock %}
   {% block dashboard-active %}{% endblock %}
   {% block posts-active %}class="active"{% endblock %}
+  {% block additional-js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/google-code-prettify/prettify.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js"></script>
+  {% endblock %}
+  {% block additional-css %}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/css/bootstrap.min.css">
+  {% endblock %}
 {% block content %}
 
 
     <form enctype="multipart/form-data" action="{% url "blogs.views.editpost" post.id %}" method="post" id=savedpost>{% csrf_token %}
       <div class="row">
-        <div class="col-md-6 form_section" id="settings_title">
-        {{ form.title }}
-        <div class="col-md-6 form_section" id="settings_slug">
-        <div class="input-group">
-        {{ form.pic }}
-       </div>
+        {{ form.title.label_tag }} :{{ form.title }}
+      </div>
+  {% if post.pic %}
+
+
+          <div>
+           {{ form.pic.label_tag }} :{{form.pic }}
+          </div>
+          <div>{{ form.content_0.label_tag }} :{{ form.content_0 }}</div>
+  {% endif %}
+  {% if post.pic_0 %}
+      <div class="row" id="rowform_al_2img">
+        <div class="col-md-6" id="image_al_1_form">
+          <div class="form-group">
+            <div class="fileinput fileinput-new col-xs-12" data-provides="fileinput">
+              <div>
+                <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_0 }}</span>
+                <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+              </div>
+              <div class="fileinput-preview thumbnail medimgpreview" id="med1" data-trigger="fileinput"></div>
+              <div>{{ post_form.content_0 }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" id="image_al_1_form">
+          <div class="form-group">
+            <div class="fileinput fileinput-new col-xs-12" data-provides="fileinput">
+              <div>
+                <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_1 }}</span>
+                <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+              </div>
+              <div class="fileinput-preview thumbnail medimgpreview" id="med2" data-trigger="fileinput"></div>
+              <div>{{ post_form.content_1 }}</div>
+            </div>
+          </div>
         </div>
       </div>
+  {% endif %}
+  {% if post.pic_04 %}
+      <div class="row" id="rowform_al_4imgbig">
+        <div class="form-group" id="bigpreview">
+          <div class="fileinput fileinput-new col-xs-12" id="image_al2_1_form" data-provides="fileinput">
+            <div>
+              <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_1 }}</span>
+                <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+            </div>
+            <div class="fileinput-preview thumbnail bigimgpreview album2preview" id="preview_al_2_1" data-trigger="fileinput" id="album2_prev_1"></div>
+            <div>{{ post_form.content_0 }}</div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row" id="rowform_al_4img">
+        <div class="col-sm-4" id="image_al2_2_form">
+          <div class="form-group">
+            <div class="fileinput fileinput-new" data-provides="fileinput">
+              <div>
+                <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_2 }}</span>
+                <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+              </div>
+              <div class="fileinput-preview thumbnail smallimgpreview album2preview" id="preview_al_2_2"  data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+              <div>{{ post_form.content_1 }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4" id="image_al2_3_form">
+          <div class="form-group">
+            <div class="fileinput fileinput-new" data-provides="fileinput">
+              <div>
+                <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_3 }}</span>
+                <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+              </div>
+              <div class="fileinput-preview thumbnail smallimgpreview album2preview" id="preview_al_2_3"  data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+              <div>{{ post_form.content_2 }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4" id="image_al2_4_form">
+          <div class="form-group">
+            <div class="fileinput fileinput-new" data-provides="fileinput">
+              <div>
+                <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_04 }}</span>
+                <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+              </div>
+              <div class="fileinput-preview thumbnail smallimgpreview album2preview" id="preview_al_2_4" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+              <div>{{ post_form.content_3 }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+  {% endif %}
+      </form>
     <div class="savedpost_submit">
       <button type="submit" class="btn btn-default" id=submitsavedpost title="{% trans "Submit Changes" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
     </div>
@@ -32,3 +120,4 @@
       });
     </script>
 {% endblock %}
+
