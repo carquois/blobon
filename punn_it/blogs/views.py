@@ -87,6 +87,29 @@ def videos(request):
 
 def single(request, shorturl):
     post = get_object_or_404(Post, base62id=shorturl)
+#    if post.blog.custom_domain:
+#      home = post.blog.custom_domain
+#    else:
+#      home = "http://blobon.com"
+    latest_post_list = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:6]
+    next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]
+    prev_post = ""
+    next_post = ""
+    if Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]:
+      next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
+      if (next_post_query.count() > 0):
+        next_post = next_post_query[0]
+    if Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).order_by('pub_date').exclude(pk=post.id)[:1]:
+      prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(is_top=True).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
+      if (prev_post_query.count() > 0):
+        prev_post = prev_post_query[0]
+#    url = request.build_absolute_uri()
+    return render_to_response('single.html',
+                                {'post': post, 'latest_post_list': latest_post_list,
+                                 'next_post': next_post, 'prev_post': prev_post,
+                                 'user': post.author},
+                                context_instance=RequestContext(request))
+
     #cats = Cat.objects.filter(is_top_level=True)
     #votesup = PunnVote.objects.filter(punn=punn).filter(vote='U')
     #votesdown = PunnVote.objects.filter(punn=punn).filter(vote='D')
@@ -104,18 +127,6 @@ def single(request, shorturl):
     #  home = punn.author.userprofile.domain
     #else:
     #  home = "http://checkdonc.ca"
-    latest_post_list = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:6]
-    next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]
-    prev_post = ""
-    next_post = ""
-    if Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]:
-      next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
-      if (next_post_query.count() > 0):
-        next_post = next_post_query[0]
-    if Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).order_by('pub_date').exclude(pk=post.id)[:1]:
-      prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(is_top=True).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
-      if (prev_post_query.count() > 0):
-        prev_post = prev_post_query[0]
     #content = ""
     #if punn.content:
     #    content = linkify(punn.content)
@@ -166,13 +177,6 @@ def single(request, shorturl):
     #url = request.build_absolute_uri()
     #site_description = settings.MAIN_SITE_DESCRIPTION
     #site = get_current_site(request)
-    return render_to_response('single.html',
-                              {'post': post, 'latest_post_list': latest_post_list,
-                               'next_post': next_post, 'prev_post': prev_post,
-                               'user': post.author,},
-                              context_instance=RequestContext(request))
-
-
 
 
 @login_required

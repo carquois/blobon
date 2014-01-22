@@ -57,6 +57,9 @@
         text-align: center;
         cursor: pointer;
       }
+      .source_artist {
+        padding:5px 5px 15px 5px;
+      }
       .smallprev {
         max-width:200px;
       }
@@ -257,10 +260,10 @@
                             <form enctype="multipart/form-data" id="newimagealbum1" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
                               <div class="row">
                                 <div class="col-xs-3 addtitle" id="addtitle_al_1">
-                                  <a id="addtitletoal1" title="{% trans "Add a Title to Your Album" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
+                                  <a id="addtitletoal1" title="{% trans "Add a Title to Your Album" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a title" %}</a>
                                 </div>
                                 <div class="col-xs-3 col-xs-offset-3 addcomment pull-right" id="addcomment_al_1">
-                                  <a class="pull-right" id="addcommenttoal1" title="{% trans "Add a Comment to Your Images" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Comments" %}</a>
+                                  <a class="pull-right" id="addcommenttoal1" title="{% trans "Add a Comment to Your Images" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add content" %}</a>
                                 </div>
                               </div>
                               <div class="col-md-12 form-group" style="display: none" id="addedtitle_al_1">
@@ -297,10 +300,18 @@
                                   </div>
                                 </div>
                               </div>
-                                {% if categories %}
-                              <div class="form-group" id="cate_al1">
-                               {{ post_form.category.label_tag }} {{ post_form.category }}
+                              <div class="row source_artist">
+                                <div class="col-md-6">
+                                {{ post_form.source.label_tag }}{{ post_form.source }}
+                                </div>
+                                <div class="col-md-6">
+                                {{ post_form.artist.label_tag }}{{ post_form.artist }}
+                                </div>
                               </div>
+                                {% if categories %}
+                                  <div class="form-group" id="cate_al1">
+                                    {{ post_form.category.label_tag }} {{ post_form.category }}
+                                  </div>
                                 {% endif %}
                             </form>
                             <button id="submitimagealbum1form" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
@@ -310,10 +321,10 @@
                             <form enctype="multipart/form-data" id="newimagealbum2" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
                               <div class="row">
                                 <div class="col-xs-3 addtitle" id="addtitle_al_2">
-                                  <a id="addtitletoal2" title="{% trans "Add a Title to Your Album" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
+                                  <a id="addtitletoal2" title="{% trans "Add a Title to Your Album" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a title" %}</a>
                                 </div>
                                 <div class="col-xs-3 col-xs-offset-3 addcomment pull-right" id="addcomment_al_2">
-                                  <a class="pull-right" id="addcommenttoal2" title="{% trans "Add a Comment to Your Images" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Comments" %}</a>
+                                  <a class="pull-right" id="addcommenttoal2" title="{% trans "Add a Comment to Your Images" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add content" %}</a>
                                 </div>
                               </div>
                               <div class="form-group" style="display: none" id="addedtitle_al_2">
@@ -379,7 +390,14 @@
                                   </div>
                                 </div>
                               </div>
-                              <hr>
+                              <div class="row source_artist">
+                                <div class="col-md-6">
+                                {{ post_form.source.label_tag }}{{ post_form.source }}
+                                </div>
+                                <div class="col-md-6">
+                                {{ post_form.artist.label_tag }}{{ post_form.artist }}
+                                </div>
+                              </div>
                                 {% if categories %}
                               <div class="form-group" id="cate_al2">
                                {{ post_form.category.label_tag }} {{ post_form.category }}
@@ -393,10 +411,10 @@
                             <form enctype="multipart/form-data" id="newimagealbum3" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
                               <div class="row">
                                 <div class="col-xs-3 addtitle" id="addtitle_al_3">
-                                  <a id="addtitletoal3" title="{% trans "Add a Title to Your Album" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
+                                  <a id="addtitletoal3" title="{% trans "Add a Title to Your Album" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a title" %}</a>
                                 </div>
                                 <div class="col-xs-3 col-xs-offset-3 addcomment pull-right" id="addcomment_al_3">
-                                  <a class="pull-right" id="addcommenttoal3" title="{% trans "Add a Comment to Your Images" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Comments" %}</a>
+                                  <a class="pull-right" id="addcommenttoal3" title="{% trans "Add a Comment to Your Images" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add content" %}</a>
                                 </div>
                               </div>
                               <div class="form-group" style="display: none" id="addedtitle_al_3">
@@ -490,6 +508,14 @@
                                  </div>
                                 </div>
                               </div>
+                              <div class="row source_artist">
+                                <div class="col-md-6">
+                                {{ post_form.source.label_tag }}{{ post_form.source }}
+                                </div>
+                                <div class="col-md-6">
+                                {{ post_form.artist.label_tag }}{{ post_form.artist }}
+                                </div>
+                              </div>
                                 {% if categories %}
                               <div class="form-group" id="cate_al3">
                                {{ post_form.category.label_tag }} {{ post_form.category }}
@@ -503,10 +529,10 @@
                             <form enctype="multipart/form-data" id="newimage" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
                               <div class="row">
                                 <div class="col-xs-3 addtitle" id="addtitle_img">
-                                  <a id="addtitletoimage" title="{% trans "Add a Title to Your Image" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Title" %}</a>
+                                  <a id="addtitletoimage" title="{% trans "Add a Title to Your Image" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a title" %}</a>
                                 </div>
                                 <div class="col-xs-3 col-xs-offset-3 addcomment pull-right" id="addcomment_image">
-                                  <a class="pull-right" id="addcommenttoimage" title="{% trans "Add a Comment to Your Image" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Comment" %}</a>
+                                  <a class="pull-right" id="addcommenttoimage" title="{% trans "Add a Comment to Your Image" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add content" %}</a>
                                 </div>
                               </div>
                               <div class="title" id="addedtitle_image" style="display: none"> 
@@ -523,6 +549,14 @@
                                       <div id=addedcomment_image style="display: none">{{ post_form.content_0 }}<span id="addcomment_image_cancel" title="{% trans "Cancel Comment" %}" class="glyphicon glyphicon-remove-circle pull-right"></span></div>
                                     </div>
                                 </div>
+                              <div class="row source_artist">
+                                <div class="col-md-6">
+                                {{ post_form.source.label_tag }}{{ post_form.source }}
+                                </div>
+                                <div class="col-md-6">
+                                {{ post_form.artist.label_tag }}{{ post_form.artist }}
+                                </div>
+                              </div>
                                 {% if categories %}
                               <div class="form-group" id="cate_image">
                                {{ post_form.category.label_tag }} {{ post_form.category }}
@@ -543,7 +577,7 @@
                             <a id="addtitletovideo" title="{% trans "Add a Title to Your Video" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Title" %}</a>
                           </div>
                           <div class="col-xs-3 col-xs-offset-3 addcomment pull-right" id="addcomment_video">
-                            <a id="addcommenttovideo" title="{% trans "Add a Comment to Your Video" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Comment" %}</a>
+                            <a id="addcommenttovideo" title="{% trans "Add a Comment to Your Video" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add content" %}</a>
                           </div>
                         </div>
                         <div class="row" id="addedtitle_video" style="display: none">
