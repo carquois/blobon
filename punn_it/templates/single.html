@@ -59,6 +59,9 @@
 #btn-left {
   margin-left: 10px;
 }
+.img_content{
+  padding: 10px;
+}
  
 .comment-holder{
   padding: 10px;
@@ -108,7 +111,9 @@ img{
   <a href="{{ next_post.get_absolute_url }}">
     <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
   </a>
-  
+       {% if post.content_0 %}
+         <div class="img_content">{{ post.content_0 }}</div>
+       {% endif %}  
   
   {% endif %}
   {% if post.pic_0 %}

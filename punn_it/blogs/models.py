@@ -94,6 +94,7 @@ class Blog(models.Model):
     password = models.CharField(verbose_name=_("Password"), max_length=140, blank=True)
     custom_domain = models.CharField(verbose_name=_("Custom domain"), max_length=300, blank=True)
     description = models.CharField(verbose_name=_("Description"), max_length=500, blank=True)
+    translation = models.ForeignKey('self',  null=True, blank=True)
     def __unicode__(self):
         return self.title
 
