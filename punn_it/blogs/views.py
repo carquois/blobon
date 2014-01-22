@@ -218,6 +218,16 @@ def newpost(request, slug):
 #                                {},
 #                                context_instance=RequestContext(request))
 
+def draft(request):
+      punns = paginate(request,
+                       Punns.objects.filter(status='D').order_by('-pub_date'),
+                       20)
+      site_description = settings.MAIN_SITE_DESCRIPTION
+      site = get_current_site(request)
+      return render_to_response('base.html',
+                               {'site_description': site_description,
+                                'punns': punns, 'site': site},
+                                context_instance=RequestContext(request))
 
 
 @login_required
@@ -365,6 +375,46 @@ def createpage(request, slug):
                                   {'blog': blog},
                                   context_instance=RequestContext(request))
 
+
+@login_required
+def submit(request): 
+    from blogs.forms import SubmitForm
+    if request.method == 'POST':
+        form = SubmitForm(request.POST)
+        if form.is_valid():
+          new_post = form.save(commit=False)
+          new_post.author = request.user
+          if request.user.is_staff:
+            new_post.is_top = True
+            new_post.save()
+          new_post.status = "D"
+          new_post.save()
+          new_post.source = request.POST['source']
+          img_temp = NamedTemporaryFile(delete=True)
+          img_temp.write(urllib2.urlopen(request.POST['media']).read())
+          img_temp.flush()
+          filename = urlparse(request.POST['media']).path.split('/')[-1]
+          ext = filename.split('.')[-1]
+          prefix = new_post.base62id
+          filename = "%s.%s" % (prefix, ext)
+          new_post.pic.save(filename, File(img_temp))
+          if request.POST['is_video'] == 'true':
+            query = urlparse(new_post.source)
+            p = parse_qs(query.query)
+            new_post.youtube_id = p['v'][0]
+            new_post.save()
+            return HttpResponseRedirect( new_post.get_absolute_url() )
+        #  return render_to_response('success.html', {"post": new_post}, context_instance=RequestContext(request))
+    elif request.method == 'GET':
+      source = request.GET.get('url', '') 
+      title = request.GET.get('title', '') 
+      image = request.GET.get('media', '') 
+      is_video = request.GET.get('is_video', '') 
+      form = SubmitForm(initial={'source':source, 'title':title, 'image': image, 'is_video':is_video})
+      return render_to_response('submit.html', {'image': image, 'form': form, 'is_video': is_video}, context_instance=RequestContext(request))
+    else:
+      form = SubmitForm()
+    return render_to_response('submit.html', {'form': form}, context_instance=RequestContext(request))
 
 #@login_required
 #def savepost(request, id):

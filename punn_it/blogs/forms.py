@@ -17,6 +17,14 @@ class BlogForm(ModelForm):
         model = Blog 
         fields = ('title', 'slug', )
 
+class SubmitForm(ModelForm):
+    title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.'), 'class': 'form-control'}), required=False)
+    translated_title = CharField(label=_('Title translated :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your translation here.'), 'class': 'form-control'}), required=False)
+    source = URLField(label=_('Source :'), widget=forms.HiddenInput(), required=False)
+    class Meta:
+        model = Post
+        fields = ('title', 'translated_title', )
+
 class SettingsForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your blog title'),
                                                     'type': 'text',
