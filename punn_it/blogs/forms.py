@@ -50,7 +50,14 @@ class SettingsForm(ModelForm):
 class PostForm(ModelForm):
     title = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Write your title here'),
                                                     'type': 'text',
-                                                    
+                                                    'class': "form-control setting_form input-block-level",
+                                                    'autofocus':'on'}))
+    source = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Write your title here'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    'autofocus':'on'}))
+    artist = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Write your title here'),
+                                                    'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
                                                     'autofocus':'on'}))
     content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write a new post'),
@@ -109,4 +116,4 @@ class PostForm(ModelForm):
                                                     'autofocus':'on'}))
     class Meta:
         model = Post 
-        fields = ('title','content','content_0','content_01','content_1','content_2','content_3','content_4','content_5','content_6','content_video', 'pic','pic_0','pic_04','pic_1','pic_2','pic_3','pic_4','pic_5','pic_6','youtube_url','category', )
+        fields = ('title','content','artist','content_0','content_01','content_1','content_2','content_3','content_4','content_5','content_6','content_video', 'pic','pic_0','pic_04','pic_1','pic_2','pic_3','pic_4','pic_5','pic_6','youtube_url','category', )
