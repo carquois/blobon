@@ -232,7 +232,11 @@ img{
    </div>
   {% endif %}
   {% endif %}
-  
+  {% if post.artist %}
+  <div class="media-body">
+   <h5>{% trans "Artist : " %}{{ post.artist }}</h5>
+  </div>
+  {% endif %}
   <div class="media" id="heading">
   <a class="pull-left" href="#">
 {% if post.author.userprofile.avatar %}
