@@ -204,7 +204,7 @@ def moderate(request):
                                 context_instance=RequestContext(request))
 def draft(request):
       punns = paginate(request,
-                       Punn.objects.filter(status='D').order_by('-pub_date'),
+                       Punns.objects.filter(status='D').order_by('-pub_date'),
                        20)
       site_description = settings.MAIN_SITE_DESCRIPTION
       site = get_current_site(request)
