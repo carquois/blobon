@@ -27,31 +27,14 @@ class Command(BaseCommand):
       if p.count() >= 1:
         post = p[0]
         publish_draft(post)
-        publish_facebook_link(post)
-        publish_twitter_link(post)
-        if post.translated_title and up.fr_user:
+        if post.translated_title and up.fr_user: 
           post.is_top = False
           post.save()
-          new_post = Post(title=post.translated_title, author=up.fr_user, pic=post.pic, source=post.source, is_top=True, youtube_id=post.youtube_id)
+          new_post = Post(title=post.translated_title, author= up.fr_user, blog=post.blog, pic=post.pic, source=post.source, is_top=False)
           publish_draft(new_post)
-          publish_facebook_link(new_post)
-          publish_twitter_link(new_post)
 
 
 def publish_draft(post):
         post.status = "P"
         post.pub_date = datetime.now()
         post.save()
-
-def publish_twitter_link(post):
-      up = UserProfile.objects.get(user=post.author)
-      if up.twitter_oauth_token:
-        twitter = Twython(APP_KEY, APP_SECRET,
-                  up.twitter_oauth_token, up.twitter_oauth_token_secret)
-        twitter.update_status(status="%s\n\nhttp://%s%s" % (post.title.encode('utf-8') , settings.MAIN_SITE_DOMAIN, post.get_absolute_url() ))
-
-def publish_facebook_link(post):
-      up = UserProfile.objects.get(user=post.author)
-      graph = facebook.GraphAPI(up.fan_page_access_token)
-      profile = graph.get_object("me")
-      graph.put_object("me", "feed", link="http://%s%s" % (settings.MAIN_SITE_DOMAIN, post.get_absolute_url() ))
