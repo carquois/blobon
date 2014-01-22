@@ -806,7 +806,7 @@
         "http:": "http://passets-cdn.pinterest.com"
     },
     embed: "//pinterest.com/embed/?",
-    pin: "punn.it/submit/",
+    pin: "blobon.com/submit/",
     minImgSize: 80,
     maxCheckCount: 20,
     thumbCellSize: 200,

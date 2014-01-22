@@ -27,14 +27,13 @@ class Command(BaseCommand):
       if p.count() >= 1:
         post = p[0]
         publish_draft(post)
-        if post.translated_title and up.fr_user: 
-          post.is_top = False
+        if post.translated_title and post.blog.translation: 
           post.save()
-          new_post = Post(title=post.translated_title, author= up.fr_user, blog=post.blog, pic=post.pic, source=post.source, is_top=False)
+          new_post = Post(title=post.translated_title, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
-
 
 def publish_draft(post):
         post.status = "P"
+        post.is_top = True 
         post.pub_date = datetime.now()
         post.save()
