@@ -146,8 +146,6 @@ class Post(models.Model):
     views = models.IntegerField(default=0, blank=True)
     source = models.URLField(verbose_name=_("Source"), max_length=300, blank=True)
     content = models.TextField(verbose_name=_("Contenu"),max_length=10000, blank=True)
-    ###IS VIDEO IS DEPRECATED
-    is_video = models.BooleanField(default=False)
     is_top = models.BooleanField(default=False)
     publish_on_facebook = models.BooleanField(default=False)
     youtube_id = models.CharField(max_length=50, null=True, blank=True)
