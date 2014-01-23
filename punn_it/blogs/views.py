@@ -194,7 +194,8 @@ def newpost(request, slug):
           post.author = request.user
           post.blog = blog
           post.save()
-          return HttpResponseRedirect( post.get_absolute_url() )
+          return render_to_response('administrateposts.html', {'blog': blog})
+         # return HttpResponseRedirect( post.get_absolute_url() )
       return render_to_response('administrateblog.html', {'form': form})
 #      else:
 #        form = PostForm()
@@ -228,14 +229,11 @@ def newpost(request, slug):
 #                                context_instance=RequestContext(request))
 
 def draft(request):
-      punns = paginate(request,
-                       Punns.objects.filter(status='D').order_by('-pub_date'),
+      post = paginate(request,
+                       Posts.objects.filter(status='D').order_by('-pub_date'),
                        20)
-      site_description = settings.MAIN_SITE_DESCRIPTION
-      site = get_current_site(request)
-      return render_to_response('base.html',
-                               {'site_description': site_description,
-                                'punns': punns, 'site': site},
+      return render_to_response('index.html',
+                               {'post': post},
                                 context_instance=RequestContext(request))
 
 
