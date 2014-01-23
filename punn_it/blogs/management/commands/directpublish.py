@@ -28,14 +28,14 @@ class Command(BaseCommand):
         post = p[0]
         publish_draft(post)
         publish_twitter_link(post)
-        if post.translated_title and post.blog.translation: 
+        if post.translated_title and post.blog.translation and post.youtube_id: 
           post.save()
-          new_post = Post(title=post.translated_title, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
+          new_post = Post(title=post.translated_title, youtube_id=post.youtube_id, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
           publish_twitter_link(new_post)
-        elif post.translated_title and post.blog.translation and post.is_video:
+        elif post.translated_title and post.blog.translation:
           post.save()
-          new_post = Post(title=post.translated_title, is_video=True, youtube_id=post.youtube_id, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
+          new_post = Post(title=post.translated_title, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
           publish_twitter_link(new_post)
 
