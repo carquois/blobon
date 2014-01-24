@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from django.forms import ModelForm, Textarea, TextInput, CharField, URLField
+from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, ImageField
 from django.utils.translation import ugettext as _
 
 from blogs.models import Blog, Post, Category
@@ -65,6 +65,11 @@ class PostForm(ModelForm):
                                                     'rows': '5',
                                                     'class': "form-control setting_form input-block-level",
                                                     'autofocus':'on'}))
+    text = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write your text here'),
+                                                    'type': 'text',
+                                                    'rows': '5',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    'autofocus':'on'}))
     content_0 = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this image'),
                                                     'type': 'text',
                                                     'rows': '5',
@@ -114,6 +119,32 @@ class PostForm(ModelForm):
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
                                                     'autofocus':'on'}))
+    pic_1 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_2 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_3 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_4 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_5 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_6 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_7 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_8 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_9 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_10 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_11 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_12 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_13 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_14 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_15 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_16 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_17 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_18 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_19 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_20 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_21 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_22 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_23 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+    pic_24 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
+
     class Meta:
         model = Post 
-        fields = ('title','content','artist','content_0','content_01','content_1','content_2','content_3','content_4','content_5','content_6','content_video', 'pic','pic_0','pic_04','pic_1','pic_2','pic_3','pic_4','pic_5','pic_6','youtube_url','category', )
+        fields = ('title','content','source','artist','text','content_0','content_01','content_1','content_2','content_3','content_4','content_5','content_6','content_video', 'pic','pic_0','pic_04','pic_1','pic_2','pic_3','pic_4','pic_5','pic_6','youtube_url','category',
+                 'pic_7','pic_8','pic_9','pic_10','pic_11','pic_12','pic_13','pic_14','pic_15','pic_16','pic_17','pic_18','pic_19','pic_20','pic_21','pic_22','pic_23','pic_24','layout_type', )

@@ -27,7 +27,7 @@
                   <th>{% trans "Title" %}
                   </th>
                   <th>{% trans "Author" %}</th>
-                  <th>{% trans "Stats" %}</th>
+                  <th style="display:none;">{% trans "Stats" %}</th>
                   <th>{% trans "Date" %}</th>
                 </tr>
               </thead>
@@ -36,13 +36,13 @@
                 <tr>
                   <td>{{ post.title }}
                     <div class="edit_buttons">
-                      <a href="{% url 'blogs.views.editpost' post.id %}" class="btn btn-default btn-xs edit_post" title="{% trans "Modify This Post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
+                      <a href="{% url 'blogs.views.editpost' post.id %}" class="btn btn-default btn-xs edit_post" style="display:none;" title="{% trans "Modify This Post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
                       <a href="#" class="btn btn-default btn-xs delete_post" title="{% trans "Delete This Post" %}" data-toggle="modal" data-target="#{{ post.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
                       <a href="{{ post.get_absolute_url }}" target="_blank" class="btn btn-default btn-xs view_post" title="{% trans "View This Post" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "View" %}</a>
                     </div>
                   </td>
                   <td>{{ post.author }}</td>
-                  <td><small>{% trans "Coming soon..." %}</small></td>
+                  <td style="display:none;"><small>{% trans "Coming soon..." %}</small></td>
                   <td>{{ post.pub_date }}</td>
                 </tr>
   <div class="modal fade" id="{{ post.id }}">
