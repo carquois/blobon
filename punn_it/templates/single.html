@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n thumbnail punn_tags humanize %}
+{% load markup %}
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ post.title }}" />
@@ -237,6 +238,11 @@ img{
    <h5>{% trans "Artist : " %}{{ post.artist }}</h5>
   </div>
   {% endif %}
+  {% if post.content %}
+<div>
+   <p> {{ post.content|markdown|safe }}</p>
+</div>
+  {% endif %}
   <div class="media" id="heading">
   <a class="pull-left" href="#">
 {% if post.author.userprofile.avatar %}
@@ -262,11 +268,6 @@ img{
 </div>
 
 
-  {% if content %}
-<div>
-   <h4> {{ content|safe }}</h4>
-</div>
-  {% endif %}
 <div id="infos" class="panel">
 <div class="row">
  
@@ -286,6 +287,27 @@ img{
 </div>
 
 <div class="fb-comments" data-href="http://checkdonc.ca{{ post.get_absolute_url }}" data-numposts="5" data-colorscheme="light"></div>
+
+<div class="row">
+  {% for post in latest_post_list %}
+  <div class="col-sm-6 col-md-4">
+<div class="thumbnail">
+<a href="{{ post.get_absolute_url }}">
+{% if post.pic %}
+                    {% thumbnail post.pic "220x200" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ post.title }}" />
+                    {% endthumbnail %}
+{% else %}
+                    {% thumbnail post.author.userprofile.avatar "220x200" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ post.title }}" />
+                    {% endthumbnail %}
+{% endif %}
+          </a>
+    </div>    
+  </div>
+  {% endfor %}
+</div>
+
 
 {% endblock %}
 
