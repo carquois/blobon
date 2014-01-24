@@ -288,6 +288,27 @@ img{
 
 <div class="fb-comments" data-href="http://checkdonc.ca{{ post.get_absolute_url }}" data-numposts="5" data-colorscheme="light"></div>
 
+<div class="row">
+  {% for post in latest_post_list %}
+  <div class="col-sm-6 col-md-4">
+<div class="thumbnail">
+<a href="{{ post.get_absolute_url }}">
+{% if post.pic %}
+                    {% thumbnail post.pic "220x200" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ post.title }}" />
+                    {% endthumbnail %}
+{% else %}
+                    {% thumbnail post.author.userprofile.avatar "220x200" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ post.title }}" />
+                    {% endthumbnail %}
+{% endif %}
+          </a>
+    </div>    
+  </div>
+  {% endfor %}
+</div>
+
+
 {% endblock %}
 
 {% block topsidebar %}
