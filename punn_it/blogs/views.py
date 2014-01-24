@@ -353,7 +353,7 @@ def editpost(request, id):
         form = PostForm(request.POST, instance=post,)
         if form.is_valid():
           post = form.save()
-        return HttpResponseRedirect(reverse('blogs.views.editpost', args=(post.id,)))
+        return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
       else:
         form = PostForm(instance=post,)
       return render_to_response('editpost.html',

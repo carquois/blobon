@@ -20,15 +20,39 @@
       .fields{
         padding: 15px;
       }
+      .current_image{
+      }
+      .changed_image{
+      }
+      img {
+	max-width: 100%;
+	height: auto;
+      }
+ 
     </style>
   {% endblock %}
 {% block content %}
-
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
 
     <form enctype="multipart/form-data" action="{% url "blogs.views.editpost" post.id %}" method="post" id=savedpost>{% csrf_token %}
+<!--ancien truc      
       <div class="row titlefield">
         {{ form.title.label_tag }} :{{ form.title }}
       </div>
+
   {% if post.pic %}
           <div class="fields">
           {% trans "Image :" %} {{form.pic }}
@@ -89,8 +113,24 @@
           </div>
           <div class="fields">{% trans "Content 6:" %}{{ form.content_6 }}</div>
   {% endif %}
+-->
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 1 :" %}</b></p>
+          <img id="current_id_1" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "New image 1 :" %}</b></p>
+          <img id="img_id_1" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="New image" />
+          <p><b>{% trans "Change image 1 :" %}</b></p>
+          {{form.pic_1 }}
+        </div>
+      </div>
+    </div>
     <div class="fields">{{ form.artist.label_tag }} :{{ form.artist }}</div>
-
+    <div class="fields">{{ form.title.label_tag }} :{{ form.title }}</div>
+    <div class="fields">{{ form.text.label_tag }} :{{ form.text }}</div>
     <div class="fields">{{ form.source.label_tag }} :{{ form.source }}</div>
       </form>
     <div class="savedpost_submit">
@@ -100,6 +140,22 @@
       $('#submitsavedpost').click(function() {
         $('#savedpost').submit();
       });
+    </script>
+<script type="text/javascript">
+
+
+        function upload_img(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img_id_1').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
     </script>
 {% endblock %}
 

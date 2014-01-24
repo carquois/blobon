@@ -65,6 +65,13 @@ def get_file_path_4(instance, filename):
     filename = "%s_%s.%s" % (prefix, variable, ext)
     return os.path.join('', filename)
 
+def get_file_path_04(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('04')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
 def get_file_path_5(instance, filename):
     ext = filename.split('.')[-1]
     prefix = instance.base62id
@@ -83,6 +90,125 @@ def get_file_path_7(instance, filename):
     ext = filename.split('.')[-1]
     prefix = instance.base62id
     variable = ('7')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_8(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('8')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_9(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('9')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_10(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('10')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_11(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('11')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_12(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('12')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_13(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('13')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_14(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('14')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_15(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('15')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_16(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('16')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_17(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('17')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_18(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('18')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_19(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('19')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_20(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('20')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_21(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('21')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_22(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('22')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_23(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('23')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_24(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('24')
     filename = "%s_%s.%s" % (prefix, variable, ext)
     return os.path.join('', filename)
 
@@ -157,7 +283,26 @@ class Post(models.Model):
     pic_4 = ImageField(verbose_name=_("Image_4"), upload_to=get_file_path_4, null=True, blank=True)
     pic_5 = ImageField(verbose_name=_("Image_5"), upload_to=get_file_path_5, null=True, blank=True)
     pic_6 = ImageField(verbose_name=_("Image_6"), upload_to=get_file_path_6, null=True, blank=True)
-    pic_04 = ImageField(verbose_name=_("Image_04"), upload_to=get_file_path_7, null=True, blank=True)
+    pic_7 = ImageField(verbose_name=_("Image_7"), upload_to=get_file_path_7, null=True, blank=True)
+    pic_8 = ImageField(verbose_name=_("Image_8"), upload_to=get_file_path_8, null=True, blank=True)
+    pic_9 = ImageField(verbose_name=_("Image_9"), upload_to=get_file_path_9, null=True, blank=True)
+    pic_10 = ImageField(verbose_name=_("Image_10"), upload_to=get_file_path_10, null=True, blank=True)
+    pic_11 = ImageField(verbose_name=_("Image_11"), upload_to=get_file_path_11, null=True, blank=True)
+    pic_12 = ImageField(verbose_name=_("Image_12"), upload_to=get_file_path_12, null=True, blank=True)
+    pic_13 = ImageField(verbose_name=_("Image_13"), upload_to=get_file_path_13, null=True, blank=True)
+    pic_14 = ImageField(verbose_name=_("Image_14"), upload_to=get_file_path_14, null=True, blank=True)
+    pic_15 = ImageField(verbose_name=_("Image_15"), upload_to=get_file_path_15, null=True, blank=True)
+    pic_16 = ImageField(verbose_name=_("Image_16"), upload_to=get_file_path_16, null=True, blank=True)
+    pic_17 = ImageField(verbose_name=_("Image_17"), upload_to=get_file_path_17, null=True, blank=True)
+    pic_18 = ImageField(verbose_name=_("Image_18"), upload_to=get_file_path_18, null=True, blank=True)
+    pic_19 = ImageField(verbose_name=_("Image_19"), upload_to=get_file_path_19, null=True, blank=True)
+    pic_20 = ImageField(verbose_name=_("Image_20"), upload_to=get_file_path_20, null=True, blank=True)
+    pic_21 = ImageField(verbose_name=_("Image_21"), upload_to=get_file_path_21, null=True, blank=True)
+    pic_22 = ImageField(verbose_name=_("Image_22"), upload_to=get_file_path_22, null=True, blank=True)
+    pic_23 = ImageField(verbose_name=_("Image_23"), upload_to=get_file_path_23, null=True, blank=True)
+    pic_24 = ImageField(verbose_name=_("Image_24"), upload_to=get_file_path_24, null=True, blank=True)
+    pic_04 = ImageField(verbose_name=_("Image_04"), upload_to=get_file_path_04, null=True, blank=True)
+    text = models.TextField(verbose_name=_("Text"),max_length=10000, blank=True)
     content_0 = models.TextField(verbose_name=_("Content_0"),max_length=10000, blank=True)
     content_01 = models.TextField(verbose_name=_("Content_01"),max_length=10000, blank=True)
     content_1 = models.TextField(verbose_name=_("Content_1"),max_length=10000, blank=True)
@@ -170,6 +315,13 @@ class Post(models.Model):
     youtube_url = models.URLField(verbose_name=_("YoutubeURL"), max_length=300, blank=True)
     category = models.ForeignKey(Category, null=True, blank=True)
     artist = models.CharField(verbose_name=_("Artist"), max_length=140, blank=True)
+    LAYOUT_CHOICES = (
+        ('s', 'Single'),
+        ('v', 'Vertical'),
+        ('h', 'Horizontal'),
+        ('g', 'Grid'),
+    )
+    layout_type = models.CharField(default="s", max_length=1, choices=LAYOUT_CHOICES)
     def __unicode__(self):
         return self.title
 
