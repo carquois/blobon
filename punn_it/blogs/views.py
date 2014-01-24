@@ -51,7 +51,7 @@ def index(request):
                            Post.objects.filter(blog=blog).order_by('-pub_date'),
                            15)
           return render_to_response('index.html',
-                                    {'posts': posts, },
+                                    {'posts': posts, 'blog': blog},
                                     context_instance=RequestContext(request))
       elif Blog.objects.filter(slug=request.subdomain).exists():
           blog = Blog.objects.get(slug=request.subdomain)
@@ -112,7 +112,7 @@ def single(request, shorturl):
     return render_to_response('single.html',
                                 {'post': post, 'latest_post_list': latest_post_list,
                                  'next_post': next_post, 'prev_post': prev_post,
-                                 'user': post.author},
+                                 'user': post.author, 'blog': post.blog },
                                 context_instance=RequestContext(request))
 
     #cats = Cat.objects.filter(is_top_level=True)
@@ -133,9 +133,9 @@ def single(request, shorturl):
     #else:
     #  home = "http://checkdonc.ca"
     #content = ""
-    #if punn.content:
-    #    content = linkify(punn.content)
-    #    content = markdown.markdown(content)
+    if post.content:
+        post.content = linkify(punn.content)
+        post.content = markdown.markdown(content)
 
     ##save new comment before querying for comments related to this punn
     #comment_form = CommentForm(request.POST or None)

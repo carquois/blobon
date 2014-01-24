@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n thumbnail punn_tags humanize %}
+{% load markup %}
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ post.title }}" />
@@ -237,6 +238,11 @@ img{
    <h5>{% trans "Artist : " %}{{ post.artist }}</h5>
   </div>
   {% endif %}
+  {% if post.content %}
+<div>
+   <p> {{ post.content|markdown|safe }}</p>
+</div>
+  {% endif %}
   <div class="media" id="heading">
   <a class="pull-left" href="#">
 {% if post.author.userprofile.avatar %}
@@ -262,11 +268,6 @@ img{
 </div>
 
 
-  {% if content %}
-<div>
-   <h4> {{ content|safe }}</h4>
-</div>
-  {% endif %}
 <div id="infos" class="panel">
 <div class="row">
  
