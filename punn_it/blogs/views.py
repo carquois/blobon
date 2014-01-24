@@ -84,7 +84,7 @@ def pics(request):
 
 def videos(request):
       posts = paginate(request,
-                       Post.objects.filter(youtube_id!="").order_by('-pub_date'),
+                       Post.objects.filter(youtube_id != "").order_by('-pub_date'),
                        15)
       return render_to_response('index.html',
                                {'posts': posts},
