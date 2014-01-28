@@ -345,20 +345,43 @@ def administratesettings(request, slug):
       return render_to_response('administratesettings.html',
                                 {'blog': blog, 'form': form, },
                                 context_instance=RequestContext(request))
+
+
+
 @login_required
 def editpost(request, id):
       post = get_object_or_404(Post, id=id)
       blog = post.blog
       if request.method == 'POST':
-        form = PostForm(request.POST, instance=post,)
+        form = PostForm(request.POST or None,request.FILES or None, instance=post)
         if form.is_valid():
-          post = form.save()
-        return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
+            form.save()
+            return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
       else:
         form = PostForm(instance=post,)
       return render_to_response('editpost.html',
                                 {'blog': blog, 'form': form,'post': post },
                                 context_instance=RequestContext(request))
+
+#@login_required
+#def editpost(request, id):
+#      context_instance=RequestContext(request)
+#      obj_list = Post.objects.all()
+#      if request.method == 'POST':
+#        post = Post.objects.get(pk=int(id))
+#       form = PostForm(request.POST,instance=post)
+#        blog = post.blog
+#        if form.is_valid():
+#         post=form.save()
+#        return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
+#      else:
+#        post = Post.objects.get(pk=int(id))
+#        form = PostForm(instance=post,)
+#        blog = post.blog
+#      return render_to_response('editpost.html',
+#                                {'blog': blog, 'form': form,'post': post },
+#                                context_instance=RequestContext(request))
+
 @login_required
 def createpage(request, slug):
       blog = get_object_or_404(Blog, slug=slug)

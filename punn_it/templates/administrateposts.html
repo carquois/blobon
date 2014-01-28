@@ -11,6 +11,24 @@
   {% block dashboard-active %}{% endblock %}
   {% block posts-active %}class="active"{% endblock %}
   {% block content %}
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Posts" %}<a href="{% url 'blogs.views.administrateblog' blog.slug %}" class="btn btn-default btn-xs pull-right" id="add_new_post" title="{% trans "Add a New Post" %}">{% trans "Add new" %}</a></div>
               <div class="panel-body">
@@ -36,7 +54,7 @@
                 <tr>
                   <td>{{ post.title }}
                     <div class="edit_buttons">
-                      <a href="{% url 'blogs.views.editpost' post.id %}" class="btn btn-default btn-xs edit_post" style="display:none;" title="{% trans "Modify This Post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
+                      <a href="{% url 'blogs.views.editpost' post.id %}" class="btn btn-default btn-xs edit_post" title="{% trans "Modify This Post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
                       <a href="#" class="btn btn-default btn-xs delete_post" title="{% trans "Delete This Post" %}" data-toggle="modal" data-target="#{{ post.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
                       <a href="{{ post.get_absolute_url }}" target="_blank" class="btn btn-default btn-xs view_post" title="{% trans "View This Post" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "View" %}</a>
                     </div>
