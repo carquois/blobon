@@ -63,11 +63,15 @@
 .img_content{
   padding: 10px;
 }
- 
+.2_img {
+  margin-bottom:10px;
+  padding-bottom:10px;
+}
+g 
 .comment-holder{
   padding: 10px;
 }
-img{
+.bordureGrise{
   max-width: 720px;
 }
 
@@ -102,142 +106,706 @@ img{
 {% if post.cat %}
 <a href="{% url post.views.cat post.cat.slug %}" style="text-decoration:none;"><div class="tagCat bg{{ post.cat }} ombrageTexte" style="position: relative; ">{{ post.cat }}</div></a>
 {% endif %}
+  {% if post.layout_type == "s" %}
     <div class="titreSingle">{{ post.title }}</div>
 
 
-  {% if post.youtube_id %}
-  <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
-  {% else %}
-  {% if post.pic %}
-  <a href="{{ next_post.get_absolute_url }}">
-    <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
-  </a>
+    {% if post.youtube_id %}
+    <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+    {% else %}
+    <a href="{{ next_post.get_absolute_url }}">
+      <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
+    </a>
        {% if post.content_0 %}
          <div class="img_content">{{ post.content_0 }}</div>
        {% endif %}  
-  
+    {% endif %}
+ 
   {% endif %}
-  {% if post.pic_0 %}
-   <div class="row">
-     <div class="col-md-6">  
-       <a href="{{ next_post.get_absolute_url }}">
-         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_0 }}" alt="{{ post.title }}" />
-       </a>
-       {% if post.content_0 %}
-         <div class="img_content">{{ post.content_0 }}</div>
-       {% endif %}
-     </div>
-     <div class="col-md-6"> 
-       <a href="{{ next_post.get_absolute_url }}">
-         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
-       </a>
-       {% if post.content_01 %}
-         <div class="img_content">{{ post.content_01 }}</div>
-       {% endif %}
-     </div>
-   </div>
+
+  {% if post.layout_type == "v" %}
+    <div class="row 2_img">
+      <div class="col-md-6">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}">
+        </a>
+      </div>
+      <div class="col-md-6">
+      {% if post.pic_2 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+      </div>
+    </div>
 
 
+    {% if post.pic_3 %}
+    <div class="row 2_img">
+      <div class="col-md-6">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}">
+        </a>
+      </div>
+      <div class="col-md-6">
+      {% if post.pic_4 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_5 %}
+    <div class="row 2_img">
+      <div class="col-md-6">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_5 }}" alt="{{ post.title }}">
+        </a>
+      </div>
+      <div class="col-md-6">
+      {% if post.pic_6 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_6 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_7 %}
+    <div class="row 2_img">
+      <div class="col-md-6">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_7 }}" alt="{{ post.title }}">
+        </a>
+      </div>
+      <div class="col-md-6">
+      {% if post.pic_8 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_8 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_9 %}
+    <div class="row 2_img">
+      <div class="col-md-6">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_9 }}" alt="{{ post.title }}">
+        </a>
+      </div>
+      <div class="col-md-6">
+      {% if post.pic_10 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_10 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_11 %}
+    <div class="row 2_img">
+      <div class="col-md-6">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_11 }}" alt="{{ post.title }}">
+        </a>
+      </div>
+      <div class="col-md-6">
+      {% if post.pic_12 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_12 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_13 %}
+    <div class="row 2_img">
+      <div class="col-md-6">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_13 }}" alt="{{ post.title }}">
+        </a>
+      </div>
+      <div class="col-md-6">
+      {% if post.pic_14 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_14 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_15 %}
+    <div class="row 2_img">
+      <div class="col-md-6">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_15 }}" alt="{{ post.title }}">
+        </a>
+      </div>
+      <div class="col-md-6">
+      {% if post.pic_16 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_16 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_17 %}
+    <div class="row 2_img">
+      <div class="col-md-6">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_17 }}" alt="{{ post.title }}">
+        </a>
+      </div>
+      <div class="col-md-6">
+      {% if post.pic_18 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_18 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_19 %}
+    <div class="row 2_img">
+      <div class="col-md-6">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_19 }}" alt="{{ post.title }}">
+        </a>
+      </div>
+      <div class="col-md-6">
+      {% if post.pic_20 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_20 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_21 %}
+    <div class="row 2_img">
+      <div class="col-md-6">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_21 }}" alt="{{ post.title }}">
+        </a>
+      </div>
+      <div class="col-md-6">
+      {% if post.pic_22 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_22 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_23 %}
+    <div class="row 2_img">
+      <div class="col-md-6">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_23 }}" alt="{{ post.title }}">
+        </a>
+      </div>
+      <div class="col-md-6">
+      {% if post.pic_24 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_24 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+      </div>
+    </div>
+    {% endif %}
+    {% if post.artist %}
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">{% trans "Artist : " %}</h3></div>
+      <div class="panel-body">
+      {{ post.artist }}
+      </div>
+    </div>
+    {% endif %}
+    {% if post.title %}
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">{% trans "Title : " %}</h3></div>
+      <div class="panel-body">
+      {{ post.title }}
+      </div>
+    </div>
+    {% endif %}
+    {% if post.text %}
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">{% trans "Text : " %}</h3></div>
+      <div class="panel-body">
+      {{ post.text }}
+      </div>
+    </div>
+    {% endif %}
+    {% if post.source %}
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">{% trans "Web site : " %}</h3></div>
+      <div class="panel-body">
+      <a href="{{ post.source }}" target="_blank">{{ post.source }}</a>
+      </div>
+    </div>
+    {% endif %}
   {% endif %}
-  {% if post.pic_04 %}
-   <div class="row">
-     <div class="col-md-12" style="text-align: center;">
-       <a href="{{ next_post.get_absolute_url }}">
-         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
-       </a>
-       {% if post.content_0 %}
-         <div class="img_content">{{ post.content_0 }}</div>
-       {% endif %}
-     </div>
-   </div>
-   <div class="row">
-     <div class="col-md-4">
-       <a href="{{ next_post.get_absolute_url }}">
-         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
-       </a>
-       {% if post.content_1 %}
-         <div class="img_content">{{ post.content_1 }}</div>
-       {% endif %}
-     </div>
-     <div class="col-md-4">
-       <a href="{{ next_post.get_absolute_url }}">
-         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}" />
-       </a>
-       {% if post.content_2 %}
-         <div class="img_content">{{ post.content_2 }}</div>
-       {% endif %}
-     </div>
-     <div class="col-md-4">
-       <a href="{{ next_post.get_absolute_url }}">
-         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_04 }}" alt="{{ post.title }}" />
-       </a>
-       {% if post.content_3 %}
-         <div class="img_content">{{ post.content_3 }}</div>
-       {% endif %}
-     </div>
-   </div>
+
+
+  {% if post.layout_type == "h" %}
+    <div class="row 4_img">
+      <div class="col-md-12">
+        <a href="{{ next_post.get_absolute_url }}" class="thumbnail">
+          <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
+        </a>
+      </div>
+    </div>
+
+    {% if post.pic_2 %}
+      <div class="row 4_img">
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% if post.pic_3 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %}
+      {% if post.pic_4 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %} 
+      </div>          
+    {% endif %}
+
+    {% if post.pic_5 %}
+      <div class="row 4_img">
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_5 }}" alt="{{ post.title }}">
+        </a>
+         </div>
+      {% if post.pic_6 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_6 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %}
+      {% if post.pic_7 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_7 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %}
+      </div>
+    {% endif %}
+
+    {% if post.pic_8 %}
+      <div class="row 4_img">
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_8 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% if post.pic_9 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_9 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %}
+      {% if post.pic_10 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_10 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %}
+      </div>
+    {% endif %}
+
+    {% if post.pic_11 %}
+      <div class="row 4_img">
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_11 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% if post.pic_12 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_12 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %}
+      {% if post.pic_13 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_13 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %}
+      </div>
+    {% endif %}
+
+    {% if post.pic_14 %}
+      <div class="row 4_img">
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_14 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% if post.pic_15 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_15 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %}
+      {% if post.pic_16 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_16 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %}
+      </div>
+    {% endif %}
+
+    {% if post.pic_17 %}
+      <div class="row 4_img">
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_17 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% if post.pic_18 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_18 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %}
+      {% if post.pic_19 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_19 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %}
+      </div>
+    {% endif %}
+
+    {% if post.pic_20 %}
+      <div class="row 4_img">
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_20 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% if post.pic_21 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_21 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %}
+      {% if post.pic_22 %}
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_22 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+      {% endif %}
+      </div>
+    {% endif %}
+    {% if post.artist %}
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">{% trans "Artist : " %}</h3></div>
+      <div class="panel-body">
+      {{ post.artist }}
+      </div>
+    </div>
+    {% endif %}
+    {% if post.title %}
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">{% trans "Title : " %}</h3></div>
+      <div class="panel-body">
+      {{ post.title }}
+      </div>
+    </div>
+    {% endif %}
+    {% if post.text %}
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">{% trans "Text : " %}</h3></div>
+      <div class="panel-body">
+      {{ post.text }}
+      </div>
+    </div>
+    {% endif %}
+    {% if post.source %}
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">{% trans "Web site : " %}</h3></div>
+      <div class="panel-body">
+      <a href="{{ post.source }}" target="_blank">{{ post.source }}</a>
+      </div>
+    </div>
+    {% endif %}
+  {% endif %}
+
+
+
+
+  {% if post.layout_type == "g" %}
+      <div class="row 6_img">
+        <div class="col-md-4">
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}">
+        </a>
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_2 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_3 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+      </div>
+
+      <div class="row 6_img">
+        <div class="col-md-4">
+      {% if post.pic_4 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_5 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_5 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_6 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_6 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+      </div>
+
+      <div class="row 6_img">
+        <div class="col-md-4">
+      {% if post.pic_7 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_7 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_8 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_8 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_9 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_9 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+      </div>
+
+
+      <div class="row 6_img">
+        <div class="col-md-4">
+      {% if post.pic_10 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_10 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_11 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_11 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_12 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_12 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+      </div>
+
+
+      <div class="row 6_img">
+        <div class="col-md-4">
+      {% if post.pic_13 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_13 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_14 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_14 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_15 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_15 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+      </div>
+
+
+      <div class="row 6_img">
+        <div class="col-md-4">
+      {% if post.pic_16 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_16 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_17 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_17 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_18 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_18 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+      </div>
+
+
+      <div class="row 6_img">
+        <div class="col-md-4">
+      {% if post.pic_19 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_19 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_20 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_20 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_21 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_21 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+      </div>
+
+
+      <div class="row 6_img">
+        <div class="col-md-4">
+      {% if post.pic_22 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_22 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_23 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_23 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+        <div class="col-md-4">
+      {% if post.pic_24 %}
+        <a href="#" class="thumbnail">
+          <img src="{{ MEDIA_URL }}{{ post.pic_24 }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+        </div>
+      </div>
+    {% if post.artist %}
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">{% trans "Artist : " %}</h3></div>
+      <div class="panel-body">
+      {{ post.artist }}
+      </div>
+    </div>
+    {% endif %}
+    {% if post.title %}
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">{% trans "Title : " %}</h3></div>
+      <div class="panel-body">
+      {{ post.title }}
+      </div>
+    </div>
+    {% endif %}
+    {% if post.text %}
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">{% trans "Text : " %}</h3></div>
+      <div class="panel-body">
+      {{ post.text }}
+      </div>
+    </div>
+    {% endif %}
+    {% if post.source %}
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">{% trans "Web site : " %}</h3></div>
+      <div class="panel-body">
+      <a href="{{ post.source }}" target="_blank">{{ post.source }}</a>
+      </div>
+    </div>
+    {% endif %}
 
   {% endif %}
-  {% if post.pic_6 %}
-   <div class="row">
-     <div class="col-md-4">
-       <a href="{{ next_post.get_absolute_url }}">
-         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
-       </a>
-       {% if post.content_1 %}
-         <div class="img_content">{{ post.content_1 }}</div>
-       {% endif %}
-     </div>
-     <div class="col-md-4">
-       <a href="{{ next_post.get_absolute_url }}">
-         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
-       </a>
-       {% if post.content_2 %}
-         <div class="img_content">{{ post.content_2 }}</div>
-       {% endif %}
-     </div>
-     <div class="col-md-4">
-       <a href="{{ next_post.get_absolute_url }}">
-         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}" />
-       </a>
-       {% if post.content_3 %}
-         <div class="img_content">{{ post.content_3 }}</div>
-       {% endif %}
-     </div>
-   </div>
-   <div class="row">
-     <div class="col-md-4">
-       <a href="{{ next_post.get_absolute_url }}">
-         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="{{ post.title }}" />
-       </a>
-       {% if post.content_4 %}
-         <div class="img_content">{{ post.content_4 }}</div>
-       {% endif %}
-     </div>
-     <div class="col-md-4">
-       <a href="{{ next_post.get_absolute_url }}">
-         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_5 }}" alt="{{ post.title }}" />
-       </a>
-       {% if post.content_5 %}
-         <div class="img_content">{{ post.content_5 }}</div>
-       {% endif %}
-     </div>
-     <div class="col-md-4">
-       <a href="{{ next_post.get_absolute_url }}">
-         <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_6 }}" alt="{{ post.title }}" />
-       </a>
-       {% if post.content_6 %}
-         <div class="img_content">{{ post.content_6 }}</div>
-       {% endif %}
-     </div>
-   </div>
-  {% endif %}
-  {% endif %}
-  {% if post.artist %}
-  <div class="media-body">
-   <h5>{% trans "Artist : " %}{{ post.artist }}</h5>
-  </div>
-  {% endif %}
+
+
+
   {% if post.content %}
 <div>
    <p> {{ post.content|markdown|safe }}</p>
