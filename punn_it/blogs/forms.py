@@ -45,9 +45,9 @@ class SettingsForm(ModelForm):
                                                     'class': "form-control setting_form input-block-level"}))    
     class Meta:
         model = Blog 
-        fields = ('title', 'slug', 'password', 'custom_domain', )
+        fields = ('title', 'slug', 'password', 'custom_domain','description', )
 
-class PostForm(ModelForm):
+class PostForm(forms.ModelForm):
     title = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Write your title here'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
@@ -119,32 +119,33 @@ class PostForm(ModelForm):
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
                                                     'autofocus':'on'}))
-    pic_1 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_2 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_3 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_4 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_5 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_6 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_7 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_8 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_9 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_10 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_11 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_12 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_13 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_14 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_15 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_16 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_17 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_18 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_19 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_20 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_21 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_22 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_23 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-    pic_24 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img(this);"}))
-
+    pic_1 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_1(this);"}))
+    pic_2 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_2(this);"}))
+    pic_3 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_3(this);"}))
+    pic_4 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_4(this);"}))
+    pic_5 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_5(this);"}))
+    pic_6 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_6(this);"}))
+    pic_7 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_7(this);"}))
+    pic_8 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_8(this);"}))
+    pic_9 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_9(this);"}))
+    pic_10 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_10(this);"}))
+    pic_11 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_11(this);"}))
+    pic_12 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_12(this);"}))
+    pic_13 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_13(this);"}))
+    pic_14 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_14(this);"}))
+    pic_15 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_15(this);"}))
+    pic_16 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_16(this);"}))
+    pic_17 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_17(this);"}))
+    pic_18 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_18(this);"}))
+    pic_19 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_19(this);"}))
+    pic_20 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_20(this);"}))
+    pic_21 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_21(this);"}))
+    pic_22 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_22(this);"}))
+    pic_23 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_23(this);"}))
+    pic_24 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_24(this);"}))
+    layout_type = CharField(required=False)
     class Meta:
-        model = Post 
+        model = Post
+        exclude=('author',) 
         fields = ('title','content','source','artist','text','content_0','content_01','content_1','content_2','content_3','content_4','content_5','content_6','content_video', 'pic','pic_0','pic_04','pic_1','pic_2','pic_3','pic_4','pic_5','pic_6','youtube_url','category',
                  'pic_7','pic_8','pic_9','pic_10','pic_11','pic_12','pic_13','pic_14','pic_15','pic_16','pic_17','pic_18','pic_19','pic_20','pic_21','pic_22','pic_23','pic_24','layout_type', )

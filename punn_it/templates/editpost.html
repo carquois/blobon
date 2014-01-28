@@ -36,9 +36,10 @@
     {% for field in form %}
         {% for error in field.errors %}
             <div class="alert alert-error">
-                <strong>{{ error|escape }}</strong>
+                <strong>{{ error|escape }}{{ field.name }}</strong>
             </div>
         {% endfor %}
+        
     {% endfor %}
     {% for error in form.non_field_errors %}
         <div class="alert alert-error">
@@ -47,73 +48,25 @@
     {% endfor %}
 {% endif %}
 
-    <form enctype="multipart/form-data" action="{% url "blogs.views.editpost" post.id %}" method="post" id=savedpost>{% csrf_token %}
-<!--ancien truc      
-      <div class="row titlefield">
-        {{ form.title.label_tag }} :{{ form.title }}
+    <form enctype="multipart/form-data" action="{% url 'blogs.views.editpost' post.id %}" role="form" method="post" id=savedpost>{% csrf_token %}
+  <div class="fields" style="display: none;">{{ form.layout_type }}</div>
+  {% if post.layout_type == "s" %} 
+    <div class="fields">{{ form.title.label_tag }} :{{ form.title }}</div>  
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image :" %}</b></p>
+          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic }}
+        </div>
       </div>
-
-  {% if post.pic %}
-          <div class="fields">
-          {% trans "Image :" %} {{form.pic }}
-          </div>
-          <div class="fields">{% trans "Content :" %}{{ form.content_0 }}</div>
-  {% endif %}
-  {% if post.pic_0 %}
-          <div class="fields">
-          {% trans "Image 1:" %} {{form.pic_0 }}
-          </div>
-          <div class="fields">{% trans "Content 1:" %}{{ form.content_0 }}</div>
-          <div class="fields">
-          {% trans "Image 2:" %} {{form.pic_1 }}
-          </div>
-          <div class="fields">{% trans "Content 2:" %}{{ form.content_01 }}</div>
-  {% endif %}
-  {% if post.pic_04 %}
-          <div class="fields">
-          {% trans "Image 1:" %} {{form.pic_1 }}
-          </div>
-          <div class="fields">{% trans "Content 1:" %}{{ form.content_0 }}</div>
-          <div class="fields">
-          {% trans "Image 2:" %} {{form.pic_2 }}
-          </div>
-          <div class="fields">{% trans "Content 2:" %}{{ form.content_1 }}</div>
-          <div class="fields">
-          {% trans "Image 3:" %} {{form.pic_3 }}
-          </div>
-          <div class="fields">{% trans "Content 3:" %}{{ form.content_2 }}</div>
-          <div class="fields">
-          {% trans "Image 4:" %} {{form.pic_04 }}
-          </div>
-          <div class="fields">{% trans "Content 4:" %}{{ form.content_3 }}</div>
-  {% endif %}
-  {% if post.pic_6 %}
-          <div class="fields">
-          {% trans "Image 1:" %} {{form.pic_1 }}
-          </div>
-          <div class="fields">{% trans "Content 1:" %}{{ form.content_1 }}</div>
-          <div class="fields">
-          {% trans "Image 2:" %} {{form.pic_2 }}
-          </div>
-          <div class="fields">{% trans "Content 2:" %}{{ form.content_2 }}</div>
-          <div class="fields">
-          {% trans "Image 3:" %} {{form.pic_3 }}
-          </div>
-          <div class="fields">{% trans "Content 3:" %}{{ form.content_3 }}</div>
-          <div class="fields">
-          {% trans "Image 4:" %} {{form.pic_4 }}
-          </div>
-          <div class="fields">{% trans "Content 4:" %}{{ form.content_4 }}</div>
-          <div class="fields">
-          {% trans "Image 5:" %} {{form.pic_5 }}
-          </div>
-          <div class="fields">{% trans "Content 5:" %}{{ form.content_5 }}</div>
-          <div class="fields">
-          {% trans "Image 6:" %} {{form.pic_6 }}
-          </div>
-          <div class="fields">{% trans "Content 6:" %}{{ form.content_6 }}</div>
-  {% endif %}
--->
+    </div>
+    <div class="fields">{{ form.content.label_tag }} :{{ form.content }}</div>
+  {% else %}
+    {% if post.pic_1 %}
     <div class="fields">
       <div class="row">
         <div class="current_img col-md-6">
@@ -121,17 +74,362 @@
           <img id="current_id_1" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="Current image" />
         </div>
         <div class="changed_image col-md-6">
-          <p><b>{% trans "New image 1 :" %}</b></p>
-          <img id="img_id_1" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="New image" />
-          <p><b>{% trans "Change image 1 :" %}</b></p>
+          <p><b>{% trans "Change image :" %}</b></p>
           {{form.pic_1 }}
         </div>
       </div>
     </div>
+    {% endif %}
+
+    {% if post.pic_2 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 2 :" %}</b></p>
+          <img id="current_id_2" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_2 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_3 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 3 :" %}</b></p>
+          <img id="current_id_3" src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_3 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_4 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 4 :" %}</b></p>
+          <img id="current_id_4" src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_4 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_5 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 5 :" %}</b></p>
+          <img id="current_id_5" src="{{ MEDIA_URL }}{{ post.pic_5 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_5 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_6 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 6 :" %}</b></p>
+          <img id="current_id_6" src="{{ MEDIA_URL }}{{ post.pic_6 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_6 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_7 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 7 :" %}</b></p>
+          <img id="current_id_7" src="{{ MEDIA_URL }}{{ post.pic_7 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_7 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_8 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 8 :" %}</b></p>
+          <img id="current_id_8" src="{{ MEDIA_URL }}{{ post.pic_8 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_8 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_9 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 9 :" %}</b></p>
+          <img id="current_id_9" src="{{ MEDIA_URL }}{{ post.pic_9 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_9 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_10 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 10 :" %}</b></p>
+          <img id="current_id_10" src="{{ MEDIA_URL }}{{ post.pic_10 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_10 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_11 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 11 :" %}</b></p>
+          <img id="current_id_11" src="{{ MEDIA_URL }}{{ post.pic_11 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_11 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_12 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 12 :" %}</b></p>
+          <img id="current_id_12" src="{{ MEDIA_URL }}{{ post.pic_12 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_12 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_13 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 13 :" %}</b></p>
+          <img id="current_id_13" src="{{ MEDIA_URL }}{{ post.pic_13 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_13 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_14 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 14 :" %}</b></p>
+          <img id="current_id_14" src="{{ MEDIA_URL }}{{ post.pic_14 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_14 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_15 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 15 :" %}</b></p>
+          <img id="current_id_15" src="{{ MEDIA_URL }}{{ post.pic_15 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_15 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_16 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 16 :" %}</b></p>
+          <img id="current_id_16" src="{{ MEDIA_URL }}{{ post.pic_16 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_16 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_17 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 17 :" %}</b></p>
+          <img id="current_id_17" src="{{ MEDIA_URL }}{{ post.pic_17 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_17 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_18 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 18 :" %}</b></p>
+          <img id="current_id_18" src="{{ MEDIA_URL }}{{ post.pic_18 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_18 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_19 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 19 :" %}</b></p>
+          <img id="current_id_19" src="{{ MEDIA_URL }}{{ post.pic_19 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_19 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_20 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 20 :" %}</b></p>
+          <img id="current_id_20" src="{{ MEDIA_URL }}{{ post.pic_20 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_20 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_21 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 21 :" %}</b></p>
+          <img id="current_id_21" src="{{ MEDIA_URL }}{{ post.pic_21 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_21 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_22 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 22 :" %}</b></p>
+          <img id="current_id_22" src="{{ MEDIA_URL }}{{ post.pic_22 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_22 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_23 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 23 :" %}</b></p>
+          <img id="current_id_23" src="{{ MEDIA_URL }}{{ post.pic_23 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_23 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if post.pic_24 %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <p><b>{% trans "Current image 24 :" %}</b></p>
+          <img id="current_id_24" src="{{ MEDIA_URL }}{{ post.pic_24 }}" alt="Current image" />
+        </div>
+        <div class="changed_image col-md-6">
+          <p><b>{% trans "Change image :" %}</b></p>
+          {{form.pic_24 }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
     <div class="fields">{{ form.artist.label_tag }} :{{ form.artist }}</div>
     <div class="fields">{{ form.title.label_tag }} :{{ form.title }}</div>
     <div class="fields">{{ form.text.label_tag }} :{{ form.text }}</div>
     <div class="fields">{{ form.source.label_tag }} :{{ form.source }}</div>
+  {% endif %}
       </form>
     <div class="savedpost_submit">
       <button type="submit" class="btn btn-default" id=submitsavedpost title="{% trans "Submit Changes" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Submit" %}</button>
@@ -141,15 +439,62 @@
         $('#savedpost').submit();
       });
     </script>
-<script type="text/javascript">
 
+<!---    <script>
+      $('#id_pic_1').change(function() {
+        var image = $('<img>').attr('src', e.target.result);
+        $('#current_id_1:last-child').remove();
+        $(image).appendTo('#current_id_1');
+      });
+    </script>
 
-        function upload_img(input) {
+    <script>
+// set up variables
+var reader = new FileReader(),
+    i=0,
+    numFiles = 0,
+    imageFiles;
+
+// use the FileReader to read image i
+function readFile() {
+    reader.readAsDataURL(imageFiles[i])
+}
+
+// define function to be run when the File
+// reader has finished reading the file
+reader.onloadend = function(e) {
+    
+    // make an image and append it to the div
+    var image = $('<img>').attr('src', e.target.result);
+    $('#current_id_1:last-child').remove();
+    $(image).appendTo('#current_id_1');
+    
+    // if there are more files run the file reader again
+    if (i < numFiles) {
+        i++;
+        readFile();
+    }
+};
+
+$('#id_pic_1').change(function() {
+
+    imageFiles = document.getElementById('#id_pic_1').files
+    // get the number of files
+    numFiles = imageFiles.length;
+    readFile();           
+
+});
+    </script>
+--->
+
+    <script type="text/javascript">
+
+        function upload_img_1(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    $('#img_id_1').attr('src', e.target.result);
+                    $('#current_id_1').attr('src', e.target.result);
                 }
 
                 reader.readAsDataURL(input.files[0]);
@@ -157,5 +502,376 @@
         }
 
     </script>
+
+
+    <script type="text/javascript">
+
+        function upload_img_2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_2').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_3(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_3').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_4(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_4').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_5(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_5').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_6(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_6').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_7(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_7').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_8(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_8').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_9(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_9').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_10(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_10').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_11(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_11').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_12(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_12').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_13(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_13').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_14(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_14').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_15(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_15').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_16(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_16').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_17(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_17').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_18(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_18').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_19(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_19').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_20(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_20').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_21(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_21').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_22(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_22').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_23(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_23').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_24(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_24').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+
 {% endblock %}
 
