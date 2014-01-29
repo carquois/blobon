@@ -195,7 +195,20 @@ def newpost(request, slug):
           post.blog = blog
           post.save()
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
-         # return HttpResponseRedirect( post.get_absolute_url() )
+      return render_to_response('administrateblog.html', {'form': form})
+
+@login_required
+def savedraft(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      form = PostForm(request.POST or None, request.FILES or None)
+      if request.method == 'POST':
+        if form.is_valid():
+          post = form.save(commit=False)
+          post.author = request.user
+          post.blog = blog
+          post.status = "D"
+          post.save()
+          return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
       return render_to_response('administrateblog.html', {'form': form})
 
 @login_required

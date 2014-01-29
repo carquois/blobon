@@ -240,8 +240,10 @@
                         </div>
                         {{ post_form.content }}
                         <div class="row" style="display: none">{{ post_form.layout_type }} </div>
+                        <div class="row" style="display: none">{{ post_form.status }} </div>
                        </form>
-                     <button id="submittext" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
+                       <button id="save_draft_text" class="btn btn-info btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button> 
+                       <button id="submittext" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
                     </div>
                   </div>
                 </div>
@@ -625,6 +627,7 @@
                                 </div>
                               </div>
                               <div class="row" style="display: none">{{ post_form.layout_type }} </div>
+                              <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row source_artist_texte_title">
                                <div class="col-md-12 text_field">
                                 {{ post_form.artist.label_tag }}{{ post_form.artist }}
@@ -645,6 +648,7 @@
                                   </div>
                                 {% endif %}
                             </form>
+                            <button id="save_draft_al1" class="btn btn-info btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
                             <button id="submitimagealbum1form" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
                             <button id="cancelimagealbum1form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
                       </div>
@@ -991,6 +995,7 @@
                                 </div>
                               </div>
                               <div class="row" style="display: none">{{ post_form.layout_type }} </div>
+                              <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row source_artist_texte_title">
                                <div class="col-md-12 text_field">
                                 {{ post_form.artist.label_tag }}{{ post_form.artist }}
@@ -1011,6 +1016,7 @@
                                   </div>
                                 {% endif %}
                             </form>
+                            <button id="save_draft_al2" class="btn btn-info btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
                             <button id="submitimagealbum2form" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
                             <button id="cancelimagealbum2form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
                       </div>
@@ -1362,6 +1368,7 @@
                               </div>
                             </div>
                               <div class="row" style="display: none">{{ post_form.layout_type }} </div>
+                              <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row source_artist_texte_title">
                                <div class="col-md-12 text_field">
                                 {{ post_form.artist.label_tag }}{{ post_form.artist }}
@@ -1382,6 +1389,7 @@
                                   </div>
                                 {% endif %}
                             </form>
+                            <button id="save_draft_al3" class="btn btn-info btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
                             <button id="submitimagealbum3form" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
                             <button id="cancelimagealbum3form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
                       </div>
@@ -1410,6 +1418,7 @@
                                     </div>
                                 </div>
                                 <div class="row" style="display: none">{{ post_form.layout_type }} </div>
+                                <div class="row" style="display: none">{{ post_form.status }} </div>
                                 <div class="row source_artist_texte_title">
                                   <div class="col-md-12 text_field">
                                   {{ post_form.artist.label_tag }}{{ post_form.artist }}
@@ -1430,6 +1439,7 @@
                               </div>
                                 {% endif %}
                             </form>
+                            <button id="save_draft_image" class="btn btn-info btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
                             <button id="submitimageform" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
                             <button id="cancelimageform" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
                       </div>
@@ -1457,7 +1467,9 @@
                           <span id="addcomment_video_cancel" title="Cancel Comment" class="glyphicon glyphicon-remove-circle pull-right"></span>
                         </div>
                         <div class="row" style="display: none">{{ post_form.layout_type }} </div>
+                        <div class="row" style="display: none">{{ post_form.status }} </div>
                       </form>
+                       <button id="save_draft_video" class="btn btn-info btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
                      <button id="submitvideo" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
                     </div>
                   </div> 
@@ -1765,6 +1777,7 @@
         $('#addtitle_al_2').show();
         $('#addtitle_al_3').show();
         $('#submitvideo').prop("disabled", true);
+        $('#save_draft_video').prop("disabled", true);
         });
       });
     </script>
@@ -1782,7 +1795,9 @@
         $('#addcomment_video').show();
         $('#addedcomment_video').hide();
         $('#submittext').prop("disabled", true);
+        $('#save_draft_text').prop("disabled", true);
         $('#submitvideo').prop("disabled", true);
+        $('#save_draft_video').prop("disabled", true);
         });
       });
     </script>
@@ -1863,6 +1878,7 @@
         $('#addedtitle_al_2').hide();
         $('#addedtitle_al_3').hide();
         $('#submittext').prop("disabled", true);
+        $('#save_draft_text').prop("disabled", true);
       });
     </script>
     <script>
@@ -1876,9 +1892,13 @@
         $('#addtitle_video').show();
         $('#addedtitle_video').hide();
         $('#submitimageform').prop("disabled", true);
+        $('#save_draft_image').prop("disabled", true);
         $('#submitimagealbum1form').prop("disabled", true);
         $('#submitimagealbum2form').prop("disabled", true);
         $('#submitimagealbum3form').prop("disabled", true);
+        $('#save_draft_a1').prop("disabled", true);
+        $('#save_draft_a2').prop("disabled", true);
+        $('#save_draft_al3').prop("disabled", true);
         $('#newimage').each(function(){
           this.reset();
         });
@@ -1894,9 +1914,13 @@
         $('#modelalbum3').hide();
         $('#addtitle_post').show();
         $('#submitimageform').prop("disabled", true);
+        $('#save_draft_image').prop("disabled", true);
         $('#submitimagealbum1form').prop("disabled", true);
         $('#submitimagealbum2form').prop("disabled", true);
         $('#submitimagealbum3form').prop("disabled", true);
+        $('#save_draft_a1').prop("disabled", true);
+        $('#save_draft_a2').prop("disabled", true);
+        $('#save_draft_al3').prop("disabled", true);
         $('#addedtitle_post').hide();
         setTimeout(function() { 
           $('#id_video_url').focus();
@@ -1913,6 +1937,7 @@
         $('#addedcomment_image').hide();
         $('#addcomment_image').show();
         $('#submitimageform').prop("disabled", true);
+        $('#save_draft_image').prop("disabled", true);
         $('.fileinput-exists').click();
       });
     </script>
@@ -1927,30 +1952,64 @@
     <script>
       $('#submittext').click(function() {
         $('#newtext select[name=layout_type]').val('s');
+        $('#newtext select[name=status]').val('P');
         $('#newtext').submit();
       });
     </script>
+
+    <script>
+      $('#save_draft_text').click(function() {
+        $('#newtext select[name=layout_type]').val('s');
+        $('#newtext select[name=status]').val('D');
+        $('#newtext').submit();
+      });
+    </script>
+
     <script>
       $('#submitvideo').click(function() {
         $('#newvideo select[name=layout_type]').val('s');
+        $('#newvideo select[name=status]').val('P');
         $('#newvideo').submit();
       });
     </script>
+
+    <script>
+      $('#save_draft_video').click(function() {
+        $('#newvideo select[name=layout_type]').val('s');
+        $('#newvideo select[name=status]').val('D');
+        $('#newvideo').submit();
+      });
+    </script>
+
     <script>
       $('#submitimageform').click(function() {
         $('#newimage select[name=layout_type]').val('s');
-        setTimeout(function() {
-          $('#newimage').submit(); 
-        },10);
+        $('#newimage select[name=status]').val('P');
+        $('#newimage').submit(); 
+      });
+    </script>
+    <script>
+      $('#save_draft_image').click(function() {
+        $('#newimage select[name=layout_type]').val('s');
+        $('#newimage select[name=status]').val('D');
+        $('#newimage').submit(); 
       });
     </script>
     <script>
       $('#submitimagealbum1form').click(function() {
         $('#newimagealbum1 select[name=layout_type]').val('v');
+        $('#newimagealbum1 select[name=status]').val('P');
         $('#newimagealbum1').submit();
       });
     </script>
 
+    <script>
+      $('#save_draft_al1').click(function() {
+        $('#newimagealbum1 select[name=layout_type]').val('v');
+        $('#newimagealbum1 select[name=status]').val('D');
+        $('#newimagealbum1').submit();
+      });
+    </script>
 
     <script>
       $( document ).ready(function() {
@@ -1996,6 +2055,7 @@
         $('#addedtitle_al_1').hide();
         $('.fileinput-exists').click();
         $('#submitimagealbum1form').prop("disabled", true);
+        $('#save_draft_al1').prop("disabled", true);
         $('#newimagealbum1').each(function(){
           this.reset();
         });
@@ -2004,9 +2064,19 @@
     <script>
       $('#submitimagealbum3form').click(function() {
         $('#newimagealbum3 select[name=layout_type]').val('g');
+        $('#newimagealbum3 select[name=status]').val('P');
         $('#newimagealbum3').submit();
       });
     </script>
+
+    <script>
+      $('#save_draft_al3').click(function() {
+        $('#newimagealbum3 select[name=layout_type]').val('g');
+        $('#newimagealbum3 select[name=status]').val('D');
+        $('#newimagealbum3').submit();
+      });
+    </script>
+
     <script>
       $('#cancelimagealbum3form').click(function() {
         $(".fileinput-preview").empty();
@@ -2024,6 +2094,7 @@
         $('#al3_add_more_images_3').hide();
         $('.fileinput-exists').click();
         $('#submitimagealbum3form').prop("disabled", true);
+        $('#save_draft_al3').prop("disabled", true);
         $('#newimagealbum3').each(function(){
           this.reset();
         });
@@ -2038,9 +2109,19 @@
     <script>
       $('#submitimagealbum2form').click(function() {
         $('#newimagealbum2 select[name=layout_type]').val('h');
+        $('#newimagealbum2 select[name=status]').val('P');
         $('#newimagealbum2').submit();
       });
     </script>
+
+    <script>
+      $('#save_draft_al2').click(function() {
+        $('#newimagealbum2 select[name=layout_type]').val('h');
+        $('#newimagealbum2 select[name=status]').val('P');
+        $('#newimagealbum2').submit();
+      });
+    </script>
+
     <script>
       $('#cancelimagealbum2form').click(function() {
         $(".fileinput-preview").empty();
@@ -2062,6 +2143,7 @@
         $('#al2_add_more_images_5').hide();
         $('.fileinput-exists').click();
         $('#submitimagealbum2form').prop("disabled", true);
+        $('#save_draft_al2').prop("disabled", true);
         $('#newimagealbum2').each(function(){
           this.reset();
         });
@@ -2071,11 +2153,6 @@
       $('#model2').click(function() {
         $('#createalbumform').hide();
         $('#modelalbum2').show();
-      });
-    </script>
-    <script>
-      $('#submitimagealbum3form').click(function() {
-        $('#newimagealbum3').submit();
       });
     </script>
     <script>
@@ -2493,9 +2570,11 @@
         $('#id_content').keyup(function() {
         if($(this).val() != '') {
           $('#submittext').prop("disabled", false);
+          $('#save_draft_text').prop("disabled", false);
           }
         else {
           $('#submittext').prop("disabled", true);
+          $('#save_draft_text').prop("disabled", true);
         }
         });
       });
@@ -2505,9 +2584,11 @@
         $('#id_youtube_url').keyup(function() {
         if($(this).val() != '') {
           $('#submitvideo').prop("disabled", false);
+          $('#save_draft_video').prop("disabled", false);
           }
         else {
           $('#submitvideo').prop("disabled", true);
+          $('#save_draft_video').prop("disabled", true);
         }
         });
       });
@@ -2516,9 +2597,11 @@
       $('.medimgpreview').bind('DOMNodeInserted', function() {
         if($('#med1').children().length > 0) {
           $('#submitimagealbum1form').prop("disabled", false);
+          $('#save_draft_al1').prop("disabled", false);
         }
         else {
           $('#submitimagealbum1form').prop("disabled", true);
+          $('#save_draft_al1').prop("disabled", true);
         }
       });
     </script>
@@ -2526,9 +2609,11 @@
       $('.singleimgpreview').bind('DOMNodeInserted', function() {
         if($('#imgprev').children().length > 0 ) {
           $('#submitimageform').prop("disabled", false);
+          $('#save_draft_image').prop("disabled", false);
         }
         else {
           $('#submitimageform').prop("disabled", true);
+          $('#save_draft_image').prop("disabled", true);
         }
       });
     </script>
@@ -2536,9 +2621,11 @@
       $('.album2preview').bind('DOMNodeInserted', function() {
         if($('#big1').children().length > 0) {
           $('#submitimagealbum2form').prop("disabled", false);
+          $('#save_draft_al2').prop("disabled", false);
         }
         else {
           $('#submitimagealbum2form').prop("disabled", true);
+          $('#save_draft_al2').prop("disabled", true);
         }
       });
     </script>
@@ -2546,9 +2633,11 @@
       $('.album3preview').bind('DOMNodeInserted', function() {
         if($('#small1').children().length > 0) {
           $('#submitimagealbum3form').prop("disabled", false);
+          $('#save_draft_al3').prop("disabled", false);
         }
         else {
           $('#submitimagealbum3form').prop("disabled", true);
+          $('#save_draft_al3').prop("disabled", true);
         }
       });
     </script>
