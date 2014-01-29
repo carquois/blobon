@@ -239,6 +239,7 @@
                           </div>
                         </div>
                         {{ post_form.content }}
+                        <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                        </form>
                      <button id="submittext" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
                     </div>
@@ -1386,7 +1387,7 @@
                       </div>
                       <div class="col-xs-12" style="display: none" id="uploadimageform">
                             <form enctype="multipart/form-data" id="newimage" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
-                              <div class="row">
+                              <div class="row" style="display: none">
                                 <div class="col-xs-3 addtitle" id="addtitle_img">
                                   <a id="addtitletoimage" title="{% trans "Add a Title to Your Image" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a title" %}</a>
                                 </div>
@@ -1408,14 +1409,21 @@
                                       <div id=addedcomment_image style="display: none">{{ post_form.content_0 }}<span id="addcomment_image_cancel" title="{% trans "Cancel Comment" %}" class="glyphicon glyphicon-remove-circle pull-right"></span></div>
                                     </div>
                                 </div>
-                              <div class="row source_artist">
-                                <div class="col-md-6">
-                                {{ post_form.source.label_tag }}{{ post_form.source }}
+                                <div class="row" style="display: none">{{ post_form.layout_type }} </div>
+                                <div class="row source_artist_texte_title">
+                                  <div class="col-md-12 text_field">
+                                  {{ post_form.artist.label_tag }}{{ post_form.artist }}
+                                  </div>
+                                  <div class="col-md-12 text_field">
+                                  {{ post_form.title.label_tag }}{{ post_form.title }}
+                                  </div>
+                                  <div class="col-md-12 text_field">
+                                  <label for="id_content">{% trans "Text" %}</label>{{ post_form.content }}
+                                  </div>
+                                  <div class="col-md-12 text_field">
+                                  {{ post_form.source.label_tag }}{{ post_form.source }}
+                                  </div>
                                 </div>
-                                <div class="col-md-6">
-                                {{ post_form.artist.label_tag }}{{ post_form.artist }}
-                                </div>
-                              </div>
                                 {% if categories %}
                               <div class="form-group" id="cate_image">
                                {{ post_form.category.label_tag }} {{ post_form.category }}
@@ -1448,6 +1456,7 @@
                           {{ post_form.content_video }}
                           <span id="addcomment_video_cancel" title="Cancel Comment" class="glyphicon glyphicon-remove-circle pull-right"></span>
                         </div>
+                        <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                       </form>
                      <button id="submitvideo" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
                     </div>
@@ -1917,17 +1926,22 @@
     </script>
     <script>
       $('#submittext').click(function() {
+        $('#newtext select[name=layout_type]').val('s');
         $('#newtext').submit();
       });
     </script>
     <script>
       $('#submitvideo').click(function() {
+        $('#newvideo select[name=layout_type]').val('s');
         $('#newvideo').submit();
       });
     </script>
     <script>
       $('#submitimageform').click(function() {
-        $('#newimage').submit();
+        $('#newimage select[name=layout_type]').val('s');
+        setTimeout(function() {
+          $('#newimage').submit(); 
+        },10);
       });
     </script>
     <script>
@@ -1936,6 +1950,20 @@
         $('#newimagealbum1').submit();
       });
     </script>
+
+
+    <script>
+      $( document ).ready(function() {
+        $('#newimage select[name=layout_type]').val('s');
+        $('#newvideo select[name=layout_type]').val('s');
+        $('#newtext select[name=layout_type]').val('s');
+        $('#newimagealbum1 select[name=layout_type]').val('v');
+        $('#newimagealbum2 select[name=layout_type]').val('h');
+        $('#newimagealbum3 select[name=layout_type]').val('g');
+      });
+    </script>
+
+
     <script>
       $('#cancelimagealbum1form').click(function() {
         $(".fileinput-preview").empty();
