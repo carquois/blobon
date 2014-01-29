@@ -143,7 +143,6 @@ class PostForm(forms.ModelForm):
     pic_22 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_22(this);"}))
     pic_23 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_23(this);"}))
     pic_24 = ImageField(required=False, widget=forms.FileInput(attrs={'onchange':"upload_img_24(this);"}))
-    layout_type = CharField(required=False)
     class Meta:
         model = Post
         exclude=('author',) 
