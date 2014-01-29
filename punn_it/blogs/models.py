@@ -245,7 +245,7 @@ class Category(models.Model):
     created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     top_level_cat = models.ForeignKey('self',  null=True, blank=True)
     def __unicode__(self):
-        return self.slug
+        return self.name
 
 class Tag(models.Model):
     author = models.ForeignKey(User)

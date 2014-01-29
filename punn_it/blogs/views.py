@@ -14,7 +14,7 @@ from urlparse import urlparse
 from django.core.files import File
 from cgi import parse_qs
 
-from blogs.forms import BlogForm, SettingsForm, PostForm
+from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm
 from blogs.models import Blog, Page, Tag, Category, Post, Comment
 
 from notifications.forms import InvitationForm
@@ -197,6 +197,20 @@ def newpost(request, slug):
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
          # return HttpResponseRedirect( post.get_absolute_url() )
       return render_to_response('administrateblog.html', {'form': form})
+
+@login_required
+def newcategory(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      form = CategoriesForm(request.POST or None)
+      if request.method == 'POST':
+        if form.is_valid():
+          category = form.save(commit=False)
+          category.author = request.user
+          category.blog = blog
+          category.save()
+          return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
+      return render_to_response('administrateblog.html', {'form': form})
+
 #      else:
 #        form = PostForm()
 #        messages.add_message(request, messages.INFO, _(u"WTF"))
@@ -320,8 +334,9 @@ def administratecomments(request, slug):
 def administratecategories(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       categories = Category.objects.filter(blog=blog).order_by('-id')
+      categories_form = CategoriesForm()
       return render_to_response('administratecategories.html',
-                                {'blog': blog, 'categories': categories, },
+                                {'blog': blog, 'categories': categories, 'categories_form': categories_form},
                                 context_instance=RequestContext(request))
 
 @login_required
@@ -363,24 +378,20 @@ def editpost(request, id):
                                 {'blog': blog, 'form': form,'post': post },
                                 context_instance=RequestContext(request))
 
-#@login_required
-#def editpost(request, id):
-#      context_instance=RequestContext(request)
-#      obj_list = Post.objects.all()
-#      if request.method == 'POST':
-#        post = Post.objects.get(pk=int(id))
-#       form = PostForm(request.POST,instance=post)
-#        blog = post.blog
-#        if form.is_valid():
-#         post=form.save()
-#        return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
-#      else:
-#        post = Post.objects.get(pk=int(id))
-#        form = PostForm(instance=post,)
-#        blog = post.blog
-#      return render_to_response('editpost.html',
-#                                {'blog': blog, 'form': form,'post': post },
-#                                context_instance=RequestContext(request))
+@login_required
+def editcategory(request, id):
+      category = get_object_or_404(Category, id=id)
+      blog = category.blog
+      if request.method == 'POST':
+        form = CategoriesForm(request.POST or None, instance=category)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
+      else:
+        form = CategoriesForm(instance=category,)
+      return render_to_response('editcategory.html',
+                                {'blog': blog, 'form': form,'category': category },
+                                context_instance=RequestContext(request))
 
 @login_required
 def createpage(request, slug):

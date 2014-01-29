@@ -103,8 +103,8 @@ g
                                         
 <div class="panel" id="content-holder">
 
-{% if post.cat %}
-<a href="{% url post.views.cat post.cat.slug %}" style="text-decoration:none;"><div class="tagCat bg{{ post.cat }} ombrageTexte" style="position: relative; ">{{ post.cat }}</div></a>
+{% if post.category %}
+<a href="#" style="text-decoration:none;"><div class="tagCat bg{{ post.category }} ombrageTexte" style="position: relative; ">{{ post.category.name }}</div></a>
 {% endif %}
   {% if post.layout_type == "s" %}
   <div class="titreSingle">{{ post.title }}</div>

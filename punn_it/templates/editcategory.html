@@ -1,0 +1,79 @@
+{% extends "administratecategories.html" %}
+{% load i18n %}
+{% load url from future %}
+  {% block dashboard-active %}{% endblock %}
+  {% block categories-active %}class="active"{% endblock %}
+  {% block additional-js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/google-code-prettify/prettify.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js"></script>
+  {% endblock %}
+  {% block additional-css %}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/css/bootstrap.min.css">
+    <style>
+      .titlefield{
+        padding: 15px;
+      }
+      .fields{
+        padding: 15px;
+      }
+      .current_image{
+      }
+      .changed_image{
+      }
+      img {
+	max-width: 100%;
+	height: auto;
+      }
+ 
+    </style>
+  {% endblock %}
+{% block content %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}{{ field.name }}</strong>
+            </div>
+        {% endfor %}
+        
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form enctype="multipart/form-data" action="{% url 'blogs.views.editcategory' category.id %}" role="form" method="post" id=savedcategory>{% csrf_token %}
+    <div class="form-group">{{ form.name.label_tag }} :{{ form.name }}</div>  
+    <div class="form-group">{{ form.description.label_tag }} :{{ form.description }}</div>
+    <div class="form-group">{{ form.slug.label_tag }} :{{ form.slug }}</div>
+      </form>
+    <div class="row savedcategory_submit_cancel">
+      <div class="col-md-6">   
+        <button type="submit" class="btn btn-primary btn-xs" id="submitsavedcategory" title="{% trans "Save Changes" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
+      </div>
+      <div class="col-md-6">  
+        <a class="btn btn-danger btn-xs pull-right" href="{% url 'blogs.views.administratecategories' blog.slug %}" id="cancel_edit_category" title="{% trans "Cancel editing" %}"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</a>      
+      </div>
+    </div>
+  </div>
+</div>
+    <script type="text/javascript">
+      $(function () {
+        $('#submitsavedcategory').tooltip();
+        $('#cancel_edit_category').tooltip();
+      });
+    </script>
+
+    <script>
+      $('#submitsavedcategory').click(function() {
+        $('#savedcategory').submit();
+      });
+    </script>
+{% endblock %}
