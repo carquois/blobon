@@ -47,7 +47,26 @@ class SettingsForm(ModelForm):
         model = Blog 
         fields = ('title', 'slug', 'password', 'custom_domain','description', )
 
-class PostForm(forms.ModelForm):
+
+
+class CategoriesForm(ModelForm):
+    name = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your category name here'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    'autofocus':'on'}))
+    description = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Describe your category'),
+                                                    'type': 'text',
+                                                    'rows': '5',
+                                                    'class': "form-control setting_form input-block-level"}))
+    slug = CharField(widget=forms.TextInput(attrs={'placeholder': _('Slug'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+    class Meta:
+        model = Category
+        fields = ('name','description','slug', )
+
+
+class PostForm(ModelForm):
     title = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Write your title here'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",

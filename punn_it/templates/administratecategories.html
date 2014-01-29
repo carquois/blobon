@@ -3,6 +3,9 @@
 {% load url from future %}
     {% block additional-css %}
     <style>
+      textarea {
+        resize: none;
+      }
       .edit_buttons {
         padding: 10px;0px;5px;0px;
       }
@@ -11,8 +14,29 @@
   {% block dashboard-active %}{% endblock %}
   {% block categories-active %}class="active"{% endblock %}
   {% block content %}
+          <div class="panel panel-primary" id="new_cat_form" style="display: none">
+            <div class="panel-heading">{% trans "Add a new category :" %}</div>
+            <div class="panel-body">
+              <form enctype="multipart/form-data" id="newcat" role="form" method="post" action="{% url 'blogs.views.newcategory' blog.slug %}">{% csrf_token %}
+                <div class="form-group">
+                  {{ categories_form.name.label_tag }} 
+                  {{categories_form.name}}
+                </div>
+                <div class="form-group">
+                 {{ categories_form.description.label_tag }} 
+                 {{categories_form.description}}
+                </div>
+                <div class="form-group">
+                 {{ categories_form.slug.label_tag }}
+                  {{categories_form.slug}}
+                </div>
+              </form>
+              <button id="submitcat" class="btn btn-primary btn-xs" disabled="disabled" title="{% trans "Save your new category" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
+              <span id="cancel_new_category" title="{% trans "Cancel add category" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+            </div> 
+          </div>  
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Categories" %}<a href="#" class="btn btn-default btn-xs pull-right" style="display: none" id="add_new_category" title="{% trans "Add a New Category" %}">{% trans "Add new" %}</a></div>
+            <div class="panel-heading">{% trans "Categories" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_category" title="{% trans "Add a New Category" %}">{% trans "Add new" %}</a></div>
               <div class="panel-body">
               </div>
             <table class="table table-striped">
@@ -31,8 +55,8 @@
                 <tr>
                   <td>{{ category.name }}
                     <div class="edit_buttons">
-                      <button type="button" class="btn btn-default btn-xs edit_category" title="{% trans "Modify This Category" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</button>
-                      <button type="button" class="btn btn-default btn-xs delete_category" title="{% trans "Delete This Category" %}" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</button>
+                      <a type="button" class="btn btn-default btn-xs edit_category" href="{% url 'blogs.views.editcategory' category.id %}" title="{% trans "Modify This Category" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
+                      <a type="button" class="btn btn-default btn-xs delete_category" style="display: none" title="{% trans "Delete This Category" %}" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
                     </div>
                   </td>
                   <td>{{ category.description }}</td>
@@ -63,6 +87,60 @@
         $('#add_new_category').tooltip({container: 'body'});
         $(".edit_category").tooltip({container: 'body', placement: 'bottom'});
         $(".delete_category").tooltip({container: 'body', placement: 'bottom'});
+        $('#cancel_new_category').tooltip({container: 'body'});
+        $('#submitcat').tooltip({container: 'body'});
       });
     </script>
+
+    <script>
+      $('#add_new_category').click(function() {
+        $('#add_new_category').hide();
+        $('#new_cat_form').show();
+      });
+    </script>
+
+    <script>
+      $('#cancel_new_category').click(function() {
+        $('#add_new_category').show();
+        $('#new_cat_form').hide();
+        $('#newcat').each(function(){
+          this.reset();
+        });
+      });
+    </script>
+
+    <script>
+      $(document).ready(function(){
+        $('#id_name').keyup(function() {
+        if($(this).val() != '' && $('#id_slug').val() != '') {
+          $('#submitcat').prop("disabled", false);
+          }
+        else {
+          $('#submitcat').prop("disabled", true);
+        }
+        });
+      });
+    </script>
+
+    <script>
+      $(document).ready(function(){
+        $('#id_slug').keyup(function() {
+        if($(this).val() != '' && $('#id_name').val() != '') {
+          $('#submitcat').prop("disabled", false);
+          }
+        else {
+          $('#submitcat').prop("disabled", true);
+        }
+        });
+      });
+    </script>
+
+    <script>
+      $('#submitcat').click(function() {
+        $('#newcat').submit();
+      });
+    </script>
+
   {% endblock %}
+
+
