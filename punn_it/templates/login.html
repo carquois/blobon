@@ -43,6 +43,9 @@
           {{ form.password.label_tag }}:
           {{ form.password }}
         </div>
+        <div class="form-group">
+        </div>
+
         <button id="login_submit"type="submit" disabled="disabled"class="btn btn-primary btn-sm">{% trans "Login" %}</button>
         <a id="login_cancel" href="{% url 'blogs.views.index' %}" class="btn btn-danger btn-sm">{% trans "Cancel" %}</a>
      </form>
