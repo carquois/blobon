@@ -25,6 +25,17 @@ def custom_login(request):
     else:
         return login(request)
 
+def blobon_login(request):
+     if request.method == 'POST':
+       blogs = Blog.objects.filter(creator=request.user)
+       return render_to_response('dashboard.html',
+                                    {'blogs': blogs},
+                                    context_instance=RequestContext(request))
+     else:
+       return render_to_response('login.html',
+                                 {},
+                                 context_instance=RequestContext(request))
+
 @login_required
 def twitter(request):
     twitter = Twython(APP_KEY, APP_SECRET)

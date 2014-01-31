@@ -43,4 +43,14 @@
       </div>
     </div>
   {% endblock %}
+  {% block login_create_account %}
+    <div class="row">
+      <div class="col-md-6 col-md-offset-4">
+        <div style="padding:20px;text-align: center;max-width:400px;">
+          <a type="button" class="btn btn-primary btn-lg btn-block" style="display:none;">{% trans "Create an account :" %}</a>
+          <a type="button" href="{% url 'accounts.views.login' %}" class="btn btn-default btn-lg btn-block">{% trans "Login :" %}</a>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
 
