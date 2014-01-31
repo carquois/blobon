@@ -384,7 +384,12 @@ def editpost(request, id):
         form = PostForm(request.POST or None,request.FILES or None, instance=post)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
+            if 'save_quit' in request.POST:
+              return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
+            else:
+              return render_to_response('editpost.html',
+                                       {'blog': blog, 'form': form,'post': post },
+                                       context_instance=RequestContext(request))
       else:
         form = PostForm(instance=post,)
       return render_to_response('editpost.html',
