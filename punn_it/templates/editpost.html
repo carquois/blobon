@@ -52,7 +52,7 @@
     <form enctype="multipart/form-data" action="{% url 'blogs.views.editpost' post.id %}" role="form" method="post" id=savedpost>{% csrf_token %}
     <div class="fields" style="display: none;">{{ form.layout_type }}</div>
     {% if post.layout_type == "s" %} 
-    <div class="fields">{{ form.title.label_tag }} :{{ form.title }}</div>  
+    <div class="fields" style="display: none;">{{ form.title.label_tag }} :{{ form.title }}</div>
     <div class="fields">
       <div class="row">
         <div class="current_img col-md-6">
@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-    <div class="fields">{{ form.content.label_tag }} :{{ form.content }}</div>
+    <div class="fields" style="display: none;">{{ form.content.label_tag }} :{{ form.content }}</div>
   {% else %}
     {% if post.pic_1 %}
     <div class="fields">
@@ -426,16 +426,12 @@
       </div>
     </div>
     {% endif %}
+  {% endif %}
     <div class="fields">{{ form.artist.label_tag }} :{{ form.artist }}</div>
     <div class="fields">{{ form.title.label_tag }} :{{ form.title }}</div>
     <div class="fields">{{ form.text.label_tag }} :{{ form.text }}</div>
     <div class="fields">{{ form.source.label_tag }} :{{ form.source }}</div>
-    {% if post.category %}
-    <div class="form-group" id="cate_al1">
-      {{ form.category.label_tag }} {{ form.category }}
-    </div>
-    {% endif %}
-  {% endif %}
+    <div class="fields">{{ form.category.label_tag }} :{{ form.category }}</div>  
     <div class="row" style="display: none">{{ form.status }} </div>
     <div class="row savedpost_submit_cancel">
       <div class="col-md-6">
@@ -443,7 +439,7 @@
         <button  type="submit" class="btn btn-info btn-xs" value="save_continue" name="save_continue" id="submitsavedpost_continue" title="{% trans "Save changes and continue editing" %}"><span class="glyphicon glyphicon-save"></span> {% trans "Save and continue editing" %}</button>
       </div>
       <div class="col-md-6">
-        <a class="btn btn-danger btn-xs pull-right" href="{% url 'blogs.views.administrateposts' blog.slug %}" id="cancel_edit_post" title="{% trans "Cancel editing" %}"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</a>
+        <a class="btn btn-default btn-xs pull-right" href="{% url 'blogs.views.administrateposts' blog.slug %}" id="cancel_edit_post" title="{% trans "Cancel editing" %}"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</a>
       </div>
     </div>
       </form>

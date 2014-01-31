@@ -102,10 +102,9 @@ g
                                         
                                         
 <div class="panel" id="content-holder">
-
-{% if post.category %}
-<a href="#" style="text-decoration:none;"><div class="tagCat bg{{ post.category }} ombrageTexte" style="position: relative; ">{{ post.category.name }}</div></a>
-{% endif %}
+{% for category in post.category.all %}
+<a href="#" style="text-decoration:none;"><div class="tagCat bg{{ category }} ombrageTexte" style="position: relative; ">{{ category.name }}</div></a>
+{% endfor %}
   {% if post.layout_type == "s" %}
   <div class="titreSingle">{{ post.title }}</div>
     {% if post.youtube_id %}

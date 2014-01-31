@@ -194,6 +194,7 @@ def newpost(request, slug):
           post.author = request.user
           post.blog = blog
           post.save()
+          form.save_m2m()
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
       return render_to_response('administrateblog.html', {'form': form})
 
@@ -208,6 +209,7 @@ def savedraft(request, slug):
           post.blog = blog
           post.status = "D"
           post.save()
+          form.save_m2m()
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
       return render_to_response('administrateblog.html', {'form': form})
 

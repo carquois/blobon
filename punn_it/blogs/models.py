@@ -313,7 +313,8 @@ class Post(models.Model):
     content_6 = models.TextField(verbose_name=_("Content_6"),max_length=10000, blank=True)
     content_video = models.TextField(verbose_name=_("Content_video"),max_length=10000, blank=True)
     youtube_url = models.URLField(verbose_name=_("YoutubeURL"), max_length=300, blank=True)
-    category = models.ForeignKey(Category, null=True, blank=True)
+#    category = models.ForeignKey(Category, null=True, blank=True)
+    category = models.ManyToManyField(Category, null=True, blank=True)
     artist = models.CharField(verbose_name=_("Artist"), max_length=140, blank=True)
     LAYOUT_CHOICES = (
         ('s', 'Single'),
