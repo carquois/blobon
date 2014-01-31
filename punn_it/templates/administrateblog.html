@@ -648,9 +648,15 @@
                                   </div>
                                 {% endif %}
                             </form>
-                            <button id="save_draft_al1" class="btn btn-info btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
-                            <button id="submitimagealbum1form" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
-                            <button id="cancelimagealbum1form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <button id="submitimagealbum1form" class="btn btn-primary btn-xs" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
+                                <button id="save_draft_al1" class="btn btn-info btn-xs" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
+                              </div>
+                              <div class="col-md-6">
+                                <button id="cancelimagealbum1form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+                              </div>
+                            </div>
                       </div>
                       <div class="col-xs-12 modelalbum" style="display: none" id="modelalbum2">
                             <form enctype="multipart/form-data" id="newimagealbum2" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
@@ -1016,9 +1022,15 @@
                                   </div>
                                 {% endif %}
                             </form>
-                            <button id="save_draft_al2" class="btn btn-info btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
-                            <button id="submitimagealbum2form" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
-                            <button id="cancelimagealbum2form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <button id="submitimagealbum2form" class="btn btn-primary btn-xs" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
+                                <button id="save_draft_al2" class="btn btn-info btn-xs" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
+                              </div>
+                              <div class="col-md-6">                      
+                                <button id="cancelimagealbum2form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+                              </div>
+                            </div>
                       </div>
 
 
@@ -1389,9 +1401,15 @@
                                   </div>
                                 {% endif %}
                             </form>
-                            <button id="save_draft_al3" class="btn btn-info btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
-                            <button id="submitimagealbum3form" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
-                            <button id="cancelimagealbum3form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <button id="submitimagealbum3form" class="btn btn-primary btn-xs" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
+                                <button id="save_draft_al3" class="btn btn-info btn-xs" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
+                              </div>
+                              <div class="col-md-6">
+                                <button id="cancelimagealbum3form" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+                              </div>
+                            </div>
                       </div>
                       <div class="col-xs-12" style="display: none" id="uploadimageform">
                             <form enctype="multipart/form-data" id="newimage" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
@@ -1439,9 +1457,15 @@
                               </div>
                                 {% endif %}
                             </form>
-                            <button id="save_draft_image" class="btn btn-info btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
-                            <button id="submitimageform" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
-                            <button id="cancelimageform" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <button id="submitimageform" class="btn btn-primary btn-xs" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
+                                <button id="save_draft_image" class="btn btn-info btn-xs" disabled="disabled"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
+                              </div>
+                              <div class="col-md-6">
+                                <button id="cancelimageform" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+                              </div>
+                            </div>
                       </div>
                     </div>
                 </div>
@@ -1744,6 +1768,7 @@
         $('#al2_images_field_3').hide();
         $('#al2_images_field_4').hide();
         $('#al2_images_field_5').hide();
+        $('#al2_images_field_6').hide();
         $('#al2_add_more_images_1').hide();
         $('#al2_add_more_images_2').hide();
         $('#al2_add_more_images_3').hide();
@@ -1847,6 +1872,7 @@
         $('#al2_images_field_3').hide();
         $('#al2_images_field_4').hide();
         $('#al2_images_field_5').hide();
+        $('#al2_images_field_6').hide();
         $('#al2_add_more_images_1').hide();
         $('#al2_add_more_images_2').hide();
         $('#al2_add_more_images_3').hide();
@@ -2136,6 +2162,7 @@
         $('#al2_images_field_3').hide();
         $('#al2_images_field_4').hide();
         $('#al2_images_field_5').hide();
+        $('#al2_images_field_6').hide();
         $('#al2_add_more_images_1').hide();
         $('#al2_add_more_images_2').hide();
         $('#al2_add_more_images_3').hide();

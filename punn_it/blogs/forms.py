@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, ImageField
+from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, ImageField, ModelMultipleChoiceField
 from django.utils.translation import ugettext as _
 
 from blogs.models import Blog, Post, Category
@@ -89,6 +89,7 @@ class PostForm(ModelForm):
                                                     'rows': '5',
                                                     'class': "form-control setting_form input-block-level",
                                                     'autofocus':'on'}))
+    category = ModelMultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, queryset=Category.objects.all())
     content_0 = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this image'),
                                                     'type': 'text',
                                                     'rows': '5',
