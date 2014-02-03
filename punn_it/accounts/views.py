@@ -21,7 +21,7 @@ APP_SECRET = 'CeDVT0e35vbs2KUBzQq6tQijdUfC4NL3XRmO12ZDyeA'
 
 def custom_login(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('punns.views.index'))
+        return HttpResponseRedirect(reverse('blogs.views.index'))
     else:
         return login(request)
 
