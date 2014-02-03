@@ -32,8 +32,9 @@ def blobon_login(request):
                                     {'blogs': blogs},
                                     context_instance=RequestContext(request))
      else:
+       form=AuthenticationForm
        return render_to_response('login.html',
-                                 {},
+                                 {'form': form},
                                  context_instance=RequestContext(request))
 
 @login_required
