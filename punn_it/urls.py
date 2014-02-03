@@ -6,7 +6,7 @@ from django.contrib import admin
 from punns.views import UserFeed
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from dajaxice.core import dajaxice_autodiscover, dajaxice_config
-
+from accounts.forms import Blobon_loginForm
 dajaxice_autodiscover()
 admin.autodiscover()
 
@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'django.contrib.auth.views.logout',
                           {'next_page': '/'}),
     url(r'^login/$', 'django.contrib.auth.views.login', 
-                          {'template_name': 'login.html'}),
+                          {'template_name': 'login.html', 'authentication_form':Blobon_loginForm}),
     url(r'^settings/profile/$', 'accounts.views.edit_profile'),
     url(r'^settings/password/$', 'django.contrib.auth.views.password_change',
                           {'post_change_redirect': '/settings/password/password_reset_confirmation/'}),

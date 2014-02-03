@@ -2,7 +2,7 @@
 
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from accounts.models import UserProfile
 from django.forms import ModelForm, Textarea, TextInput, CharField
 from django.utils.translation import ugettext as _
@@ -57,5 +57,21 @@ class UserForm(ModelForm):
             'username': _("Nom d'utilisateur"),
             'pic': _('Image'),
         }
+
+class Blobon_loginForm(AuthenticationForm):
+    username = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': _('Username'),
+                                                    'type': 'text',
+                                                    'class': "form-control",
+                                                    'autofocus':'on',
+                                                    'style': "max-width:220px;"}))
+    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': _('Password'),
+                                                    'class': "form-control",
+                                                    'style': "max-width:220px;"}))
+
+
+
+
+
+
 
 
