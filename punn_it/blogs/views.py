@@ -14,13 +14,16 @@ from urlparse import urlparse
 from django.core.files import File
 from cgi import parse_qs
 
-from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm
-from blogs.models import Blog, Page, Tag, Category, Post, Comment
+from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm
+from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email
 
 from notifications.forms import InvitationForm
 from notifications.models import Invitation
 
-from django.forms import ModelForm, Textarea, TextInput, CharField, URLField
+from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, EmailField
+from django.forms.models import modelformset_factory
+
+from django.core.mail import send_mail
 
 def index(request):
       request.subdomain = None
@@ -50,8 +53,9 @@ def index(request):
           posts = paginate(request,
                            Post.objects.filter(blog=blog).order_by('-pub_date'),
                            15)
+          form = SubscriptionForm()
           return render_to_response('index.html',
-                                    {'posts': posts, 'blog': blog},
+                                    {'posts': posts, 'blog': blog, 'form': form,},
                                     context_instance=RequestContext(request))
       elif Blog.objects.filter(slug=request.subdomain).exists():
           blog = Blog.objects.get(slug=request.subdomain)
@@ -60,8 +64,9 @@ def index(request):
           posts = paginate(request,
                          Post.objects.filter(blog=blog).order_by('-pub_date'),
                          15)
+          form = SubscriptionForm()
           return render_to_response('index.html',
-                                    {'posts': posts, },
+                                    {'posts': posts, 'form': form,},
                                     context_instance=RequestContext(request))
 
       else:
@@ -69,9 +74,11 @@ def index(request):
         posts = paginate(request,
                          Post.objects.order_by('-pub_date'),
                          15)
+        form = SubscriptionForm()
         return render_to_response('index.html',
                                  {'user': user,
-                                  'posts': posts, },
+                                  'posts': posts,
+                                  'form': form, },
                                   context_instance=RequestContext(request))
 
 def pics(request):
@@ -100,6 +107,7 @@ def single(request, shorturl):
     next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]
     prev_post = ""
     next_post = ""
+    form = SubscriptionForm()
     if Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]:
       next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
       if (next_post_query.count() > 0):
@@ -112,7 +120,7 @@ def single(request, shorturl):
     return render_to_response('single.html',
                                 {'post': post, 'latest_post_list': latest_post_list,
                                  'next_post': next_post, 'prev_post': prev_post,
-                                 'user': post.author, 'blog': post.blog },
+                                 'user': post.author, 'blog': post.blog, 'form': form, },
                                 context_instance=RequestContext(request))
 
     #cats = Cat.objects.filter(is_top_level=True)
@@ -377,6 +385,14 @@ def administratesettings(request, slug):
                                 context_instance=RequestContext(request))
 
 
+@login_required
+def administrateemails(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      info_emails = Info_email.objects.filter(blog=blog).order_by('-id')
+      form = EmailForm()
+      return render_to_response('administrateemails.html',
+                                {'blog': blog, 'info_emails': info_emails, 'form': form},
+                                context_instance=RequestContext(request))
 
 @login_required
 def editpost(request, id):
@@ -414,6 +430,42 @@ def editcategory(request, id):
                                 context_instance=RequestContext(request))
 
 @login_required
+def fastedit(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      posts = paginate(request,
+                       Post.objects.filter(status="D").filter(is_ready=False).order_by('-pub_date'),
+                       10)
+#      PostFormset = modelformset_factory(Post, fields=('title', 'translated_title','content', 'translated_content', 'is_ready'))
+#      if request.method == 'POST':
+#        formset = PostFormset(request.POST or None,request.FILES or None, queryset=Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date')[:40])
+#        if formset.is_valid():
+#            formset.save()
+#            return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
+#      else:
+#        formset = PostFormset(queryset=Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date')[:40])
+      return render_to_response('fastedit.html',
+                                {'blog': blog, 'posts': posts},
+                                context_instance=RequestContext(request))
+
+@login_required
+def fasteditpost(request, id):
+      post = get_object_or_404(Post, id=id)
+      blog = post.blog
+      if request.method == 'POST':
+        form = PostForm(request.POST or None,request.FILES or None, instance=post)
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect(reverse('blogs.views.fastedit', args=(blog.slug,)))
+#        return render_to_response('fastedit.html',
+#                                  {'blog': blog, 'form': form },
+#                                  context_instance=RequestContext(request))
+      else:
+        form = PostForm(instance=post,)
+      return render_to_response('fasteditpost.html',
+                                {'blog': blog, 'form': form,'post': post },
+                                context_instance=RequestContext(request))
+
+@login_required
 def createpage(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       if request.method == 'POST':
@@ -446,6 +498,7 @@ def submit(request):
           new_post = form.save(commit=False)
           new_post.blog = request.user.userprofile.main_blog
           new_post.author = request.user
+          new_post.is_ready = False
           if request.user.is_staff:
             new_post.is_top = True
             new_post.save()
@@ -466,7 +519,6 @@ def submit(request):
             new_post.youtube_id = p['v'][0]
             new_post.save()
           return HttpResponseRedirect( new_post.get_absolute_url() )
-        #  return render_to_response('success.html', {"post": new_post}, context_instance=RequestContext(request))
     elif request.method == 'GET':
       source = request.GET.get('url', '') 
       title = request.GET.get('title', '') 
@@ -478,17 +530,6 @@ def submit(request):
       form = SubmitForm()
     return render_to_response('submit.html', {'form': form}, context_instance=RequestContext(request))
 
-#@login_required
-#def savepost(request, id):
-#      post = get_object_or_404(Post, id=id)
-#      blog = post.blog
-#      if request.user == post.author:
-#        post.save()
-#        messages.add_message(request, messages.INFO, _(u"Your post has been saveed"))
-#      elif request.user.is_staff:
-#        post.save()
-#        messages.add_message(request, messages.INFO, _(u"The post has been saveed"))
-#      return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
 
 @login_required
 def deletepost(request, id):
@@ -501,6 +542,51 @@ def deletepost(request, id):
         post.delete()
         messages.add_message(request, messages.INFO, _(u"The post has been deleted"))
       return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
+
+def subscribe_to_infoletter(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      form = SubscriptionForm(request.POST or None, request.FILES or None)
+      if request.method == 'POST':
+        if form.is_valid():
+          subscription = form.save(commit=False)
+          subscription.blog = blog
+          subscription.save()
+          return render_to_response('thanks.html', {'blog': blog,}, context_instance=RequestContext(request))
+      return render_to_response('subscription.html', {'form': form, 'blog': blog,}, context_instance=RequestContext(request))
+
+@login_required
+def create_info_email(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      form = EmailForm(request.POST or None, request.FILES or None)
+      if request.method == 'POST':
+        if form.is_valid():            
+          email = form.save(commit=False)
+          email.author = request.user
+          email.blog = blog
+          email.status = "D"
+          email.save()
+          return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
+      return render_to_response('administrateblog.html', {'form': form})
+
+def contact(request):
+     if request.method == 'POST':
+      form = ContactForm(request.POST or None, request.FILES or None)
+      if form.is_valid():
+        subject = form.cleaned_data['subject']
+        message = form.cleaned_data['message']
+        from_email = form.cleaned_data['from_email']
+
+        recipients = ['vincegothier@gmail.com']
+        messages.add_message(request, messages.INFO, _(u"Your message has been send, thank you!"))
+        from django.core.mail import send_mail
+        send_mail(subject, message, from_email, recipients)
+        return HttpResponseRedirect(reverse('blogs.views.index'))
+     else:
+       form=ContactForm()
+       return render_to_response('contact.html',
+                                 {'form': form},
+                                 context_instance=RequestContext(request))
+
 ###UTILS###
 #Une fonction pour paginer une liste d'objets
 def paginate(request, list_of_objects, number_of_items):

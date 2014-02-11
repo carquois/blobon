@@ -17,6 +17,10 @@ from posts.models import Image
 from posts.models import Album
 from posts.models import Video 
 from blogs.models import Page
+from blogs.models import Subscription
+from blogs.models import Info_email
+from blogs.models import Language
+from blogs.models import Translation
 
 class PunnAdmin(admin.ModelAdmin):
     exclude = ('original_punn',)
@@ -40,5 +44,7 @@ admin.site.register(Comment)
 admin.site.register(CommentVote)
 admin.site.register(PunnVote)
 admin.site.register(Image)
-
-
+admin.site.register(Subscription)
+admin.site.register(Info_email)
+admin.site.register(Language)
+admin.site.register(Translation)

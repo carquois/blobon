@@ -193,7 +193,9 @@
  
     <div id="principaleContenant" class="container ombrage" >
                     
-                                      
+                         {% block subscription %}
+                         {% endblock %} 
+                                     
             <div class="row bgBlanc">
                     
                     <!--Colonne de gauche -->
@@ -203,7 +205,6 @@
                          {% endblock %}
                                 
                                  {% block content %}
-              
                                <!-- liste thumbnails -->
                                <div class="col-md-12 noPad" style="margin-bottom: 20px;">
                                        
@@ -321,7 +322,7 @@
                 
                 
                 <!--Colonne de droite -->
-                <div id="colonnedroite" class="col-md-4 bgNoir pad15" style="min-height: 1550px;">
+                <div id="colonnedroite" class="col-md-4 bgNoir pad15" style="min-height: 1750px;">
                         
                         
                         {% block boiteProfil %}
@@ -338,7 +339,11 @@
                                  
                                        
                                         <div class="iconeProfil IconeParametresProfil"></div><div class="lienProfil ombrageTexte"><a href="{% url 'accounts.views.edit_profile' %}">Paramètres</a> </div>
-                                        
+                                        {% if request.user.username == "gab" %}
+                                        <div class="row" style="padding:25px;">
+                                          <div class="lienProfil ombrageTexte"><span class="glyphicon glyphicon-star-empty"></span><a href="{% url 'blogs.views.fastedit' blog.slug %}"> Ben oui</a> </div>
+                                        </div>
+                                        {% endif %} 
                                         <a href="{% url 'punns.views.create' %}"> <button id="btAjoutContenu" type="button" class="btn btn-danger btn-lg ombrageTexte centered">Ajoutez du contenu</button></a>
 
                                </div>
@@ -377,8 +382,39 @@
                           
                           <div class="fb-recommendations" style="background-color:#FFFFFF; margin-top:10px" data-app-id="378058345602851" data-site="checkdonc.ca" data-action="likes" data-width="360" data-height="600" data-max-age="7" data-colorscheme="light" data-header="true"></div>
 
+    <div style="  margin-bottom: 20px;"></div>
+
+    <div class="pageProfilEntete fondDegrade coinsRonds pad20">
+      <h3>{% trans "Subscribe to " %}{{ blog.title }}{% trans " info-letters" %}</h3>
+      <form method="post" id="subscribe_form" class="form-horizontal" role="form" action="{% url 'blogs.views.subscribe_to_infoletter' blog.slug %}">
+        {% csrf_token %}
+        <div class="form-group">
+          {{ form.email.label_tag }}:
+          {{ form.email }}
+        </div>
+
+        <button id="subscribe_submit" type="submit" disabled="disabled"class="btn btn-primary btn-sm">{% trans "Subscribe" %}</button>
+     </form>
+    </div>
+
+    <div style="clear: both; margin-bottom: 20px;"></div>
+
+
+    <script>
+      $(document).ready(function(){
+        $('#id_email').keyup(function() {
+        if($(this).val() != '') {
+          $('#subscribe_submit').prop("disabled", false);
+          }
+        else {
+          $('#subscribe_submit').prop("disabled", true);
+        }
+        });
+      });
+    </script>
                 
                 </div>
+
                  <!--Fin Colonne de droite -->
                  
       </div> <!--/row -->

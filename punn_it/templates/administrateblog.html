@@ -2740,6 +2740,7 @@
       <li {% block categories-active %}{% endblock %}><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="categories_button" title="{% trans "Create, Modify or Delete Categories" %}"><span class="glyphicon glyphicon-folder-open"></span> {% trans "Categories" %}</a></li>
       <li style="display: none" {% block tags-active %}{% endblock %}><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="tags_button" title="{% trans "Create, Modify or Delete Tags" %}"><span class="glyphicon glyphicon-tag"></span> {% trans "Tags" %}</a></li>
       <li {% block settings-active %}{% endblock %}><a href="{% url 'blogs.views.administratesettings' blog.slug %}" id="settings_button" title="{% trans "Change Your Settings" %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Settings" %}</a></li>
+      <li {% block emails-active %}{% endblock %}><a href="{% url 'blogs.views.administrateemails' blog.slug %}" id="settings_button" title="{% trans "Change Your Settings" %}"><span class="glyphicon glyphicon-envelope"></span> {% trans "Mailing list" %}</a></li>
     </ul>
     <script type="text/javascript">
       $(function () {

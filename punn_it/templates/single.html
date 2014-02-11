@@ -110,9 +110,11 @@ g
     {% if post.youtube_id %}
     <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
     {% else %}
+    {% if post.pic %}
     <a href="{{ next_post.get_absolute_url }}">
       <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
     </a>
+    {% endif %}
        {% if post.content_0 %}
          <div class="img_content">{{ post.content_0 }}</div>
        {% endif %}  
@@ -804,9 +806,11 @@ g
 
 
   {% if post.content %}
+<hr>
 <div>
    <p> {{ post.content|markdown|safe }}</p>
 </div>
+<hr>
   {% endif %}
   <div class="media" id="heading">
   <a class="pull-left" href="#">

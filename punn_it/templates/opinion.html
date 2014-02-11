@@ -1,0 +1,72 @@
+{% extends "dashboard_base.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+  {% block additional-css %}
+    <style>
+      .invitation {
+        max-width:739px;
+        margin-left: auto;
+        margin-right: auto;
+        padding:2px 2px 2px 2px;
+      }
+      #bloboninviteimg {
+       max-width:100%;
+       margin-left: auto;
+       margin-right: auto;
+       position: relative;
+      }
+      .topimage {
+       max-width:700px;
+       margin-left: auto;
+       margin-right: auto;
+      }
+    </style>
+  {% endblock %}
+  {% block nav %}
+  {% endblock %}
+  {% block leaderboard %}
+  {% endblock %}
+  {% block container %}
+
+{% if messages %}
+            {% for message in messages %}
+<div class="alert alert-info alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+</div>
+            {% endfor %}
+          {% endif %}
+
+    <div style="padding:20px;text-align: center;">
+      <h1>Devrait-on augmenter ou baisser les frais de scolarité universitaires?</h1>
+  <button type="button" class="btn btn-primary btn-large">Augmenter</button>
+  <button type="button" class="btn btn-danger btn-large">Baisser</button>
+
+<br />
+
+<h3>60% sont pour une augmentation  <small>(8765 votes)</small></h3>
+
+
+<div class="progress">
+  <div class="progress-bar progress-bar-primary" style="width: 60%">
+    <span class="sr-only">35% Complete (success)</span>
+  </div>
+  <div class="progress-bar progress-bar-danger" style="width: 40%">
+    <span class="sr-only">10% Complete (danger)</span>
+  </div>
+</div>
+
+
+    </div>
+  {% endblock %}
+  {% block login_create_account %}
+    <div class="row">
+      <div class="col-md-6 col-md-offset-4">
+        <div style="padding:20px;text-align: center;max-width:400px;">
+          <a type="button" class="btn btn-primary btn-lg btn-block" style="display:none;">{% trans "Create an account :" %}</a>
+          <a type="button" href="{% url 'accounts.views.login' %}" class="btn btn-default btn-lg btn-block" style="display:none;">{% trans "Login :" %}</a> 
+       </div>
+      </div>
+    </div>
+  {% endblock %}
+

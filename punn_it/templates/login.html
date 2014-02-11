@@ -5,52 +5,23 @@
   {% endblock %}
   {% block leaderboard %}
   {% endblock %}
-  {% block container %}
+  {% block form %}
 
-{% if messages %}
-            {% for message in messages %}
-<div class="alert alert-info alert-dismissable">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
-</div>
-            {% endfor %}
-          {% endif %}
-
-    <div style="padding:20px;text-align: center;">
-      <div class="topimage">
-        <img src="http://i.imgur.com/QXoXHev.jpg" class="img-responsive" id="bloboninviteimg"/>
-      </div>
-    </div>
-  {% endblock %}
-  {% block login_create_account %}
-
-    <div class="row">
-      <div class="col-md-6 col-md-offset-4">
     {% if form.errors %}
       {% trans "Your username and password didn't match. Please try again." %}
     {% endif %}
-      </div>
-    </div>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-5">
-      <form method="post" id="login_form" class="form-horizontal" role="form" action="{% url 'django.contrib.auth.views.login' %}">
+      <form method="post" id="login_form" role="form" style="min-width:250px;display: inline-block;text-align: center;" action="{% url 'django.contrib.auth.views.login' %}">
         {% csrf_token %}
-        <div class="form-group">
-          {{ form.username.label_tag }}:
+        <div class="form-group" style="padding:10px;">
           {{ form.username }}
-        </div>
         <div class="form-group">
-          {{ form.password.label_tag }}:
+        </div>
           {{ form.password }}
-        </div>
-        <div class="form-group">
         </div>
 
         <button id="login_submit"type="submit" disabled="disabled"class="btn btn-primary btn-sm">{% trans "Login" %}</button>
         <a id="login_cancel" href="{% url 'blogs.views.index' %}" class="btn btn-default btn-sm">{% trans "Cancel" %}</a>
      </form>
-    </div>
-  </div>
 
     <script>
       $('#login_submit').click(function() {
@@ -60,7 +31,7 @@
 
     <script>
       $(document).ready(function(){
-        $('#id_iusername').keyup(function() {
+        $('#id_username').keyup(function() {
         if($(this).val() != '' && $('#id_password').val() != '') {
           $('#login_submit').prop("disabled", false);
           }

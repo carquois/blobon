@@ -62,11 +62,9 @@ class Blobon_loginForm(AuthenticationForm):
     username = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': _('Username'),
                                                     'type': 'text',
                                                     'class': "form-control",
-                                                    'autofocus':'on',
-                                                    'style': "max-width:220px;"}))
+                                                    'autofocus':'on'}))
     password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': _('Password'),
-                                                    'class': "form-control",
-                                                    'style': "max-width:220px;"}))
+                                                    'class': "form-control"}))
 
 
 
