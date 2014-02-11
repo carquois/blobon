@@ -17,9 +17,22 @@
 {{ form.translated_title }}
   </div>
 
-
 <img src="{{ image }}" style="max-width:400px;">
 
+  <div class="form-group">
+{{ form.message.label }}
+{{ form.message }}
+  </div>
+
+  <div class="form-group">
+{{ form.content.label }}
+{{ form.content }}
+  </div>
+
+  <div class="form-group">
+{{ form.translated_content.label }}
+{{ form.translated_content }}
+  </div>
 
             {{ form.source }}
             <input type="hidden" name="media" value="{{ image }}" id="media" />

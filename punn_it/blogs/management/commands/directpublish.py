@@ -23,14 +23,25 @@ class Command(BaseCommand):
     for username in args:
       u = User.objects.get(username=username)
       up = UserProfile.objects.get(user=u)
-      p = Post.objects.filter(author=u).filter(status="D").order_by('-pub_date')[:1]
+      p = Post.objects.filter(author=u).filter(status="D").filter(is_ready=True).order_by('-pub_date')[:1]
       if p.count() >= 1:
         post = p[0]
         publish_draft(post)
         publish_twitter_link(post)
-        if post.translated_title and post.blog.translation and post.youtube_id: 
+        if post.translated_title and post.blog.translation and post.translated_content and post.youtube_id: 
+          post.save()
+          new_post = Post(title=post.translated_title, content=post.translated_title, youtube_id=post.youtube_id, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
+          publish_draft(new_post)
+          publish_twitter_link(new_post)
+        elif post.translated_title and post.blog.translation and post.youtube_id:
           post.save()
           new_post = Post(title=post.translated_title, youtube_id=post.youtube_id, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
+          publish_draft(new_post)
+          publish_twitter_link(new_post)
+
+        elif post.translated_title and post.blog.translation and post.translated_content:
+          post.save()
+          new_post = Post(title=post.translated_title, content=post.translated_title, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
           publish_twitter_link(new_post)
         elif post.translated_title and post.blog.translation:

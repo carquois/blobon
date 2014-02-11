@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, ImageField, ModelMultipleChoiceField
+from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, ImageField, ModelMultipleChoiceField, EmailField
 from django.utils.translation import ugettext as _
+from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
 
-from blogs.models import Blog, Post, Category
+from blogs.models import Blog, Post, Category, Subscription, Info_email
 
 class BlogForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Enter your title'),
@@ -21,9 +22,21 @@ class SubmitForm(ModelForm):
     title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.'), 'class': 'form-control'}), required=False)
     translated_title = CharField(label=_('Title translated :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your translation here.'), 'class': 'form-control'}), required=False)
     source = URLField(label=_('Source :'), widget=forms.HiddenInput(), required=False)
+    content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Enter your content here'),
+                                                    'type': 'text',
+                                                    'rows': '5',
+                                                    'class': "form-control input-block-level"}))
+    translated_content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Enter your translation here'),
+                                                    'type': 'text',
+                                                    'rows': '5',
+                                                    'class': "form-control input-block-level"}))
+    message = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Enter your message here'),
+                                                    'type': 'text',
+                                                    'rows': '5',
+                                                    'class': "form-control input-block-level"}))
     class Meta:
         model = Post
-        fields = ('title', 'translated_title',)
+        fields = ('title', 'translated_title', 'content', 'translated_content', 'message',)
 
 class SettingsForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your blog title'),
@@ -47,7 +60,45 @@ class SettingsForm(ModelForm):
         model = Blog 
         fields = ('title', 'slug', 'password', 'custom_domain','description', )
 
+class SubscriptionForm(ModelForm):
+    email = EmailField(widget=forms.TextInput(attrs={'placeholder': _('Enter your email here'),
+                                                    'type': 'text',
+                                                    'class': "form-control input-block-level",
+                                                    'autofocus':'on'}))
+    class Meta:
+        model = Subscription
+        fields = ('email', )
 
+class ContactForm(forms.Form):
+    subject = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': _('Your subject here'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    'autofocus':'on'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'placeholder': _('Enter your message here'),
+                                                    'type': 'text',
+                                                    'rows': '5',
+                                                    'class': "form-control input-block-level"}))
+    from_email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': _('Enter your email here'),
+                                                    'type': 'text',
+                                                    'class': "form-control input-block-level"}))
+    cc_myself = forms.BooleanField(required=False)
+
+class EmailForm(ModelForm):
+    name = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your email name here'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    'autofocus':'on'}))
+    subject = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your subject'),
+                                                    'type': 'text',
+                                                    'rows': '1',
+                                                    'class': "form-control setting_form input-block-level"}))
+    content = CharField(widget=forms.Textarea(attrs={'placeholder': _('Your email content'),
+                                                    'type': 'text',
+                                                    'rows': '10',
+                                                    'class': "form-control setting_form input-block-level"}))
+    class Meta:
+        model = Info_email
+        fields = ('name','subject','content', )
 
 class CategoriesForm(ModelForm):
     name = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your category name here'),
@@ -68,6 +119,10 @@ class CategoriesForm(ModelForm):
 
 class PostForm(ModelForm):
     title = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Write your title here'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    'autofocus':'on'}))
+    translated_title = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Write your translated title here'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
                                                     'autofocus':'on'}))
@@ -135,6 +190,10 @@ class PostForm(ModelForm):
                                                     'rows': '3',
                                                     'class': "form-control setting_form input-block-level",
                                                     'autofocus':'on'}))
+    translated_content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Enter your translation here'),
+                                                    'type': 'text',
+                                                    'rows': '5',
+                                                    'class': "form-control input-block-level"}))
     youtube_url = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Copy a Youtube url here'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
@@ -164,8 +223,9 @@ class PostForm(ModelForm):
     pic_22 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_22(this);"}))
     pic_23 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_23(this);"}))
     pic_24 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_24(this);"}))
+    is_ready = forms.BooleanField(required=False) 
     class Meta:
         model = Post
         exclude=('author',) 
-        fields = ('title','content','source','status','artist','text','content_0','content_01','content_1','content_2','content_3','content_4','content_5','content_6','content_video', 'pic','pic_0','pic_04','pic_1','pic_2','pic_3','pic_4','pic_5','pic_6','youtube_url','category',
+        fields = ('title','content','source','status','artist','text','translated_title','is_ready','translated_content','content_0','content_01','content_1','content_2','content_3','content_4','content_5','content_6','content_video', 'pic','pic_0','pic_04','pic_1','pic_2','pic_3','pic_4','pic_5','pic_6','youtube_url','category',
                  'pic_7','pic_8','pic_9','pic_10','pic_11','pic_12','pic_13','pic_14','pic_15','pic_16','pic_17','pic_18','pic_19','pic_20','pic_21','pic_22','pic_23','pic_24','layout_type', )

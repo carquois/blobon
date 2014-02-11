@@ -236,6 +236,17 @@ class Page(models.Model):
     def __unicode__(self):
         return self.title
 
+class Info_email(models.Model):
+    blog = models.ForeignKey(Blog, null=True)
+    author = models.ForeignKey(User, null=True)
+    status = models.CharField(max_length=2, choices=STATUS)
+    name = models.CharField(verbose_name=_("Title"), max_length=140, blank=True)
+    content = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
+    subject = models.TextField(verbose_name=_("Subject"), max_length=100, blank=True)
+    created = models.DateTimeField(auto_now_add = True)
+    def __unicode__(self):
+        return self.name
+
 class Category(models.Model):
     author = models.ForeignKey(User)
     blog = models.ForeignKey(Blog, null=True)
@@ -303,6 +314,9 @@ class Post(models.Model):
     pic_24 = ImageField(verbose_name=_("Image_24"), upload_to=get_file_path_24, null=True, blank=True)
     pic_04 = ImageField(verbose_name=_("Image_04"), upload_to=get_file_path_04, null=True, blank=True)
     text = models.TextField(verbose_name=_("Text"),max_length=10000, blank=True)
+    translated_content = models.TextField(verbose_name=_("Contenu traduit"),max_length=10000, blank=True)
+    is_ready = models.BooleanField(default=True)
+    message = models.TextField(verbose_name=_("Message"),max_length=10000, blank=True)
     content_0 = models.TextField(verbose_name=_("Content_0"),max_length=10000, blank=True)
     content_01 = models.TextField(verbose_name=_("Content_01"),max_length=10000, blank=True)
     content_1 = models.TextField(verbose_name=_("Content_1"),max_length=10000, blank=True)
@@ -313,7 +327,6 @@ class Post(models.Model):
     content_6 = models.TextField(verbose_name=_("Content_6"),max_length=10000, blank=True)
     content_video = models.TextField(verbose_name=_("Content_video"),max_length=10000, blank=True)
     youtube_url = models.URLField(verbose_name=_("YoutubeURL"), max_length=300, blank=True)
-#    category = models.ForeignKey(Category, null=True, blank=True)
     category = models.ManyToManyField(Category, null=True, blank=True)
     artist = models.CharField(verbose_name=_("Artist"), max_length=140, blank=True)
     LAYOUT_CHOICES = (
@@ -359,6 +372,26 @@ class Comment(models.Model):
     notify_me = models.BooleanField(default=False)
     def __unicode__(self):
         return self.comment
+
+
+class Subscription(models.Model):
+    blog = models.ForeignKey(Blog, null=True)
+    email = models.EmailField(verbose_name=_("Email"))
+    def __unicode__(self):
+        return self.email
+
+class Language(models.Model):
+    language_name = models.CharField(verbose_name=_("Language_name"), max_length=40)
+    language_code = models.CharField(verbose_name=_("Language_code"), max_length=5)
+    def __unicode__(self):
+        return self.language_name
+
+class Translation(models.Model):
+    name = models.CharField(verbose_name=_("Name"), max_length=40)
+    origin_blog = models.ForeignKey(Blog, related_name='Translation_origin_blog', null=True)
+    translated_blog = models.ForeignKey(Blog, related_name='Translation_translated_blog', null=True)
+    def __unicode__(self):
+        return self.name
 
 #class Video(Post):
 #    video_title = models.CharField(verbose_name=_("Title"), max_length=140, blank=True)
