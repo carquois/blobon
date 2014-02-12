@@ -2740,7 +2740,8 @@
       <li {% block categories-active %}{% endblock %}><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="categories_button" title="{% trans "Create, Modify or Delete Categories" %}"><span class="glyphicon glyphicon-folder-open"></span> {% trans "Categories" %}</a></li>
       <li style="display: none" {% block tags-active %}{% endblock %}><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="tags_button" title="{% trans "Create, Modify or Delete Tags" %}"><span class="glyphicon glyphicon-tag"></span> {% trans "Tags" %}</a></li>
       <li {% block settings-active %}{% endblock %}><a href="{% url 'blogs.views.administratesettings' blog.slug %}" id="settings_button" title="{% trans "Change Your Settings" %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Settings" %}</a></li>
-      <li {% block emails-active %}{% endblock %}><a href="{% url 'blogs.views.administrateemails' blog.slug %}" id="settings_button" title="{% trans "Change Your Settings" %}"><span class="glyphicon glyphicon-envelope"></span> {% trans "Mailing list" %}</a></li>
+      <li {% block emails-active %}{% endblock %}><a href="{% url 'blogs.views.administrateemails' blog.slug %}" id="emails_button" title="{% trans "Change Your Settings" %}"><span class="glyphicon glyphicon-envelope"></span> {% trans "Mailing list" %}</a></li>
+      <li {% block translation-active %}{% endblock %}><a href="{% url 'blogs.views.translation' blog.slug %}" id="translations_button" title="{% trans "Translate your posts" %}"><span class="glyphicon glyphicon-euro"></span> {% trans "Translation" %}</a></li>   
     </ul>
     <script type="text/javascript">
       $(function () {
@@ -2751,6 +2752,8 @@
         $('#categories_button').tooltip();
         $('#tags_button').tooltip();
         $('#settings_button').tooltip();
+        $('#translations_button').tooltip();
+        $('#emails_button').tooltip();
       });
     </script>
   {% endblock %}
