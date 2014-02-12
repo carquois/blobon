@@ -164,7 +164,7 @@ body {
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="{% url 'blogs.views.index' %}">{% trans "Home" %}</a></li>
+                <li class="active"><a href="#">{% trans "Home" %}</a></li>
                 <li><a href="#">{% trans "Solutions" %}</a></li>
                 <li><a href="#">{% trans "Partners" %}</a></li>
               </ul>
@@ -237,9 +237,9 @@ body {
               <li><a href="http://blobon.com/p/vHjXR7jj">{% trans " Blog " %}</a></li>
               <li><a href="{% url 'blogs.views.contact' %}">{% trans " Contact " %}</a></li>
               <li><a href="http://blobon.com/p/n47yOJI9">{% trans " Jobs " %}</a></li>
-              <li><p>{% trans " @ 2013 Blobon, Inc." %}</p></li>
+              <li><p><a href="{% url 'blogs.views.index' %}">{% trans " @ 2013 Blobon, Inc." %}</a></p></li>
             </ul>
           </div>
     </div>
-
+{% url 'blogs.views.index' %}
     {% endblock %}

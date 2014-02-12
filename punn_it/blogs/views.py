@@ -415,6 +415,73 @@ def editpost(request, id):
                                 context_instance=RequestContext(request))
 
 @login_required
+def translatepost(request, id):
+      post = get_object_or_404(Post, id=id)
+      blog = post.blog
+      if request.method == 'POST':
+        form = PostForm(request.POST or None,request.FILES or None, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            if 'save_ready_publish' in request.POST:
+              post.is_ready = True
+              post.status = 'P'
+              post.save()
+              return HttpResponseRedirect(reverse('blogs.views.translation', args=(blog.slug,)))
+            elif 'save_ready_queue' in request.POST:
+              post.is_ready = True
+              post.save()
+              return HttpResponseRedirect(reverse('blogs.views.translation', args=(blog.slug,)))
+            else:
+              post.save()
+              return HttpResponseRedirect(reverse('blogs.views.translation', args=(blog.slug,)))
+      else:
+        form = PostForm(instance=post,)
+      return render_to_response('translatepost.html',
+                                {'blog': blog, 'form': form,'post': post },
+                                context_instance=RequestContext(request))
+
+@login_required
+def quicktranslation(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      posts = Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date')[:1]
+      if not posts:
+        return HttpResponseRedirect(reverse('blogs.views.translation', args=(blog.slug,)))
+      else:
+        for post in posts:
+          post.id
+        if request.method == 'POST':
+          form = PostForm(request.POST or None,request.FILES or None, instance=post)
+          if form.is_valid():
+              post = form.save(commit=False)
+              if 'save_ready_publish' in request.POST:
+                post.is_ready = True
+                post.status = 'P'
+                post.save()
+                return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
+              elif 'save_ready_queue' in request.POST:
+                post.is_ready = True
+                post.save()
+                return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
+              else:
+                post.save()
+                return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
+        else:
+          form = PostForm(instance=post,)
+        return render_to_response('quicktranslation.html',
+                                  {'blog': blog, 'form': form,'post': post },
+                                  context_instance=RequestContext(request))
+
+@login_required
+def translation(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      posts = paginate(request,
+                       Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date'),
+                       15)
+      return render_to_response('translation.html',
+                                {'blog': blog, 'posts': posts, },
+                                context_instance=RequestContext(request))
+
+@login_required
 def editcategory(request, id):
       category = get_object_or_404(Category, id=id)
       blog = category.blog
