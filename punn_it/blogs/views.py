@@ -497,6 +497,31 @@ def editcategory(request, id):
                                 context_instance=RequestContext(request))
 
 @login_required
+def editemail(request, id):
+      info_email = get_object_or_404(Info_email, id=id)
+      blog = info_email.blog
+      if request.method == 'POST':
+        form = EmailForm(request.POST or None, instance=info_email)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
+      else:
+        form = EmailForm(instance=info_email,)
+      return render_to_response('editemail.html',
+                                {'blog': blog, 'form': form,'info_email': info_email },
+                                context_instance=RequestContext(request))
+
+@login_required
+def view_info_letter(request, id):
+      info_email = get_object_or_404(Info_email, id=id)
+      blog = info_email.blog
+      return render_to_response('view_info_letter.html',
+                                {'blog': blog,'info_email': info_email },
+                                context_instance=RequestContext(request))
+
+
+
+@login_required
 def fastedit(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       posts = paginate(request,
@@ -610,6 +635,18 @@ def deletepost(request, id):
         messages.add_message(request, messages.INFO, _(u"The post has been deleted"))
       return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
 
+@login_required
+def deleteemail(request, id):
+      info_email = get_object_or_404(Info_email, id=id)
+      blog = info_email.blog
+      if request.user == info_email.author:
+        info_email.delete()
+        messages.add_message(request, messages.INFO, _(u"Your email has been deleted"))
+      elif request.user.is_staff:
+        info_email.delete()
+        messages.add_message(request, messages.INFO, _(u"The email has been deleted"))
+      return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
+
 def subscribe_to_infoletter(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       form = SubscriptionForm(request.POST or None, request.FILES or None)
@@ -634,6 +671,32 @@ def create_info_email(request, slug):
           email.save()
           return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
       return render_to_response('administrateblog.html', {'form': form})
+
+@login_required
+def send_email_now(request, id):
+      info_email = get_object_or_404(Info_email, id=id)
+      blog = info_email.blog
+      subject = info_email.subject
+      message = info_email.message
+#Va falloir qu'un blog aille un mail (ou user... à voir)
+      from_email = 'vincegothier@gmail.com'
+      recipient_list = []
+      if info_email.subscribers == 'A':
+        for subscription in Subscription.objects.filter(blog=blog):
+          recipient_list.append(subscription.email)
+        from django.core.mail import send_mail
+        send_mail(subject, message, from_email, recipient_list)
+        messages.add_message(request, messages.INFO, _(u"Your message has been send, thank you!"))
+        return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
+      else:
+        for subscription in Subscription.objects.filter(blog=blog).filter(is_new=True):
+          recipient_list.append(subscription.email)
+          subscription.is_new = False
+          subscription.save()
+        from django.core.mail import send_mail
+        send_mail(subject, message, from_email, recipient_list)
+        messages.add_message(request, messages.INFO, _(u"Your message has been send, thank you!"))
+        return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
 
 def contact(request):
      if request.method == 'POST':
