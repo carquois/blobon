@@ -23,7 +23,18 @@ STATUS = (
     ('P', 'Publish'),
     ('D', 'Draft'),
 )
-
+FREQUENCY = (
+    ('Da', 'Daily'),
+    ('We', 'Weekly'),
+    ('Mo', 'Monthly'),
+    ('Ep', 'After each post'),
+    ('Fp', 'After five posts'),
+    ('Tp', 'After ten posts'),
+)
+SUBSCRIBERS = (
+    ('A', 'All'),
+    ('N', 'New'),
+)
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
     prefix = instance.base62id
@@ -241,9 +252,11 @@ class Info_email(models.Model):
     author = models.ForeignKey(User, null=True)
     status = models.CharField(max_length=2, choices=STATUS)
     name = models.CharField(verbose_name=_("Title"), max_length=140, blank=True)
-    content = models.TextField(verbose_name=_("Content"),max_length=10000, blank=True)
+    message = models.TextField(verbose_name=_("Message"),max_length=10000, blank=True)
     subject = models.TextField(verbose_name=_("Subject"), max_length=100, blank=True)
     created = models.DateTimeField(auto_now_add = True)
+    frequency = models.CharField(max_length=2, choices=FREQUENCY, default="We", null=True)
+    subscribers = models.CharField(max_length=2, choices=SUBSCRIBERS, default="A", null=True)
     def __unicode__(self):
         return self.name
 
@@ -377,6 +390,7 @@ class Comment(models.Model):
 class Subscription(models.Model):
     blog = models.ForeignKey(Blog, null=True)
     email = models.EmailField(verbose_name=_("Email"))
+    is_new = models.BooleanField(default=True)
     def __unicode__(self):
         return self.email
 

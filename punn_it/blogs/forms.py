@@ -92,13 +92,13 @@ class EmailForm(ModelForm):
                                                     'type': 'text',
                                                     'rows': '1',
                                                     'class': "form-control setting_form input-block-level"}))
-    content = CharField(widget=forms.Textarea(attrs={'placeholder': _('Your email content'),
+    message = CharField(widget=forms.Textarea(attrs={'placeholder': _('Your message'),
                                                     'type': 'text',
                                                     'rows': '10',
                                                     'class': "form-control setting_form input-block-level"}))
     class Meta:
         model = Info_email
-        fields = ('name','subject','content', )
+        fields = ('name','subject','message','subscribers','frequency', )
 
 class CategoriesForm(ModelForm):
     name = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your category name here'),

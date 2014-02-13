@@ -34,60 +34,75 @@
                  {{ form.status.label_tag }}
                   {{ form.status }}
                 </div>
+                <div class="form-group">
+                 {{ form.frequency.label_tag }}
+                  {{ form.frequency }}
+                </div>
+                <div class="form-group">
+                 {{ form.subscribers.label_tag }}
+                  {{ form.subscribers }}
+                </div>
               </form>
               <button id="submitemail" class="btn btn-primary btn-xs" disabled="disabled" title="{% trans "Save your new email" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
-              <span id="cancel_new_email" title="{% trans "Cancel new email" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+              <span id="cancel_new_email" title="{% trans "Cancel new info-letters" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
             </div> 
           </div>
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Mailing list" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_list" title="{% trans "Create a new mailing list" %}">{% trans "Create new" %}</a></div>
-              <div class="panel-body">
-              </div>
+            <div class="panel-heading">{% trans "Info-letters" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_email" title="{% trans "Create a new info-letter" %}">{% trans "Create new" %}</a></div>
             <table class="table table-striped">
               <colgroup>
+                <col class="col-xs-4">
+                <col class="col-xs-3">
                 <col class="col-xs-2">
-                <col class="col-xs-8">
-              </colgroup>
-              <thead>
-                <tr>
-                  <th>{% trans "Name" %}</th>
-                  <th>{% trans "Description" %}</th>
-                </tr>
-              </thead>
-              <tbody>
-              {% for info_email in info_emails %}
-                <tr>
-                  <td>{{ info_email.name }}
-                  </td>
-                  <td>{{ info_email.subject }}</td>
-                </tr>
-              {% endfor %}
-              </tbody>
-            </table>
-          </div>  
-          <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Emails" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_email" title="{% trans "Create a new email" %}">{% trans "Create new" %}</a></div>
-              <div class="panel-body">
-              </div>
-            <table class="table table-striped">
-              <colgroup>
-                <col class="col-xs-2">
-                <col class="col-xs-8">
+                <col class="col-xs-1">
               </colgroup>
               <thead>
                 <tr>
                   <th>{% trans "Name" %}</th>
                   <th>{% trans "Subject" %}</th>
+                  <th>{% trans "Frequency" %}</th>
+                  <th>{% trans "Subscribers" %}</th>
                 </tr>
               </thead>
               <tbody>
               {% for info_email in info_emails %}
                 <tr>
                   <td>{{ info_email.name }}
+                    <div class="edit_buttons">
+                      <a href="{% url 'blogs.views.editemail' info_email.id %}" class="btn btn-default btn-xs edit_post" title="{% trans "Modify this info-letter" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
+                      <a href="#" class="btn btn-default btn-xs delete_post" title="{% trans "Delete this info-letter" %}" data-toggle="modal" data-target="#{{ info_email.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
+                      <a href="{% url 'blogs.views.view_info_letter' info_email.id %}" target="_blank" class="btn btn-default btn-xs view_post" title="{% trans "View email content" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "View email" %}</a>
+                      <a href="{% url 'blogs.views.send_email_now' info_email.id %}" class="btn btn-default btn-xs edit_post" title="{% trans "Send this info-letter now" %}"><span class="glyphicon glyphicon-send"></span> {% trans "Send now" %}</a>
+                    </div>
                   </td>
                   <td>{{ info_email.subject }}</td>
+                  <td>{{ info_email.get_frequency_display }}</td>
+                  <td>{{ info_email.get_subscribers_display }}</td>
                 </tr>
-              {% endfor %}
+  
+
+
+  <div class="modal fade" id="{{ info_email.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Delete info-letter" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Are you sure you want to delete this info-letter : " %}{{ info_email.name }}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
+          <a href="{% url 'blogs.views.deleteemail' info_email.id %}" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+            {% endfor %}
               </tbody>
             </table>
           </div>
@@ -159,7 +174,13 @@
         $('#newemail').submit();
       });
     </script>
-
+    <script type="text/javascript">
+      $(function () {
+        $(".edit_post").tooltip({container: 'body', placement: 'bottom'});
+        $(".delete_post").tooltip({container: 'body', placement: 'bottom'});
+        $(".view_post").tooltip({container: 'body', placement: 'bottom'});
+      });
+    </script>
   {% endblock %}
 
 
