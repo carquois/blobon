@@ -58,7 +58,7 @@ class SettingsForm(ModelForm):
                                                     'class': "form-control setting_form input-block-level"}))    
     class Meta:
         model = Blog 
-        fields = ('title', 'slug', 'password', 'custom_domain','description', )
+        fields = ('title', 'slug', 'password', 'custom_domain','description','is_online', )
 
 class SubscriptionForm(ModelForm):
     email = EmailField(widget=forms.TextInput(attrs={'placeholder': _('Enter your email here'),

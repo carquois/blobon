@@ -33,7 +33,7 @@ def index(request):
           request.subdomain = host_s[0]
       if host == "blobon.com":
         if request.user.is_authenticated():
-          blogs = Blog.objects.filter(creator=request.user)
+          blogs = Blog.objects.filter(creator=request.user,is_online=True)
           return render_to_response('dashboard.html',
                                     {'blogs': blogs},
                                     context_instance=RequestContext(request))
@@ -634,6 +634,20 @@ def deletepost(request, id):
         post.delete()
         messages.add_message(request, messages.INFO, _(u"The post has been deleted"))
       return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
+
+@login_required
+def deleteblog(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      if request.user == blog.creator:
+        blog.is_online=False
+        blog.save()
+        messages.add_message(request, messages.INFO, _(u"Your blog has been deleted"))
+      elif request.user.is_staff:
+        blog.is_online=False
+        blog.save()
+        messages.add_message(request, messages.INFO, _(u"The blog has been deleted"))
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+
 
 @login_required
 def deleteemail(request, id):

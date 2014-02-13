@@ -28,8 +28,6 @@ FREQUENCY = (
     ('We', 'Weekly'),
     ('Mo', 'Monthly'),
     ('Ep', 'After each post'),
-    ('Fp', 'After five posts'),
-    ('Tp', 'After ten posts'),
 )
 SUBSCRIBERS = (
     ('A', 'All'),
@@ -232,6 +230,7 @@ class Blog(models.Model):
     custom_domain = models.CharField(verbose_name=_("Custom domain"), max_length=300, blank=True)
     description = models.CharField(verbose_name=_("Description"), max_length=500, blank=True)
     translation = models.ForeignKey('self',  null=True, blank=True)
+    is_online = models.BooleanField(default=True)
     def __unicode__(self):
         return self.title
 
