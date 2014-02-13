@@ -46,13 +46,13 @@ class SettingsForm(ModelForm):
     slug = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your blog adress'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level"}))
-    password = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your blog password'),
+    password = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Your blog password'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level"}))
-    custom_domain = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your custom domain'),
+    custom_domain = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Your custom domain'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level"}))
-    description = CharField(widget=forms.Textarea(attrs={'placeholder': _('Describe Your Blog'),
+    description = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Describe Your Blog'),
                                                     'type': 'text',
                                                     'rows': '5',
                                                     'class': "form-control setting_form input-block-level"}))    

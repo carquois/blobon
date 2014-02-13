@@ -24,6 +24,20 @@
     </style>
     {% endblock %}
 {% block content %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}</strong>{{ field.name }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
   <div id="info">
     <div class="row">
       <div class="col-md-12">
@@ -71,7 +85,7 @@
     <a href="#" class="btn btn-xs btn-primary" id="edit_blog_button"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit blog" %}</a>
     <a href="#" class="btn btn-xs btn-danger" id="delete_blog_button" data-toggle="modal" data-target="#{{ blog.slug }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete blog" %}</a>
   </div>
-    <form enctype="multipart/form-data" style="display:none;" action="{% url "blogs.views.administratesettings" blog.slug %}" method="post" id=newsettings>{% csrf_token %}
+    <form enctype="multipart/form-data" style="display:none;" role="form" action="{% url 'blogs.views.administratesettings' blog.slug %}" method="post" id=newsettings>{% csrf_token %}
       <div class="row">
         <div class="col-md-6 form_section" id="settings_title">
         {{ form.title.label_tag }}<a id="info_title" class="pull-right info" title="{% trans "More Info About Title" %}" data-toggle="modal" data-target="#info_title_modal">{% trans "More info" %}</a>
@@ -105,6 +119,9 @@
         <div class="under_text"><small><em>Describe your blog here</em></small></div>
         </div>
       </div>
+      <div class="row" style="display:none;">
+        {{ form.is_online }}
+      </div>     
     </form>
     <div id="formbuttons" style="display:none;">
       <button type="submit" class="btn btn-xs btn-primary" id=submitsettings title="{% trans "Save your settings" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
