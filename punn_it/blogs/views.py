@@ -691,15 +691,16 @@ def send_email_now(request, id):
       info_email = get_object_or_404(Info_email, id=id)
       blog = info_email.blog
       subject = info_email.subject
-      message = info_email.message
+      text_content = info_email.message
 #Va falloir qu'un blog aille un mail (ou user... à voir)
       from_email = 'vincegothier@gmail.com'
       recipient_list = []
       if info_email.subscribers == 'A':
         for subscription in Subscription.objects.filter(blog=blog):
           recipient_list.append(subscription.email)
-        from django.core.mail import send_mail
-        send_mail(subject, message, from_email, recipient_list)
+        from django.core.mail import EmailMultiAlternatives
+        msg = EmailMultiAlternatives(subject, text_content, from_email, bcc=recipient_list)
+        msg.send()
         messages.add_message(request, messages.INFO, _(u"Your message has been send, thank you!"))
         return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
       else:
@@ -707,8 +708,9 @@ def send_email_now(request, id):
           recipient_list.append(subscription.email)
           subscription.is_new = False
           subscription.save()
-        from django.core.mail import send_mail
-        send_mail(subject, message, from_email, recipient_list)
+        from django.core.mail import EmailMultiAlternatives
+        msg = EmailMultiAlternatives(subject, text_content, from_email, bcc=recipient_list)
+        msg.send()
         messages.add_message(request, messages.INFO, _(u"Your message has been send, thank you!"))
         return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
 
