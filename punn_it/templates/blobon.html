@@ -81,7 +81,7 @@ body {
 
 /* Padding for spacing */
 .inner {
-  padding: 30px;
+  padding: 10px;
 }
 
 
@@ -208,7 +208,9 @@ body {
             <div class="inner">
               <h3 class="masthead-brand">{% trans "Blobon.com" %}</h3>
               <ul class="nav masthead-nav">
+                {% block login_link %}
                 <li class="active"><a href="{% url 'accounts.views.login' %}">{% trans "Login" %}</a></li>
+                {% endblock %}
               </ul>
             </div>
           </div>
@@ -242,29 +244,15 @@ body {
           <button type="submit" class="btn btn-primary">{% trans "Submit" %}</button>
           </form>
   {% endblock %}
-
           </div>
-
-
-  {% block blobonfooter %}
-          <div class="mastfoot">
-            <div class="inner">
-              <a href="http://blobon.com/p/vHjXR7jj">{% trans "Blog" %}</a>
-              <a href="{% url 'blogs.views.contact' %}">{% trans "Contact" %}</a>
-              <a href="http://blobon.com/terms">{% trans "Terms" %}</a>
-              <a href="http://blobon.com/privacypolicy">{% trans "Privacy" %}</a>
-              <a href="http://blobon.com/p/n47yOJI9">{% trans "Jobs" %}</a>
-              <a href="http://blobon.com/entreprise">{% trans "Entreprise" %}</a>
-              <p>{% trans " @ 2013 Blobon, Inc." %}</p>
-            </div>
+          <div class="blobonfooter" style="marging-top:20px;">
+          {% include 'blobon_footer.html' %}
           </div>
-  {% endblock %}
         </div>
 
       </div>
 
     </div>
-
     <script>
       $('#invitation_request').click(function() {
         $('#invitation_request').hide();
@@ -283,15 +271,5 @@ body {
         $('#cancel_invitation').tooltip();
       });
     </script>
-  {% endblock %}
-  {% block login_create_account %}
-    <div class="row">
-      <div class="col-md-6 col-md-offset-4">
-        <div style="padding:20px;text-align: center;max-width:400px;">
-          <a type="button" class="btn btn-primary btn-lg btn-block" style="display:none;">{% trans "Create an account :" %}</a>
-          <a type="button" href="{% url 'accounts.views.login' %}" class="btn btn-default btn-lg btn-block" style="display:none;">{% trans "Login :" %}</a> 
-       </div>
-      </div>
-    </div>
   {% endblock %}
 

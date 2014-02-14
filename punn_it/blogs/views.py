@@ -719,7 +719,7 @@ def contact(request):
         subject = form.cleaned_data['subject']
         message = form.cleaned_data['message']
         from_email = form.cleaned_data['from_email']
-
+#modifier le recipients pour info@blobon.com avant de migrer
         recipients = ['vincegothier@gmail.com']
         messages.add_message(request, messages.INFO, _(u"Your message has been send, thank you!"))
         from django.core.mail import send_mail
@@ -730,6 +730,27 @@ def contact(request):
        return render_to_response('contact.html',
                                  {'form': form},
                                  context_instance=RequestContext(request))
+
+def entreprise(request):
+     if request.method == 'POST':
+      form = ContactForm(request.POST or None, request.FILES or None)
+      if form.is_valid():
+        subject = form.cleaned_data['subject']
+        message = form.cleaned_data['message']
+        from_email = form.cleaned_data['from_email']
+#modifier le recipients pour info@blobon.com avant de migrer
+        recipients = ['vincegothier@gmail.com']
+        messages.add_message(request, messages.INFO, _(u"Your message has been send, thank you!"))
+        from django.core.mail import send_mail
+        send_mail(subject, message, from_email, recipients)
+        return HttpResponseRedirect(reverse('blogs.views.entreprise'))
+
+     else:
+       form=ContactForm()
+       return render_to_response('entreprise.html',
+                                 {'form': form},
+                                 context_instance=RequestContext(request))
+
 
 ###UTILS###
 #Une fonction pour paginer une liste d'objets
