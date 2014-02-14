@@ -1,0 +1,15 @@
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+        <div class="row" style="text-align:center;">
+            <div class="inner">
+              <a href="http://blobon.com/p/vHjXR7jj">{% trans "Blog" %}</a>
+              {% block contact %}
+              <a href="{% url 'blogs.views.contact' %}">{% trans "Contact" %}</a>
+              {% endblock %}
+              <a href="http://blobon.com/terms">{% trans "Terms" %}</a>
+              <a href="http://blobon.com/privacypolicy">{% trans "Privacy" %}</a>
+              <a href="http://blobon.com/p/n47yOJI9">{% trans "Jobs" %}</a>
+              <a href="http://blobon.com/entreprise">{% trans "Entreprise" %}</a>
+              <p>{% trans " @ 2013 Blobon, Inc." %}</p>
+            </div>
+        </div>

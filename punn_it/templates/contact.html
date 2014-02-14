@@ -7,11 +7,29 @@
   {% endblock %}
   {% block slogan %}
   {% endblock %}
+  {% block blobonheader %}
+  {% endblock %}
   {% block form %}
     {% if form.errors %}
       {% trans "Please try again." %}
     {% endif %}
-      <h4>{% trans "To contact us, please use the contact form below or send us an email to " %}<a href="mailto:info@blobon.com">{% trans "info@blobon.com" %}</a></h4>
+  <div class="row">
+  </div>
+  <div class="contact_info" style="text-align:left;padding:15px;">
+    <h3>{% trans "Contact Blobon, Inc" %}</h3>
+    <p>
+      {% trans "Here is the adress to join us, you can also use the contact form below. Don't be shy, we’re here to help you." %}
+    </p>
+    <hr>
+      <address>
+        <strong>{% trans "Blobon, Inc" %}</strong><br>
+        {% trans "201 St-Louis, App 401" %}<br>
+        {% trans "St-Jean-sur-Richelieu, Québec, Canada" %}<br>
+        {% trans "J3B 1X9" %}<br>
+        {% trans "+1 (514) 887-1868" %}<br>
+        <a href="mailto:info@blobon.com">{% trans "info@blobon.com" %}</a>
+        </address>
+  </div>
       <form class="form-horizontal" method="post" id="contact_form" role="form" action="{% url 'blogs.views.contact' %}">
         {% csrf_token %}
   <div class="form-group">
@@ -41,11 +59,15 @@
         $('#contact_form').submit();
       });
     </script>
-
+    <script>
+      $( document ).ready(function() {
+        $( "#id_subject" ).focus();
+      });
+    </script>
     <script>
       $(document).ready(function(){
         $('#id_message').keyup(function() {
-        if($(this).val() != '' && $('#id_sender').val() != '') {
+        if($(this).val() != '' && $('#id_from_email').val() != '') {
           $('#send').prop("disabled", false);
           }
         else {
@@ -57,7 +79,7 @@
 
     <script>
       $(document).ready(function(){
-        $('#id_sender').keyup(function() {
+        $('#id_from_email').keyup(function() {
         if($(this).val() != '' && $('#id_message').val() != '') {
           $('#send').prop("disabled", false);
           }

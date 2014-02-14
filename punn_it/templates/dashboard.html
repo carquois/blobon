@@ -69,10 +69,14 @@
             </div>
           </div>
         {% endfor %}
-          <a href="/createblog/" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-plus"></span> {% trans "Create a new blog" %}</a>
+          <div class="add_blog" style="padding:15px;">
+            <a href="/createblog/" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-plus"></span> {% trans "Create a new blog" %}</a>
+          </div>      
         {% endblock %}
         </div>
       </div>
     </div> <!-- /container -->
-    
+          <div class="blobonfooter" style="padding-top:30px;">
+          {% include 'blobon_footer.html' %}
+          </div>    
   {% endblock %}

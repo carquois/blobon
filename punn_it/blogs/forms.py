@@ -72,11 +72,10 @@ class SubscriptionForm(ModelForm):
 class ContactForm(forms.Form):
     subject = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': _('Your subject here'),
                                                     'type': 'text',
-                                                    'class': "form-control setting_form input-block-level",
-                                                    'autofocus':'on'}))
+                                                    'class': "form-control setting_form input-block-level"}))
     message = forms.CharField(widget=forms.Textarea(attrs={'placeholder': _('Enter your message here'),
                                                     'type': 'text',
-                                                    'rows': '5',
+                                                    'rows': '4',
                                                     'class': "form-control input-block-level"}))
     from_email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': _('Enter your email here'),
                                                     'type': 'text',
