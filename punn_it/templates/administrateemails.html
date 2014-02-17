@@ -51,17 +51,15 @@
             <div class="panel-heading">{% trans "Info-letters" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_email" title="{% trans "Create a new info-letter" %}">{% trans "Create new" %}</a></div>
             <table class="table table-striped">
               <colgroup>
-                <col class="col-xs-4">
-                <col class="col-xs-3">
+                <col class="col-xs-6">
                 <col class="col-xs-2">
-                <col class="col-xs-1">
+                <col class="col-xs-2">
               </colgroup>
               <thead>
                 <tr>
                   <th>{% trans "Name" %}</th>
                   <th>{% trans "Subject" %}</th>
-                  <th>{% trans "Frequency" %}</th>
-                  <th>{% trans "Subscribers" %}</th>
+                  <th>{% trans "Who" %}</th>
                 </tr>
               </thead>
               <tbody>
@@ -76,7 +74,6 @@
                     </div>
                   </td>
                   <td>{{ info_email.subject }}</td>
-                  <td>{{ info_email.get_frequency_display }}</td>
                   <td>{{ info_email.get_subscribers_display }}</td>
                 </tr>
   
@@ -103,6 +100,33 @@
 
 
             {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+
+          <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Blog subscribers" %}</div>
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-7">
+                <col class="col-xs-3">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>{% trans "Email" %}</th>
+                  <th>{% trans "New" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for subscription in subscriptions %}
+                <tr>
+                  <td>{{ subscription.email }}
+                  </td>
+                  <td>{{ subscription.is_new }}</td>
+                </tr>
+            {% endfor %}
+
               </tbody>
             </table>
           </div>

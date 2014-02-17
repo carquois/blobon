@@ -102,7 +102,12 @@ body {
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
-
+@media (min-width: 300px) {
+  .contactform{
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+}
 @media (min-width: 768px) {
 
   /* Remove the edge padding needed for mobile */
@@ -110,7 +115,6 @@ body {
     padding-left: 0;
     padding-right: 0;
   }
-
   /* Navbar positioning foo */
   .navbar-wrapper {
     margin-top: 20px;
@@ -215,6 +219,7 @@ body {
       <a class="left carousel-control" href="#Carousel_entreprise" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
       <a class="right carousel-control" href="#Carousel_entreprise" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
     </div>
+    <div class="container marketing">
 {% if messages %}
             {% for message in messages %}
 <div class="alert alert-warning alert-dismissable">
@@ -223,7 +228,6 @@ body {
 </div>
             {% endfor %}
           {% endif %}
-    <div class="container marketing">
       <div class="row">
         <div class="col-lg-4">
           <h2>{% trans "Optimise your website" %}</h2>
@@ -243,7 +247,7 @@ body {
       </div>
     </div>
     <a name="contact"></a>
-    <div class="row form">
+    <div class="row contactform">
       <div class="col-md-10 col-md-offset-1">
     <hr>
     <h1>{% trans "Contact Blobon, Inc" %}</h1>
@@ -275,7 +279,9 @@ body {
             <label for="id_sender" class="control-label">{% trans "Your email :" %}</label>
             {{ form.from_email }}
           </div>
+          <div class="form-group">
           <button id="send"type="submit" disabled="disabled"class="btn btn-primary btn-sm">{% trans "Send" %}</button>
+          </div>
         </form>
         <div class="row" style="padding-bottom:25px;">
         </div>

@@ -75,7 +75,7 @@ class ContactForm(forms.Form):
                                                     'class': "form-control setting_form input-block-level"}))
     message = forms.CharField(widget=forms.Textarea(attrs={'placeholder': _('Enter your message here'),
                                                     'type': 'text',
-                                                    'rows': '4',
+                                                    'rows': '3',
                                                     'class': "form-control input-block-level"}))
     from_email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': _('Enter your email here'),
                                                     'type': 'text',
