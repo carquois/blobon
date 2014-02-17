@@ -23,7 +23,10 @@
       #cancel_invitation{
         cursor: pointer;
       }
-
+  {% block footer-css %}
+      #footer {
+      }
+  {% endblock %}
 
 /*
  * Globals
@@ -245,9 +248,11 @@ body {
           </form>
   {% endblock %}
           </div>
+  {% block blobonfooter %}
           <div class="blobonfooter" style="marging-top:20px;">
           {% include 'blobon_footer.html' %}
           </div>
+  {% endblock %}
         </div>
 
       </div>

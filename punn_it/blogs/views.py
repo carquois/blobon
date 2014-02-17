@@ -16,6 +16,7 @@ from cgi import parse_qs
 
 from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm
 from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email
+from django.contrib.auth.models import User
 
 from notifications.forms import InvitationForm
 from notifications.models import Invitation
@@ -358,9 +359,10 @@ def administratesettings(request, slug):
 def administrateemails(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       info_emails = Info_email.objects.filter(blog=blog).order_by('-id')
+      subscriptions = Subscription.objects.filter(blog=blog).order_by('-email')
       form = EmailForm()
       return render_to_response('administrateemails.html',
-                                {'blog': blog, 'info_emails': info_emails, 'form': form},
+                                {'blog': blog, 'info_emails': info_emails, 'form': form,'subscriptions': subscriptions,},
                                 context_instance=RequestContext(request))
 
 @login_required
@@ -671,7 +673,7 @@ def send_email_now(request, id):
         from django.core.mail import EmailMultiAlternatives
         msg = EmailMultiAlternatives(subject, text_content, from_email, bcc=recipient_list)
         msg.send()
-        messages.add_message(request, messages.INFO, _(u"Your message has been send, thank you!"))
+        messages.add_message(request, messages.INFO, _(u"Your message has been sent, thank you!"))
         return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
       else:
         for subscription in Subscription.objects.filter(blog=blog).filter(is_new=True):
@@ -681,7 +683,7 @@ def send_email_now(request, id):
         from django.core.mail import EmailMultiAlternatives
         msg = EmailMultiAlternatives(subject, text_content, from_email, bcc=recipient_list)
         msg.send()
-        messages.add_message(request, messages.INFO, _(u"Your message has been send, thank you!"))
+        messages.add_message(request, messages.INFO, _(u"Your message has been sent, thank you!"))
         return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
 
 def contact(request):
@@ -693,16 +695,28 @@ def contact(request):
         from_email = form.cleaned_data['from_email']
 #modifier le recipients pour info@blobon.com avant de migrer
         recipients = ['vincegothier@gmail.com']
-        messages.add_message(request, messages.INFO, _(u"Your message has been send, thank you!"))
+        messages.add_message(request, messages.INFO, _(u"Your message has been sent, thank you!"))
         from django.core.mail import send_mail
         send_mail(subject, message, from_email, recipients)
         return HttpResponseRedirect(reverse('blogs.views.index'))
+      else:
+        form=ContactForm()
+        messages.add_message(request, messages.INFO, _(u"Oups! It didn't work, please try again with a valid email"))
+        return render_to_response('contact.html', 
+                                  {'form': form},
+                                  context_instance=RequestContext(request))
      else:
-       form=ContactForm()
-       return render_to_response('contact.html',
-                                 {'form': form},
-                                 context_instance=RequestContext(request))
-
+       if request.user.is_authenticated(): 
+         u=User.objects.get(username=request.user.username)
+         form=ContactForm(initial={'from_email':u.email})
+         return render_to_response('contact.html',
+                                   {'form': form, 'u': u,},
+                                   context_instance=RequestContext(request))
+       else:
+         form=ContactForm()
+         return render_to_response('contact.html',
+                                   {'form': form},
+                                   context_instance=RequestContext(request))     
 def entreprise(request):
      if request.method == 'POST':
       form = ContactForm(request.POST or None, request.FILES or None)
@@ -712,11 +726,16 @@ def entreprise(request):
         from_email = form.cleaned_data['from_email']
 #modifier le recipients pour info@blobon.com avant de migrer
         recipients = ['vincegothier@gmail.com']
-        messages.add_message(request, messages.INFO, _(u"Your message has been send, thank you!"))
+        messages.add_message(request, messages.INFO, _(u"Your message has been sent, thank you!"))
         from django.core.mail import send_mail
         send_mail(subject, message, from_email, recipients)
         return HttpResponseRedirect(reverse('blogs.views.entreprise'))
-
+      else:
+        form=ContactForm()
+        messages.add_message(request, messages.INFO, _(u"Oups! It didn't work, please try again with a valid email"))
+        return render_to_response('entreprise.html', 
+                                  {'form': form},
+                                  context_instance=RequestContext(request))
      else:
        form=ContactForm()
        return render_to_response('entreprise.html',

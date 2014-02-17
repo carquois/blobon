@@ -9,6 +9,10 @@
   {% endblock %}
   {% block blobonheader %}
   {% endblock %}
+  {% block blobonfooter %}
+  {% endblock %}
+  {% block footer-css %}
+  {% endblock %}
   {% block form %}
     {% if form.errors %}
       {% trans "Please try again." %}
@@ -18,7 +22,7 @@
   <div class="contact_info" style="text-align:left;padding:15px;">
     <h3>{% trans "Contact Blobon, Inc" %}</h3>
     <p>
-      {% trans "Here is the adress to join us, you can also use the contact form below. Don't be shy, we’re here to help you." %}
+      {% trans "Here is the adress to join us, you can also use the contact form below. Don't be shy, we’re here to help you. If you just want to say hi, that's cool too." %}
     </p>
     <hr>
       <address>
@@ -50,10 +54,12 @@
          {{ form.from_email }}
     </div>
   </div>
+  <div class="form-group">
         <button id="send"type="submit" disabled="disabled"class="btn btn-primary btn-sm">{% trans "Send" %}</button>
         <a id="send_cancel" href="{% url 'blogs.views.index' %}" class="btn btn-default btn-sm">{% trans "Cancel" %}</a>
+  </div>
      </form>
-
+          {% include 'blobon_footer.html' %}
     <script>
       $('#send').click(function() {
         $('#contact_form').submit();
@@ -76,7 +82,6 @@
         });
       });
     </script>
-
     <script>
       $(document).ready(function(){
         $('#id_from_email').keyup(function() {

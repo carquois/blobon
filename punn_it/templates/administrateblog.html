@@ -3,11 +3,9 @@
 {% load url from future %}
 
   {% block additional-js %}
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
     <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script> 
-    <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/google-code-prettify/prettify.js"></script>
-    <script src="http://mindmup.github.io/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js"></script>
   {% endblock %}
   {% block additional-css %}
@@ -238,6 +236,7 @@
                             <a class="pull-right" id="moreformating" title="{% trans "Get More Formating Options" %}"><span class="glyphicon glyphicon-plus"></span> {% trans "Formating Options" %}</a>
                           </div>
                         </div>
+<div id="summernote"></div>
                         {{ post_form.content }}
                         <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                         <div class="row" style="display: none">{{ post_form.status }} </div>
@@ -2739,9 +2738,9 @@
       <li style="display: none" {% block comments-active %}{% endblock %}><a href="{% url 'blogs.views.administratecomments' blog.slug %}" id="comments_button" title="{% trans "Moderate Comments" %}"><span class="glyphicon glyphicon-comment"></span> {% trans "Comments" %} <span class="badge">{{ num_of_comments }}</span></a></li>
       <li {% block categories-active %}{% endblock %}><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="categories_button" title="{% trans "Create, Modify or Delete Categories" %}"><span class="glyphicon glyphicon-folder-open"></span> {% trans "Categories" %}</a></li>
       <li style="display: none" {% block tags-active %}{% endblock %}><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="tags_button" title="{% trans "Create, Modify or Delete Tags" %}"><span class="glyphicon glyphicon-tag"></span> {% trans "Tags" %}</a></li>
-      <li {% block settings-active %}{% endblock %}><a href="{% url 'blogs.views.administratesettings' blog.slug %}" id="settings_button" title="{% trans "Change Your Settings" %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Settings" %}</a></li>
       <li {% block emails-active %}{% endblock %}><a href="{% url 'blogs.views.administrateemails' blog.slug %}" id="emails_button" title="{% trans "Change Your Settings" %}"><span class="glyphicon glyphicon-envelope"></span> {% trans "Mailing list" %}</a></li>
       <li {% block translation-active %}{% endblock %}><a href="{% url 'blogs.views.translation' blog.slug %}" id="translations_button" title="{% trans "Translate your posts" %}"><span class="glyphicon glyphicon-euro"></span> {% trans "Translation" %}</a></li>   
+ <li {% block settings-active %}{% endblock %}><a href="{% url 'blogs.views.administratesettings' blog.slug %}" id="settings_button" title="{% trans "Change Your Settings" %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Settings" %}</a></li>
     </ul>
     <script type="text/javascript">
       $(function () {
@@ -2756,4 +2755,102 @@
         $('#emails_button').tooltip();
       });
     </script>
+
+<script>
+$.fn.myTextEditor = function(options){
+        // extend the option with the default ones
+        var settings = $.extend({
+            width : "100%",
+            height : "200px",
+          fonts : ["Arial","Comic Sans MS","Courier New","Monotype Corsiva","Tahoma","Times"]
+        },options);
+        return this.each(function(){
+            var $this = $(this).hide();
+       // create a container div on the fly
+       var containerDiv = $("<div/>",{
+           css : {
+               width : settings.width ,
+               height : settings.height,
+               border : "1px solid #ccc"
+           }
+       });
+       $this.after(containerDiv); 
+       var editor = $("<iframe/>",{
+           frameborder : "0" 
+       }).appendTo(containerDiv).get(0);
+       // opening and closing the editor is a workaround to solve issue in Firefox
+       editor.contentWindow.document.open();
+       editor.contentWindow.document.close();
+       editor.contentWindow.document.designMode="on";
+       var buttonPane = $("<div/>",{
+          "class" : "btn-toolbar",
+          "role" : "toolbar",
+       }).prependTo(containerDiv);
+       var toolbar_left = $("<div/>",{
+          "class" : "btn-group",
+       }).appendTo(buttonPane);
+       var btnBold = $("<a/>",{
+        href : "#",
+        "class" : "btn btn-sm btn-default",
+        text : "B",        
+        data : {
+            commandName : "bold"
+        },
+        click : execCommand 
+        }).appendTo(toolbar_left);
+          var btnItalic = $("<a/>",{
+        href : "#",
+        "class" : "btn btn-sm btn-default",
+        text : "I",
+        data : {
+            commandName : "italic"
+        },
+        click : execCommand 
+        }).appendTo(toolbar_left);
+          var btnUnderline = $("<a/>",{
+        href : "#",
+        "class" : "btn btn-sm btn-default",
+        text : "U",
+        data : {
+            commandName : "underline"
+        },
+        click : execCommand 
+        }).appendTo(toolbar_left);
+          var toolbar_middle = $("<div/>",{
+        "class" : "btn-group",
+        }).appendTo(buttonPane);
+          var selectFont = $("<button/>",{
+            "class" : "btn btn-sm btn-default dropdown-toggle",
+            "data-toggle" : "dropdown",
+            text : "Font",
+            data : {
+              commandName : "FontName"
+            },
+            change : execCommand
+          }).appendTo(toolbar_middle); 
+           var fontMenu = $("<ul/>",{
+             "class" : "dropdown-menu",
+             "role" : "menu"
+           }).appendTo(toolbar_middle); 
+          $.each(settings.fonts,function(i,v){
+            $("<a/>",{
+              text : v
+            }).appendTo(fontMenu);
+            
+          });  
+    function execCommand (e) {
+            $(this).toggleClass("selected");
+            var contentWindow = editor.contentWindow;
+            contentWindow.focus();
+            contentWindow.document.execCommand($(this).data("commandName"), false, this.value || "");
+            contentWindow.focus();
+            return false;
+    }
+    });
+};
+//$(document).ready(function(){
+//  $("#id_content").myTextEditor();
+
+//});
+</script>
   {% endblock %}

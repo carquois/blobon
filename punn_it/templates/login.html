@@ -24,7 +24,6 @@
         <button id="login_submit"type="submit" disabled="disabled"class="btn btn-primary btn-sm">{% trans "Login" %}</button>
         <a id="login_cancel" href="{% url 'blogs.views.index' %}" class="btn btn-default btn-sm">{% trans "Cancel" %}</a>
      </form>
-
     <script>
       $('#login_submit').click(function() {
         $('#login_form').submit();
