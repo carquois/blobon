@@ -694,7 +694,7 @@ def contact(request):
         message = form.cleaned_data['message']
         from_email = form.cleaned_data['from_email']
 #modifier le recipients pour info@blobon.com avant de migrer
-        recipients = ['vincegothier@gmail.com']
+        recipients = ['info@blobon.com']
         messages.add_message(request, messages.INFO, _(u"Your message has been sent, thank you!"))
         from django.core.mail import send_mail
         send_mail(subject, message, from_email, recipients)
@@ -725,7 +725,7 @@ def entreprise(request):
         message = form.cleaned_data['message']
         from_email = form.cleaned_data['from_email']
 #modifier le recipients pour info@blobon.com avant de migrer
-        recipients = ['vincegothier@gmail.com']
+        recipients = ['info@blobon.com']
         messages.add_message(request, messages.INFO, _(u"Your message has been sent, thank you!"))
         from django.core.mail import send_mail
         send_mail(subject, message, from_email, recipients)
