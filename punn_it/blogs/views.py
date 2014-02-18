@@ -51,6 +51,8 @@ def index(request):
                                      context_instance=RequestContext(request))
       elif Blog.objects.filter(custom_domain=host).exists():
           blog = Blog.objects.get(custom_domain=host)
+          if blog.is_online == False:
+            return render_to_response('closed.html',context_instance=RequestContext(request))
 	  if blog.is_open == False:
             if 'is_legit' in request.session:
               b = request.session['blog']
@@ -82,6 +84,8 @@ def index(request):
                                       context_instance=RequestContext(request))
       elif Blog.objects.filter(slug=request.subdomain).exists():
           blog = Blog.objects.get(slug=request.subdomain)
+          if blog.is_online == False:
+           return render_to_response('closed.html',context_instance=RequestContext(request))
           if blog.is_open == False:
             if 'is_legit' in request.session:
               b = request.session['blog']
@@ -98,7 +102,7 @@ def index(request):
                                15)
                 form = SubscriptionForm()
                 return render_to_response('index.html',
-                                          {'posts': posts, 'form': form, 'blog':blog,},
+                                          {'posts': posts, 'form': form,},
                                           context_instance=RequestContext(request))
             else:
               form = PasswordForm()
@@ -113,7 +117,7 @@ def index(request):
                            15)
             form = SubscriptionForm()
             return render_to_response('index.html',
-                                      {'posts': posts, 'form': form, 'blog': blog, },
+                                      {'posts': posts, 'form': form, },
                                       context_instance=RequestContext(request))
       else:
         user = ""
