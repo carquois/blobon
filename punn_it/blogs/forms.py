@@ -60,6 +60,13 @@ class SettingsForm(ModelForm):
         model = Blog 
         fields = ('title', 'slug', 'password', 'custom_domain','description','is_online', )
 
+class PasswordForm(ModelForm):
+    password = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Enter the blog password'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+    class Meta:
+        model = Blog
+        fields = ('password', )
 class SubscriptionForm(ModelForm):
     email = EmailField(widget=forms.TextInput(attrs={'placeholder': _('Enter your email here'),
                                                     'type': 'text',
