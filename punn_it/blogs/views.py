@@ -14,7 +14,7 @@ from urlparse import urlparse
 from django.core.files import File
 from cgi import parse_qs
 
-from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm
+from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm,PasswordForm
 from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email
 from django.contrib.auth.models import User
 
@@ -51,25 +51,70 @@ def index(request):
                                      context_instance=RequestContext(request))
       elif Blog.objects.filter(custom_domain=host).exists():
           blog = Blog.objects.get(custom_domain=host)
-          posts = paginate(request,
-                           Post.objects.filter(blog=blog).order_by('-pub_date'),
-                           15)
-          form = SubscriptionForm()
-          return render_to_response('index.html',
-                                    {'posts': posts, 'blog': blog, 'form': form,},
-                                    context_instance=RequestContext(request))
+	  if blog.is_open == False:
+            if 'is_legit' in request.session:
+              b = request.session['blog']
+              if b != blog:
+                form = PasswordForm()
+                return render_to_response('password.html',
+                                          {'form': form,'blog': blog,},
+                                          context_instance=RequestContext(request))
+              else:
+                posts = paginate(request,
+                                 Post.objects.filter(blog=blog).order_by('-pub_date'),
+                                 15)
+                form = SubscriptionForm()
+                return render_to_response('index.html',
+                                          {'posts': posts, 'blog': blog, 'form': form,},
+                                          context_instance=RequestContext(request))
+            else:
+              form = PasswordForm()
+              return render_to_response('password.html',
+                                        {'form': form,'blog': blog,},
+                                        context_instance=RequestContext(request))
+          else: 
+            posts = paginate(request,
+                             Post.objects.filter(blog=blog).order_by('-pub_date'),
+                             15)
+            form = SubscriptionForm()
+            return render_to_response('index.html',
+                                      {'posts': posts, 'blog': blog, 'form': form,},
+                                      context_instance=RequestContext(request))
       elif Blog.objects.filter(slug=request.subdomain).exists():
           blog = Blog.objects.get(slug=request.subdomain)
-          if blog.custom_domain:
-            return HttpResponseRedirect("http://%s/" % blog.custom_domain)
-          posts = paginate(request,
-                         Post.objects.filter(blog=blog).order_by('-pub_date'),
-                         15)
-          form = SubscriptionForm()
-          return render_to_response('index.html',
-                                    {'posts': posts, 'form': form,},
-                                    context_instance=RequestContext(request))
-
+          if blog.is_open == False:
+            if 'is_legit' in request.session:
+              b = request.session['blog']
+              if b != blog:
+                form = PasswordForm()
+                return render_to_response('password.html',
+                                          {'form': form,'blog': blog,},
+                                          context_instance=RequestContext(request))
+              else:
+                if blog.custom_domain:
+                  return HttpResponseRedirect("http://%s/" % blog.custom_domain)
+                posts = paginate(request,
+                               Post.objects.filter(blog=blog).order_by('-pub_date'),
+                               15)
+                form = SubscriptionForm()
+                return render_to_response('index.html',
+                                          {'posts': posts, 'form': form, 'blog':blog,},
+                                          context_instance=RequestContext(request))
+            else:
+              form = PasswordForm()
+              return render_to_response('password.html',
+                                        {'form': form,'blog': blog,},
+                                        context_instance=RequestContext(request))
+          else:
+            if blog.custom_domain:
+              return HttpResponseRedirect("http://%s/" % blog.custom_domain)
+            posts = paginate(request,
+                           Post.objects.filter(blog=blog).order_by('-pub_date'),
+                           15)
+            form = SubscriptionForm()
+            return render_to_response('index.html',
+                                      {'posts': posts, 'form': form, 'blog': blog, },
+                                      context_instance=RequestContext(request))
       else:
         user = ""
         posts = paginate(request,
@@ -81,6 +126,7 @@ def index(request):
                                   'posts': posts,
                                   'form': form, },
                                   context_instance=RequestContext(request))
+
 
 def pics(request):
       posts = paginate(request,
@@ -686,6 +732,32 @@ def send_email_now(request, id):
         messages.add_message(request, messages.INFO, _(u"Your message has been sent, thank you!"))
         return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
 
+def password(request, slug):
+     blog = get_object_or_404(Blog, slug=slug)
+     if request.method == 'POST':
+       form = PasswordForm(request.POST or None,)
+       if form.is_valid():
+         pw = blog.password
+         password = form.cleaned_data['password']
+         if password == pw:
+           request.session['is_legit'] = 'True'
+           request.session['blog'] = blog
+           return HttpResponseRedirect(reverse('blogs.views.index'))
+         else:
+           messages.add_message(request, messages.INFO, _(u"The password didn't match. Please try again."))
+           return render_to_response('password.html',
+                                     {'form': form,'blog': blog,},
+                                      context_instance=RequestContext(request))
+       else:
+         form = PasswordForm()
+         return render_to_response('password.html',
+                                   {'form': form,'blog': blog,},
+                                   context_instance=RequestContext(request))
+     else:
+       form = PasswordForm()
+       return render_to_response('password.html',
+                                 {'form': form,'blog': blog,},
+                                 context_instance=RequestContext(request))
 def contact(request):
      if request.method == 'POST':
       form = ContactForm(request.POST or None, request.FILES or None)

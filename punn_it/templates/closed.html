@@ -1,0 +1,21 @@
+{% extends "blobon.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+  {% block nav %}
+  {% endblock %}
+  {% block leaderboard %}
+  {% endblock %}
+  {% block slogan %}
+  {% endblock %}
+  {% block blobonheader %}
+  <div class="contact_info" style="text-align:center;padding:15px;">
+    <h3>{% trans "Sorry! This blog is now closed" %}</h3>
+    <a href="http://blobon.com" class="nav">{% trans "Home" %}</a>
+  </div>
+  {% endblock %}
+  {% block blobonfooter %}
+  {% endblock %}
+  {% block footer-css %}
+  {% endblock %}
+  {% block form %}
+  {% endblock %}
