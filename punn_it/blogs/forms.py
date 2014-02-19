@@ -63,7 +63,7 @@ class SettingsForm(ModelForm):
 class PasswordForm(ModelForm):
     password = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Enter the blog password'),
                                                     'type': 'text',
-                                                    'class': "form-control setting_form input-block-level"}))
+                                                    'class': "form-control input-block-level"}))
     class Meta:
         model = Blog
         fields = ('password', )
