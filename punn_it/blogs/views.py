@@ -775,6 +775,7 @@ def password(request, slug):
          pw = blog.password
          password = form.cleaned_data['password']
          if password == pw:
+           request.session.set_expiry(14400)
            request.session['is_legit'] = 'True'
            request.session['blog'] = blog
            return HttpResponseRedirect(reverse('blogs.views.index'))
@@ -806,6 +807,7 @@ def passwordsingle(request, id):
          pw = blog.password
          password = form.cleaned_data['password']
          if password == pw:
+           request.session.set_expiry(14400)
            request.session['is_legit'] = 'True'
            request.session['blog'] = blog
            return HttpResponseRedirect(reverse('blogs.views.single', args=(post.base62id,)))
