@@ -150,6 +150,7 @@ def videos(request):
 
 def single(request, shorturl):
     post = get_object_or_404(Post, base62id=shorturl)
+    blog = post.blog
 #    if post.blog.custom_domain:
 #      home = post.blog.custom_domain
 #    else:
@@ -159,20 +160,50 @@ def single(request, shorturl):
     prev_post = ""
     next_post = ""
     form = SubscriptionForm()
-    if Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]:
-      next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
-      if (next_post_query.count() > 0):
-        next_post = next_post_query[0]
-    if Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).order_by('pub_date').exclude(pk=post.id)[:1]:
-      prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(is_top=True).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
-      if (prev_post_query.count() > 0):
-        prev_post = prev_post_query[0]
-#    url = request.build_absolute_uri()
-    return render_to_response('single.html',
-                                {'post': post, 'latest_post_list': latest_post_list,
-                                 'next_post': next_post, 'prev_post': prev_post,
-                                 'user': post.author, 'blog': post.blog, 'form': form, },
-                                context_instance=RequestContext(request))
+    if blog.is_online == False:
+      return render_to_response('closed.html',context_instance=RequestContext(request))
+    if blog.is_open == False:
+      if 'is_legit' in request.session:
+        b = request.session['blog']
+        if b != blog:
+          form = PasswordForm()
+          return render_to_response('passwordsingle.html',
+                                    {'form': form,'blog': blog,'post': post,},
+                                    context_instance=RequestContext(request))
+        else:
+          if Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]:
+            next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
+            if (next_post_query.count() > 0):
+              next_post = next_post_query[0]
+          if Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).order_by('pub_date').exclude(pk=post.id)[:1]:
+            prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(is_top=True).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
+            if (prev_post_query.count() > 0):
+              prev_post = prev_post_query[0]
+          return render_to_response('single.html',
+                                    {'post': post, 'latest_post_list': latest_post_list,
+                                     'next_post': next_post, 'prev_post': prev_post,
+                                     'user': post.author, 'blog': post.blog, 'form': form, },
+                                     context_instance=RequestContext(request))
+      else:
+        form = PasswordForm()
+        return render_to_response('passwordsingle.html',
+                                  {'form': form,'blog': blog,'post': post,},
+                                  context_instance=RequestContext(request))
+    else:
+      if Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]:
+        next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
+        if (next_post_query.count() > 0):
+          next_post = next_post_query[0]
+      if Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).order_by('pub_date').exclude(pk=post.id)[:1]:
+        prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(is_top=True).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
+        if (prev_post_query.count() > 0):
+          prev_post = prev_post_query[0]
+#      url = request.build_absolute_uri()
+      return render_to_response('single.html',
+                                  {'post': post, 'latest_post_list': latest_post_list,
+                                   'next_post': next_post, 'prev_post': prev_post,
+                                   'user': post.author, 'blog': post.blog, 'form': form, },
+                                   context_instance=RequestContext(request))
 
     #cats = Cat.objects.filter(is_top_level=True)
     #votesup = PunnVote.objects.filter(punn=punn).filter(vote='U')
@@ -762,6 +793,38 @@ def password(request, slug):
        return render_to_response('password.html',
                                  {'form': form,'blog': blog,},
                                  context_instance=RequestContext(request))
+def passwordsingle(request, id):
+     post = get_object_or_404(Post, id=id)
+     blog = post.blog
+     latest_post_list = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:6]
+     next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]
+     prev_post = ""
+     next_post = ""
+     if request.method == 'POST':
+       form = PasswordForm(request.POST or None,)
+       if form.is_valid():
+         pw = blog.password
+         password = form.cleaned_data['password']
+         if password == pw:
+           request.session['is_legit'] = 'True'
+           request.session['blog'] = blog
+           return HttpResponseRedirect(reverse('blogs.views.single', args=(post.base62id,)))
+         else:
+           messages.add_message(request, messages.INFO, _(u"The password didn't match. Please try again."))
+           return render_to_response('passwordsingle.html',
+                                     {'form': form,'blog': blog,'post': post,},
+                                      context_instance=RequestContext(request))
+       else:
+         form = PasswordForm()
+         return render_to_response('passwordsingle.html',
+                                   {'form': form,'blog': blog,'post': post,},
+                                   context_instance=RequestContext(request))
+     else:
+       form = PasswordForm()
+       return render_to_response('passwordsingle.html',
+                                 {'form': form,'blog': blog,'post': post,},
+                                 context_instance=RequestContext(request))
+
 def contact(request):
      if request.method == 'POST':
       form = ContactForm(request.POST or None, request.FILES or None)
