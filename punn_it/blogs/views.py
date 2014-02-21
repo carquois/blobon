@@ -66,9 +66,14 @@ def index(request):
                                  Post.objects.filter(blog=blog).order_by('-pub_date'),
                                  15)
                 form = SubscriptionForm()
-                return render_to_response('index.html',
-                                          {'posts': posts, 'blog': blog, 'form': form,},
-                                          context_instance=RequestContext(request))
+                if blog.has_template == False:
+                  return render_to_response('index.html',
+                                            {'posts': posts, 'blog': blog, 'form': form,},
+                                            context_instance=RequestContext(request))
+                else:
+                  return render_to_response('blog_template.html',
+                                            {'posts': posts, 'blog': blog, 'form': form,},
+                                            context_instance=RequestContext(request))
             else:
               form = PasswordForm()
               return render_to_response('password.html',
@@ -79,9 +84,14 @@ def index(request):
                              Post.objects.filter(blog=blog).order_by('-pub_date'),
                              15)
             form = SubscriptionForm()
-            return render_to_response('index.html',
-                                      {'posts': posts, 'blog': blog, 'form': form,},
-                                      context_instance=RequestContext(request))
+            if blog.has_template == False:
+              return render_to_response('index.html',
+                                        {'posts': posts, 'blog': blog, 'form': form,},
+                                        context_instance=RequestContext(request))
+            else:
+              return render_to_response('blog_template.html',
+                                        {'posts': posts, 'blog': blog, 'form': form,},
+                                        context_instance=RequestContext(request))
       elif Blog.objects.filter(slug=request.subdomain).exists():
           blog = Blog.objects.get(slug=request.subdomain)
           if blog.is_online == False:
@@ -101,9 +111,14 @@ def index(request):
                                Post.objects.filter(blog=blog).order_by('-pub_date'),
                                15)
                 form = SubscriptionForm()
-                return render_to_response('index.html',
-                                          {'posts': posts, 'form': form,},
-                                          context_instance=RequestContext(request))
+                if blog.has_template == False:
+                  return render_to_response('index.html',
+                                            {'posts': posts, 'blog': blog, 'form': form,},
+                                            context_instance=RequestContext(request))
+                else:
+                  return render_to_response('blog_template.html',
+                                            {'posts': posts, 'blog': blog, 'form': form,},
+                                            context_instance=RequestContext(request))
             else:
               form = PasswordForm()
               return render_to_response('password.html',
@@ -116,9 +131,14 @@ def index(request):
                            Post.objects.filter(blog=blog).order_by('-pub_date'),
                            15)
             form = SubscriptionForm()
-            return render_to_response('index.html',
-                                      {'posts': posts, 'form': form, },
-                                      context_instance=RequestContext(request))
+            if blog.has_template == False:
+              return render_to_response('index.html',
+                                        {'posts': posts, 'blog': blog, 'form': form,},
+                                        context_instance=RequestContext(request))
+            else:
+              return render_to_response('blog_template.html',
+                                        {'posts': posts, 'blog': blog, 'form': form,},
+                                        context_instance=RequestContext(request))
       else:
         user = ""
         posts = paginate(request,
@@ -131,6 +151,15 @@ def index(request):
                                   'form': form, },
                                   context_instance=RequestContext(request))
 
+def testbloggab(request):
+      blog = Blog.objects.get(slug='gab')
+      posts = paginate(request,
+                       Post.objects.filter(blog=blog).order_by('-pub_date'),
+                       5)
+      form = SubscriptionForm()
+      return render_to_response('testbloggab.html',
+                                {'posts': posts, 'blog': blog,'form': form,},
+                                context_instance=RequestContext(request))
 
 def pics(request):
       posts = paginate(request,
@@ -179,11 +208,18 @@ def single(request, shorturl):
             prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(is_top=True).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
             if (prev_post_query.count() > 0):
               prev_post = prev_post_query[0]
-          return render_to_response('single.html',
-                                    {'post': post, 'latest_post_list': latest_post_list,
-                                     'next_post': next_post, 'prev_post': prev_post,
-                                     'user': post.author, 'blog': post.blog, 'form': form, },
-                                     context_instance=RequestContext(request))
+          if blog.has_template == False:
+            return render_to_response('single.html',
+                                      {'post': post, 'latest_post_list': latest_post_list,
+                                       'next_post': next_post, 'prev_post': prev_post,
+                                       'user': post.author, 'blog': post.blog, 'form': form, },
+                                       context_instance=RequestContext(request))
+          else:
+            return render_to_response('single_template.html',
+                                      {'post': post, 'latest_post_list': latest_post_list,
+                                       'next_post': next_post, 'prev_post': prev_post,
+                                       'user': post.author, 'blog': post.blog, 'form': form, },
+                                       context_instance=RequestContext(request))
       else:
         form = PasswordForm()
         return render_to_response('passwordsingle.html',
@@ -199,12 +235,18 @@ def single(request, shorturl):
         if (prev_post_query.count() > 0):
           prev_post = prev_post_query[0]
 #      url = request.build_absolute_uri()
-      return render_to_response('single.html',
+      if blog.has_template == False:
+        return render_to_response('single.html',
+                                  {'post': post, 'latest_post_list': latest_post_list,
+                                  'next_post': next_post, 'prev_post': prev_post,
+                                   'user': post.author, 'blog': post.blog, 'form': form, },
+                                   context_instance=RequestContext(request))
+      else:
+        return render_to_response('single_template.html',
                                   {'post': post, 'latest_post_list': latest_post_list,
                                    'next_post': next_post, 'prev_post': prev_post,
                                    'user': post.author, 'blog': post.blog, 'form': form, },
                                    context_instance=RequestContext(request))
-
     #cats = Cat.objects.filter(is_top_level=True)
     #votesup = PunnVote.objects.filter(punn=punn).filter(vote='U')
     #votesdown = PunnVote.objects.filter(punn=punn).filter(vote='D')

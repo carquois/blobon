@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
 
+from django.utils.safestring import mark_safe 
+
 from punns.utils import BASE10, BASE62, baseconvert
 
 import uuid
@@ -231,8 +233,31 @@ class Blog(models.Model):
     description = models.CharField(verbose_name=_("Description"), max_length=500, blank=True)
     translation = models.ForeignKey('self',  null=True, blank=True)
     is_online = models.BooleanField(default=True)
+    has_template = models.BooleanField(default=False)
+    short_description = models.CharField(verbose_name=_("Short description"), max_length=140, blank=True)
+    block_css = models.TextField(verbose_name=_("Css"),max_length=10000, blank=True)
+    block_navbar = models.TextField(verbose_name=_("Navbar"), max_length=10000, blank=True)
+    block_header = models.TextField(verbose_name=_("Header"), max_length=10000, blank=True)
+    block_title = models.TextField(verbose_name=_("Showing title"), max_length=10000, blank=True)
+    block_right = models.TextField(verbose_name=_("Right"), max_length=10000, blank=True)
+    block_right_top = models.TextField(verbose_name=_("Right top"), max_length=10000, blank=True)
+    block_right_middle_1 = models.TextField(verbose_name=_("Right middle 1"), max_length=10000, blank=True)
+    block_right_middle_2 = models.TextField(verbose_name=_("Right middle 2"), max_length=10000, blank=True)
+    block_right_bottom = models.TextField(verbose_name=_("Right bottom"), max_length=10000, blank=True)
+    block_left = models.TextField(verbose_name=_("Left"), max_length=10000, blank=True)
+    block_single_left = models.TextField(verbose_name=_("Single left"), max_length=10000, blank=True)
+    block_middle = models.TextField(verbose_name=_("Middle"), max_length=10000, blank=True)
+    block_footer = models.TextField(verbose_name=_("Footer"), max_length=10000, blank=True)
+    block_other_1 = models.TextField(verbose_name=_("Other 1"), max_length=10000, blank=True)
+    block_other_2 = models.TextField(verbose_name=_("Other 2"), max_length=10000, blank=True)
+    block_other_3 = models.TextField(verbose_name=_("Other 3"), max_length=10000, blank=True)
+    block_subscribe_text = models.TextField(verbose_name=_("Subscribe text"), max_length=10000, blank=True)
+    block_subscribe_button = models.TextField(verbose_name=_("subscribe button"), max_length=10000, blank=True)
     def __unicode__(self):
         return self.title
+
+    def display_blocknavbar(self): 
+        return mark_safe(self.block_navbar)
 
 class Page(models.Model):
     blog = models.ForeignKey(Blog, null=True)
