@@ -1,0 +1,21 @@
+{% extends "blog_template.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+{% load markup %}
+{% load blog_tags %}
+{% load i18n thumbnail punn_tags humanize %}
+
+      {% block blog_left %}
+      {% ultrarender blog.block_single_left %}
+      {% endblock %}
+      {% if post.content %}
+      <div>
+        <p> {{ post.content|markdown|safe }}</p>
+      </div>
+      <hr>
+      {% endif %}
+
+      {% block top_image %}
+      {% endblock %}
+      {% block info_letter %}
+      {% endblock %}
