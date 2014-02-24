@@ -1504,13 +1504,19 @@
             </div>
           </div>
 
+
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Last Post" %}
-                <a href="{% url 'blogs.views.administrateposts' blog.slug %}" class="btn btn-default btn-xs manageposts pull-right" title="{% trans "Manage Your Posts" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
+              <a href="{% url 'blogs.views.administrateposts' blog.slug %}" class="btn btn-default btn-xs manageposts pull-right" title="{% trans "Manage Your Posts" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
             </div>
               <div class="panel-body">
+              {% if posts %}
                 <p><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="show_all_posts" title="{% trans "Show All Posts" %}">{% trans "All" %}</a> ({{ posts.paginator.num_pages }})</p>
+              {% else %}
+                <p>{% trans "There are no posts for this blog" %}</p>
+              {% endif %}
             </div>
+            {% if posts %}
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-7">
@@ -1537,6 +1543,7 @@
               {% endfor %}
               </tbody>
             </table>
+            {% endif %}
           </div>
 
           <div class="panel panel-default" style="display:none;">
@@ -1583,11 +1590,17 @@
                 <a href="{% url 'blogs.views.administrateemails' blog.slug %}" class="btn btn-default btn-xs managecomments pull-right" title="{% trans "Manage your Info-letters" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
             </div>
               <div class="panel-body">
-              {% trans "Number of subscriber: " %}{{ subscribers.paginator.num_pages }}
-                <div class="form-group" style="padding-top:5px;">
-              {% trans "Last subscriber: " %}{% for subscprition in last_subscriber %}{{ subscprition.email }}{% endfor %}
-                </div>
+              {% if last_subscriber %}
+                {% trans "Number of subscriber: " %}{{ subscribers.paginator.num_pages }}
+                  <div class="form-group" style="padding-top:5px;">
+                  {% trans "Last subscriber: " %}{% for subscprition in last_subscriber %}{{ subscprition.email }}{% endfor %}
+                  </div>
+                {% if not info_emails %}{% trans "This blog have no info-letter" %}{% endif %}  
+              {% else %} 
+                {% trans "This blog have no subscriber" %}{% if not info_emails %}{% trans " and no info-letter" %}{% endif %}
+              {% endif %}
               </div>
+            {% if info_emails %}
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-4">
@@ -1615,6 +1628,7 @@
               {% endfor %}
               </tbody>
             </table>
+            {% endif %}
           </div>
 
 
@@ -1625,8 +1639,13 @@
                 <a href="{% url 'blogs.views.translation' blog.slug %}" class="btn btn-default btn-xs managecomments pull-right" title="{% trans "Translate your posts" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
             </div>
               <div class="panel-body">
+              {% if posts_to_translate %}
               {% trans "Number of posts to be translate: " %}{{ posts_to_translate.paginator.num_pages }}
+              {% else %}
+              {% trans "This blog have no post to translate" %}
+              {% endif %}
               </div>
+            {% if posts_to_translate %}
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-7">
@@ -1654,6 +1673,7 @@
               {% endfor %}
               </tbody>
             </table>
+            {% endif %}
           </div>
 
 
@@ -1702,8 +1722,13 @@
                 <a href="#" class="btn btn-default btn-xs addnewcategory pull-right" title="{% trans "Add a New Category" %}" style="display: none"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>    
             </div>
               <div class="panel-body">
+              {% if categories %}
                 <p><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="show_all_categories" title="{% trans "Show All Categories" %}">{% trans "All" %}</a> ({{ categories|length }})</p>
+              {% else %}
+               {% trans "This blog have no category" %}
+              {% endif %}
             </div>
+            {% if categories %}
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-2">
@@ -1725,6 +1750,7 @@
               {% endfor %}
               </tbody>
             </table>
+            {% endif %}
           </div>
          </div>
          <div class="col-md-6">
