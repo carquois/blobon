@@ -409,11 +409,24 @@ def administrateblog(request, slug):
       comments = paginate(request,
                        Comment.objects.order_by('-id'),
                        1)
+      info_emails = Info_email.objects.filter(blog=blog).order_by('-id')
+      last_subscriber = paginate(request,
+                       Subscription.objects.filter(blog=blog).order_by('-id'),
+                       1)
+      subscribers = paginate(request,
+                       Subscription.objects.filter(blog=blog).order_by('-id'),
+                       1)
+      posts_to_translate = paginate(request,
+                           Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date'),
+                           1)
+      last_posts_to_translate = paginate(request,
+                                Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date'),
+                                5)
       categories = Category.objects.filter(blog=blog).order_by('-id')
       tags = Tag.objects.filter(blog=blog).order_by('-id')
       post_form = PostForm()
       return render_to_response('administrateblog.html',
-                                {'blog': blog, 'posts': posts, 'pages': pages , 'comments': comments , 'categories': categories, 'tags': tags, 'post_form': post_form},
+                                {'blog': blog,'info_emails':info_emails, 'posts_to_translate': posts_to_translate, 'last_posts_to_translate': last_posts_to_translate,'subscribers': subscribers, 'last_subscriber': last_subscriber, 'posts': posts, 'pages': pages , 'comments': comments , 'categories': categories, 'tags': tags, 'post_form': post_form},
                                 context_instance=RequestContext(request))
 
 @login_required

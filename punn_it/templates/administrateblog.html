@@ -50,6 +50,9 @@
       #videoform {
         padding:10px 5px 5px 5px;
       }
+      .edit_buttons {
+        padding: 10px;0px;5px;0px;
+      }
       .model {
         padding:5px 5px 5px 5px;
         text-align: center;
@@ -1536,7 +1539,7 @@
             </table>
           </div>
 
-          <div class="panel panel-default">
+          <div class="panel panel-default" style="display:none;">
             <div class="panel-heading">{% trans "Last Page" %}
                 <a href="{% url 'blogs.views.administratepages' blog.slug %}" class="btn btn-default btn-xs managepages pull-right" title="{% trans "Manage Your Pages" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
                 <a href="#" class="btn btn-default btn-xs addnewpage pull-right" title="{% trans "Add a New Page" %}" style="display: none"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
@@ -1572,7 +1575,91 @@
             </table>
           </div>
 
+
+
+
           <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Info-letters" %}
+                <a href="{% url 'blogs.views.administrateemails' blog.slug %}" class="btn btn-default btn-xs managecomments pull-right" title="{% trans "Manage your Info-letters" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
+            </div>
+              <div class="panel-body">
+              {% trans "Number of subscriber: " %}{{ subscribers.paginator.num_pages }}
+                <div class="form-group" style="padding-top:5px;">
+              {% trans "Last subscriber: " %}{% for subscprition in last_subscriber %}{{ subscprition.email }}{% endfor %}
+                </div>
+              </div>
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-4">
+                <col class="col-xs-4">
+                <col class="col-xs-2">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>{% trans "Name" %}
+                  </th>
+                  <th>{% trans "Subject" %}</th>
+                  <th>{% trans "Who" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for info_email in info_emails %}
+                <tr>
+                  <td>{{ info_email.name }}</td>
+                  <td>{{ info_email.subject }}
+                  </td>
+                  <td>{{ info_email.get_subscribers_display }}
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+
+
+
+          <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Translation" %}
+                <a href="{% url 'blogs.views.translation' blog.slug %}" class="btn btn-default btn-xs managecomments pull-right" title="{% trans "Translate your posts" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
+            </div>
+              <div class="panel-body">
+              {% trans "Number of posts to be translate: " %}{{ posts_to_translate.paginator.num_pages }}
+              </div>
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-7">
+                <col class="col-xs-2">
+                <col class="col-xs-1">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>{% trans "Title" %}
+                  </th>
+                  <th>{% trans "Author" %}</th>
+                  <th>{% trans "Date" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for post in last_posts_to_translate %}
+                <tr>
+                  <td><p><a href="{{ post.get_absolute_url }}" target="_blank" class="view_this_post_translation" title="{% trans "View This Post" %}">{{ post.title }}</a></p></td>
+                  <td>{{ post.author }}
+                  </td>
+                  <td>{{ post.pub_date }}
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+
+
+
+          <div class="panel panel-default" style="display:none;">
             <div class="panel-heading">{% trans "Last Comment" %}
                 <a href="{% url 'blogs.views.administratecomments' blog.slug %}" class="btn btn-default btn-xs managecomments pull-right" title="{% trans "Moderate Comments" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
             </div>
@@ -1642,6 +1729,32 @@
          </div>
          <div class="col-md-6">
           <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Your blog settings" %}
+                <a href="{% url 'blogs.views.administratesettings' blog.slug %}" class="btn btn-default btn-xs managetags pull-right" title="{% trans "Change your settings" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
+            </div>
+            <div class="panel-body">
+              <b>{% trans "Name : " %}</b>{{ blog.title }}
+            </div>
+            <ul class="list-group">
+              <li class="list-group-item"><b>{% trans "Description : " %}</b>{{ blog.description }}</li>
+              <li class="list-group-item"><b>{% trans "Creator : " %}</b>{{ blog.creator }}</li>
+              <li class="list-group-item"><b>{% trans "Url : " %}</b>{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}</li>
+              <li class="list-group-item"><b>{% trans "Private : " %}</b>{% if not blog.is_open %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</li>
+              {% if not blog.is_open %}
+              <li class="list-group-item"><b>{% trans "Password : " %}</b>{{ blog.password }}</li>
+              {% endif %}
+            </ul>
+          </div>
+         </div>
+        </div>
+      
+
+
+
+
+
+         <div class="col-md-6">
+          <div class="panel panel-default" style="display:none;">
             <div class="panel-heading">{% trans "Your Tags" %}
                 <a href="{% url 'blogs.views.administratetags' blog.slug %}" class="btn btn-default btn-xs managetags pull-right" title="{% trans "Manage Your Tags" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
                 <a href="#" class="btn btn-default btn-xs addnewpage pull-right" title="{% trans "Add a New Tag" %}" style="display: none"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
@@ -1669,11 +1782,16 @@
                 </tr>
               {% endfor %}
               </tbody>
-            </table>          
+            </table>
           </div>
          </div>
-        </div>
-      
+
+
+
+
+
+
+
 
     <script>
       $('#createalbumlink').click(function() {
@@ -2715,6 +2833,7 @@
         $('#add_new_tag').tooltip({container: 'body'});
         $('#add_new_category').tooltip({container: 'body'});
         $('#view_this_post').tooltip({container: 'body', placement: 'bottom'});
+        $(".view_this_post_translation").tooltip({container: 'body', placement: 'bottom'});
         $('#view_this_page').tooltip({container: 'body', placement: 'bottom'});
         $('#view_this_comment').tooltip({container: 'body', placement: 'bottom'});
         $(".addnewpost").tooltip({container: 'body'});
