@@ -51,9 +51,9 @@
   <div class="panel-body">
     <form enctype="multipart/form-data" action="{% url 'blogs.views.quicktranslation' blog.slug %}" role="form" method="post" id=translatedpost>{% csrf_token %}
     <div class="fields" style="display: none;">{{ form.layout_type }}</div>
-    {% if post.layout_type == "s" %} 
     <div class="fields">{{ form.title.label_tag }} :{{ form.title }}</div>
     <div class="fields">{{ form.translated_title.label_tag }} :{{ form.translated_title }}</div>
+    {% if post.layout_type == "s" %}
     <div class="fields">
       <div class="row">
         <div class="current_img col-md-6 col-md-offset-3">
@@ -61,100 +61,73 @@
           <iframe width="300" height="180" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
        {% else %}
           {% if post.pic %}
-          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic }}" alt="Current image" />
+          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
           {% endif %}
        {% endif %}
         </div>
       </div>
     </div>
+    {% endif %}
+    {% if post.layout_type == "v" %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-6">
+          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
+        </div>
+        <div class="current_img col-md-6">
+          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% if post.layout_type == "h" %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-12">
+          <img id="current_id" style="width:100%;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
+        </div>
+      </div>
+      <div class="row" style="padding-top:10px;">
+        <div class="current_img col-md-4">
+          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
+        </div>
+        <div class="current_img col-md-4">
+          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}" />
+        </div>
+        <div class="current_img col-md-4">
+          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="{{ post.title }}" />
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% if post.layout_type == "g" %}
+    <div class="fields">
+      <div class="row">
+        <div class="current_img col-md-4">
+          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
+        </div>
+        <div class="current_img col-md-4">
+          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
+        </div>
+        <div class="current_img col-md-4">
+          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}" />
+        </div>
+      </div>
+      <div class="row" style="padding-top:10px;">
+        <div class="current_img col-md-4">
+          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="{{ post.title }}" />
+        </div>
+        <div class="current_img col-md-4">
+          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic_5 }}" alt="{{ post.title }}" />
+        </div>
+        <div class="current_img col-md-4">
+          <img id="current_id" src="{{ MEDIA_URL }}{{ post.pic_6 }}" alt="{{ post.title }}" />
+        </div>
+      </div>
+    </div>
+    {% endif %}
     <div class="fields">{{ form.content.label_tag }} :{{ form.content }}</div>
     <div class="fields">{{ form.translated_content.label_tag }} :{{ form.translated_content }}</div>
-  {% else %}
-    {% if post.pic_1 %}
-    <div class="fields">
-      <div class="row">
-        <div class="current_img col-md-6">
-          <p><b>{% trans "Current image 1 :" %}</b></p>
-          <img id="current_id_1" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="Current image" />
-        </div>
-        <div class="changed_image col-md-6">
-          {{form.pic_1 }}
-        </div>
-      </div>
-    </div>
-    {% endif %}
-
-    {% if post.pic_2 %}
-    <div class="fields">
-      <div class="row">
-        <div class="current_img col-md-6">
-          <p><b>{% trans "Current image 2 :" %}</b></p>
-          <img id="current_id_2" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="Current image" />
-        </div>
-        <div class="changed_image col-md-6">
-          {{form.pic_2 }}
-        </div>
-      </div>
-    </div>
-    {% endif %}
-
-    {% if post.pic_3 %}
-    <div class="fields">
-      <div class="row">
-        <div class="current_img col-md-6">
-          <p><b>{% trans "Current image 3 :" %}</b></p>
-          <img id="current_id_3" src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="Current image" />
-        </div>
-        <div class="changed_image col-md-6">
-          {{form.pic_3 }}
-        </div>
-      </div>
-    </div>
-    {% endif %}
-
-    {% if post.pic_4 %}
-    <div class="fields">
-      <div class="row">
-        <div class="current_img col-md-6">
-          <p><b>{% trans "Current image 4 :" %}</b></p>
-          <img id="current_id_4" src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="Current image" />
-        </div>
-        <div class="changed_image col-md-6">
-          {{form.pic_4 }}
-        </div>
-      </div>
-    </div>
-    {% endif %}
-
-    {% if post.pic_5 %}
-    <div class="fields">
-      <div class="row">
-        <div class="current_img col-md-6">
-          <p><b>{% trans "Current image 5 :" %}</b></p>
-          <img id="current_id_5" src="{{ MEDIA_URL }}{{ post.pic_5 }}" alt="Current image" />
-        </div>
-        <div class="changed_image col-md-6">
-          {{form.pic_5 }}
-        </div>
-      </div>
-    </div>
-    {% endif %}
-
-    {% if post.pic_6 %}
-    <div class="fields">
-      <div class="row">
-        <div class="current_img col-md-6">
-          <p><b>{% trans "Current image 6 :" %}</b></p>
-          <img id="current_id_6" src="{{ MEDIA_URL }}{{ post.pic_6 }}" alt="Current image" />
-        </div>
-        <div class="changed_image col-md-6">
-          {{form.pic_6 }}
-        </div>
-      </div>
-    </div>
-    {% endif %}
-
-  {% endif %}
     <div class="fields" style="display: none">{{ form.is_ready.label_tag }} :{{ form.is_ready }}</div>
     <div class="fields" style="display: none">{{ form.artist.label_tag }} :{{ form.artist }}</div>
     <div class="fields" style="display: none">{{ form.text.label_tag }} :{{ form.text }}</div>
