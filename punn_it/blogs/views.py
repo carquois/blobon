@@ -325,6 +325,7 @@ def newpost(request, slug):
           post = form.save(commit=False)
           post.author = request.user
           post.blog = blog
+          post.is_ready = True
           post.save()
           form.save_m2m()
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
@@ -339,6 +340,7 @@ def savedraft(request, slug):
           post = form.save(commit=False)
           post.author = request.user
           post.blog = blog
+          post.is_ready = True
           post.status = "D"
           post.save()
           form.save_m2m()
