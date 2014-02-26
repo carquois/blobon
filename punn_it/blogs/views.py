@@ -409,7 +409,7 @@ def administrateblog(request, slug):
                        Page.objects.order_by('-pub_date'),
                        1)
       comments = paginate(request,
-                       Comment.objects.filter(comment_status='pe').order_by('-id'),
+                       Comment.objects.filter(blog=blog).filter(comment_status='pe').order_by('-id'),
                        1)
       info_emails = Info_email.objects.filter(blog=blog).order_by('-id')
       last_subscriber = paginate(request,
@@ -457,7 +457,7 @@ def administratepages(request, slug):
 def administratecomments(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       comments = paginate(request,
-                       Comment.objects.filter(comment_status='pe').order_by('-id'),
+                       Comment.objects.filter(blog=blog).filter(comment_status='pe').order_by('-id'),
                        15)
       return render_to_response('administratecomments.html',
                                 {'blog': blog, 'comments': comments, },

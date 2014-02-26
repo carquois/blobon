@@ -31,6 +31,7 @@
 
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Posts" %}<a href="{% url 'blogs.views.administrateblog' blog.slug %}" class="btn btn-default btn-xs pull-right" id="add_new_post" title="{% trans "Add a New Post" %}">{% trans "Add new" %}</a></div>
+            {% if posts %}
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-7">
@@ -81,6 +82,11 @@
               {% endfor %}
               </tbody>
             </table>
+            {% else %}
+            <div class="panel-body">
+              <p>{% trans "There are no posts for this blog" %}</p>
+            </div>
+            {% endif %}
           </div>
 
 

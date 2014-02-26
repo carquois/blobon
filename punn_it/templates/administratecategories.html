@@ -37,6 +37,7 @@
           </div>  
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Categories" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_category" title="{% trans "Add a New Category" %}">{% trans "Add new" %}</a></div>
+            {% if categories %}
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-2">
@@ -62,6 +63,11 @@
               {% endfor %}
               </tbody>
             </table>
+            {% else %}
+            <div class="panel-body">
+             {% trans "This blog has no category" %}
+            </div>
+            {% endif %}
           </div>
   <div class="modal fade" id="delete">
     <div class="modal-dialog">

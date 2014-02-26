@@ -49,6 +49,7 @@
           </div>
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Info-letters" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_email" title="{% trans "Create a new info-letter" %}">{% trans "Create new" %}</a></div>
+            {% if info_emails %}
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-6">
@@ -102,11 +103,17 @@
             {% endfor %}
               </tbody>
             </table>
+            {% else %}
+            <div class="panel-body">
+            {% trans "This blog has no info-letter" %}
+            </div>
+            {% endif %}
           </div>
 
 
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Blog subscribers" %}</div>
+            {% if subscriptions%}
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-7">
@@ -129,6 +136,11 @@
 
               </tbody>
             </table>
+            {% else %}
+            <div class="panel-body">
+            {% trans "This blog has no subscriber" %}
+            </div>
+            {% endif %}
           </div>
     <script type="text/javascript">
       $(function () {
