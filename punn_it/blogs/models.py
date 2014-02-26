@@ -225,6 +225,7 @@ def get_file_path_24(instance, filename):
 
 class Blog(models.Model):
     creator = models.ForeignKey(User, null=True)
+    moderator_email = models.EmailField(verbose_name=_("Moderator email"),blank=True, null=True)
     is_open = models.BooleanField(default=False)
     slug = models.SlugField(verbose_name=_("URL"), max_length=30, unique=True)
     title = models.CharField(verbose_name=_("Title"), max_length=140)
@@ -406,7 +407,14 @@ class Comment(models.Model):
     email = models.EmailField(verbose_name=_("Email"))
     name = models.CharField(verbose_name=_("Name"), max_length=140)
     website = models.URLField(verbose_name=_("Website"), max_length=300, blank=True)
+    author = models.ForeignKey(User, related_name='Comment_author',blank=True, null=True)
     notify_me = models.BooleanField(default=False)
+    COMMENTS_CHOICES = (
+        ('pe', 'Pending'),
+        ('pu', 'Published'),
+        ('sp', 'Spam'),
+    )
+    comment_status = models.CharField(default="pe", max_length=2, choices=COMMENTS_CHOICES)
     def __unicode__(self):
         return self.comment
 

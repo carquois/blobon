@@ -5,7 +5,7 @@ from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, Im
 from django.utils.translation import ugettext as _
 from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
 
-from blogs.models import Blog, Post, Category, Subscription, Info_email
+from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment
 
 class BlogForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Enter your title'),
@@ -37,6 +37,26 @@ class SubmitForm(ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'translated_title', 'content', 'translated_content', 'message',)
+
+class CommentForm(ModelForm):
+    name = CharField(required=True, widget=forms.TextInput(attrs={'placeholder': _('Your name'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    'autofocus':'on'}))
+    comment = CharField(required=True, widget=forms.Textarea(attrs={'placeholder': _('Leave your comment here'),
+                                                    'type': 'text',
+                                                    'rows': '3',
+                                                    'class': "form-control setting_form input-block-level"}))
+    email = EmailField(required=True, widget=forms.TextInput(attrs={'placeholder': _('Enter your email here'),
+                                                    'type': 'text',
+                                                    'class': "form-control input-block-level"}))
+    website = URLField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Your website url here'),
+                                                    'type': 'text',
+                                                    'class': "form-control"}))
+
+    class Meta:
+        model = Comment
+        fields = ('name', 'comment', 'email', 'website', )
 
 class SettingsForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your blog title'),

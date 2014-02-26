@@ -14,7 +14,7 @@ from urlparse import urlparse
 from django.core.files import File
 from cgi import parse_qs
 
-from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm,PasswordForm
+from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm
 from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email
 from django.contrib.auth.models import User
 
@@ -180,6 +180,7 @@ def videos(request):
 def single(request, shorturl):
     post = get_object_or_404(Post, base62id=shorturl)
     blog = post.blog
+    comments = Comment.objects.filter(post=post).filter(comment_status='pu').order_by('-id')
 #    if post.blog.custom_domain:
 #      home = post.blog.custom_domain
 #    else:
@@ -189,6 +190,7 @@ def single(request, shorturl):
     prev_post = ""
     next_post = ""
     form = SubscriptionForm()
+    comment_form = CommentForm()
     if blog.is_online == False:
       return render_to_response('closed.html',context_instance=RequestContext(request))
     if blog.is_open == False:
@@ -212,13 +214,13 @@ def single(request, shorturl):
             return render_to_response('single.html',
                                       {'post': post, 'latest_post_list': latest_post_list,
                                        'next_post': next_post, 'prev_post': prev_post,
-                                       'user': post.author, 'blog': post.blog, 'form': form, },
+                                       'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                        context_instance=RequestContext(request))
           else:
             return render_to_response('single_template.html',
                                       {'post': post, 'latest_post_list': latest_post_list,
                                        'next_post': next_post, 'prev_post': prev_post,
-                                       'user': post.author, 'blog': post.blog, 'form': form, },
+                                       'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                        context_instance=RequestContext(request))
       else:
         form = PasswordForm()
@@ -239,13 +241,13 @@ def single(request, shorturl):
         return render_to_response('single.html',
                                   {'post': post, 'latest_post_list': latest_post_list,
                                   'next_post': next_post, 'prev_post': prev_post,
-                                   'user': post.author, 'blog': post.blog, 'form': form, },
+                                   'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                    context_instance=RequestContext(request))
       else:
         return render_to_response('single_template.html',
                                   {'post': post, 'latest_post_list': latest_post_list,
                                    'next_post': next_post, 'prev_post': prev_post,
-                                   'user': post.author, 'blog': post.blog, 'form': form, },
+                                   'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                    context_instance=RequestContext(request))
     #cats = Cat.objects.filter(is_top_level=True)
     #votesup = PunnVote.objects.filter(punn=punn).filter(vote='U')
@@ -407,7 +409,7 @@ def administrateblog(request, slug):
                        Page.objects.order_by('-pub_date'),
                        1)
       comments = paginate(request,
-                       Comment.objects.order_by('-id'),
+                       Comment.objects.filter(comment_status='pe').order_by('-id'),
                        1)
       info_emails = Info_email.objects.filter(blog=blog).order_by('-id')
       last_subscriber = paginate(request,
@@ -455,7 +457,7 @@ def administratepages(request, slug):
 def administratecomments(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       comments = paginate(request,
-                       Comment.objects.order_by('-id'),
+                       Comment.objects.filter(comment_status='pe').order_by('-id'),
                        15)
       return render_to_response('administratecomments.html',
                                 {'blog': blog, 'comments': comments, },
@@ -746,6 +748,13 @@ def deletepost(request, id):
       return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
 
 @login_required
+def deletecomment(request, id):
+      comment = get_object_or_404(Comment, id=id)
+      blog = comment.blog
+      comment.delete()
+      return HttpResponseRedirect(reverse('blogs.views.administratecomments', args=(blog.slug,)))
+
+@login_required
 def deleteblog(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       if request.user == blog.creator:
@@ -758,6 +767,41 @@ def deleteblog(request, slug):
         messages.add_message(request, messages.INFO, _(u"The blog has been deleted"))
       return HttpResponseRedirect(reverse('blogs.views.index'))
 
+@login_required
+def approvecomment(request, id):
+      comment = get_object_or_404(Comment, id=id)
+      blog = comment.blog
+      if request.user == blog.creator:
+        comment.comment_status = "pu"
+        comment.save()
+      elif request.user.is_staff:
+        comment.comment_status = "pu"
+        comment.save()      
+      return HttpResponseRedirect(reverse('blogs.views.administratecomments', args=(blog.slug,)))
+
+@login_required
+def signalcomment(request, id):
+      comment = get_object_or_404(Comment, id=id)
+      blog = comment.blog
+      comment.comment_status = "sp"
+      comment.save()
+      from django.core.mail import EmailMultiAlternatives
+      from django.template.loader import get_template
+      from django.template import Context
+      plaintext = get_template('signalemail.txt')
+      htmly     = get_template('signalemail.html')
+
+      d = Context({ 'comment_id': comment.id, 'blog': blog.title, 'slug': blog.slug , 'comment': comment, 'post': comment.post, 'name': comment.name, 'email': comment.email, 'website': comment.website, })
+
+      subject = 'Somebody signal a spam comment on blobon.com'
+      from_email = 'info@blobon.com'
+      to = 'vince@blobon.com'
+      text_content = plaintext.render(d)
+      html_content = htmly.render(d)
+      msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+      msg.attach_alternative(html_content, "text/html")
+      msg.send()
+      return HttpResponseRedirect(reverse('blogs.views.administratecomments', args=(blog.slug,)))
 
 @login_required
 def deleteemail(request, id):
@@ -883,6 +927,53 @@ def passwordsingle(request, id):
        return render_to_response('passwordsingle.html',
                                  {'form': form,'blog': blog,'post': post,},
                                  context_instance=RequestContext(request))
+
+
+def newcomment(request, id):
+     post = get_object_or_404(Post, id=id)
+     blog = post.blog
+     form = CommentForm(request.POST or None,)
+     mailto = blog.moderator_email
+     blog_title = blog.title
+     slug = blog.slug
+     if request.method == 'POST':
+       if form.is_valid():
+         comment = form.save(commit=False)
+         comment.blog = blog
+         if request.user.is_authenticated():
+           author = User.objects.get(username=request.user.username)
+           comment.author = author
+         comment.post = post
+         comment.comment_status = "pe"
+         comment.save()
+         from django.core.mail import EmailMultiAlternatives
+         from django.template.loader import get_template
+         from django.template import Context
+         plaintext = get_template('email.txt')
+         htmly     = get_template('email.html')
+
+         d = Context({ 'blog_title': blog_title, 'slug': slug , 'comment': comment, 'post': post, 'name': comment.name, 'email': comment.email, 'website': comment.website, })  
+
+         subject = 'You have a new comment'
+         from_email = 'info@blobon.com'
+         to = mailto
+         text_content = plaintext.render(d)
+         html_content = htmly.render(d)
+         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+         msg.attach_alternative(html_content, "text/html")
+         msg.send()
+         return HttpResponseRedirect(reverse('blogs.views.single', args=(post.base62id,)))
+       else:
+         return render_to_response('errors.html',
+                                  {'form': form,'blog': blog,'post': post,},
+                                  context_instance=RequestContext(request))
+
+#     else:
+#       form = PasswordForm()
+#       return render_to_response('passwordsingle.html',
+#                                 {'form': form,'blog': blog,'post': post,},
+#                                 context_instance=RequestContext(request))
+
 
 def contact(request):
      if request.method == 'POST':

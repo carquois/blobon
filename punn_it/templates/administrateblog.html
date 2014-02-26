@@ -1595,9 +1595,9 @@
                   <div class="form-group" style="padding-top:5px;">
                   {% trans "Last subscriber: " %}{% for subscprition in last_subscriber %}{{ subscprition.email }}{% endfor %}
                   </div>
-                {% if not info_emails %}{% trans "This blog have no info-letter" %}{% endif %}  
+                {% if not info_emails %}{% trans "This blog has no info-letter" %}{% endif %}  
               {% else %} 
-                {% trans "This blog have no subscriber" %}{% if not info_emails %}{% trans " and no info-letter" %}{% endif %}
+                {% trans "This blog has no subscriber" %}{% if not info_emails %}{% trans " and no info-letter" %}{% endif %}
               {% endif %}
               </div>
             {% if info_emails %}
@@ -1642,7 +1642,7 @@
               {% if posts_to_translate %}
               {% trans "Number of posts to be translate: " %}{{ posts_to_translate.paginator.num_pages }}
               {% else %}
-              {% trans "This blog have no post to translate" %}
+              {% trans "This blog has no post to translate" %}
               {% endif %}
               </div>
             {% if posts_to_translate %}
@@ -1679,17 +1679,23 @@
 
 
 
-          <div class="panel panel-default" style="display:none;">
-            <div class="panel-heading">{% trans "Last Comment" %}
+          <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Last comment to be approve" %}
                 <a href="{% url 'blogs.views.administratecomments' blog.slug %}" class="btn btn-default btn-xs managecomments pull-right" title="{% trans "Moderate Comments" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
             </div>
               <div class="panel-body">
+            {% if comments %}
                 <p><a href="{% url 'blogs.views.administratecomments' blog.slug %}" id="show_all_comments" title="{% trans "Show All Comments" %}">{% trans "All" %}</a> ({{ comments.paginator.num_pages }})</p>
-            </div>
+              {% else %}
+              {% trans "This blog has no comment to approve" %}
+              {% endif %}
+             </div>
+            {% if comments %}
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-4">
-                <col class="col-xs-4">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
                 <col class="col-xs-2">
               </colgroup>
               <thead>
@@ -1697,22 +1703,24 @@
                   <th>{% trans "Comment" %}
                   </th>
                   <th>{% trans "Post" %}</th>
+                  <th>{% trans "Name" %}</th>
                   <th>{% trans "Email" %}</th>
                 </tr>
               </thead>
               <tbody>
               {% for comment in comments %}
                 <tr>
-                  <td><p><a href="{{ comment.post.get_absolute_url }}" target="_blank" id="view_this_comment" title="{% trans "View Related Post" %}">{{ comment.comment }}</a></p></td>
-                  <td>{{ comment.post }}
+                  <td><p><a href="{% url 'blogs.views.administratecomments' blog.slug %}" target="_blank" id="view_this_comment" title="{% trans "Manage comment" %}">{{ comment.comment|truncatewords:15 }}</a></p></td>
+                  <td><p><a href="{{ comment.post.get_absolute_url }}" target="_blank" id="view_post" title="{% trans "View post" %}">{{ comment.post }}</a></p></td>
+                  <td>{{ comment.name }}
                   </td>
-                  <td>{{ comment.email }}
-                    </div>
-                  </td>
+                 <td><p><a href="mailto: {{ comment.email }}" id="send_email" title="{% trans "Send email" %}">{{ comment.email}}
+                  </a></p></td>
                 </tr>
               {% endfor %}
               </tbody>
-            </table>         
+            </table>      
+            {% endif %}   
           </div>
         <div class="row cate_tag">
          <div class="col-md-6">
@@ -1725,7 +1733,7 @@
               {% if categories %}
                 <p><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="show_all_categories" title="{% trans "Show All Categories" %}">{% trans "All" %}</a> ({{ categories|length }})</p>
               {% else %}
-               {% trans "This blog have no category" %}
+               {% trans "This blog has no category" %}
               {% endif %}
             </div>
             {% if categories %}
@@ -2861,7 +2869,7 @@
         $('#view_this_post').tooltip({container: 'body', placement: 'bottom'});
         $(".view_this_post_translation").tooltip({container: 'body', placement: 'bottom'});
         $('#view_this_page').tooltip({container: 'body', placement: 'bottom'});
-        $('#view_this_comment').tooltip({container: 'body', placement: 'bottom'});
+        $('#view_this_comment').tooltip({container: 'body'});
         $(".addnewpost").tooltip({container: 'body'});
         $(".addnewpage").tooltip({container: 'body'});
         $(".addnewcategory").tooltip({container: 'body'});
@@ -2872,6 +2880,8 @@
         $(".managetags").tooltip({container: 'body'});
         $(".managecomments").tooltip({container: 'body'});
         $(".more_images").tooltip({container: 'body'});
+        $('#view_post').tooltip({container: 'body'});
+        $('#send_email').tooltip({container: 'body'});
       });
     </script>
   {% endblock %}
@@ -2880,7 +2890,7 @@
       <li {% block dashboard-active %}class="active"{% endblock %}><a href="{% url 'blogs.views.administrateblog' blog.slug %}" id="dashboard_button" title="{% trans "Manage Your Blogs" %}"><span class="glyphicon glyphicon-home"></span> {% trans "Dashboard" %}</a></li>
       <li {% block posts-active %}{% endblock %}><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="posts_button" title="{% trans "Manage Your Posts" %}"><span class="glyphicon glyphicon-pushpin"></span> {% trans "Posts" %}</a></li>
       <li style="display: none" {% block pages-active %}{% endblock %}><a href="{% url 'blogs.views.administratepages' blog.slug %}" id="pages_button" title="{% trans "Manage Your Pages" %}"><span class="glyphicon glyphicon-file"></span> {% trans "Pages" %}</a></li>
-      <li style="display: none" {% block comments-active %}{% endblock %}><a href="{% url 'blogs.views.administratecomments' blog.slug %}" id="comments_button" title="{% trans "Moderate Comments" %}"><span class="glyphicon glyphicon-comment"></span> {% trans "Comments" %} <span class="badge">{{ num_of_comments }}</span></a></li>
+      <li {% block comments-active %}{% endblock %}><a href="{% url 'blogs.views.administratecomments' blog.slug %}" id="comments_button" title="{% trans "Moderate Comments" %}"><span class="glyphicon glyphicon-comment"></span> {% trans "Comments" %} <span class="badge">{{ num_of_comments }}</span></a></li>
       <li {% block categories-active %}{% endblock %}><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="categories_button" title="{% trans "Create, Modify or Delete Categories" %}"><span class="glyphicon glyphicon-folder-open"></span> {% trans "Categories" %}</a></li>
       <li style="display: none" {% block tags-active %}{% endblock %}><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="tags_button" title="{% trans "Create, Modify or Delete Tags" %}"><span class="glyphicon glyphicon-tag"></span> {% trans "Tags" %}</a></li>
       <li {% block emails-active %}{% endblock %}><a href="{% url 'blogs.views.administrateemails' blog.slug %}" id="emails_button" title="{% trans "Change Your Settings" %}"><span class="glyphicon glyphicon-envelope"></span> {% trans "Mailing list" %}</a></li>

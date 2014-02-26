@@ -1,0 +1,8 @@
+{{ blog }} signal a spam comment
+
+    Comment: {{ comment }}
+    Name: {{ name }}
+    Email: {{ email }}
+    Website: {{ website }}
+
+Manage this comment
