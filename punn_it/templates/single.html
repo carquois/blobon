@@ -21,6 +21,8 @@
 {% endblock %}
 {% block title %} {{ post.title }} {% endblock %}
     {% block additional_js %}
+<script src="{{ STATIC_URL }}js/jquery.validate.js"></script>
+
 <script>
                   $(document).ready(function () {
                     $(document).keydown(function(e) {
@@ -49,6 +51,18 @@
 
     {% endblock %}
     {% block additional-css %}
+.has-success {
+border-color: #3c763d;
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+.has-error {
+border-color: #a94442;
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
 #nav-above-top-sidebar {
   margin-bottom: 10px;
 }
@@ -856,6 +870,126 @@ g
 </div>
 
 <div class="fb-comments" data-href="http://checkdonc.ca{{ post.get_absolute_url }}" data-numposts="5" data-colorscheme="light"></div>
+
+
+{% if comments %}
+<div class="row comment">
+  <div class="col-sm-12">
+    <h3>{% trans "Comments:" %}</h3>
+    <hr>
+  </div>
+</div>
+  {% for comment in comments %}
+  <div class="media">
+    <a class="pull-left" href="#">
+    {% if comment.author.userprofile.avatar %}
+      {% thumbnail comment.author.userprofile.avatar "50x50" crop="center" as im %}
+        <img class="media-object img-circle" src="{{ im.url }}" alt="{{ comment.author.first_name }} {{ comment.author.last_name }}" />
+      {% endthumbnail %}
+    {% else %}    
+       <img class="media-object img-circle" src="http://i.imgur.com/mcowg4i.jpg" alt="{{ comment.name }}">
+    {% endif %}
+    </a>
+    <div class="media-body">
+      <h4 class="media-heading">{{ comment.name }}</h4>
+        {{ comment.comment }}
+    </div>
+  </div>
+  <hr>
+  {% endfor %}
+{% endif %}
+
+
+
+<div class="row comment_form">
+  <div class="col-sm-12">
+    <h3>{% trans "Leave a comment" %}</h3>
+    <hr>
+  </div>
+  <div class="col-sm-12">
+    <form class="form-horizontal" id="new_comment" enctype="multipart/form-data" role="form" method="post" action="{% url blogs.views.newcomment post.id %}">{% csrf_token %}
+      <div class="form-group">
+          <div class="col-sm-2 comment_form_input" style="margin-right:-20px;">
+          {{ comment_form.name.label_tag }}
+          </div>
+          <div class="col-sm-10">
+          {{ comment_form.name }}
+          </div>
+      </div>
+      <div class="form-group">
+          <div class="col-sm-2 comment_form_input" style="margin-right:-20px;">
+          {{ comment_form.email.label_tag }}
+          </div>
+          <div class="col-sm-10">
+          {{ comment_form.email }}
+          </div>
+      </div>
+      <div class="form-group">
+          <div class="col-sm-2 comment_form_input" style="margin-right:-20px;">
+          {{ comment_form.comment.label_tag }}
+          </div>
+          <div class="col-sm-10">
+          {{ comment_form.comment }}
+          </div>
+      </div>
+      <div class="form-group">
+          <div class="col-sm-2 comment_form_input" style="margin-right:-20px;">
+          {{ comment_form.website.label_tag }}
+          </div>
+          <div class="col-sm-10">
+          {{ comment_form.website }}
+          </div>
+      </div>
+     <button type="submit" class="btn btn-sm btn-default">{% trans "Submit" %}</button>
+    </form>
+    <hr>
+  </div>
+</div>
+
+<script>
+$(document).ready(function () {
+
+$('#new_comment').validate({
+    rules: {
+        name: {
+            minlength: 2,
+            required: true
+        },
+        email: {
+            required: true,
+            email: true
+        },
+        comment: {
+            minlength: 5,
+            required: true
+        }
+    },
+    highlight: function (element) {
+        $(element).closest('.form-control').removeClass('has-success').addClass('has-error');
+    },
+    success: function (element) {
+        element.text('OK!').addClass('has-success').closest('.form-control').removeClass('has-error').addClass('has-success');
+    }
+});
+});
+</script>
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}</strong>{{ field.name }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
 
 <div class="row">
   {% for post in latest_post_list %}
