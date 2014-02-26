@@ -38,95 +38,114 @@
         </div>
     {% endfor %}
 {% endif %}
-  <div id="info">
-    <div class="row">
-      <div class="col-md-12">
-        <h3>{{ blog.title }}</h3>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">{% trans "Creator : " %}</h3>
-      </div>
-      <div class="panel-body">
-        {{ blog.creator }}
-      </div>
-    </div>
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">{% trans "Url : " %}</h3>
-      </div>
-      <div class="panel-body">
-        <em>{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}</em>
-      </div>
-    </div>
 
-    {% if blog.description %}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">{% trans "Description : " %}</h3>
-      </div>
-      <div class="panel-body">
-        {{ blog.description }}
-      </div>
-    </div>
-    {% endif %}
-    {% if blog.password %}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">{% trans "Password : " %}</h3>
-      </div>
-      <div class="panel-body">
-        {{ blog.password }}
-      </div>
-    </div>
-    {% endif %} 
+
+
+
+
+
+         <div class="col-md-12" id="info">
+          <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Your blog settings" %}
+            </div>
+            <div class="panel-body">
+              <b>{% trans "Name : " %}</b>{{ blog.title }}
+            </div>
+            <ul class="list-group">
+              {% if blog.short_description %}
+              <li class="list-group-item"><b>{% trans "Short description: " %}</b>{{ blog.short_description }}</li>
+              {% endif %}
+              {% if blog.description %}
+              <li class="list-group-item"><b>{% trans "Description : " %}</b>{{ blog.description }}</li>
+              {% endif %}
+              <li class="list-group-item"><b>{% trans "Creator : " %}</b>{{ blog.creator }}</li>
+              <li class="list-group-item"><b>{% trans "Url : " %}</b>{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}</li>
+              <li class="list-group-item"><b>{% trans "Private : " %}</b>{% if not blog.is_open %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</li>
+              {% if not blog.is_open %}
+              <li class="list-group-item"><b>{% trans "Password : " %}</b>{{ blog.password }}</li>
+              {% endif %}
+            </ul>
+          </div>
     <a href="#" class="btn btn-xs btn-primary" id="edit_blog_button"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit blog" %}</a>
     <a href="#" class="btn btn-xs btn-danger" id="delete_blog_button" data-toggle="modal" data-target="#{{ blog.slug }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete blog" %}</a>
-  </div>
-    <form enctype="multipart/form-data" style="display:none;" role="form" action="{% url 'blogs.views.administratesettings' blog.slug %}" method="post" id=newsettings>{% csrf_token %}
-      <div class="row">
-        <div class="col-md-6 form_section" id="settings_title">
-        {{ form.title.label_tag }}<a id="info_title" class="pull-right info" title="{% trans "More Info About Title" %}" data-toggle="modal" data-target="#info_title_modal">{% trans "More info" %}</a>
-        {{ form.title }}
-        <div class="under_text"><small><em>Write your new title here</em></small></div>
-        </div>
-        <div class="col-md-6 form_section" id="settings_slug">
-        {{ form.slug.label_tag }}<a id="info_slug" class="pull-right info" title="{% trans "What is a Slug" %}" data-toggle="modal" data-target="#info_slug_modal">{% trans "More info" %}</a>
-        <div class="input-group">
-        {{ form.slug }}<span class="input-group-addon" id="urlending">.Blobon.com</span>
-       </div>
-        <div class="under_text"><small><em>Write your new slug here</em></small></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 form_section" id="settings_password">
-        {{ form.password.label_tag }}<a id="info_password" class="pull-right info" title="{% trans "Why Should I Need a Password" %}"data-toggle="modal" data-target="#info_password_modal">{% trans "More info" %}</a>
-        {{ form.password }}
-        <div class="under_text"><small><em>Write your new password here</em></small></div>
-        </div>
-        <div class="col-md-6 form_section" id="settings_custom_domain">
-        {{ form.custom_domain.label_tag }}<a id="info_custom_domain" class="pull-right info" title="{% trans "Info About Customs Domains" %}" data-toggle="modal" data-target="#info_custom_domain_modal">{% trans "More info" %}</a>
-        {{ form.custom_domain }}
-        <div class="under_text"><small><em>Write the url of your custom domain here</em></small></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 form_section" id="settings_description">
-        {{ form.description.label_tag }}<a id="info_description" class="pull-right info" title="{% trans "Info About Blog Description" %}"data-toggle="modal" data-target="#info_description_modal">{% trans "More info" %}</a>
-        {{ form.description }}
-        <div class="under_text"><small><em>Describe your blog here</em></small></div>
-        </div>
-      </div>
-      <div class="row" style="display:none;">
-        {{ form.is_online }}
-      </div>     
-    </form>
-    <div id="formbuttons" style="display:none;">
-      <button type="submit" class="btn btn-xs btn-primary" id=submitsettings title="{% trans "Save your settings" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
-      <button class="btn btn-xs btn-default" id=cancelsettings title="{% trans "Cancel edit settings" %}"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
-    </div>
+         </div>
+         <div class="col-md-12">
+           <form enctype="multipart/form-data" style="display:none;" role="form" action="{% url 'blogs.views.administratesettings' blog.slug %}" method="post" id=newsettings>{% csrf_token %}
+          <div class="panel panel-primary" id="setting_form">
+            <div class="panel-heading">{% trans "Edit your settings :" %}</div>
+            <div class="panel-body">         
+             <div class="row">
+               <div class="col-md-12 form_section" id="settings_title">
+               {{ form.title.label_tag }}<a id="info_title" class="pull-right info" title="{% trans "More Info About Title" %}" data-toggle="modal" data-target="#info_title_modal">{% trans "More info" %}</a>
+               {{ form.title }}
+                 <div class="under_text"><small><em>{% trans "Write your new title here" %}</em></small></div>
+               </div>
+               <div class="col-md-6 form_section" id="settings_slug">
+               {{ form.slug.label_tag }}<a id="info_slug" class="pull-right info" title="{% trans "What is a Slug" %}" data-toggle="modal" data-target="#info_slug_modal">{% trans "More info" %}</a>
+                 <div class="input-group">
+                 {{ form.slug }}<span class="input-group-addon" id="urlending">.Blobon.com</span>
+                 </div>
+                 <div class="under_text"><small><em>{% trans "Write your new slug here" %}</em></small></div>
+               </div>
+               <div class="col-md-6 form_section" id="settings_custom_domain">
+               {{ form.custom_domain.label_tag }}<a id="info_custom_domain" class="pull-right info" title="{% trans "Info About Customs Domains" %}" data-toggle="modal" data-target="#info_custom_domain_modal">{% trans "More info" %}</a>
+               {{ form.custom_domain }}
+                 <div class="under_text"><small><em>{% trans "Write the url of your custom domain here" %}</em></small></div>
+               </div>
+             </div>
+             <hr>
+             <div class="row">
+               <div class="col-md-12 form_section" id="settings_description">
+               {{ form.description.label_tag }}<a id="info_description" class="pull-right info" title="{% trans "Info About Blog Description" %}"data-toggle="modal" data-target="#info_description_modal">{% trans "More info" %}</a>
+               {{ form.description }}
+                 <div class="under_text"><small><em>{% trans "Describe your blog here" %}</em></small></div>
+               </div>
+             </div>
+             <div class="row">
+               <div class="col-md-12 form_section" id="settings_description">
+               {{ form.short_description.label_tag }}<a id="info_short_description" class="pull-right info" title="{% trans "Info About Blog Short Description" %}"data-toggle="modal" data-target="#info_short_description_modal">{% trans "More info" %}</a>
+               {{ form.short_description }}
+                 <div class="under_text"><small><em>{% trans "Write a short description of your blog here" %}</em></small></div>
+               </div>
+             </div>
+             <hr>
+             <div class="row" style="display:none;">
+             {{ form.is_online }}
+             </div>
+
+             <div class="row">
+               <div class="col-md-6 form_section" id="settings_password">
+                 <b>{% trans "Public blog " %}</b><a id="info_password" class="pull-right info" title="{% trans "What is the difference between a publi and a private blog" %}"data-toggle="modal" data-target="#info_password_modal">{% trans "More info" %}</a>
+                 <div style="padding-top:5px;">{{ form.is_open }}
+                   <div class="under_text"><small><em>{% trans "Check if you want your blog to be private" %}</em></small></div>
+                 </div>
+               </div>
+            </div>
+             <div class="row">
+               <div class="col-md-6 form_section" id="settings_password">
+               {{ form.password.label_tag }}
+               {{ form.password }}
+                 <div class="under_text"><small><em>{% trans "Write your new password here" %}</em></small></div>
+               </div>
+             </div>
+
+             </div>
+             </div>
+           </form>
+           <div id="formbuttons" style="display:none;">
+             <button type="submit" class="btn btn-xs btn-primary" id=submitsettings title="{% trans "Save your settings" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
+             <button class="btn btn-xs btn-default" id=cancelsettings title="{% trans "Cancel edit settings" %}"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+           </div>
+         </div>
+
+
+
+
+
+
+
+
   <div class="modal fade" id="info_title_modal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -199,7 +218,7 @@
           <h4 class="modal-title">{% trans "Description" %}</h4>
         </div>
         <div class="modal-body">
-          <p>{% trans "This section is to wrtite a small description of your blog..." %}</p>
+          <p>{% trans "This section is to wrtite a full description of your blog..." %}</p>
         </div>
         <div class="modal-footer">
           <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
@@ -209,7 +228,22 @@
   </div>
 
 
-
+  <div class="modal fade" id="info_short_description_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Short description" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "This section is to wrtite a small description of your blog..." %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="modal fade" id="{{ blog.slug }}">
     <div class="modal-dialog">
@@ -261,7 +295,7 @@
         $('#info_password').tooltip({container: 'body'});
         $('#info_custom_domain').tooltip({container: 'body'});
         $('#info_description').tooltip({container: 'body'});
-
+        $('#info_short_description').tooltip({container: 'body'});
       });
     </script>
 

@@ -76,9 +76,14 @@ class SettingsForm(ModelForm):
                                                     'type': 'text',
                                                     'rows': '5',
                                                     'class': "form-control setting_form input-block-level"}))    
+    short_description = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Describe Your Blog'),
+                                                    'type': 'text',
+                                                    'rows': '2',
+                                                    'class': "form-control setting_form input-block-level"}))
+
     class Meta:
         model = Blog 
-        fields = ('title', 'slug', 'password', 'custom_domain','description','is_online', )
+        fields = ('title', 'slug', 'password', 'custom_domain','description','is_online','is_open','short_description', )
 
 class PasswordForm(ModelForm):
     password = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Enter the blog password'),

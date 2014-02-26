@@ -1770,7 +1770,12 @@
               <b>{% trans "Name : " %}</b>{{ blog.title }}
             </div>
             <ul class="list-group">
+              {% if blog.short_description %}
+              <li class="list-group-item"><b>{% trans "Short description: " %}</b>{{ blog.short_description }}</li>
+              {% endif %}
+              {% if blog.description %}
               <li class="list-group-item"><b>{% trans "Description : " %}</b>{{ blog.description }}</li>
+              {% endif %}
               <li class="list-group-item"><b>{% trans "Creator : " %}</b>{{ blog.creator }}</li>
               <li class="list-group-item"><b>{% trans "Url : " %}</b>{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}</li>
               <li class="list-group-item"><b>{% trans "Private : " %}</b>{% if not blog.is_open %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</li>
