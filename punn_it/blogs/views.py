@@ -190,7 +190,6 @@ def single(request, shorturl):
     prev_post = ""
     next_post = ""
     form = SubscriptionForm()
-    comment_form = CommentForm()
     if blog.is_online == False:
       return render_to_response('closed.html',context_instance=RequestContext(request))
     if blog.is_open == False:
@@ -211,17 +210,39 @@ def single(request, shorturl):
             if (prev_post_query.count() > 0):
               prev_post = prev_post_query[0]
           if blog.has_template == False:
-            return render_to_response('single.html',
-                                      {'post': post, 'latest_post_list': latest_post_list,
-                                       'next_post': next_post, 'prev_post': prev_post,
+            if request.user.is_authenticated():
+              u=User.objects.get(username=request.user.username)
+              name=request.user.get_full_name
+              comment_form = CommentForm(initial={'email':u.email, 'name':name})
+              return render_to_response('single.html',
+                                       {'post': post, 'latest_post_list': latest_post_list,
+                                       'next_post': next_post, 'prev_post': prev_post, 'u': u, 'name': name,
                                        'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                        context_instance=RequestContext(request))
+            else:
+              comment_form = CommentForm()
+              return render_to_response('single.html',
+                                        {'post': post, 'latest_post_list': latest_post_list,
+                                         'next_post': next_post, 'prev_post': prev_post,
+                                         'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
+                                         context_instance=RequestContext(request))
           else:
-            return render_to_response('single_template.html',
-                                      {'post': post, 'latest_post_list': latest_post_list,
-                                       'next_post': next_post, 'prev_post': prev_post,
+            if request.user.is_authenticated():
+              u=User.objects.get(username=request.user.username)
+              name=request.user.get_full_name
+              comment_form = CommentForm(initial={'email':u.email, 'name':name})
+              return render_to_response('single.html',
+                                       {'post': post, 'latest_post_list': latest_post_list,
+                                       'next_post': next_post, 'prev_post': prev_post, 'u': u, 'name': name,
                                        'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                        context_instance=RequestContext(request))
+            else:
+              comment_form = CommentForm()
+              return render_to_response('single_template.html',
+                                        {'post': post, 'latest_post_list': latest_post_list,
+                                         'next_post': next_post, 'prev_post': prev_post,
+                                         'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
+                                         context_instance=RequestContext(request))
       else:
         form = PasswordForm()
         return render_to_response('passwordsingle.html',
@@ -238,15 +259,21 @@ def single(request, shorturl):
           prev_post = prev_post_query[0]
 #      url = request.build_absolute_uri()
       if blog.has_template == False:
+        if request.user.is_authenticated():
+          u=User.objects.get(username=request.user.username)
+          name=request.user.get_full_name
+          comment_form = CommentForm(initial={'email':u.email, 'name':name})
+        else:
+           comment_form = CommentForm()
         return render_to_response('single.html',
                                   {'post': post, 'latest_post_list': latest_post_list,
-                                  'next_post': next_post, 'prev_post': prev_post,
+                                  'next_post': next_post, 'prev_post': prev_post, 'u': u, 'name': name,
                                    'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                    context_instance=RequestContext(request))
       else:
         return render_to_response('single_template.html',
                                   {'post': post, 'latest_post_list': latest_post_list,
-                                   'next_post': next_post, 'prev_post': prev_post,
+                                   'next_post': next_post, 'prev_post': prev_post, 'u': u, 'name': name,
                                    'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                    context_instance=RequestContext(request))
     #cats = Cat.objects.filter(is_top_level=True)
