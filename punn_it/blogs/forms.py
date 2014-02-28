@@ -14,9 +14,12 @@ class BlogForm(ModelForm):
     slug = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your blog adress'),
                                                     'type': 'text',
                                                     'class': "form-control"}))
+    moderator_email = EmailField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Enter the blog moderator email here'),
+                                                    'type': 'text',
+                                                    'class': "form-control input-block-level"}))
     class Meta:
         model = Blog 
-        fields = ('title', 'slug', )
+        fields = ('title', 'slug','moderator_email' )
 
 class SubmitForm(ModelForm):
     title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.'), 'class': 'form-control'}), required=False)
@@ -25,15 +28,15 @@ class SubmitForm(ModelForm):
     content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Enter your content here'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control input-block-level"}))
+                                                    'class': "form-control input-block-level mceNoEditor"}))
     translated_content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Enter your translation here'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control input-block-level"}))
+                                                    'class': "form-control input-block-level mceNoEditor"}))
     message = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Enter your message here'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control input-block-level"}))
+                                                    'class': "form-control input-block-level mceNoEditor"}))
     class Meta:
         model = Post
         fields = ('title', 'translated_title', 'content', 'translated_content', 'message',)
@@ -75,11 +78,11 @@ class SettingsForm(ModelForm):
     description = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Describe Your Blog'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control setting_form input-block-level"}))    
+                                                    'class': "form-control setting_form input-block-level mceNoEditor"}))    
     short_description = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Describe Your Blog'),
                                                     'type': 'text',
                                                     'rows': '2',
-                                                    'class': "form-control setting_form input-block-level"}))
+                                                    'class': "form-control setting_form input-block-level mceNoEditor"}))
 
     class Meta:
         model = Blog 
@@ -126,7 +129,7 @@ class EmailForm(ModelForm):
     message = CharField(widget=forms.Textarea(attrs={'placeholder': _('Your message'),
                                                     'type': 'text',
                                                     'rows': '10',
-                                                    'class': "form-control setting_form input-block-level"}))
+                                                    'class': "form-control setting_form input-block-level mceNoEditor"}))
     class Meta:
         model = Info_email
         fields = ('name','subject','message','subscribers','frequency', )
@@ -139,7 +142,7 @@ class CategoriesForm(ModelForm):
     description = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Describe your category'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control setting_form input-block-level"}))
+                                                    'class': "form-control setting_form input-block-level mceNoEditor"}))
     slug = CharField(widget=forms.TextInput(attrs={'placeholder': _('Slug'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level"}))
@@ -168,63 +171,63 @@ class PostForm(ModelForm):
     content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write a new post'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control setting_form input-block-level",
+                                                    'class': "form-control setting_form input-block-level mceNoEditor",
                                                     'autofocus':'on'}))
     text = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write your text here'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control setting_form input-block-level",
+                                                    'class': "form-control setting_form input-block-level mceNoEditor",
                                                     'autofocus':'on'}))
     category = ModelMultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, queryset=Category.objects.all())
     content_0 = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this image'),
                                                     'type': 'text',
-                                                    'rows': '5',
-                                                    'class': "form-control setting_form input-block-level",
+                                                    'rows': '10',
+                                                    'class': "form-control setting_form input-block-level mceEditor",
                                                     'autofocus':'on'}))
     content_01 = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this image'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control setting_form input-block-level",
+                                                    'class': "form-control setting_form input-block-level mceNoEditor",
                                                     'autofocus':'on'}))
     content_1 = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this image'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control setting_form input-block-level smallprev",
+                                                    'class': "form-control setting_form input-block-level smallprev mceNoEditor",
                                                     'autofocus':'on'}))
     content_2 = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this image'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control setting_form input-block-level smallprev",
+                                                    'class': "form-control setting_form input-block-level smallprev mceNoEditor",
                                                     'autofocus':'on'}))
     content_3 = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this image'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control setting_form input-block-level smallprev",
+                                                    'class': "form-control setting_form input-block-level smallprev mceNoEditor",
                                                     'autofocus':'on'}))
     content_4 = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this image'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control setting_form input-block-level smallprev",
+                                                    'class': "form-control setting_form input-block-level smallprev mceNoEditor",
                                                     'autofocus':'on'}))
     content_5 = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this image'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control setting_form input-block-level smallprev",
+                                                    'class': "form-control setting_form input-block-level smallprev mceNoEditor",
                                                     'autofocus':'on'}))
     content_6 = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this image'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control setting_form input-block-level smallprev",
+                                                    'class': "form-control setting_form input-block-level smallprev mceNoEditor",
                                                     'autofocus':'on'}))
     content_video = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this video'),
                                                     'type': 'text',
                                                     'rows': '3',
-                                                    'class': "form-control setting_form input-block-level",
+                                                    'class': "form-control setting_form input-block-level mceNoEditor",
                                                     'autofocus':'on'}))
     translated_content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Enter your translation here'),
                                                     'type': 'text',
                                                     'rows': '5',
-                                                    'class': "form-control input-block-level"}))
+                                                    'class': "form-control input-block-level mceNoEditor"}))
     youtube_url = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Copy a Youtube url here'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",

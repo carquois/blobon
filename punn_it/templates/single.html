@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n thumbnail punn_tags humanize %}
 {% load markup %}
+{% load blog_tags %}
 {% block open-graphs %}
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ post.title }}" />
@@ -130,7 +131,7 @@ g
     </a>
     {% endif %}
        {% if post.content_0 %}
-         <div class="img_content">{{ post.content_0 }}</div>
+         <div class="img_content">{% ultrarender post.content_0 %}</div>
        {% endif %}  
     {% endif %}
  

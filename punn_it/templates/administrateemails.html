@@ -151,6 +151,15 @@
     </script>
 
     <script>
+      $(document).ready(function() {
+        setTimeout(function() { 
+         $(".mceNoEditor").removeAttr("style");
+        },10);
+                   });
+         
+    </script>
+
+    <script>
       $('#add_new_email').click(function() {
         $('#add_new_email').hide();
         $('#new_email_form').show();
