@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load i18n thumbnail %}
+{% block title %}{{ cat.slug }}{% endblock %}
+{% block open-graphs %}
+    <!-- Le open graphs tags -->
+    <meta property="og:title" content="{{ category.name }}" />
+    <meta property="og:url" content="{{ url }}" />
+    <meta property="og:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ user.userprofile.avatar }}" />
+    <meta property="og:site_name" content="{{ user.first_name }} {{ user.last_name }}" />
+    <!-- Le twitter cards -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="{{ url }}">
+    <meta name="twitter:title" content="{{ user.first_name }} {{ user.last_name }} {% trans 'sur' %} {{ site.name }}">
+    <meta name="twitter:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
+    <meta name="twitter:description" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}">
+{% endblock %}
+ {% block content %}
+	       		
+	       		<!-- liste thumbnails -->
+	       		<div class="col-md-12 noPad" style="margin-bottom: 20px;">
+	       				
+	       			<div class="mobileBigBox" id='div-gpt-ad-1360772351679-1'>
+				        <script type='text/javascript'>
+				          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1360772351679-1'); });
+				        </script>
+					</div>
+	       			
+	       			<div class="headerCategorie bg{{ category.name }} ombrageTexte pad5">
+	        		
+	        		<span>{{ category.slug }}</span>
+	        		
+	        		
+	        		</div>
+	        		
+	       			
+
+	       			<!-- boucle pour 1 thumbnails -->
+	       			{% for post in posts %}
+	       			<a href="{{ post.get_absolute_url }}">
+	       			{% if forloop.counter|divisibleby:3 %}
+		       			<div class="contenantImageThumb  " style="float:left;position: relative;">
+		       			{% else %}	
+		       			<div class="contenantImageThumb  margeDroiteThumb" style="float:left;position: relative;">
+						{% endif %}	
+							<div class="overThumb" >
+									
+									{% if punn.title|length >= 60 %}
+									<div class="titre3small ombrageTexte centreVertical">{{ post.title }}</div> 
+									{% else %}	
+									<div class="titre3 ombrageTexte centreVertical">{{ psot.title }}</div> 
+									{% endif %}	
+
+								
+							</div>
+		       				
+		       					
+		       					 {% thumbnail post.pic "222x240" crop="center" as im %}
+					  	          <img id="thumbs" src="{{ im.url }}" class="Thumb-general " alt="{{ post.title }}"/>
+						         {% endthumbnail %}
+		       				
+		       					
+								
+		       			</div>
+	       		</a>
+	       		 
+	       			
+	       			{% if forloop.counter == 3 %}
+
+					<div id='div-gpt-ad-1363051510706-0' style='width:728px; height:90px;' class="hidden-xs centered hidden-md">
+					        <script type='text/javascript'>
+					          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363051510706-0'); });
+					        </script>
+					</div>	
+					
+					
+					{% endif %}
+	       			
+
+	       			{% endfor %}
+					<!-- FIN boucle pour 1 thumbnails -->
+	       			
+				{% if posts.has_previous or posts.has_next %}
+<div style="clear: both; margin-bottom: 30px;"></div>
+		            <div class="row">
+		              <ul class="pager">
+		                <li class="previous{% if not posts.has_previous %} disabled{% endif %}"><a href="{% if posts.has_previous %}?page={{ posts.previous_page_number }}{% endif %}" style="font-size:24px; margin-left: 20px;"><span class="glyphicon glyphicon-chevron-left" ></span></a></li>
+		                <li class="next{% if not posts.has_next %} disabled{% endif %}"><a href="{% if posts.has_next %}?page={{ posts.next_page_number }}{% endif %}" style="font-size:24px;margin-right:20px;"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+		              </ul>
+		            </div>
+
+				{% endif %}
+	       		
+	 	       		 
+
+
+	       			
+	       		</div>
+	       		<!-- liste thumbnails -->
+	       		
+	       		<div style="clear: both; margin-bottom: 30px;"></div>
+	       		
+	       		
+	       		   {% endblock %}
