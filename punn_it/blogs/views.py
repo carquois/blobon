@@ -227,12 +227,10 @@ def single(request, shorturl):
               prev_post = prev_post_query[0]
           if blog.has_template == False:
             if request.user.is_authenticated():
-              u=User.objects.get(username=request.user.username)
-              name=request.user.get_full_name
-              comment_form = CommentForm(initial={'email':u.email, 'name':name})
+              comment_form = CommentForm(initial={'email':u.email,})
               return render_to_response('single.html',
                                        {'post': post, 'latest_post_list': latest_post_list,
-                                       'next_post': next_post, 'prev_post': prev_post, 'u': u, 'name': name,
+                                       'next_post': next_post, 'prev_post': prev_post,
                                        'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                        context_instance=RequestContext(request))
             else:
@@ -244,12 +242,10 @@ def single(request, shorturl):
                                          context_instance=RequestContext(request))
           else:
             if request.user.is_authenticated():
-              u=User.objects.get(username=request.user.username)
-              name=request.user.get_full_name
-              comment_form = CommentForm(initial={'email':u.email, 'name':name})
+              comment_form = CommentForm(initial={'email':u.email,})
               return render_to_response('single.html',
                                        {'post': post, 'latest_post_list': latest_post_list,
-                                       'next_post': next_post, 'prev_post': prev_post, 'u': u, 'name': name,
+                                       'next_post': next_post, 'prev_post': prev_post,
                                        'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                        context_instance=RequestContext(request))
             else:
@@ -276,20 +272,19 @@ def single(request, shorturl):
 #      url = request.build_absolute_uri()
       if blog.has_template == False:
         if request.user.is_authenticated():
-          u=User.objects.get(username=request.user.username)
-          name=request.user.get_full_name
-          comment_form = CommentForm(initial={'email':u.email, 'name':name})
+          comment_form = CommentForm(initial={'email':request.user.email,})
         else:
            comment_form = CommentForm()
         return render_to_response('single.html',
                                   {'post': post, 'latest_post_list': latest_post_list,
-                                  'next_post': next_post, 'prev_post': prev_post, 'u': u, 'name': name,
+                                  'next_post': next_post, 'prev_post': prev_post, 
                                    'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                    context_instance=RequestContext(request))
       else:
+        comment_form = CommentForm()
         return render_to_response('single_template.html',
                                   {'post': post, 'latest_post_list': latest_post_list,
-                                   'next_post': next_post, 'prev_post': prev_post, 'u': u, 'name': name,
+                                   'next_post': next_post, 'prev_post': prev_post,
                                    'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                    context_instance=RequestContext(request))
     #cats = Cat.objects.filter(is_top_level=True)
@@ -976,7 +971,10 @@ def newcomment(request, id):
      post = get_object_or_404(Post, id=id)
      blog = post.blog
      form = CommentForm(request.POST or None,)
-     mailto = blog.moderator_email
+     if blog.moderator_email:
+       mailto = blog.moderator_email
+     else:
+       mailto = 'vince@blobon.com'
      blog_title = blog.title
      slug = blog.slug
      if request.method == 'POST':
