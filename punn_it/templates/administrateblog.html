@@ -236,7 +236,7 @@ border-radius: 4px;
 {% endif %}
 
 <div class="page-header" style="margin-top:-10px;">
-  <h1>{{ blog.title }}<small>&nbsp;&nbsp;<a href="http://{{ blog.slug }}.blobon.com" target="_blank">{% trans "View blog" %}</a>&nbsp;&nbsp;<a href="{% url 'blogs.views.index' %}" target="_blank">{% trans "All my blogs" %}</a></small></h1>
+  <h1>{{ blog.title }}<small>&nbsp;&nbsp;<div style="padding-top:10px;"><a href="http://{{ blog.slug }}.blobon.com" target="_blank">{% trans "View blog" %}</a>&nbsp;&nbsp;<a style="float:right;" href="{% url 'blogs.views.index' %}" target="_blank">{% trans "All my blogs" %}</a></div></small></h1>
 </div>
           <div class="panel panel-default"> 
             <div class="panel-body">
