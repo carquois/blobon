@@ -63,7 +63,7 @@ def index(request):
                                           context_instance=RequestContext(request))
               else:
                 posts = paginate(request,
-                                 Post.objects.filter(blog=blog).order_by('-pub_date'),
+                                 Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
                                  15)
                 form = SubscriptionForm()
                 categories = Category.objects.filter(blog=blog)
@@ -82,7 +82,7 @@ def index(request):
                                         context_instance=RequestContext(request))
           else: 
             posts = paginate(request,
-                             Post.objects.filter(blog=blog).order_by('-pub_date'),
+                             Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
                              15)
             form = SubscriptionForm()
             categories = Category.objects.filter(blog=blog)
@@ -110,7 +110,7 @@ def index(request):
                 if blog.custom_domain:
                   return HttpResponseRedirect("http://%s/" % blog.custom_domain)
                 posts = paginate(request,
-                               Post.objects.filter(blog=blog).order_by('-pub_date'),
+                               Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
                                15)
                 form = SubscriptionForm()
                 categories = Category.objects.filter(blog=blog)
@@ -131,7 +131,7 @@ def index(request):
             if blog.custom_domain:
               return HttpResponseRedirect("http://%s/" % blog.custom_domain)
             posts = paginate(request,
-                           Post.objects.filter(blog=blog).order_by('-pub_date'),
+                           Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
                            15)
             form = SubscriptionForm()
             categories = Category.objects.filter(blog=blog)
