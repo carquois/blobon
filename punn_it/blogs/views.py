@@ -66,13 +66,14 @@ def index(request):
                                  Post.objects.filter(blog=blog).order_by('-pub_date'),
                                  15)
                 form = SubscriptionForm()
+                categories = Category.objects.filter(blog=blog)
                 if blog.has_template == False:
                   return render_to_response('index.html',
-                                            {'posts': posts, 'blog': blog, 'form': form,},
+                                            {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                             context_instance=RequestContext(request))
                 else:
                   return render_to_response('blog_template.html',
-                                            {'posts': posts, 'blog': blog, 'form': form,},
+                                            {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                             context_instance=RequestContext(request))
             else:
               form = PasswordForm()
@@ -84,13 +85,14 @@ def index(request):
                              Post.objects.filter(blog=blog).order_by('-pub_date'),
                              15)
             form = SubscriptionForm()
+            categories = Category.objects.filter(blog=blog)
             if blog.has_template == False:
               return render_to_response('index.html',
-                                        {'posts': posts, 'blog': blog, 'form': form,},
+                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                         context_instance=RequestContext(request))
             else:
               return render_to_response('blog_template.html',
-                                        {'posts': posts, 'blog': blog, 'form': form,},
+                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                         context_instance=RequestContext(request))
       elif Blog.objects.filter(slug=request.subdomain).exists():
           blog = Blog.objects.get(slug=request.subdomain)
@@ -111,13 +113,14 @@ def index(request):
                                Post.objects.filter(blog=blog).order_by('-pub_date'),
                                15)
                 form = SubscriptionForm()
+                categories = Category.objects.filter(blog=blog)
                 if blog.has_template == False:
                   return render_to_response('index.html',
-                                            {'posts': posts, 'blog': blog, 'form': form,},
+                                            {'posts': posts, 'blog': blog, 'form': form, 'categories': categories,},
                                             context_instance=RequestContext(request))
                 else:
                   return render_to_response('blog_template.html',
-                                            {'posts': posts, 'blog': blog, 'form': form,},
+                                            {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                             context_instance=RequestContext(request))
             else:
               form = PasswordForm()
@@ -131,13 +134,14 @@ def index(request):
                            Post.objects.filter(blog=blog).order_by('-pub_date'),
                            15)
             form = SubscriptionForm()
+            categories = Category.objects.filter(blog=blog)
             if blog.has_template == False:
               return render_to_response('index.html',
-                                        {'posts': posts, 'blog': blog, 'form': form,},
+                                        {'posts': posts, 'blog': blog, 'form': form, 'categories': categories,},
                                         context_instance=RequestContext(request))
             else:
               return render_to_response('blog_template.html',
-                                        {'posts': posts, 'blog': blog, 'form': form,},
+                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                         context_instance=RequestContext(request))
       else:
         user = ""
@@ -150,6 +154,18 @@ def index(request):
                                   'posts': posts,
                                   'form': form, },
                                   context_instance=RequestContext(request))
+
+
+def category(request, slug):
+      category = get_object_or_404(Category, slug=slug)
+      posts = paginate(request,
+                       Post.objects.filter(status='P').filter(category=category).order_by('-pub_date'),
+                       15)
+      blog = category.blog
+      form = SubscriptionForm()
+      return render_to_response('category.html',
+                                {'form': form, 'blog': blog,'posts': posts, 'category': category,},
+                                context_instance=RequestContext(request))
 
 def testbloggab(request):
       blog = Blog.objects.get(slug='gab')

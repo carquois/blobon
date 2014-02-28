@@ -178,8 +178,8 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-                  {% for cat in cats %} 
-            <li><a href="{% url "punns.views.cat" cat.slug %}" class="nav-{{ cat.slug }} ombrageTexte">{{ cat.slug }}</a></li>
+                  {% for category in categories %} 
+            <li><a href="{% url "blogs.views.category" category.slug %}" class="nav-{{ category.slug }} ombrageTexte">{{ category.slug }}</a></li>
             {% endfor %}
             
 
