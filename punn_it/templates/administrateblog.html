@@ -7,6 +7,16 @@
     <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script> 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}js/tinymce/js/tinymce/tinymce.min.js" type="text/javascript">// <![CDATA[
+/tiny_mce/tiny_mce.js">
+// ]]></script>
+<script type="text/javascript">// <![CDATA[
+tinyMCE.init({
+    mode : "textareas",
+    language : "en",
+    theme : "simple"
+});
+// ]]></script>
   {% endblock %}
   {% block additional-css %}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/css/bootstrap.min.css">
@@ -43,6 +53,11 @@
     }
       textarea {
         resize: none;
+      }
+      #mce_31 {
+border: 1px solid #ccc;
+border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
       }
       #imagetype {
         padding:15px 15px 5px 15px;
@@ -128,6 +143,9 @@
       #textform {
         padding:10px 15px 5px 15px;
       }
+      #blog_postform {
+        padding:10px 15px 5px 15px;
+      }
       #uploadimage {
         padding:5px 5px 5px 5px;
       }
@@ -141,6 +159,9 @@
         margin-right: auto;
       }
       #newtext{
+        padding:0px 0px 10px 0px;
+      }
+      #newblog_post{
         padding:0px 0px 10px 0px;
       }
       #newvideo{
@@ -214,11 +235,14 @@
     {% endfor %}
 {% endif %}
 
-
+<div class="page-header" style="margin-top:-10px;">
+  <h1>{{ blog.title }}<small>&nbsp;&nbsp;<a href="http://{{ blog.slug }}.blobon.com" target="_blank">{% trans "View blog" %}</a>&nbsp;&nbsp;<a href="{% url 'blogs.views.index' %}" target="_blank">{% trans "All my blogs" %}</a></small></h1>
+</div>
           <div class="panel panel-default"> 
             <div class="panel-body">
               <ul class="nav nav-tabs nav-justified" id="tabbar">
-                <li class="active" id="litext"><a href="#text" id="texttab" title="{% trans "Write a New Post Quickly" %}" data-toggle="tab"><span class="glyphicon glyphicon-font"></span> {% trans "Text" %}</a></li>
+                <li class="active" id="litext"><a href="#text" id="texttab" title="{% trans "Write a new post quickly" %}" data-toggle="tab"><span class="glyphicon glyphicon-font"></span> {% trans "Quick post" %}</a></li>
+                <li id="liblog_post"><a href="#blog_post" id="blog_posttab" title="{% trans "Write a blog post" %}" data-toggle="tab"><span class="glyphicon glyphicon-book"></span> {% trans "Blog post" %}</a></li>
                 <li id="liimage"><a href="#image" id="imagetab" title="{% trans "Submit One or More Images" %}" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span> {% trans "Image" %}</a></li>
                 <li id="livideo"><a href="#video" id="videotab" title="{% trans "Submit A Youtube Video" %}" data-toggle="tab"><span class="glyphicon glyphicon-film"></span> {% trans "Video" %}</a></li>
               </ul>
@@ -249,6 +273,30 @@
                     </div>
                   </div>
                 </div>
+
+
+                <div class="tab-pane fade" id="blog_post" style="font-size:14px;">
+                  <div class="row">
+                    <div class="col-md-12" id="blog_postform">
+                      <form enctype="multipart/form-data" id="newblog_post" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
+                        <div class="title" id="blog_post_title">
+                          {{ post_form.title.label_tag }}
+                          {{ post_form.title }}
+                        </div>
+                        <div class="form-group" style="padding-top:10px;">
+                        {{ post_form.content_0 }}
+                        </div>
+                        <div class="row" style="display: none">{{ post_form.layout_type }} </div>
+                        <div class="row" style="display: none">{{ post_form.status }} </div>
+                       </form>
+                       <button id="save_draft_blog_post" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-save"></span> {% trans "Add to the queue" %}</button>
+                       <button id="submitblog_post" class="btn btn-primary btn-xs pull-right" disabled="disabled"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Post" %}</button>
+                    </div>
+                  </div>
+                </div>
+
+
+
                 <div class="tab-pane fade" id="image">
                     <div class="row">
                       <div class="col-md-12" id="imagetype">
@@ -1829,8 +1877,39 @@
 
 
 
-
-
+    <script src="{{ STATIC_URL }}js/tinymce/tinymce.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        tinyMCE.init({setup : function(ed) {
+                             ed.on("keyup", function(ed, l) {
+ if($(l) != '') {
+          $('#submitblog_post').prop("disabled", false);
+          $('#save_draft_blog_post').prop("disabled", false);
+          }
+        else {
+          $('#submitblog_post').prop("disabled", true);
+          $('#save_draft_blog_post').prop("disabled", true);
+        }
+                             });
+                      },
+                      skin:'light', 
+                      selector:"textarea.mceEditor", 
+                      language : 'en',
+                      menubar : false,
+                      toolbar: "undo redo | bold italic underline | fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | link unlink media image | code",
+                      plugins: "code link media image paste",
+                      paste_text_sticky: true,
+                      paste_text_sticky_default: true,
+                      resize: true,
+                      height: 250,
+                      elements : "txtName",
+                     });
+        setTimeout(function() { 
+         $(".mceNoEditor").removeAttr("style");
+        },15);
+                   });
+         
+    </script>
 
     <script>
       $('#createalbumlink').click(function() {
@@ -1896,6 +1975,10 @@
         });
         $('#newimagealbum3').each(function(){
           this.reset();
+        });
+        $('#newblog_post').each(function(){
+          this.reset();
+        });
         $('#add_more_images_0').show();
         $('#images_field_1').hide();
         $('#images_field_2').hide();
@@ -1959,9 +2042,98 @@
         $('#addtitle_al_3').show();
         $('#submitvideo').prop("disabled", true);
         $('#save_draft_video').prop("disabled", true);
+        $('#submitblog_post').prop("disabled", true);
+        $('#save_draft_blog_post').prop("disabled", true);
+      });
+    </script>
+
+    <script>
+      $('#tabbar a[href="#blog_post"]').click(function() {
+        $(".fileinput-preview").empty();
+        $('#add_more_images_0').show();
+        $('#images_field_1').hide();
+        $('#images_field_2').hide();
+        $('#images_field_3').hide();
+        $('#images_field_4').hide();
+        $('#images_field_5').hide();
+        $('#images_field_6').hide();
+        $('#images_field_7').hide();
+        $('#images_field_8').hide();
+        $('#images_field_9').hide();
+        $('#images_field_10').hide();
+        $('#images_field_11').hide();
+        $('#add_more_images_1').hide();
+        $('#add_more_images_2').hide();
+        $('#add_more_images_3').hide();
+        $('#add_more_images_4').hide();
+        $('#add_more_images_5').hide();
+        $('#add_more_images_6').hide();
+        $('#add_more_images_7').hide();
+        $('#add_more_images_8').hide();
+        $('#add_more_images_9').hide();
+        $('#add_more_images_10').hide();
+        $('#al2_add_more_images_0').show();
+        $('#al2_images_field_1').hide();
+        $('#al2_images_field_2').hide();
+        $('#al2_images_field_3').hide();
+        $('#al2_images_field_4').hide();
+        $('#al2_images_field_5').hide();
+        $('#al2_images_field_6').hide();
+        $('#al2_add_more_images_1').hide();
+        $('#al2_add_more_images_2').hide();
+        $('#al2_add_more_images_3').hide();
+        $('#al2_add_more_images_4').hide();
+        $('#al2_add_more_images_5').hide();
+        $('#al3_add_more_images_0').show();
+        $('#al3_images_field_1').hide();
+        $('#al3_images_field_2').hide();
+        $('#al3_images_field_3').hide();
+        $('#al3_add_more_images_1').hide();
+        $('#al3_add_more_images_2').hide();
+        $('#al3_add_more_images_3').hide();
+        $('#addtitle_video').show();
+        $('#addedtitle_video').hide();
+        $('#addcomment_video').show();
+        $('#addedcomment_video').hide();
+        $('#addtitle_img').show();
+        $('#addedtitle_image').hide();
+        $('#addedcomment_image').hide();
+        $('#addcomment_image').show();
+        $('#addcomment_al_1').show();
+        $(".addedcoment_al_1").hide();
+        $('#addcomment_al_2').show();
+        $(".addedcoment_al_2").hide();
+        $('#addcomment_al_3').show();
+        $(".addedcoment_al_3").hide();
+        $('#addedtitle_al_1').hide();
+        $('#addedtitle_al_2').hide();
+        $('#addedtitle_al_3').hide();
+        $('#addtitle_al_1').show();
+        $('#addtitle_al_2').show();
+        $('#addtitle_al_3').show();
+        $('#submitvideo').prop("disabled", true);
+        $('#save_draft_video').prop("disabled", true);
+        $('#submittext').prop("disabled", true);
+        $('#save_draft_text').prop("disabled", true);
+        $('#newimage').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum1').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum2').each(function(){
+          this.reset();
+        });
+        $('#newvideo').each(function(){
+          this.reset();
+        });
+        $('#newimagealbum3').each(function(){
+          this.reset();
         });
       });
     </script>
+
+
     <script>
       $('#tabbar a[href="#image"]').click(function() {
         $('#newvideo').each(function(){
@@ -1969,6 +2141,10 @@
         });
         $('#newtext').each(function(){
           this.reset();
+        });
+        $('#newblog_post').each(function(){
+          this.reset();
+        }); 
         $('#addtitle_post').show();
         $('#addedtitle_post').hide();
         $('#addtitle_video').show();
@@ -1977,9 +2153,10 @@
         $('#addedcomment_video').hide();
         $('#submittext').prop("disabled", true);
         $('#save_draft_text').prop("disabled", true);
+        $('#submitblog_post').prop("disabled", true);
+        $('#save_draft_blog_post').prop("disabled", true);
         $('#submitvideo').prop("disabled", true);
         $('#save_draft_video').prop("disabled", true);
-        });
       });
     </script>
     <script>
@@ -2000,6 +2177,9 @@
         $('#newtext').each(function(){
           this.reset();
         });
+        $('#newblog_post').each(function(){
+          this.reset();
+        });
         $('#add_more_images_0').show();
         $('#images_field_1').hide();
         $('#images_field_2').hide();
@@ -2061,6 +2241,8 @@
         $('#addedtitle_al_3').hide();
         $('#submittext').prop("disabled", true);
         $('#save_draft_text').prop("disabled", true);
+        $('#submitblog_post').prop("disabled", true);
+        $('#save_draft_blog_post').prop("disabled", true);
       });
     </script>
     <script>
@@ -2086,6 +2268,32 @@
         });
     });
     </script>
+
+    <script>
+      $('#liblog_post').click(function() {
+        $('#id_title').focus();
+        $('#imagetype').show();
+        $('#uploadimageform').hide();
+        $('#createalbumform').hide();
+        $('#modelalbum1').hide();
+        $('#modelalbum2').hide();
+        $('#modelalbum3').hide();
+        $('#addtitle_video').show();
+        $('#addedtitle_video').hide();
+        $('#submitimageform').prop("disabled", true);
+        $('#save_draft_image').prop("disabled", true);
+        $('#submitimagealbum1form').prop("disabled", true);
+        $('#submitimagealbum2form').prop("disabled", true);
+        $('#submitimagealbum3form').prop("disabled", true);
+        $('#save_draft_a1').prop("disabled", true);
+        $('#save_draft_a2').prop("disabled", true);
+        $('#save_draft_al3').prop("disabled", true);
+        $('#newimage').each(function(){
+          this.reset();
+        });
+    });
+    </script>
+
     <script>
       $('#livideo').click(function() {
         $('#imagetype').show();
@@ -2140,10 +2348,20 @@
     </script>
 
     <script>
-      $('#save_draft_text').click(function() {
-        $('#newtext select[name=layout_type]').val('s');
-        $('#newtext select[name=status]').val('D');
-        $('#newtext').submit();
+      $('#submitblog_post').click(function() {
+        $('#newblog_post select[name=layout_type]').val('s');
+        $('#newblog_post select[name=status]').val('P');
+        tinymce.get('id_content_0').save();
+        $('#newblog_post').submit();
+      });
+    </script>
+
+    <script>
+      $('#save_draft_blog_post').click(function() {
+        $('#newblog_post select[name=layout_type]').val('s');
+        $('#newblog_post select[name=status]').val('D');
+        tinymce.get('id_content_0').save();
+        $('#newblog_post').submit();
       });
     </script>
 
@@ -2198,6 +2416,7 @@
         $('#newimage select[name=layout_type]').val('s');
         $('#newvideo select[name=layout_type]').val('s');
         $('#newtext select[name=layout_type]').val('s');
+        $('#newblog_post select[name=layout_type]').val('s');
         $('#newimagealbum1 select[name=layout_type]').val('v');
         $('#newimagealbum2 select[name=layout_type]').val('h');
         $('#newimagealbum3 select[name=layout_type]').val('g');
@@ -2742,13 +2961,6 @@
 
 
     <script>
-      $(document).ready(function() {
-        setTimeout(function() {
-          $("litext").trigger('click');
-        },10);
-      });
-    </script>
-    <script>
       $(document).ready(function(){
         $('#id_content').keyup(function() {
         if($(this).val() != '') {
@@ -2762,6 +2974,23 @@
         });
       });
     </script>
+
+
+    <script>
+      $(document).ready(function(){
+        $('#id_content_0').change(function() {
+        if($(this).val() != '') {
+          $('#submitblog_post').prop("disabled", false);
+          $('#save_draft_blog_post').prop("disabled", false);
+          }
+        else {
+          $('#submitblog_post').prop("disabled", true);
+          $('#save_draft_blog_post').prop("disabled", true);
+        }
+        });
+      });
+    </script>
+
     <script>
       $(document).ready(function(){
         $('#id_youtube_url').keyup(function() {

@@ -118,7 +118,7 @@
                <div class="col-md-6 form_section" id="settings_password">
                  <b>{% trans "Public blog " %}</b><a id="info_password" class="pull-right info" title="{% trans "What is the difference between a public and a private blog" %}"data-toggle="modal" data-target="#info_password_modal">{% trans "More info" %}</a>
                  <div style="padding-top:5px;">{{ form.is_open }}
-                   <div class="under_text"><small><em>{% trans "Check if you want your blog to be private" %}</em></small></div>
+                   <div class="under_text"><small><em>{% trans "Check if you want your blog to be public" %}</em></small></div>
                  </div>
                </div>
             </div>
@@ -268,6 +268,15 @@
       $('#submitsettings').click(function() {
         $('#newsettings').submit();
       });
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        setTimeout(function() { 
+         $(".mceNoEditor").removeAttr("style");
+        },10);
+                   });
+         
     </script>
 
     <script>

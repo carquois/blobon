@@ -1,5 +1,6 @@
 {% extends "dashboard_base.html" %}
 {% load i18n %}
+{% load i18n thumbnail punn_tags humanize %}
 {% load url from future %}
     {% block additional-css %}
 <!--    <style>
@@ -14,6 +15,11 @@
     border-color:#311905;
    }
     </style>-->
+    <style>
+   .profile_field {
+    padding-top:2px;
+   }
+    </style>
     {% endblock %}
   {% block nav %}
      <div class="navbar navbar-default navbar-static-top" role="navigation">
@@ -57,6 +63,37 @@
           {% endfor %}
         {% endif %}
         {% block content %}
+
+        <div class="page-header" style="margin-top:-10px;">
+          <h1>{{ user.username }}<small>&nbsp;&nbsp;<a href="#" target="_blank" style="display:none;">{% trans "Edit profile" %}</a>&nbsp;&nbsp;<a href="/createblog/" target="_blank">{% trans "Create a new blog" %}</a></small></h1>
+        </div>
+    {% if user.userprofile.avatar %}
+    <div class="media" style="padding-bottom:10px;">
+      <a class="pull-left" href="#">
+      {% thumbnail user.userprofile.avatar "50x50" crop="center" as im %}
+        <img class="media-object img-rounded" src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" />
+      {% endthumbnail %}
+    {% else %}    
+       <img class="media-object img-rounded" src="http://i.imgur.com/mcowg4i.jpg" alt="{{ user.username }}">
+    {% endif %}
+     </a>
+          <span class="glyphicon glyphicon-question-sign pull-right" id="info_user" title="{% trans "Those are your user informations, only you and the adminstrators of Blobon.com can see this" %}"></span>
+      <div class="media-body">
+        <h4 class="media-heading">{{ user.first_name }} {{ user.last_name }}</h4>
+        <div class="profile_field" style="padding-bottom:10px;">
+          {{ user.userprofile.description }}
+        </div>
+    {% if user.userprofile.main_blog %}
+        <div class="profile_field">
+         <b>{% trans "Main blog: " %}</b>{{ user.userprofile.main_blog }}
+        </div>
+    {% endif %}
+        <div class="profile_field">
+         <b>{% trans "Email: " %}</b>          {{ user.email }}
+        </div>
+      </div>
+    </div>
+    <hr>
         {% for blog in blogs %}
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -64,14 +101,23 @@
             </div>
             <div class="panel-body">
               <p><small><em>{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}</em></small></p>
-              <a href="{% url 'blogs.views.administrateblog' blog.slug %}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-cog"></span> {% trans "Dashboard" %}</a>
-              <a href="http://{{ blog.slug }}.blobon.com" class="btn btn-xs btn-default" target="_blank"><span class="glyphicon glyphicon-globe"></span> {% trans "Visit blog" %}</a>
+              <a href="{% url 'blogs.views.administrateblog' blog.slug %}" class="btn btn-xs btn-primary" id="manage_blog" title="{% trans "The dashboard is the main tool to manage your blog" %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Dashboard" %}</a>
+              <a href="http://{{ blog.slug }}.blobon.com" class="btn btn-xs btn-default" title="View your blog in new tab" id="view_blog" target="_blank"><span class="glyphicon glyphicon-globe"></span> {% trans "Visit blog" %}</a>
             </div>
           </div>
         {% endfor %}
           <div class="add_blog" style="padding:15px;">
             <a href="/createblog/" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-plus"></span> {% trans "Create a new blog" %}</a>
-          </div>      
+          </div>     
+
+    <script type="text/javascript">
+      $(function () {
+        $('#info_user').tooltip({container: 'body'});
+        $('#manage_blog').tooltip({container: 'body'});
+        $('#view_blog').tooltip({container: 'body'});
+      });
+    </script>
+ 
         {% endblock %}
         </div>
       </div>
