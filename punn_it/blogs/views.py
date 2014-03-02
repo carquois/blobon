@@ -890,6 +890,8 @@ def send_email_now(request, id):
       if info_email.subscribers == 'A':
         for subscription in Subscription.objects.filter(blog=blog):
           recipient_list.append(subscription.email)
+          subscription.is_new = False
+          subscription.save()
         from django.core.mail import EmailMultiAlternatives
         msg = EmailMultiAlternatives(subject, text_content, from_email, bcc=recipient_list)
         msg.send()

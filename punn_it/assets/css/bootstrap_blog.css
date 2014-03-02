@@ -38,6 +38,10 @@ text-decoration: none;
   font-weight: 500;
   color: #cdddeb;
 }
+.fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {
+    width: 100% !important;
+}
+
 .blog-nav-item:hover,
 .blog-nav-item:focus {
   color: #fff;
