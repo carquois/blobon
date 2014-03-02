@@ -339,11 +339,6 @@
                                  
                                        
                                         <div class="iconeProfil IconeParametresProfil"></div><div class="lienProfil ombrageTexte"><a href="{% url 'accounts.views.edit_profile' %}">Paramètres</a> </div>
-                                        {% if request.user.username == "gab" %}
-                                        <div class="row" style="padding:25px;">
-                                          <div class="lienProfil ombrageTexte"><span class="glyphicon glyphicon-star-empty"></span><a href="{% url 'blogs.views.fastedit' blog.slug %}"> Ben oui</a> </div>
-                                        </div>
-                                        {% endif %} 
                                         <a href="{% url 'punns.views.create' %}"> <button id="btAjoutContenu" type="button" class="btn btn-danger btn-lg ombrageTexte centered">Ajoutez du contenu</button></a>
 
                                </div>
