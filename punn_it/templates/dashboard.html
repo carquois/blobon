@@ -67,9 +67,9 @@
         <div class="page-header" style="margin-top:-10px;">
           <h1>{{ user.username }}<small>&nbsp;&nbsp;<a href="#" target="_blank" style="display:none;">{% trans "Edit profile" %}</a>&nbsp;&nbsp;<a href="/createblog/" target="_blank">{% trans "Create a new blog" %}</a></small></h1>
         </div>
-    {% if user.userprofile.avatar %}
     <div class="media" style="padding-bottom:10px;">
       <a class="pull-left" href="#">
+    {% if user.userprofile.avatar %}
       {% thumbnail user.userprofile.avatar "50x50" crop="center" as im %}
         <img class="media-object img-rounded" src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" />
       {% endthumbnail %}
