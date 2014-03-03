@@ -406,7 +406,9 @@
     <div class="fields">{{ form.title.label_tag }} :{{ form.title }}</div>
     <div class="fields">{{ form.text.label_tag }} :{{ form.text }}</div>
     <div class="fields">{{ form.source.label_tag }} :{{ form.source }}</div>
+{% if categories %}
     <div class="fields">{{ form.category.label_tag }} :{{ form.category }}</div>  
+  {% endif %}
     <div class="row" style="display: none">{{ form.status }} </div>
     <div class="row savedpost_submit_cancel">
       <div class="col-md-6">
