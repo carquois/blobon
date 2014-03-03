@@ -415,6 +415,7 @@ class Comment(models.Model):
         ('sp', 'Spam'),
     )
     comment_status = models.CharField(default="pe", max_length=2, choices=COMMENTS_CHOICES)
+    occupation = models.CharField(verbose_name=_("Occupation"), max_length=50,blank=True, null=True)
     def __unicode__(self):
         return self.comment
 

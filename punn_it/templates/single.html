@@ -99,6 +99,10 @@ g
 .fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {
     width: 100% !important;
 }
+#gender{
+    display: none;
+}
+
 
     {% endblock %}
  
@@ -948,6 +952,7 @@ g
             <input type="checkbox" name="subscription" id="subscription">
           </div>
       </div>
+{{ comment_form.occupation }}
      <button type="submit" class="btn btn-sm btn-default">{% trans "Submit" %}</button>
     </form>
     <hr>

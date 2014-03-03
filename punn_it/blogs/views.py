@@ -991,34 +991,38 @@ def newcomment(request, id):
          comment.post = post
          comment.comment_status = "pe"
          comment.save()
-         from django.core.mail import EmailMultiAlternatives
-         from django.template.loader import get_template
-         from django.template import Context
-         plaintext = get_template('email.txt')
-         htmly     = get_template('email.html')
+         if comment.occupation:
+           comment.delete()
+           return HttpResponseRedirect(reverse('blogs.views.single', args=(post.base62id,)))
+         else:
+           from django.core.mail import EmailMultiAlternatives
+           from django.template.loader import get_template
+           from django.template import Context
+           plaintext = get_template('email.txt')
+           htmly     = get_template('email.html')
 
-         d = Context({ 'blog_title': blog_title, 'slug': slug , 'comment': comment, 'post': post, 'name': comment.name, 'email': comment.email, 'website': comment.website, })  
+           d = Context({ 'blog_title': blog_title, 'slug': slug , 'comment': comment, 'post': post, 'name': comment.name, 'email': comment.email, 'website': comment.website, })  
 
-         subject = 'You have a new comment'
-         from_email = 'info@blobon.com'
-         to = mailto
-         text_content = plaintext.render(d)
-         html_content = htmly.render(d)
-         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-         msg.attach_alternative(html_content, "text/html")
-         msg.send()
-         if request.POST.get('check', True):
-           subs_form = SubscriptionForm()
-           subscription = subs_form.save(commit=False)
-           subscription.blog = blog
-           subscription.email = comment.email
-#           subscription = Subscription.objects.create_subscription(blog=blog, email=comment.email)
-           subscription.save()
-         return HttpResponseRedirect(reverse('blogs.views.single', args=(post.base62id,)))
+           subject = 'You have a new comment'
+           from_email = 'info@blobon.com'
+           to = mailto
+           text_content = plaintext.render(d)
+           html_content = htmly.render(d)
+           msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+           msg.attach_alternative(html_content, "text/html")
+           msg.send()
+           if request.POST.get('check', True):
+             subs_form = SubscriptionForm()
+             subscription = subs_form.save(commit=False)
+             subscription.blog = blog
+             subscription.email = comment.email
+#             subscription = Subscription.objects.create_subscription(blog=blog, email=comment.email)
+             subscription.save()
+           return HttpResponseRedirect(reverse('blogs.views.single', args=(post.base62id,)))
        else:
          return render_to_response('errors.html',
-                                  {'form': form,'blog': blog,'post': post,},
-                                  context_instance=RequestContext(request))
+                                   {'form': form,'blog': blog,'post': post,},
+                                   context_instance=RequestContext(request))
 
 #     else:
 #       form = PasswordForm()
