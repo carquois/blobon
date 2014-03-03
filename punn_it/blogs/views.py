@@ -795,6 +795,14 @@ def deletecomment(request, id):
       return HttpResponseRedirect(reverse('blogs.views.administratecomments', args=(blog.slug,)))
 
 @login_required
+def deletecomment_from_single(request, id):
+      comment = get_object_or_404(Comment, id=id)
+      post = comment.post
+      comment.delete()
+      return HttpResponseRedirect(reverse('blogs.views.single', args=(post.base62id,)))
+
+
+@login_required
 def deleteblog(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       if request.user == blog.creator:
