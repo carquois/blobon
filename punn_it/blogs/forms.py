@@ -61,10 +61,12 @@ class CommentForm(ModelForm):
     website = URLField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Your website url here'),
                                                     'type': 'text',
                                                     'class': "form-control"}))
-
+    occupation = CharField(required=False, widget=forms.HiddenInput(attrs={'placeholder': _('Your occupation here'),
+                                                    'type': 'text',
+                                                    'class': "form-control"}))
     class Meta:
         model = Comment
-        fields = ('name', 'comment', 'email', 'website', )
+        fields = ('name', 'comment', 'email', 'website', 'occupation' )
 
 class SettingsForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your blog title'),
