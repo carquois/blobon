@@ -494,11 +494,13 @@ def administratepages(request, slug):
 @login_required
 def administratecomments(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      comments = paginate(request,
-                       Comment.objects.filter(blog=blog).filter(comment_status='pe').order_by('-id'),
+      comments = Comment.objects.filter(blog=blog).filter(comment_status='pe').order_by('-id')
+      comments_pu = paginate(request,
+                          Comment.objects.filter(blog=blog).filter(comment_status='pu').order_by('-id'),
                        15)
+      pucomments = Comment.objects.filter(blog=blog).filter(comment_status='pu').order_by('-id')
       return render_to_response('administratecomments.html',
-                                {'blog': blog, 'comments': comments, },
+                                {'blog': blog, 'comments': comments, 'pucomments': pucomments,'comments_pu' : comments_pu, },
                                 context_instance=RequestContext(request))
 
 @login_required
