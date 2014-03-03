@@ -653,8 +653,9 @@ def administrateemails(request, slug):
 def editpost(request, id):
       post = get_object_or_404(Post, id=id)
       blog = post.blog
+      categories = Category.objects.filter(blog=blog).order_by('-id')
       if request.method == 'POST':
-        form = PostForm(request.POST or None,request.FILES or None, instance=post)
+        form = PostForm(request.POST or None,request.FILES or None, instance=post,blog=blog)
         if form.is_valid():
             form.save()
             if 'save_quit' in request.POST:
@@ -662,12 +663,12 @@ def editpost(request, id):
             else:
               form = PostForm(instance=post,)
               return render_to_response('editpost.html',
-                                       {'blog': blog, 'form': form,'post': post },
+                                       {'blog': blog, 'form': form,'post': post,'categories': categories, },
                                        context_instance=RequestContext(request))
       else:
-        form = PostForm(instance=post,)
+        form = PostForm(instance=post, blog=blog)
       return render_to_response('editpost.html',
-                                {'blog': blog, 'form': form,'post': post },
+                                {'blog': blog, 'form': form,'post': post, 'categories': categories, },
                                 context_instance=RequestContext(request))
 
 @login_required
