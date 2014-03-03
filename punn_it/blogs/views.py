@@ -227,7 +227,7 @@ def single(request, shorturl):
               prev_post = prev_post_query[0]
           if blog.has_template == False:
             if request.user.is_authenticated():
-              comment_form = CommentForm(initial={'email':u.email,})
+              comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
               return render_to_response('single.html',
                                        {'post': post, 'latest_post_list': latest_post_list,
                                        'next_post': next_post, 'prev_post': prev_post,
@@ -242,7 +242,7 @@ def single(request, shorturl):
                                          context_instance=RequestContext(request))
           else:
             if request.user.is_authenticated():
-              comment_form = CommentForm(initial={'email':u.email,})
+              comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
               return render_to_response('single.html',
                                        {'post': post, 'latest_post_list': latest_post_list,
                                        'next_post': next_post, 'prev_post': prev_post,
@@ -272,7 +272,7 @@ def single(request, shorturl):
 #      url = request.build_absolute_uri()
       if blog.has_template == False:
         if request.user.is_authenticated():
-          comment_form = CommentForm(initial={'email':request.user.email,})
+          comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
         else:
            comment_form = CommentForm()
         return render_to_response('single.html',
@@ -1007,6 +1007,13 @@ def newcomment(request, id):
          msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
          msg.attach_alternative(html_content, "text/html")
          msg.send()
+         if request.POST.get('check', True):
+           subs_form = SubscriptionForm()
+           subscription = subs_form.save(commit=False)
+           subscription.blog = blog
+           subscription.email = comment.email
+#           subscription = Subscription.objects.create_subscription(blog=blog, email=comment.email)
+           subscription.save()
          return HttpResponseRedirect(reverse('blogs.views.single', args=(post.base62id,)))
        else:
          return render_to_response('errors.html',

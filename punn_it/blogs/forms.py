@@ -4,6 +4,7 @@ from django import forms
 from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, ImageField, ModelMultipleChoiceField, EmailField
 from django.utils.translation import ugettext as _
 from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
+from django.db import models
 
 from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment
 
@@ -40,6 +41,10 @@ class SubmitForm(ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'translated_title', 'content', 'translated_content', 'message',)
+
+
+
+
 
 class CommentForm(ModelForm):
     name = CharField(required=True, widget=forms.TextInput(attrs={'placeholder': _('Your name'),
