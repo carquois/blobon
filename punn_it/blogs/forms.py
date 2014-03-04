@@ -125,7 +125,7 @@ class ContactForm(forms.Form):
     cc_myself = forms.BooleanField(required=False)
 
 class EmailForm(ModelForm):
-    name = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your email name here'),
+    name = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your email purpose here'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
                                                     'autofocus':'on'}))
