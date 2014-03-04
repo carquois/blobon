@@ -226,7 +226,7 @@ def get_file_path_24(instance, filename):
 class Blog(models.Model):
     creator = models.ForeignKey(User, null=True)
     moderator_email = models.EmailField(verbose_name=_("Moderator email"),blank=True, null=True)
-    is_open = models.BooleanField(default=False)
+    is_open = models.BooleanField(default=True)
     slug = models.SlugField(verbose_name=_("URL"), max_length=30, unique=True)
     title = models.CharField(verbose_name=_("Title"), max_length=140)
     password = models.CharField(verbose_name=_("Password"), max_length=140, blank=True)
