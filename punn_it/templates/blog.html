@@ -1,0 +1,244 @@
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+{% load markup %}
+{% load blog_tags %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% trans "Create a free blog." %}{% endblock %}">
+    <meta name="author" content="">
+    <link href="{{ STATIC_URL }}css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Copse' rel='stylesheet' type='text/css'>
+    <title>{% block title %}{{ blog.title }}{% endblock %}</title>
+    {% block open-graphs %}
+    <!-- Le open graphs tags -->
+    <meta property="og:title" content="{{ site.name }}" />
+    <meta property="og:url" content="http://{{ site.domain }}" />
+    <meta property="og:image" content="http://{{ site.domain }}{{ STATIC_URL }}img/avatar.png" />
+    <!-- Le twitter cards -->
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:url" content="http://{{ site.domain }}">
+    <meta name="twitter:title" content="{{ site.name }}">
+    <meta name="twitter:image" content="http://{{ site.domain }}{{ STATIC_URL }}img/avatar.png">
+    <!-- Le canonical url -->
+    <link rel="canonical" href="{{ site.name }}" />
+    {% endblock %}
+    <link rel="shortcut icon" href="{{ STATIC_URL }}/ico/favicon.png">
+    {% block additional-js %}
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    {% endblock %}
+    {% block blog_css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap_blog_base.css">
+<style>
+a {
+color: #667C91;
+text-decoration: none;
+}
+.blog-masthead {
+  background-color: #667C91;
+  box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+}
+</style>
+    {% endblock %}
+</head>
+
+        <!-- Le analytics -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10970225-13']);
+      _gaq.push(['_setCustomVar',
+            1, 
+            'author_id',
+            '{{ user.id }}', 
+            3
+        ]);
+      _gaq.push(['_setCustomVar',
+            2, 
+            'author_username',
+            '{{ user.username }}', 
+            3
+        ]);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    {% if request.user.is_authenticated %}
+        _gaq.push(['_setCustomVar', 3, 'uid', '{{request.user.pk}}', 1]);
+        _gaq.push(['_setCustomVar', 4, 'gender', '{{request.user.get_profile.gender}}', 1]);
+        {% if request.user.get_profile.birthdate %}
+        _gaq.push(['_setCustomVar', 5, 'age', '{{request.user.get_profile.birthdate|age}}', 1]);
+        {% endif %}
+    {% endif %}
+      
+    </script>
+    <script type='text/javascript'>
+      var googletag = googletag || {};
+      googletag.cmd = googletag.cmd || [];
+      (function() {
+        var gads = document.createElement('script');
+        gads.async = true;
+        gads.type = 'text/javascript';
+        var useSSL = 'https:' == document.location.protocol;
+        gads.src = (useSSL ? 'https:' : 'http:') + 
+        '//www.googletagservices.com/tag/js/gpt.js';
+        var node = document.getElementsByTagName('script')[0];
+        node.parentNode.insertBefore(gads, node);
+      })();
+    </script>
+    <script type='text/javascript'>
+      googletag.cmd.push(function() {
+        googletag.defineSlot('/17303639/300x250TopRight', [[300, 250], [300, 600]], 'div-gpt-ad-1360772351679-0').addService(googletag.pubads());
+        googletag.defineSlot('/17303639/MobileLeaderboardBelowTheContent', [320, 50], 'div-gpt-ad-1360772351679-1').addService(googletag.pubads());
+        googletag.defineSlot('/17303639/Leaderboard', [728, 90], 'div-gpt-ad-1363051510706-0').addService(googletag.pubads());
+        googletag.defineSlot('/17303639/SkyScrapper', [160, 600], 'div-gpt-ad-1363052072029-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+      });
+    </script>
+
+    <div id="fb-root"></div>
+
+          <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/fr_CA/all.js#xfbml=1&appId=378058345602851";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+</head>
+  <body>
+
+
+
+    {% block navbar %}
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item active" href="http://{{blog.slug}}.blobon.com">Home</a>
+          <a class="blog-nav-item pull-right" href="http://blobon.com">Powered by blobon.com</a>
+        </nav>
+      </div>
+    </div>
+    {% endblock %}
+
+
+    {% block blog_header %}
+    <div class="topimg" style="text-align:center;">
+    {% block top_image %}
+    {% if blog.main_image %}
+      <img src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ blog.title }}" style="max-width:100%;">
+    {% endif %}
+    {% endblock %}
+      <div class="container" style="text-align:left;">
+        <div class="blog-header">
+          <h1 class="blog-title">{{ blog.title }}</h1><p class="lead blog-description">{{ blog.short_description }}</p>
+        </div>
+      </div>
+      <div class="container"><hr></div>
+    </div>
+    {% endblock %}
+
+
+
+    <div class="container">
+
+
+
+      {% block blog_left %}
+       <div class="col-sm-8 blog-main">
+         {% for post in posts %}
+         <a href="{{ post.get_absolute_url }}">
+         <div class="blog-post">
+           <h2 class="blog-post-title">{{ post.title }}</h2>
+           <p class="blog-post-meta">{{ post.pub_date }} <a href="#">{{ post.author }}</a></p>
+           {% if post.youtube_id %}
+           <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+           {% else %}
+           {% if post.pic %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
+           {% endif %}
+           {% endif %}
+           {% load markup %}
+           {{ post.content|markdown|safe }}
+         </div>
+         <hr>
+         {% endfor %}
+         {% block pager %}
+         <ul class="pager">
+           <div class="row">
+             <div class="col-md-4">
+             {% if posts.has_previous %}
+             <li><a class="pull-left" href="?page={{ posts.previous_page_number }}">Previous</a></li>
+             {% endif %}
+             </div>
+             <div class="col-md-4">
+               <span class="current">Page {{ posts.number }} of {{ posts.paginator.num_pages }}</span>
+             </div>
+             <div class="col-md-4">
+               {% if posts.has_next %}
+               <li><a class="pull-right" href="?page={{ posts.next_page_number }}">Next</a></li>
+               {% endif %}
+             </div>
+           </div>
+         </ul>
+         {% endblock %}
+       </div>
+      {% endblock %}
+      {% block blog_middle %}
+      {% endblock %}
+
+      {% block blog_right %}
+      <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        <div class="sidebar-module sidebar-module-inset"><h4>About</h4>{{ blog.description }}</div>
+        <div class="sidebar-module" style="text-align:left;">
+          <form method="post" id="subscribe_form" class="form-horizontal" role="form" action="{% url 'blogs.views.subscribe_to_infoletter' blog.slug %}">{% csrf_token %}
+            <div class="form-group">
+            <h3>{% trans "Subscribe to " %}{{ blog.title }}{% trans " info-letters" %}</h3>
+            </div>
+            <div class="form-group">
+            {{ form.email.label_tag }}:
+            {{ form.email }}
+            </div>
+            <div class="form-group">
+            <button id="subscribe_submit" type="submit" disabled="disabled"class="btn btn-primary btn-sm pull-left">{% trans "Subscribe" %}</button>
+            </div>
+          </form>
+        </div>
+        <div style="clear: both; margin-bottom: 20px;"></div>
+        <script>
+          $(document).ready(function(){
+            $('#id_email').keyup(function() {
+            if($(this).val() != '') {
+              $('#subscribe_submit').prop("disabled", false);
+              }
+            else {
+              $('#subscribe_submit').prop("disabled", true);
+              }
+            });
+          });
+        </script>
+      </div>
+
+         {% endblock %}
+
+    </div>
+
+      {% block other_posts %}
+      {% endblock %}
+
+      {% block blog_footer %}
+          <div class="blobonfooter" style="marging-top:20px;">
+          {% include 'blobon_footer.html' %}
+          </div>     
+      {% endblock %}
+
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+  </body>
+</html>

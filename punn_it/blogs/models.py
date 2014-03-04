@@ -223,18 +223,28 @@ def get_file_path_24(instance, filename):
     filename = "%s_%s.%s" % (prefix, variable, ext)
     return os.path.join('', filename)
 
+def get_file_path_main(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.id
+    variable = ('main')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
 class Blog(models.Model):
     creator = models.ForeignKey(User, null=True)
     moderator_email = models.EmailField(verbose_name=_("Moderator email"),blank=True, null=True)
     is_open = models.BooleanField(default=True)
     slug = models.SlugField(verbose_name=_("URL"), max_length=30, unique=True)
     title = models.CharField(verbose_name=_("Title"), max_length=140)
+    main_image = ImageField(verbose_name=_("Main image"), upload_to=get_file_path_main, null=True, blank=True)
+    main_color = models.TextField(verbose_name=_("Main color"),max_length=10, blank=True)
     password = models.CharField(verbose_name=_("Password"), max_length=140, blank=True)
     custom_domain = models.CharField(verbose_name=_("Custom domain"), max_length=300, blank=True)
     description = models.CharField(verbose_name=_("Description"), max_length=500, blank=True)
     translation = models.ForeignKey('self',  null=True, blank=True)
     is_online = models.BooleanField(default=True)
     has_template = models.BooleanField(default=False)
+    is_bootblog = models.BooleanField(default=True)
     short_description = models.CharField(verbose_name=_("Short description"), max_length=140, blank=True)
     block_css = models.TextField(verbose_name=_("Css"),max_length=10000, blank=True)
     block_navbar = models.TextField(verbose_name=_("Navbar"), max_length=10000, blank=True)

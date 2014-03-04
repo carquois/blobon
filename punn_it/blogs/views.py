@@ -67,14 +67,19 @@ def index(request):
                                  15)
                 form = SubscriptionForm()
                 categories = Category.objects.filter(blog=blog)
-                if blog.has_template == False:
-                  return render_to_response('index.html',
-                                            {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
-                                            context_instance=RequestContext(request))
-                else:
+                if blog.has_template == True:
                   return render_to_response('blog_template.html',
                                             {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                             context_instance=RequestContext(request))
+                elif blog.is_bootblog == True:
+                  return render_to_response('blog.html',
+                                            {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                            context_instance=RequestContext(request))
+                else:
+                  return render_to_response('index.html',
+                                            {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                            context_instance=RequestContext(request))
+
             else:
               form = PasswordForm()
               return render_to_response('password.html',
@@ -86,14 +91,19 @@ def index(request):
                              15)
             form = SubscriptionForm()
             categories = Category.objects.filter(blog=blog)
-            if blog.has_template == False:
-              return render_to_response('index.html',
-                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
-                                        context_instance=RequestContext(request))
-            else:
+            if blog.has_template == True:
               return render_to_response('blog_template.html',
                                         {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                         context_instance=RequestContext(request))
+            elif blog.is_bootblog == True:
+              return render_to_response('blog.html',
+                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                        context_instance=RequestContext(request))
+            else:
+              return render_to_response('index.html',
+                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                        context_instance=RequestContext(request))
+
       elif Blog.objects.filter(slug=request.subdomain).exists():
           blog = Blog.objects.get(slug=request.subdomain)
           if blog.is_online == False:
@@ -114,13 +124,17 @@ def index(request):
                                15)
                 form = SubscriptionForm()
                 categories = Category.objects.filter(blog=blog)
-                if blog.has_template == False:
-                  return render_to_response('index.html',
-                                            {'posts': posts, 'blog': blog, 'form': form, 'categories': categories,},
-                                            context_instance=RequestContext(request))
-                else:
+                if blog.has_template == True:
                   return render_to_response('blog_template.html',
                                             {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                            context_instance=RequestContext(request))
+                elif blog.is_bootblog == True:
+                  return render_to_response('blog.html',
+                                            {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                            context_instance=RequestContext(request)) 
+                else:
+                  return render_to_response('index.html',
+                                            {'posts': posts, 'blog': blog, 'form': form, 'categories': categories,},
                                             context_instance=RequestContext(request))
             else:
               form = PasswordForm()
@@ -135,14 +149,19 @@ def index(request):
                            15)
             form = SubscriptionForm()
             categories = Category.objects.filter(blog=blog)
-            if blog.has_template == False:
-              return render_to_response('index.html',
-                                        {'posts': posts, 'blog': blog, 'form': form, 'categories': categories,},
-                                        context_instance=RequestContext(request))
-            else:
+            if blog.has_template == True:
               return render_to_response('blog_template.html',
                                         {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                         context_instance=RequestContext(request))
+            elif blog.is_bootblog == True:
+              return render_to_response('blog.html',
+                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                        context_instance=RequestContext(request))
+            else:
+              return render_to_response('index.html',
+                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                        context_instance=RequestContext(request))
+
       else:
         user = ""
         posts = paginate(request,
@@ -234,22 +253,37 @@ def single(request, shorturl):
             if blog.has_template == False:
               if request.user.is_authenticated():
                 comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
-                return render_to_response('single.html',
-                                         {'post': post, 'latest_post_list': latest_post_list,
-                                         'next_post': next_post, 'prev_post': prev_post,
-                                         'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
-                                         context_instance=RequestContext(request))
-              else:
-                comment_form = CommentForm()
-                return render_to_response('single.html',
-                                          {'post': post, 'latest_post_list': latest_post_list,
+                if blog.is_bootblog == False:
+                  return render_to_response('single.html',
+                                           {'post': post, 'latest_post_list': latest_post_list,
                                            'next_post': next_post, 'prev_post': prev_post,
                                            'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                            context_instance=RequestContext(request))
+                else:
+                  return render_to_response('blog_single.html',
+                                           {'post': post, 'latest_post_list': latest_post_list,
+                                           'next_post': next_post, 'prev_post': prev_post,
+                                           'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
+                                           context_instance=RequestContext(request))
+              else:
+                comment_form = CommentForm()
+                if blog.is_bootblog == False:
+                  return render_to_response('single.html',
+                                            {'post': post, 'latest_post_list': latest_post_list,
+                                             'next_post': next_post, 'prev_post': prev_post,
+                                             'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
+                                             context_instance=RequestContext(request))
+                else:
+                  return render_to_response('blog_single.html',
+                                           {'post': post, 'latest_post_list': latest_post_list,
+                                           'next_post': next_post, 'prev_post': prev_post,
+                                           'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
+                                           context_instance=RequestContext(request))
+
             else:
               if request.user.is_authenticated():
                 comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
-                return render_to_response('single.html',
+                return render_to_response('single_template.html',
                                          {'post': post, 'latest_post_list': latest_post_list,
                                          'next_post': next_post, 'prev_post': prev_post,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
@@ -281,13 +315,23 @@ def single(request, shorturl):
             comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
           else:
              comment_form = CommentForm()
-          return render_to_response('single.html',
-                                    {'post': post, 'latest_post_list': latest_post_list,
-                                    'next_post': next_post, 'prev_post': prev_post, 
-                                    'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
-                                    context_instance=RequestContext(request))
+          if blog.is_bootblog == False:
+            return render_to_response('single.html',
+                                      {'post': post, 'latest_post_list': latest_post_list,
+                                      'next_post': next_post, 'prev_post': prev_post, 
+                                      'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
+                                      context_instance=RequestContext(request))
+          else:
+            return render_to_response('blog_single.html',
+                                      {'post': post, 'latest_post_list': latest_post_list,
+                                      'next_post': next_post, 'prev_post': prev_post,
+                                      'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
+                                      context_instance=RequestContext(request))                           
         else:
-          comment_form = CommentForm()
+          if request.user.is_authenticated():
+            comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
+          else:
+             comment_form = CommentForm()
           return render_to_response('single_template.html',
                                     {'post': post, 'latest_post_list': latest_post_list,
                                      'next_post': next_post, 'prev_post': prev_post,
@@ -321,22 +365,36 @@ def single(request, shorturl):
             if blog.has_template == False:
               if request.user.is_authenticated():
                 comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
-                return render_to_response('single.html',
-                                         {'post': post, 'latest_post_list': latest_post_list,
-                                         'next_post': next_post, 'prev_post': prev_post,
-                                         'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
-                                         context_instance=RequestContext(request))
+                if blog.is_bootblog == False:
+                  return render_to_response('single.html',
+                                           {'post': post, 'latest_post_list': latest_post_list,
+                                           'next_post': next_post, 'prev_post': prev_post,
+                                           'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
+                                           context_instance=RequestContext(request))
+                else:
+                  return render_to_response('blog_single.html',
+                                           {'post': post, 'latest_post_list': latest_post_list,
+                                           'next_post': next_post, 'prev_post': prev_post,
+                                           'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
+                                           context_instance=RequestContext(request))
               else:
                 comment_form = CommentForm()
-                return render_to_response('single.html',
-                                          {'post': post, 'latest_post_list': latest_post_list,
+                if blog.is_bootblog == False:
+                  return render_to_response('single.html',
+                                            {'post': post, 'latest_post_list': latest_post_list,
+                                             'next_post': next_post, 'prev_post': prev_post,
+                                             'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
+                                             context_instance=RequestContext(request))
+                else:
+                  return render_to_response('blog_single.html',
+                                           {'post': post, 'latest_post_list': latest_post_list,
                                            'next_post': next_post, 'prev_post': prev_post,
                                            'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                            context_instance=RequestContext(request))
             else:
               if request.user.is_authenticated():
                 comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
-                return render_to_response('single.html',
+                return render_to_response('single_template.html',
                                          {'post': post, 'latest_post_list': latest_post_list,
                                          'next_post': next_post, 'prev_post': prev_post,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
@@ -368,13 +426,23 @@ def single(request, shorturl):
             comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
           else:
              comment_form = CommentForm()
-          return render_to_response('single.html',
-                                    {'post': post, 'latest_post_list': latest_post_list,
-                                    'next_post': next_post, 'prev_post': prev_post,
-                                    'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
-                                    context_instance=RequestContext(request))
+          if blog.is_bootblog == False:
+            return render_to_response('single.html',
+                                      {'post': post, 'latest_post_list': latest_post_list,
+                                      'next_post': next_post, 'prev_post': prev_post,
+                                      'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
+                                      context_instance=RequestContext(request))
+          else:
+            return render_to_response('blog_single.html',
+                                      {'post': post, 'latest_post_list': latest_post_list,
+                                      'next_post': next_post, 'prev_post': prev_post,
+                                      'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
+                                      context_instance=RequestContext(request))
         else:
-          comment_form = CommentForm()
+          if request.user.is_authenticated():
+            comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
+          else:
+             comment_form = CommentForm()
           return render_to_response('single_template.html',
                                     {'post': post, 'latest_post_list': latest_post_list,
                                      'next_post': next_post, 'prev_post': prev_post,
