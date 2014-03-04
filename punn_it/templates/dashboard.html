@@ -36,9 +36,42 @@
          <div class="navbar-collapse collapse">
            <ul class="nav navbar-nav">
            </ul>
+
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown btn-group">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              {% if request.user.userprofile.avatar %}
+                {% thumbnail request.user.userprofile.avatar "27x27" crop="center" as im %}
+                <img class="img-rounded" src="{{ im.url }}" alt="{{ request.user.first_name }} {{ request.user.last_name }}" id="avatar-menu" /> 
+                {% endthumbnail %}{{ request.user.first_name }} {{ request.user.last_name }}&nbsp;<b class="caret"></b>
+              {% else %}
+                <span class="glyphicon glyphicon-user"></span> <b class="caret"></b>
+              {% endif %}
+            </a>
+            <ul class="dropdown-menu" style="min-width:190px;">
+              <li><a href="/createblog/">{% trans "Create a new blog" %}</a></li>
+              <li style="display:none;"><a href="{% url 'punns.views.profile_page' request.user.username %}">{% trans "Your profile" %}</a></li>
+              <li style="display:none;"><a href="{% url 'earnings.views.index' %}">{% trans "Vos revenus" %}</a></li>
+              <li class="divider" style="display:none;"></li>
+              <li style="display:none;"><a href="{% url 'accounts.views.edit_profile' %}">{% trans "Edit profile" %}</a></li>
+              <li class="divider"></li>
+              <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Logout" %}</a></li>
+            </ul>
+            </li>
+          </ul>
+<!--/.
+
+
            <ul class="nav navbar-nav navbar-right">
              <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Logout" %}</a></li>
            </ul>
+
+ -->
+
+
+
+
          </div><!--/.nav-collapse -->
        </div>
      </div>
@@ -64,36 +97,6 @@
         {% endif %}
         {% block content %}
 
-        <div class="page-header" style="margin-top:-10px;">
-          <h1>{{ user.username }}<small>&nbsp;&nbsp;<a href="#" target="_blank" style="display:none;">{% trans "Edit profile" %}</a>&nbsp;&nbsp;<a href="/createblog/" target="_blank">{% trans "Create a new blog" %}</a></small></h1>
-        </div>
-    <div class="media" style="padding-bottom:10px;">
-      <a class="pull-left" href="#">
-    {% if user.userprofile.avatar %}
-      {% thumbnail user.userprofile.avatar "50x50" crop="center" as im %}
-        <img class="media-object img-rounded" src="{{ im.url }}" alt="{{ user.first_name }} {{ user.last_name }}" />
-      {% endthumbnail %}
-    {% else %}    
-       <img class="media-object img-rounded" src="http://i.imgur.com/mcowg4i.jpg" alt="{{ user.username }}">
-    {% endif %}
-     </a>
-          <span class="glyphicon glyphicon-question-sign pull-right" id="info_user" title="{% trans "Those are your user informations, only you and the adminstrators of Blobon.com can see this" %}"></span>
-      <div class="media-body">
-        <h4 class="media-heading">{{ user.first_name }} {{ user.last_name }}</h4>
-        <div class="profile_field" style="padding-bottom:10px;">
-          {{ user.userprofile.description }}
-        </div>
-    {% if user.userprofile.main_blog %}
-        <div class="profile_field">
-         <b>{% trans "Main blog: " %}</b>{{ user.userprofile.main_blog }}
-        </div>
-    {% endif %}
-        <div class="profile_field">
-         <b>{% trans "Email: " %}</b>          {{ user.email }}
-        </div>
-      </div>
-    </div>
-    <hr>
         {% for blog in blogs %}
           <div class="panel panel-default">
             <div class="panel-heading">
