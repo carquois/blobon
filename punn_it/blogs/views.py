@@ -463,7 +463,7 @@ def single(request, shorturl):
 @login_required
 def newpost(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      form = PostForm(request.POST or None, request.FILES or None)
+      form = PostForm(request.POST or None, request.FILES or None, blog=blog)
       if request.method == 'POST':
         if form.is_valid():
           post = form.save(commit=False)
@@ -568,7 +568,7 @@ def administrateblog(request, slug):
                                 5)
       categories = Category.objects.filter(blog=blog).order_by('-id')
       tags = Tag.objects.filter(blog=blog).order_by('-id')
-      post_form = PostForm()
+      post_form = PostForm(blog=blog)
       return render_to_response('administrateblog.html',
                                 {'blog': blog,'info_emails':info_emails, 'posts_to_translate': posts_to_translate, 'last_posts_to_translate': last_posts_to_translate,'subscribers': subscribers, 'last_subscriber': last_subscriber, 'posts': posts, 'pages': pages , 'comments': comments , 'categories': categories, 'tags': tags, 'post_form': post_form},
                                 context_instance=RequestContext(request))
@@ -655,7 +655,7 @@ def editpost(request, id):
       blog = post.blog
       categories = Category.objects.filter(blog=blog).order_by('-id')
       if request.method == 'POST':
-        form = PostForm(request.POST or None,request.FILES or None, instance=post,blog=blog)
+        form = PostForm(request.POST or None,request.FILES or None, instance=post)
         if form.is_valid():
             form.save()
             if 'save_quit' in request.POST:

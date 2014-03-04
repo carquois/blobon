@@ -167,6 +167,9 @@ border-radius: 4px;
       #newvideo{
         padding:0px 0px 10px 0px;
       }
+      .fields{
+        padding-top: 15px;
+      }
       .boutonplace-image{
         padding:5px 0px 0px 0px;
       }
@@ -177,12 +180,12 @@ border-radius: 4px;
       }
       .addcomment{
         font-size:x-small;
-        padding:5px 15px 5px 0px;
+        padding:10px 0px 5px 15px;
         cursor: pointer;
       }
       .addtitle{
         font-size:x-small;
-        padding:5px 0px 5px 15px;
+        padding:5px 0px 10px 15px;
         cursor: pointer;
       }
       #addedtitle_post{
@@ -265,6 +268,9 @@ border-radius: 4px;
                         </div>
 <div id="summernote"></div>
                         {{ post_form.content }}
+                        {% if categories %}
+                         <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>  
+                        {% endif %}
                         <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                         <div class="row" style="display: none">{{ post_form.status }} </div>
                        </form>
@@ -286,6 +292,9 @@ border-radius: 4px;
                         <div class="form-group" style="padding-top:10px;">
                         {{ post_form.content_0 }}
                         </div>
+                        {% if categories %}
+                         <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>
+                        {% endif %}
                         <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                         <div class="row" style="display: none">{{ post_form.status }} </div>
                        </form>
@@ -1527,19 +1536,24 @@ border-radius: 4px;
                           <div class="col-xs-3 addtitle" id="addtitle_video">
                             <a id="addtitletovideo" title="{% trans "Add a Title to Your Video" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Title" %}</a>
                           </div>
-                          <div class="col-xs-3 col-xs-offset-3 addcomment pull-right" id="addcomment_video">
-                            <a id="addcommenttovideo" title="{% trans "Add a Comment to Your Video" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add content" %}</a>
-                          </div>
                         </div>
                         <div class="row" id="addedtitle_video" style="display: none">
                           {{ post_form.title.label_tag }}<span id="addtitle_video_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                           {{ post_form.title }}
                         </div>
                           {{ post_form.youtube_url }}
+                        <div class="row">
+                          <div class="col-xs-3 addcomment" id="addcomment_video">
+                            <a id="addcommenttovideo" title="{% trans "Add a Comment to Your Video" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add content" %}</a>
+                          </div>
+                        </div>
                         <div class="row" id="addedcomment_video" style="display: none">
                           {{ post_form.content_video }}
                           <span id="addcomment_video_cancel" title="Cancel Comment" class="glyphicon glyphicon-remove-circle pull-right"></span>
                         </div>
+                        {% if categories %}
+                         <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>  
+                        {% endif %}
                         <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                         <div class="row" style="display: none">{{ post_form.status }} </div>
                       </form>
