@@ -1,0 +1,82 @@
+{% extends "blog.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+{% load markup %}
+{% load blog_tags %}
+{% load i18n thumbnail punn_tags humanize %}
+
+      {% block blog_left %}
+      <div class="col-sm-8 blog-main">
+        <div class="blog-post">
+          <h2 class="blog-post-title">{{ post.title }}</h2>
+          <p class="blog-post-meta">{{ post.pub_date }} <a href="#">{{ post.author }}</a></p>
+          {% if post.youtube_id %}
+          <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+          {% else %}
+          {% if post.pic %}
+          <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
+          {% endif %}
+          {% endif %}
+          {% load markup %}
+          {{ post.content|markdown|safe }}
+          <div class="media" id="heading">
+            <a class="pull-left" href="#">
+            {% if post.author.userprofile.avatar %}
+              {% thumbnail post.author.userprofile.avatar "64x64" crop="center" as im %}<img src="{{ im.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }}" />{% endthumbnail %}
+            {% endif %}
+            </a>
+            <div class="btn-group pull-right">
+              <a href="{{ prev_post.get_absolute_url }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+              </a>
+              <a href="{{ next_post.get_absolute_url }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+              </a>
+            </div>
+            <div class="media-body fontBlobon">
+              <h5 class="media-heading fontBlobon" style="margin-right: 10px;">{{ post.author.first_name }} {{ post.author.last_name }} <small>@{{ post.author.username }}</small> {% if post.author.userprofile.fan_page_access_token %}<div class="fb-like" data-href="{{ post.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false"></div>{% endif %}</h5>
+              <p class="text-muted">{% trans "Publié" %} {{ post.pub_date|naturaltime }}{% if post.source %} via <a href="{{ post.source }}" target="_blank">Source</a>{% endif %}</p>
+            </div>
+          </div>
+          <div id="infos" class="panel">
+            <div class="row">
+              <div class="pull-right">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <div class="fb-like" data-href="http://checkdonc.ca{{ post.get_absolute_url }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fb-comments" data-href="http://checkdonc.ca{{ post.get_absolute_url }}" data-numposts="5" data-colorscheme="light"></div>
+            <div class="row">
+              {% for post in latest_post_list %}
+                <div class="col-sm-6 col-md-4">
+                  <div class="thumbnail">
+                    <a href="{{ post.get_absolute_url }}">
+                    {% if post.pic %}
+                      {% thumbnail post.pic "220x200" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ post.title }}" />
+                      {% endthumbnail %}
+                    {% else %}
+                      {% thumbnail post.author.userprofile.avatar "220x200" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ post.title }}" />
+                      {% endthumbnail %}
+                    {% endif %}
+                    </a>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endblock %}
+      {% if post.content %}
+      <div>
+        <p> {{ post.content|markdown|safe }}</p>
+      </div>
+      <hr>
+      {% endif %}
+
+      {% block top_image %}
+      {% endblock %}
