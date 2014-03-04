@@ -45,33 +45,8 @@
 
 
 
-         <div class="col-md-12" id="info">
-          <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Your blog settings" %}
-            </div>
-            <div class="panel-body">
-              <b>{% trans "Name : " %}</b>{{ blog.title }}
-            </div>
-            <ul class="list-group">
-              {% if blog.short_description %}
-              <li class="list-group-item"><b>{% trans "Short description: " %}</b>{{ blog.short_description }}</li>
-              {% endif %}
-              {% if blog.description %}
-              <li class="list-group-item"><b>{% trans "Description : " %}</b>{{ blog.description }}</li>
-              {% endif %}
-              <li class="list-group-item"><b>{% trans "Creator : " %}</b>{{ blog.creator }}</li>
-              <li class="list-group-item"><b>{% trans "Url : " %}</b>{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}</li>
-              <li class="list-group-item"><b>{% trans "Private : " %}</b>{% if not blog.is_open %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</li>
-              {% if not blog.is_open %}
-              <li class="list-group-item"><b>{% trans "Password : " %}</b>{{ blog.password }}</li>
-              {% endif %}
-            </ul>
-          </div>
-    <a href="#" class="btn btn-xs btn-primary" id="edit_blog_button"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit blog" %}</a>
-    <a href="#" class="btn btn-xs btn-danger" id="delete_blog_button" data-toggle="modal" data-target="#{{ blog.slug }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete blog" %}</a>
-         </div>
          <div class="col-md-12">
-           <form enctype="multipart/form-data" style="display:none;" role="form" action="{% url 'blogs.views.administratesettings' blog.slug %}" method="post" id=newsettings>{% csrf_token %}
+           <form enctype="multipart/form-data" role="form" action="{% url 'blogs.views.administratesettings' blog.slug %}" method="post" id=newsettings>{% csrf_token %}
           <div class="panel panel-primary" id="setting_form">
             <div class="panel-heading">{% trans "Edit your settings :" %}</div>
             <div class="panel-body">         
