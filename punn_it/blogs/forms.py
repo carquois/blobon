@@ -162,7 +162,7 @@ class PostForm(ModelForm):
     title = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Write your title here'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
-                                                    'autofocus':'on'}))
+                                                    }))
     translated_title = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Write your translated title here'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
@@ -170,27 +170,27 @@ class PostForm(ModelForm):
     source = URLField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Your source'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
-                                                    'autofocus':'on'}))
+                                                    }))
     artist = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Write artist name here'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
-                                                    'autofocus':'on'}))
+                                                    }))
     content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write a new post'),
                                                     'type': 'text',
                                                     'rows': '5',
                                                     'class': "form-control setting_form input-block-level mceNoEditor",
-                                                    'autofocus':'on'}))
+                                                    }))
     text = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write your text here'),
                                                     'type': 'text',
                                                     'rows': '5',
                                                     'class': "form-control setting_form input-block-level mceNoEditor",
-                                                    'autofocus':'on'}))
+                                                    }))
     category = ModelMultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, queryset=Category.objects.all())
     content_0 = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this image'),
                                                     'type': 'text',
                                                     'rows': '10',
                                                     'class': "form-control setting_form input-block-level mceEditor",
-                                                    'autofocus':'on'}))
+                                                    }))
     content_01 = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this image'),
                                                     'type': 'text',
                                                     'rows': '5',
