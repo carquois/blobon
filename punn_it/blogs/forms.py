@@ -50,7 +50,7 @@ class CommentForm(ModelForm):
     name = CharField(required=True, widget=forms.TextInput(attrs={'placeholder': _('Your name'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
-                                                    'autofocus':'on'}))
+                                                    }))
     comment = CharField(required=True, widget=forms.Textarea(attrs={'placeholder': _('Leave your comment here'),
                                                     'type': 'text',
                                                     'rows': '3',
