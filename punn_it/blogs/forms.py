@@ -91,9 +91,13 @@ class SettingsForm(ModelForm):
                                                     'rows': '2',
                                                     'class': "form-control setting_form input-block-level mceNoEditor"}))
 
+    main_color = CharField(required=True, widget=forms.TextInput(attrs={'readonly':'readonly', 'placeholder': _('Your blog main color'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+    main_image = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_30(this);"}))
     class Meta:
         model = Blog 
-        fields = ('title', 'slug', 'password', 'custom_domain','description','is_online','is_open','short_description', )
+        fields = ('title', 'slug', 'main_color', 'main_image', 'password', 'custom_domain','description','is_online','is_open','short_description', )
 
 class PasswordForm(ModelForm):
     password = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Enter the blog password'),

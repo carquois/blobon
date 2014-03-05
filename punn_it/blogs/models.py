@@ -237,7 +237,7 @@ class Blog(models.Model):
     slug = models.SlugField(verbose_name=_("URL"), max_length=30, unique=True)
     title = models.CharField(verbose_name=_("Title"), max_length=140)
     main_image = ImageField(verbose_name=_("Main image"), upload_to=get_file_path_main, null=True, blank=True)
-    main_color = models.TextField(verbose_name=_("Main color"),max_length=10, blank=True)
+    main_color = models.TextField(verbose_name=_("Main color"),max_length=10, default="#ff7f00", blank=False)
     password = models.CharField(verbose_name=_("Password"), max_length=140, blank=True)
     custom_domain = models.CharField(verbose_name=_("Custom domain"), max_length=300, blank=True)
     description = models.CharField(verbose_name=_("Description"), max_length=500, blank=True)
