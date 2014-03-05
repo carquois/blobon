@@ -1165,11 +1165,12 @@ def passwordsingle(request, id):
 def newcomment(request, id):
      post = get_object_or_404(Post, id=id)
      blog = post.blog
+     secondmoderator = blog.creator
      form = CommentForm(request.POST or None,)
      if blog.moderator_email:
        mailto = blog.moderator_email
      else:
-       mailto = 'vince@blobon.com'
+       mailto = secondmoderator.email
      blog_title = blog.title
      slug = blog.slug
      if request.method == 'POST':
