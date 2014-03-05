@@ -700,10 +700,11 @@ def administratetags(request, slug):
 def administratesettings(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       if request.method == 'POST':
-        form = SettingsForm(request.POST or None, instance=blog,)
+        form = SettingsForm(request.POST or None, request.FILES or None, instance=blog,)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('blogs.views.administratesettings', args=(blog.slug,)))
+            messages.add_message(request, messages.INFO, _(u"Your settings have been saved"))
+            return HttpResponseRedirect(reverse('blogs.views.administrateblog', args=(blog.slug,)))
       else:
         form = SettingsForm(instance=blog,)
       return render_to_response('administratesettings.html',

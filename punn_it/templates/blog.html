@@ -35,11 +35,11 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap_blog_base.css">
 <style>
 a {
-color: #667C91;
+color: {% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};
 text-decoration: none;
 }
 .blog-masthead {
-  background-color: #667C91;
+  background-color: {% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};
   box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
 }
 </style>
