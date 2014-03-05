@@ -138,13 +138,12 @@
              <hr>
              <div class="row">
                <div class="col-md-6 form_section" id="settings_password">
-                 <b>{% trans "Public blog " %}</b><a id="info_password" class="pull-right info" title="{% trans "What is the difference between a public and a private blog" %}"data-toggle="modal" data-target="#info_password_modal">{% trans "More info" %}</a>
-                 <div style="padding-top:5px;">{{ form.is_open }}
+                 {{ form.password.label_tag }}<a id="info_password" class="pull-right info" title="{% trans "If you enter a password in the field below, your blog will be hidden except to the people who you give the password to." %}"data-toggle="modal" data-target="#info_password_modal">{% trans "More info" %}</a>
+                 <div style="padding-top:5px;display:none;">{{ form.is_open }}
                    <div class="under_text"><small><em>{% trans "Check if you want your blog to be public" %}</em></small></div>
                  </div>
-               {{ form.password.label_tag }}
                {{ form.password }}
-                 <div class="under_text"><small><em>{% trans "Write your new password here" %}</em></small></div>
+                 <div class="under_text"><small><em>{% trans "Write a password here if you want your blog to be private" %}</em></small></div>
                </div>
              </div>
            </div>
@@ -203,7 +202,7 @@
           <h4 class="modal-title">{% trans "Password" %}</h4>
         </div>
         <div class="modal-body">
-          <p>{% trans "If you don't want your blog to be seen by all... " %}</p>
+          <p>{% trans "If you enter a password, your blog will be hidden except to the people who you give the password to." %}</p>
         </div>
         <div class="modal-footer">
           <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
@@ -254,6 +253,40 @@
         </div>
         <div class="modal-body">
           <p>{% trans "This section is to wrtite a small description of your blog..." %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="info_main_color_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Main color" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "This color is for the navbar and the link of your blog" %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="info_main_image_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Main image" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "This is the image that si going to be at the top of your blog main page" %}</p>
         </div>
         <div class="modal-footer">
           <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
@@ -343,6 +376,8 @@ $("#id_main_image").change(function(){
         $('#info_custom_domain').tooltip({container: 'body'});
         $('#info_description').tooltip({container: 'body'});
         $('#info_short_description').tooltip({container: 'body'});
+        $('#info_main_image').tooltip({container: 'body'});
+        $('#info_main_color').tooltip({container: 'body'});
       });
     </script>
 {% endblock %}

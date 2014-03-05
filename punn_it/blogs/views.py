@@ -600,10 +600,10 @@ def createblog(request):
           blog = form.save(commit=False)
           blog.creator = request.user
           if request.POST['propassword']:
-            blog.status = "Pr"
+            blog.is_open = False
             blog.password = request.POST['propassword']
           else:
-            blog.status = "Pu"
+            blog.is_open = True
           blog.save()
           messages.add_message(request, messages.INFO, _(u"Congratulation, you just created a blog"))
           return HttpResponseRedirect(reverse('blogs.views.administrateblog', args=(blog.slug,)))
@@ -702,7 +702,12 @@ def administratesettings(request, slug):
       if request.method == 'POST':
         form = SettingsForm(request.POST or None, request.FILES or None, instance=blog,)
         if form.is_valid():
-            form.save()
+            blog = form.save(commit=False)
+            if blog.password:
+              blog.is_open = False
+            else:
+              blog.is_open = True
+            blog.save() 
             messages.add_message(request, messages.INFO, _(u"Your settings have been saved"))
             return HttpResponseRedirect(reverse('blogs.views.administrateblog', args=(blog.slug,)))
       else:
