@@ -109,7 +109,7 @@ class PasswordForm(ModelForm):
 class SubscriptionForm(ModelForm):
     email = EmailField(widget=forms.TextInput(attrs={'placeholder': _('Enter your email here'),
                                                     'type': 'text',
-                                                    'class': "form-control input-block-level"
+                                                    'class': "form-control input-block-level submail"
                                                     }))
     class Meta:
         model = Subscription

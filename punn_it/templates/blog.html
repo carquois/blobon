@@ -1,4 +1,5 @@
 {% load thumbnail i18n compress calculate_age %}
+{% load i18n thumbnail punn_tags humanize %}
 {% load url from future %}
 {% load markup %}
 {% load blog_tags %}
@@ -13,23 +14,25 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
     <link href='http://fonts.googleapis.com/css?family=Copse' rel='stylesheet' type='text/css'>
-    <title>{% block title %}{{ blog.title }}{% endblock %}</title>
     {% block open-graphs %}
+    <title>{% block title %}{{ blog.title }}{% endblock %}</title>
+
     <!-- Le open graphs tags -->
-    <meta property="og:title" content="{{ site.name }}" />
-    <meta property="og:url" content="http://{{ site.domain }}" />
-    <meta property="og:image" content="http://{{ site.domain }}{{ STATIC_URL }}img/avatar.png" />
+    <meta property="og:title" content="{{ blog.title }}" />
+    <meta property="og:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" />
+    <meta property="og:image" content="{{ MEDIA_URL }}{{ blog.main_image }}" />
     <!-- Le twitter cards -->
     <meta name="twitter:card" content="photo">
-    <meta name="twitter:url" content="http://{{ site.domain }}">
-    <meta name="twitter:title" content="{{ site.name }}">
-    <meta name="twitter:image" content="http://{{ site.domain }}{{ STATIC_URL }}img/avatar.png">
+    <meta name="twitter:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}">
+    <meta name="twitter:title" content="{{ blog.title }}">
+    <meta name="twitter:image" content="{{ MEDIA_URL }}{{ blog.main_image }}">
     <!-- Le canonical url -->
-    <link rel="canonical" href="{{ site.name }}" />
+    <link rel="canonical" href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" />
     {% endblock %}
     <link rel="shortcut icon" href="{{ STATIC_URL }}/ico/favicon.png">
     {% block additional-js %}
     <script src="{{ STATIC_URL }}js/jquery.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.validate.js"></script>
     {% endblock %}
     {% block blog_css %}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap_blog_base.css">
@@ -41,6 +44,23 @@ text-decoration: none;
 .blog-masthead {
   background-color: {% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};
   box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+}
+img{
+padding-top:10px;
+}
+.fb-like{
+padding-bottom:5px;
+}
+
+.fb_wrapper{
+}
+#fb-root {
+    display: none;
+}
+/* To fill the container and nothing else */
+
+.fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {
+    width: 100% !important;
 }
 </style>
     {% endblock %}
@@ -102,20 +122,18 @@ text-decoration: none;
       });
     </script>
 
-    <div id="fb-root"></div>
-
-          <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/fr_CA/all.js#xfbml=1&appId=378058345602851";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
 
 </head>
   <body>
 
-
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
     {% block navbar %}
     <div class="blog-masthead">
@@ -146,14 +164,13 @@ text-decoration: none;
     {% endblock %}
 
 
-
     <div class="container">
 
 
 
       {% block blog_left %}
        <div class="col-sm-8 blog-main">
-         {% for post in posts %}
+        {% for post in posts %}
          <a href="{{ post.get_absolute_url }}">
          <div class="blog-post">
            <h2 class="blog-post-title">{{ post.title }}</h2>
@@ -161,15 +178,203 @@ text-decoration: none;
            {% if post.youtube_id %}
            <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
            {% else %}
+
            {% if post.pic %}
-           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
+           {% thumbnail post.pic "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
            {% endif %}
+
+           {% if post.pic_0 %}
+           {% thumbnail post.pic_0 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
            {% endif %}
-           {% load markup %}
-           {{ post.content|markdown|safe }}
+
+           {% if post.pic_1 %}
+           {% thumbnail post.pic_1 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_2 %}
+           {% thumbnail post.pic_2 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_3 %}
+           {% thumbnail post.pic_3 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_4 %}
+           {% thumbnail post.pic_4 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_5 %}
+           {% thumbnail post.pic_5 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_6 %}
+           {% thumbnail post.pic_6 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_7 %}
+           {% thumbnail post.pic_7 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_8 %}
+           {% thumbnail post.pic_8 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_9 %}
+           {% thumbnail post.pic_9 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_10 %}
+           {% thumbnail post.pic_10 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+
+           {% if post.pic_11 %}
+           {% thumbnail post.pic_11 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_12 %}
+           {% thumbnail post.pic_12 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_13 %}
+           {% thumbnail post.pic_13 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_14 %}
+           {% thumbnail post.pic_14 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_15 %}
+           {% thumbnail post.pic_15 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_16 %}
+           {% thumbnail post.pic_16 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_17 %}
+           {% thumbnail post.pic_17 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_18 %}
+           {% thumbnail post.pic_18 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_19 %}
+           {% thumbnail post.pic_19 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_20 %}
+           {% thumbnail post.pic_20 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_21 %}
+           {% thumbnail post.pic_21 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_22 %}
+           {% thumbnail post.pic_22 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_23 %}
+           {% thumbnail post.pic_23 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_24 %}
+           {% thumbnail post.pic_24 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+
+
+
+           {% endif %}
+{% if post.content %}{% load markup %}{{ post.content|markdown|safe }}{% endif %}
+{% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe }}{% endif %}
+{% if post.text %}{% load markup %}{{ post.text|markdown|safe }}{% endif %}
          </div>
          <hr>
-         {% endfor %}
+         <div class="media" id="heading">
+           <a class="pull-left" href="#">
+           {% if post.author.userprofile.avatar %}
+           {% thumbnail post.author.userprofile.avatar "64x64" crop="center" as im %}
+           <img src="{{ im.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }}" />{% endthumbnail %}
+           {% endif %}
+           </a>
+           <div class="media-body fontBlobon">
+             <h5 class="media-heading fontBlobon" style="margin-right: 10px;">{{ post.author.first_name }} {{ post.author.last_name }} <small>@{{ post.author.username }}</small>
+             {% if post.author.userprofile.fan_page_access_token %}
+               <div class="fb-like" data-href="{{ post.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false">
+               </div>
+             {% endif %}
+             </h5>
+             <p class="text-muted">{% trans "Published" %} {{ post.pub_date|naturaltime }}{% if post.source %} via <a href="{{ post.source }}" target="_blank">Source</a>{% endif %}</p>
+           </div>
+         </div>
+         <div id="infos" class="panel">
+           <div class="row">
+             <div class="pull-right">
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-url="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" data-text="{{ post.title }}">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div class="fb-like" data-href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" data-text="{{ post.title }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+
+             </div>
+           </div>
+         </div>
+        {% endfor %}
          {% block pager %}
          <ul class="pager">
            <div class="row">
@@ -202,7 +407,7 @@ text-decoration: none;
             <div class="form-group">
             <h3>{% trans "Subscribe to " %}{{ blog.title }}{% trans " info-letters" %}</h3>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="subs_mail">
             {{ form.email.label_tag }}:
             {{ form.email }}
             </div>
@@ -232,13 +437,13 @@ text-decoration: none;
 
       {% block other_posts %}
       {% endblock %}
-
+        <div class="container" style="text-align:center;">
       {% block blog_footer %}
           <div class="blobonfooter" style="marging-top:20px;">
           {% include 'blobon_footer.html' %}
           </div>     
       {% endblock %}
-
+        </div>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
   </body>
 </html>
