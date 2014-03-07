@@ -245,6 +245,7 @@ class Blog(models.Model):
     is_online = models.BooleanField(default=True)
     has_template = models.BooleanField(default=False)
     is_bootblog = models.BooleanField(default=True)
+    has_artists = models.BooleanField(default=False)
     short_description = models.CharField(verbose_name=_("Short description"), max_length=140, blank=True)
     block_css = models.TextField(verbose_name=_("Css"),max_length=10000, blank=True)
     block_navbar = models.TextField(verbose_name=_("Navbar"), max_length=10000, blank=True)
