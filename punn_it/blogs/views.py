@@ -723,8 +723,9 @@ def administrateemails(request, slug):
       info_emails = Info_email.objects.filter(blog=blog).order_by('-id')
       subscriptions = Subscription.objects.filter(blog=blog).order_by('-email')
       form = EmailForm()
+      subs_form = SubscriptionForm()
       return render_to_response('administrateemails.html',
-                                {'blog': blog, 'info_emails': info_emails, 'form': form,'subscriptions': subscriptions,},
+                                {'subs_form': subs_form, 'blog': blog, 'info_emails': info_emails, 'form': form,'subscriptions': subscriptions,},
                                 context_instance=RequestContext(request))
 
 @login_required
@@ -1054,7 +1055,11 @@ def subscribe_to_infoletter(request, slug):
           subscription = form.save(commit=False)
           subscription.blog = blog
           subscription.save()
-          return render_to_response('thanks.html', {'blog': blog,}, context_instance=RequestContext(request))
+          if 'subs_admin' in request.POST:
+            messages.add_message(request, messages.INFO, _(u"A new subscriber has been added to your blog"))
+            return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
+          else:
+            return render_to_response('thanks.html', {'blog': blog,}, context_instance=RequestContext(request))
       return render_to_response('subscription.html', {'form': form, 'blog': blog,}, context_instance=RequestContext(request))
 
 @login_required
