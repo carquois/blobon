@@ -216,10 +216,10 @@ def single(request, shorturl):
     request.subdomain = None
     host = request.META.get('HTTP_HOST', '')
     host_s = host.replace('www.', '').split('.')
-    if len(host_s) > 2:
-      request.subdomain = host_s[0]    
+    subd = host_s[0]    
     post = get_object_or_404(Post, base62id=shorturl)
     blog = post.blog
+    slug = blog.slug
     comments = Comment.objects.filter(post=post).filter(comment_status='pu').order_by('-id')
     if host == blog.custom_domain:
 #    if post.blog.custom_domain:
@@ -323,7 +323,7 @@ def single(request, shorturl):
                                       context_instance=RequestContext(request))
           else:
             return render_to_response('blog_single.html',
-                                      {'post': post, 'latest_post_list': latest_post_list,
+                                      {'subd': subd, 'slug': slug, 'post': post, 'latest_post_list': latest_post_list,
                                       'next_post': next_post, 'prev_post': prev_post,
                                       'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                       context_instance=RequestContext(request))                           
@@ -337,7 +337,7 @@ def single(request, shorturl):
                                      'next_post': next_post, 'prev_post': prev_post,
                                      'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                      context_instance=RequestContext(request))
-    elif blog.slug == host:
+    elif subd == blog.slug:
       latest_post_list = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:6]
       next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]
       prev_post = ""
@@ -387,7 +387,7 @@ def single(request, shorturl):
                                              context_instance=RequestContext(request))
                 else:
                   return render_to_response('blog_single.html',
-                                           {'post': post, 'latest_post_list': latest_post_list,
+                                           {'subd': subd, 'slug': slug,'post': post, 'latest_post_list': latest_post_list,
                                            'next_post': next_post, 'prev_post': prev_post,
                                            'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                            context_instance=RequestContext(request))
@@ -425,7 +425,7 @@ def single(request, shorturl):
           if request.user.is_authenticated():
             comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
           else:
-             comment_form = CommentForm()
+            comment_form = CommentForm()
           if blog.is_bootblog == False:
             return render_to_response('single.html',
                                       {'post': post, 'latest_post_list': latest_post_list,
@@ -434,7 +434,7 @@ def single(request, shorturl):
                                       context_instance=RequestContext(request))
           else:
             return render_to_response('blog_single.html',
-                                      {'post': post, 'latest_post_list': latest_post_list,
+                                      {'subd': subd, 'slug': slug, 'post': post, 'latest_post_list': latest_post_list,
                                       'next_post': next_post, 'prev_post': prev_post,
                                       'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                       context_instance=RequestContext(request))
@@ -442,7 +442,7 @@ def single(request, shorturl):
           if request.user.is_authenticated():
             comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
           else:
-             comment_form = CommentForm()
+            comment_form = CommentForm()
           return render_to_response('single_template.html',
                                     {'post': post, 'latest_post_list': latest_post_list,
                                      'next_post': next_post, 'prev_post': prev_post,
@@ -452,7 +452,7 @@ def single(request, shorturl):
       if blog.custom_domain:
         return HttpResponseRedirect("http://" + blog.custom_domain + "/p/" + post.base62id) 
       else:
-        return HttpResponseRedirect("http://" + blog.slug + "/p/" + post.base62id)
+        return HttpResponseRedirect("http://" + blog.slug + ".blobon.com/p/" + post.base62id)
 
 
 

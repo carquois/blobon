@@ -4,79 +4,455 @@
 {% load markup %}
 {% load blog_tags %}
 {% load i18n thumbnail punn_tags humanize %}
+    {% block open-graphs %}
+    <title>{% block title %}{{ post.title }}{% endblock %}</title>
+
+    <!-- Le open graphs tags -->
+    <meta property="og:title" content="{{ post.title }}" />
+    <meta property="og:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" />
+{% if post.pic %}
+                  {% thumbnail post.pic "400x300" crop="center" as im %}
+    <meta property="og:image" content="{{ im.url }}" />
+                  {% endthumbnail %}
+                  {% endif %} 
+   <!-- Le twitter cards -->
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}">
+    <meta name="twitter:title" content="{{ post.title }}">
+    <meta name="twitter:image" content="{{ MEDIA_URL }}{{ post.pic }}">
+    <!-- Le canonical url -->
+    <link rel="canonical" href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" />
+    {% endblock %}
+      {% block post_in_posts %}
+      {% endblock %}
+      {% block post_in_posts_enfor %}
+      {% endblock %}
+
+    {% block additional-css %}
+ <style>
+.has-success {
+border-color: #3c763d;
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+.has-error {
+border-color: #a94442;
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+
+ </style>
+    {% endblock %}
 
       {% block blog_left %}
-      <div class="col-sm-8 blog-main">
-        <div class="blog-post">
-          <h2 class="blog-post-title">{{ post.title }}</h2>
-          <p class="blog-post-meta">{{ post.pub_date }} <a href="#">{{ post.author }}</a></p>
-          {% if post.youtube_id %}
-          <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
-          {% else %}
-          {% if post.pic %}
-          <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
-          {% endif %}
-          {% endif %}
-          {% load markup %}
-          {{ post.content|markdown|safe }}
-          <div class="media" id="heading">
-            <a class="pull-left" href="#">
-            {% if post.author.userprofile.avatar %}
-              {% thumbnail post.author.userprofile.avatar "64x64" crop="center" as im %}<img src="{{ im.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }}" />{% endthumbnail %}
-            {% endif %}
-            </a>
-            <div class="btn-group pull-right">
-              <a href="{{ prev_post.get_absolute_url }}" class="btn btn-default">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-              </a>
-              <a href="{{ next_post.get_absolute_url }}" class="btn btn-default">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-              </a>
-            </div>
-            <div class="media-body fontBlobon">
-              <h5 class="media-heading fontBlobon" style="margin-right: 10px;">{{ post.author.first_name }} {{ post.author.last_name }} <small>@{{ post.author.username }}</small> {% if post.author.userprofile.fan_page_access_token %}<div class="fb-like" data-href="{{ post.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false"></div>{% endif %}</h5>
-              <p class="text-muted">{% trans "Publié" %} {{ post.pub_date|naturaltime }}{% if post.source %} via <a href="{{ post.source }}" target="_blank">Source</a>{% endif %}</p>
-            </div>
-          </div>
-          <div id="infos" class="panel">
-            <div class="row">
-              <div class="pull-right">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr">Tweet</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                <div class="fb-like" data-href="http://checkdonc.ca{{ post.get_absolute_url }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="fb-comments" data-href="http://checkdonc.ca{{ post.get_absolute_url }}" data-numposts="5" data-colorscheme="light"></div>
-            <div class="row">
-              {% for post in latest_post_list %}
-                <div class="col-sm-6 col-md-4">
-                  <div class="thumbnail">
-                    <a href="{{ post.get_absolute_url }}">
-                    {% if post.pic %}
-                      {% thumbnail post.pic "220x200" crop="center" as im %}
-                      <img src="{{ im.url }}" alt="{{ post.title }}" />
-                      {% endthumbnail %}
-                    {% else %}
-                      {% thumbnail post.author.userprofile.avatar "220x200" crop="center" as im %}
-                      <img src="{{ im.url }}" alt="{{ post.title }}" />
-                      {% endthumbnail %}
-                    {% endif %}
-                    </a>
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        </div>
-      {% endblock %}
-      {% if post.content %}
-      <div>
-        <p> {{ post.content|markdown|safe }}</p>
-      </div>
-      <hr>
+       <div class="col-sm-8 blog-main">
+         <a href="{{ post.get_absolute_url }}">
+         <div class="blog-post">
+           <h2 class="blog-post-title">{{ post.title }}</h2>
+           <p class="blog-post-meta">{{ post.pub_date }} <a href="#">{{ post.author }}</a></p>
+           {% if post.youtube_id %}
+           <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+           {% else %}
+
+           {% if post.pic %}
+           {% thumbnail post.pic "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_0 %}
+           {% thumbnail post.pic_0 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_1 %}
+           {% thumbnail post.pic_1 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_2 %}
+           {% thumbnail post.pic_2 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_3 %}
+           {% thumbnail post.pic_3 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_4 %}
+           {% thumbnail post.pic_4 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_5 %}
+           {% thumbnail post.pic_5 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_6 %}
+           {% thumbnail post.pic_6 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_7 %}
+           {% thumbnail post.pic_7 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_8 %}
+           {% thumbnail post.pic_8 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_9 %}
+           {% thumbnail post.pic_9 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_10 %}
+           {% thumbnail post.pic_10 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+
+           {% if post.pic_11 %}
+           {% thumbnail post.pic_11 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_12 %}
+           {% thumbnail post.pic_12 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_13 %}
+           {% thumbnail post.pic_13 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_14 %}
+           {% thumbnail post.pic_14 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_15 %}
+           {% thumbnail post.pic_15 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_16 %}
+           {% thumbnail post.pic_16 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+
+           {% if post.pic_17 %}
+           {% thumbnail post.pic_17 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_18 %}
+           {% thumbnail post.pic_18 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_19 %}
+           {% thumbnail post.pic_19 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_20 %}
+           {% thumbnail post.pic_20 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_21 %}
+           {% thumbnail post.pic_21 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_22 %}
+           {% thumbnail post.pic_22 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_23 %}
+           {% thumbnail post.pic_23 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+           {% if post.pic_24 %}
+           {% thumbnail post.pic_24 "2000" as im %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           {% endthumbnail %}
+           {% endif %}
+
+
+
+
+           {% endif %}
+
+{% if post.content %}{% load markup %}{{ post.content|markdown|safe }}{% endif %}
+{% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe }}{% endif %}
+{% if post.text %}{% load markup %}{{ post.text|markdown|safe }}{% endif %}
+
+
+         </div>
+         <hr>
+         <div class="media" id="heading">
+           <a class="pull-left" href="#">
+           {% if post.author.userprofile.avatar %}
+           {% thumbnail post.author.userprofile.avatar "64x64" crop="center" as im %}
+           <img src="{{ im.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }}" />{% endthumbnail %}
+           {% endif %}
+           </a>
+           <div class="btn-group pull-right">
+             <a href="{{ prev_post.get_absolute_url }}" class="btn btn-default">
+               <span class="glyphicon glyphicon-chevron-left"></span>
+             </a>
+             <a href="{{ next_post.get_absolute_url }}" class="btn btn-default">
+               <span class="glyphicon glyphicon-chevron-right"></span>
+             </a>
+           </div>
+           <div class="media-body fontBlobon">
+             <h5 class="media-heading fontBlobon" style="margin-right: 10px;">{{ post.author.first_name }} {{ post.author.last_name }} <small>@{{ post.author.username }}</small>
+             {% if post.author.userprofile.fan_page_access_token %}
+               <div class="fb-like" data-href="{{ post.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false">
+               </div>
+             {% endif %}
+             </h5>
+             <p class="text-muted">{% trans "Published" %} {{ post.pub_date|naturaltime }}{% if post.source %} via <a href="{{ post.source }}" target="_blank">Source</a>{% endif %}</p>
+           </div>
+         </div>
+         <div id="infos" class="panel">
+           <div class="row">
+             <div class="pull-right">
+
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-url="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" data-text="{{ post.title }}">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+
+<div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+
+
+             </div>
+           </div>
+         </div>
+
+{% if comments %}
+<div class="row comment">
+  <div class="col-sm-12">
+    <h3>{% trans "Comments:" %}</h3>
+    <hr>
+  </div>
+</div>
+  {% for comment in comments %}
+  <div class="media">
+    <a class="pull-left" href="#">
+    {% if comment.author.userprofile.avatar %}
+      {% thumbnail comment.author.userprofile.avatar "50x50" crop="center" as im %}
+        <img class="media-object img-circle" src="{{ im.url }}" alt="{{ comment.author.first_name }} {{ comment.author.last_name }}" />
+      {% endthumbnail %}
+    {% else %}    
+       <img class="media-object img-circle" src="http://i.imgur.com/mcowg4i.jpg" alt="{{ comment.name }}">
+    {% endif %}
+    </a>
+      {% if request.user.is_staff or request.user == comment.author %}
+    <a href="#" id="deletecomment" title="{% trans "Delete this comment" %}" data-toggle="modal" data-target="#{{ comment.id }}"><button type="button" class="close">&times;</button>
+    </a>
       {% endif %}
 
+
+
+
+    <div class="media-body">
+      <h4 class="media-heading">{{ comment.name }}</h4>
+        {{ comment.comment }}
+    </div>
+  </div>
+  <hr>
+
+  <div class="modal fade" id="{{ comment.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Delete Comment" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Are you Sure You Want to Delete This Comment?" %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
+          <a href="{% url 'blogs.views.deletecomment_from_single' comment.id %}" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+{% endif %}
+
+
+
+<div class="row comment_form">
+  <div class="col-sm-12">
+    <h3>{% trans "Leave a comment" %}</h3>
+    <hr>
+  </div>
+  <div class="col-sm-12">
+    <form class="form-horizontal" id="new_comment" enctype="multipart/form-data" role="form" method="post" action="{% url 'blogs.views.newcomment' post.id %}">{% csrf_token %}
+      <div class="form-group">
+          <div class="col-sm-3 comment_form_input" style="margin-right:-20px;">
+          {{ comment_form.name.label_tag }}
+          </div>
+          <div class="col-sm-9">
+          {{ comment_form.name }}
+
+          </div>
+      </div>
+      <div class="form-group">
+          <div class="col-sm-3 comment_form_input" style="margin-right:-20px;">
+          {{ comment_form.email.label_tag }}
+          </div>
+          <div class="col-sm-9">
+          {{ comment_form.email }}
+          </div>
+      </div>
+      <div class="form-group">
+          <div class="col-sm-3 comment_form_input" style="margin-right:-20px;">
+          {{ comment_form.comment.label_tag }}
+          </div>
+          <div class="col-sm-9">
+          {{ comment_form.comment }}
+          </div>
+      </div>
+      <div class="form-group">
+          <div class="col-sm-3 comment_form_input" style="margin-right:-20px;">
+          {{ comment_form.website.label_tag }}
+          </div>
+          <div class="col-sm-9">
+          {{ comment_form.website }}
+          </div>
+      </div>
+      <div class="form-group">
+          <div class="col-sm-12 subscription_form_input" style="margin-right:-20px;padding-top:10px;">
+         <b>{% trans "I want to subscribe to " %}{{ blog.title }}{% trans " info-letter" %}&nbsp</b>
+            <input type="checkbox" name="subscription" id="subscription">
+          </div>
+      </div>
+{{ comment_form.occupation }}
+     <button type="submit" class="btn btn-sm btn-default">{% trans "Submit" %}</button>
+    </form>
+    <hr>
+  </div>
+</div>
+
+<script>
+$(document).ready(function () {
+
+$('#new_comment').validate({
+    rules: {
+        name: {
+            minlength: 2,
+            required: true
+        },
+        email: {
+            required: true,
+            email: true
+        },
+        comment: {
+            minlength: 5,
+            required: true
+        },
+        website: {
+            required: false,
+            url: true
+        }
+    },
+    highlight: function (element) {
+        $(element).closest('.form-control').removeClass('has-success').addClass('has-error');
+        $(element).closest('.glyphycon').removeClass('glyphycon glyphicon-ok').addClass('glyphycon glyphicon-remove');
+    },
+    success: function (element) {
+        $(element).closest('.form-control').removeClass('has-error').addClass('has-success');
+        $(element).closest('.glyphicon').removeClass('glyphycon glyphicon-remove').addClass('glyphycon glyphicon-ok');
+    }
+});
+});
+</script>
+    <script type="text/javascript">
+      $(function () {
+        $('#delete_comment').tooltip({container: 'body', placement: 'top'});
+      });
+    </script>
+
+       </div>
+      {% endblock %}
+
+      {% block blog_right %}
+      <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        <div class="sidebar-module sidebar-module-inset"><h4>About</h4>{{ blog.description }}</div>
+        <div class="sidebar-module" style="text-align:left;">
+          <form method="post" id="subscribe_form" class="form-horizontal" role="form" action="{% url 'blogs.views.subscribe_to_infoletter' blog.slug %}">{% csrf_token %}
+            <div class="form-group">
+            <h3>{% trans "Subscribe to " %}{{ blog.title }}{% trans " info-letters" %}</h3>
+            </div>
+            <div class="form-group" id="subs_mail">
+            {{ form.email.label_tag }}:
+            {{ form.email }}
+            </div>
+            <div class="form-group">
+            <button id="subscribe_submit" type="submit" disabled="disabled"class="btn btn-primary btn-sm pull-left">{% trans "Subscribe" %}</button>
+            </div>
+          </form>
+        </div>
+        <div style="clear: both; margin-bottom: 20px;"></div>
+        <script>
+          $(document).ready(function(){
+            $(".submail").change(function() {
+            if($(this).val() != '') {
+              $('#subscribe_submit').prop("disabled", false);
+              }
+            else {
+              $('#subscribe_submit').prop("disabled", true);
+              }
+            });
+          });
+        </script>
+      </div>
+
+         {% endblock %}
+
       {% block top_image %}
+
       {% endblock %}
