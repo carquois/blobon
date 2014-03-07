@@ -112,7 +112,34 @@
 
 
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Blog subscribers" %}</div>
+            <div class="panel-heading" style="min-height:52px;">
+             <div class="row">
+              <div class="col-sm-4">
+              {% trans "Blog subscribers" %}
+              </div>              
+              <div class="col-sm-6 col-sm-offset-2">
+               <form class="form-inline" enctype="multipart/form-data" id="newsubs" role="form" method="post" action="{% url 'blogs.views.subscribe_to_infoletter' blog.slug %}">{% csrf_token %}
+               <b>{% trans "Add new : " %}</b>
+                <div class="form-group">
+                 {{ subs_form.email}}
+                </div>
+                 <button id="subscribe_submit" value="subs_admin" name="subs_admin"type="submit" disabled="disabled"class="btn btn-primary btn-sm">{% trans "Add" %}</button>
+               </form>
+              </div>
+             </div>
+    <script>
+      $(document).ready(function(){
+        $('#id_email').change(function() {
+        if($(this).val() != '') {
+          $('#subscribe_submit').prop("disabled", false);
+          }
+        else {
+          $('#subscribe_submit').prop("disabled", true);
+        }
+        });
+      });
+    </script>
+            </div>
             {% if subscriptions%}
             <table class="table table-striped">
               <colgroup>

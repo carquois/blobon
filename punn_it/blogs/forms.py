@@ -107,7 +107,7 @@ class PasswordForm(ModelForm):
         model = Blog
         fields = ('password', )
 class SubscriptionForm(ModelForm):
-    email = EmailField(widget=forms.TextInput(attrs={'placeholder': _('Enter your email here'),
+    email = EmailField(widget=forms.TextInput(attrs={'placeholder': _('Enter email here'),
                                                     'type': 'text',
                                                     'class': "form-control input-block-level submail"
                                                     }))
