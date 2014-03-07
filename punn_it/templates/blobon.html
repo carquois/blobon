@@ -159,6 +159,8 @@ body {
  */
 
 @media (min-width: 768px) {
+
+  {% block for_contact %}
   /* Pull out the header and footer */
   .masthead {
     position: fixed;
@@ -168,6 +170,7 @@ body {
     position: fixed;
     bottom: 0;
   }
+  {% endblock %}
   /* Start the vertical centering */
   .site-wrapper-inner {
     vertical-align: middle;
