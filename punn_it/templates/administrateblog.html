@@ -688,9 +688,11 @@ border-radius: 4px;
                               <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                               <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row source_artist_texte_title">
+                               {% if blog.has_artists %}
                                <div class="col-md-12 text_field">
                                 {{ post_form.artist.label_tag }}{{ post_form.artist }}
                                 </div>
+                                {% endif %}
                                <div class="col-md-12 text_field">
                                 {{ post_form.title.label_tag }}{{ post_form.title }}
                                 </div>
@@ -1062,9 +1064,11 @@ border-radius: 4px;
                               <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                               <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row source_artist_texte_title">
+                               {% if blog.has_artists %}
                                <div class="col-md-12 text_field">
                                 {{ post_form.artist.label_tag }}{{ post_form.artist }}
                                 </div>
+                                {% endif %}
                                <div class="col-md-12 text_field">
                                 {{ post_form.title.label_tag }}{{ post_form.title }}
                                 </div>
@@ -1441,9 +1445,11 @@ border-radius: 4px;
                               <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                               <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row source_artist_texte_title">
+                               {% if blog.has_artists %}
                                <div class="col-md-12 text_field">
                                 {{ post_form.artist.label_tag }}{{ post_form.artist }}
                                 </div>
+                                {% endif %}
                                <div class="col-md-12 text_field">
                                 {{ post_form.title.label_tag }}{{ post_form.title }}
                                 </div>
@@ -1497,9 +1503,11 @@ border-radius: 4px;
                                 <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                                 <div class="row" style="display: none">{{ post_form.status }} </div>
                                 <div class="row source_artist_texte_title">
-                                  <div class="col-md-12 text_field">
-                                  {{ post_form.artist.label_tag }}{{ post_form.artist }}
-                                  </div>
+                               {% if blog.has_artists %}
+                               <div class="col-md-12 text_field">
+                                {{ post_form.artist.label_tag }}{{ post_form.artist }}
+                                </div>
+                                {% endif %}
                                   <div class="col-md-12 text_field">
                                   {{ post_form.title.label_tag }}{{ post_form.title }}
                                   </div>
@@ -1987,27 +1995,6 @@ border-radius: 4px;
 
 
 
-    <script>
-      $('#model1').click(function() {
-        setTimeout(function() { 
-          $('#id_artist').focus();
-        },10);
-      });
-    </script>
-    <script>
-      $('#model2').click(function() {
-        setTimeout(function() { 
-          $('#id_artist').focus();
-        },10);
-      });
-    </script>
-    <script>
-      $('#model3').click(function() {
-        setTimeout(function() { 
-          $('#id_artist').focus();
-        },10);
-      });
-    </script>
     <script>
       $('#tabbar a:first').click(function() {
         setTimeout(function() {
