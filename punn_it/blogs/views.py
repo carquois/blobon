@@ -537,7 +537,6 @@ def newpost(request, slug):
           post = form.save(commit=False)
           post.author = request.user
           post.blog = blog
-          post.is_ready = True
           if post.youtube_url:
             query = urlparse(post.youtube_url)
             p = parse_qs(query.query)

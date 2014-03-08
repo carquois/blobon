@@ -104,6 +104,7 @@
              <div class="row" style="display:none;">
              {{ form.is_online }}
              </div>
+             {% if blog.is_bootblog %}
              <div class="row">
                <div class="col-md-7 form_section" id="settings_main_image">
                  <p><b>{% trans "Blog main image" %}</b></p>
@@ -136,6 +137,7 @@
 </script>
              </div>
              <hr>
+             {% endif %}
              <div class="row">
                <div class="col-md-6 form_section" id="settings_password">
                  {{ form.password.label_tag }}<a id="info_password" class="pull-right info" title="{% trans "If you enter a password in the field below, your blog will be hidden except to the people who you give the password to." %}"data-toggle="modal" data-target="#info_password_modal">{% trans "More info" %}</a>
