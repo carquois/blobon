@@ -544,8 +544,10 @@ def newpost(request, slug):
           post.save()
           form.save_m2m()
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
-      return render_to_response('administrateblog.html', {'form': form})
-
+        else:
+          messages.add_message(request, messages.INFO, _(u"Error! Please post a valide youtube url.")) 
+          return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
+      return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
 @login_required
 def savedraft(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
@@ -560,7 +562,10 @@ def savedraft(request, slug):
           post.save()
           form.save_m2m()
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
-      return render_to_response('administrateblog.html', {'form': form})
+        else:
+          messages.add_message(request, messages.INFO, _(u"Error! Please post a valide youtube url."))         
+          return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
+      return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
 
 @login_required
 def newcategory(request, slug):
