@@ -124,8 +124,9 @@ g
 {% for category in post.category.all %}
 <a href="#" style="text-decoration:none;"><div class="tagCat bg{{ category }} ombrageTexte" style="position: relative; ">{{ category.name }}</div></a>
 {% endfor %}
-  {% if post.layout_type == "s" %}
+
   <div class="titreSingle">{{ post.title }}</div>
+  {% if post.layout_type == "s" %}
     {% if post.youtube_id %}
     <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
     {% else %}
@@ -134,9 +135,6 @@ g
       <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
     </a>
     {% endif %}
-       {% if post.content_0 %}
-         <div class="img_content">{% ultrarender post.content_0 %}</div>
-       {% endif %}  
     {% endif %}
  
   {% endif %}
@@ -352,30 +350,6 @@ g
       </div>
     </div>
     {% endif %}
-    {% if post.title %}
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">{% trans "Title : " %}</h3></div>
-      <div class="panel-body">
-      {{ post.title }}
-      </div>
-    </div>
-    {% endif %}
-    {% if post.text %}
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">{% trans "Text : " %}</h3></div>
-      <div class="panel-body">
-      {{ post.text }}
-      </div>
-    </div>
-    {% endif %}
-    {% if post.source %}
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">{% trans "Web site : " %}</h3></div>
-      <div class="panel-body">
-      <a href="{{ post.source }}" target="_blank">{{ post.source }}</a>
-      </div>
-    </div>
-    {% endif %}
   {% endif %}
 
 
@@ -560,30 +534,6 @@ g
       <div class="panel-heading"><h3 class="panel-title">{% trans "Artist : " %}</h3></div>
       <div class="panel-body">
       {{ post.artist }}
-      </div>
-    </div>
-    {% endif %}
-    {% if post.title %}
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">{% trans "Title : " %}</h3></div>
-      <div class="panel-body">
-      {{ post.title }}
-      </div>
-    </div>
-    {% endif %}
-    {% if post.text %}
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">{% trans "Text : " %}</h3></div>
-      <div class="panel-body">
-      {{ post.text }}
-      </div>
-    </div>
-    {% endif %}
-    {% if post.source %}
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">{% trans "Web site : " %}</h3></div>
-      <div class="panel-body">
-      <a href="{{ post.source }}" target="_blank">{{ post.source }}</a>
       </div>
     </div>
     {% endif %}
@@ -795,42 +745,19 @@ g
       </div>
     </div>
     {% endif %}
-    {% if post.title %}
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">{% trans "Title : " %}</h3></div>
-      <div class="panel-body">
-      {{ post.title }}
-      </div>
-    </div>
-    {% endif %}
-    {% if post.text %}
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">{% trans "Text : " %}</h3></div>
-      <div class="panel-body">
-      {{ post.text }}
-      </div>
-    </div>
-    {% endif %}
-    {% if post.source %}
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">{% trans "Web site : " %}</h3></div>
-      <div class="panel-body">
-      <a href="{{ post.source }}" target="_blank">{{ post.source }}</a>
-      </div>
-    </div>
-    {% endif %}
 
   {% endif %}
 
 
 
-  {% if post.content %}
-<hr>
-<div>
-   <p> {{ post.content|markdown|safe }}</p>
-</div>
-<hr>
-  {% endif %}
+
+
+
+{% if post.content %}{% load markup %}{{ post.content|markdown|safe }}<hr>{% endif %}
+{% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe }}<hr>{% endif %}
+{% if post.text %}{% load markup %}{{ post.text|markdown|safe }}<hr>{% endif %}
+{% if post.content_video %}{% load markup %}{{ post.content_video|markdown|safe }}<hr>{% endif %}
+
   <div class="media" id="heading">
   <a class="pull-left" href="#">
 {% if post.author.userprofile.avatar %}
