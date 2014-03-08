@@ -59,7 +59,7 @@
                     </div>
                   </td>
                   <td>{{ post.author }}</td>
-                  <td>{{ post.get_status_display }}</td>
+                  <td>{% if post.is_ready %}{{ post.get_status_display }}{% else %}{% trans "To be translated" %}{% endif %}</td>
                   <td>{{ post.pub_date }}</td>
                 </tr>
   <div class="modal fade" id="{{ post.id }}">
