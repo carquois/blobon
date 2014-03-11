@@ -1,0 +1,211 @@
+{% extends "dashboard_base.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+
+
+    {% block container %}
+      <div class="container" style="max-width:768px;">
+        <div class="row" style="padding-top:25px;">
+          <div class="col-xs-6">
+            <address>
+              <strong>{% trans "Blobon, Inc" %}</strong><br>
+              {% trans "201 St-Louis, App 401" %}<br>
+              {% trans "St-Jean-sur-Richelieu, Québec, Canada" %}<br>
+              {% trans "J3B 1X9" %}<br>
+              {% trans "(514) 887-1868" %}<br>
+            </address>
+          </div>
+          <div class="col-xs-6">
+            <img class="pull-right" src="http://i.imgur.com/8dQY4nH.png" alt="Blobon inc." style="max-width:125px;">
+          </div>
+        </div>
+        <div class="row" style="padding-top:25px;">
+          <div class="col-xs-6">
+              <b>{% trans "Facturé à:" %}</b>
+          </div>
+          <div class="col-xs-6" style="text-align:right;">
+              <b>{% trans "Facture #0000074" %}</b>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <address>
+              <strong>{% trans "PQ -organisation" %}</strong><br>
+              {% trans "Pierre Séguin" %}<br>
+              {% trans "1200, avenue Papineau,bureau 150" %}<br>
+              {% trans "Montréal QC" %}<br>
+              {% trans "J3B 1X9" %}<br>
+            </address>
+          </div>
+          <div class="col-xs-6" style="text-align:right;">
+            <b>{% trans "Date de facturation :" %}</b>{% trans " 11-04-2014" %}
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="table-responsive">
+            <table class="table">
+              <colgroup>
+                <col class="col-xs-2">
+                <col class="col-xs-4">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="active">{% trans "Tâche" %}</th>
+                  <th class="active">{% trans "Notes" %}</th>
+                  <th class="active">{% trans "Taux($)" %}</th>
+                  <th class="active">{% trans "Heures" %}</th>
+                  <th class="active">{% trans "Montant($)" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{% trans "Programmation" %}</td>
+                  <td>{% trans "03-02-14" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                  <td>{% trans "2" %}</td>
+                  <td>{% trans "160,00" %}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Programmation" %}</td>
+                  <td>{% trans "06-02-14" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                  <td>{% trans "1" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Programmation" %}</td>
+                  <td>{% trans "11-02-14" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                  <td>{% trans "1" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Programmation" %}</td>
+                  <td>{% trans "12-02-14" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                  <td>{% trans "2" %}</td>
+                  <td>{% trans "160,00" %}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Programmation" %}</td>
+                  <td>{% trans "18-02-14" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                  <td>{% trans "1" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Programmation" %}</td>
+                  <td>{% trans "20-02-14" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                  <td>{% trans "2" %}</td>
+                  <td>{% trans "160,00" %}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Programmation" %}</td>
+                  <td>{% trans "22-02-14" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                  <td>{% trans "1" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Programmation" %}</td>
+                  <td>{% trans "25-02-14" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                  <td>{% trans "1" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Programmation" %}</td>
+                  <td>{% trans "26-02-14" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                  <td>{% trans "1" %}</td>
+                  <td>{% trans "80,00" %}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+          <div class="table-responsive">
+            <table class="table">
+              <colgroup>
+                <col class="col-xs-2">
+                <col class="col-xs-4">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="active">{% trans "Article" %}</th>
+                  <th class="active">{% trans "Description" %}</th>
+                  <th class="active">{% trans "Prix unitaire($)" %}</th>
+                  <th class="active">{% trans "Quantité" %}</th>
+                  <th class="active">{% trans "Montant($)" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{% trans "Gestion DB1" %}</td>
+                  <td>{% trans "Gestion du serveur DB1" %}</td>
+                  <td>{% trans "995,00" %}</td>
+                  <td>{% trans "1" %}</td>
+                  <td>{% trans "995,00" %}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Gestion DB2" %}</td>
+                  <td>{% trans "Gestion du serveur DB2" %}</td>
+                  <td>{% trans "995,00" %}</td>
+                  <td>{% trans "1" %}</td>
+                  <td>{% trans "995,00" %}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+            <table class="table">
+              <colgroup>
+                <col class="col-xs-10">
+                <col class="col-xs-2">
+              </colgroup>
+              <thead>
+                <tr>
+                </tr>
+              </thead>
+              <tbody style="border:2px solid #999;">
+                <tr class="active">
+                  <td style="text-align:right;"><b>{% trans "Sous-total:" %}</b></td>
+                  <td><b>{% trans "2950,00" %}</b></td>
+                </tr>
+                <tr class="active">
+                  <td style="text-align:right;"><b>{% trans "TPS " %}</b><small>{% trans "(#808009708)" %}</small><b>{% trans " -5%:" %}</b></td>
+                  <td><b>{% trans "147,50" %}</b></td>
+                </tr>
+                <tr class="active">
+                  <td style="text-align:right;"><b>{% trans "TVQ " %}</b><small>{% trans "(#1219103898)" %}</small><b>{% trans " -9,5%:" %}</b></td>
+                  <td><b>{% trans "294,26" %}</b></td>
+                </tr>
+                <tr class="active">
+                  <td style="text-align:right;"><b>{% trans "Total:" %}</b></td>
+                  <td><b>{% trans "3391,76" %}</b></td>
+                </tr>
+                <tr class="active">
+                  <td style="text-align:right;"><b>{% trans "Total payé:" %}</b></td>
+                  <td><b>{% trans "-0,00" %}</td>
+                </tr>
+                <tr class="active" style="border-top:2px solid #999;">
+                  <td style="text-align:right;"><b>{% trans "Montant payable CAD:" %}</b></td>
+                  <td><b>{% trans "3391,76" %}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        <div class="row" style="text-align:center;padding-bottom:25px;">
+         <div>{% trans "Questions, commentaires: (514) 887-1868 ou facturation@blobon.com" %}</div>
+         <div>{% trans "Votre paiement doit être fait au nom de Blobon" %}</div>
+         <div>{% trans "Merci beaucoup." %}</div>
+        
+        </div>
+      </div>
+    {% endblock %}
