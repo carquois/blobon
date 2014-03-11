@@ -993,6 +993,13 @@ def deletecomment_from_single(request, id):
       comment.delete()
       return HttpResponseRedirect(reverse('blogs.views.single', args=(post.base62id,)))
 
+@login_required
+def deletesubscription(request, id):
+      subscription = get_object_or_404(Subscription, id=id)
+      blog = subscription.blog
+      subscription.delete()
+      messages.add_message(request, messages.INFO, _(u"The subscriber has been deleted"))
+      return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
 
 @login_required
 def deleteblog(request, slug):
