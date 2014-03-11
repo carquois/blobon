@@ -28,23 +28,6 @@
       {% block post_in_posts_enfor %}
       {% endblock %}
 
-    {% block additional-css %}
- <style>
-.has-success {
-border-color: #3c763d;
--webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-}
-
-.has-error {
-border-color: #a94442;
--webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-}
-
-
- </style>
-    {% endblock %}
 
       {% block blog_left %}
        <div class="col-sm-8 blog-main">
@@ -253,15 +236,16 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
          </div>
          <div id="infos" class="panel">
            <div class="row">
-             <div class="pull-right">
-
+             <div class="col-xs-12">
+<div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+             </div>
+           </div>
+           <div class="row">
+             <div class="col-xs-12">
 
 <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-url="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" data-text="{{ post.title }}">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-
-
-<div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 
 
              </div>
