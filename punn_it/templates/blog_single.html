@@ -283,7 +283,7 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
         <img class="media-object img-circle" src="{{ im.url }}" alt="{{ comment.author.first_name }} {{ comment.author.last_name }}" />
       {% endthumbnail %}
     {% else %}    
-       <img class="media-object img-circle" src="http://i.imgur.com/mcowg4i.jpg" alt="{{ comment.name }}">
+       <img class="media-object img-circle" style="max-height:64px;max-width:64px;" src="http://i.imgur.com/ZRQkOH5.jpg" alt="{{ comment.name }}">
     {% endif %}
     </a>
       {% if request.user.is_staff or request.user == comment.author %}
