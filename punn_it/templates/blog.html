@@ -50,6 +50,9 @@ padding-top:10px;
 }
 .fb-like{
 padding-bottom:5px;
+    height: 28px;
+    overflow: hidden;
+
 }
 
 .fb_wrapper{
@@ -57,12 +60,22 @@ padding-bottom:5px;
 #fb-root {
     display: none;
 }
-/* To fill the container and nothing else */
-
+.fb_edge_comment_widget {
+  display: none !important;
+}
 .fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {
     width: 100% !important;
 }
+.fb_iframe_widget_lift{
+
+}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr {
+    display: none !important;
+}
+
 </style>
+    {% block additional_css %}
+    {% endblock %}
     {% endblock %}
 </head>
 
@@ -364,13 +377,18 @@ padding-bottom:5px;
            </div>
          </div>
          <div id="infos" class="panel">
+
            <div class="row">
-             <div class="pull-right">
+             <div class="col-xs-12">
+
+<div class="fb-like" data-href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" data-text="{{ post.title }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+             </div>
+           </div>
+           <div class="row">
+             <div class="col-xs-12">
 
 <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-url="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" data-text="{{ post.title }}">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-<div class="fb-like" data-href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" data-text="{{ post.title }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 
              </div>
            </div>
