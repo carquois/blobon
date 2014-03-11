@@ -49,6 +49,10 @@ def index(request):
           return render_to_response('blobon.html',
                                     {'form': form, },
                                      context_instance=RequestContext(request))
+      if host == "gabrieldancause.com":
+        return render_to_response('gabrieldancause.html',
+                                  {},
+                                   context_instance=RequestContext(request))
       elif Blog.objects.filter(custom_domain=host).exists():
           blog = Blog.objects.get(custom_domain=host)
           if blog.is_online == False:
