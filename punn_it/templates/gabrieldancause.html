@@ -1,0 +1,139 @@
+{% extends "dashboard_base.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+
+    {% block additional-css %}
+
+<style>
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  padding-bottom: 19px;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+</style>
+    {% endblock %}
+
+
+
+    {% block container %}
+
+ <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://gab.blobon.com" target="_blank">{% trans "Blog" %}</a></li>
+          <li class="active"><a href="#">{% trans "About" %}</a></li>
+        </ul>
+        <h3 class="text-muted">{% trans "Gabriel Dancause" %}</h3>
+      </div>
+
+      <div class="jumbotron">
+        <img class="img-responsive" src="https://pbs.twimg.com/profile_images/2562763929/ygw6cbtptmrhw0wgym3h.jpeg" alt="Gab" style="width:100%;padding-bottom:15px;">
+        <p class="lead">{% trans "Je suis le fondateur et CEO du startup Blobon, une plateforme qui se veut une centralisation de tous vos besoins Web." %}</p>
+        <p class="lead">{% trans "Je suis originaire de la rive-sud de Montréal, de Marieville plus précisément. Mon entreprise est basée à St-Jean-sur-Richelieu." %}</p>
+        <p class="lead">{% trans "J'aime beaucoup le Web, la musique, l'humour, les médias sociaux la politique et les voyages. J'ai visité plus de 35 pays." %}</p>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-6">
+          <a href="https://twitter.com/GabQc" target="_blank"><h4>{% trans "Twitter" %}</h4></a>
+
+          <a href="http://www.linkedin.com/profile/view?id=57970439&goback=%2Enmp_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1&trk=spm_pic" target="_blank"><h4>{% trans "Linkedin" %}</h4></a>
+
+          <a href="mailto:gabrieldancause@gmail.com" target="_blank"><h4>{% trans "gabrieldancause@gmail.com" %}</h4></a>
+
+        </div>
+        <div class="col-lg-6">
+
+          <a href="https://www.facebook.com/profile.php?id=772035088" target="_blank"><h4>{% trans "Facebook" %}</h4></a>
+
+          <a href="http://gab.blobon.com" target="_blank"><h4>{% trans "Mon blog" %}</h4></a>
+
+
+        </div>
+      </div>
+
+      <div class="footer">
+                 <div class="blobonfooter" style="padding-top:30px;text-align:center;">
+          {% include 'blobon_footer.html' %}
+          </div>  
+      </div>
+
+    </div>
+
+
+
+    {% endblock %}
