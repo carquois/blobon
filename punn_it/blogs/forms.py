@@ -61,7 +61,7 @@ class CommentForm(ModelForm):
     website = URLField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Your website url here'),
                                                     'type': 'text',
                                                     'class': "form-control"}))
-    occupation = CharField(required=False, widget=forms.HiddenInput(attrs={'placeholder': _('Your occupation here'),
+    occupation = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Your occupation here'),
                                                     'type': 'text',
                                                     'class': "form-control"}))
     class Meta:
