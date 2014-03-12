@@ -298,7 +298,7 @@ border-radius: 4px;
                            <li><a class="submittext" href="#">{% trans "Post now" %}</a></li>
                            <li class="divider"></li>
                            <li><a id="add_queue" href="#">{% trans "Add to the queue" %}</a></li>
-                           <li><a id="add_translate" href="#">{% trans "To be translated" %}</a></li>
+                           {% if blog.translation %}<li><a id="add_translate" href="#">{% trans "To be translated" %}</a></li>{% endif %}
                          </ul>
                        </div>
                        </form>
@@ -338,7 +338,6 @@ border-radius: 4px;
                            <li><a class="submitblog_post" href="#">{% trans "Post now" %}</a></li>
                            <li class="divider"></li>
                            <li><a id="add_queue_blog" href="#">{% trans "Add to the queue" %}</a></li>
-                           <li style="display: none"><a id="add_translate_blog" href="#">{% trans "To be translated" %}</a></li>
                          </ul>
                        </div>
 
@@ -768,7 +767,7 @@ border-radius: 4px;
                            <li><a class="submitimagealbum1form" href="#">{% trans "Post now" %}</a></li>
                            <li class="divider"></li>
                            <li><a id="add_queue_al1" href="#">{% trans "Add to the queue" %}</a></li>
-                           <li style="display: none"><a id="add_translate_al1" href="#">{% trans "To be translated" %}</a></li>
+                           {% if blog.translation %}<li><a id="add_translate_al1" href="#">{% trans "To be translated" %}</a></li>{% endif %}
                          </ul>
                        </div>
                      </form>
@@ -1161,7 +1160,7 @@ border-radius: 4px;
                            <li><a class="submitimagealbum2form" href="#">{% trans "Post now" %}</a></li>
                            <li class="divider"></li>
                            <li><a id="add_queue_al2" href="#">{% trans "Add to the queue" %}</a></li>
-                           <li style="display: none"><a id="add_translate_al2" href="#">{% trans "To be translated" %}</a></li>
+                           {% if blog.translation %}<li><a id="add_translate_al2" href="#">{% trans "To be translated" %}</a></li>{% endif %}
                          </ul>
                        </div>
 
@@ -1557,7 +1556,7 @@ border-radius: 4px;
                            <li><a class="submitimagealbum3form" href="#">{% trans "Post now" %}</a></li>
                            <li class="divider"></li>
                            <li><a id="add_queue_al3" href="#">{% trans "Add to the queue" %}</a></li>
-                           <li style="display: none"><a id="add_translate_al3" href="#">{% trans "To be translated" %}</a></li>
+                           {% if blog.translation %}<li><a id="add_translate_al3" href="#">{% trans "To be translated" %}</a></li>{% endif %}
                          </ul>
                        </div>
 
@@ -1628,7 +1627,7 @@ border-radius: 4px;
                            <li><a class="submitimageform" href="#">{% trans "Post now" %}</a></li>
                            <li class="divider"></li>
                            <li><a id="add_queue_image" href="#">{% trans "Add to the queue" %}</a></li>
-                           <li><a id="add_translate_image" href="#">{% trans "To be translated" %}</a></li>
+                           {% if blog.translation %}<li><a id="add_translate_image" href="#">{% trans "To be translated" %}</a></li>{% endif %}
                          </ul>
                        </div>
 
@@ -1680,7 +1679,7 @@ border-radius: 4px;
                            <li><a class="submitvideo" href="#">{% trans "Post now" %}</a></li>
                            <li class="divider"></li>
                            <li><a id="add_queue_video" href="#">{% trans "Add to the queue" %}</a></li>
-                           <li style="display: none"><a id="add_translate_video" href="#">{% trans "To be translated" %}</a></li>
+                           {% if blog.translation %}<li><a id="add_translate_video" href="#">{% trans "To be translated" %}</a></li>{% endif %}
                          </ul>
                        </div>
 
@@ -3381,7 +3380,13 @@ border-radius: 4px;
       <li {% block categories-active %}{% endblock %}><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="categories_button" title="{% trans "Create, modify or delete categories" %}"><span class="glyphicon glyphicon-folder-open"></span> {% trans "Categories" %}</a></li>
       <li style="display: none" {% block tags-active %}{% endblock %}><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="tags_button" title="{% trans "Create, modify or delete tags" %}"><span class="glyphicon glyphicon-tag"></span> {% trans "Tags" %}</a></li>
       <li {% block emails-active %}{% endblock %}><a href="{% url 'blogs.views.administrateemails' blog.slug %}" id="emails_button" title="{% trans "Create and manage info-letters" %}"><span class="glyphicon glyphicon-envelope"></span> {% trans "Mailing list" %}</a></li>
+
+
+{% if blog.translation %}
       <li {% block translation-active %}{% endblock %}><a href="{% url 'blogs.views.translation' blog.slug %}" id="translations_button" title="{% trans "Translate your posts" %}"><span class="glyphicon glyphicon-euro"></span> {% trans "Translation" %}</a></li>   
+{% endif %}
+
+
  <li {% block settings-active %}{% endblock %}><a href="{% url 'blogs.views.administratesettings' blog.slug %}" id="settings_button" title="{% trans "Change your settings" %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Settings" %}</a></li>
     </ul>
     <script type="text/javascript">
