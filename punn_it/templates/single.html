@@ -916,7 +916,12 @@ g
             <input type="checkbox" name="subscription" id="subscription">
           </div>
       </div>
-{{ comment_form.occupation }}
+
+<div style="display:none;">
+{{ comment_form.occupation.label_tag }}{{ comment_form.occupation }}
+</div>
+
+
      <button type="submit" class="btn btn-sm btn-default">{% trans "Submit" %}</button>
     </form>
     <hr>
