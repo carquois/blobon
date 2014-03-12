@@ -39,164 +39,272 @@
            <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
            {% else %}
 
+
            {% if post.pic %}
+           {% if post.file_extension == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
+
 
            {% if post.pic_0 %}
+           {% if post.file_extension_0 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_0 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_0 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
+
 
            {% if post.pic_1 %}
+           {% if post.file_extension_1 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_1 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
+
 
            {% if post.pic_2 %}
+           {% if post.file_extension_2 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_2 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
+
 
            {% if post.pic_3 %}
+           {% if post.file_extension_3 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_3 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
+
 
            {% if post.pic_4 %}
+           {% if post.file_extension_4 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_4 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
+
 
            {% if post.pic_5 %}
+           {% if post.file_extension_5 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_5 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_5 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_6 %}
+           {% if post.file_extension_6 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_6 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_6 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_7 %}
+           {% if post.file_extension_7 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_7 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_7 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_8 %}
+           {% if post.file_extension_8 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_8 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_8 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_9 %}
+           {% if post.file_extension_9 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_9 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_9 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_10 %}
+           {% if post.file_extension_10 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_10 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_10 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
-
+           {% endif %}
 
            {% if post.pic_11 %}
+           {% if post.file_extension_11 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_11 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_11 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_12 %}
+           {% if post.file_extension_12 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_12 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_12 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_13 %}
+           {% if post.file_extension_13 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_13 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_13 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_14 %}
+           {% if post.file_extension_14 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_14 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_14 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_15 %}
+           {% if post.file_extension_15 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_15 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_15 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_16 %}
+           {% if post.file_extension_16 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_16 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_16 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
-
+           {% endif %}
 
            {% if post.pic_17 %}
+           {% if post.file_extension_17 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_17 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_17 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_18 %}
+           {% if post.file_extension_18 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_18 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_18 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_19 %}
+           {% if post.file_extension_19 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_19 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_19 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_20 %}
+           {% if post.file_extension_20 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_20 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_20 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_21 %}
+           {% if post.file_extension_21 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_21 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_21 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_22 %}
+           {% if post.file_extension_22 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_22 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_22 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_23 %}
+           {% if post.file_extension_23 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_23 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_23 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
+           {% endif %}
 
            {% if post.pic_24 %}
+           {% if post.file_extension_24 == ".gif" %}
+           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_24 }}" alt="{{ post.title }}" />
+           {% else %}
            {% thumbnail post.pic_24 "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
-
+           {% endif %}
 
 
 

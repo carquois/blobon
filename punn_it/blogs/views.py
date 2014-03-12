@@ -68,7 +68,7 @@ def index(request):
               else:
                 posts = paginate(request,
                                  Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
-                                 15)
+                                 9)
                 form = SubscriptionForm()
                 categories = Category.objects.filter(blog=blog)
                 if blog.has_template == True:
@@ -92,7 +92,7 @@ def index(request):
           else: 
             posts = paginate(request,
                              Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
-                             15)
+                             9)
             form = SubscriptionForm()
             categories = Category.objects.filter(blog=blog)
             if blog.has_template == True:
@@ -125,7 +125,7 @@ def index(request):
                   return HttpResponseRedirect("http://%s/" % blog.custom_domain)
                 posts = paginate(request,
                                Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
-                               15)
+                               9)
                 form = SubscriptionForm()
                 categories = Category.objects.filter(blog=blog)
                 if blog.has_template == True:
@@ -150,7 +150,7 @@ def index(request):
               return HttpResponseRedirect("http://%s/" % blog.custom_domain)
             posts = paginate(request,
                            Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
-                           15)
+                           9)
             form = SubscriptionForm()
             categories = Category.objects.filter(blog=blog)
             if blog.has_template == True:
@@ -170,7 +170,7 @@ def index(request):
         user = ""
         posts = paginate(request,
                          Post.objects.order_by('-pub_date'),
-                         15)
+                         9)
         form = SubscriptionForm()
         return render_to_response('index.html',
                                  {'user': user,

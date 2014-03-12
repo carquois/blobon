@@ -35,6 +35,8 @@ SUBSCRIBERS = (
     ('A', 'All'),
     ('N', 'New'),
 )
+
+
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
     prefix = instance.base62id
@@ -392,6 +394,110 @@ class Post(models.Model):
         if not self.base62id:
             self.base62id = Post.generate_unique_id()
         return super(Post, self).save()
+
+    def file_extension(self):
+        basename, extension = os.path.splitext(self.pic.name) 
+        return extension
+
+    def file_extension_0(self):
+        basename, extension = os.path.splitext(self.pic_0.name)
+        return extension
+
+    def file_extension_1(self):
+        basename, extension = os.path.splitext(self.pic_1.name)
+        return extension
+
+    def file_extension_2(self):
+        basename, extension = os.path.splitext(self.pic_2.name)
+        return extension
+
+    def file_extension_3(self):
+        basename, extension = os.path.splitext(self.pic_3.name)
+        return extension
+
+    def file_extension_4(self):
+        basename, extension = os.path.splitext(self.pic_4.name)
+        return extension
+
+    def file_extension_5(self):
+        basename, extension = os.path.splitext(self.pic_5.name)
+        return extension
+
+    def file_extension_6(self):
+        basename, extension = os.path.splitext(self.pic_6.name)
+        return extension
+
+    def file_extension_7(self):
+        basename, extension = os.path.splitext(self.pic_7.name)
+        return extension
+
+    def file_extension_8(self):
+        basename, extension = os.path.splitext(self.pic_8.name)
+        return extension
+
+    def file_extension_9(self):
+        basename, extension = os.path.splitext(self.pic_9.name)
+        return extension
+
+    def file_extension_10(self):
+        basename, extension = os.path.splitext(self.pic_10.name)
+        return extension
+
+    def file_extension_11(self):
+        basename, extension = os.path.splitext(self.pic_11.name)
+        return extension
+
+    def file_extension_12(self):
+        basename, extension = os.path.splitext(self.pic_12.name)
+        return extension
+
+    def file_extension_13(self):
+        basename, extension = os.path.splitext(self.pic_13.name)
+        return extension
+
+    def file_extension_14(self):
+        basename, extension = os.path.splitext(self.pic_14.name)
+        return extension
+
+    def file_extension_15(self):
+        basename, extension = os.path.splitext(self.pic_15.name)
+        return extension
+
+    def file_extension_16(self):
+        basename, extension = os.path.splitext(self.pic_16.name)
+        return extension
+
+    def file_extension_17(self):
+        basename, extension = os.path.splitext(self.pic_17.name)
+        return extension
+
+    def file_extension_18(self):
+        basename, extension = os.path.splitext(self.pic_18.name)
+        return extension
+
+    def file_extension_19(self):
+        basename, extension = os.path.splitext(self.pic_19.name)
+        return extension
+
+    def file_extension_20(self):
+        basename, extension = os.path.splitext(self.pic_20.name)
+        return extension
+
+    def file_extension_21(self):
+        basename, extension = os.path.splitext(self.pic_21.name)
+        return extension
+
+    def file_extension_22(self):
+        basename, extension = os.path.splitext(self.pic_22.name)
+        return extension
+
+    def file_extension_23(self):
+        basename, extension = os.path.splitext(self.pic_23.name)
+        return extension
+
+    def file_extension_24(self):
+        basename, extension = os.path.splitext(self.pic_24.name)
+        return extension
 
     @models.permalink
     def get_absolute_url(self):
