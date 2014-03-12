@@ -745,6 +745,11 @@ def editpost(request, id):
         form = PostForm(request.POST or None,request.FILES or None, instance=post)
         if form.is_valid():
             form.save()
+            if post.youtube_url:
+              query = urlparse(post.youtube_url)
+              p = parse_qs(query.query)
+              post.youtube_id = p['v'][0]
+              post.save()  
             if 'save_quit' in request.POST:
               return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
             else:
