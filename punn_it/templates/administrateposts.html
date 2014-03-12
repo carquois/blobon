@@ -56,6 +56,12 @@
                       <a href="{% url 'blogs.views.editpost' post.id %}" class="btn btn-default btn-xs edit_post" title="{% trans "Modify This Post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
                       <a href="#" class="btn btn-default btn-xs delete_post" title="{% trans "Delete This Post" %}" data-toggle="modal" data-target="#{{ post.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
                       <a href="{{post.get_absolute_url }}" target="_blank" class="btn btn-default btn-xs view_post" title="{% trans "View This Post" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "View" %}</a>
+                      {% if post.status == "D" %}
+                      <a href="{% url 'blogs.views.publish_now' post.id %}" class="btn btn-default btn-xs publish_post" title="{% trans "Publish this post now" %}"><span class="glyphicon glyphicon-ok"></span> {% trans "Publish now" %}</a>
+                      {% endif %}
+                      {% if not post.is_ready %}
+                      <a href="{% url 'blogs.views.translatepost' post.id %}" target="_blank" class="btn btn-default btn-xs translate_post" title="{% trans "Translate this post" %}"><span class="glyphicon glyphicon-euro"></span> {% trans "Translate" %}</a>
+                      {% endif %}
                     </div>
                   </td>
                   <td>{{ post.author }}</td>

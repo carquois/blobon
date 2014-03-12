@@ -770,13 +770,16 @@ def translatepost(request, id):
               post.is_ready = True
               post.status = 'P'
               post.save()
+              messages.add_message(request, messages.INFO, _(u"Your post has been publish"))
               return HttpResponseRedirect(reverse('blogs.views.translation', args=(blog.slug,)))
             elif 'save_ready_queue' in request.POST:
               post.is_ready = True
               post.save()
+              messages.add_message(request, messages.INFO, _(u"Your post has been add to queue"))
               return HttpResponseRedirect(reverse('blogs.views.translation', args=(blog.slug,)))
             else:
               post.save()
+              messages.add_message(request, messages.INFO, _(u"Your post has been save"))
               return HttpResponseRedirect(reverse('blogs.views.translation', args=(blog.slug,)))
       else:
         form = PostForm(instance=post,)
@@ -977,6 +980,15 @@ def deletepost(request, id):
       elif request.user.is_staff:
         post.delete()
         messages.add_message(request, messages.INFO, _(u"The post has been deleted"))
+      return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
+
+@login_required
+def publish_now(request, id):
+      post = get_object_or_404(Post, id=id)
+      blog = post.blog
+      post.status = 'P'
+      post.save()
+      messages.add_message(request, messages.INFO, _(u"The post has been publish"))
       return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
 
 @login_required
