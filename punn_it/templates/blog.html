@@ -187,7 +187,7 @@ padding-bottom:5px;
          <a href="{{ post.get_absolute_url }}">
          <div class="blog-post">
            <h2 class="blog-post-title">{{ post.title }}</h2>
-           <p class="blog-post-meta">{{ post.pub_date }} <a href="#">{{ post.author }}</a></p>
+           <p class="blog-post-meta">{{ post.pub_date }}&nbsp&nbsp{{ post.author }}</p>
            {% if post.youtube_id %}
            <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
            {% else %}
