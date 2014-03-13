@@ -34,7 +34,8 @@
             {% if posts %}
             <table class="table table-striped">
               <colgroup>
-                <col class="col-xs-6">
+                <col class="col-xs-4">
+                <col class="col-xs-2">
                 <col class="col-xs-1">
                 <col class="col-xs-1">
                 <col class="col-xs-2">
@@ -43,6 +44,7 @@
                 <tr>
                   <th>{% trans "Title" %}
                   </th>
+                  <th>{% trans "Category" %}</th>
                   <th>{% trans "Author" %}</th>
                   <th>{% trans "Status" %}</th>
                   <th>{% trans "Date" %}</th>
@@ -64,6 +66,7 @@
                       {% endif %}
                     </div>
                   </td>
+                  <td>{% if not post.category %}{% trans "None" %}{% else %}{% for category in post.category.all %}<a href="{% url 'blogs.views.editcategory' category.id %}" class="post_category" title="{% trans "Edit this category" %}">{{ category }}</a><br/>{% endfor %}{% endif %}</td>
                   <td>{{ post.author }}</td>
                   <td>{% if post.is_ready %}{{ post.get_status_display }}{% else %}{% trans "To be translated" %}{% endif %}</td>
                   <td>{{ post.pub_date }}</td>
@@ -123,6 +126,7 @@
         $(".edit_post").tooltip({container: 'body', placement: 'bottom'});
         $(".delete_post").tooltip({container: 'body', placement: 'bottom'});
         $(".view_post").tooltip({container: 'body', placement: 'bottom'});
+        $(".post_category").tooltip({container: 'body'});
       });
     </script>
   {% endblock %}
