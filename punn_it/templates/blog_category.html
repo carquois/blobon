@@ -1,0 +1,23 @@
+{% extends "blog.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load i18n thumbnail punn_tags humanize %}
+{% load url from future %}
+{% load markup %}
+{% load blog_tags %}
+
+    {% block open-graphs %}
+    <title>{% block title %}{{ blog.title }} - {{ category.name }}{% endblock %}</title>
+
+    <!-- Le open graphs tags -->
+    <meta property="og:title" content="{{ blog.title }} - {{ category.name }}" />
+    <meta property="og:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}/cat/{{ category.slug }}{% else %}http://{{ blog.slug }}.blobon.com/cat/{{ category.slug }}{% endif %}" />
+    <meta property="og:image" content="{{ MEDIA_URL }}{{ blog.main_image }}" />
+    <!-- Le twitter cards -->
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}/cat/{{ category.slug }}{% else %}http://{{ blog.slug }}.blobon.com/cat/{{ category.slug }}{% endif %}">
+    <meta name="twitter:title" content="{{ blog.title }} - {{ category.name }}">
+    <meta name="twitter:image" content="{{ MEDIA_URL }}{{ blog.main_image }}">
+    <!-- Le canonical url -->
+    <link rel="canonical" href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}/cat/{{ category.slug }}{% else %}http://{{ blog.slug }}.blobon.com/cat/{{ category.slug }}{% endif %}" />
+    {% endblock %}
+

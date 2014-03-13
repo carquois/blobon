@@ -186,9 +186,16 @@ def category(request, slug):
                        15)
       blog = category.blog
       form = SubscriptionForm()
-      return render_to_response('category.html',
-                                {'form': form, 'blog': blog,'posts': posts, 'category': category,},
-                                context_instance=RequestContext(request))
+      cat = category
+      categories = Category.objects.filter(blog=blog)
+      if blog.is_bootblog == True:
+        return render_to_response('blog_category.html',
+                                  {'cat': cat,'form': form, 'blog': blog,'posts': posts, 'category': category, 'categories': categories,},
+                                  context_instance=RequestContext(request))        
+      else:
+        return render_to_response('category.html',
+                                  {'form': form, 'blog': blog,'posts': posts, 'category': category,},
+                                  context_instance=RequestContext(request))
 
 def testbloggab(request):
       blog = Blog.objects.get(slug='gab')
@@ -582,7 +589,7 @@ def newcategory(request, slug):
           category.blog = blog
           category.save()
           return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
-      return render_to_response('administrateblog.html', {'form': form})
+      return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
 
 def draft(request):
       posts = paginate(request,
@@ -613,6 +620,18 @@ def createblog(request):
           else:
             blog.is_open = True
           blog.save()
+          cat1 = "_Music"
+          cat2 = "_Fashion"
+          cat3 = "_Travel"
+          cat4 = "_Design"
+          cat5 = "_Food"
+          cat6 = "_Movie"
+          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Music", slug=(blog.slug + cat1), color="#CC0000")
+          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Fashion", slug=(blog.slug + cat2), color="#CC0066")
+          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Travel", slug=(blog.slug + cat3), color="#009900")
+          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Design", slug=(blog.slug + cat4), color="#669999")
+          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Food", slug=(blog.slug + cat5), color="#4c660f")
+          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Movie", slug=(blog.slug + cat6), color="#0033CC")
           messages.add_message(request, messages.INFO, _(u"Congratulation, you just created a blog"))
           return HttpResponseRedirect(reverse('blogs.views.administrateblog', args=(blog.slug,)))
       else:
