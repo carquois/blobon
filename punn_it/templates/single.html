@@ -955,7 +955,7 @@ $('#new_comment').validate({
         $(element).closest('.glyphycon').removeClass('glyphycon glyphicon-ok').addClass('glyphycon glyphicon-remove');
     },
     success: function (element) {
-        $(element).closest('.form-control').removeClass('has-error').addClass('has-success');
+        element.text('OK!').addClass('has-success').closest('.form-control').removeClass('has-error').addClass('has-success');
         $(element).closest('.glyphicon').removeClass('glyphycon glyphicon-remove').addClass('glyphycon glyphicon-ok');
     }
 });
