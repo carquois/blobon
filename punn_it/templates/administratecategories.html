@@ -1,6 +1,11 @@
 {% extends "administrateblog.html" %}
 {% load i18n %}
 {% load url from future %}
+  {% block additional-js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}farbastic/farbtastic.js" type="text/javascript"></script>
+  {% endblock %}
     {% block additional-css %}
     <style>
       textarea {
@@ -10,10 +15,28 @@
         padding: 10px;0px;5px;0px;
       }
     </style>
+    <link rel="stylesheet" href="{{ STATIC_URL }}farbastic/farbtastic.css" type="text/css" />
   {% endblock %}
   {% block dashboard-active %}{% endblock %}
   {% block categories-active %}class="active"{% endblock %}
   {% block content %}
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}</strong>{{ field.name }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
           <div class="panel panel-primary" id="new_cat_form" style="display: none">
             <div class="panel-heading">{% trans "Add a new category :" %}</div>
             <div class="panel-body">
@@ -30,6 +53,16 @@
                  {{ categories_form.slug.label_tag }}
                   {{categories_form.slug}}
                 </div>
+                <div class="form-group">
+             <div class="row">
+               <div class="col-md-8 form_section" id="color">
+               {{ categories_form.color.label_tag }}
+               {{ categories_form.color }}
+               </div>
+               <div class="col-md-4 form_section" id="colorpicker"></div>
+
+             </div>
+                </div>
               </form>
               <button id="submitcat" class="btn btn-primary btn-xs" disabled="disabled" title="{% trans "Save your new category" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
               <span id="cancel_new_category" title="{% trans "Cancel add category" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
@@ -41,12 +74,14 @@
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-2">
-                <col class="col-xs-8">
+                <col class="col-xs-6">
+                <col class="col-xs-2">
               </colgroup>
               <thead>
                 <tr>
                   <th>{% trans "Name" %}</th>
                   <th>{% trans "Description" %}</th>
+                  <th>{% trans "Color" %}</th>
                 </tr>
               </thead>
               <tbody>
@@ -59,6 +94,7 @@
                     </div>
                   </td>
                   <td>{{ category.description }}</td>
+                  <td><div style="background-color:{{ category.color }};height:50px;"></div></td>
                 </tr>
               {% endfor %}
               </tbody>
@@ -100,6 +136,11 @@
       $('#add_new_category').click(function() {
         $('#add_new_category').hide();
         $('#new_cat_form').show();
+        $('#colorpicker').farbtastic('#id_color');
+        $('#id_color').val("#000000");
+        setTimeout(function() { 
+         $(".mceNoEditor").removeAttr("style");
+        },10);
       });
     </script>
 

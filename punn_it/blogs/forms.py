@@ -157,9 +157,12 @@ class CategoriesForm(ModelForm):
     slug = CharField(widget=forms.TextInput(attrs={'placeholder': _('Slug'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level"}))
+    color = CharField(required=True, widget=forms.TextInput(attrs={'readonly':'readonly', 'placeholder': _('Your category color'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
     class Meta:
         model = Category
-        fields = ('name','description','slug', )
+        fields = ('name','description','slug','color', )
 
 
 class PostForm(ModelForm):

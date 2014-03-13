@@ -239,7 +239,7 @@ class Blog(models.Model):
     slug = models.SlugField(verbose_name=_("URL"), max_length=30, unique=True)
     title = models.CharField(verbose_name=_("Title"), max_length=140)
     main_image = ImageField(verbose_name=_("Main image"), upload_to=get_file_path_main, null=True, blank=True)
-    main_color = models.TextField(verbose_name=_("Main color"),max_length=10, default="#ff7f00", blank=False)
+    main_color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#ff7f00", blank=False)
     password = models.CharField(verbose_name=_("Password"), max_length=140, blank=True)
     custom_domain = models.CharField(verbose_name=_("Custom domain"), max_length=300, blank=True)
     description = models.CharField(verbose_name=_("Description"), max_length=500, blank=True)
@@ -305,6 +305,7 @@ class Category(models.Model):
     description = models.CharField(verbose_name=_("Description"), max_length=1000, null=True, blank=True)
     slug = models.SlugField(max_length=140, unique=True)
     created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
+    color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#000000", blank=False)
     top_level_cat = models.ForeignKey('self',  null=True, blank=True)
     def __unicode__(self):
         return self.name

@@ -72,6 +72,8 @@ padding-bottom:5px;
 .fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr {
     display: none !important;
 }
+.catnav{
+}
 
 </style>
     {% block additional_css %}
@@ -152,7 +154,12 @@ padding-bottom:5px;
     <div class="blog-masthead">
       <div class="container">
         <nav class="blog-nav">
-          <a class="blog-nav-item active" href="http://{{blog.slug}}.blobon.com">Home</a>
+          <a class="blog-nav-item {% if category %}{% else %}active{% endif %}" style="padding-left:25px;padding-right:25px;" href="http://{{blog.slug}}.blobon.com">Home</a>
+    {% if categories %}
+      {% for category in categories %} 
+      <a class="blog-nav-item {% if cat == category %}active{% else %}{% endif %}" href="{% url "blogs.views.category" category.slug %}" style="background-color:{{ category.color }};">{{ category.name }}</a>
+      {% endfor %}
+    {% endif %}
           <a class="blog-nav-item pull-right" href="http://blobon.com">Powered by blobon.com</a>
         </nav>
       </div>
@@ -184,10 +191,15 @@ padding-bottom:5px;
       {% block blog_left %}
        <div class="col-sm-8 blog-main">
         {% for post in posts %}
-         <a href="{{ post.get_absolute_url }}">
          <div class="blog-post">
+
+{% for category in post.category.all %}
+<a href="{% url "blogs.views.category" category.slug %}" style="text-decoration:none;"><div class="cate" style="background-color:{{ category.color }};position:relative;margin-bottom:10px;color:#fff;">&nbsp&nbsp{{ category.name }}</div></a>
+{% endfor %}
+
+         <a href="{{ post.get_absolute_url }}">
            <h2 class="blog-post-title">{{ post.title }}</h2>
-           <p class="blog-post-meta">{{ post.pub_date }}&nbsp&nbsp{{ post.author }}</p>
+           <p class="blog-post-meta">{{ post.pub_date }}&nbsp&nbsp{{ post.author }}</p></a>
            {% if post.youtube_id %}
            <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
            {% else %}
