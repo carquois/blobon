@@ -193,9 +193,6 @@ padding-bottom:5px;
         {% for post in posts %}
          <div class="blog-post">
 
-{% for category in post.category.all %}
-<a href="{% url "blogs.views.category" category.slug %}" style="text-decoration:none;"><div class="cate" style="background-color:{{ category.color }};position:relative;margin-bottom:10px;color:#fff;">&nbsp&nbsp{{ category.name }}</div></a>
-{% endfor %}
 
          <a href="{{ post.get_absolute_url }}">
            <h2 class="blog-post-title">{{ post.title }}</h2>
@@ -478,6 +475,9 @@ padding-bottom:5px;
 {% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe }}{% endif %}
 {% if post.text %}{% load markup %}{{ post.text|markdown|safe }}{% endif %}
 {% if post.content_video %}{% load markup %}{{ post.content_video|markdown|safe }}{% endif %}
+{% for category in post.category.all %}
+<a href="{% url "blogs.views.category" category.slug %}" style="text-decoration:none;"><div class="cate" style="background-color:{{ category.color }};position:relative;margin-top:10px;margin-bottom:10px;color:#fff;">&nbsp&nbsp{{ category.name }}</div></a>
+{% endfor %}
          </div>
          <hr>
          <div class="media" id="heading">
