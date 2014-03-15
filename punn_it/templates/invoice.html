@@ -1,0 +1,165 @@
+{% extends "dashboard_base.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+{% load mathfilters %}
+
+    {% block container %}
+
+      <div class="container" style="max-width:768px;">
+        <div class="row" style="padding-top:25px;">
+          <div class="col-xs-6">
+            <address>
+              <strong>{% trans "Blobon, Inc" %}</strong><br>
+              {% trans "201 St-Louis, App 401" %}<br>
+              {% trans "St-Jean-sur-Richelieu, Québec, Canada" %}<br>
+              {% trans "J3B 1X9" %}<br>
+              {% trans "(514) 887-1868" %}<br>
+            </address>
+          </div>
+          <div class="col-xs-6">
+            <img class="pull-right" src="http://i.imgur.com/8dQY4nH.png" alt="Blobon inc." style="max-width:125px;">
+          </div>
+        </div>
+        <div class="row" style="padding-top:25px;">
+          <div class="col-xs-6">
+              <b>{% trans "Facturé à:" %}</b>
+          </div>
+          <div class="col-xs-6" style="text-align:right;">
+              <b>{% trans "Facture #" %}{{ invoice.invoice_number }}</b>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <address>
+              <strong>{{ client.organization_name }}</strong><br>
+              {{ client.first_name }}&nbsp;{{ client.last_name }}<br>
+              {{ client.street_adress }}<br>
+              {{ client.city }}&nbsp;{{ client.state }}<br>
+              {{ client.postal_code }}<br>
+            </address>
+          </div>
+          <div class="col-xs-6" style="text-align:right;">
+            <b>{% trans "Date de facturation :" %}</b>&nbsp;{{ invoice.last_modified|date:"d M Y" }}
+          </div>
+        </div>
+        <div class="panel panel-default">
+        {% if times %}
+          <div class="table-responsive">
+            <table class="table">
+              <colgroup>
+                <col class="col-xs-2">
+                <col class="col-xs-4">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="active">{% trans "Tâche" %}</th>
+                  <th class="active">{% trans "Notes" %}</th>
+                  <th class="active">{% trans "Taux($)" %}</th>
+                  <th class="active">{% trans "Heures" %}</th>
+                  <th class="active" style="text-align:right;padding-right:30px;">{% trans "Montant($)" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for time in times %}
+                <tr>
+                  <td>{{ time.task.name }}</td>
+                  <td>{{ time.notes }}</td>
+                  <td>{{ time.rate_per_hour }}</td>
+                  <td>{{ time.time }}</td>
+                  <td style="text-align:right;padding-right:30px;"><div class="for_subtotal">{{ time.rate_per_hour|mul:time.time}}</div></td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+        {% if items %}
+          <div class="table-responsive">
+            <table class="table">
+              <colgroup>
+                <col class="col-xs-2">
+                <col class="col-xs-4">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="active">{% trans "Article" %}</th>
+                  <th class="active">{% trans "Description" %}</th>
+                  <th class="active">{% trans "Prix unitaire($)" %}</th>
+                  <th class="active">{% trans "Quantité" %}</th>
+                  <th class="active" style="text-align:right;padding-right:30px;">{% trans "Montant($)" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for item in items %}
+                <tr>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.description }}</td>
+                  <td>{{ item.cost }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td style="text-align:right;padding-right:30px;"><div class="for_subtotal">{{ item.cost|mul:item.quantity}}</div></td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endif %}
+
+
+            <table class="table">
+              <colgroup>
+                <col class="col-xs-10">
+                <col class="col-xs-2">
+              </colgroup>
+              <thead>
+                <tr>
+                </tr>
+              </thead>
+              <tbody style="border:2px solid #999;">
+                <tr class="active">
+                  <td style="text-align:right;"><b>{% trans "Sous-total:" %}</b></td>
+                  <td><b>{{ subtotal }}</b></td>
+                </tr>
+              {% for tax in taxs %}
+                {% if not tax.compound_tax %}
+                <tr class="active">
+                  <td style="text-align:right;"><b>{{ tax.name}}</b>&nbsp;{% if tax.gouv_number %}<small>(#{{ tax.gouv_number }})</small>{% endif %}<b>&nbsp;{{ tax.rate}}%</b></td>
+                  <td><b>{{ sub_tax1 }}</b></td>
+                </tr>
+                {% else %}
+                <tr class="active">
+                  <td style="text-align:right;"><b>{{ tax.name}}</b>&nbsp;{% if tax.gouv_number %}<small>(#{{ tax.gouv_number }})</small>{% endif %}<b>&nbsp;{{ tax.rate}}%</b></td>
+                  <td><b>{{ sub_tax2 }}</b></td>
+                </tr>
+                {% endif %}
+              {% endfor %}
+                <tr class="active">
+                  <td style="text-align:right;"><b>{% trans "Total:" %}</b></td>
+                  <td><b>{{ total }}</b></td>
+                </tr>
+                <tr class="active">
+                  <td style="text-align:right;"><b>{% trans "Total payé:" %}</b></td>
+                  <td><b>{% trans "-0,00" %}</td>
+                </tr>
+                <tr class="active" style="border-top:2px solid #999;">
+                  <td style="text-align:right;"><b>{% trans "Montant payable CAD:" %}</b></td>
+                  <td><b>{{ total }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        <div class="row" style="text-align:center;padding-bottom:25px;">
+         <div>{{ invoice.terms }}</div>
+         <div>{{ invoice.notes }}</div>
+        </div>
+      </div>
+
+
+    {% endblock %}

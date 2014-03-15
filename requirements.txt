@@ -28,4 +28,5 @@ twython==3.0.0
 -e git://github.com/pcraciunoiu/django-s3sync@0eab4f3c15c8167bcc1270249921269dc20dc506#egg=Django_S3_Sync-dev
 boto==2.14.0
 django-storages==1.1.8
+django-mathfilters==0.1.3
 
