@@ -3,6 +3,12 @@
 {% load url from future %}
 {% load mathfilters %}
 
+    {% block additional-css %}
+<style>
+.page-break { display: block; page-break-before: auto; }
+</style>
+    {% endblock %}
+
     {% block container %}
 
       <div class="container" style="max-width:768px;">
@@ -17,7 +23,7 @@
             </address>
           </div>
           <div class="col-xs-6">
-            <img class="pull-right" src="http://i.imgur.com/8dQY4nH.png" alt="Blobon inc." style="max-width:125px;">
+            <img class="pull-right" src="http://i.imgur.com/n2qn5gh.png" alt="Blobon inc." style="max-width:125px;">
           </div>
         </div>
         <div class="row" style="padding-top:25px;">
@@ -42,6 +48,7 @@
             <b>{% trans "Date de facturation :" %}</b>&nbsp;{{ invoice.last_modified|date:"d M Y" }}
           </div>
         </div>
+<div class="page-break">
         <div class="panel panel-default">
         {% if times %}
           <div class="table-responsive">
@@ -74,10 +81,13 @@
               {% endfor %}
               </tbody>
             </table>
-        </div>
+          </div>
         {% endif %}
-
+        </div>
+</div>
         {% if items %}
+<div class="page-break">
+        <div class="panel panel-default">
           <div class="table-responsive">
             <table class="table">
               <colgroup>
@@ -110,8 +120,10 @@
             </table>
           </div>
         {% endif %}
-
-
+        </div>
+</div>
+<div class="page-break">
+        <div class="panel panel-default">
             <table class="table">
               <colgroup>
                 <col class="col-xs-10">
@@ -153,13 +165,14 @@
                 </tr>
               </tbody>
             </table>
-
-          </div>
+        </div>
+</div>
+<div class="page-break">
         <div class="row" style="text-align:center;padding-bottom:25px;">
          <div>{{ invoice.terms }}</div>
          <div>{{ invoice.notes }}</div>
         </div>
       </div>
-
+</div>
 
     {% endblock %}
