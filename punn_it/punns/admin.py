@@ -21,6 +21,15 @@ from blogs.models import Subscription
 from blogs.models import Info_email
 from blogs.models import Language
 from blogs.models import Translation
+from books.models import Client
+from books.models import Invoice
+from books.models import Project
+from books.models import Tax
+from books.models import Expense
+from books.models import Task
+from books.models import Time
+from books.models import Item
+
 
 class PunnAdmin(admin.ModelAdmin):
     exclude = ('original_punn',)
@@ -48,3 +57,11 @@ admin.site.register(Subscription)
 admin.site.register(Info_email)
 admin.site.register(Language)
 admin.site.register(Translation)
+admin.site.register(Client)
+admin.site.register(Invoice)
+admin.site.register(Project)
+admin.site.register(Tax)
+admin.site.register(Expense)
+admin.site.register(Task)
+admin.site.register(Time)
+admin.site.register(Item)

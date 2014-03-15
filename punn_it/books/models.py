@@ -14,7 +14,7 @@ class Client(models.Model):
     country = models.CharField(max_length=100, blank=True)
     state = models.CharField(max_length=100, blank=True)
     def __unicode__(self):
-        return self.id
+        return self.organization_name
 
 class Invoice(models.Model):
     author = models.ForeignKey(User)
@@ -26,48 +26,51 @@ class Invoice(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     last_modified = models.DateTimeField(auto_now = True,  null=True, blank=True)
     def __unicode__(self):
-        return self.id
+        return unicode(self.invoice_number)
 
 class Project(models.Model):
     name = models.CharField(max_length=50)
     client = models.ForeignKey(Client)
-    rate_per_hour = models.PositiveIntegerField(blank=True)
+    rate_per_hour = models.DecimalField(max_digits=5, decimal_places=2)
     def __unicode__(self):
-        return self.id
-
+        return u'%s - %s' % (self.name, self.client)
 
 class Tax(models.Model):
     name = models.CharField(max_length=20)
-    rate = models.PositiveIntegerField()
-    number = models.PositiveIntegerField(blank=True)
+    number = models.PositiveIntegerField()
+    rate = models.DecimalField(max_digits=4, decimal_places=2, blank=True)
     compound_tax = models.BooleanField(default=False)
+    gouv_number = models.CharField(max_length=100, null=True, blank=True)
     def __unicode__(self):
-        return self.id
+        return self.name
 
 class Expense(models.Model):
     author = models.ForeignKey(User)
     def __unicode__(self):
-        return self.id
+        return unicode(self.id)
 
 class Task(models.Model):
     name = models.CharField(max_length=50)
     project = models.ForeignKey(Project)
-    rate_per_hour = models.PositiveIntegerField(blank=True)
+    rate_per_hour = models.DecimalField(max_digits=5, decimal_places=2)
     def __unicode__(self):
-        return self.id
+        return u'%s -  %s' % (self.name, self.project)
 
 class Time(models.Model):
     task = models.ForeignKey(Task, null=True, blank=True)
     notes = models.CharField(max_length=1000)
-    rate_per_hour = models.PositiveIntegerField(blank=True)
+    rate_per_hour = models.DecimalField(max_digits=5, decimal_places=2)
     time = models.PositiveIntegerField(blank=True)
+    invoice = models.ForeignKey(Invoice, null=True, blank=True)
     #add taxes
     def __unicode__(self):
-        return self.id
+        return u'%s -  %s - %s' % (self.task, self.notes, self.id)
 
 class Item(models.Model):
     name = models.CharField(max_length=50)
     cost = models.DecimalField(max_digits=8, decimal_places=2)
     quantity = models.PositiveIntegerField(blank=True)
+    client = models.ForeignKey(Client, null=True)
+    description = models.CharField(max_length=1000, blank=True)
     def __unicode__(self):
-        return self.id
+        return u'%s - %s' % (self.name, self.client)
