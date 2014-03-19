@@ -54,8 +54,8 @@
           <div class="table-responsive">
             <table class="table">
               <colgroup>
-                <col class="col-xs-2">
                 <col class="col-xs-4">
+                <col class="col-xs-2">
                 <col class="col-xs-2">
                 <col class="col-xs-2">
                 <col class="col-xs-2">
@@ -72,7 +72,7 @@
               <tbody>
               {% for time in times %}
                 <tr>
-                  <td>{{ time.task.name }}</td>
+                  <td>{{ time.task.name }}<br><small>{{ time.task.project.name }}</small></td>
                   <td>{{ time.notes }}</td>
                   <td>{{ time.rate_per_hour }}</td>
                   <td>{{ time.time }}</td>
@@ -154,14 +154,6 @@
                 <tr class="active">
                   <td style="text-align:right;"><b>{% trans "Total:" %}</b></td>
                   <td><b>{{ total }}</b></td>
-                </tr>
-                <tr class="active">
-                  <td style="text-align:right;"><b>{% trans "Total payé:" %}</b></td>
-                  <td><b>{% trans "-0,00" %}</td>
-                </tr>
-                <tr class="active" style="border-top:2px solid #999;">
-                  <td style="text-align:right;"><b>{% trans "Montant payable CAD:" %}</b></td>
-                  <td><b>{{ total }}</td>
                 </tr>
               </tbody>
             </table>

@@ -20,12 +20,12 @@
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ blog.title }}" />
     <meta property="og:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" />
-    <meta property="og:image" content="{{ MEDIA_URL }}{{ blog.main_image }}" />
+    <meta property="og:image" content="{{ MEDIA_URL }}{{ blog.header_image }}" />
     <!-- Le twitter cards -->
     <meta name="twitter:card" content="photo">
     <meta name="twitter:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}">
     <meta name="twitter:title" content="{{ blog.title }}">
-    <meta name="twitter:image" content="{{ MEDIA_URL }}{{ blog.main_image }}">
+    <meta name="twitter:image" content="{{ MEDIA_URL }}{{ blog.header_image }}">
     <!-- Le canonical url -->
     <link rel="canonical" href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" />
     {% endblock %}
@@ -170,8 +170,8 @@ padding-bottom:5px;
     {% block blog_header %}
     <div class="topimg" style="text-align:center;">
     {% block top_image %}
-    {% if blog.main_image %}
-      <img src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ blog.title }}" style="max-width:100%;">
+    {% if blog.header_image %}
+      <img src="{{ MEDIA_URL }}{{ blog.header_image }}" alt="{{ blog.title }}" style="max-width:100%;">
     {% endif %}
     {% endblock %}
       <div class="container" style="text-align:left;">

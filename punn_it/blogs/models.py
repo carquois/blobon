@@ -8,7 +8,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 from django.utils.safestring import mark_safe 
-
+from django.conf.global_settings import LANGUAGES
 from punns.utils import BASE10, BASE62, baseconvert
 
 import uuid
@@ -238,8 +238,9 @@ class Blog(models.Model):
     is_open = models.BooleanField(default=True)
     slug = models.SlugField(verbose_name=_("URL"), max_length=30, unique=True)
     title = models.CharField(verbose_name=_("Title"), max_length=140)
-    main_image = ImageField(verbose_name=_("Main image"), upload_to=get_file_path_main, null=True, blank=True)
+    header_image = ImageField(verbose_name=_("Main image"), upload_to=get_file_path_main, null=True, blank=True)
     main_color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#ff7f00", blank=False)
+    language = models.CharField(max_length=7, choices=LANGUAGES,blank=True)
     password = models.CharField(verbose_name=_("Password"), max_length=140, blank=True)
     custom_domain = models.CharField(verbose_name=_("Custom domain"), max_length=300, blank=True)
     description = models.CharField(verbose_name=_("Description"), max_length=500, blank=True)
@@ -249,9 +250,34 @@ class Blog(models.Model):
     is_bootblog = models.BooleanField(default=True)
     has_artists = models.BooleanField(default=False)
     short_description = models.CharField(verbose_name=_("Short description"), max_length=140, blank=True)
-    block_css = models.TextField(verbose_name=_("Css"),max_length=10000, blank=True)
-    block_navbar = models.TextField(verbose_name=_("Navbar"), max_length=10000, blank=True)
-    block_header = models.TextField(verbose_name=_("Header"), max_length=10000, blank=True)
+    has_js = models.BooleanField(default=False)
+    has_bootstrap = models.BooleanField(default=False)
+    charset = models.CharField(verbose_name=_("Charset"), max_length=20, default="utf-8",)
+    style = models.TextField(verbose_name=_("Style"),max_length=10000, blank=True)
+    header = models.TextField(verbose_name=_("Header"), max_length=10000, blank=True)
+    head = models.TextField(verbose_name=_("Head"), max_length=10000, blank=True)
+    index = models.TextField(verbose_name=_("Index"), max_length=10000, blank=True)
+    sidebar = models.TextField(verbose_name=_("Sidebar"), max_length=10000, blank=True)
+    footer = models.TextField(verbose_name=_("Footer"), max_length=10000, blank=True)
+    sidebar_footer = models.TextField(verbose_name=_("Sidebar footer"), max_length=10000, blank=True)
+    content = models.TextField(verbose_name=_("Content"), max_length=10000, blank=True)
+    comments = models.TextField(verbose_name=_("Comments"), max_length=10000, blank=True)
+    front_page = models.TextField(verbose_name=_("Front-page"), max_length=10000, blank=True)
+    home = models.TextField(verbose_name=_("Home"), max_length=10000, blank=True)
+    single = models.TextField(verbose_name=_("Single"), max_length=10000, blank=True)
+    not_found_page = models.TextField(verbose_name=_("404 page"), max_length=10000, blank=True)
+    page = models.TextField(verbose_name=_("Page"), max_length=10000, blank=True)
+    category = models.TextField(verbose_name=_("Category"), max_length=10000, blank=True)
+    tag = models.TextField(verbose_name=_("Tag"), max_length=10000, blank=True)
+    taxonomy = models.TextField(verbose_name=_("Taxonomy"), max_length=10000, blank=True)
+    author = models.TextField(verbose_name=_("Author"), max_length=10000, blank=True)
+    date = models.TextField(verbose_name=_("Date"), max_length=10000, blank=True)
+    archive = models.TextField(verbose_name=_("Archive"), max_length=10000, blank=True)
+    search = models.TextField(verbose_name=_("Search"), max_length=10000, blank=True)
+    attachment = models.TextField(verbose_name=_("Attachment"), max_length=10000, blank=True)
+    image  = models.TextField(verbose_name=_("Image"), max_length=10000, blank=True)
+    block_navbar = models.CharField(verbose_name=_("Navbar"), max_length=10000, blank=True)
+    block_header = models.TextField(verbose_name=_("Block header"), max_length=10000, blank=True)
     block_title = models.TextField(verbose_name=_("Showing title"), max_length=10000, blank=True)
     block_right = models.TextField(verbose_name=_("Right"), max_length=10000, blank=True)
     block_right_top = models.TextField(verbose_name=_("Right top"), max_length=10000, blank=True)
@@ -260,11 +286,7 @@ class Blog(models.Model):
     block_right_bottom = models.TextField(verbose_name=_("Right bottom"), max_length=10000, blank=True)
     block_left = models.TextField(verbose_name=_("Left"), max_length=10000, blank=True)
     block_single_left = models.TextField(verbose_name=_("Single left"), max_length=10000, blank=True)
-    block_middle = models.TextField(verbose_name=_("Middle"), max_length=10000, blank=True)
     block_footer = models.TextField(verbose_name=_("Footer"), max_length=10000, blank=True)
-    block_other_1 = models.TextField(verbose_name=_("Other 1"), max_length=10000, blank=True)
-    block_other_2 = models.TextField(verbose_name=_("Other 2"), max_length=10000, blank=True)
-    block_other_3 = models.TextField(verbose_name=_("Other 3"), max_length=10000, blank=True)
     block_subscribe_text = models.TextField(verbose_name=_("Subscribe text"), max_length=10000, blank=True)
     block_subscribe_button = models.TextField(verbose_name=_("subscribe button"), max_length=10000, blank=True)
     def __unicode__(self):
@@ -274,7 +296,7 @@ class Blog(models.Model):
         return mark_safe(self.block_navbar)
 
 class Page(models.Model):
-    blog = models.ForeignKey(Blog, null=True)
+    blog = models.ForeignKey(Blog, related_name="Blog_page", null=True)
     author = models.ForeignKey(User, null=True)
     status = models.CharField(max_length=2, choices=STATUS)
     title = models.CharField(verbose_name=_("Title"), max_length=140, blank=True)
@@ -300,7 +322,7 @@ class Info_email(models.Model):
 
 class Category(models.Model):
     author = models.ForeignKey(User)
-    blog = models.ForeignKey(Blog, null=True)
+    blog = models.ForeignKey(Blog, related_name="Blog_category", null=True)
     name = models.CharField(verbose_name=_("Name"), max_length=140, null=True, blank=True)
     description = models.CharField(verbose_name=_("Description"), max_length=1000, null=True, blank=True)
     slug = models.SlugField(max_length=140, unique=True)
@@ -312,7 +334,7 @@ class Category(models.Model):
 
 class Tag(models.Model):
     author = models.ForeignKey(User)
-    blog = models.ForeignKey(Blog, null=True)
+    blog = models.ForeignKey(Blog, related_name="Blog_tag", null=True)
     name = models.CharField(verbose_name=_("Name"), max_length=140, null=True, blank=True)
     description = models.CharField(verbose_name=_("Description"), max_length=1000, null=True, blank=True)
     slug = models.SlugField(max_length=140, unique=True)
