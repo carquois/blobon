@@ -246,7 +246,6 @@ class Blog(models.Model):
     description = models.CharField(verbose_name=_("Description"), max_length=500, blank=True)
     translation = models.ForeignKey('self',  null=True, blank=True)
     is_online = models.BooleanField(default=True)
-    has_template = models.BooleanField(default=False)
     is_bootblog = models.BooleanField(default=True)
     has_artists = models.BooleanField(default=False)
     short_description = models.CharField(verbose_name=_("Short description"), max_length=140, blank=True)

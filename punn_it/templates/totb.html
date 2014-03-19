@@ -1,0 +1,152 @@
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+{% load markup %}
+{% load blog_tags %}
+{% load i18n thumbnail punn_tags humanize %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% trans "VOIR AVEC NICK" %}{% endblock %}">
+    <link href="{{ STATIC_URL }}css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Copse' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="{{ STATIC_URL }}/ico/favicon.png">
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
+    {% block open-graphs %}
+
+    <title>{% block title %}{{ blog.title }}{% endblock %}</title>
+    <meta property="og:title" content="{{ blog.title }}" />
+    <meta property="og:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" />
+    <meta property="og:image" content="{{ MEDIA_URL }}{{ blog.header_image }}" />
+
+
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}">
+    <meta name="twitter:title" content="{{ blog.title }}">
+    <meta name="twitter:image" content="{{ MEDIA_URL }}{{ blog.header_image }}">
+
+    <link rel="canonical" href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ 
+post.get_absolute_url }}{% endif %}" />
+
+    {% endblock %}
+    
+    <style>
+      .custom_hover > li > a:hover {
+          color:#191A1B;
+      }
+      .topnav{
+        height:90px !important;
+        background-color:#141517 !important;
+        border-color:#121213;
+        top: 0;
+        border-bottom-width: 1px;
+        position: fixed;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+        margin-bottom: 90px;
+        display: block; 
+      }
+      .nav_header_totb{
+        height:64px !important;
+      }
+      .nav_link_totb{
+        padding-top:20px;
+        padding-right:20px;
+        height:40px;
+        width:162px;
+
+      }
+      .nav_link_totb_noborder{
+        padding-top:20px;
+      }
+      .ul_topnav_totb{
+        height:60px !important;
+      }	
+      .totb_cat_link_active{
+        color:#22BE8C !important;
+        border-style:solid;
+        border-color:#22BE8C;
+        height:40px;
+        width:162px;
+      }
+      #caret_vert{
+        color:#22BE8C !important;
+      }
+      #caret_gris{
+        color:#515151 !important;
+      }     
+      .totb_cat_link{
+        color:#515151 !important;
+        border-style:solid;
+        border-color:#515151;
+        height:40px;
+        width:162px;
+      }
+      .link_totb_gris{
+        color:#515151 !important;
+      }
+      .totb_padding_nav_button{
+        padding:20px;
+        text-align:middle !important;
+      }
+    </style>
+
+
+  </head>
+  <body> 
+    {% block top_nav %}
+
+
+	<div class="topnav custom_hover" role="navigation">
+      <div class="container nav_container">
+        <div class="navbar-header nav_header_totb">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <p class="navbar-text navbar-right" style="padding-right:50px;">
+            <img src="http://i.imgur.com/nnwumvp.png"  style="vertical-align:middle;" alt="TOTB">
+          </p>
+        </div>
+        
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav ul_topnav_totb">
+            <li class="dropdown-toggle totb_padding_nav_button" data-toggle="dropdown"><a class="totb_cat_link_active" href="#">Art<b class="caret" id="caret_vert"></b></a></li>
+            <li class="dropdown-toggle totb_padding_nav_button" data-toggle="dropdown"><a class="totb_cat_link" href="#">Music<b class="caret" id="caret_gris"></b></a></li>            
+            <li class="dropdown-toggle totb_padding_nav_button" data-toggle="dropdown"><a class="totb_cat_link" href="#">Travel<b class="caret" id="caret_gris"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">dsfasdf</a></li>
+                <li><a href="#">asdfasdfasdf</a></li>
+                <li class="divider"></li>
+                <li><a href="#">asdfasdfasdfd</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right ul_topnav_totb">
+            <li class="nav_link_totb_noborder"><a class="link_totb_gris" href="#">Our Story</a></li>
+            <li class="nav_link_totb_noborder"><a class="link_totb_gris" href="#">Contact</a></li>
+            <li class="nav_link_totb_noborder"><a class="link_totb_gris" href="#">Mettre les icones</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    {% endblock %}
+  
+
+    {% block content %}
+
+{{blog.title}}
+
+    {% endblock %}
+  </body>
+</html>

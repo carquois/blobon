@@ -1,0 +1,31 @@
+{% extends "blog.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+{% load markup %}
+{% load blog_tags %}
+{% load i18n thumbnail punn_tags humanize %}
+
+
+    {% block open-graphs %}
+
+    <title>{% block title %}{{ post.title }}{% endblock %}</title>
+    <meta property="og:title" content="{{ post.title }}" />
+    <meta property="og:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" />
+    
+    {% if post.pic_0 %}
+    {% thumbnail post.pic "400x300" crop="center" as im %}
+    <meta property="og:image" content="{{ im.url }}" />
+    {% endthumbnail %}
+    {% endif %} 
+
+
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}">
+    <meta name="twitter:title" content="{{ post.title }}">
+    <meta name="twitter:image" content="{{ MEDIA_URL }}{{ post.pic }}">
+
+    <link rel="canonical" href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" />
+
+    {% endblock %}
+
+
