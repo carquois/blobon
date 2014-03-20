@@ -74,6 +74,7 @@ post.get_absolute_url }}{% endif %}" />
         vertical-align:text-top;
         padding-top:8px !important;
         padding-bottom:0px !important;
+        font-size:16px;
       }
       #caret_vert{
         color:#22BE8C !important;
@@ -89,19 +90,34 @@ post.get_absolute_url }}{% endif %}" />
         width:162px;
         padding-top:8px !important;
         padding-bottom:0px !important;
+        font-size:16px;
       }
       .link_totb_gris{
-        margin-left:-20px !important;
         color:#515151 !important;
+        padding-left:5px !important;
+        padding-right:5px !important;
+
       }
       .totb_padding_nav_button{
         padding-right:10px !important;
         padding-top:20px !important;
         text-align:middle !important;
       }
-      .navbar .nav > li > a:hover {
+      .navbar-inverse .navbar .nav > li > a:hover {
         color: #191A1B !important;
       }
+
+      .navbar-inverse .navbar-inner {
+        background:#141517 !important;
+        filter:none !important;
+      }
+      .open {
+        border-color: #141517 !important;
+      }
+      .nav .open > a {
+        border-color: #141517 !important;
+      }
+
     </style>
 
 
@@ -110,7 +126,7 @@ post.get_absolute_url }}{% endif %}" />
     {% block top_nav %}
 
 
-	<div class="topnav custom_hover" role="navigation">
+	<nav class="navbar navbar-inverse navbar-fixed-top topnav" role="navigation">
       <div class="container nav_container">
         <div class="navbar-header nav_header_totb">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#totb_navbar">
@@ -126,7 +142,7 @@ post.get_absolute_url }}{% endif %}" />
         
         <div class="navbar-collapse collapse" id="totb_navbar">
           <ul class="nav navbar-nav ul_topnav_totb">
-            <li class="dropdown totb_padding_nav_button"><a class="dropdown-toggle totb_cat_link_active" data-toggle="dropdown" href="#">Art<b class="caret" id="caret_vert"></b></a>
+            <li class="dropdown totb_padding_nav_button"><a class="dropdown-toggle totb_cat_link_active" data-toggle="dropdown" href="#">Art&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class="caret" id="caret_vert"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#">dsfasdf</a></li>
                 <li><a href="#">asdfasdfasdf</a></li>
@@ -136,8 +152,8 @@ post.get_absolute_url }}{% endif %}" />
             </li>
 
 
-            <li class="dropdown totb_padding_nav_button" data-toggle="dropdown"><a class="totb_cat_link" href="#">Music<b class="caret" id="caret_gris"></b></a></li>            
-            <li class="dropdown totb_padding_nav_button" data-toggle="dropdown"><a class="totb_cat_link" href="#">Travel<b class="caret" id="caret_gris"></b></a>
+            <li class="dropdown totb_padding_nav_button" data-toggle="dropdown"><a class="totb_cat_link" href="#">Music&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class="caret" id="caret_gris"></b></a></li>            
+            <li class="dropdown totb_padding_nav_button" data-toggle="dropdown"><a class="totb_cat_link" href="#">Travel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class="caret" id="caret_gris"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#">dsfasdf</a></li>
                 <li><a href="#">asdfasdfasdf</a></li>
@@ -153,7 +169,7 @@ post.get_absolute_url }}{% endif %}" />
           </ul>
         </div>
       </div>
-    </div>
+    </nav>
 
 
     {% endblock %}
