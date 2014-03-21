@@ -104,8 +104,8 @@
             </div>
             <div class="panel-body">
               <p><small><em>{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}</em></small></p>
-              <a href="{% url 'blogs.views.administrateblog' blog.slug %}" class="btn btn-xs btn-primary manage_blog" title="{% trans "The dashboard is the main tool to manage your blog" %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Dashboard" %}</a>
-              <a href="http://{{ blog.slug }}.blobon.com" class="btn btn-xs btn-default view_blog" title="View your blog in new tab" target="_blank"><span class="glyphicon glyphicon-globe"></span> {% trans "Visit blog" %}</a>
+              <a href="{% url 'blogs.views.administrateblog' blog.slug %}" class="btn btn-xs btn-primary manage_blog" title="{% trans "Manage" %} {{ blog.title }}"><span class="glyphicon glyphicon-cog"></span> {% trans "Dashboard" %}</a>
+              <a href="http://{{ blog.slug }}.blobon.com" class="btn btn-xs btn-default view_blog" title="{% trans "View " %}{{ blog.title }}{% trans " in new tab" %}" target="_blank"><span class="glyphicon glyphicon-globe"></span> {% trans "Visit blog" %}</a>
             </div>
           </div>
         {% endfor %}
