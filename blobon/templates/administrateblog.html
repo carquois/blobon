@@ -3373,7 +3373,7 @@ border-radius: 4px;
   {% endblock %}
   {% block sidebar %}
     <ul class="nav nav-pills nav-stacked">
-      <li {% block dashboard-active %}class="active"{% endblock %}><a href="{% url 'blogs.views.administrateblog' blog.slug %}" id="dashboard_button" title="{% trans "Manage your blogs" %}"><span class="glyphicon glyphicon-home"></span> {% trans "Dashboard" %}</a></li>
+      <li {% block dashboard-active %}class="active"{% endblock %}><a href="{% url 'blogs.views.administrateblog' blog.slug %}" id="dashboard_button" title="{% trans "Manage" %} {{ blog.title }}" ><span class="glyphicon glyphicon-home"></span> {% trans "Dashboard" %}</a></li>
       <li {% block posts-active %}{% endblock %}><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="posts_button" title="{% trans "Manage your posts" %}"><span class="glyphicon glyphicon-pushpin"></span> {% trans "Posts" %}</a></li>
       <li style="display: none" {% block pages-active %}{% endblock %}><a href="{% url 'blogs.views.administratepages' blog.slug %}" id="pages_button" title="{% trans "Manage your pages" %}"><span class="glyphicon glyphicon-file"></span> {% trans "Pages" %}</a></li>
       <li {% block comments-active %}{% endblock %}><a href="{% url 'blogs.views.administratecomments' blog.slug %}" id="comments_button" title="{% trans "Moderate comments" %}"><span class="glyphicon glyphicon-comment"></span> {% trans "Comments" %} <span class="badge">{{ num_of_comments }}</span></a></li>
