@@ -1709,14 +1709,12 @@ border-radius: 4px;
               <colgroup>
                 <col class="col-xs-7">
                 <col class="col-xs-1">
-                <col class="col-xs-1">
-                <col class="col-xs-1">
+                <col class="col-xs-2">
               </colgroup>
               <thead>
                 <tr>
                   <th>{% trans "Title" %}</th>
                   <th>{% trans "Author" %}</th>
-                  <th>{% trans "Stats" %}</th>
                   <th>{% trans "Date" %}</th>
                 </tr>
               </thead>
@@ -1725,7 +1723,6 @@ border-radius: 4px;
                 <tr>
                   <td><p><a href="{{ post.get_absolute_url }}" target="_blank" id="view_this_post" title="{% trans "View This Post" %}">{{ post.title }}</a></p></td>
                   <td>{{ post.author }}</td>
-                  <td><small>{% trans "Coming soon" %}</small></td>
                   <td>{{ post.pub_date }}</td>
                 </tr>
               {% endfor %}
