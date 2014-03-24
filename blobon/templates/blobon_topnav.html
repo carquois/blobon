@@ -1,0 +1,62 @@
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#blobon_topnav">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'blogs.views.index' %}" style="height:57px;">{% trans "Blobon" %}</a>
+    </div>
+    <div class="collapse navbar-collapse" id="blobon_topnav">
+
+      <ul class="nav navbar-nav">
+        <li {% if not blogs %}class="active"{% else %}{% endif %}  id="li_read" style="height:57px;"><a href="{% url 'blogs.views.index' %}" style="height:57px;"><span class="glyphicon glyphicon-home"></span>{% trans " Read" %}</a></li>
+
+        <li {% if blogs %}class="active"{% else %}{% endif %} id="li_write" style="height:57px;"><a href="{% url 'blogs.views.dashboard' %}" style="height:57px;"><span class="glyphicon glyphicon-pencil"></span>{% trans " Write" %}
+
+</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown btn-group">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+              {% if request.user.userprofile.avatar %}
+                {% thumbnail request.user.userprofile.avatar "27x27" crop="center" as im %}
+
+                <img class="img-rounded" src="{{ im.url }}" alt="{{ request.user.first_name }} {{ request.user.last_name }}" id="avatar-menu" /> 
+
+                {% endthumbnail %}{{ request.user.first_name }} {{ request.user.last_name }}&nbsp;<b class="caret"></b>
+
+              {% else %}
+                <span class="glyphicon glyphicon-user"></span> <b class="caret"></b>
+
+              {% endif %}
+            </a>
+
+            <ul class="dropdown-menu" style="min-width:190px;">
+
+              <li><a href="/createblog/">{% trans "Create a new blog" %}</a></li>
+
+
+              <li class="divider"></li>
+
+              <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Logout" %}</a></li>
+
+            </ul>
+          </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+</div>
+<div class="row" style="padding-top:90px;">
+</div>
+
+<script src="/static/js/bootstrap.min.js"></script>

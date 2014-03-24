@@ -22,68 +22,19 @@
     </style>
     {% endblock %}
   {% block nav %}
-     <div class="navbar navbar-default navbar-static-top" role="navigation">
-       <div class="container">
-         <div class="navbar-header">
-           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-             <span class="sr-only">Toggle navigation</span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-           </button>
-           <a class="navbar-brand" href="{% url 'blogs.views.index' %}">{% trans "Blobon" %}</a>
-         </div>
-         <div class="navbar-collapse collapse">
-           <ul class="nav navbar-nav">
-           </ul>
-
-
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown btn-group">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              {% if request.user.userprofile.avatar %}
-                {% thumbnail request.user.userprofile.avatar "27x27" crop="center" as im %}
-                <img class="img-rounded" src="{{ im.url }}" alt="{{ request.user.first_name }} {{ request.user.last_name }}" id="avatar-menu" /> 
-                {% endthumbnail %}{{ request.user.first_name }} {{ request.user.last_name }}&nbsp;<b class="caret"></b>
-              {% else %}
-                <span class="glyphicon glyphicon-user"></span> <b class="caret"></b>
-              {% endif %}
-            </a>
-            <ul class="dropdown-menu" style="min-width:190px;">
-              <li><a href="/createblog/">{% trans "Create a new blog" %}</a></li>
-              <li style="display:none;"><a href="{% url 'punns.views.profile_page' request.user.username %}">{% trans "Your profile" %}</a></li>
-              <li style="display:none;"><a href="{% url 'earnings.views.index' %}">{% trans "Vos revenus" %}</a></li>
-              <li class="divider" style="display:none;"></li>
-              <li style="display:none;"><a href="{% url 'accounts.views.edit_profile' %}">{% trans "Edit profile" %}</a></li>
-              <li class="divider"></li>
-              <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Logout" %}</a></li>
-            </ul>
-            </li>
-          </ul>
-<!--/.
-
-
-           <ul class="nav navbar-nav navbar-right">
-             <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Logout" %}</a></li>
-           </ul>
-
- -->
-
-
-
-
-         </div><!--/.nav-collapse -->
-       </div>
-     </div>
+  {% include 'blobon_topnav.html' %}
   {% endblock %}
   {% block container %}
     <div class="container">
       <div class="row">
         <div class="col-md-3">
         {% block sidebar %}
-          <ul class="nav nav-pills nav-stacked" style="padding-bottom:20px;">
-            <li class="active" style="display:none;"><a href="#">{% trans "All my blogs" %}</a></li>
-            </ul>
+          <div class="my_blog">
+           <h2>{% trans "My Blogs" %}</h2>
+           <h3><small>{% trans "Here's an overview of all your blogs. From here, you can manage posts, pages, comments, and much more." %}</small></h3>
+
+<a href="/createblog/" class="btn btn-primary" style="margin-top:5px;" role="button">{% trans "Create another blog " %}</a>
+          </div>
         {% endblock %}
         </div>
         <div class="col-md-9">

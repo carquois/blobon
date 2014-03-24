@@ -1,0 +1,29 @@
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% trans "Create a free blog." %}{% endblock %}">
+    <meta name="author" content="">
+    <title>{% block title %}Blobon{% endblock %}</title>
+    <link href="{{ STATIC_URL }}css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/css/bootstrap.min.css">
+
+    {% block additional-js %}
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    {% endblock %}
+    {% block additional-css %}
+    {% endblock %}
+  </head>
+  <body>
+
+{% include 'blobon_topnav.html' %}
+
+
+
+  </body>
+</html>

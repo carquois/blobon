@@ -34,9 +34,8 @@ def index(request):
           request.subdomain = host_s[0]
       if host == "blobon.com":
         if request.user.is_authenticated():
-          blogs = Blog.objects.filter(creator=request.user,is_online=True)
-          return render_to_response('dashboard.html',
-                                    {'blogs': blogs},
+          return render_to_response('read.html',
+                                    {},
                                     context_instance=RequestContext(request))
         else:
           if request.method == 'POST':
@@ -189,6 +188,12 @@ def testbloggab(request):
       form = SubscriptionForm()
       return render_to_response('testbloggab.html',
                                 {'posts': posts, 'blog': blog,'form': form,},
+                                context_instance=RequestContext(request))
+
+def dashboard(request):
+      blogs = Blog.objects.filter(creator=request.user,is_online=True)
+      return render_to_response('dashboard.html',
+                                {'blogs': blogs},
                                 context_instance=RequestContext(request))
 
 def pics(request):
