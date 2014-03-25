@@ -150,15 +150,8 @@ def index(request):
                                         context_instance=RequestContext(request))
 
       else:
-        user = ""
-        posts = paginate(request,
-                         Post.objects.order_by('-pub_date'),
-                         9)
-        form = SubscriptionForm()
-        return render_to_response('index.html',
-                                 {'user': user,
-                                  'posts': posts,
-                                  'form': form, },
+        return render_to_response('404.html',
+                                 {},
                                   context_instance=RequestContext(request))
 
 
