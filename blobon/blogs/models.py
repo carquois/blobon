@@ -16,6 +16,8 @@ import os
 from random import choice
 from sorl.thumbnail import ImageField
 
+from blogs.utils import unique_slugify
+
 PRIVACY = (
     ('Pu', 'Public'),
     ('Pr', 'Private'),
@@ -324,12 +326,16 @@ class Category(models.Model):
     blog = models.ForeignKey(Blog, related_name="Blog_category", null=True)
     name = models.CharField(verbose_name=_("Name"), max_length=140, null=True, blank=True)
     description = models.CharField(verbose_name=_("Description"), max_length=1000, null=True, blank=True)
-    slug = models.SlugField(max_length=140, unique=True)
+    slug = models.SlugField(max_length=140)
     created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#000000", blank=False)
     top_level_cat = models.ForeignKey('self',  null=True, blank=True)
     def __unicode__(self):
         return self.name
+    def save(self, *args, **kwargs):
+        if not self.id:
+	    unique_slugify(self, self.name)
+        super(Category, self).save(*args, **kwargs)
 
 class Tag(models.Model):
     author = models.ForeignKey(User)
