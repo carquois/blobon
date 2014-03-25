@@ -30,7 +30,7 @@ class Command(BaseCommand):
         publish_twitter_link(post)
         if post.translated_title and post.blog.translation and post.translated_content and post.youtube_id: 
           post.save()
-          new_post = Post(title=post.translated_title, content=post.translated_title, youtube_id=post.youtube_id, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
+          new_post = Post(title=post.translated_title, content=post.translated_content, youtube_id=post.youtube_id, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
           publish_twitter_link(new_post)
         elif post.translated_title and post.blog.translation and post.youtube_id:
@@ -41,7 +41,7 @@ class Command(BaseCommand):
 
         elif post.translated_title and post.blog.translation and post.translated_content:
           post.save()
-          new_post = Post(title=post.translated_title, content=post.translated_title, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
+          new_post = Post(title=post.translated_title, content=post.translated_content, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
           publish_twitter_link(new_post)
         elif post.translated_title and post.blog.translation:
