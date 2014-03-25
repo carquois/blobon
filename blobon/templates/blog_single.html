@@ -29,17 +29,21 @@
       {% endblock %}
 
       {% block blog_header %}
-       <div class="row" style="padding-top:30px;">
+       <div class="row" style="padding-top:10px;">
        </div>
       {% endblock %}
 
       {% block blog_left %}
+
+      <ol class="breadcrumb">
+        <li><a href="http://{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}">{% trans "Home" %}</a></li>
+        {% if post.category.all %}<li>{% for category in post.category.all %}<a href="{% url "blogs.views.category" category.slug %}">{% if post.category.count >= 2 %}&nbsp; - {% endif %}{{ category.name }}</a>{% endfor %}</li>{% endif %}
+        <li class="active">{{ post.title }}</li>
+      </ol>
+
        <div class="col-sm-8 blog-main">
          <div class="blog-post">
 
-{% for category in post.category.all %}
-<a href="{% url "blogs.views.category" category.slug %}" style="text-decoration:none;"><div class="cate" style="background-color:{{ category.color }};position:relative;margin-bottom:10px;color:#fff;">&nbsp&nbsp{{ category.name }}</div></a>
-{% endfor %}
 
            <h2 class="blog-post-title">{{ post.title }}</h2>
            <p class="blog-post-meta">{{ post.pub_date }}&nbsp&nbsp{{ post.author }}</p>
@@ -329,6 +333,10 @@
 {% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe }}{% endif %}
 {% if post.text %}{% load markup %}{{ post.text|markdown|safe }}{% endif %}
 {% if post.content_video %}{% load markup %}{{ post.content_video|markdown|safe }}{% endif %}
+<div style="padding:5px;"></div>
+{% for category in post.category.all %}
+<a href="{% url "blogs.views.category" category.slug %}" style="text-decoration:none;"><div class="cate" style="background-color:{{ category.color }};position:relative;margin-bottom:10px;color:#fff;">&nbsp&nbsp{{ category.name }}</div></a>
+{% endfor %}
 
          </div>
          <hr>
