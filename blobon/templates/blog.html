@@ -173,7 +173,7 @@ padding-bottom:5px;
       <a class="blog-nav-item {% if cat == category %}active{% else %}{% endif %}" href="{% url "blogs.views.category" category.slug %}" style="background-color:{{ category.color }};">{{ category.name }}</a>
       {% endfor %}
     {% endif %}
-          <a class="blog-nav-item pull-right" href="http://blobon.com">Powered by blobon.com</a>
+          <a class="blog-nav-item pull-right" style="display:none;" href="http://blobon.com">Powered by blobon.com</a>
         </nav>
       </div>
     </div>

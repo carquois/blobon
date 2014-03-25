@@ -14,9 +14,9 @@
     <div class="collapse navbar-collapse" id="blobon_topnav">
 
       <ul class="nav navbar-nav">
-        <li {% if not blogs %}class="active"{% else %}{% endif %}  id="li_read" style="height:57px;"><a href="{% url 'blogs.views.index' %}" style="height:57px;"><span class="glyphicon glyphicon-home"></span>{% trans " Read" %}</a></li>
+        <li {% if not blogs and not blog%}class="active"{% else %}{% endif %}  id="li_read" style="height:57px;"><a href="{% url 'blogs.views.index' %}" style="height:57px;"><span class="glyphicon glyphicon-home"></span>{% trans " Read" %}</a></li>
 
-        <li {% if blogs %}class="active"{% else %}{% endif %} id="li_write" style="height:57px;"><a href="{% url 'blogs.views.dashboard' %}" style="height:57px;"><span class="glyphicon glyphicon-pencil"></span>{% trans " Write" %}
+        <li {% if blogs or blog %}class="active"{% else %}{% endif %} id="li_write" style="height:57px;"><a href="{% url 'blogs.views.dashboard' %}" style="height:57px;"><span class="glyphicon glyphicon-pencil"></span>{% trans " Write" %}
 
 </a></li>
       </ul>

@@ -6,7 +6,23 @@ from django.utils.translation import ugettext as _
 from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
 from django.db import models
 
-from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment
+from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page
+
+
+class PageForm(ModelForm):
+    title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Enter your page title'),
+                                                    'type': 'text',
+                                                    'class': "form-control"}))
+
+    content = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Your page content here'),
+                                                    'type': 'text',
+                                                    'rows': '10',
+                                                    'class': "form-control setting_form input-block-level mceEditor",
+                                                    }))
+ 
+    class Meta:
+        model = Page
+        fields = ('title', 'content', 'status' )
 
 class BlogForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Enter your title'),

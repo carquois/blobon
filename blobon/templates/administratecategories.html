@@ -95,12 +95,32 @@
                   <td>{{ category.name }}
                     <div class="edit_buttons">
                       <a type="button" class="btn btn-default btn-xs edit_category" href="{% url 'blogs.views.editcategory' category.id %}" title="{% trans "Modify This Category" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
-                      <a type="button" class="btn btn-default btn-xs delete_category" style="display: none" title="{% trans "Delete This Category" %}" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
+                      <a type="button" class="btn btn-default btn-xs delete_category" title="{% trans "Delete This Category" %}" data-toggle="modal" data-target="#{{ category.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
                     </div>
                   </td>
                   <td>{{ category.description }}</td>
                   <td><div style="background-color:{{ category.color }};height:50px;"></div></td>
                 </tr>
+
+  <div class="modal fade" id="{{ category.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Delete Category" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Are you Sure You Want to Delete This Category?" %}</p>
+             {{ category.name }}
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
+          <a href="{% url 'blogs.views.deletecategory' category.id %}" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
               {% endfor %}
               </tbody>
             </table>
@@ -110,23 +130,6 @@
             </div>
             {% endif %}
           </div>
-  <div class="modal fade" id="delete">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">{% trans "Delete Category" %}</h4>
-        </div>
-        <div class="modal-body">
-          <p>{% trans "Are you Sure You Want to Delete This Category?" %}</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
-          <a href="" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
-        </div>
-      </div>
-    </div>
-  </div>
     <script type="text/javascript">
       $(function () {
         $('#add_new_category').tooltip({container: 'body'});

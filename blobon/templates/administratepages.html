@@ -12,21 +12,21 @@
   {% block pages-active %}class="active"{% endblock %}
   {% block content %}
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Pages" %}<a href="#" class="btn btn-default btn-xs pull-right" style="display: none" id="add_new_page" title="{% trans "Add a New Page" %}">{% trans "Add new" %}</a></div>
+            <div class="panel-heading">{% trans "Pages" %}<a href="{% url 'blogs.views.createpage' blog.slug %}" class="btn btn-default btn-xs pull-right" id="add_new_page" title="{% trans "Add a New Page" %}">{% trans "Add new" %}</a></div>
               <div class="panel-body">
               </div>
             <table class="table table-striped">
               <colgroup>
-                <col class="col-xs-7">
-                <col class="col-xs-1">
+                <col class="col-xs-6">
+                <col class="col-xs-2">
                 <col class="col-xs-1">
                 <col class="col-xs-1">
               </colgroup>
               <thead>
                 <tr>
                   <th>{% trans "Title" %}</th>
+                  <th>{% trans "Status" %}</th>
                   <th>{% trans "Author" %}</th>
-                  <th>{% trans "Stats" %}</th>
                   <th>{% trans "Date" %}</th>
                 </tr>
               </thead>
@@ -35,20 +35,21 @@
                 <tr>
                   <td>{{ page.title }}
                     <div class="edit_buttons">
-                      <button type="button" class="btn btn-default btn-xs edit_post" title="{% trans "Modify This Page" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</button>
-                      <button type="button" class="btn btn-default btn-xs delete_post" title="{% trans "Delete This Page" %}"i data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</button>
-                      <button type="button" class="btn btn-default btn-xs view_post" title="{% trans "View This Page" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "View" %}</button>
+                      <a href="{% url 'blogs.views.editpage' page.id %}" type="button" class="btn btn-default btn-xs edit_post" title="{% trans "Modify This Page" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
+                      <button type="button" class="btn btn-default btn-xs delete_post" title="{% trans "Delete This Page" %}" data-toggle="modal" data-target="#{{ page.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</button>
+                      <button type="button" class="btn btn-default btn-xs view_post" title="{% trans "View This Page" %}" style="display:none;"><span class="glyphicon glyphicon-new-window"></span> {% trans "View" %}</button>
+                    {% if page.status == "D" %}
+                      <a href="{% url 'blogs.views.publish_page_now' page.id %}" type="button" class="btn btn-default btn-xs view_post" title="{% trans "Publish this page now" %}"><span class="glyphicon glyphicon-ok"></span> {% trans "Publish now" %}</a>
+                    {% endif %}
                     </div>                  
                   </td>
+                  <td>{{ page.get_status_display }}</td>
                   <td>{{ page.author }}</td>
-                  <td><small>{% trans "Coming soon" %}</small></td>
                   <td>{{ page.created }}</td>
                 </tr>
-              {% endfor %}
-              </tbody>
-            </table>
-          </div>
-  <div class="modal fade" id="delete">
+
+
+  <div class="modal fade" id="{{ page.id }}">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -57,14 +58,22 @@
         </div>
         <div class="modal-body">
           <p>{% trans "Are you Sure You Want to Delete This Page?" %}</p>
+          {{ page.title }}
         </div>
         <div class="modal-footer">
           <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
-          <a href="" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
+          <a href="{% url 'blogs.views.deletepage' page.id %}" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
         </div>
       </div>
     </div>
   </div>
+
+
+
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
     <ul class="pager">
     <div class="row">
       <div class="col-md-4">

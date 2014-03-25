@@ -28,6 +28,10 @@
       {% block post_in_posts_enfor %}
       {% endblock %}
 
+      {% block blog_header %}
+       <div class="row" style="padding-top:30px;">
+       </div>
+      {% endblock %}
 
       {% block blog_left %}
        <div class="col-sm-8 blog-main">
@@ -39,6 +43,13 @@
 
            <h2 class="blog-post-title">{{ post.title }}</h2>
            <p class="blog-post-meta">{{ post.pub_date }}&nbsp&nbsp{{ post.author }}</p>
+           {% if post.video %}
+           <video width="620" height="440" controls>
+             <source src="{{ MEDIA_URL }}{{ post.video }}" type="video/mp4">
+             <source src="{{ MEDIA_URL }}{{ post.video_ogg }}" type="video/ogg">
+             Your browser does not support the video tag.
+           </video>
+           {% endif %}
            {% if post.youtube_id %}
            <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
            {% else %}

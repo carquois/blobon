@@ -14,7 +14,7 @@ from urlparse import urlparse
 from django.core.files import File
 from cgi import parse_qs
 
-from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm
+from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm
 from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email
 from django.contrib.auth.models import User
 
@@ -725,6 +725,27 @@ def editpost(request, id):
                                 {'blog': blog, 'form': form,'post': post, 'categories': categories, },
                                 context_instance=RequestContext(request))
 
+
+@login_required
+def editpage(request, id):
+      page = get_object_or_404(Page, id=id)
+      blog = page.blog
+      if request.method == 'POST':
+        form = PageForm(request.POST or None,request.FILES or None, instance=page)
+        if form.is_valid():
+          form.save()
+          if 'save_quit' in request.POST:
+            return HttpResponseRedirect(reverse('blogs.views.administratepages', args=(blog.slug,)))
+          else:
+            form = PageForm(instance=page,)
+            return render_to_response('editpage.html',
+                                      {'blog': blog, 'form': form,'page': page, },
+                                      context_instance=RequestContext(request))
+      else:
+        form = PageForm(instance=page)
+      return render_to_response('editpage.html',
+                                {'blog': blog, 'form': form,'page': page, },
+                                context_instance=RequestContext(request))
 @login_required
 def translatepost(request, id):
       post = get_object_or_404(Post, id=id)
@@ -875,23 +896,18 @@ def fasteditpost(request, id):
 def createpage(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       if request.method == 'POST':
-        page = Page(author = request.user)
-        page.blog = blog
-        if request.POST['id_status']:
-          if request.POST['id_status'] == "P":
-            page.status = "P"
-          else:
-            page.status = "D"
-        if request.POST['id_content']:
-          page.content = request.POST['id_content']
-        if request.POST['id_title']:
-          page.title = request.POST['id_title']
-        page.save()
-        messages.add_message(request, messages.INFO, _(u"Your page has been created"))
-        return HttpResponseRedirect('/')
+        form = PageForm(request.POST or None)
+        if form.is_valid():
+          page = form.save(commit=False)
+          page.blog = blog
+          page.author = request.user
+          page.save()
+          messages.add_message(request, messages.INFO, _(u"Your page has been created"))
+          return HttpResponseRedirect(reverse('blogs.views.administratepages', args=(blog.slug,)))
       else:
+        form = PageForm() 
         return render_to_response('createpage.html',
-                                  {'blog': blog},
+                                  {'blog': blog, 'form': form,},
                                   context_instance=RequestContext(request))
 
 
@@ -950,6 +966,30 @@ def deletepost(request, id):
       return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
 
 @login_required
+def deletepage(request, id):
+      page = get_object_or_404(Page, id=id)
+      blog = page.blog
+      if request.user == page.author:
+        page.delete()
+        messages.add_message(request, messages.INFO, _(u"Your page has been deleted"))
+      elif request.user.is_staff:
+        page.delete()
+        messages.add_message(request, messages.INFO, _(u"The page has been deleted"))
+      return HttpResponseRedirect(reverse('blogs.views.administratepages', args=(blog.slug,)))
+
+@login_required
+def deletecategory(request, id):
+      category = get_object_or_404(Category, id=id)
+      blog = category.blog
+      if request.user == category.author:
+        category.delete()
+        messages.add_message(request, messages.INFO, _(u"Your category has been deleted"))
+      elif request.user.is_staff:
+        category.delete()
+        messages.add_message(request, messages.INFO, _(u"The category has been deleted"))
+      return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
+
+@login_required
 def publish_now(request, id):
       post = get_object_or_404(Post, id=id)
       blog = post.blog
@@ -957,6 +997,15 @@ def publish_now(request, id):
       post.save()
       messages.add_message(request, messages.INFO, _(u"The post has been publish"))
       return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
+
+@login_required
+def publish_page_now(request, id):
+      page = get_object_or_404(Page, id=id)
+      blog = page.blog
+      page.status = 'P'
+      page.save()
+      messages.add_message(request, messages.INFO, _(u"The page has been publish"))
+      return HttpResponseRedirect(reverse('blogs.views.administratepages', args=(blog.slug,)))
 
 @login_required
 def deletecomment(request, id):

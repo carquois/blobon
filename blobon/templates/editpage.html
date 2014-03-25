@@ -8,9 +8,9 @@
   {% block content %}
 
             <div class="col-md-12"> 
-              <form enctype="multipart/form-data" id="newblog_page" role="form" method="post" action="{% url 'blogs.views.createpage' blog.slug %}">{% csrf_token %}
+              <form enctype="multipart/form-data" id="savedpage" role="form" method="post" action="{% url 'blogs.views.editpage' page.id %}">{% csrf_token %}
                 <div class="panel panel-primary" id="setting_form">
-                  <div class="panel-heading">{% trans "Create a new page :" %}<a href="{% url 'blogs.views.administratepages' blog.slug %}" class="btn btn-xs btn-danger pull-right" id="cancelpage"><span class="glyphicon glyphicon-remove"></span> {% trans "Cancel" %}</a></div>
+                  <div class="panel-heading">{% trans "Edit your page :" %}<a href="{% url 'blogs.views.administratepages' blog.slug %}" class="btn btn-xs btn-danger pull-right" id="cancelpage"><span class="glyphicon glyphicon-remove"></span> {% trans "Cancel" %}</a></div>
                     <div class="panel-body">         
                         <div class="title" id="blog_page_title">
                           {{ form.title.label_tag }}
@@ -19,20 +19,13 @@
                         <div class="form-group" style="padding-top:10px;">
                         {{ form.content }}
                         </div>
-                        <div class="row" style="display: none">{{ form.status }} </div>
-
+                        <div class="form-group" style="padding-top:10px;display:none;">                      
+                        {{ form.status }}
+                        </div>
 
                        <div class="btn-group pull-right">
-                         <button type="button" class="btn btn-xs btn-primary submitblog_page" disabled="disabled">{% trans "Submit page" %}</button>
-                         <button id="save_draft_blog_page" title="{% trans "More options" %}" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" disabled="disabled">
-                         <span class="caret"></span>
-                         <span class="sr-only">Toggle Dropdown</span>
-                         </button>
-                         <ul class="dropdown-menu" role="menu">
-                           <li><a class="submitblog_page" href="#">{% trans "Publish now" %}</a></li>
-                           <li class="divider"></li>
-                           <li><a id="add_queue_page" href="#">{% trans "Add to the queue" %}</a></li>
-                         </ul>
+                         <button id="savequit" class="btn btn-xs btn-primary" value="save_quit" name="save_quit">{% trans "Save" %}</button>
+                         <button id="save_continue" class="btn btn-xs btn-info" value="save_continue" name="save_continue">{% trans "Save and continue editing" %}</button>
                        </div>
                    </div>
                  </div>
@@ -75,20 +68,17 @@
     </script>
 
     <script>
-      $(".submitblog_page").click(function() {
-        $('#newblog_page select[name=status]').val('P');
+      $('#save_continue').click(function() {
         tinymce.get('id_content').save();
-        $('#newblog_page').submit();
+        $('#savedpage').submit();
       });
     </script>
 
     <script>
-      $('#add_queue_page').click(function() {
-        $('#newblog_page select[name=status]').val('D');
+      $('#savequit').click(function() {
         tinymce.get('id_content').save();
-        $('#newblog_page').submit();
+        $('#savedpage').submit();
       });
     </script>
-
 
   {% endblock %}

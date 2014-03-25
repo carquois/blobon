@@ -359,6 +359,8 @@ class Post(models.Model):
     is_top = models.BooleanField(default=False)
     publish_on_facebook = models.BooleanField(default=False)
     youtube_id = models.CharField(max_length=50, null=True, blank=True)
+    video = models.FileField(verbose_name=_("Video"), upload_to=get_file_path, null=True, blank=True)
+    video_ogg = models.FileField(verbose_name=_("Video"), upload_to=get_file_path, null=True, blank=True)
     pic = ImageField(verbose_name=_("Image"), upload_to=get_file_path, null=True, blank=True)
     pic_0 = ImageField(verbose_name=_("Image_0"), upload_to=get_file_path_0, null=True, blank=True)
     pic_1 = ImageField(verbose_name=_("Image_1"), upload_to=get_file_path_1, null=True, blank=True)
