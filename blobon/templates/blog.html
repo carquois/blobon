@@ -502,6 +502,7 @@ padding-top:10px;
 
         <p>{{ post.pub_date|naturaltime }}{% if post.source %} via <a href="{{ post.source }}" target="_blank">Source</a> | <a href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}"><span class="glyphicon glyphicon-comment"></span> {% trans "Comment" %}</a>{% endif %}</p>
         <hr>
+        </div>
         {% endfor %}
          {% block pager %}
          <ul class="pager">
