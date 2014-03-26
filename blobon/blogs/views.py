@@ -67,7 +67,7 @@ def index(request):
               else:
                 posts = paginate(request,
                                  Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
-                                 9)
+                                 6)
                 form = SubscriptionForm()
                 categories = Category.objects.filter(blog=blog)
                 if blog.is_bootblog == True:
@@ -87,7 +87,7 @@ def index(request):
           else: 
             posts = paginate(request,
                              Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
-                             9)
+                             6)
             form = SubscriptionForm()
             categories = Category.objects.filter(blog=blog)
             if blog.is_bootblog == True:
@@ -116,7 +116,7 @@ def index(request):
                   return HttpResponseRedirect("http://%s/" % blog.custom_domain)
                 posts = paginate(request,
                                Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
-                               9)
+                               6)
                 form = SubscriptionForm()
                 categories = Category.objects.filter(blog=blog)
                 if blog.is_bootblog == True:
@@ -137,7 +137,7 @@ def index(request):
               return HttpResponseRedirect("http://%s/" % blog.custom_domain)
             posts = paginate(request,
                            Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
-                           9)
+                           6)
             form = SubscriptionForm()
             categories = Category.objects.filter(blog=blog)
             if blog.is_bootblog == True:
@@ -159,7 +159,7 @@ def category(request, slug):
       category = get_object_or_404(Category, slug=slug)
       posts = paginate(request,
                        Post.objects.filter(status='P').filter(category=category).order_by('-pub_date'),
-                       15)
+                       6)
       blog = category.blog
       form = SubscriptionForm()
       cat = category

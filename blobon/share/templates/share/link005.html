@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+            <title>AddThis Permalink</title>
+            <link rel="stylesheet" type="text/css" href="link005.css" />
+       		<script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js#pubid=addthis"></script> 
+	</head>
+        <body>
+            <script type="text/javascript" src="ZeroClipboard005.js"></script>
+            <h3 id="hdr">Copy and paste this link into an email or IM.</h3>
+            <form>
+                <input id="strLink" class="strLink" name="" type="text" size="40" value="http://www.addthis.com" onfocus="this.select();" />
+            </form>
+            <form id="cpyBtnForm">
+                <input type="button" class="btn-blue linkcopy" value="Copy Link" id="d_clip_button">
+                <span id="copied" style="display:none"><em>Copied</em></span>
+            </form>
+            <span id="copied" style="display:none">
+                Copied!
+            </span>
+
+
+            <script language="JavaScript">
+
+                addthis.addEventListener('addthis.ready',function() {
+			    var d = document,    
+        			inl = false;
+                    el = d.getElementById('strLink'),
+				kv = _ate.util.rfromKV(d.location.href.split('#')[1]);
+                addthis_share = kv['ats'];
+			    addthis_config = kv['atc'];
+			    addthis_url = addthis_share.url = _duc(kv['url']);
+                addthis_url = _ate.share.acb('link',addthis_share,addthis_config)
+			    /*inline display?*/
+                if(kv['inl']){
+                   d.getElementById('atemail3').style.display=d.getElementById('footer').style.display="none";
+                   d.getElementById('ate-promo').style.top="40px";
+                   d.getElementById('copylink').className="linkcopy250";
+                   d.getElementById('d_clip_button').style.width = "70px"; 
+                   d.getElementById('strLink').className="strLink250";
+                   d.getElementById('hdr').className="hdr250"; 
+                   d.getElementById('copied').style.fontSize="12px";
+                   inl = true;   
+                }
+                
+                el.value = unescape(addthis_url);
+                el.select(); 
+			    d.getElementById('d_clip_button').focus();
+                
+                var clip = new ZeroClipboard.Client();
+                clip.setText( '' ); // will be set later on mouseDown
+                clip.setHandCursor( true );
+                clip.setCSSEffects( false );
+                clip.addEventListener( 'complete', function(client, text) {
+				    /*unsightly post click box around swf focus*/
+				    //d.getElementById('ate-promo').focus();
+                    d.getElementById('copied').style.display="block";
+                    addthis_share.imp_url=0;
+				    _ate.share.track('link',0,addthis_share,addthis_config);
+                } );
+                clip.addEventListener( 'mouseDown', function(client) { 
+                    clip.setText( d.getElementById('strLink').value );
+                    d.getElementById('copylink').className = (!inl)?'btn-blue linkcopy linkcopy-active':'linkcopy250-hover';
+                } );
+                clip.addEventListener( 'mouseUp', function(client) { 
+                    d.getElementById('copylink').className = (!inl)?'btn-blue linkcopy':'linkcopy250';
+                } );
+                clip.addEventListener( 'mouseOver', function(client) { 
+                    d.getElementById('copylink').className = (!inl)?'btn-blue linkcopy linkcopy-hover':'linkcopy250-hover';
+                } );
+                clip.addEventListener( 'mouseOut', function(client) { 
+                    d.getElementById('copylink').className = (!inl)?'btn-blue linkcopy':'linkcopy250';
+                } );
+                
+                clip.glue( 'd_clip_button' );
+                d.getElementById('cpyBtnForm').hover = function() {
+                    clip.reposition();
+                };
+
+});
+                </script>
+        </body>
+</html>
+
