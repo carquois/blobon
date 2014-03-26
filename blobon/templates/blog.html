@@ -62,8 +62,6 @@ img{
 padding-top:10px;
 }
 .fb-like{
-padding-bottom:5px;
-    height: 28px;
     overflow: hidden;
 
 }
@@ -87,7 +85,9 @@ padding-bottom:5px;
 }
 .catnav{
 }
-
+#fb, #tw{
+    display:inline;
+}
 </style>
     {% block additional_css %}
     {% endblock %}
@@ -153,17 +153,6 @@ padding-bottom:5px;
 
 </head>
   <body>
-    {% block fb %}
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-     {% endblock %}
-
     {% block navbar %}
     <div class="blog-masthead">
       <div class="container">
@@ -203,13 +192,10 @@ padding-bottom:5px;
 
 
     <div class="container">
-
-
-
-      {% block blog_left %}
-       <div class="col-sm-8 blog-main">
-        {% for post in posts %}
-         <div class="blog-post">
+    {% block blog_left %}
+      <div class="col-sm-8 blog-main">
+      {% for post in posts %}
+        <div class="blog-post">
 
 
          <a href="{{ post.get_absolute_url }}">
@@ -493,45 +479,53 @@ padding-bottom:5px;
 {% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe }}{% endif %}
 {% if post.text %}{% load markup %}{{ post.text|markdown|safe }}{% endif %}
 {% if post.content_video %}{% load markup %}{{ post.content_video|markdown|safe }}{% endif %}
-{% for category in post.category.all %}
-<a href="{% url "blogs.views.category" category.slug %}" style="text-decoration:none;"><div class="cate" style="background-color:{{ category.color }};position:relative;margin-top:10px;margin-bottom:10px;color:#fff;">&nbsp&nbsp{{ category.name }}</div></a>
-{% endfor %}
-         </div>
-         <hr>
-         <div class="media" id="heading">
-           <a class="pull-left" href="#">
-           {% if post.author.userprofile.avatar %}
-           {% thumbnail post.author.userprofile.avatar "64x64" crop="center" as im %}
-           <img src="{{ im.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }}" />{% endthumbnail %}
-           {% endif %}
-           </a>
-           <div class="media-body fontBlobon">
-             <h5 class="media-heading fontBlobon" style="margin-right: 10px;">{{ post.author.first_name }} {{ post.author.last_name }} <small>@{{ post.author.username }}</small>
+
+
+          {% block share %}
+        <div class="row">
+          <div class="pull-right" style="padding-top:10px;" >
+            <div class="addthis_toolbox addthis_default_style pull-right" style="margin-right:-15px;">
+              <div id="fb">
+                <a class="addthis_button_facebook_like" fb:like:href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" fb:like:layout="button_count" style="width:100px !important;height:20px !important;"></a>
+              </div>
+              <div id="tw">
+                <a class="addthis_button_tweet" tw:url="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" addthis:title="{{ post.title }}" style="height:20px !important;"></a>
+              </div>
+            </div>
+            <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
+            <script type="text/javascript" src="{{ STATIC_URL }}share/js/share.js#pubid=ra-512bd1f11b9d2efd"></script>
+          </div>
+        </div>
+          {% endblock %}
+
+
+          <div style="padding:5px;"></div>
+
+          {% for category in post.category.all %}
+          <a href="{% url "blogs.views.category" category.slug %}" style="text-decoration:none;">
+            <div class="cate" style="background-color:{{ category.color }};position:relative;margin-top:10px;margin-bottom:10px;color:#fff;">&nbsp&nbsp{{ category.name }}
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+        <hr>
+        <div class="media" id="heading">
+          <a class="pull-left" href="#">
+          {% if post.author.userprofile.avatar %}
+          {% thumbnail post.author.userprofile.avatar "64x64" crop="center" as im %}
+          <img src="{{ im.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }}" />{% endthumbnail %}
+          {% endif %}
+          </a>
+          <div class="media-body fontBlobon">
+            <h5 class="media-heading fontBlobon" style="margin-right: 10px;">{{ post.author.first_name }} {{ post.author.last_name }} <small>@{{ post.author.username }}</small>
              {% if post.author.userprofile.fan_page_access_token %}
-               <div class="fb-like" data-href="{{ post.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false">
-               </div>
+              <div class="fb-like" data-href="{{ post.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false">
+              </div>
              {% endif %}
-             </h5>
-             <p class="text-muted">{% trans "Published" %} {{ post.pub_date|naturaltime }}{% if post.source %} via <a href="{{ post.source }}" target="_blank">Source</a>{% endif %}</p>
-           </div>
-         </div>
-         <div id="infos" class="panel">
-
-           <div class="row">
-             <div class="col-xs-12">
-
-<div class="fb-like" data-href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" data-text="{{ post.title }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
-             </div>
-           </div>
-           <div class="row">
-             <div class="col-xs-12">
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-url="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" data-text="{{ post.title }}">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-             </div>
-           </div>
-         </div>
+            </h5>
+            <p class="text-muted">{% trans "Published" %} {{ post.pub_date|naturaltime }}{% if post.source %} via <a href="{{ post.source }}" target="_blank">Source</a>{% endif %}</p>
+          </div>
+        </div>
         {% endfor %}
          {% block pager %}
          <ul class="pager">
