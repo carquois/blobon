@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+    <HEAD>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" content=" AddThis is a free way to boost traffic back to your site by making it easier for visitors to share your content" />
+        <meta name="copyright" content="Copyright (c) 2011 Add This, LLC" />
+        <meta name="title" content="AddThis Social Bookmarking Sharing Button Widget" />
+        <link rel="shortcut icon" href="http://s7.addthis.com/static/t00/logo100100.png" />
+        <LINK href="bookmark041.css" rel="stylesheet" type="text/css">
+        <TITLE>AddThis Social Bookmarking Sharing Button Widget</TITLE>
+</head>
+
+<body>
+
+<div id="filter">
+    <label for="service-filter" style="position:absolute;left:-9999em;">Sharing Service Filter</label>
+    <input id="service-filter" type="text" size="30" maxlength="50" placeholder="Find a service..." />
+</div>
+<div id="main">
+    <div id="toolbox" class="addthis_toolbox addthis_default_style addthis_32x32_style">
+    </div>
+</div>
+<div id="details">
+    <p id="pgtitle">&nbsp;</p>
+    <p id="pgurl">&nbsp;</p>
+</div>
+<div id="ate-promo" align="center">
+    <h3>Share again!</h3>
+    <div id='psptb' class="addthis_toolbox addthis_default_style">
+        <a href="/" title="Facebook" onclick="addthis_sendto('facebook', addthis_config_msg, addthis_share_msg);return false;"><span class="at300bs at15nc at15t_facebook"><span class="at_a11y">Share on facebook</span></span></a>
+        <a href="/" title="Tweet This" onclick="addthis_sendto('twitter', addthis_config_msg, addthis_share_msg);return false;"><span class="at300bs at15nc at15t_twitter"><span class="at_a11y">Share on twitter</span></span></a>
+        <a id="pspmore" href="/"><span class="fake_addthis_button at300bs at15nc"></span></a>
+    <div class="atclear"></div></div>
+</div>
+
+
+<script type="text/javascript">
+    var url = window.location.href.split('#')[1],
+    lang = '';
+    if(url.search(/ui_language/)>-1)lang = url.split('ui_language%3D')[1].substr(0,2);/*operable hack to make langgs works*/
+    var addthis_config = {/*"data_track_clickback":true,*/
+        ui_language: lang
+    };
+    if(window.location.href.search(/at3frameclosereload/)>-1){
+        document.body.style.display = 'none';
+    }
+</script>
+<SCRIPT type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=addthis"></SCRIPT>
+<script>
+/* <![CDATA[ */
+
+var get=function(a){return document.getElementById(a);};var w=window,d=document;addthis.addEventListener("addthis.ready",function(){_ate.xf.listen();if((_ate.bro.msi&&document.compatMode=="BackCompat")){document.getElementById("service-filter").style.backgroundPosition="330px";document.getElementById("main").style.height="300px";}_ate.ajs(_atc.rsrcs.menujs);var a=new _ate.resource.Resource("widget32.css",_atc.rsrcs.widget32css,function(){return true;}).load();});addthis.addEventListener("addthis.expanded.data.share",function(a){window.addthis_share_msg=a.target;window.addthis_share_msg.title=_duc(window.addthis_share_msg.title);window.addthis_share_msg.url=_ate.track.mgu(_duc(window.addthis_share_msg.url),window.addthis_share_msg.url_transforms||{});get("pgtitle").innerHTML=addthis_share_msg.title;get("pgurl").innerHTML=addthis_share_msg.url=typeof addthis_share_msg.url=="object"?_duc(_ate.util.toKV(addthis_share_msg.url)):addthis_share_msg.url;var b=(a.target||{}).smd;if(b&&b.sta){_ate.track.uns(b.sta);}_ate.uid=_ate.cookie.rck("uid");});addthis.addEventListener("addthis.expanded.data.config",function(a){window.addthis_config_msg=window.addthis_config=a.target;window.addthis.init();});addthis.addEventListener("addthis.expanded.share.ui_pane",function(a){switch(a.target.ui_pane){case("image"):((document.getElementById("main")||{}).style||{}).display=((document.getElementById("filter")||{}).style||{}).display=((document.getElementById("details")||{}).style||{}).display="none";_ate.share.img(a.target.image_service||"pinterest_share",window.addthis_media_msg||null);break;default:((document.getElementById("main")||{}).style||{}).display=((document.getElementById("filter")||{}).style||{}).display=((document.getElementById("details")||{}).style||{}).display="block";}});addthis.addEventListener("addthis.expanded.data.media",function(a){window.addthis_media_msg=typeof a.target=="string"?_duc((a.target||"")).split(";"):new Array();});addthis.addEventListener("addthis.menu.share",function(a){if(!a||!a.data||!a.data.service){}else{_ate.xf.send(window.parent,"addthis.menu.share",{service:a.data.service,url:a.data.url});}});addthis.addEventListener("addthis.menu.ready",function(){if(!_ate.xf.upm){var b=d.location.href.search("#ats")>-1?"#":"?",k=_ate.util.rfromKV(d.location.href.split(b)[1]);k.atm=_duc(d.location.href.split("atm=")[1]||"").split("&")[0];_ate.ed.fire("addthis.expanded.data.share",k.ats);_ate.ed.fire("addthis.expanded.data.config",k.atc);_ate.ed.fire("addthis.expanded.data.media",k.atm);_ate.ed.fire("addthis.expanded.share.ui_pane",{ui_pane:((k.atc||{}).ui_pane||null)});}else{_ate.xf.send(window.parent,"addthis.expanded.bookmark","ready");}var l=get("service-filter"),h=new Array(),j,e,m=function(n){if(_atw.list[n]==undefined){return false;}var r={},q={},p=n.replace(/\./g,"_dot_"),i=_atw.list[n],s=true;if(n=="email"){i=_atw.lang((_atw.conf||{}).ui_language||_ate.lng(),4);}else{if(n=="print"){i=_atw.lang((_atw.conf||{}).ui_language||_ate.lng(),22);}else{if(n=="favorites"){i=_atw.lang((_atw.conf||{}).ui_language||_ate.lng(),5);}else{s=false;}}}r["a.at3winsvc_"+p]="";q["span.at300bs.at15nc.at15t_"+p]=_atw.css[n]?{style:_atw.css[n]}:"";var o=_ate.util.json2html(r);o.appendChild(_ate.util.json2html(q));o.appendChild(_ate.util.json2html({"span.at3winsvcname":i.replace("&nbsp;"," ")}));return o;},a=function(i){if(!(i.name&&i.url&&i.icon)){return;}_atw.list[i.code]=i.name;if(_atw.list_mun){w.list_mun[_ate.mun(i.code)]=i.code;}_atw.css[i.code]="background:url("+i.icon+") no-repeat left !important;";return i.code;},c=function(n){var q=window.toolbox.getElementsByTagName("a"),p=(n||"").toLowerCase();for(var o in q){if((q[o].className||"").replace("at3winsvc_","").replace(/_dot_/ig,".").indexOf(p)>-1||n==null){if(q[o].style){q[o].style.display="block";}}else{if(q[o].style){q[o].style.display="none";}}}},g=function(){if(_ate.xf.upm){_ate.xf.send(window.parent,"addthis.expanded.close",{expanded:"close"});}else{}};for(var f in _atw.list){h.push(f);}e=function(){if(!window.addthis_config_msg){return;}if(j){clearInterval(j);}var r=null,t=new Array(),u=null,y=new Array(),s=null,z=_atw.lang((_atw.conf||{}).ui_language||_ate.lng(),35),v,p,o,q,x;if(window.addthis_config_msg.services_expanded){r=window.addthis_config_msg.services_expanded.split(/\,\s*/);for(q in r){t[r[q]]=true;}}if(window.addthis_config_msg.services_exclude){u=window.addthis_config_msg.services_exclude.split(/\,\s*/);for(q in u){y[u[q]]=true;}}if(window.addthis_config_msg.services_custom){s=window.addthis_config_msg.services_custom;for(q in s){a(s[q]);h.push(s[q].code);}h.sort();}get("service-filter").setAttribute("placeholder",z);window.toolbox=get("toolbox");v=_ate.util.unqconcat((_ate.cookie.rck("uss")||"").split(","),_ate.util.unqconcat((window.addthis_options||"").replace(",more","").split(","),_atw.loc.split(",")));p=v.length;o=_ate.util.unqconcat(v,h);for(q in o){if(!o[q]||(r&&!t[o[q]])||(u&&y[o[q]])){continue;}x=m(o[q]);if(x!==false){if(q<p){x.style.fontWeight="bold";}x.href="#";if(o[q]=="pinterest_share"&&window.addthis_media_msg==""){continue;}window.toolbox.appendChild(x);x.onclick=function(){var F=(this.className||"").replace(/at3winsvc_/,"").replace(/_dot_/g,"."),E={pinterest_share:true,email:true},D={favorites:true,print:true},C,A,i,B;addthis_sendto(F,addthis_config_msg,addthis_share_msg);this.blur();if(D[F]&&_ate.share.inBm()&&_ate.xf.upm){_ate.xf.send(window.parent,"addthis.expanded.close",{expanded:"close"});}if(!_ate.xf.upm&&!E[F]){C=document.getElementById("filter");A=document.getElementById("ate-promo");i=document.getElementById("main");B=document.getElementById("details");if(C&&C.style){C.style.visibility="hidden";}if(i&&i.style){i.style.visibility="hidden";}if(B&&B.style){B.style.visibility="hidden";}if(A&&A.style){A.style.display="block";}}return false;};}}var n=function(){try{l.focus();l.select();}catch(i){}setTimeout(function(){if(l.value===""){}if(!_ate.bro.ffx){}l.onfocus=function(A){if(l.value==l.defaultValue){if(!_ate.bro.ffx){}}};l.onblur=function(A){if(l.value===""){}};l.onkeydown=function(B){B=B||window.event;var A=B.keyCode?B.keyCode:B.which;if(A&&A==27){g();return;}if(l.value==l.defaultValue&&A!=9){}};l.onkeyup=function(D){D=D||window.event;var A=D.keyCode?D.keyCode:D.which;if(A&&A==27){return;}else{if(A&&(A==13||A==9)){if(window.toolbox){var C=window.toolbox.getElementsByTagName("a");}else{return;}for(var B=0;B<C.length;B++){if((C[B].className||"").search(/at3winsvc_/i)!=-1&&C[B].style.display!="none"){if(A==9){return;}else{try{C[B].click();}catch(D){C[B].focus();}return;}}}}}c(l.value);};},0);};addthis.addEventListener("addthis.expanded.reopen",function(i){n();});n();};if(window.addthis_config_msg){e();}else{j=setInterval(e,25);}window.onkeypress=function(n){n=n||window.event;var i=n.keyCode?n.keyCode:n.which;if(i&&i==27){g();}};document.getElementById("pspmore").onclick=function(){document.getElementById("ate-promo").style.display="none";_ate.ed.fire("addthis.menu.ready");return false;};});/* ]]> */</script></body></html>

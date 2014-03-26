@@ -1,0 +1,102 @@
+<!DOCTYPE>
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+    <HEAD>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" content=" AddThis is a free way to boost traffic back to your site by making it easier for visitors to share your content" />
+        <meta name="copyright" content="Copyright (c) 2011 Add This, LLC" />
+        <link rel="shortcut icon" href="http://s7.addthis.com/static/t00/logo100100.png" />
+        <SCRIPT type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=addthis"></SCRIPT>
+        <STYLE type="text/css">
+            /* Footer 
+------------------------------------------------------------------- */
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #ccc;
+    padding: 6px 0;
+    font-size: 11px;
+    z-index: 1;
+}
+#footer a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #666;
+}
+#footer a:hover {
+    text-decoration: underline;
+    color: #000;
+}
+#atlogo-sm {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    background: url(//www.addthis.com/style/images/addthis-logo-footer.gif) no-repeat left;
+    padding-left: 10px;
+} 
+        </STYLE>
+    </HEAD>
+    <BODY>
+        <SCRIPT type="text/javascript">
+            addthis.addEventListener('addthis.ready',function() {
+                var kv = {};
+                window.addEventListener('message',function(event) {
+                    if(event.data.search('atimg_payload')!=0) return;
+                    if(kv.img)_ate.share.img(kv.img, event.data.split('atimg_payload')[1].split(';'));
+                },false);
+                window.opener.postMessage('atimg_request','*');
+                _atc.ver = 300; 
+                var d = document,
+                    w = window,
+                    tb = d.getElementById('toolbox'),
+                    sf = d.getElementById('service-filter');
+                kv = _ate.util.rfromKV(d.location.href.split('#')[1]);
+                addthis_product = "max-300";
+                addthis_share = as = kv.ats;
+                //if (!((as.passthrough||{}).pinterest_share || {}).media && !((as.passthrough||{}).pinterest || {}).media) delete services.pinterest_share; 
+                if((as.url_transforms||{}).remove)as.url_transforms.remove = _ate.util.otoCSV(as.url_transforms.remove).split(',');
+                as.imp_url = 0;
+                as.url = _duc(as.url);
+                as.title = _duc(as.title);
+                addthis_config = ac = kv.atc;
+                ac.ui_use_same_window = true;
+                ac.ui_window_panes = true;
+                    
+                var customCss = {};
+
+                var u = "/static/r07/atimg041.html";
+                if (window._gat) {
+                    var gaPageTracker = _gat._getTracker("UA-1170033-9");
+                    gaPageTracker._setDomainName("www.addthis.com");
+                    gaPageTracker._trackPageview(u);
+                }
+
+                // fix for fixed positioned elements for iphone/ipad
+                if(navigator.platform && (navigator.platform == 'iPad' || navigator.platform == 'iPhone' || navigator.platform == 'iPod')) {
+                    d.getElementById("header").style.position = "static";
+                    d.getElementById("footer").style.position = "static";
+                    d.getElementById("content").style.paddingTop = "0px";
+                };
+
+                /*Google Analytics*/
+                var gaJsHost = (("https:" == d.location.protocol) ? "https://ssl." : "http://www."),
+                    gaScript = d.createElement('script');
+                gaScript.setAttribute('type', 'text/javascript');
+                gaScript.setAttribute('src', gaJsHost+"google-analytics.com/ga.js");
+                d.body.appendChild(gaScript);
+            });
+        </SCRIPT>
+        <DIV id="footer">
+            <DIV class="container">
+                <A href="http://www.addthis.com/personalize" class="whatsthis">Settings</A>
+                <A target="_blank" href="http://www.addthis.com/privacy" class="privacy">Privacy</A>
+                <A title="addthis.com" target="_blank" href="http://www.addthis.com/" id="atlogo-sm">AddThis</A>
+            </DIV>
+        </DIV>
+
+    </BODY>
+</HTML>
+
+
