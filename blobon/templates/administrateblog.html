@@ -1941,7 +1941,7 @@ border-radius: 4px;
                 <tr>
                   <td>{{ category.name }}
                   </td>
-                  <td>{{ category.description }}</td>
+                  <td>{% if category.description %}{{ category.description }}{% endif %}</td>
                 </tr>
               {% endfor %}
               </tbody>
