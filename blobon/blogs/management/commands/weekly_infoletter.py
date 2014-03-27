@@ -17,7 +17,7 @@ from accounts.views import APP_KEY, APP_SECRET
 
 class Command(BaseCommand):
   args = '<info_email_id info_email_id ...>'
-  help = 'Auto send daily info-letter'
+  help = 'Auto send daily mailing list'
 
   def handle(self, *args, **options):
     for info_email_id in args:

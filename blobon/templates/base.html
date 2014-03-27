@@ -381,7 +381,7 @@
     <div style="  margin-bottom: 20px;"></div>
 
     <div class="pageProfilEntete fondDegrade coinsRonds pad20">
-      <h3>{% trans "Subscribe to " %}{{ blog.title }}{% trans " info-letters" %}</h3>
+      <h3>{% trans "Subscribe to" %} {{ blog.title }} {% trans "mailing list" %}</h3>
       <form method="post" id="subscribe_form" class="form-horizontal" role="form" action="{% url 'blogs.views.subscribe_to_infoletter' blog.slug %}">
         {% csrf_token %}
         <div class="form-group">
