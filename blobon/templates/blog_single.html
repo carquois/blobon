@@ -334,8 +334,9 @@
 {% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe }}{% endif %}
 {% if post.text %}{% load markup %}{{ post.text|markdown|safe }}{% endif %}
 {% if post.content_video %}{% load markup %}{{ post.content_video|markdown|safe }}{% endif %}
+<div class="row">
 <div class="pull-right" style="padding-top:10px;" >
-<div class="addthis_toolbox addthis_default_style pull-right" style="margin-right:-30px;">
+<div class="addthis_toolbox addthis_default_style pull-right" style="margin-right:-15px;">
     <div id="fb" style="overflow:visible;">
     <a class="addthis_button_facebook_like" fb:like:layout="button_count" style="width:100px !important;height:20px !important;"></a>
     </div>
@@ -346,13 +347,12 @@
     <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
     <script type="text/javascript" src="{{ STATIC_URL }}share/js/share.js#pubid=ra-512bd1f11b9d2efd"></script>
 </div>
+</div>
 <div style="padding:5px;"></div>
 
-
 {% for category in post.category.all %}
-<a href="{% url "blogs.views.category" category.slug %}" style="text-decoration:none;"><div class="cate" style="background-color:{{ category.color }};position:relative;margin-bottom:10px;color:#fff;">&nbsp&nbsp{{ category.name }}</div></a>
+<a href="{% url "blogs.views.category" category.slug %}" style="text-decoration:none;display:none;"><div class="cate" style="background-color:{{ category.color }};position:relative;margin-bottom:10px;color:#fff;">&nbsp&nbsp{{ category.name }}</div></a>
 {% endfor %}
-
          </div>
          <hr>
          <div class="media" id="heading">
