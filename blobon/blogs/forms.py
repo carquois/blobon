@@ -170,7 +170,7 @@ class CategoriesForm(ModelForm):
                                                     'type': 'text',
                                                     'rows': '5',
                                                     'class': "form-control setting_form input-block-level mceNoEditor"}))
-    slug = CharField(widget=forms.TextInput(attrs={'placeholder': _('Slug'),
+    slug = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Slug'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level"}))
     color = CharField(required=True, widget=forms.TextInput(attrs={'readonly':'readonly', 'placeholder': _('Your category color'),

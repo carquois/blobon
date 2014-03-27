@@ -172,7 +172,8 @@ padding-top:10px;
 
 
     {% endblock %}
-
+    {% block breadcrumbs %}
+    {% endblock %}
 
     {% block blog_header %}
     <div class="topimg" style="text-align:center;">
@@ -200,7 +201,6 @@ padding-top:10px;
 
          <a href="{{ post.get_absolute_url }}">
            <h2 class="blog-post-title">{{ post.title }}</h2>
-           <p class="blog-post-meta">{{ post.pub_date }}&nbsp&nbsp{{ post.author }}</p></a>
            {% if post.youtube_id %}
            <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
            {% else %}
@@ -501,30 +501,8 @@ padding-top:10px;
 
           <div style="padding:5px;"></div>
 
-          {% for category in post.category.all %}
-          <a href="{% url "blogs.views.category" category.slug %}" style="text-decoration:none;">
-            <div class="cate" style="background-color:{{ category.color }};position:relative;margin-top:10px;margin-bottom:10px;color:#fff;">&nbsp&nbsp{{ category.name }}
-            </div>
-          </a>
-          {% endfor %}
-        </div>
+        <p>{{ post.pub_date|naturaltime }}{% if post.source %} via <a href="{{ post.source }}" target="_blank">Source</a> | <a href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}"><span class="glyphicon glyphicon-comment"></span> {% trans "Comment" %}</a>{% endif %}</p>
         <hr>
-        <div class="media" id="heading">
-          <a class="pull-left" href="#">
-          {% if post.author.userprofile.avatar %}
-          {% thumbnail post.author.userprofile.avatar "64x64" crop="center" as im %}
-          <img src="{{ im.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }}" />{% endthumbnail %}
-          {% endif %}
-          </a>
-          <div class="media-body fontBlobon">
-            <h5 class="media-heading fontBlobon" style="margin-right: 10px;">{{ post.author.first_name }} {{ post.author.last_name }} <small>@{{ post.author.username }}</small>
-             {% if post.author.userprofile.fan_page_access_token %}
-              <div class="fb-like" data-href="{{ post.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false">
-              </div>
-             {% endif %}
-            </h5>
-            <p class="text-muted">{% trans "Published" %} {{ post.pub_date|naturaltime }}{% if post.source %} via <a href="{{ post.source }}" target="_blank">Source</a>{% endif %}</p>
-          </div>
         </div>
         {% endfor %}
          {% block pager %}

@@ -47,7 +47,6 @@
 
 
            <h2 class="blog-post-title">{{ post.title }}</h2>
-           <p class="blog-post-meta">{{ post.pub_date }}&nbsp&nbsp{{ post.author }}</p>
            {% if post.video %}
            <video width="620" height="440" controls>
              <source src="{{ MEDIA_URL }}{{ post.video }}" type="video/mp4">

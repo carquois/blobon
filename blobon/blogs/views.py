@@ -523,6 +523,7 @@ def newcategory(request, slug):
           category = form.save(commit=False)
           category.author = request.user
           category.blog = blog
+          category.slug = category.name
           category.save()
           return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
       return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
@@ -562,12 +563,12 @@ def createblog(request):
           cat4 = "_Design"
           cat5 = "_Food"
           cat6 = "_Movie"
-          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Music", slug=(blog.slug + cat1), color="#CC0000")
-          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Fashion", slug=(blog.slug + cat2), color="#CC0066")
-          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Travel", slug=(blog.slug + cat3), color="#009900")
-          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Design", slug=(blog.slug + cat4), color="#669999")
-          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Food", slug=(blog.slug + cat5), color="#4c660f")
-          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Movie", slug=(blog.slug + cat6), color="#0033CC")
+          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Music", slug= cat1, color="#CC0000")
+          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Fashion", slug= cat2, color="#CC0066")
+          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Travel", slug= cat3, color="#009900")
+          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Design", slug= cat4, color="#669999")
+          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Food", slug= cat5, color="#4c660f")
+          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Movie", slug= cat6, color="#0033CC")
           messages.add_message(request, messages.INFO, _(u"Congratulation, you just created a blog"))
           return HttpResponseRedirect(reverse('blogs.views.administrateblog', args=(blog.slug,)))
       else:

@@ -1,23 +1,20 @@
 # -*- coding: utf-8 -*-
 import datetime
 from south.db import db
-from south.v2 import SchemaMigration
+from south.v2 import DataMigration
 from django.db import models
 
-
-class Migration(SchemaMigration):
+class Migration(DataMigration):
 
     def forwards(self, orm):
-        # Adding field 'Post.video_ogg'
-        db.add_column('blogs_post', 'video_ogg',
-                      self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True),
-                      keep_default=False)
+        "Write your forwards methods here."
+        # Note: Remember to use orm['appname.ModelName'] rather than "from appname.models..."
 
+        for cat in orm.Category.objects.all():
+          cat.delete()
 
     def backwards(self, orm):
-        # Deleting field 'Post.video_ogg'
-        db.delete_column('blogs_post', 'video_ogg')
-
+        "Write your backwards methods here."
 
     models = {
         'auth.group': {
@@ -117,7 +114,7 @@ class Migration(SchemaMigration):
             'description': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '140'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '140', 'blank': 'True'}),
             'top_level_cat': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['blogs.Category']", 'null': 'True', 'blank': 'True'})
         },
         'blogs.comment': {
@@ -265,4 +262,5 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['blogs']
+    complete_apps = ['auth', 'blogs']
+    symmetrical = True

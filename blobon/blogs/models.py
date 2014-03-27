@@ -329,7 +329,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=140, blank=True)
     created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#000000", blank=False)
-    top_level_cat = models.ForeignKey('self',  null=True, blank=True)
+    parent_category = models.ForeignKey('self',  null=True, blank=True)
     def __unicode__(self):
         return self.name
 #    def save(self, *args, **kwargs):

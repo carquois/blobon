@@ -21,3 +21,15 @@
     <link rel="canonical" href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}/cat/{{ category.slug }}{% else %}http://{{ blog.slug }}.blobon.com/cat/{{ category.slug }}{% endif %}" />
     {% endblock %}
 
+    {% block breadcrumbs %}
+
+    <div class="container" style="padding-top:10px;">
+
+      <ol class="breadcrumb">
+        <li><a href="http://{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}">{% trans "Home" %}</a></li>
+        <li class="active">{{ category.name }}</li>
+      </ol>
+
+    </div>
+    {% endblock %}
+

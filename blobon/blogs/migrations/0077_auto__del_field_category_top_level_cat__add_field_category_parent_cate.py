@@ -8,15 +8,23 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Post.video_ogg'
-        db.add_column('blogs_post', 'video_ogg',
-                      self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True),
+        # Deleting field 'Category.top_level_cat'
+        db.delete_column('blogs_category', 'top_level_cat_id')
+
+        # Adding field 'Category.parent_category'
+        db.add_column('blogs_category', 'parent_category',
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['blogs.Category'], null=True, blank=True),
                       keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting field 'Post.video_ogg'
-        db.delete_column('blogs_post', 'video_ogg')
+        # Adding field 'Category.top_level_cat'
+        db.add_column('blogs_category', 'top_level_cat',
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['blogs.Category'], null=True, blank=True),
+                      keep_default=False)
+
+        # Deleting field 'Category.parent_category'
+        db.delete_column('blogs_category', 'parent_category_id')
 
 
     models = {
@@ -117,8 +125,8 @@ class Migration(SchemaMigration):
             'description': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '140'}),
-            'top_level_cat': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['blogs.Category']", 'null': 'True', 'blank': 'True'})
+            'parent_category': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['blogs.Category']", 'null': 'True', 'blank': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '140', 'blank': 'True'})
         },
         'blogs.comment': {
             'Meta': {'object_name': 'Comment'},
