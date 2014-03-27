@@ -54,7 +54,7 @@
     <form enctype="multipart/form-data" action="{% url 'blogs.views.editcategory' category.id %}" role="form" method="post" id=savedcategory>{% csrf_token %}
     <div class="form-group">{{ form.name.label_tag }} :{{ form.name }}</div>  
     <div class="form-group">{{ form.description.label_tag }} :{{ form.description }}</div>
-    <div class="form-group" style="display:none;">{{ form.slug.label_tag }} :{{ form.slug }}</div>
+    <div class="form-group">{{ form.slug.label_tag }} :{{ form.slug }}</div>
                 <div class="form-group">
              <div class="row">
                <div class="col-md-8 form_section" id="color">
@@ -92,6 +92,19 @@
       $(function () {
         $('#submitsavedcategory').tooltip();
         $('#cancel_edit_category').tooltip();
+      });
+    </script>
+
+<script>
+      $(document).ready(function(){
+        $('#id_slug').keyup(function() {
+        if ($(this).val() != '') {
+          $('#submitsavedcategory').prop("disabled", false);
+          }
+        else {
+          $('#submitsavedcategory').prop("disabled", true);
+        }
+        });
       });
     </script>
 
