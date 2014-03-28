@@ -41,14 +41,19 @@
     {% endfor %}
 {% endif %}
 
+{% regroup cats by parent_category as parent_category_list %}
 
-{% for tlc in top_level_cats %}
-{{ tlc.name }}
-{% for clc in tlc.child_category.all %}
-{{ clc.name }}
+<ul style="display:none;">
+{% for parent_category in parent_category_list %}
+    <li>{{ parent_category.grouper }}
+    <ul>
+        {% for item in parent_category.list %}
+          <li>{{ item.name }} - {{item.slug}}</li>
+        {% endfor %}
+    </ul>
+    </li>
 {% endfor %}
-{% endfor %}
-
+</ul>
 
 
           <div class="panel panel-primary" id="new_cat_form" style="display: none">
@@ -94,7 +99,7 @@
 
           {% for category, sub_categories in categories.items %}
           <div class="panel panel-default">
-            <div class="panel-heading"><b>{% if not category.parent_category %}<span class="glyphicon glyphicon-star"></span>{% trans " Main category : " %}{% else %}{% trans "Category : " %}{% endif %}{{ category.name }}</b><a href="#" class="btn btn-default btn-xs pull-right" id="add_new_category" title="{% trans "Add a New Category" %}">{% trans "Add new" %}</a></div>
+            <div class="panel-heading"><b>{% trans "Category : " %}{{ category.name }}</b>{% if category.parent_category %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% trans "Parent category : " %}{{ category.parent_category }}{% endif %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_category" title="{% trans "Add a New Category" %}">{% trans "Add new" %}</a></div>
             <div class="panel-body">
 
 

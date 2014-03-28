@@ -654,12 +654,13 @@ def administratecategories(request, slug):
       categories_form = CategoriesForm(blog=blog)
 #      categories_top = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).order_by('-id')   
       top_level_cats = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).order_by('-id')
+      cats = Category.objects.filter(blog=blog).order_by('-parent_category')
       categories ={}
       map(lambda c: categories.setdefault(c.parent_category, []).append(c),\
           Category.objects.filter(blog=blog).filter(parent_category__isnull=False)\
               .select_related('parent_category'))
       return render_to_response('administratecategories.html',
-                                {'top_level_cats':top_level_cats, 'blog': blog, 'categories': categories, 'categories_form': categories_form, 'categories_top': categories_top,},
+                                {'cats': cats,'top_level_cats':top_level_cats, 'blog': blog, 'categories': categories, 'categories_form': categories_form, 'categories_top': categories_top,},
                                 context_instance=RequestContext(request))
 
 
