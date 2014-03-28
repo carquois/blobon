@@ -377,10 +377,11 @@
            {% endif %}
            </a>
            <div class="btn-group pull-right">
-             <a href="{{ prev_post.get_absolute_url }}" class="btn btn-default">
-               <span class="glyphicon glyphicon-chevron-left"></span>
+             <a href="{{ prev_post.get_absolute_url }}" class="btn btn-sm btn-default prev_next" title="{% trans "View previous post" %}">
+               <span class="glyphicon glyphicon-chevron-left"></span>{% trans "Previous" %}
              </a>
-             <a href="{{ next_post.get_absolute_url }}" class="btn btn-default">
+             <a href="{{ next_post.get_absolute_url }}" class="btn btn-sm btn-default prev_next" title="{% trans "View next post" %}">
+                {% trans "Next" %}
                <span class="glyphicon glyphicon-chevron-right"></span>
              </a>
            </div>
@@ -545,6 +546,16 @@ $('#new_comment').validate({
 });
 });
 </script>
+
+
+    <script type="text/javascript">
+      $(function () {
+        $(".prev_next").tooltip({container: 'body', placement: 'bottom'});
+      });
+    </script>
+
+
+
     <script type="text/javascript">
       $(function () {
         $('#delete_comment').tooltip({container: 'body', placement: 'top'});
