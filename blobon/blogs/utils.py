@@ -31,7 +31,7 @@ def unique_slugify(instance, value, slug_field_name='slug', queryset=None,
     # Create the queryset if one wasn't explicitly provided and exclude the
     # current instance from the queryset.
     if queryset is None:
-        queryset = instance.__class__._default_manager.all()
+        queryset = instance.__class__._default_manager.filter(blog=instance.blog)
     if instance.pk:
         queryset = queryset.exclude(pk=instance.pk)
 
