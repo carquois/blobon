@@ -7,6 +7,9 @@
     {% block open-graphs %}
     <title>{% block title %}{{ post.title }}{% endblock %}</title>
 
+
+    <meta name="description" content="{% if post.content %}{{ post.content|slice:":225" }}{% else %}{% if post.text %}{{ post.text|slice:":225" }}{% else %}{% if post.content_video %}{{ post.content_video|slice:":225" }}{% else %}{% if blog.description %}{{ blog.description|slice:":225" }}{% else %}{% if blog.short_description %}{{ blog.short_description}}{% endif %}{% endif %}{% endif %}{% endif %}{% endif %}">
+
     <!-- Le open graphs tags -->
     <meta property="og:title" content="{{ post.title }}" />
     <meta property="og:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" />
@@ -333,21 +336,33 @@
 {% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe }}{% endif %}
 {% if post.text %}{% load markup %}{{ post.text|markdown|safe }}{% endif %}
 {% if post.content_video %}{% load markup %}{{ post.content_video|markdown|safe }}{% endif %}
-<div class="row">
-<div class="pull-right" style="padding-top:10px;" >
-<div class="addthis_toolbox addthis_default_style pull-right" style="margin-right:-15px;">
-    <div id="fb" style="overflow:visible;">
-    <a class="addthis_button_facebook_like" fb:like:layout="button_count" style="width:100px !important;height:20px !important;"></a>
-    </div>
-    <div id="tw">
-    <a class="addthis_button_tweet" style="height:20px !important;"></a>
-    </div>
-    </div>
-    <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
-    <script type="text/javascript" src="{{ STATIC_URL }}share/js/share.js#pubid=ra-512bd1f11b9d2efd"></script>
-</div>
-</div>
-<div style="padding:5px;"></div>
+
+
+
+
+
+
+        <div class="row" style="padding-bottom:10px;">
+          <div class="col-xs-6 col-xs-offset-6" style="padding-top:10px;padding-left:30px;" >
+            <div class="addthis_toolbox addthis_default_style" style="margin-right:-15px;">
+              <div id="tw">
+                <a class="addthis_button_tweet" style="width:90px;!important;height:20px !important;"></a>
+              </div>
+              <div id="fb_share">
+                <a class="addthis_button_facebook_share" fb:share:layout="button" style="width:75px !important;height:20px !important;padding:none;"></a>
+              </div>
+              <div id="fb">
+                <a class="addthis_button_facebook_like" fb:like:href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" fb:like:layout="button_count" style="width:100px !important;height:20px !important;"></a>
+              </div>
+            </div>
+            <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
+            <script type="text/javascript" src="{{ STATIC_URL }}share/js/share.js#pubid=ra-512bd1f11b9d2efd"></script>
+          </div>
+        </div>
+
+
+
+
 
 {% for category in post.category.all %}
 <a href="{% url "blogs.views.category" category.slug %}" style="text-decoration:none;display:none;"><div class="cate" style="background-color:{{ category.color }};position:relative;margin-bottom:10px;color:#fff;">&nbsp&nbsp{{ category.name }}</div></a>
