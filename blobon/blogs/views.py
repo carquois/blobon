@@ -25,7 +25,9 @@ from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, Em
 from django.forms.models import modelformset_factory
 
 from django.core.mail import send_mail
+from django.views.decorators.cache import never_cache
 
+@never_cache
 def index(request):
       request.subdomain = None
       host = request.META.get('HTTP_HOST', '')
