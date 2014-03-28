@@ -52,6 +52,7 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <form enctype="multipart/form-data" action="{% url 'blogs.views.editcategory' category.id %}" role="form" method="post" id=savedcategory>{% csrf_token %}
+    <div class="form-group">{{ form.parent_category.label_tag }} :{{ form.parent_category }}</div>
     <div class="form-group">{{ form.name.label_tag }} :{{ form.name }}</div>  
     <div class="form-group">{{ form.description.label_tag }} :{{ form.description }}</div>
     <div class="form-group">{{ form.slug.label_tag }} :{{ form.slug }}</div>

@@ -329,13 +329,13 @@ class Category(models.Model):
     slug = models.SlugField(max_length=140, blank=True)
     created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#000000", blank=False)
-    parent_category = models.ForeignKey('self',  null=True, blank=True)
+    parent_category = models.ForeignKey('self',  null=True, blank=True, related_name='child_category')
     def __unicode__(self):
         return self.name
-#    def save(self, *args, **kwargs):
-#        if not self.slug:
-#	    unique_slugify(self, self.name)
-#        super(Category, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if not self.slug:
+	    unique_slugify(self, self.name)
+        super(Category, self).save(*args, **kwargs)
 
 class Tag(models.Model):
     author = models.ForeignKey(User)

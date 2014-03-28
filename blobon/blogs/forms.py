@@ -178,7 +178,14 @@ class CategoriesForm(ModelForm):
                                                     'class': "form-control setting_form input-block-level"}))
     class Meta:
         model = Category
-        fields = ('name','description','slug','color', )
+        exclude=('author', ' parent_category',)
+        fields = ('name','description','slug','color','parent_category', )
+    def __init__(self, *args, **kwargs):
+        blog = kwargs.pop('blog', None)
+        super(CategoriesForm, self).__init__(*args, **kwargs)
+        if blog:
+            self.fields['parent_category'].queryset = Category.objects.filter(blog=blog)
+
 
 
 class PostForm(ModelForm):

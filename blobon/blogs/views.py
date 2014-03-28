@@ -173,6 +173,8 @@ def category(request, slug):
                                   {'form': form, 'blog': blog,'posts': posts, 'category': category,},
                                   context_instance=RequestContext(request))
 
+
+
 def testbloggab(request):
       blog = Blog.objects.get(slug='gab')
       posts = paginate(request,
@@ -523,7 +525,6 @@ def newcategory(request, slug):
           category = form.save(commit=False)
           category.author = request.user
           category.blog = blog
-          category.slug = category.name
           category.save()
           return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
       return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
@@ -646,11 +647,22 @@ def administratecomments(request, slug):
 @login_required
 def administratecategories(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      categories = Category.objects.filter(blog=blog).order_by('-id')
-      categories_form = CategoriesForm()
+#      categories = Category.objects.filter(blog=blog).order_by('-id')
+      categories_top = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).order_by('-id')
+#      categories_child = Category.objects.filter(blog=blog).exclude(parent_category__isnull=True).order_by('-id')
+#      categories_middle = Category.objects.filter(blog=blog).exclude(parent_category__isnull=True).order_by('-id')
+      categories_form = CategoriesForm(blog=blog)
+#      categories_top = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).order_by('-id')   
+      top_level_cats = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).order_by('-id')
+      cats = Category.objects.filter(blog=blog).order_by('-parent_category')
+      categories ={}
+      map(lambda c: categories.setdefault(c.parent_category, []).append(c),\
+          Category.objects.filter(blog=blog).filter(parent_category__isnull=False)\
+              .select_related('parent_category'))
       return render_to_response('administratecategories.html',
-                                {'blog': blog, 'categories': categories, 'categories_form': categories_form},
+                                {'cats': cats,'top_level_cats':top_level_cats, 'blog': blog, 'categories': categories, 'categories_form': categories_form, 'categories_top': categories_top,},
                                 context_instance=RequestContext(request))
+
 
 @login_required
 def administratetags(request, slug):
@@ -820,7 +832,7 @@ def editcategory(request, id):
             form.save()
             return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
       else:
-        form = CategoriesForm(instance=category,)
+        form = CategoriesForm(instance=category,blog=blog)
       return render_to_response('editcategory.html',
                                 {'blog': blog, 'form': form,'category': category },
                                 context_instance=RequestContext(request))

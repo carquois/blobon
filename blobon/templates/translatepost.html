@@ -55,6 +55,7 @@
   <div class="panel-body">
     <form enctype="multipart/form-data" action="{% url 'blogs.views.translatepost' post.id %}" role="form" method="post" id=translatedpost>{% csrf_token %}
     <div class="fields" style="display: none;">{{ form.layout_type }}</div>
+    <div class="fields" style="display: none;">{{ form.youtube_id }}</div>
     <div class="fields">{{ form.title.label_tag }} :{{ form.title }}</div>
     <div class="fields">{{ form.translated_title.label_tag }} :{{ form.translated_title }}</div>
     {% if post.layout_type == "s" %}
