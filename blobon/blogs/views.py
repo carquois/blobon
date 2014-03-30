@@ -1226,7 +1226,7 @@ def newcomment(request, id):
      if blog.moderator_email:
        mailto = blog.moderator_email
      else:
-       mailto = secondmoderator.email
+       mailto = blog.creator.email
      blog_title = blog.title
      slug = blog.slug
      if request.method == 'POST':
