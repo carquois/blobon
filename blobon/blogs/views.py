@@ -695,7 +695,7 @@ def administratecategories(request, slug):
 def administratetags(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       tags = Tag.objects.filter(blog=blog).order_by('-id')
-      return render_to_response('administratetags.html',
+      return render_to_response('blogs/administratetags.html',
                                 {'blog': blog, 'tags': tags, },
                                 context_instance=RequestContext(request))
 
@@ -715,7 +715,7 @@ def administratesettings(request, slug):
             return HttpResponseRedirect(reverse('blogs.views.administrateblog', args=(blog.slug,)))
       else:
         form = SettingsForm(instance=blog,)
-      return render_to_response('administratesettings.html',
+      return render_to_response('blogs/administratesettings.html',
                                 {'blog': blog, 'form': form, },
                                 context_instance=RequestContext(request))
 
@@ -727,7 +727,7 @@ def administrateemails(request, slug):
       subscriptions = Subscription.objects.filter(blog=blog).order_by('-email')
       form = EmailForm()
       subs_form = SubscriptionForm()
-      return render_to_response('administrateemails.html',
+      return render_to_response('blogs/administrateemails.html',
                                 {'subs_form': subs_form, 'blog': blog, 'info_emails': info_emails, 'form': form,'subscriptions': subscriptions,},
                                 context_instance=RequestContext(request))
 
@@ -749,12 +749,12 @@ def editpost(request, id):
               return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
             else:
               form = PostForm(instance=post,)
-              return render_to_response('editpost.html',
+              return render_to_response('blogs/editpost.html',
                                        {'blog': blog, 'form': form,'post': post,'categories': categories, },
                                        context_instance=RequestContext(request))
       else:
         form = PostForm(instance=post, blog=blog)
-      return render_to_response('editpost.html',
+      return render_to_response('blogs/editpost.html',
                                 {'blog': blog, 'form': form,'post': post, 'categories': categories, },
                                 context_instance=RequestContext(request))
 
@@ -771,12 +771,12 @@ def editpage(request, id):
             return HttpResponseRedirect(reverse('blogs.views.administratepages', args=(blog.slug,)))
           else:
             form = PageForm(instance=page,)
-            return render_to_response('editpage.html',
+            return render_to_response('blogs/editpage.html',
                                       {'blog': blog, 'form': form,'page': page, },
                                       context_instance=RequestContext(request))
       else:
         form = PageForm(instance=page)
-      return render_to_response('editpage.html',
+      return render_to_response('blogs/editpage.html',
                                 {'blog': blog, 'form': form,'page': page, },
                                 context_instance=RequestContext(request))
 @login_required
@@ -804,7 +804,7 @@ def translatepost(request, id):
               return HttpResponseRedirect(reverse('blogs.views.translation', args=(blog.slug,)))
       else:
         form = PostForm(instance=post,)
-      return render_to_response('translatepost.html',
+      return render_to_response('blogs/translatepost.html',
                                 {'blog': blog, 'form': form,'post': post },
                                 context_instance=RequestContext(request))
 
@@ -835,7 +835,7 @@ def quicktranslation(request, slug):
                 return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
         else:
           form = PostForm(instance=post,)
-        return render_to_response('quicktranslation.html',
+        return render_to_response('blogs/quicktranslation.html',
                                   {'blog': blog, 'form': form,'post': post },
                                   context_instance=RequestContext(request))
 
@@ -845,7 +845,7 @@ def translation(request, slug):
       posts = paginate(request,
                        Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date'),
                        15)
-      return render_to_response('translation.html',
+      return render_to_response('blogs/translation.html',
                                 {'blog': blog, 'posts': posts, },
                                 context_instance=RequestContext(request))
 
@@ -860,7 +860,7 @@ def editcategory(request, id):
             return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
       else:
         form = CategoriesForm(instance=category,blog=blog)
-      return render_to_response('editcategory.html',
+      return render_to_response('blogs/editcategory.html',
                                 {'blog': blog, 'form': form,'category': category },
                                 context_instance=RequestContext(request))
 
@@ -875,7 +875,7 @@ def editemail(request, id):
             return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
       else:
         form = EmailForm(instance=info_email,)
-      return render_to_response('editemail.html',
+      return render_to_response('blogs/editemail.html',
                                 {'blog': blog, 'form': form,'info_email': info_email },
                                 context_instance=RequestContext(request))
 
@@ -883,7 +883,7 @@ def editemail(request, id):
 def view_info_letter(request, id):
       info_email = get_object_or_404(Info_email, id=id)
       blog = info_email.blog
-      return render_to_response('view_info_letter.html',
+      return render_to_response('blogs/view_info_letter.html',
                                 {'blog': blog,'info_email': info_email },
                                 context_instance=RequestContext(request))
 
@@ -903,7 +903,7 @@ def fastedit(request, slug):
 #            return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
 #      else:
 #        formset = PostFormset(queryset=Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date')[:40])
-      return render_to_response('fastedit.html',
+      return render_to_response('blogs/fastedit.html',
                                 {'blog': blog, 'posts': posts},
                                 context_instance=RequestContext(request))
 
@@ -921,7 +921,7 @@ def fasteditpost(request, id):
 #                                  context_instance=RequestContext(request))
       else:
         form = PostForm(instance=post,)
-      return render_to_response('fasteditpost.html',
+      return render_to_response('blogs/fasteditpost.html',
                                 {'blog': blog, 'form': form,'post': post },
                                 context_instance=RequestContext(request))
 
@@ -939,7 +939,7 @@ def createpage(request, slug):
           return HttpResponseRedirect(reverse('blogs.views.administratepages', args=(blog.slug,)))
       else:
         form = PageForm() 
-        return render_to_response('createpage.html',
+        return render_to_response('blogs/createpage.html',
                                   {'blog': blog, 'form': form,},
                                   context_instance=RequestContext(request))
 
@@ -980,10 +980,10 @@ def submit(request):
       image = request.GET.get('media', '') 
       is_video = request.GET.get('is_video', '') 
       form = SubmitForm(initial={'source':source, 'title':title, 'image': image, 'is_video':is_video})
-      return render_to_response('submit.html', {'image': image, 'form': form, 'is_video': is_video}, context_instance=RequestContext(request))
+      return render_to_response('blogs/submit.html', {'image': image, 'form': form, 'is_video': is_video}, context_instance=RequestContext(request))
     else:
       form = SubmitForm()
-    return render_to_response('submit.html', {'form': form}, context_instance=RequestContext(request))
+    return render_to_response('blogs/submit.html', {'form': form}, context_instance=RequestContext(request))
 
 
 @login_required
@@ -1121,7 +1121,7 @@ def signalcomment(request, id):
       from django.template.loader import get_template
       from django.template import Context
       plaintext = get_template('signalemail.txt')
-      htmly     = get_template('signalemail.html')
+      htmly     = get_template('blogs/signalemail.html')
 
       d = Context({ 'comment_id': comment.id, 'blog': blog.title, 'slug': blog.slug , 'comment': comment, 'post': comment.post, 'name': comment.name, 'email': comment.email, 'website': comment.website, })
 
@@ -1159,8 +1159,8 @@ def subscribe_to_infoletter(request, slug):
             messages.add_message(request, messages.INFO, _(u"A new subscriber has been added to your blog"))
             return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
           else:
-            return render_to_response('thanks.html', {'blog': blog,}, context_instance=RequestContext(request))
-      return render_to_response('subscription.html', {'form': form, 'blog': blog,}, context_instance=RequestContext(request))
+            return render_to_response('blogs/thanks.html', {'blog': blog,}, context_instance=RequestContext(request))
+      return render_to_response('blogs/subscription.html', {'form': form, 'blog': blog,}, context_instance=RequestContext(request))
 
 @login_required
 def create_info_email(request, slug):
@@ -1174,7 +1174,7 @@ def create_info_email(request, slug):
           email.status = "D"
           email.save()
           return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
-      return render_to_response('administrateblog.html', {'form': form})
+      return render_to_response('blogs/administrateblog.html', {'form': form})
 
 @login_required
 def send_email_now(request, id):
@@ -1220,17 +1220,17 @@ def password(request, slug):
            return HttpResponseRedirect(reverse('blogs.views.index'))
          else:
            messages.add_message(request, messages.INFO, _(u"The password didn't match. Please try again."))
-           return render_to_response('password.html',
+           return render_to_response('blogs/password.html',
                                      {'form': form,'blog': blog,},
                                       context_instance=RequestContext(request))
        else:
          form = PasswordForm()
-         return render_to_response('password.html',
+         return render_to_response('blogs/password.html',
                                    {'form': form,'blog': blog,},
                                    context_instance=RequestContext(request))
      else:
        form = PasswordForm()
-       return render_to_response('password.html',
+       return render_to_response('blogs/password.html',
                                  {'form': form,'blog': blog,},
                                  context_instance=RequestContext(request))
 def passwordsingle(request, id):
@@ -1252,17 +1252,17 @@ def passwordsingle(request, id):
            return HttpResponseRedirect(reverse('blogs.views.single', args=(post.base62id,)))
          else:
            messages.add_message(request, messages.INFO, _(u"The password didn't match. Please try again."))
-           return render_to_response('passwordsingle.html',
+           return render_to_response('blogs/passwordsingle.html',
                                      {'form': form,'blog': blog,'post': post,},
                                       context_instance=RequestContext(request))
        else:
          form = PasswordForm()
-         return render_to_response('passwordsingle.html',
+         return render_to_response('blogs/passwordsingle.html',
                                    {'form': form,'blog': blog,'post': post,},
                                    context_instance=RequestContext(request))
      else:
        form = PasswordForm()
-       return render_to_response('passwordsingle.html',
+       return render_to_response('blogs/passwordsingle.html',
                                  {'form': form,'blog': blog,'post': post,},
                                  context_instance=RequestContext(request))
 
@@ -1296,7 +1296,7 @@ def newcomment(request, id):
            from django.template.loader import get_template
            from django.template import Context
            plaintext = get_template('email.txt')
-           htmly     = get_template('email.html')
+           htmly     = get_template('blogs/email.html')
 
            d = Context({ 'blog_title': blog_title, 'slug': slug , 'comment': comment, 'post': post, 'name': comment.name, 'email': comment.email, 'website': comment.website, })  
 
@@ -1317,7 +1317,7 @@ def newcomment(request, id):
              subscription.save()
            return HttpResponseRedirect(reverse('blogs.views.single', args=(post.base62id,)))
        else:
-         return render_to_response('errors.html',
+         return render_to_response('blogs/errors.html',
                                    {'form': form,'blog': blog,'post': post,},
                                    context_instance=RequestContext(request))
 
@@ -1344,19 +1344,19 @@ def contact(request):
       else:
         form=ContactForm()
         messages.add_message(request, messages.INFO, _(u"Oups! It didn't work, please try again with a valid email"))
-        return render_to_response('contact.html', 
+        return render_to_response('blogs/contact.html', 
                                   {'form': form},
                                   context_instance=RequestContext(request))
      else:
        if request.user.is_authenticated(): 
          u=User.objects.get(username=request.user.username)
          form=ContactForm(initial={'from_email':u.email})
-         return render_to_response('contact.html',
+         return render_to_response('blogs/contact.html',
                                    {'form': form, 'u': u,},
                                    context_instance=RequestContext(request))
        else:
          form=ContactForm()
-         return render_to_response('contact.html',
+         return render_to_response('blogs/contact.html',
                                    {'form': form},
                                    context_instance=RequestContext(request))     
 def entreprise(request):
@@ -1375,12 +1375,12 @@ def entreprise(request):
       else:
         form=ContactForm()
         messages.add_message(request, messages.INFO, _(u"Oups! It didn't work, please try again with a valid email"))
-        return render_to_response('entreprise.html', 
+        return render_to_response('blogs/entreprise.html', 
                                   {'form': form},
                                   context_instance=RequestContext(request))
      else:
        form=ContactForm()
-       return render_to_response('entreprise.html',
+       return render_to_response('blogs/entreprise.html',
                                  {'form': form},
                                  context_instance=RequestContext(request))
 
