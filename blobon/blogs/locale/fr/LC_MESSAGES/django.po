@@ -19,107 +19,107 @@ msgstr ""
 
 #: forms.py:13
 msgid "Enter your page title"
-msgstr ""
+msgstr "Entrez le titre de votre page"
 
 #: forms.py:17
 msgid "Your page content here"
-msgstr ""
+msgstr "Votre contenu ici"
 
 #: forms.py:28
 msgid "Enter your title"
-msgstr ""
+msgstr "Entrez votre titre"
 
 #: forms.py:31 forms.py:92
 msgid "Your blog adress"
-msgstr ""
+msgstr "L'adresse de votre blogue"
 
 #: forms.py:34
 msgid "Enter the blog moderator email here"
-msgstr ""
+msgstr "Entrez le modérateur du blogue ici"
 
 #: forms.py:42
 msgid "Title :"
-msgstr ""
+msgstr "Titre :"
 
 #: forms.py:42
 msgid "Enter your title here."
-msgstr ""
+msgstr "Entrez le titre ici"
 
 #: forms.py:43
 msgid "Title translated :"
-msgstr ""
+msgstr "Titre traduit :"
 
 #: forms.py:43
 msgid "Enter your translation here."
-msgstr ""
+msgstr "Entrez votre traduction ici."
 
 #: forms.py:44
 msgid "Source :"
-msgstr ""
+msgstr "Source :"
 
 #: forms.py:45
 msgid "Enter your content here"
-msgstr ""
+msgstr "Entrez votre contenu ici"
 
 #: forms.py:49 forms.py:264
 msgid "Enter your translation here"
-msgstr ""
+msgstr "Entrez votre traduction ici"
 
 #: forms.py:53 forms.py:138
 msgid "Enter your message here"
-msgstr ""
+msgstr "Entrez votre message ici"
 
 #: forms.py:66
 msgid "Your name"
-msgstr ""
+msgstr "Votre nom"
 
 #: forms.py:70
 msgid "Leave your comment here"
-msgstr ""
+msgstr "Laissez votre commentaire ici"
 
 #: forms.py:74 forms.py:142
 msgid "Enter your email here"
-msgstr ""
+msgstr "Entrez votre courriel ici"
 
 #: forms.py:77
 msgid "Your website url here"
-msgstr ""
+msgstr "Le lien vers votre site Web"
 
 #: forms.py:80
 msgid "Your occupation here"
-msgstr ""
+msgstr "Votre emploi"
 
 #: forms.py:88
 msgid "Your blog title"
-msgstr ""
+msgstr "Le titre de votre blogue"
 
 #: forms.py:95
 msgid "Your blog password"
-msgstr ""
+msgstr "Le mot de passe de votre blogue"
 
 #: forms.py:98
 msgid "Your custom domain"
-msgstr ""
+msgstr "Votre domaine personnalisé"
 
 #: forms.py:101 forms.py:105
 msgid "Describe Your Blog"
-msgstr ""
+msgstr "Décrivez votre blogue"
 
 #: forms.py:110
 msgid "Your blog main color"
-msgstr ""
+msgstr "La couleur principale de votre blogue"
 
 #: forms.py:119
 msgid "Enter the blog password"
-msgstr ""
+msgstr "Entrez le mot de passe de votre blogue"
 
 #: forms.py:126
 msgid "Enter email here"
-msgstr ""
+msgstr "Entrez votre courriel"
 
 #: forms.py:135
 msgid "Your subject here"
-msgstr ""
+msgstr "Votre sujet ici"
 
 #: forms.py:148
 msgid "Your email purpose here"
