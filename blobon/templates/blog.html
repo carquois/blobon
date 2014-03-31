@@ -168,7 +168,7 @@ padding-top:10px;
     <div class="blog-masthead">
       <div class="container">
         <nav class="blog-nav">
-          <a class="blog-nav-item {% if category %}{% else %}active{% endif %}" style="padding-left:25px;padding-right:25px;" href="http://{{blog.slug}}.blobon.com">Home</a>
+          <a class="blog-nav-item {% if category %}{% else %}active{% endif %}" style="padding-left:25px;padding-right:25px;" href="http://{{blog.slug}}.blobon.com">{% trans "Home" %}</a>
     {% if categories %}
       {% for category in categories %} 
       <a class="blog-nav-item {% if cat == category %}active{% else %}{% endif %}" href="{% url "blogs.views.category" category.slug %}" style="background-color:{{ category.color }};">{{ category.name }}</a>
@@ -545,11 +545,11 @@ padding-top:10px;
 
       {% block blog_right %}
       <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-        <div class="sidebar-module sidebar-module-inset"><h4>About</h4>{{ blog.description }}</div>
+        <div class="sidebar-module sidebar-module-inset"><h4>{% trans "About" %}</h4>{{ blog.description }}</div>
         <div class="sidebar-module" style="text-align:left;">
           <form method="post" id="subscribe_form" class="form-horizontal" role="form" action="{% url 'blogs.views.subscribe_to_infoletter' blog.slug %}">{% csrf_token %}
             <div class="form-group">
-            <h3>{% trans "Subscribe to" %} {{ blog.title }} {% trans "mailing list" %}</h3>
+            <h3>{% blocktrans with title=blog.title %}Subscribe to {{ title }} mailing list{% endblocktrans %}</h3>
             </div>
             <div class="form-group" id="subs_mail">
             {{ form.email.label_tag }}:
