@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-30 23:14-0400\n"
+"POT-Creation-Date: 2014-03-31 11:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,19 +137,19 @@ msgstr ""
 
 #: blogs/forms.py:66
 msgid "Your name"
-msgstr ""
+msgstr "Votre nom"
 
 #: blogs/forms.py:70
 msgid "Leave your comment here"
-msgstr ""
+msgstr "Votre commentaire"
 
 #: blogs/forms.py:74 blogs/forms.py:142
 msgid "Enter your email here"
-msgstr ""
+msgstr "Votre adresse email"
 
 #: blogs/forms.py:77
 msgid "Your website url here"
-msgstr ""
+msgstr "Le lien vers votre site Web"
 
 #: blogs/forms.py:80
 msgid "Your occupation here"
@@ -181,7 +181,7 @@ msgstr ""
 
 #: blogs/forms.py:126
 msgid "Enter email here"
-msgstr ""
+msgstr "Votre courriel"
 
 #: blogs/forms.py:135
 msgid "Your subject here"
@@ -343,7 +343,7 @@ msgid "Front-page"
 msgstr ""
 
 #: blogs/models.py:267 templates/blog.html:171 templates/blog_category.html:29
-#: templates/blog_single.html:43 templates/closed.html:12
+#: templates/blog_single.html:44 templates/closed.html:12
 #: templates/entreprise.html:172 templates/privacypolicy.html:16
 #: templates/terms.html:17
 msgid "Home"
@@ -466,7 +466,7 @@ msgstr ""
 #: templates/administratecomments.html:42
 #: templates/administratecomments.html:123 templates/administratetags.html:25
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: blogs/models.py:359 posts/models.py:77 punns/models.py:53
 msgid "Titre traduit"
@@ -647,11 +647,11 @@ msgstr ""
 #: templates/administratecomments.html:124
 #: templates/administrateemails.html:152
 msgid "Email"
-msgstr ""
+msgstr "Courriel"
 
 #: blogs/models.py:556 posts/models.py:69
 msgid "Website"
-msgstr ""
+msgstr "Site Web"
 
 #: blogs/models.py:565
 msgid "Occupation"
@@ -1277,7 +1277,7 @@ msgstr ""
 
 #: templates/administrateblog.html:1958
 msgid "Name : "
-msgstr ""
+msgstr "Nom : "
 
 #: templates/administrateblog.html:1962
 msgid "Short description: "
@@ -1311,7 +1311,7 @@ msgstr ""
 #: templates/administrateemails.html:94 templates/administrateemails.html:177
 #: templates/administratepages.html:64 templates/administrateposts.html:87
 #: templates/administratesettings.html:319 templates/administratetags.html:55
-#: templates/blog_single.html:449 templates/single.html:871
+#: templates/blog_single.html:450 templates/single.html:871
 #: templates/translation.html:84
 msgid "No"
 msgstr ""
@@ -1473,7 +1473,7 @@ msgstr ""
 #: templates/administratecomments.html:159
 #: templates/administrateemails.html:95 templates/administrateemails.html:178
 #: templates/administratepages.html:65 templates/administrateposts.html:88
-#: templates/administratetags.html:56 templates/blog_single.html:450
+#: templates/administratetags.html:56 templates/blog_single.html:451
 #: templates/single.html:872 templates/translation.html:85
 msgid "Yes, I Want to Delete it"
 msgstr ""
@@ -1507,7 +1507,7 @@ msgid "Signal"
 msgstr ""
 
 #: templates/administratecomments.html:53
-#: templates/administratecomments.html:132 templates/blog_single.html:424
+#: templates/administratecomments.html:132 templates/blog_single.html:425
 #: templates/single.html:846
 msgid "Delete this comment"
 msgstr ""
@@ -1529,13 +1529,13 @@ msgid "Send Email"
 msgstr ""
 
 #: templates/administratecomments.html:73
-#: templates/administratecomments.html:152 templates/blog_single.html:443
+#: templates/administratecomments.html:152 templates/blog_single.html:444
 #: templates/single.html:865
 msgid "Delete Comment"
 msgstr ""
 
 #: templates/administratecomments.html:76
-#: templates/administratecomments.html:155 templates/blog_single.html:446
+#: templates/administratecomments.html:155 templates/blog_single.html:447
 #: templates/single.html:868
 msgid "Are you Sure You Want to Delete This Comment?"
 msgstr ""
@@ -1549,22 +1549,22 @@ msgid "This has no published comment"
 msgstr ""
 
 #: templates/administratecomments.html:180 templates/administratepages.html:81
-#: templates/administrateposts.html:109 templates/blog_single.html:381
+#: templates/administrateposts.html:109 templates/blog_single.html:382
 #: templates/translation.html:105
 msgid "Previous"
-msgstr ""
+msgstr "Précédent"
 
 #: templates/administratecomments.html:185 templates/administratepages.html:86
 #: templates/administrateposts.html:114 templates/translation.html:110
 msgid "of"
-msgstr ""
+msgstr "de"
 
 #: templates/administratecomments.html:190 templates/administratepages.html:91
-#: templates/administrateposts.html:119 templates/blog_single.html:384
+#: templates/administrateposts.html:119 templates/blog_single.html:385
 #: templates/search.html:42 templates/search.html.py:46
 #: templates/translation.html:115
 msgid "Next"
-msgstr ""
+msgstr "Suivant"
 
 #: templates/administrateemails.html:18
 msgid "Create a new email :"
@@ -1922,21 +1922,19 @@ msgstr ""
 msgid "Se connecter"
 msgstr ""
 
-#: templates/base.html:384 templates/blog_single.html:574
-#: templates/subscription.html:37
+#: templates/base.html:384 templates/subscription.html:37
 msgid "Subscribe to"
 msgstr ""
 
-#: templates/base.html:384 templates/blog_single.html:503
-#: templates/blog_single.html.py:574 templates/single.html:925
+#: templates/base.html:384 templates/single.html:925
 #: templates/subscription.html:37
 msgid "mailing list"
 msgstr ""
 
 #: templates/base.html:392 templates/blog.html:559
-#: templates/blog_single.html:581 templates/subscription.html:45
+#: templates/subscription.html:45
 msgid "Subscribe"
-msgstr ""
+msgstr "S'abonner"
 
 #: templates/base.html:433
 msgid "Blogue"
@@ -2230,38 +2228,42 @@ msgstr ""
 msgid "Cancel the invitation request"
 msgstr ""
 
-#: templates/blobon.html:248 templates/blog_single.html:510
+#: templates/blobon.html:248 templates/blog_single.html:511
 #: templates/createblogpost.html:89 templates/createcat.html:25
 #: templates/password.html:26 templates/passwordsingle.html:26
 #: templates/single.html:935
 msgid "Submit"
-msgstr ""
+msgstr "Soumettre"
 
 #: templates/blobon_footer.html:5 templates/gabrieldancause.html:97
 msgid "Blog"
-msgstr ""
+msgstr "Blogue"
 
 #: templates/blobon_footer.html:7
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #: templates/blobon_footer.html:9
 msgid "Terms"
-msgstr ""
+msgstr "Conditions"
 
 #: templates/blobon_footer.html:10
 msgid "Privacy"
-msgstr ""
+msgstr "Confidentialité"
 
 #: templates/blobon_footer.html:11
 msgid "Jobs"
-msgstr ""
+msgstr "Emplois"
 
 #: templates/blobon_footer.html:12
 msgid "Entreprise"
-msgstr ""
+msgstr "Entreprise"
 
 #: templates/blobon_footer.html:13
+msgid "Github"
+msgstr "Github"
+
+#: templates/blobon_footer.html:14
 msgid " © 2013 Blobon, Inc."
 msgstr ""
 
@@ -2291,29 +2293,30 @@ msgstr "À propos"
 msgid "Subscribe to %(title)s mailing list"
 msgstr "S'inscrire à l'infolettre de %(title)s"
 
-#: templates/blog_single.html:380
+#: templates/blog_single.html:381
 msgid "View previous post"
 msgstr ""
 
-#: templates/blog_single.html:383
+#: templates/blog_single.html:384
 msgid "View next post"
 msgstr ""
 
-#: templates/blog_single.html:395
+#: templates/blog_single.html:396
 msgid "Published"
-msgstr ""
+msgstr "Publié"
 
-#: templates/blog_single.html:408 templates/single.html:830
+#: templates/blog_single.html:409 templates/single.html:830
 msgid "Comments:"
 msgstr ""
 
-#: templates/blog_single.html:463 templates/single.html:885
+#: templates/blog_single.html:464 templates/single.html:885
 msgid "Leave a comment"
-msgstr ""
+msgstr "Écrire un commentaire"
 
-#: templates/blog_single.html:503 templates/single.html:925
-msgid "I want to subscribe to"
-msgstr ""
+#: templates/blog_single.html:504
+#, fuzzy, python-format
+msgid "I want to subscribe to %(title)s mailing list"
+msgstr "S'inscrire à l'infolettre de %(title)s"
 
 #: templates/cat.html:13 templates/cat.html.py:15 templates/category.html:13
 #: templates/category.html.py:15 templates/errors.html:7
@@ -3059,6 +3062,10 @@ msgstr ""
 msgid "Artist : "
 msgstr ""
 
+#: templates/single.html:925
+msgid "I want to subscribe to"
+msgstr ""
+
 #: templates/single.html:1017
 msgid "Préc"
 msgstr ""
@@ -3096,18 +3103,10 @@ msgid " Conditions d'utilisation"
 msgstr ""
 
 #: templates/thanks.html:20
-msgid "It worked!"
+msgid "Thank you! We have added your email to our list."
 msgstr ""
 
-#: templates/thanks.html:21
-msgid "You will now receive the mailing list of"
-msgstr ""
-
-#: templates/thanks.html:21
-msgid "by email"
-msgstr ""
-
-#: templates/thanks.html:23
+#: templates/thanks.html:22
 msgid " Home"
 msgstr ""
 

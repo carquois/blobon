@@ -17,8 +17,7 @@
 {% endblock %}
  {% block profileEntete %}
     <div class="pageProfilEntete fondDegrade coinsRonds pad20">
-      <h2>{% trans "It worked!" %}</h2>
-      <h3>{% trans "You will now receive the mailing list of" %} {{ blog.title }} {% trans "by email" %}</h3>
+      <h3>{% trans "Thank you! We have added your email to our list." %}</h3>
       <div class="row" style="padding:15px;">
         <a href="{% url 'blogs.views.index' %}" class="btn btn-default btn-md"><span class="glyphicon glyphicon-home"></span>{% trans " Home" %}</a>
       </div>    

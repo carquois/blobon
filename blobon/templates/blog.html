@@ -524,7 +524,7 @@ padding-top:10px;
            <div class="row">
              <div class="col-md-4">
              {% if posts.has_previous %}
-             <li><a class="pull-left" href="?page={{ posts.previous_page_number }}">Previous</a></li>
+             <li><a class="pull-left" href="?page={{ posts.previous_page_number }}">{% trans "Previous" %}</a></li>
              {% endif %}
              </div>
              <div class="col-md-4">
@@ -532,7 +532,7 @@ padding-top:10px;
              </div>
              <div class="col-md-4">
                {% if posts.has_next %}
-               <li><a class="pull-right" href="?page={{ posts.next_page_number }}">Next</a></li>
+               <li><a class="pull-right" href="?page={{ posts.next_page_number }}">{% trans "Next" %}</a></li>
                {% endif %}
              </div>
            </div>
@@ -563,7 +563,7 @@ padding-top:10px;
         <div style="clear: both; margin-bottom: 20px;"></div>
         <script>
           $(document).ready(function(){
-            $('#id_email').keyup(function() {
+            $('#subs_mail input[name=email]').change(function() {
             if($(this).val() != '') {
               $('#subscribe_submit').prop("disabled", false);
               }

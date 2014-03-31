@@ -36,8 +36,9 @@
        <div class="row" style="padding-top:10px;">
        </div>
       {% endblock %}
+      
 
-      {% block blog_left %}
+{% block blog_left %}
 
       <ol class="breadcrumb">
         <li><a href="http://{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}">{% trans "Home" %}</a></li>
@@ -500,7 +501,7 @@
       </div>
       <div class="form-group">
           <div class="col-sm-12 subscription_form_input" style="margin-right:-20px;padding-top:10px;">
-         <b>{% trans "I want to subscribe to" %} {{ blog.title }} {% trans "mailing list" %}&nbsp</b>
+         <b>{% blocktrans with title=blog.title %}I want to subscribe to {{ title }} mailing list{% endblocktrans %}&nbsp</b>
             <input type="checkbox" name="subscription" id="subscription">
           </div>
       </div>
@@ -512,6 +513,8 @@
     <hr>
   </div>
 </div>
+
+
 
 <script>
 $(document).ready(function () {
@@ -565,39 +568,6 @@ $('#new_comment').validate({
        </div>
       {% endblock %}
 
-      {% block blog_right %}
-      <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-        <div class="sidebar-module sidebar-module-inset"><h4>About</h4>{{ blog.description }}</div>
-        <div class="sidebar-module" style="text-align:left;">
-          <form method="post" id="subscribe_form" class="form-horizontal" role="form" action="{% url 'blogs.views.subscribe_to_infoletter' blog.slug %}">{% csrf_token %}
-            <div class="form-group">
-            <h3>{% trans "Subscribe to" %} {{ blog.title }} {% trans "mailing list" %}</h3>
-            </div>
-            <div class="form-group" id="subs_mail">
-            {{ form.email.label_tag }}:
-            {{ form.email }}
-            </div>
-            <div class="form-group">
-            <button id="subscribe_submit" type="submit" disabled="disabled"class="btn btn-primary btn-sm pull-left">{% trans "Subscribe" %}</button>
-            </div>
-          </form>
-        </div>
-        <div style="clear: both; margin-bottom: 20px;"></div>
-        <script>
-          $(document).ready(function(){
-            $(".submail").change(function() {
-            if($(this).val() != '') {
-              $('#subscribe_submit').prop("disabled", false);
-              }
-            else {
-              $('#subscribe_submit').prop("disabled", true);
-              }
-            });
-          });
-        </script>
-      </div>
-
-         {% endblock %}
 
       {% block top_image %}
 

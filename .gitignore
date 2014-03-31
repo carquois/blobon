@@ -3,6 +3,7 @@
 *.pyc
 *.swp
 *.swo
+*.mo
 env/*
 punn_it/media/*
 src/*
