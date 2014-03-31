@@ -36,8 +36,7 @@
 
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Posts to translate" %}
-              {% if blog.title == "Rock and Pics" %}<a href="{% url 'blogs.views.quicktranslation' blog.slug %}" class="btn btn-default btn-xs pull-right" id="quick_translation" title="{% trans "Translate your posts quickly" %}">{% trans "Quick translation" %}</a>
-              {% endif %}
+              <a href="{% url 'blogs.views.quicktranslation' blog.slug %}" class="btn btn-default btn-xs pull-right" id="quick_translation" title="{% trans "Translate your posts quickly" %}">{% trans "Quick translation" %}</a>
             </div>
             {% if posts %}
             <table class="table table-striped">

@@ -239,7 +239,7 @@ class Blog(models.Model):
     moderator_email = models.EmailField(verbose_name=_("Moderator email"),blank=True, null=True)
     is_open = models.BooleanField(default=True)
     slug = models.SlugField(verbose_name=_("URL"), max_length=30, unique=True)
-    title = models.CharField(verbose_name=_("Title"), max_length=140)
+    title = models.CharField(verbose_name=_("Title"), max_length=240)
     header_image = ImageField(verbose_name=_("Main image"), upload_to=get_file_path_main, null=True, blank=True)
     main_color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#ff7f00", blank=False)
     language = models.CharField(max_length=7, choices=LANGUAGES,blank=True)
@@ -295,6 +295,13 @@ class Blog(models.Model):
 
     def display_blocknavbar(self): 
         return mark_safe(self.block_navbar)
+
+class Rss(models.Model):
+    feed_url = models.URLField(verbose_name=_("Feed url"), max_length=300, blank=True)
+    blog = models.ForeignKey(Blog, related_name="Blog_rss", null=True)
+    def __unicode__(self):
+        return self.feed_url
+
 
 class Page(models.Model):
     blog = models.ForeignKey(Blog, related_name="Blog_page", null=True)
@@ -420,10 +427,10 @@ class Post(models.Model):
     def __unicode__(self):
         return self.title
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.base62id:
             self.base62id = Post.generate_unique_id()
-        return super(Post, self).save()
+        return super(Post, self).save(*args, **kwargs)
 
     def file_extension(self):
         basename, extension = os.path.splitext(self.pic.name) 

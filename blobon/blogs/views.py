@@ -14,8 +14,8 @@ from urlparse import urlparse
 from django.core.files import File
 from cgi import parse_qs
 
-from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm
-from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email
+from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm
+from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email, Rss
 from django.contrib.auth.models import User
 
 from notifications.forms import InvitationForm
@@ -36,7 +36,7 @@ def index(request):
           request.subdomain = host_s[0]
       if host == "blobon.com":
         if request.user.is_authenticated():
-          return render_to_response('read.html',
+          return render_to_response('blogs/read.html',
                                     {},
                                     context_instance=RequestContext(request))
         else:
@@ -176,7 +176,27 @@ def category(request, slug):
                                   context_instance=RequestContext(request))
 
 
+@login_required
+def rss_auto_post(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      rsss = Rss.objects.filter(blog=blog).order_by('-id')
+      form = RssForm()
+      return render_to_response('rss_auto_post.html',
+                                {'rsss': rsss, 'blog': blog, 'form': form,},
+                                context_instance=RequestContext(request))
+@login_required
+def administrateemails(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      info_emails = Info_email.objects.filter(blog=blog).order_by('-id')
+      subscriptions = Subscription.objects.filter(blog=blog).order_by('-email')
+      form = EmailForm()
+      subs_form = SubscriptionForm()
+      return render_to_response('blogs/administrateemails.html',
+                                {'subs_form': subs_form, 'blog': blog, 'info_emails': info_emails, 'form': form,'subscriptions': subscriptions,},
+                                context_instance=RequestContext(request))
 
+
+ 
 def testbloggab(request):
       blog = Blog.objects.get(slug='gab')
       posts = paginate(request,
@@ -530,6 +550,20 @@ def newcategory(request, slug):
           category.save()
           return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
       return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
+
+
+@login_required
+def newrss(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      form = RssForm(request.POST or None)
+      if request.method == 'POST':
+        if form.is_valid():
+          rss = form.save(commit=False)
+          rss.blog = blog
+          rss.save()
+          messages.add_message(request, messages.INFO, _(u"The feed has been had"))
+          return HttpResponseRedirect(reverse('blogs.views.rss_auto_post', args=(blog.slug,)))
+      return HttpResponseRedirect(reverse('blogs.views.rss_auto_post', args=(blog.slug,)))
 
 def draft(request):
       posts = paginate(request,
@@ -973,6 +1007,20 @@ def deletepost(request, id):
         messages.add_message(request, messages.INFO, _(u"The post has been deleted"))
       return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
 
+
+
+@login_required
+def deletepost_trans(request, id):
+      post = get_object_or_404(Post, id=id)
+      blog = post.blog
+      if request.user == post.author:
+        post.delete()
+        messages.add_message(request, messages.INFO, _(u"Your post has been deleted"))
+      elif request.user.is_staff:
+        post.delete()
+        messages.add_message(request, messages.INFO, _(u"The post has been deleted"))
+      return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
+
 @login_required
 def deletepage(request, id):
       page = get_object_or_404(Page, id=id)
@@ -1036,6 +1084,16 @@ def deletesubscription(request, id):
       subscription.delete()
       messages.add_message(request, messages.INFO, _(u"The subscriber has been deleted"))
       return HttpResponseRedirect(reverse('blogs.views.administrateemails', args=(blog.slug,)))
+
+
+@login_required
+def deleterss(request, id):
+      rss = get_object_or_404(Rss, id=id)
+      blog = rss.blog
+      rss.delete()
+      messages.add_message(request, messages.INFO, _(u"The feed has been deleted"))
+      return HttpResponseRedirect(reverse('blogs.views.rss_auto_post', args=(blog.slug,)))
+
 
 @login_required
 def deleteblog(request, slug):

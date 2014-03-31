@@ -21,6 +21,7 @@ from blogs.models import Subscription
 from blogs.models import Info_email
 from blogs.models import Language
 from blogs.models import Translation
+from blogs.models import Rss
 from books.models import Client
 from books.models import Invoice
 from books.models import Project
@@ -65,3 +66,4 @@ admin.site.register(Expense)
 admin.site.register(Task)
 admin.site.register(Time)
 admin.site.register(Item)
+admin.site.register(Rss)

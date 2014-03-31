@@ -52,6 +52,8 @@
     <form enctype="multipart/form-data" action="{% url 'blogs.views.quicktranslation' blog.slug %}" role="form" method="post" id=translatedpost>{% csrf_token %}
     <div class="fields" style="display: none;">{{ form.layout_type }}</div>
     <div class="fields" style="display: none;">{{ form.youtube_id }}</div>
+
+    <div class="fields"><a href="{% url "blogs.views.deletepost_trans" post.id %}" accesskey=d class="deletesubscriber pull-right" id="deletesubscriber" title="{% trans "Delete post" %}"><button type="button" class="close">&times;</button></a></div>
     <div class="fields">{{ form.title.label_tag }} :{{ form.title }}</div>
     <div class="fields">{{ form.translated_title.label_tag }} :{{ form.translated_title }}</div>
     {% if post.layout_type == "s" %}
@@ -154,6 +156,7 @@
         $('#savepublish').tooltip();
         $('#savequeue').tooltip();
         $('#cancel_translate_post').tooltip();
+        $(".deletesubscriber").tooltip();
       });
     </script>
 

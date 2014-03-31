@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _
 from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
 from django.db import models
 
-from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page
+from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page, Rss
 
 
 class PageForm(ModelForm):
@@ -130,6 +130,17 @@ class SubscriptionForm(ModelForm):
     class Meta:
         model = Subscription
         fields = ('email', )
+
+
+class RssForm(ModelForm):
+    feed_url = URLField(widget=forms.TextInput(attrs={'placeholder': _('Enter feed url here'),
+                                                    'type': 'text',
+                                                    'class': "form-control input-block-level"
+                                                    }))
+    class Meta:
+        model = Rss
+        fields = ('feed_url', )
+
 
 class ContactForm(forms.Form):
     subject = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': _('Your subject here'),
