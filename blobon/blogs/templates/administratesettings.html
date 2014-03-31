@@ -1,0 +1,394 @@
+{% extends "administrateblog.html" %}
+{% load i18n %}
+{% load url from future %}
+{% block dashboard-active %}{% endblock %}
+  {% block additional-js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script> 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}farbastic/farbtastic.js" type="text/javascript"></script>
+
+    <script src="http://www.lfhs.ca/blobon/assets/farbastic/farbtastic.js" type="text/javascript"></script>
+
+    <script src="{{ STATIC_URL }}js/tinymce/js/tinymce/tinymce.min.js" type="text/javascript">// <![CDATA[
+/tiny_mce/tiny_mce.js">
+// ]]></script>
+
+  {% endblock %}
+{% block settings-active %}class="active"{% endblock %}
+    {% block additional-css %}
+    <style>
+      .settings_submit {
+        padding-top:10px;
+      }
+      .form_section {
+        padding-top:10px;
+        padding-bottom:10px;
+      }
+      .info {
+        cursor: pointer;      
+      }
+      .under_text {
+        padding:10px;
+      }
+      textarea {
+        resize: none;
+      }
+      #id_main_color {
+	border-right:100px solid{% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};
+	line-height:20px;
+      }
+    </style>
+    <link rel="stylesheet" href="{{ STATIC_URL }}farbastic/farbtastic.css" type="text/css" />
+
+    <link rel="stylesheet" href="http://www.lfhs.ca/blobon/assets/farbastic/farbtastic.css" type="text/css" />
+    {% endblock %}
+{% block content %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}</strong>{{ field.name }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+
+
+
+
+         <div class="col-md-12">
+           <form enctype="multipart/form-data" role="form" action="{% url 'blogs.views.administratesettings' blog.slug %}" method="post" id=newsettings>{% csrf_token %}
+          <div class="panel panel-primary" id="setting_form">
+            <div class="panel-heading">{% trans "Edit your settings :" %}<a href="#" class="btn btn-xs btn-danger pull-right" id="delete_blog_button" data-toggle="modal" data-target="#{{ blog.slug }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete blog" %}</a></div>
+            <div class="panel-body">         
+             <div class="row">
+               <div class="col-md-12 form_section" id="settings_title">
+               {{ form.title.label_tag }}<a id="info_title" class="pull-right info" title="{% trans "More Info About Title" %}" data-toggle="modal" data-target="#info_title_modal">{% trans "More info" %}</a>
+               {{ form.title }}
+                 <div class="under_text"><small><em>{% trans "Write your new title here" %}</em></small></div>
+               </div>
+               <div class="col-md-6 form_section" id="settings_slug">
+               {{ form.slug.label_tag }}<a id="info_slug" class="pull-right info" title="{% trans "What is a Slug" %}" data-toggle="modal" data-target="#info_slug_modal">{% trans "More info" %}</a>
+                 <div class="input-group">
+                 {{ form.slug }}<span class="input-group-addon" id="urlending">.Blobon.com</span>
+                 </div>
+                 <div class="under_text"><small><em>{% trans "Write your new slug here" %}</em></small></div>
+               </div>
+               <div class="col-md-6 form_section" id="settings_custom_domain">
+               {{ form.custom_domain.label_tag }}<a id="info_custom_domain" class="pull-right info" title="{% trans "Info About Customs Domains" %}" data-toggle="modal" data-target="#info_custom_domain_modal">{% trans "More info" %}</a>
+               {{ form.custom_domain }}
+                 <div class="under_text"><small><em>{% trans "Write the url of your custom domain here" %}</em></small></div>
+               </div>
+             </div>
+             <hr>
+             <div class="row">
+               <div class="col-md-12 form_section" id="settings_description">
+               {{ form.description.label_tag }}<a id="info_description" class="pull-right info" title="{% trans "Info About Blog Description" %}"data-toggle="modal" data-target="#info_description_modal">{% trans "More info" %}</a>
+               {{ form.description }}
+                 <div class="under_text"><small><em>{% trans "Describe your blog here" %}</em></small></div>
+               </div>
+             </div>
+             <div class="row">
+               <div class="col-md-12 form_section" id="settings_description">
+               {{ form.short_description.label_tag }}<a id="info_short_description" class="pull-right info" title="{% trans "Info About Blog Short Description" %}"data-toggle="modal" data-target="#info_short_description_modal">{% trans "More info" %}</a>
+               {{ form.short_description }}
+                 <div class="under_text"><small><em>{% trans "Write a short description of your blog here" %}</em></small></div>
+               </div>
+             </div>
+             <hr>
+             <div class="row" style="display:none;">
+             {{ form.is_online }}
+             </div>
+             {% if blog.is_bootblog %}
+             <div class="row">
+               <div class="col-md-7 form_section" id="settings_main_image">
+                 <p><b>{% trans "Blog main image" %}</b></p>
+               {% if not blog.main_image %}
+                 <p><b>{% trans "This blog has no main image, you can add one anytime" %}</b></p>
+               {% endif %}
+                 <img style="max-width:100%;" id="current_main_image" src="{{ MEDIA_URL }}{{ blog.main_image }}" alt="Current image" />
+               </div>
+               <div class="col-md-5 form_section" id="settings_choose_main_image">
+<a id="info_main_image" class="pull-right info" title="{% trans "Info about your blog main image" %}"data-toggle="modal" data-target="#info_main_image_modal">{% trans "More info" %}</a>              
+<div style="padding-top:0px;"> {{ form.main_image }}</div> 
+               </div>
+             </div>
+             <hr>
+             <div class="row">
+               <div class="col-md-8 form_section" id="settings_color">
+               {{ form.main_color.label_tag }}<a id="info_main_color" class="pull-right info" title="{% trans "Info a bout your blog main color" %}"data-toggle="modal" data-target="#info_main_color_modal">{% trans "More info" %}</a>
+               {{ form.main_color }}
+               </div>
+               <div class="col-md-4 form_section" id="colorpicker"></div>
+
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    $('#colorpicker').farbtastic('#id_main_color');
+
+  });
+</script>
+             </div>
+             <hr>
+             {% endif %}
+             <div class="row">
+               <div class="col-md-6 form_section" id="settings_password">
+                 {{ form.password.label_tag }}<a id="info_password" class="pull-right info" title="{% trans "If you enter a password in the field below, your blog will be hidden except to the people who you give the password to." %}"data-toggle="modal" data-target="#info_password_modal">{% trans "More info" %}</a>
+                 <div style="padding-top:5px;display:none;">{{ form.is_open }}
+                   <div class="under_text"><small><em>{% trans "Check if you want your blog to be public" %}</em></small></div>
+                 </div>
+               {{ form.password }}
+                 <div class="under_text"><small><em>{% trans "Write a password here if you want your blog to be private" %}</em></small></div>
+               </div>
+             </div>
+           <a style="display:none" href="https://api.instagram.com/oauth/authorize/?client_id=915d4f11508a48bba8a74af8cd35477a&redirect_uri=http%3A%2F%2Fblobon.com%2Finstagram-redirect&response_type=code&scope=likes+comments+relationships">Link your Instagram account</a>
+           <a style="display:none" href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&state=%2Fprofile&redirect_uri=http%3A%2F%2Fblobon.com%2Fredirect-google&response_type=code&client_id=426220460683.apps.googleusercontent.com&access_type=offline">Link your Google account</a>
+           </div>
+         </div>
+           </form>
+           <div id="formbuttons">
+             <button type="submit" class="btn btn-xs btn-primary" id=submitsettings title="{% trans "Save your settings" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
+             <button class="btn btn-xs btn-default" id=cancelsettings title="{% trans "Cancel edit settings" %}"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
+           </div>
+         </div>
+
+
+
+
+
+
+
+
+  <div class="modal fade" id="info_title_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Title" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Your blog title is what people see on top of your blog, idealy it should be short a representative of your blog subjet. Etc..." %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="info_slug_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Slug" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "A slug is the part of a URL which identifies a page..." %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="info_password_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Password" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "If you enter a password, your blog will be hidden except to the people who you give the password to." %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="info_custom_domain_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Custom domain" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "If you have your own custom domain...  If you want one :..." %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="info_description_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Description" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "This section is to wrtite a full description of your blog..." %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="info_short_description_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Short description" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "This section is to wrtite a small description of your blog..." %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="info_main_color_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Main color" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "This color is for the navbar and the link of your blog" %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="info_main_image_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Main image" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "This is the image that si going to be at the top of your blog main page" %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="{{ blog.slug }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Delete this blog" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Are you sure you want to delete the blog : " %}{{ blog.title }}</p>
+          <h3>{% trans "This action is irreversible" %}</h3>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
+          <a href="{% url 'blogs.views.deleteblog' blog.slug %}" class="btn btn-danger">{% trans "Yes, I want to delete it" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script>
+      $('#submitsettings').click(function() {
+        $('#newsettings').submit();
+      });
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        setTimeout(function() { 
+         $(".mceNoEditor").removeAttr("style");
+        },10);
+                   });
+         
+    </script>
+
+    <script>
+      $('#edit_blog_button').click(function() {
+        $('#info').hide();
+        $('#newsettings').show();
+        $('#formbuttons').show();
+      });
+    </script>
+
+    <script>
+      $('#cancelsettings').click(function() {
+        $('#info').show();
+        $('#newsettings').hide();
+        $('#formbuttons').hide();
+      });
+    </script>
+
+
+    <script type="text/javascript">
+
+        function upload_img_30(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_main_image').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+$("#id_main_image").change(function(){
+    readPath(this);
+});
+
+    </script>
+
+    <script type="text/javascript">
+      $(function () {
+        $('#submitsettings').tooltip({container: 'body', placement: 'top'});
+        $('#cancelsettings').tooltip({container: 'body', placement: 'top'});
+        $('#info_title').tooltip({container: 'body', placement: 'top'});
+        $('#info_slug').tooltip({container: 'body'});
+        $('#info_password').tooltip({container: 'body'});
+        $('#info_custom_domain').tooltip({container: 'body'});
+        $('#info_description').tooltip({container: 'body'});
+        $('#info_short_description').tooltip({container: 'body'});
+        $('#info_main_image').tooltip({container: 'body'});
+        $('#info_main_color').tooltip({container: 'body'});
+      });
+    </script>
+{% endblock %}
+
+

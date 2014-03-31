@@ -1,0 +1,48 @@
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script> 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//blobon.com/punn_it/assets/css/bootstrap-theme.min.css">
+    <style>
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #555;
+}
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  margin-top: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  color: #333;
+}
+.page-header {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+small{
+font-weight: 400;
+line-height: 1;
+color: #999;
+}
+    </style>
+  </head>
+  <body>
+    <div class="page-header">
+      <h1>{{ blog_title }} <small>has a new comment</small></h1>
+    </div>
+    
+    <p>Comment: <h3>{{ comment }}</h3></p>
+    <p>Name: <h3>{{ name }}</h3></p>
+    <p>Email: <h3>{{ email }}</h3></p>
+    <p>Website: <h3>{{ website }}</h3></p>
+    <p><a href="http://blobon.com/administratecomments/{{ slug }}/">Manage this comment</a><p>
+  </body>

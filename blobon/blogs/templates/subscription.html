@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load i18n thumbnail markup %}
+{% load url from future %}
+  {% block title %}{% trans "Subsribe to " %}{% endblock %}
+  {% block open-graphs %}
+    <!-- Le open graphs tags -->
+    <meta property="og:title" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}" />
+    <meta property="og:url" content="{{ url }}" />
+    <meta property="og:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ user.userprofile.avatar }}" />
+    <meta property="og:site_name" content="{{ user.first_name }} {{ user.last_name }}" />
+    <!-- Le twitter cards -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="{{ url }}">
+    <meta name="twitter:title" content="{{ user.first_name }} {{ user.last_name }} {% trans 'sur' %} {{ site.name }}">
+    <meta name="twitter:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ user.userprofile.avatar }}">
+    <meta name="twitter:description" content="{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) {% trans 'sur' %} {{ site.name }}">
+{% endblock %}
+ {% block profileEntete %}
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger alert-dismissable">
+              <button id="alert_closing"type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+    <div class="pageProfilEntete fondDegrade coinsRonds pad20">
+      <h2>{% trans "Subscribe to" %} {{ blog.title }} {% trans "mailing list" %}</h2>
+      <form method="post" id="subscribe_form" class="form-horizontal" role="form" action="{% url 'blogs.views.subscribe_to_infoletter' blog.slug %}">
+        {% csrf_token %}
+        <div class="form-group">
+          {{ form.email.label_tag }}:
+          {{ form.email }}
+        </div>
+
+        <button id="subscribe_submit" type="submit" disabled="disabled"class="btn btn-primary btn-sm">{% trans "Subscribe" %}</button>
+        <a id="subscribe_cancel" href="{% url 'blogs.views.index' %}" class="btn btn-default btn-sm">{% trans "Cancel" %}</a>
+     </form>
+    </div>
+
+    <div style="clear: both; margin-bottom: 20px;"></div>
+
+
+    <script>
+      $(document).ready(function(){
+        $('#id_email').keyup(function() {
+        if($(this).val() != '') {
+          $('#subscribe_submit').prop("disabled", false);
+          }
+        else {
+          $('#subscribe_submit').prop("disabled", true);
+        }
+        });
+      });
+    </script>
+
+    <script>
+      $('#alert_closing').click(function() {
+        $('#subscribe_form input[name=email]').val('');
+      });
+    </script>
+
+    <script>
+      $('#alert_closing').click(function() {
+        setTimeout(function() { 
+          $('#id_email').focus();
+        },10);
+      });
+    </script>
+
+ {% endblock %}
+ 
+ 
+{% block boiteProfil %}
+{% endblock %}

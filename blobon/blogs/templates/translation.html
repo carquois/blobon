@@ -1,0 +1,128 @@
+{% extends "administrateblog.html" %}
+{% load i18n %}
+{% load url from future %}
+  {% block additional-css %}
+    <style>
+      .edit_buttons {
+        padding: 10px;0px;5px;0px;
+      }
+    </style>
+  {% endblock %}
+  {% block dashboard-active %}{% endblock %}
+  {% block translation-active %}class="active"{% endblock %}
+  {% block content %}
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if not posts %}
+<div class="alert alert-warning alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <strong>{% trans "Good job! " %}</strong>{% trans " There is no post to translate right now" %} 
+</div>
+{% endif %}
+
+          <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Posts to translate" %}
+              <a href="{% url 'blogs.views.quicktranslation' blog.slug %}" class="btn btn-default btn-xs pull-right" id="quick_translation" title="{% trans "Translate your posts quickly" %}">{% trans "Quick translation" %}</a>
+            </div>
+            {% if posts %}
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-7">
+                <col class="col-xs-1">
+                <col class="col-xs-1">
+                <col class="col-xs-1">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>{% trans "Title" %}
+                  </th>
+                  <th>{% trans "Author" %}</th>
+                  <th style="display:none;">{% trans "Stats" %}</th>
+                  <th>{% trans "Date" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for post in posts %}
+                <tr>
+                  <td>{% if post.title %}{{ post.title }}{% else %}{% trans "This post has no title" %}{% endif %}
+                    <div class="edit_buttons">
+                      <a href="{% url 'blogs.views.translatepost' post.id %}" class="btn btn-default btn-xs edit_post" title="{% trans "Translate this post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Translate" %}</a>
+                      <a href="#" class="btn btn-default btn-xs delete_post" title="{% trans "Delete This Post" %}" data-toggle="modal" data-target="#{{ post.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
+                      <a href="{{ post.get_absolute_url }}" target="_blank" class="btn btn-default btn-xs view_post" title="{% trans "View This Post" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "View" %}</a>
+                    </div>
+                  </td>
+                  <td>{{ post.author }}</td>
+                  <td style="display:none;"><small>{% trans "Coming soon..." %}</small></td>
+                  <td>{{ post.pub_date }}</td>
+                </tr>
+  <div class="modal fade" id="{{ post.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Delete Post" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Are you Sure You Want to Delete This Post : " %}{{ post.title }}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
+          <a href="{% url 'blogs.views.deletepost' post.id %}" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+              {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+              <div class="panel-body">
+                {% trans "This blog has no post to translate" %}
+              </div>
+            {% endif %}
+          </div>
+
+
+    <ul class="pager">
+    <div class="row">
+      <div class="col-md-4">
+        {% if posts.has_previous %}
+            <li><a class="pull-left" href="?page={{ posts.previous_page_number }}">{% trans "Previous" %}</a></li>
+        {% endif %}
+      </div>
+      <div class="col-md-4">
+        <span class="current">
+            {% trans "Page" %} {{ posts.number }} {% trans "of" %} {{ posts.paginator.num_pages }}
+        </span>
+      </div>
+      <div class="col-md-4">
+        {% if posts.has_next %}
+           <li><a class="pull-right" href="?page={{ posts.next_page_number }}">{% trans "Next" %}</a></li>
+        {% endif %}
+      </div>
+    </div>
+    </ul>
+    <script type="text/javascript">
+      $(function () {
+        $('#show_all_posts').tooltip({container: 'body'});
+        $('#quick_translation').tooltip({container: 'body'});
+        $(".edit_post").tooltip({container: 'body', placement: 'bottom'});
+        $(".delete_post").tooltip({container: 'body', placement: 'bottom'});
+        $(".view_post").tooltip({container: 'body', placement: 'bottom'});
+      });
+    </script>
+  {% endblock %}
