@@ -9,14 +9,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="">
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
     <link href="{{ STATIC_URL }}css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
-
     <link rel="stylesheet" href="http://www.lfhs.ca/blobon/assets/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="http://www.lfhs.ca/blobon/assets/css/bootstrap.min.css">
-
     <link href='http://fonts.googleapis.com/css?family=Copse' rel='stylesheet' type='text/css'>
+
+
+
     {% block open-graphs %}
     <title>{% block title %}{{ blog.title }}{% endblock %}</title>
 
@@ -37,20 +39,17 @@
     <!-- Le canonical url -->
     <link rel="canonical" href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" />
     {% endblock %}
+
+
+
     <link rel="shortcut icon" href="{{ STATIC_URL }}/ico/favicon.png">
+    <script src="{{ STATIC_URL }}js/jquery.validate.js"></script>
 
-    <link rel="shortcut icon" href="http://www.lfhs.ca/blobon/assets/ico/favicon.png">
-    {% block additional-js %}
-    <script src="{{ STATIC_URL }}js/jquery.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.validate.js"></script>
 
-    <script src="http://www.lfhs.ca/blobon/assets/js/jquery.js"></script>
-<script src="http://www.lfhs.ca/blobon/assets/js/jquery.validate.js"></script>
-    {% endblock %}
+
     {% block blog_css %}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap_blog_base.css">
 
-<link rel="stylesheet" href="http://www.lfhs.ca/blobon/assets/css/bootstrap_blog_base.css">
 
 
 <style>
@@ -118,7 +117,8 @@ padding-top:10px;
     {% block additional_css %}
     {% endblock %}
     {% endblock %}
-</head>
+    <link rel="stylesheet" href="{{ STATIC_URL }}lightbox/docs/assets/css/bootstrap-lightbox.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}lightbox/docs/assets/css/bootstrap-lightbox.css">
 
         <!-- Le analytics -->
     <script type="text/javascript">
@@ -604,7 +604,6 @@ padding-top:10px;
       {% endblock %}
         </div>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-
-    <script src="http://www.lfhs.ca/blobon/assets/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}lightbox/js/bootstrap-lightbox.js"></script>
   </body>
 </html>

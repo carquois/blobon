@@ -19,7 +19,7 @@
             <div class="panel-body">
               <form enctype="multipart/form-data" id="newemail" role="form" method="post" action="{% url 'blogs.views.create_info_email' blog.slug %}">{% csrf_token %}
                 <div class="form-group">
-                 <div style="padding-bottom:5px;"><b>{% trans "Email purpose" %}</b></div>      
+                 <div style="padding-bottom:5px;"><b>{% trans "Newsletter name" %}</b></div>      
                   {{ form.name}}
                 </div>
                 <div class="form-group">
@@ -58,7 +58,7 @@
               </colgroup>
               <thead>
                 <tr>
-                  <th>{% trans "Email purpose" %}</th>
+                  <th>{% trans "Newsletter name" %}</th>
                   <th>{% trans "Subject" %}</th>
                   <th>{% trans "Who" %}</th>
                 </tr>

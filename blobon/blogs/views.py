@@ -229,6 +229,7 @@ def single(request, shorturl):
     blog = post.blog
     slug = blog.slug
     comments = Comment.objects.filter(post=post).filter(comment_status='pu').order_by('-id')
+    categories = Category.objects.filter(blog=blog)
     if host == blog.custom_domain:
 #    if post.blog.custom_domain:
 #      home = post.blog.custom_domain
@@ -263,13 +264,13 @@ def single(request, shorturl):
               comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
               if blog.is_bootblog == False:
                 return render_to_response('blogs/single.html',
-                                         {'post': post, 'latest_post_list': latest_post_list,
+                                         {'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
                                          'next_post': next_post, 'prev_post': prev_post,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
               else:
                 return render_to_response('blogs/blog_single.html',
-                                         {'post': post, 'latest_post_list': latest_post_list,
+                                         {'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
                                          'next_post': next_post, 'prev_post': prev_post,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
@@ -277,13 +278,13 @@ def single(request, shorturl):
               comment_form = CommentForm()
               if blog.is_bootblog == False:
                 return render_to_response('blogs/single.html',
-                                          {'post': post, 'latest_post_list': latest_post_list,
+                                          {'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
                                            'next_post': next_post, 'prev_post': prev_post,
                                            'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                            context_instance=RequestContext(request))
               else:
                 return render_to_response('blogs/blog_single.html',
-                                         {'post': post, 'latest_post_list': latest_post_list,
+                                         {'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
                                          'next_post': next_post, 'prev_post': prev_post,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
@@ -310,13 +311,13 @@ def single(request, shorturl):
            comment_form = CommentForm()
         if blog.is_bootblog == False:
           return render_to_response('blogs/single.html',
-                                    {'post': post, 'latest_post_list': latest_post_list,
+                                    {'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
                                     'next_post': next_post, 'prev_post': prev_post, 
                                     'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                     context_instance=RequestContext(request))
         else:
           return render_to_response('blogs/blog_single.html',
-                                    {'subd': subd, 'slug': slug, 'post': post, 'latest_post_list': latest_post_list,
+                                    {'categories': categories, 'subd': subd, 'slug': slug, 'post': post, 'latest_post_list': latest_post_list,
                                     'next_post': next_post, 'prev_post': prev_post,
                                     'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                     context_instance=RequestContext(request))                           
@@ -351,13 +352,13 @@ def single(request, shorturl):
               comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
               if blog.is_bootblog == False:
                 return render_to_response('blogs/single.html',
-                                         {'post': post, 'latest_post_list': latest_post_list,
+                                         {'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
                                          'next_post': next_post, 'prev_post': prev_post,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
               else:
                 return render_to_response('blogs/blog_single.html',
-                                         {'post': post, 'latest_post_list': latest_post_list,
+                                         {'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
                                          'next_post': next_post, 'prev_post': prev_post,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
@@ -365,13 +366,13 @@ def single(request, shorturl):
               comment_form = CommentForm()
               if blog.is_bootblog == False:
                 return render_to_response('blogs/single.html',
-                                          {'post': post, 'latest_post_list': latest_post_list,
+                                          {'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
                                            'next_post': next_post, 'prev_post': prev_post,
                                            'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                            context_instance=RequestContext(request))
               else:
                 return render_to_response('blogs/blog_single.html',
-                                         {'subd': subd, 'slug': slug,'post': post, 'latest_post_list': latest_post_list,
+                                         {'categories': categories, 'subd': subd, 'slug': slug,'post': post, 'latest_post_list': latest_post_list,
                                          'next_post': next_post, 'prev_post': prev_post,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
@@ -399,13 +400,13 @@ def single(request, shorturl):
           comment_form = CommentForm()
         if blog.is_bootblog == False:
           return render_to_response('blogs/single.html',
-                                    {'post': post, 'latest_post_list': latest_post_list,
+                                    {'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
                                     'next_post': next_post, 'prev_post': prev_post,
                                     'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                     context_instance=RequestContext(request))
         else:
           return render_to_response('blogs/blog_single.html',
-                                    {'subd': subd, 'slug': slug, 'post': post, 'latest_post_list': latest_post_list,
+                                    {'categories': categories, 'subd': subd, 'slug': slug, 'post': post, 'latest_post_list': latest_post_list,
                                     'next_post': next_post, 'prev_post': prev_post,
                                     'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                     context_instance=RequestContext(request))
@@ -1315,6 +1316,7 @@ def newcomment(request, id):
              subscription.email = comment.email
 #             subscription = Subscription.objects.create_subscription(blog=blog, email=comment.email)
              subscription.save()
+             messages.add_message(request, messages.INFO, _(u"Thank you. Your comment is now awaiting moderation"))
            return HttpResponseRedirect(reverse('blogs.views.single', args=(post.base62id,)))
        else:
          return render_to_response('blogs/errors.html',
