@@ -127,112 +127,112 @@ msgstr ""
 
 #: forms.py:152
 msgid "Your subject"
-msgstr ""
+msgstr "Votre sujet"
 
 #: forms.py:156
 msgid "Your message"
-msgstr ""
+msgstr "Votre message"
 
 #: forms.py:165
 msgid "Your category name here"
-msgstr ""
+msgstr "Le nom de votre catégorie"
 
 #: forms.py:169
 msgid "Describe your category"
-msgstr ""
+msgstr "Décrivez votre catégorie"
 
 #: forms.py:173
 msgid "Slug"
-msgstr ""
+msgstr "URL"
 
 #: forms.py:176
 msgid "Your category color"
-msgstr ""
+msgstr "La couleur de votre catégorie"
 
 #: forms.py:192
 msgid "Write your title here"
-msgstr ""
+msgstr "Entrez votre titre ici"
 
 #: forms.py:196
 msgid "Write your translated title here"
-msgstr ""
+msgstr "Entrez votre traduction ici"
 
 #: forms.py:200
 msgid "Your source"
-msgstr ""
+msgstr "Votre source"
 
 #: forms.py:204
 msgid "Write artist name here"
-msgstr ""
+msgstr "Écrivez le nom de l'artiste ici"
 
 #: forms.py:208
 msgid "Write a new post"
-msgstr ""
+msgstr "Écrivez un nouvel article"
 
 #: forms.py:213
 msgid "Write your text here"
-msgstr ""
+msgstr "Entrez votre texte ici"
 
 #: forms.py:219 forms.py:224 forms.py:229 forms.py:234 forms.py:239
 #: forms.py:244 forms.py:249 forms.py:254
 msgid "Write something about this image"
-msgstr ""
+msgstr "Écrivez quelque chose à propos de votre image"
 
 #: forms.py:259
 msgid "Write something about this video"
-msgstr ""
+msgstr "Écrivez quelque chose à propos de cette vidéo"
 
 #: forms.py:268
 msgid "Copy a Youtube url here"
-msgstr ""
+msgstr "Copiez un lien YouTube ici"
 
 #: models.py:239
 msgid "Moderator email"
-msgstr ""
+msgstr "Courriel du modérateur"
 
 #: models.py:241
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: models.py:242 models.py:303 models.py:315 models.py:357
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #: models.py:243
 msgid "Main image"
-msgstr ""
+msgstr "Image principale"
 
 #: models.py:244 models.py:331
 msgid "Main color"
-msgstr ""
+msgstr "Couleur principale"
 
 #: models.py:246
 msgid "Password"
-msgstr ""
+msgstr "Mot de passe"
 
 #: models.py:247
 msgid "Custom domain"
-msgstr ""
+msgstr "Domaine"
 
 #: models.py:248 models.py:328 models.py:344
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: models.py:253
 msgid "Short description"
-msgstr ""
+msgstr "Courte description"
 
 #: models.py:256
 msgid "Charset"
-msgstr ""
+msgstr "Jeu de caractères"
 
 #: models.py:257
 msgid "Style"
-msgstr ""
+msgstr "Style"
 
 #: models.py:258
 msgid "Header"
-msgstr ""
+msgstr "En-tête"
 
 #: models.py:259
 msgid "Head"
@@ -244,31 +244,31 @@ msgstr ""
 
 #: models.py:261
 msgid "Sidebar"
-msgstr ""
+msgstr "Colonne"
 
 #: models.py:262 models.py:290
 msgid "Footer"
-msgstr ""
+msgstr "Pied de page"
 
 #: models.py:263
 msgid "Sidebar footer"
-msgstr ""
+msgstr "Pied de page de la colonne"
 
 #: models.py:264 models.py:304 models.py:553
 msgid "Content"
-msgstr ""
+msgstr "Contenu"
 
 #: models.py:265
 msgid "Comments"
-msgstr ""
+msgstr "Commentaires"
 
 #: models.py:266
 msgid "Front-page"
-msgstr ""
+msgstr "Page d'accueil"
 
 #: models.py:267
 msgid "Home"
-msgstr ""
+msgstr "Accueil"
 
 #: models.py:268
 msgid "Single"
@@ -276,19 +276,19 @@ msgstr ""
 
 #: models.py:269
 msgid "404 page"
-msgstr ""
+msgstr "Erreur 404"
 
 #: models.py:270
 msgid "Page"
-msgstr ""
+msgstr "Page"
 
 #: models.py:271
 msgid "Category"
-msgstr ""
+msgstr "Catégorie"
 
 #: models.py:272
 msgid "Tag"
-msgstr ""
+msgstr "Étiquette"
 
 #: models.py:273
 msgid "Taxonomy"
@@ -296,31 +296,31 @@ msgstr ""
 
 #: models.py:274
 msgid "Author"
-msgstr ""
+msgstr "Auteur"
 
 #: models.py:275
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: models.py:276
 msgid "Archive"
-msgstr ""
+msgstr "Archive"
 
 #: models.py:277
 msgid "Search"
-msgstr ""
+msgstr "Recherche"
 
 #: models.py:278
 msgid "Attachment"
-msgstr ""
+msgstr "Pièce jointe"
 
 #: models.py:279 models.py:370
 msgid "Image"
-msgstr ""
+msgstr "Imag"
 
 #: models.py:280
 msgid "Navbar"
-msgstr ""
+msgstr "Navigation"
 
 #: models.py:281
 msgid "Block header"
@@ -368,15 +368,15 @@ msgstr ""
 
 #: models.py:316 models.py:400
 msgid "Message"
-msgstr ""
+msgstr "Message"
 
 #: models.py:317
 msgid "Subject"
-msgstr ""
+msgstr "Sujet"
 
 #: models.py:327 models.py:343 models.py:555 models.py:584
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: models.py:359
 msgid "Titre traduit"
