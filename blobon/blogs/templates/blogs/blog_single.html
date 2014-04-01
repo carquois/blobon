@@ -467,41 +467,29 @@
   <div class="col-sm-12">
     <form class="form-horizontal" id="new_comment" enctype="multipart/form-data" role="form" method="post" action="{% url 'blogs.views.newcomment' post.id %}">{% csrf_token %}
       <div class="form-group">
-          <div class="col-sm-3 comment_form_input" style="margin-right:-20px;">
-          {{ comment_form.name.label_tag }}
-          </div>
-          <div class="col-sm-9">
+          <div class="col-sm-12">
           {{ comment_form.name }}
 
           </div>
       </div>
       <div class="form-group">
-          <div class="col-sm-3 comment_form_input" style="margin-right:-20px;">
-          {{ comment_form.email.label_tag }}
-          </div>
-          <div class="col-sm-9">
+          <div class="col-sm-12">
           {{ comment_form.email }}
           </div>
       </div>
       <div class="form-group">
-          <div class="col-sm-3 comment_form_input" style="margin-right:-20px;">
-          {{ comment_form.comment.label_tag }}
-          </div>
-          <div class="col-sm-9">
+          <div class="col-sm-12">
           {{ comment_form.comment }}
           </div>
       </div>
       <div class="form-group">
-          <div class="col-sm-3 comment_form_input" style="margin-right:-20px;">
-          {{ comment_form.website.label_tag }}
-          </div>
-          <div class="col-sm-9">
+          <div class="col-sm-12">
           {{ comment_form.website }}
           </div>
       </div>
       <div class="form-group">
           <div class="col-sm-12 subscription_form_input" style="margin-right:-20px;padding-top:10px;">
-         <b>{% blocktrans with title=blog.title %}I want to subscribe to {{ title }} mailing list{% endblocktrans %}&nbsp</b>
+         <b>{% trans "Receive following comments" %}&nbsp</b>
             <input type="checkbox" name="subscription" id="subscription">
           </div>
       </div>

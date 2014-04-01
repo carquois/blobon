@@ -1,0 +1,297 @@
+{% extends "blogs/administrateblog.html" %}
+{% load i18n %}
+{% load url from future %}
+  {% block additional-js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}farbastic/farbtastic.js" type="text/javascript"></script>
+
+    <script src="http://www.lfhs.ca/blobon/assets/farbastic/farbtastic.js" type="text/javascript"></script>
+  {% endblock %}
+    {% block additional-css %}
+    <style>
+      textarea {
+        resize: none;
+      }
+      .edit_buttons {
+        padding: 10px;0px;5px;0px;
+      }
+    </style>
+    <link rel="stylesheet" href="{{ STATIC_URL }}farbastic/farbtastic.css" type="text/css" />
+
+
+    <link rel="stylesheet" href="http://www.lfhs.ca/blobon/assets/farbastic/farbtastic.css" type="text/css" />
+  {% endblock %}
+  {% block dashboard-active %}{% endblock %}
+  {% block categories-active %}class="active"{% endblock %}
+  {% block content %}
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}</strong>{{ field.name }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% regroup cats by parent_category as parent_category_list %}
+
+<ul style="display:none;">
+{% for parent_category in parent_category_list %}
+    <li>{{ parent_category.grouper }}
+    <ul>
+        {% for item in parent_category.list %}
+          <li>{{ item.name }} - {{item.slug}}</li>
+        {% endfor %}
+    </ul>
+    </li>
+{% endfor %}
+</ul>
+
+
+          <div class="panel panel-primary" id="new_cat_form" style="display: none">
+            <div class="panel-heading">{% trans "Add a new category :" %}</div>
+            <div class="panel-body">
+              <form enctype="multipart/form-data" id="newcat" role="form" method="post" action="{% url 'blogs.views.newcategory' blog.slug %}">{% csrf_token %}
+            {% if categories %}
+                <div class="form-group">
+                 <b>{% trans "Parent: " %}</b>
+                  {{categories_form.parent_category}}
+                </div>
+            {% endif %}
+                <div class="form-group">
+                  {{ categories_form.name.label_tag }} 
+                  {{categories_form.name}}
+                </div>
+                <div class="form-group">
+                 {{ categories_form.description.label_tag }} 
+                 {{categories_form.description}}
+                </div>
+                <div class="form-group" style="display:none;">
+                 {{ categories_form.slug.label_tag }}
+                  {{categories_form.slug}}
+                </div>
+                <div class="form-group">
+             <div class="row">
+               <div class="col-md-8 form_section" id="color">
+               {{ categories_form.color.label_tag }}
+               {{ categories_form.color }}
+               </div>
+               <div class="col-md-4 form_section" id="colorpicker"></div>
+
+             </div>
+                </div>
+
+              </form>
+              <button id="submitcat" class="btn btn-primary btn-xs" disabled="disabled" title="{% trans "Save your new category" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
+              <span id="cancel_new_category" title="{% trans "Cancel add category" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+            </div> 
+          </div>  
+
+          {% if categories %}
+
+          {% for category, sub_categories in categories.items %}
+          <div class="panel panel-default">
+            <div class="panel-heading"><b>{% trans "Category : " %}{{ category.name }}</b>{% if category.parent_category %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% trans "Parent category : " %}{{ category.parent_category }}{% endif %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_category" title="{% trans "Add a New Category" %}">{% trans "Add new" %}</a></div>
+            <div class="panel-body">
+
+
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-2">
+                <col class="col-xs-6">
+                <col class="col-xs-2">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>{% trans "Name" %}</th>
+                  <th>{% trans "Description" %}</th>
+                  <th>{% trans "Color" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ category.name }}
+                    <div class="edit_buttons">
+                      <a type="button" class="btn btn-default btn-xs edit_category" href="{% url 'blogs.views.editcategory' category.id %}" title="{% trans "Modify This Category" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
+                      <a type="button" class="btn btn-default btn-xs delete_category" title="{% trans "Delete This Category" %}" data-toggle="modal" data-target="#{{ category.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
+                    </div>
+                  </td>
+                  <td>{% if category.description %}{{ category.description }}{% endif %}</td>
+                  <td><div style="background-color:{{ category.color }};height:50px;"></div></td>
+                </tr>
+
+  <div class="modal fade" id="{{ category.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Delete Category" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Are you sure you want to delete the category " %} {{ category.name }}{% trans "?" %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
+          <a href="{% url 'blogs.views.deletecategory' category.id %}" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+              </tbody>
+            </table>
+
+
+
+            </div>
+
+    {% if sub_categories %}
+
+
+            <div class="panel-heading"><div style="margin-left:50px;"><b>{% trans "Sub-categories : " %}</b></div>
+            </div>
+            <div class="panel-body">
+            
+
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-1">
+                <col class="col-xs-3">
+                <col class="col-xs-6">
+                <col class="col-xs-1">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>{% trans "Name" %}</th>
+                  <th>{% trans "Description" %}</th>
+                  <th>{% trans "Color" %}</th>
+                </tr>
+              </thead>
+           {% for sub_category in sub_categories %}
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td>{{ sub_category.name }}
+                    <div class="edit_buttons">
+                      <a type="button" class="btn btn-default btn-xs edit_category" href="{% url 'blogs.views.editcategory' sub_category.id %}" title="{% trans "Modify This Category" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
+                      <a type="button" class="btn btn-default btn-xs delete_category" title="{% trans "Delete This Category" %}" data-toggle="modal" data-target="#{{ sub_category.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
+                    </div>
+                  </td>
+                  <td>{% if sub_category.description %}{{ sub_category.description }}{% endif %}</td>
+                  <td><div style="background-color:{{ sub_category.color }};height:50px;"></div></td>
+                </tr>
+
+  <div class="modal fade" id="{{ sub_category.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Delete Category" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Are you sure you want to delete the category " %} {{ sub_category.name }}{% trans "?" %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
+          <a href="{% url 'blogs.views.deletecategory' sub_category.id %}" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+              </tbody>
+    {% endfor %}
+            </table>
+          
+          
+          
+            </div>
+    {% endif %}
+          </div>
+
+
+              {% endfor %}
+
+            {% else %}
+          <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Categories" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_category" title="{% trans "Add a New Category" %}">{% trans "Add one" %}</a></div>
+            <div class="panel-body">
+             {% trans "This blog has no category" %}
+            </div>
+          </div>
+            {% endif %}
+    <script type="text/javascript">
+      $(function () {
+        $('#add_new_category').tooltip({container: 'body'});
+        $(".edit_category").tooltip({container: 'body', placement: 'bottom'});
+        $(".delete_category").tooltip({container: 'body', placement: 'bottom'});
+        $('#cancel_new_category').tooltip({container: 'body'});
+        $('#submitcat').tooltip({container: 'body'});
+      });
+    </script>
+
+    <script>
+      $('#add_new_category').click(function() {
+        $('#add_new_category').hide();
+        $('#new_cat_form').show();
+        $('#colorpicker').farbtastic('#id_color');
+        $('#id_color').val("#000000");
+        setTimeout(function() { 
+         $(".mceNoEditor").removeAttr("style");
+        },10);
+      });
+    </script>
+
+    <script>
+      $('#cancel_new_category').click(function() {
+        $('#add_new_category').show();
+        $('#new_cat_form').hide();
+        $('#newcat').each(function(){
+          this.reset();
+        });
+      });
+    </script>
+
+    <script>
+      $(document).ready(function(){
+        $('#id_name').keyup(function() {
+        if ($(this).val() != '') {
+          $('#submitcat').prop("disabled", false);
+          }
+        else {
+          $('#submitcat').prop("disabled", true);
+        }
+        });
+      });
+    </script>
+
+
+    <script>
+      $('#submitcat').click(function() {
+        $('#newcat').submit();
+      });
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        setTimeout(function() { 
+         $(".mceNoEditor").removeAttr("style");
+        },10);
+                   });
+         
+    </script>
+
+
+
+  {% endblock %}
+
+
