@@ -32,7 +32,15 @@
 
 
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Posts" %}<a href="{% url 'blogs.views.administrateblog' blog.slug %}" class="btn btn-default btn-xs pull-right" id="add_new_post" title="{% trans "Add a New Post" %}">{% trans "Add new" %}</a></div>
+            <div class="panel-heading">{% trans "Posts" %}
+                <div class="pull-right">  
+                  <a href="{% url 'blogs.views.administrateblog' blog.slug %}" class="btn btn-default btn-xs" id="add_new_post" title="{% trans "Add a New Post" %}">{% trans "Add new" %}</a>
+                  {% block status %}
+                  <a href="{% url 'blogs.views.queue' blog.slug %}" class="btn btn-default btn-xs" id="queue" title="{% trans "View only the draft posts" %}">{% trans "View queue" %}</a>
+                  <a href="{% url 'blogs.views.published' blog.slug %}" class="btn btn-default btn-xs" id="pub" title="{% trans "View only published posts" %}">{% trans "View publish" %}</a>
+                  {% endblock %}
+                </div>
+            </div>
             {% if posts %}
             <table class="table table-striped">
               <colgroup>
@@ -57,14 +65,14 @@
                 <tr>
                   <td>{% if post.title %}{{ post.title }}{% else %}{% trans "This post has no title" %}{% endif %}
                     <div class="edit_buttons">
-                      <a href="{% url 'blogs.views.editpost' post.id %}" class="btn btn-default btn-xs edit_post" title="{% trans "Modify This Post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
-                      <a href="#" class="btn btn-default btn-xs delete_post" title="{% trans "Delete This Post" %}" data-toggle="modal" data-target="#{{ post.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
-                      <a href="{{post.get_absolute_url }}" target="_blank" class="btn btn-default btn-xs view_post" title="{% trans "View This Post" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "View" %}</a>
+                      <a href="{% url 'blogs.views.editpost' post.id %}" style="margin-bottom:5px;" class="btn btn-default btn-xs edit_post" title="{% trans "Modify This Post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
+                      <a href="#" class="btn btn-default btn-xs delete_post" style="margin-bottom:5px;" title="{% trans "Delete This Post" %}" data-toggle="modal" data-target="#{{ post.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
+                      <a href="{{post.get_absolute_url }}" target="_blank" style="margin-bottom:5px;" class="btn btn-default btn-xs view_post" title="{% trans "View This Post" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "View" %}</a>
                       {% if post.status == "D" %}
-                      <a href="{% url 'blogs.views.publish_now' post.id %}" class="btn btn-default btn-xs publish_post" title="{% trans "Publish this post now" %}"><span class="glyphicon glyphicon-ok"></span> {% trans "Publish now" %}</a>
+                      <a href="{% url 'blogs.views.publish_now' post.id %}" style="margin-bottom:5px;" class="btn btn-default btn-xs publish_post" title="{% trans "Publish this post now" %}"><span class="glyphicon glyphicon-ok"></span> {% trans "Publish now" %}</a>
                       {% endif %}
                       {% if not post.is_ready %}
-                      <a href="{% url 'blogs.views.translatepost' post.id %}" target="_blank" class="btn btn-default btn-xs translate_post" title="{% trans "Translate this post" %}"><span class="glyphicon glyphicon-euro"></span> {% trans "Translate" %}</a>
+                      <a href="{% url 'blogs.views.translatepost' post.id %}" target="_blank" style="margin-bottom:5px;" class="btn btn-default btn-xs translate_post" title="{% trans "Translate this post" %}"><span class="glyphicon glyphicon-euro"></span> {% trans "Translate" %}</a>
                       {% endif %}
                     </div>
                   </td>
@@ -129,6 +137,7 @@
         $(".delete_post").tooltip({container: 'body', placement: 'bottom'});
         $(".view_post").tooltip({container: 'body', placement: 'bottom'});
         $(".post_category").tooltip({container: 'body'});
+        $(".btn").tooltip({container: 'body'});
       });
     </script>
   {% endblock %}

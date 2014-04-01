@@ -370,6 +370,7 @@ class Post(models.Model):
     source = models.URLField(verbose_name=_("Source"), max_length=300, blank=True)
     content = models.TextField(verbose_name=_("Contenu"),max_length=10000, blank=True)
     is_top = models.BooleanField(default=False)
+    is_discarded = models.BooleanField(default=False)
     publish_on_facebook = models.BooleanField(default=False)
     youtube_id = models.CharField(max_length=50, null=True, blank=True)
     video = models.FileField(verbose_name=_("Video"), upload_to=get_file_path, null=True, blank=True)

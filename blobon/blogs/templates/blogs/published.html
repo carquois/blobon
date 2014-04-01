@@ -1,0 +1,8 @@
+{% extends "blogs/administrateposts.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block status %}
+<a href="{% url 'blogs.views.queue' blog.slug %}" class="btn btn-default btn-xs" id="queue" title="{% trans "View only draft posts" %}">{% trans "View queue" %}</a>
+<a href="{% url 'blogs.views.administrateposts' blog.slug %}" class="btn btn-default btn-xs" id="all" title="{% trans "View all posts" %}">{% trans "View all" %}</a>
+{% endblock %}

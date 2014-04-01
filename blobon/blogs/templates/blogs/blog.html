@@ -9,14 +9,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="">
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
     <link href="{{ STATIC_URL }}css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
-
     <link rel="stylesheet" href="http://www.lfhs.ca/blobon/assets/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="http://www.lfhs.ca/blobon/assets/css/bootstrap.min.css">
-
     <link href='http://fonts.googleapis.com/css?family=Copse' rel='stylesheet' type='text/css'>
+
+
+
     {% block open-graphs %}
     <title>{% block title %}{{ blog.title }}{% endblock %}</title>
 
@@ -37,20 +39,17 @@
     <!-- Le canonical url -->
     <link rel="canonical" href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" />
     {% endblock %}
+
+
+
     <link rel="shortcut icon" href="{{ STATIC_URL }}/ico/favicon.png">
+    <script src="{{ STATIC_URL }}js/jquery.validate.js"></script>
 
-    <link rel="shortcut icon" href="http://www.lfhs.ca/blobon/assets/ico/favicon.png">
-    {% block additional-js %}
-    <script src="{{ STATIC_URL }}js/jquery.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.validate.js"></script>
 
-    <script src="http://www.lfhs.ca/blobon/assets/js/jquery.js"></script>
-<script src="http://www.lfhs.ca/blobon/assets/js/jquery.validate.js"></script>
-    {% endblock %}
+
     {% block blog_css %}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap_blog_base.css">
 
-<link rel="stylesheet" href="http://www.lfhs.ca/blobon/assets/css/bootstrap_blog_base.css">
 
 
 <style>
@@ -58,6 +57,21 @@ a {
 color: {% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};
 text-decoration: none;
 }
+
+
+h2 {
+color: {% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};
+text-decoration: none;
+}
+.blog-post-title:hover, .blog-post-title:focus {
+    color: #005580 !important;
+    text-decoration: none !important;
+}
+a:hover, a:focus {
+    color: #005580 !important;
+    text-decoration: none !important;
+}
+
 .blog-masthead {
   background-color: {% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};
   box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
@@ -103,7 +117,8 @@ padding-top:10px;
     {% block additional_css %}
     {% endblock %}
     {% endblock %}
-</head>
+    <link rel="stylesheet" href="{{ STATIC_URL }}lightbox/docs/assets/css/bootstrap-lightbox.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}lightbox/docs/assets/css/bootstrap-lightbox.css">
 
         <!-- Le analytics -->
     <script type="text/javascript">
@@ -211,17 +226,17 @@ padding-top:10px;
 
 
          <a href="{{ post.get_absolute_url }}">
-           <h2 class="blog-post-title">{{ post.title }}</h2>
+           <h2 class="blog-post-title">{{ post.title }}</h2></a>
            {% if post.youtube_id %}
            <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
            {% else %}
 
            {% if post.pic %}
            {% if post.file_extension == ".gif" %}
-           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
+           <a href="{{ post.get_absolute_url }}"><img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" /></a>
            {% else %}
            {% thumbnail post.pic "700" as im %}
-           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+           <a href="{{ post.get_absolute_url }}"><img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" /></a>
            {% endthumbnail %}
            {% endif %}
            {% endif %}
@@ -486,10 +501,10 @@ padding-top:10px;
 
 
            {% endif %}
-{% if post.content %}{% load markup %}{{ post.content|markdown|safe }}{% endif %}
-{% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe }}{% endif %}
-{% if post.text %}{% load markup %}{{ post.text|markdown|safe }}{% endif %}
-{% if post.content_video %}{% load markup %}{{ post.content_video|markdown|safe }}{% endif %}
+{% if post.content %}{% load markup %}{{ post.content|safe|urlize }}{% endif %}
+{% if post.content_0 %}{% load markup %}{{ post.content_0|safe|urlize }}{% endif %}
+{% if post.text %}{% load markup %}{{ post.text|safe|urlize }}{% endif %}
+{% if post.content_video %}{% load markup %}{{ post.content_video|safe|urlize }}{% endif %}
 
 
           {% block share %}
@@ -545,7 +560,7 @@ padding-top:10px;
 
       {% block blog_right %}
       <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-        <div class="sidebar-module sidebar-module-inset"><h4>{% trans "About" %}</h4>{{ blog.description }}</div>
+        <div class="sidebar-module sidebar-module-inset"><h4>{% trans "About" %}</h4>{{ blog.description|urlize }}</div>
         <div class="sidebar-module" style="text-align:left;">
           <form method="post" id="subscribe_form" class="form-horizontal" role="form" action="{% url 'blogs.views.subscribe_to_infoletter' blog.slug %}">{% csrf_token %}
             <div class="form-group">
@@ -589,7 +604,6 @@ padding-top:10px;
       {% endblock %}
         </div>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-
-    <script src="http://www.lfhs.ca/blobon/assets/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}lightbox/js/bootstrap-lightbox.js"></script>
   </body>
 </html>
