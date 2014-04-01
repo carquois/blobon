@@ -333,10 +333,10 @@
 
            {% endif %}
 
-{% if post.content %}{% load markup %}{{ post.content|markdown|safe }}{% endif %}
-{% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe }}{% endif %}
-{% if post.text %}{% load markup %}{{ post.text|markdown|safe }}{% endif %}
-{% if post.content_video %}{% load markup %}{{ post.content_video|markdown|safe }}{% endif %}
+{% if post.content %}{% load markup %}{{ post.content|markdown|safe|urlize }}{% endif %}
+{% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe|urlize }}{% endif %}
+{% if post.text %}{% load markup %}{{ post.text|markdown|safe|urlize }}{% endif %}
+{% if post.content_video %}{% load markup %}{{ post.content_video|markdown|safe|urlize }}{% endif %}
 
 
 
@@ -431,7 +431,7 @@
 
     <div class="media-body">
       <h4 class="media-heading">{{ comment.name }}</h4>
-        {{ comment.comment }}
+        {{ comment.comment|urlize }}
     </div>
   </div>
   <hr>

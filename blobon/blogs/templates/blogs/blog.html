@@ -486,10 +486,10 @@ padding-top:10px;
 
 
            {% endif %}
-{% if post.content %}{% load markup %}{{ post.content|markdown|safe }}{% endif %}
-{% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe }}{% endif %}
-{% if post.text %}{% load markup %}{{ post.text|markdown|safe }}{% endif %}
-{% if post.content_video %}{% load markup %}{{ post.content_video|markdown|safe }}{% endif %}
+{% if post.content %}{% load markup %}{{ post.content|markdown|safe|urlize }}{% endif %}
+{% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe|urlize }}{% endif %}
+{% if post.text %}{% load markup %}{{ post.text|markdown|safe|urlize }}{% endif %}
+{% if post.content_video %}{% load markup %}{{ post.content_video|markdown|safe|urlize }}{% endif %}
 
 
           {% block share %}
@@ -545,7 +545,7 @@ padding-top:10px;
 
       {% block blog_right %}
       <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-        <div class="sidebar-module sidebar-module-inset"><h4>{% trans "About" %}</h4>{{ blog.description }}</div>
+        <div class="sidebar-module sidebar-module-inset"><h4>{% trans "About" %}</h4>{{ blog.description|urlize }}</div>
         <div class="sidebar-module" style="text-align:left;">
           <form method="post" id="subscribe_form" class="form-horizontal" role="form" action="{% url 'blogs.views.subscribe_to_infoletter' blog.slug %}">{% csrf_token %}
             <div class="form-group">
