@@ -160,7 +160,7 @@ def index(request):
 def category(request, slug):
       category = get_object_or_404(Category, slug=slug)
       posts = paginate(request,
-                       Post.objects.filter(status='P').filter(category=category).order_by('-pub_date'),
+                       Post.objects.filter(status='P').filter(category=category).filter(is_discarded=False).order_by('-pub_date'),
                        6)
       blog = category.blog
       form = SubscriptionForm()
@@ -559,7 +559,7 @@ def newrss(request, slug):
 
 def draft(request):
       posts = paginate(request,
-                       Post.objects.filter(status='D').order_by('-pub_date'),
+                       Post.objects.filter(status='D').filter(is_discarded=False).filter(is_ready=True).order_by('-pub_date'),
                        20)
       return render_to_response('blogs/index.html',
                                {'posts': posts},
@@ -610,7 +610,7 @@ def createblog(request):
 def administrateblog(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       posts = paginate(request,
-                       Post.objects.filter(blog=blog).order_by('-pub_date'),
+                       Post.objects.filter(blog=blog).filter(is_discarded=False).order_by('-pub_date'),
                        1)
       pages = paginate(request,
                        Page.objects.order_by('-pub_date'),
@@ -626,10 +626,10 @@ def administrateblog(request, slug):
                        Subscription.objects.filter(blog=blog).order_by('-id'),
                        1)
       posts_to_translate = paginate(request,
-                           Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date'),
+                           Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('-pub_date'),
                            1)
       last_posts_to_translate = paginate(request,
-                                Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date'),
+                                Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('-pub_date'),
                                 5)
       categories = Category.objects.filter(blog=blog).order_by('-id')
       tags = Tag.objects.filter(blog=blog).order_by('-id')
@@ -641,14 +641,34 @@ def administrateblog(request, slug):
 @login_required
 def administrateposts(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      posts = Post.objects.filter(blog=blog).order_by('-pub_date')
+      posts = Post.objects.filter(blog=blog).filter(is_discarded=False).order_by('-pub_date')
       posts = paginate(request,
-                       Post.objects.filter(blog=blog).order_by('-pub_date'),
+                       Post.objects.filter(blog=blog).filter(is_discarded=False).order_by('-pub_date'),
                        15)
       return render_to_response('blogs/administrateposts.html',
                                 {'blog': blog, 'posts': posts, },
                                 context_instance=RequestContext(request))
 
+@login_required
+def queue(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      posts = paginate(request,
+                       Post.objects.filter(blog=blog).filter(is_ready=True).filter(status="D").filter(is_discarded=False).order_by('-pub_date'),
+                       20)
+      return render_to_response('blogs/queue.html',
+                                {'blog': blog, 'posts': posts, },
+                                context_instance=RequestContext(request))
+
+
+@login_required
+def published(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      posts = paginate(request,
+                       Post.objects.filter(blog=blog).filter(is_ready=True).filter(status="P").filter(is_discarded=False).order_by('-pub_date'),
+                       20)
+      return render_to_response('blogs/published.html',
+                                {'blog': blog, 'posts': posts, },
+                                context_instance=RequestContext(request))
 @login_required
 def administratepages(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
@@ -812,7 +832,7 @@ def translatepost(request, id):
 @login_required
 def quicktranslation(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      posts = Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date')[:1]
+      posts = Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('-pub_date')[:1]
       if not posts:
         return HttpResponseRedirect(reverse('blogs.views.translation', args=(blog.slug,)))
       else:
@@ -844,7 +864,7 @@ def quicktranslation(request, slug):
 def translation(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       posts = paginate(request,
-                       Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date'),
+                       Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('-pub_date'),
                        15)
       return render_to_response('blogs/translation.html',
                                 {'blog': blog, 'posts': posts, },
@@ -894,7 +914,7 @@ def view_info_letter(request, id):
 def fastedit(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       posts = paginate(request,
-                       Post.objects.filter(status="D").filter(is_ready=False).order_by('-pub_date'),
+                       Post.objects.filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('-pub_date'),
                        10)
 #      PostFormset = modelformset_factory(Post, fields=('title', 'translated_title','content', 'translated_content', 'is_ready'))
 #      if request.method == 'POST':
@@ -1006,10 +1026,12 @@ def deletepost_trans(request, id):
       post = get_object_or_404(Post, id=id)
       blog = post.blog
       if request.user == post.author:
-        post.delete()
+        post.is_discarded = True
+        post.save()
         messages.add_message(request, messages.INFO, _(u"Your post has been deleted"))
       elif request.user.is_staff:
-        post.delete()
+        post.is_discarded = True
+        post.save()
         messages.add_message(request, messages.INFO, _(u"The post has been deleted"))
       return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
 

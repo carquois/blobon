@@ -1,0 +1,8 @@
+{% extends "blogs/administrateposts.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block status %}
+<a href="{% url 'blogs.views.published' blog.slug %}" class="btn btn-default btn-xs" id="pub" title="{% trans "View only published posts" %}">{% trans "View published" %}</a>
+<a href="{% url 'blogs.views.administrateposts' blog.slug %}" class="btn btn-default btn-xs" id="all" title="{% trans "View all posts" %}">{% trans "View all" %}</a>
+{% endblock %}
