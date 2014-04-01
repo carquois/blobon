@@ -333,10 +333,10 @@
 
            {% endif %}
 
-{% if post.content %}{% load markup %}{{ post.content|markdown|safe|urlize }}{% endif %}
-{% if post.content_0 %}{% load markup %}{{ post.content_0|markdown|safe|urlize }}{% endif %}
-{% if post.text %}{% load markup %}{{ post.text|markdown|safe|urlize }}{% endif %}
-{% if post.content_video %}{% load markup %}{{ post.content_video|markdown|safe|urlize }}{% endif %}
+{% if post.content %}{% load markup %}{{ post.content|safe|urlize }}{% endif %}
+{% if post.content_0 %}{% load markup %}{{ post.content_0|safe|urlize }}{% endif %}
+{% if post.text %}{% load markup %}{{ post.text|safe|urlize }}{% endif %}
+{% if post.content_video %}{% load markup %}{{ post.content_video|safe|urlize }}{% endif %}
 
 
 
