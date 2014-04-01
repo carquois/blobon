@@ -653,7 +653,7 @@ def administratepages(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       pages = Page.objects.filter(blog=blog).order_by('-pub_date')
       pages = paginate(request,
-                       Page.objects.order_by('-pub_date'),
+                       Page.objects.filter(blog=blog).order_by('-pub_date'),
                        15)
       return render_to_response('blogs/administratepages.html',
                                 {'blog': blog, 'pages': pages, },
