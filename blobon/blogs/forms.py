@@ -2,7 +2,7 @@
 
 from django import forms
 from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, ImageField, ModelMultipleChoiceField, EmailField
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
 from django.db import models
 
