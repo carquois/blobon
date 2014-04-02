@@ -32,19 +32,21 @@ class Command(NoArgsCommand):
            for image in soup.findAll("img"):
              entry.img.append(image['src'])
            post, created = Post.objects.get_or_create(author=blog.creator, blog=blog, source=entry.link)
-           post.status = "D"
-           if len(entry.title) > 140:
-             post.title = "Title to long"
-           else:
-             post.title = entry.title
-           post.is_ready = False
-           post.save()
-           img_url = "%s%s" % ('http:', entry.img[0])
-           img_temp = NamedTemporaryFile(delete=True)
-           img_temp.write(urllib2.urlopen(img_url).read())
-           img_temp.flush()
-           filename = urlparse(entry.img[0]).path.split('/')[-1]
-           ext = filename.split('.')[-1]
-           prefix = post.base62id
-           filename = "%s.%s" % (prefix, ext)
-           post.pic.save(filename, File(img_temp))
+           if created:
+             post.status = "D"
+             if len(entry.title) > 140:
+               post.title = "Title to long"
+             else:
+               post.title = entry.title
+             post.is_ready = False
+             post.save()
+             img_url = "%s%s" % ('http:', entry.img[0])
+             img_temp = NamedTemporaryFile(delete=True)
+             img_temp.write(urllib2.urlopen(img_url).read())
+             img_temp.flush()
+             filename = urlparse(entry.img[0]).path.split('/')[-1]
+             ext = filename.split('.')[-1]
+             prefix = post.base62id
+             filename = "%s.%s" % (prefix, ext)
+             post.pic.save(filename, File(img_temp))
+

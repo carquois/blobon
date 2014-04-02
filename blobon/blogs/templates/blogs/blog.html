@@ -113,6 +113,12 @@ padding-top:10px;
 #fb, #tw{
     display:inline;
 }
+#fblogo{
+padding-top:0px !important;
+}
+#twlogo{
+padding-top:0px !important;
+}
 </style>
     {% block additional_css %}
     {% endblock %}
@@ -188,6 +194,13 @@ padding-top:10px;
       {% for category in categories %} 
       <a class="blog-nav-item {% if cat == category %}active{% else %}{% endif %}" href="{% url "blogs.views.category" category.slug %}" style="background-color:{{ category.color }};">{{ category.name }}</a>
       {% endfor %}
+    {% endif %}
+
+    {% if blog.facebook_link %}
+          <a class="blog-nav-item pull-right" href="{{ blog.facebook_link }}" target="_blank" style="height:40px;" ><img id="fblogo" style="padding-top:none !important;margin-top:-8px;" width="35" height="35" src="http://i.imgur.com/ghz9zWC.png" alt="FB"></a>
+    {% endif %}
+    {% if blog.twitter_link %}
+          <a class="blog-nav-item pull-right" href="{{ blog.twitter_link }}" target="_blank" style="height:40px;"><img id="twlogo" style="padding-top:none !important;margin-top:-8px;" width="35" height="35" src="http://i.imgur.com/7Arr9wb.png" alt="Twitter"></a>
     {% endif %}
           <a class="blog-nav-item pull-right" style="display:none;" href="http://blobon.com">Powered by blobon.com</a>
         </nav>

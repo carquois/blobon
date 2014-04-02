@@ -842,18 +842,10 @@ def quicktranslation(request, slug):
           form = PostForm(request.POST or None,request.FILES or None, instance=post)
           if form.is_valid():
               post = form.save(commit=False)
-              if 'save_ready_publish' in request.POST:
-                post.is_ready = True
-                post.status = 'P'
-                post.save()
-                return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
-              elif 'save_ready_queue' in request.POST:
-                post.is_ready = True
-                post.save()
-                return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
-              else:
-                post.save()
-                return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
+              post.is_ready = True
+              post.status = 'D'
+              post.save()
+              return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
         else:
           form = PostForm(instance=post,)
         return render_to_response('blogs/quicktranslation.html',
