@@ -25,7 +25,7 @@ class Command(BaseCommand):
 #      up = UserProfile.objects.get(user=u)
       b = Blog.objects.get(slug=bl)
       tb = b.translation
-      p = Post.objects.filter(blog=b).filter(status="D").filter(is_ready=True).order_by('-pub_date')[:1]
+      p = Post.objects.filter(blog=b).filter(is_discarded=False).filter(status="D").filter(is_ready=True).order_by('-pub_date')[:1]
       if p.count() >= 1:
         post = p[0]
         publish_draft(post)
