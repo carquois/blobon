@@ -553,7 +553,7 @@ def newrss(request, slug):
           rss = form.save(commit=False)
           rss.blog = blog
           rss.save()
-          messages.add_message(request, messages.INFO, _(u"The feed has been had"))
+          messages.add_message(request, messages.INFO, _(u"The feed has been added"))
           return HttpResponseRedirect(reverse('blogs.views.rss_auto_post', args=(blog.slug,)))
       return HttpResponseRedirect(reverse('blogs.views.rss_auto_post', args=(blog.slug,)))
 
@@ -842,10 +842,17 @@ def quicktranslation(request, slug):
           form = PostForm(request.POST or None,request.FILES or None, instance=post)
           if form.is_valid():
               post = form.save(commit=False)
-              post.is_ready = True
-              post.status = 'D'
-              post.save()
-              return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
+              if not post.translated_title:
+                post.is_ready = True
+                post.status = 'D'
+                post.is_discarded = True
+                post.save()
+                return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
+              else:
+                post.is_ready = True
+                post.status = 'D'
+                post.save()
+                return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
         else:
           form = PostForm(instance=post,)
         return render_to_response('blogs/quicktranslation.html',
