@@ -26,6 +26,27 @@
     <!-- Le canonical url -->
     <link rel="canonical" href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" />
     {% endblock %}
+    {% block additionnal_js %}
+                <script>
+                  $(document).ready(function () {
+                    $(document).keydown(function(e) {
+                      if ($(e.target).is('input, textarea')) {
+                      }else{
+                        var url = false;
+                        if (e.which == 37) {
+                          url = "{{ prev_post.get_absolute_url }}";
+                        }
+                        else if (e.which == 39) {
+                          url = "{{ next_post.get_absolute_url }}";
+                        }
+                        if (url) {
+                          window.location = url;
+                        }
+                      }
+                    });
+                  });
+                </script>
+    {% endblock %}
       {% block post_in_posts %}
       {% endblock %}
       {% block post_in_posts_enfor %}
@@ -33,7 +54,7 @@
     {% block fb %}
      {% endblock %}
       {% block blog_header %}
-       <div class="row" style="padding-top:10px;">
+       <div class="col-md-12" style="padding-top:10px;">
        </div>
       {% endblock %}
       

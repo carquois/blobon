@@ -45,8 +45,8 @@
     <link rel="shortcut icon" href="{{ STATIC_URL }}/ico/favicon.png">
     <script src="{{ STATIC_URL }}js/jquery.validate.js"></script>
 
-
-
+    {% block additionnal_js %}
+    {% endblock %}
     {% block blog_css %}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap_blog_base.css">
 
