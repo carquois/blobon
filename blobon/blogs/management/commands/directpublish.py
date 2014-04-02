@@ -1,6 +1,6 @@
 from datetime import datetime
 from accounts.models import UserProfile
-from blogs.models import Post
+from blogs.models import Post, Blog
 
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
@@ -16,37 +16,39 @@ from django.conf import settings
 from accounts.views import APP_KEY, APP_SECRET
 
 class Command(BaseCommand):
-  args = '<username username ...>'
+  args = '<bl bl ...>'
   help = 'Publish a fan page'
 
   def handle(self, *args, **options):
-    for username in args:
-      u = User.objects.get(username=username)
-      up = UserProfile.objects.get(user=u)
-      p = Post.objects.filter(author=u).filter(status="D").filter(is_ready=True).order_by('-pub_date')[:1]
+    for bl in args:
+#      u = User.objects.get(username=username)
+#      up = UserProfile.objects.get(user=u)
+      b = Blog.objects.get(slug=bl)
+      tb = b.translation
+      p = Post.objects.filter(blog=b).filter(status="D").filter(is_ready=True).order_by('-pub_date')[:1]
       if p.count() >= 1:
         post = p[0]
         publish_draft(post)
         publish_twitter_link(post)
         if post.translated_title and post.blog.translation and post.translated_content and post.youtube_id: 
           post.save()
-          new_post = Post(title=post.translated_title, content=post.translated_content, youtube_id=post.youtube_id, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
+          new_post = Post(title=post.translated_title, content=post.translated_content, youtube_id=post.youtube_id, author=tb.creator, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
           publish_twitter_link(new_post)
         elif post.translated_title and post.blog.translation and post.youtube_id:
           post.save()
-          new_post = Post(title=post.translated_title, youtube_id=post.youtube_id, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
+          new_post = Post(title=post.translated_title, youtube_id=post.youtube_id, author=tb.creator, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
           publish_twitter_link(new_post)
 
         elif post.translated_title and post.blog.translation and post.translated_content:
           post.save()
-          new_post = Post(title=post.translated_title, content=post.translated_content, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
+          new_post = Post(title=post.translated_title, content=post.translated_content, author=tb.creator, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
           publish_twitter_link(new_post)
         elif post.translated_title and post.blog.translation:
           post.save()
-          new_post = Post(title=post.translated_title, author= up.fr_user, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
+          new_post = Post(title=post.translated_title, author=tb.creator, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
           publish_twitter_link(new_post)
 
@@ -57,10 +59,9 @@ def publish_draft(post):
         post.save()
 
 def publish_twitter_link(post):
-      up = UserProfile.objects.get(user=post.author)
-      if up.twitter_oauth_token:
+      if post.blog.twitter_oauth_token:
         twitter = Twython(APP_KEY, APP_SECRET,
-                  up.twitter_oauth_token, up.twitter_oauth_token_secret)
+                  post.blog.twitter_oauth_token, post.blog.twitter_oauth_token_secret)
         twitter.update_status(status="%s\n\nhttp://%s%s" % (post.title.encode('utf-8') , settings.MAIN_SITE_DOMAIN, post.get_absolute_url() ))
 
 def publish_facebook_link(post):
