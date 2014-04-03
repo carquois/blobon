@@ -47,6 +47,16 @@
                   });
                 </script>
     {% endblock %}
+
+    {% block additional_css %}
+    <style>
+    .blog-post-title:hover, .blog-post-title:focus {
+        color: {% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %} !important;
+        
+    }
+    </style>
+    {% endblock %}
+
       {% block post_in_posts %}
       {% endblock %}
       {% block post_in_posts_enfor %}
@@ -80,7 +90,7 @@
          <div class="blog-post">
 
 
-           <h2 class="blog-post-title">{{ post.title }}</h2>
+           <h2 class="blog-post-title" id="titleh2">{{ post.title }}</h2>
            {% if post.video %}
            <video width="620" height="440" controls>
              <source src="{{ MEDIA_URL }}{{ post.video }}" type="video/mp4">
@@ -454,16 +464,16 @@
 
 
         <div class="row" style="padding-bottom:10px;">
-          <div class="col-xs-6 col-xs-offset-6" style="padding-top:10px;padding-left:30px;" >
-            <div class="addthis_toolbox addthis_default_style" style="margin-right:-15px;">
+          <div class="col-xs-12" style="padding-top:10px;padding-left:30px;" >
+            <div class="addthis_toolbox addthis_default_style">
               <div id="tw">
-                <a class="addthis_button_tweet" style="width:90px;!important;height:20px !important;"></a>
+                <a class="addthis_button_tweet pull-right" style="width:90px;!important;height:20px !important;"></a>
               </div>
               <div id="fb_share">
-                <a class="addthis_button_facebook_share" fb:share:layout="button" style="width:75px !important;height:20px !important;padding:none;"></a>
+                <a class="addthis_button_facebook_share pull-right" fb:share:layout="button" style="width:75px !important;height:20px !important;padding:none;"></a>
               </div>
               <div id="fb">
-                <a class="addthis_button_facebook_like" fb:like:href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" fb:like:layout="button_count" style="width:100px !important;height:20px !important;"></a>
+                <a class="addthis_button_facebook_like pull-right" fb:like:href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" fb:like:layout="button_count" style="width:95px !important;height:20px !important;"></a>
               </div>
             </div>
             <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
