@@ -27,6 +27,7 @@ from django.forms.models import modelformset_factory
 from django.core.mail import send_mail
 from django.views.decorators.cache import never_cache
 
+
 @never_cache
 def index(request):
       request.subdomain = None
@@ -201,7 +202,7 @@ def administrateemails(request, slug):
 def dashboard(request):
       blogs = Blog.objects.filter(creator=request.user,is_online=True)
       return render_to_response('blogs/dashboard.html',
-                                {'blogs': blogs},
+                                {'blogs': blogs,},
                                 context_instance=RequestContext(request))
 
 def pics(request):
