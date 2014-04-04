@@ -212,7 +212,7 @@ def administrateemails(request, slug):
 
 
  
-
+@login_required
 def dashboard(request):
       blogs = Blog.objects.filter(creator=request.user,is_online=True)
       return render_to_response('blogs/dashboard.html',
@@ -602,18 +602,18 @@ def createblog(request):
           else:
             blog.is_open = True
           blog.save()
-          cat1 = "_Music"
-          cat2 = "_Fashion"
-          cat3 = "_Travel"
-          cat4 = "_Design"
-          cat5 = "_Food"
-          cat6 = "_Movie"
-          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Music", slug= cat1, color="#CC0000")
-          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Fashion", slug= cat2, color="#CC0066")
-          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Travel", slug= cat3, color="#009900")
-          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Design", slug= cat4, color="#669999")
-          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Food", slug= cat5, color="#4c660f")
-          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Movie", slug= cat6, color="#0033CC")
+#          cat1 = "_Music"
+#          cat2 = "_Fashion"
+#          cat3 = "_Travel"
+#          cat4 = "_Design"
+#          cat5 = "_Food"
+#          cat6 = "_Movie"
+#          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Music", slug= cat1, color="#CC0000")
+#          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Fashion", slug= cat2, color="#CC0066")
+#          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Travel", slug= cat3, color="#009900")
+#          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Design", slug= cat4, color="#669999")
+#          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Food", slug= cat5, color="#4c660f")
+#          category, created = Category.objects.get_or_create(author=request.user, blog=blog, name="Movie", slug= cat6, color="#0033CC")
           messages.add_message(request, messages.INFO, _(u"Congratulation, you just created a blog"))
           return HttpResponseRedirect(reverse('blogs.views.administrateblog', args=(blog.slug,)))
       else:
@@ -624,7 +624,8 @@ def createblog(request):
 
 @login_required
 def administrateblog(request, slug):
-      blog = get_object_or_404(Blog, slug=slug)
+    blog = get_object_or_404(Blog, slug=slug)
+    if request.user == blog.creator:    
       posts = paginate(request,
                        Post.objects.filter(blog=blog).filter(is_discarded=False).order_by('-pub_date'),
                        1)
@@ -653,10 +654,15 @@ def administrateblog(request, slug):
       return render_to_response('blogs/administrateblog.html',
                                 {'blog': blog,'info_emails':info_emails, 'posts_to_translate': posts_to_translate, 'last_posts_to_translate': last_posts_to_translate,'subscribers': subscribers, 'last_subscriber': last_subscriber, 'posts': posts, 'pages': pages , 'comments': comments , 'categories': categories, 'tags': tags, 'post_form': post_form},
                                 context_instance=RequestContext(request))
-
+    else:
+      return render_to_response('404.html',
+                               {},
+                                context_instance=RequestContext(request))      
+    
 @login_required
 def administrateposts(request, slug):
-      blog = get_object_or_404(Blog, slug=slug)
+    blog = get_object_or_404(Blog, slug=slug)
+    if request.user == blog.creator:
       posts = Post.objects.filter(blog=blog).filter(is_discarded=False).order_by('-pub_date')
       posts = paginate(request,
                        Post.objects.filter(blog=blog).filter(is_discarded=False).order_by('-pub_date'),
@@ -664,30 +670,45 @@ def administrateposts(request, slug):
       return render_to_response('blogs/administrateposts.html',
                                 {'blog': blog, 'posts': posts, },
                                 context_instance=RequestContext(request))
+    else:
+      return render_to_response('404.html',
+                               {},
+                                context_instance=RequestContext(request))  
 
 @login_required
 def queue(request, slug):
-      blog = get_object_or_404(Blog, slug=slug)
+    blog = get_object_or_404(Blog, slug=slug)
+    if request.user == blog.creator:
       posts = paginate(request,
                        Post.objects.filter(blog=blog).filter(is_ready=True).filter(status="D").filter(is_discarded=False).order_by('-pub_date'),
                        20)
       return render_to_response('blogs/queue.html',
                                 {'blog': blog, 'posts': posts, },
                                 context_instance=RequestContext(request))
+    else:
+      return render_to_response('404.html',
+                               {},
+                                context_instance=RequestContext(request))
 
 
 @login_required
 def published(request, slug):
-      blog = get_object_or_404(Blog, slug=slug)
+    blog = get_object_or_404(Blog, slug=slug)
+    if request.user == blog.creator:
       posts = paginate(request,
                        Post.objects.filter(blog=blog).filter(is_ready=True).filter(status="P").filter(is_discarded=False).order_by('-pub_date'),
                        20)
       return render_to_response('blogs/published.html',
                                 {'blog': blog, 'posts': posts, },
                                 context_instance=RequestContext(request))
+    else:
+      return render_to_response('404.html',
+                               {},
+                                context_instance=RequestContext(request))
 @login_required
 def administratepages(request, slug):
-      blog = get_object_or_404(Blog, slug=slug)
+    blog = get_object_or_404(Blog, slug=slug)
+    if request.user == blog.creator:
       pages = Page.objects.filter(blog=blog).order_by('-pub_date')
       pages = paginate(request,
                        Page.objects.filter(blog=blog).order_by('-pub_date'),
@@ -695,10 +716,15 @@ def administratepages(request, slug):
       return render_to_response('blogs/administratepages.html',
                                 {'blog': blog, 'pages': pages, },
                                 context_instance=RequestContext(request))
+    else:
+      return render_to_response('404.html',
+                               {},
+                                context_instance=RequestContext(request))
 
 @login_required
 def administratecomments(request, slug):
-      blog = get_object_or_404(Blog, slug=slug)
+    blog = get_object_or_404(Blog, slug=slug)
+    if request.user == blog.creator:
       comments = Comment.objects.filter(blog=blog).filter(comment_status='pe').order_by('-id')
       comments_pu = paginate(request,
                           Comment.objects.filter(blog=blog).filter(comment_status='pu').order_by('-id'),
@@ -707,10 +733,15 @@ def administratecomments(request, slug):
       return render_to_response('blogs/administratecomments.html',
                                 {'blog': blog, 'comments': comments, 'pucomments': pucomments,'comments_pu' : comments_pu, },
                                 context_instance=RequestContext(request))
+    else:
+      return render_to_response('404.html',
+                               {},
+                                context_instance=RequestContext(request))
 
 @login_required
 def administratecategories(request, slug):
-      blog = get_object_or_404(Blog, slug=slug)
+    blog = get_object_or_404(Blog, slug=slug)
+    if request.user == blog.creator:
 #      categories = Category.objects.filter(blog=blog).order_by('-id')
       categories_top = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).order_by('-id')
 #      categories_child = Category.objects.filter(blog=blog).exclude(parent_category__isnull=True).order_by('-id')
@@ -726,19 +757,28 @@ def administratecategories(request, slug):
       return render_to_response('blogs/administratecategories.html',
                                 {'cats': cats,'top_level_cats':top_level_cats, 'blog': blog, 'categories': categories, 'categories_form': categories_form, 'categories_top': categories_top,},
                                 context_instance=RequestContext(request))
-
+    else:
+      return render_to_response('404.html',
+                               {},
+                                context_instance=RequestContext(request))
 
 @login_required
 def administratetags(request, slug):
-      blog = get_object_or_404(Blog, slug=slug)
+    blog = get_object_or_404(Blog, slug=slug)
+    if request.user == blog.creator:
       tags = Tag.objects.filter(blog=blog).order_by('-id')
       return render_to_response('blogs/administratetags.html',
                                 {'blog': blog, 'tags': tags, },
                                 context_instance=RequestContext(request))
+    else:
+      return render_to_response('404.html',
+                               {},
+                                context_instance=RequestContext(request))
 
 @login_required
 def administratesettings(request, slug):
-      blog = get_object_or_404(Blog, slug=slug)
+    blog = get_object_or_404(Blog, slug=slug)
+    if request.user == blog.creator:
       if request.method == 'POST':
         form = SettingsForm(request.POST or None, request.FILES or None, instance=blog,)
         if form.is_valid():
@@ -755,17 +795,25 @@ def administratesettings(request, slug):
       return render_to_response('blogs/administratesettings.html',
                                 {'blog': blog, 'form': form, },
                                 context_instance=RequestContext(request))
-
+    else:
+      return render_to_response('404.html',
+                               {},
+                                context_instance=RequestContext(request))
 
 @login_required
 def administrateemails(request, slug):
-      blog = get_object_or_404(Blog, slug=slug)
+    blog = get_object_or_404(Blog, slug=slug)
+    if request.user == blog.creator:
       info_emails = Info_email.objects.filter(blog=blog).order_by('-id')
       subscriptions = Subscription.objects.filter(blog=blog).order_by('-email')
       form = EmailForm()
       subs_form = SubscriptionForm()
       return render_to_response('blogs/administrateemails.html',
                                 {'subs_form': subs_form, 'blog': blog, 'info_emails': info_emails, 'form': form,'subscriptions': subscriptions,},
+                                context_instance=RequestContext(request))
+    else:
+      return render_to_response('404.html',
+                               {},
                                 context_instance=RequestContext(request))
 
 @login_required
@@ -877,12 +925,17 @@ def quicktranslation(request, slug):
 
 @login_required
 def translation(request, slug):
-      blog = get_object_or_404(Blog, slug=slug)
+    blog = get_object_or_404(Blog, slug=slug)
+    if request.user == blog.creator:
       posts = paginate(request,
                        Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('-pub_date'),
                        15)
       return render_to_response('blogs/translation.html',
                                 {'blog': blog, 'posts': posts, },
+                                context_instance=RequestContext(request))
+    else:
+      return render_to_response('404.html',
+                               {},
                                 context_instance=RequestContext(request))
 
 @login_required
