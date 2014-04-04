@@ -37,7 +37,7 @@
                     <div class="edit_buttons">
                       <a href="{% url 'blogs.views.editpage' page.id %}" type="button" class="btn btn-default btn-xs edit_post" title="{% trans "Modify This Page" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
                       <button type="button" class="btn btn-default btn-xs delete_post" title="{% trans "Delete This Page" %}" data-toggle="modal" data-target="#{{ page.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</button>
-                      <button type="button" class="btn btn-default btn-xs view_post" title="{% trans "View This Page" %}" style="display:none;"><span class="glyphicon glyphicon-new-window"></span> {% trans "View" %}</button>
+                      <a href="{% url 'blogs.views.page' page.slug %}" type="button" class="btn btn-default btn-xs view_post" title="{% trans "View This Page" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "View" %}</a>
                     {% if page.status == "D" %}
                       <a href="{% url 'blogs.views.publish_page_now' page.id %}" type="button" class="btn btn-default btn-xs view_post" title="{% trans "Publish this page now" %}"><span class="glyphicon glyphicon-ok"></span> {% trans "Publish now" %}</a>
                     {% endif %}

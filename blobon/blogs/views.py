@@ -15,7 +15,7 @@ from django.core.files import File
 from cgi import parse_qs
 
 from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm
-from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email, Rss
+from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email, Rss, Menu, MenuItem
 from django.contrib.auth.models import User
 
 from notifications.forms import InvitationForm
@@ -57,6 +57,7 @@ def index(request):
                                    context_instance=RequestContext(request))
       elif Blog.objects.filter(custom_domain=host).exists():
           blog = Blog.objects.get(custom_domain=host)
+          menus = Menu.objects.filter(blog=blog)
           if blog.is_online == False:
             return render_to_response('blogs/closed.html',context_instance=RequestContext(request))
 	  if blog.is_open == False:
@@ -75,7 +76,7 @@ def index(request):
                 categories = Category.objects.filter(blog=blog)
                 if blog.is_bootblog == True:
                   return render_to_response('blogs/blog.html',
-                                            {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                            {'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                             context_instance=RequestContext(request))
                 else:
                   return render_to_response('blogs/index.html',
@@ -95,7 +96,7 @@ def index(request):
             categories = Category.objects.filter(blog=blog)
             if blog.is_bootblog == True:
               return render_to_response('blogs/blog.html',
-                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                        {'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                         context_instance=RequestContext(request))
             else:
               return render_to_response('blogs/index.html',
@@ -104,6 +105,7 @@ def index(request):
 
       elif Blog.objects.filter(slug=request.subdomain).exists():
           blog = Blog.objects.get(slug=request.subdomain)
+          menus = Menu.objects.filter(blog=blog)
           if blog.is_online == False:
            return render_to_response('blogs/closed.html',context_instance=RequestContext(request))
           if blog.is_open == False:
@@ -124,7 +126,7 @@ def index(request):
                 categories = Category.objects.filter(blog=blog)
                 if blog.is_bootblog == True:
                   return render_to_response('blogs/blog.html',
-                                            {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                            {'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                             context_instance=RequestContext(request)) 
                 else:
                   return render_to_response('blogs/index.html',
@@ -145,7 +147,7 @@ def index(request):
             categories = Category.objects.filter(blog=blog)
             if blog.is_bootblog == True:
               return render_to_response('blogs/blog.html',
-                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                        {'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                         context_instance=RequestContext(request))
             else:
               return render_to_response('blogs/index.html',
@@ -167,14 +169,26 @@ def category(request, slug):
       form = SubscriptionForm()
       cat = category
       categories = Category.objects.filter(blog=blog)
+      menus = Menu.objects.filter(blog=blog)
       if blog.is_bootblog == True:
         return render_to_response('blogs/blog_category.html',
-                                  {'cat': cat,'form': form, 'blog': blog,'posts': posts, 'category': category, 'categories': categories,},
+                                  {'menus': menus, 'cat': cat,'form': form, 'blog': blog,'posts': posts, 'category': category, 'categories': categories,},
                                   context_instance=RequestContext(request))        
       else:
         return render_to_response('blogs/category.html',
                                   {'form': form, 'blog': blog,'posts': posts, 'category': category,},
                                   context_instance=RequestContext(request))
+
+
+def page(request, slug):
+      page = get_object_or_404(Page, slug=slug)
+      blog = page.blog
+      menus = Menu.objects.filter(blog=blog)
+      return render_to_response('blogs/page.html',
+                                {'page': page, 'blog': blog, 'menus': menus,},
+                                context_instance=RequestContext(request))
+
+
 
 
 @login_required
@@ -228,6 +242,7 @@ def single(request, shorturl):
     subd = host_s[0]    
     post = get_object_or_404(Post, base62id=shorturl)
     blog = post.blog
+    menus = Menu.objects.filter(blog=blog)
     slug = blog.slug
     comments = Comment.objects.filter(post=post).filter(comment_status='pu').order_by('-id')
     categories = Category.objects.filter(blog=blog)
@@ -271,7 +286,7 @@ def single(request, shorturl):
                                          context_instance=RequestContext(request))
               else:
                 return render_to_response('blogs/blog_single.html',
-                                         {'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
+                                         {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
                                          'next_post': next_post, 'prev_post': prev_post,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
@@ -285,7 +300,7 @@ def single(request, shorturl):
                                            context_instance=RequestContext(request))
               else:
                 return render_to_response('blogs/blog_single.html',
-                                         {'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
+                                         {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
                                          'next_post': next_post, 'prev_post': prev_post,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
@@ -318,7 +333,7 @@ def single(request, shorturl):
                                     context_instance=RequestContext(request))
         else:
           return render_to_response('blogs/blog_single.html',
-                                    {'categories': categories, 'subd': subd, 'slug': slug, 'post': post, 'latest_post_list': latest_post_list,
+                                    {'menus': menus, 'categories': categories, 'subd': subd, 'slug': slug, 'post': post, 'latest_post_list': latest_post_list,
                                     'next_post': next_post, 'prev_post': prev_post,
                                     'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                     context_instance=RequestContext(request))                           
@@ -359,7 +374,7 @@ def single(request, shorturl):
                                          context_instance=RequestContext(request))
               else:
                 return render_to_response('blogs/blog_single.html',
-                                         {'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
+                                         {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
                                          'next_post': next_post, 'prev_post': prev_post,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
@@ -373,7 +388,7 @@ def single(request, shorturl):
                                            context_instance=RequestContext(request))
               else:
                 return render_to_response('blogs/blog_single.html',
-                                         {'categories': categories, 'subd': subd, 'slug': slug,'post': post, 'latest_post_list': latest_post_list,
+                                         {'menus': menus, 'categories': categories, 'subd': subd, 'slug': slug,'post': post, 'latest_post_list': latest_post_list,
                                          'next_post': next_post, 'prev_post': prev_post,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
@@ -407,7 +422,7 @@ def single(request, shorturl):
                                     context_instance=RequestContext(request))
         else:
           return render_to_response('blogs/blog_single.html',
-                                    {'categories': categories, 'subd': subd, 'slug': slug, 'post': post, 'latest_post_list': latest_post_list,
+                                    {'menus': menus, 'categories': categories, 'subd': subd, 'slug': slug, 'post': post, 'latest_post_list': latest_post_list,
                                     'next_post': next_post, 'prev_post': prev_post,
                                     'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                     context_instance=RequestContext(request))

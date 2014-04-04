@@ -1,0 +1,51 @@
+{% extends "blogs/blog_single.html" %}
+{% load i18n %}
+{% load url from future %}
+{% block open-graphs %}
+<title>{% block title %}{{ page.title }}{% endblock %}</title>    
+<meta name="description" content="{% if page.content %}{{ page.content|slice:":225" }}{% else %}{% if blog.description %}{{ blog.description|slice:":225" }}{% else %}{% if blog.short_description %}{{ blog.short_description}}{% endif %}{% endif %}{% endif %}">
+
+<meta property="og:title" content="{{ page.title }}" />
+<meta property="og:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}/page/{{ page.slug }}{% else %}http://{{ blog.slug }}.blobon.com/page/{{ page.slug }}{% endif %}" />
+
+<link rel="canonical" href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}/page/{{ page.slug }}{% else %}http://{{ blog.slug }}.blobon.com/page/{{ page.slug }}{% endif %}" />
+
+
+{% endblock %}
+
+
+{% block blog_left %}
+
+      <ol class="breadcrumb">
+        <li><a href="http://{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}">{% trans "Home" %}</a></li>
+        <li class="active">{{ page.title }}</li>
+      </ol>
+
+
+        {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+          </div>
+          {% endfor %}
+        {% endif %}
+
+
+       <div class="col-sm-8 blog-main">
+         <div class="blog-post">
+
+
+           <h2 class="blog-post-title" id="titleh2">{{ page.title }}</h2>
+           {% if page.content %}{% load markup %}{{ page.content|safe|urlize }}{% endif %}
+         </div>
+       </div>
+
+
+{% endblock %}
+
+
+
+{% block blog_right %}
+{% endblock %}
+

@@ -300,6 +300,7 @@ class Blog(models.Model):
     def display_blocknavbar(self): 
         return mark_safe(self.block_navbar)
 
+
 class Rss(models.Model):
     feed_url = models.URLField(verbose_name=_("Feed url"), max_length=300, blank=True)
     blog = models.ForeignKey(Blog, related_name="Blog_rss", null=True)
@@ -316,8 +317,14 @@ class Page(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     pub_date = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     last_modified = models.DateTimeField(auto_now = True,  null=True, blank=True)
+    slug = models.SlugField(max_length=140, blank=True)
     def __unicode__(self):
         return self.title
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            unique_slugify(self, self.title)
+        super(Page, self).save(*args, **kwargs)
+
 
 class Info_email(models.Model):
     blog = models.ForeignKey(Blog, null=True)
@@ -347,6 +354,23 @@ class Category(models.Model):
         if not self.slug:
 	    unique_slugify(self, self.name)
         super(Category, self).save(*args, **kwargs)
+
+class Menu(models.Model):
+    name = models.CharField(verbose_name=_("Name"), max_length=40)
+    blog = models.ForeignKey(Blog, related_name="Blog_menu", null=True)
+    is_main = models.BooleanField(default=False)
+    def __unicode__(self):
+        return self.name
+
+class MenuItem(models.Model):
+    title = models.CharField(verbose_name=_("Title"), max_length=40, blank=True)
+    menu = models.ForeignKey(Menu, null=True)
+    page = models.ForeignKey(Page, blank=True, null=True)
+    category = models.ForeignKey(Category, blank=True, null=True)
+    external_link = models.URLField(max_length=140, blank=True)
+    position = models.IntegerField(null=True, blank=True)
+    def __unicode__(self):
+        return self.title
 
 class Tag(models.Model):
     author = models.ForeignKey(User)

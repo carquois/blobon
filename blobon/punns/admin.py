@@ -30,7 +30,8 @@ from books.models import Expense
 from books.models import Task
 from books.models import Time
 from books.models import Item
-
+from blogs.models import Menu
+from blogs.models import MenuItem
 
 class PunnAdmin(admin.ModelAdmin):
     exclude = ('original_punn',)
@@ -67,3 +68,5 @@ admin.site.register(Task)
 admin.site.register(Time)
 admin.site.register(Item)
 admin.site.register(Rss)
+admin.site.register(Menu)
+admin.site.register(MenuItem)

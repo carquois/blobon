@@ -189,10 +189,17 @@ padding-top:0px !important;
     <div class="blog-masthead">
       <div class="container">
         <nav class="blog-nav">
-          <a class="blog-nav-item {% if category %}{% else %}active{% endif %}" style="padding-left:25px;padding-right:25px;" href="http://{{blog.slug}}.blobon.com">{% trans "Home" %}</a>
-    {% if categories %}
-      {% for category in categories %} 
-      <a class="blog-nav-item {% if cat == category %}active{% else %}{% endif %}" href="{% url "blogs.views.category" category.slug %}" style="background-color:{{ category.color }};">{{ category.name }}</a>
+          <a class="blog-nav-item {% if category or page %}{% else %}{% if posts %}active{% endif %}{% endif %}" style="padding-left:25px;padding-right:25px;" href="http://{{blog.slug}}.blobon.com">{% trans "Home" %}</a>
+
+
+
+    {% if menus %}
+      {% for menu in menus %}
+        {% if menu.is_main %}
+          {% for menuitem in menu.menuitem_set.all|dictsort:"position" %}
+          <a class="blog-nav-item {% if category and menuitem.category %}{% if category == menuitem.category %}active{% else %}{% endif %}{% endif %}{% if page and menuitem.page %}{% if page == menuitem.page %}active{% else %}{% endif %}{% endif %}" style="padding-left:10px;padding-right:10px;" href="{% if menuitem.external_link %}{{ menuitem.external_link}}{% else %}{% if menuitem.category %}http://{{ blog.slug }}.blobon.com/cat/{{ menuitem.category.slug }}{% else %}http://{{ blog.slug }}.blobon.com/page/{{ menuitem.page.slug }}{% endif %}{% endif %}" {% if menuitem.external_link %}target="_blank"{% endif %}>{% if menuitem.external_link %}{{ menuitem.title}}{% else %}{% if menuitem.category %}{{ menuitem.category.name }}{% else %}{{ menuitem.page.title }}{% endif %}{% endif %}</a>
+          {% endfor %}
+        {% endif %} 
       {% endfor %}
     {% endif %}
 
