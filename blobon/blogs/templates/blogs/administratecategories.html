@@ -155,7 +155,7 @@
                <div class="col-xs-1" style="padding-bottom:20px;">
                  <a href="#" id="deletecat" data-toggle="modal" data-target="#{{ category.id }}"><button type="button" class="close delete_category" title="{% trans "Delete this category" %}">&times;</button></a>
                </div>
-             {% for category in category.child_category.all %}
+             {% for category in category.child_category.all|dictsort:"name" %}
              <ul class="list-group">
            <div class="row" style="margin-left:0px;margin-right:0px;">
                <div class="col-xs-3" style=padding-left:30px;>
@@ -179,7 +179,7 @@
 
 
 
-             {% for category in category.child_category.all %}
+             {% for category in category.child_category.all|dictsort:"name" %}
              <ul class="list-group">
            <div class="row" style="margin-left:0px;margin-right:0px;">
                <div class="col-xs-3" style=padding-left:50px;>
@@ -200,7 +200,7 @@
 
 
 
-             {% for category in category.child_category.all %}
+             {% for category in category.child_category.all|dictsort:"name" %}
              <ul class="list-group">
            <div class="row" style="margin-left:0px;margin-right:0px;">
                <div class="col-xs-3" style=padding-left:75px;>
@@ -219,7 +219,7 @@
              </ul>
 
 
-             {% for category in category.child_category.all %}
+             {% for category in category.child_category.all|dictsort:"name" %}
              <ul class="list-group">
            <div class="row" style="margin-left:0px;margin-right:0px;">
                <div class="col-xs-3" style=padding-left:100px;>
