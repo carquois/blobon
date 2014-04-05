@@ -748,6 +748,8 @@ def administratecategories(request, slug):
 #      categories_middle = Category.objects.filter(blog=blog).exclude(parent_category__isnull=True).order_by('-id')
       categories_form = CategoriesForm(blog=blog)
 #      categories_top = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).order_by('-id')   
+      cats_no_familly = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).exclude(child_category__isnull=False).order_by('name')
+      cats_c_no_p = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).exclude(child_category__isnull=True).order_by('name')
       top_level_cats = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).order_by('-id')
       cats = Category.objects.filter(blog=blog).order_by('-parent_category')
       categories ={}
@@ -755,7 +757,7 @@ def administratecategories(request, slug):
           Category.objects.filter(blog=blog).filter(parent_category__isnull=False)\
               .select_related('parent_category'))
       return render_to_response('blogs/administratecategories.html',
-                                {'cats': cats,'top_level_cats':top_level_cats, 'blog': blog, 'categories': categories, 'categories_form': categories_form, 'categories_top': categories_top,},
+                                {'cats_no_familly': cats_no_familly, 'cats_c_no_p': cats_c_no_p,'cats': cats,'top_level_cats':top_level_cats, 'blog': blog, 'categories': categories, 'categories_form': categories_form, 'categories_top': categories_top,},
                                 context_instance=RequestContext(request))
     else:
       return render_to_response('404.html',
