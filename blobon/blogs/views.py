@@ -742,22 +742,12 @@ def administratecomments(request, slug):
 def administratecategories(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
     if request.user == blog.creator:
-#      categories = Category.objects.filter(blog=blog).order_by('-id')
-      categories_top = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).order_by('-id')
-#      categories_child = Category.objects.filter(blog=blog).exclude(parent_category__isnull=True).order_by('-id')
-#      categories_middle = Category.objects.filter(blog=blog).exclude(parent_category__isnull=True).order_by('-id')
+      categories = Category.objects.filter(blog=blog).order_by('-id')
       categories_form = CategoriesForm(blog=blog)
-#      categories_top = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).order_by('-id')   
       cats_no_familly = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).exclude(child_category__isnull=False).order_by('name')
       cats_c_no_p = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).exclude(child_category__isnull=True).order_by('name')
-      top_level_cats = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).order_by('-id')
-      cats = Category.objects.filter(blog=blog).order_by('-parent_category')
-      categories ={}
-      map(lambda c: categories.setdefault(c.parent_category, []).append(c),\
-          Category.objects.filter(blog=blog).filter(parent_category__isnull=False)\
-              .select_related('parent_category'))
       return render_to_response('blogs/administratecategories.html',
-                                {'cats_no_familly': cats_no_familly, 'cats_c_no_p': cats_c_no_p,'cats': cats,'top_level_cats':top_level_cats, 'blog': blog, 'categories': categories, 'categories_form': categories_form, 'categories_top': categories_top,},
+                                {'cats_no_familly': cats_no_familly, 'cats_c_no_p': cats_c_no_p, 'blog': blog, 'categories': categories, 'categories_form': categories_form,},
                                 context_instance=RequestContext(request))
     else:
       return render_to_response('404.html',
