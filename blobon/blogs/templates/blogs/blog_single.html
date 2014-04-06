@@ -73,7 +73,7 @@
 
       <ol class="breadcrumb">
         <li><a href="http://{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}">{% trans "Home" %}</a></li>
-        {% if post.category.all %}<li>{% for category in post.category.all %}<a href="{% url "blogs.views.category" category.slug %}">{% if post.category.count >= 2 %}&nbsp; - {% endif %}{{ category.name }}</a>{% endfor %}</li>{% endif %}
+        {% if post.category.all %}<li>{% for category in post.category.all %}<a href="{% url "blogs.views.category" category.slug %}">{% if post.category.count >= 2 %}&nbsp;&nbsp;{% endif %}{{ category.name }}</a>{% endfor %}</li>{% endif %}
         <li class="active">{{ post.title }}</li>
       </ol>
 
