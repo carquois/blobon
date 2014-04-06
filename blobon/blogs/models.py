@@ -349,7 +349,10 @@ class Category(models.Model):
     color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#000000", blank=False)
     parent_category = models.ForeignKey('self',  null=True, blank=True, related_name='child_category')
     def __unicode__(self):
-        return self.name
+        if self.parent_category:
+          return u'%s -  %s' % (self.parent_category, self.name)
+        else:
+          return self.name
     def save(self, *args, **kwargs):
         if not self.slug:
 	    unique_slugify(self, self.name)
