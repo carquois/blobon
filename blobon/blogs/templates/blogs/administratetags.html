@@ -11,8 +11,35 @@
   {% block dashboard-active %}{% endblock %}
   {% block tags-active %}class="active"{% endblock %}
   {% block content %}
+
+
+          <div class="panel panel-primary" id="new_tag_form" style="display: none">
+            <div class="panel-heading">{% trans "Add a new tag :" %}</div>
+            <div class="panel-body">
+              <form enctype="multipart/form-data" id="newtag" role="form" method="post" action="{% url 'blogs.views.administratetags' blog.slug %}">{% csrf_token %}
+                <div class="form-group">
+                  {{ form.name.label_tag }}
+                  {{ form.name }}
+                </div>
+                <div class="form-group">
+                 {{ form.description.label_tag }}
+                 {{ form.description}}
+                </div>
+                <div class="form-group" style="display:none;">
+                 {{ form.slug.label_tag }}
+                  {{ form.slug }}
+                </div>
+
+              </form>
+              <button id="submittag" class="btn btn-primary btn-xs" disabled="disabled" title="{% trans "Save your new tag" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
+              <span id="cancel_new_tag" title="{% trans "Cancel add tag" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+            </div>
+          </div>
+
+
+
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Tags" %}<a href="#" class="btn btn-default btn-xs pull-right" style="display: none" id="add_new_tag" title="{% trans "Add a New Tag" %}">{% trans "Add new" %}</a></div>
+            <div class="panel-heading">{% trans "Tags" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_tag" title="{% trans "Add a New Tag" %}">{% trans "Add new" %}</a></div>
               <div class="panel-body">
               </div>
             <table class="table table-striped">
@@ -64,6 +91,56 @@
         $(".edit_tag").tooltip({container: 'body', placement: 'bottom'});
         $(".delete_tag").tooltip({container: 'body', placement: 'bottom'});
       });
+    </script>
+
+
+    <script>
+      $('#add_new_tag').click(function() {
+        $('#add_new_tag').hide();
+        $('#new_tag_form').show();
+        setTimeout(function() { 
+         $(".mceNoEditor").removeAttr("style");
+        },10);
+      });
+    </script>
+
+    <script>
+      $('#cancel_new_tag').click(function() {
+        $('#add_new_tag').show();
+        $('#new_tag_form').hide();
+        $('#newtag').each(function(){
+          this.reset();
+        });
+      });
+    </script>
+
+    <script>
+      $(document).ready(function(){
+        $('#id_name').keyup(function() {
+        if ($(this).val() != '') {
+          $('#submittag').prop("disabled", false);
+          }
+        else {
+          $('#submittag').prop("disabled", true);
+        }
+        });
+      });
+    </script>
+
+
+    <script>
+      $('#submittag').click(function() {
+        $('#newtag').submit();
+      });
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        setTimeout(function() { 
+         $(".mceNoEditor").removeAttr("style");
+        },10);
+                   });
+         
     </script>
   {% endblock %}
 

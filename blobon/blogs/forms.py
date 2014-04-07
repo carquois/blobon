@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
 from django.db import models
 
-from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page, Rss
+from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page, Rss, Tag
 
 
 class PageForm(ModelForm):
@@ -171,6 +171,24 @@ class EmailForm(ModelForm):
     class Meta:
         model = Info_email
         fields = ('name','subject','message','subscribers','frequency', )
+
+class TagsForm(ModelForm):
+    name = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your tag name here'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    'autofocus':'on'}))
+    description = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Describe your tag'),
+                                                    'type': 'text',
+                                                    'rows': '5',
+                                                    'class': "form-control setting_form input-block-level mceNoEditor"}))
+    slug = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Slug'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+
+    class Meta:
+        model = Tag
+        fields = ('name','slug','description',)
+
 
 class CategoriesForm(ModelForm):
     name = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your category name here'),

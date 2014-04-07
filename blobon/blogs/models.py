@@ -384,6 +384,12 @@ class Tag(models.Model):
     created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     def __unicode__(self):
         return self.slug 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            unique_slugify(self, self.name)
+        super(Tag, self).save(*args, **kwargs)
+
+
 
 class Post(models.Model):
     author = models.ForeignKey(User, null=True)

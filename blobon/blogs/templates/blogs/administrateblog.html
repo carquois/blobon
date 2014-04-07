@@ -1981,7 +1981,7 @@ border-radius: 4px;
 
 
          <div class="col-md-6">
-          <div class="panel panel-default" style="display:none;">
+          <div class="panel panel-default">
             <div class="panel-heading">{% trans "Your Tags" %}
                 <a href="{% url 'blogs.views.administratetags' blog.slug %}" class="btn btn-default btn-xs managetags pull-right" title="{% trans "Manage Your Tags" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
                 <a href="#" class="btn btn-default btn-xs addnewpage pull-right" title="{% trans "Add a New Tag" %}" style="display: none"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
@@ -3381,7 +3381,7 @@ border-radius: 4px;
       <li {% block pages-active %}{% endblock %}><a href="{% url 'blogs.views.administratepages' blog.slug %}" id="pages_button" title="{% trans "Manage your pages" %}"><span class="glyphicon glyphicon-file"></span> {% trans "Pages" %}</a></li>
       <li {% block comments-active %}{% endblock %}><a href="{% url 'blogs.views.administratecomments' blog.slug %}" id="comments_button" title="{% trans "Moderate comments" %}"><span class="glyphicon glyphicon-comment"></span> {% trans "Comments" %} <span class="badge">{{ num_of_comments }}</span></a></li>
       <li {% block categories-active %}{% endblock %}><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="categories_button" title="{% trans "Create, modify or delete categories" %}"><span class="glyphicon glyphicon-folder-open"></span> {% trans "Categories" %}</a></li>
-      <li style="display: none" {% block tags-active %}{% endblock %}><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="tags_button" title="{% trans "Create, modify or delete tags" %}"><span class="glyphicon glyphicon-tag"></span> {% trans "Tags" %}</a></li>
+      <li {% block tags-active %}{% endblock %}><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="tags_button" title="{% trans "Create, modify or delete tags" %}"><span class="glyphicon glyphicon-tag"></span> {% trans "Tags" %}</a></li>
       <li {% block emails-active %}{% endblock %}><a href="{% url 'blogs.views.administrateemails' blog.slug %}" id="emails_button" title="{% trans "Create and manage mailing list" %}"><span class="glyphicon glyphicon-envelope"></span> {% trans "Mailing list" %}</a></li>
 
 

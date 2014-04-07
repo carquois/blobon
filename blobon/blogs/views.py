@@ -14,7 +14,7 @@ from urlparse import urlparse
 from django.core.files import File
 from cgi import parse_qs
 
-from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm
+from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm, TagsForm
 from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email, Rss, Menu, MenuItem
 from django.contrib.auth.models import User
 
@@ -757,11 +757,22 @@ def administratecategories(request, slug):
 @login_required
 def administratetags(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
+    form = TagsForm()
     if request.user == blog.creator:
-      tags = Tag.objects.filter(blog=blog).order_by('-id')
-      return render_to_response('blogs/administratetags.html',
-                                {'blog': blog, 'tags': tags, },
-                                context_instance=RequestContext(request))
+      if request.method == 'POST':
+        form = TagsForm(request.POST or None,)
+        if form.is_valid():
+          tag = form.save(commit=False)
+          tag.author = request.user
+          tag.blog = blog
+          tag.save()
+          return HttpResponseRedirect(reverse('blogs.views.administratetags', args=(blog.slug,)))
+      else:
+        form = TagsForm()
+        tags = Tag.objects.filter(blog=blog).order_by('-id')
+        return render_to_response('blogs/administratetags.html',
+                                  {'blog': blog, 'tags': tags, 'form':form, },
+                                  context_instance=RequestContext(request))
     else:
       return render_to_response('404.html',
                                {},
