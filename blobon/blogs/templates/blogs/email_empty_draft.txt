@@ -1,0 +1,5 @@
+The draft for {{ blog_title }} is empty.
+
+Thank you.
+
+Post now

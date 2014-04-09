@@ -103,11 +103,14 @@
                <div class="col-xs-3">           
                  <a href="{% url 'blogs.views.editcategory' category.id %}" class="edit_category" title="{% trans "Modify This Category" %}">{{ category.name }}</a>
                </div>
-               <div class="col-xs-7">
+               <div class="col-xs-5">
                  {{ category.description }}
                </div>
                <div class="col-xs-1"> 
                  <span class="badge pull-right" style="background-color:{{ category.color }};">&nbsp;&nbsp;</span>
+               </div>
+               <div class="col-xs-2">
+                 <a href="{% url 'blogs.views.convertcategory' category.id %}" id="convertcat" class="pull-right delete_category" title="{% trans "Convert this category to a tag"%}">{% trans "Convert to a tag" %}</a>
                </div>
                <div class="col-xs-1">
                  <a href="#" id="deletecat" data-toggle="modal" data-target="#{{ category.id }}"><button type="button" class="close delete_category" title="{% trans "Delete this category" %}">&times;</button></a>
@@ -146,11 +149,14 @@
                <div class="col-xs-3" style="padding-bottom:20px;">
                  <a href="{% url 'blogs.views.editcategory' category.id %}" class="edit_category" title="{% trans "Modify This Category" %}">{{ category.name }}</a>
                </div>
-               <div class="col-xs-7" style="padding-bottom:20px;">
+               <div class="col-xs-5" style="padding-bottom:20px;">
                  {{ category.description }}
                </div>
                <div class="col-xs-1" style="padding-bottom:20px;">
                  <span class="badge pull-right" style="background-color:{{ category.color }};">&nbsp;&nbsp;</span>
+               </div>
+               <div class="col-xs-2">
+                 <a href="{% url 'blogs.views.convertcategory' category.id %}" id="convertcat" class="pull-right delete_category" title="{% trans "Convert this category to a tag"%}">{% trans "Convert to a tag" %}</a>
                </div>
                <div class="col-xs-1" style="padding-bottom:20px;">
                  <a href="#" id="deletecat" data-toggle="modal" data-target="#{{ category.id }}"><button type="button" class="close delete_category" title="{% trans "Delete this category" %}">&times;</button></a>
@@ -161,11 +167,14 @@
                <div class="col-xs-3" style=padding-left:30px;>
                  <a href="{% url 'blogs.views.editcategory' category.id %}" class="edit_category" title="{% trans "Modify This Category" %}">{{ category.name }}</a>
                </div>
-               <div class="col-xs-7">
+               <div class="col-xs-5">
                  {{ category.description }}
                </div>
                <div class="col-xs-1">
                  <span class="badge pull-right" style="background-color:{{ category.color }};">&nbsp;&nbsp;</span>
+               </div>
+               <div class="col-xs-2">
+                 <a href="{% url 'blogs.views.convertcategory' category.id %}" id="convertcat" class="pull-right delete_category" title="{% trans "Convert this category to a tag"%}">{% trans "Convert to a tag" %}</a>
                </div>
                <div class="col-xs-1">
                  <a href="#" id="deletecat" data-toggle="modal" data-target="#sub1{{ category.id }}"><button type="button" class="close delete_category" title="{% trans "Delete this category" %}">&times;</button></a>
@@ -185,11 +194,14 @@
                <div class="col-xs-3" style=padding-left:50px;>
                  <a href="{% url 'blogs.views.editcategory' category.id %}" class="edit_category" title="{% trans "Modify This Category" %}">{{ category.name }}</a>
                </div>
-               <div class="col-xs-7">
+               <div class="col-xs-5">
                  {{ category.description }}
                </div>
                <div class="col-xs-1">
                  <span class="badge pull-right" style="background-color:{{ category.color }};">&nbsp;&nbsp;</span>
+               </div>
+               <div class="col-xs-2">                 
+                 <a href="{% url 'blogs.views.convertcategory' category.id %}" id="convertcat" class="pull-right delete_category" title="{% trans "Convert this category to a tag"%}">{% trans "Convert to a tag" %}</a>
                </div>
                <div class="col-xs-1">
                  <a href="#" id="deletecat" data-toggle="modal" data-target="#sub2{{ category.id }}"><button type="button" class="close delete_category" title="{% trans "Delete this category" %}">&times;</button></a>
@@ -206,11 +218,14 @@
                <div class="col-xs-3" style=padding-left:75px;>
                  <a href="{% url 'blogs.views.editcategory' category.id %}" class="edit_category" title="{% trans "Modify This Category" %}">{{ category.name }}</a>
                </div>
-               <div class="col-xs-7">
+               <div class="col-xs-5">
                  {{ category.description }}
                </div>
                <div class="col-xs-1">
                  <span class="badge pull-right" style="background-color:{{ category.color }};">&nbsp;&nbsp;</span>
+               </div>
+               <div class="col-xs-2">                 
+                 <a href="{% url 'blogs.views.convertcategory' category.id %}" id="convertcat" class="pull-right delete_category" title="{% trans "Convert this category to a tag"%}">{% trans "Convert to a tag" %}</a>
                </div>
                <div class="col-xs-1">
                  <a href="#" id="deletecat" data-toggle="modal" data-target="#sub3{{ category.id }}"><button type="button" class="close delete_category" title="{% trans "Delete this category" %}">&times;</button></a>
@@ -225,11 +240,14 @@
                <div class="col-xs-3" style=padding-left:100px;>
                  <a href="{% url 'blogs.views.editcategory' category.id %}" class="edit_category" title="{% trans "Modify This Category" %}">{{ category.name }}</a>
                </div>
-               <div class="col-xs-7">
+               <div class="col-xs-5">
                  {{ category.description }}
                </div>
                <div class="col-xs-1">
                  <span class="badge pull-right" style="background-color:{{ category.color }};">&nbsp;&nbsp;</span>
+               </div>
+               <div class="col-xs-2">                 
+                 <a href="{% url 'blogs.views.convertcategory' category.id %}" id="convertcat" class="pull-right delete_category" title="{% trans "Convert this category to a tag"%}">{% trans "Convert to a tag" %}</a>
                </div>
                <div class="col-xs-1">
                  <a href="#" id="deletecat" data-toggle="modal" data-target="#sub4{{ category.id }}"><button type="button" class="close delete_category" title="{% trans "Delete this category" %}">&times;</button></a>

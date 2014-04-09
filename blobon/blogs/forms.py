@@ -36,7 +36,7 @@ class BlogForm(ModelForm):
                                                     'class': "form-control input-block-level"}))
     class Meta:
         model = Blog 
-        fields = ('title', 'slug','moderator_email' )
+        fields = ('title', 'slug','moderator_email')
 
 class SubmitForm(ModelForm):
     title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.'), 'class': 'form-control'}), required=False)
@@ -113,7 +113,7 @@ class SettingsForm(ModelForm):
     main_image = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_30(this);"}))
     class Meta:
         model = Blog 
-        fields = ('title', 'slug', 'main_color', 'main_image', 'password', 'custom_domain','description','is_online','is_open','short_description', )
+        fields = ('title', 'slug', 'main_color', 'main_image', 'password', 'custom_domain','description','is_online','is_open','short_description','draft_notice' )
 
 class PasswordForm(ModelForm):
     password = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Enter the blog password'),
@@ -245,6 +245,7 @@ class PostForm(ModelForm):
                                                     'class': "form-control setting_form input-block-level mceNoEditor",
                                                     }))
     category = ModelMultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, queryset=Category.objects.all())
+    tag = ModelMultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, queryset=Tag.objects.all())
     content_0 = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Write something about this image'),
                                                     'type': 'text',
                                                     'rows': '10',
@@ -334,3 +335,4 @@ class PostForm(ModelForm):
         super(PostForm, self).__init__(*args, **kwargs)
         if blog:
             self.fields['category'].queryset = Category.objects.filter(blog=blog)
+            self.fields['tag'].queryset = Tag.objects.filter(blog=blog)

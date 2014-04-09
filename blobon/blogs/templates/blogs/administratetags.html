@@ -45,30 +45,27 @@
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-2">
-                <col class="col-xs-8">
+                <col class="col-xs-6">
+                <col class="col-xs-2">
               </colgroup>
               <thead>
                 <tr>
                   <th>{% trans "Name" %}</th>
                   <th>{% trans "Description" %}</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
               {% for tag in tags %}
                 <tr>
-                  <td>{{ tag.name }}
-                    <div class="edit_buttons">
-                      <button type="button" class="btn btn-default btn-xs edit_tag" title="{% trans "Modify This tag" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</button>
-                      <button type="button" class="btn btn-default btn-xs delete_tag" title="{% trans "Delete This tag" %}" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</button>
-                    </div>
+                  <td><a href="{% url 'blogs.views.edittag' tag.id %}" id="edittag" title="{% trans "Modify This tag" %}" class="edit_tag">{{ tag.name }}</a>
                   </td>
-                  <td>{{ tag.description }}</td>
+                  <td>{{ tag.description }}<a href="{% url 'blogs.views.converttag' tag.id %}" id="converttag" class="pull-right delete_tag" title="{% trans "Convert this tag to a category"%}">{% trans "Convert to a category" %}</a></td>
+                  <td><a href="#" id="deletetag" data-toggle="modal" data-target="#{{ tag.id }}" class="pull-right"><button type="button" class="close delete_tag" title="{% trans "Delete this tag" %}">&times;</button></a></td>
                 </tr>
-              {% endfor %}
-              </tbody>
-            </table>
-          </div>
-  <div class="modal fade" id="delete">
+
+
+  <div class="modal fade" id="{{ tag.id }}">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -80,11 +77,16 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
-          <a href="" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
+          <a href="{% url 'blogs.views.deletetag' tag.id %}" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
         </div>
       </div>
     </div>
   </div>
+
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
     <script type="text/javascript">
       $(function () {
         $('#add_new_tag').tooltip({container: 'body'});

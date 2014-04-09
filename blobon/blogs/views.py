@@ -655,9 +655,7 @@ def administrateblog(request, slug):
                                 {'blog': blog,'info_emails':info_emails, 'posts_to_translate': posts_to_translate, 'last_posts_to_translate': last_posts_to_translate,'subscribers': subscribers, 'last_subscriber': last_subscriber, 'posts': posts, 'pages': pages , 'comments': comments , 'categories': categories, 'tags': tags, 'post_form': post_form},
                                 context_instance=RequestContext(request))
     else:
-      return render_to_response('404.html',
-                               {},
-                                context_instance=RequestContext(request))      
+      return HttpResponseRedirect(reverse('blogs.views.index'))
     
 @login_required
 def administrateposts(request, slug):
@@ -671,9 +669,7 @@ def administrateposts(request, slug):
                                 {'blog': blog, 'posts': posts, },
                                 context_instance=RequestContext(request))
     else:
-      return render_to_response('404.html',
-                               {},
-                                context_instance=RequestContext(request))  
+      return HttpResponseRedirect(reverse('blogs.views.index'))
 
 @login_required
 def queue(request, slug):
@@ -686,10 +682,7 @@ def queue(request, slug):
                                 {'blog': blog, 'posts': posts, },
                                 context_instance=RequestContext(request))
     else:
-      return render_to_response('404.html',
-                               {},
-                                context_instance=RequestContext(request))
-
+      return HttpResponseRedirect(reverse('blogs.views.index'))
 
 @login_required
 def published(request, slug):
@@ -702,9 +695,7 @@ def published(request, slug):
                                 {'blog': blog, 'posts': posts, },
                                 context_instance=RequestContext(request))
     else:
-      return render_to_response('404.html',
-                               {},
-                                context_instance=RequestContext(request))
+      return HttpResponseRedirect(reverse('blogs.views.index'))
 @login_required
 def administratepages(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
@@ -717,9 +708,7 @@ def administratepages(request, slug):
                                 {'blog': blog, 'pages': pages, },
                                 context_instance=RequestContext(request))
     else:
-      return render_to_response('404.html',
-                               {},
-                                context_instance=RequestContext(request))
+      return HttpResponseRedirect(reverse('blogs.views.index'))
 
 @login_required
 def administratecomments(request, slug):
@@ -734,9 +723,7 @@ def administratecomments(request, slug):
                                 {'blog': blog, 'comments': comments, 'pucomments': pucomments,'comments_pu' : comments_pu, },
                                 context_instance=RequestContext(request))
     else:
-      return render_to_response('404.html',
-                               {},
-                                context_instance=RequestContext(request))
+      return HttpResponseRedirect(reverse('blogs.views.index'))
 
 @login_required
 def administratecategories(request, slug):
@@ -750,9 +737,7 @@ def administratecategories(request, slug):
                                 {'cats_no_familly': cats_no_familly, 'cats_c_no_p': cats_c_no_p, 'blog': blog, 'categories': categories, 'categories_form': categories_form,},
                                 context_instance=RequestContext(request))
     else:
-      return render_to_response('404.html',
-                               {},
-                                context_instance=RequestContext(request))
+      return HttpResponseRedirect(reverse('blogs.views.index'))
 
 @login_required
 def administratetags(request, slug):
@@ -766,6 +751,7 @@ def administratetags(request, slug):
           tag.author = request.user
           tag.blog = blog
           tag.save()
+          messages.add_message(request, messages.INFO, _(u"The tag has been created"))
           return HttpResponseRedirect(reverse('blogs.views.administratetags', args=(blog.slug,)))
       else:
         form = TagsForm()
@@ -774,9 +760,64 @@ def administratetags(request, slug):
                                   {'blog': blog, 'tags': tags, 'form':form, },
                                   context_instance=RequestContext(request))
     else:
-      return render_to_response('404.html',
-                               {},
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+
+
+@login_required
+def deletetag(request, id):
+      tag = get_object_or_404(Tag, id=id)
+      blog = tag.blog
+      if request.user == tag.author:
+        tag.delete()
+        messages.add_message(request, messages.INFO, _(u"Your tag has been deleted"))
+      elif request.user.is_staff:
+        tag.delete()
+        messages.add_message(request, messages.INFO, _(u"The tag has been deleted"))
+      return HttpResponseRedirect(reverse('blogs.views.administratetags', args=(blog.slug,)))
+
+@login_required
+def edittag(request, id):
+      tag = get_object_or_404(Tag, id=id)
+      blog = tag.blog
+      if request.method == 'POST':
+        form = TagsForm(request.POST or None, instance=tag)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('blogs.views.administratetags', args=(blog.slug,)))
+      else:
+        form = TagsForm(instance=tag,)
+      return render_to_response('blogs/edittag.html',
+                                {'blog': blog, 'form': form,'tag': tag },
                                 context_instance=RequestContext(request))
+
+@login_required
+def converttag(request, id):
+      tag = get_object_or_404(Tag, id=id)
+      blog = tag.blog
+      posts = Post.objects.filter(blog=blog).filter(tag=tag).filter(is_discarded=False).order_by('-pub_date') 
+      category = Category.objects.create(name=tag.name, description=tag.description, author=tag.author, blog=blog)
+      for post in posts:
+        post.save()
+        post.category.add(category)
+        post.save()
+      tag.delete()
+      messages.add_message(request, messages.INFO, _(u"The tag has been change to a category"))
+      return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))  
+
+
+@login_required
+def convertcategory(request, id):
+      category = get_object_or_404(Category, id=id)
+      blog = category.blog
+      posts = Post.objects.filter(blog=blog).filter(category=category).filter(is_discarded=False).order_by('-pub_date')
+      tag = Tag.objects.create(name=category.name, description=category.description, author=category.author, blog=blog)
+      for post in posts:
+        post.save()
+        post.tag.add(tag)
+        post.save()
+      category.delete()
+      messages.add_message(request, messages.INFO, _(u"The category has been change to a tag"))
+      return HttpResponseRedirect(reverse('blogs.views.administratetags', args=(blog.slug,)))
 
 @login_required
 def administratesettings(request, slug):
@@ -799,9 +840,7 @@ def administratesettings(request, slug):
                                 {'blog': blog, 'form': form, },
                                 context_instance=RequestContext(request))
     else:
-      return render_to_response('404.html',
-                               {},
-                                context_instance=RequestContext(request))
+      return HttpResponseRedirect(reverse('blogs.views.index'))
 
 @login_required
 def administrateemails(request, slug):
@@ -815,9 +854,7 @@ def administrateemails(request, slug):
                                 {'subs_form': subs_form, 'blog': blog, 'info_emails': info_emails, 'form': form,'subscriptions': subscriptions,},
                                 context_instance=RequestContext(request))
     else:
-      return render_to_response('404.html',
-                               {},
-                                context_instance=RequestContext(request))
+      return HttpResponseRedirect(reverse('blogs.views.index'))
 
 @login_required
 def editpost(request, id):
@@ -937,9 +974,7 @@ def translation(request, slug):
                                 {'blog': blog, 'posts': posts, },
                                 context_instance=RequestContext(request))
     else:
-      return render_to_response('404.html',
-                               {},
-                                context_instance=RequestContext(request))
+      return HttpResponseRedirect(reverse('blogs.views.index'))
 
 @login_required
 def editcategory(request, id):

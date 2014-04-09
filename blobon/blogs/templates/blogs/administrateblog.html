@@ -286,6 +286,9 @@ border-radius: 4px;
                         {% if categories %}
                          <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>  
                         {% endif %}
+                        {% if tags %}
+                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
+                        {% endif %}
                         <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                         <div class="row" style="display: none">{{ post_form.status }} </div>
                         <div class="row" style="display: none">{{ post_form.is_ready }} </div>      
@@ -325,6 +328,9 @@ border-radius: 4px;
                         </div>
                         {% if categories %}
                          <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>
+                        {% endif %}
+                        {% if tags %}
+                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
                         {% endif %}
                         <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                         <div class="row" style="display: none">{{ post_form.status }} </div>
@@ -735,6 +741,12 @@ border-radius: 4px;
                                   </div>
                                 </div>
                               </div>
+                        {% if categories %}
+                         <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>
+                        {% endif %}
+                        {% if tags %}
+                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
+                        {% endif %}
                               <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                               <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row" style="display: none">{{ post_form.is_ready }} </div>
@@ -1127,6 +1139,12 @@ border-radius: 4px;
                                   </div>
                                 </div>
                               </div>
+                        {% if categories %}
+                         <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>
+                        {% endif %}
+                        {% if tags %}
+                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
+                        {% endif %}
                               <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                               <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row" style="display: none">{{ post_form.is_ready }} </div>
@@ -1523,6 +1541,12 @@ border-radius: 4px;
                                 </div>
                               </div>
                             </div>
+                        {% if categories %}
+                         <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>
+                        {% endif %}
+                        {% if tags %}
+                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
+                        {% endif %}
                               <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                               <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row" style="display: none">{{ post_form.is_ready }} </div>
@@ -1595,6 +1619,12 @@ border-radius: 4px;
                                       <div id=addedcomment_image style="display: none">{{ post_form.content_0 }}<span id="addcomment_image_cancel" title="{% trans "Cancel Comment" %}" class="glyphicon glyphicon-remove-circle pull-right"></span></div>
                                     </div>
                                 </div>
+                        {% if categories %}
+                         <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>
+                        {% endif %}
+                        {% if tags %}
+                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
+                        {% endif %}
                                 <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                                 <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row" style="display: none">{{ post_form.is_ready }} </div>
@@ -1666,6 +1696,9 @@ border-radius: 4px;
                         </div>
                         {% if categories %}
                          <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>  
+                        {% endif %}
+                        {% if tags %}
+                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
                         {% endif %}
                         <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                         <div class="row" style="display: none">{{ post_form.status }} </div>

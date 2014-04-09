@@ -294,6 +294,7 @@ class Blog(models.Model):
     block_footer = models.TextField(verbose_name=_("Footer"), max_length=10000, blank=True)
     block_subscribe_text = models.TextField(verbose_name=_("Subscribe text"), max_length=10000, blank=True)
     block_subscribe_button = models.TextField(verbose_name=_("subscribe button"), max_length=10000, blank=True)
+    draft_notice = models.BooleanField(default=False)
     def __unicode__(self):
         return self.title
 
@@ -454,6 +455,7 @@ class Post(models.Model):
     content_video = models.TextField(verbose_name=_("Content_video"),max_length=10000, blank=True)
     youtube_url = models.URLField(verbose_name=_("YoutubeURL"), max_length=300, blank=True)
     category = models.ManyToManyField(Category, null=True, blank=True)
+    tag = models.ManyToManyField(Tag, null=True, blank=True)
     artist = models.CharField(verbose_name=_("Artist"), max_length=140, blank=True)
     LAYOUT_CHOICES = (
         ('s', 'Single'),
