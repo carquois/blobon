@@ -15,11 +15,11 @@
   {% block emails-active %}class="active"{% endblock %}
   {% block content %}
           <div class="panel panel-primary" id="new_email_form" style="display: none">
-            <div class="panel-heading">{% trans "Create a new email :" %}</div>
+            <div class="panel-heading">{% trans "Create a campaign :" %}</div>
             <div class="panel-body">
               <form enctype="multipart/form-data" id="newemail" role="form" method="post" action="{% url 'blogs.views.create_info_email' blog.slug %}">{% csrf_token %}
                 <div class="form-group">
-                 <div style="padding-bottom:5px;"><b>{% trans "Newsletter name" %}</b></div>      
+                 <div style="padding-bottom:5px;"><b>{% trans "Campaign name" %}</b></div>      
                   {{ form.name}}
                 </div>
                 <div class="form-group">
@@ -44,11 +44,11 @@
                 </div>
               </form>
               <button id="submitemail" class="btn btn-primary btn-xs" disabled="disabled" title="{% trans "Save your new email" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
-              <span id="cancel_new_email" title="{% trans "Cancel new mailing list" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+              <span id="cancel_new_email" title="{% trans "Cancel new campaign" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
             </div> 
           </div>
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Info-letters" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_email" title="{% trans "Create a new mailing list" %}">{% trans "Create new" %}</a></div>
+            <div class="panel-heading">{% trans "Campaigns" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_email" title="{% trans "Create a new campaign" %}">{% trans "Create new" %}</a></div>
             {% if info_emails %}
             <table class="table table-striped">
               <colgroup>
@@ -58,7 +58,7 @@
               </colgroup>
               <thead>
                 <tr>
-                  <th>{% trans "Newsletter name" %}</th>
+                  <th>{% trans "Campaign name" %}</th>
                   <th>{% trans "Subject" %}</th>
                   <th>{% trans "Who" %}</th>
                 </tr>
@@ -68,10 +68,10 @@
                 <tr>
                   <td>{{ info_email.name }}
                     <div class="edit_buttons">
-                      <a href="{% url 'blogs.views.editemail' info_email.id %}" class="btn btn-default btn-xs edit_post" title="{% trans "Modify this mailing list" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
-                      <a href="#" class="btn btn-default btn-xs delete_post" title="{% trans "Delete this mailing list" %}" data-toggle="modal" data-target="#{{ info_email.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
+                      <a href="{% url 'blogs.views.editemail' info_email.id %}" class="btn btn-default btn-xs edit_post" title="{% trans "Modify this campaign" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
+                      <a href="#" class="btn btn-default btn-xs delete_post" title="{% trans "Delete this campaign" %}" data-toggle="modal" data-target="#{{ info_email.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
                       <a href="{% url 'blogs.views.view_info_letter' info_email.id %}" target="_blank" class="btn btn-default btn-xs view_post" title="{% trans "View email content" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "View email" %}</a>
-                      <a href="{% url 'blogs.views.send_email_now' info_email.id %}" class="btn btn-default btn-xs edit_post" title="{% trans "Send this mailing list now" %}"><span class="glyphicon glyphicon-send"></span> {% trans "Send now" %}</a>
+                      <a href="{% url 'blogs.views.send_email_now' info_email.id %}" class="btn btn-default btn-xs edit_post" title="{% trans "Send email now" %}"><span class="glyphicon glyphicon-send"></span> {% trans "Send now" %}</a>
                     </div>
                   </td>
                   <td>{{ info_email.subject }}</td>
