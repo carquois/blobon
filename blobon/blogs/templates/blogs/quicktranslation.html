@@ -49,7 +49,7 @@
 {% endif %}
 <div class="panel panel-default">
   <div class="panel-body">
-    <form enctype="multipart/form-data" action="{% url 'blogs.views.quicktranslation' blog.slug %}" role="form" method="post" id=translatedpost>{% csrf_token %}
+    <form enctype="multipart/form-data" action="{% url 'blogs.views.quicktranslation' post.id %}" role="form" method="post" id=translatedpost>{% csrf_token %}
     <div class="fields" style="display: none;">{{ form.layout_type }}</div>
     <div class="fields" style="display: none;">{{ form.youtube_id }}</div>
 

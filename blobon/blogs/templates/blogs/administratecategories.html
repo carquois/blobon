@@ -16,6 +16,16 @@
       .edit_buttons {
         padding: 10px;0px;5px;0px;
       }
+      #choose_color{
+        padding-bottom:10px;
+        cursor: pointer;
+      }
+      #cancel_choose_color{
+        padding-bottom:10px;
+        cursor: pointer;
+      }
+
+
     </style>
     <link rel="stylesheet" href="{{ STATIC_URL }}farbastic/farbtastic.css" type="text/css" />
 
@@ -77,8 +87,11 @@
                  {{ categories_form.slug.label_tag }}
                   {{categories_form.slug}}
                 </div>
-                <div class="form-group">
-             <div class="row">
+                <div class="form-group" id="add_form_color">    
+                  <a id="choose_color" title="{% trans "Choose a color for your category, default is black" %}"><span class="glyphicon glyphicon-plus"></span> {% trans "Choose a color" %}</a>
+                  <a id="cancel_choose_color" title="{% trans "Cancel and leave the default color" %}" style="display:none;"><span class="glyphicon glyphicon-remove"></span> {% trans "Cancel" %}</a>
+
+             <div class="row" id="color_form" style="display: none">
                <div class="col-md-8 form_section" id="color">
                {{ categories_form.color.label_tag }}
                {{ categories_form.color }}
@@ -386,6 +399,8 @@
         $(".delete_category").tooltip({container: 'body', placement: 'top'});
         $('#cancel_new_category').tooltip({container: 'body'});
         $('#submitcat').tooltip({container: 'body'});
+        $('#choose_color').tooltip({container: 'body'});
+        $('#cancel_choose_color').tooltip({container: 'body'});
       });
     </script>
 
@@ -395,6 +410,23 @@
       });
     </script>
 
+    <script>
+      $('#choose_color').click(function() {
+        $('#choose_color').hide();
+        $('#cancel_choose_color').show();
+        $('#color_form').show();
+      });
+    </script>
+
+    <script>
+      $('#cancel_choose_color').click(function() {
+        $('#choose_color').show();
+        $('#cancel_choose_color').hide();
+        $('#color_form').hide();
+        $('#id_color').val("#000000");
+        $('#id_color').css("background-color", "")
+      });
+    </script>
 
     <script>
       $('#add_new_category').click(function() {
@@ -412,6 +444,10 @@
       $('#cancel_new_category').click(function() {
         $('#add_new_category').show();
         $('#new_cat_form').hide();
+        $('#choose_color').show();
+        $('#cancel_choose_color').hide();
+        $('#color_form').hide();
+        $('#id_color').css("background-color", "")
         $('#newcat').each(function(){
           this.reset();
         });

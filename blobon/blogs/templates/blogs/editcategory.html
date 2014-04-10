@@ -29,7 +29,14 @@
 	max-width: 100%;
 	height: auto;
       }
- 
+      #change_color{
+        padding-bottom:10px;
+        cursor: pointer;
+      }
+      #cancel_change_color{
+        padding-bottom:10px;
+        cursor: pointer;
+      } 
     </style>
     <link rel="stylesheet" href="{{ STATIC_URL }}farbastic/farbtastic.css" type="text/css" />
   {% endblock %}
@@ -57,7 +64,9 @@
     <div class="form-group">{{ form.description.label_tag }} :{{ form.description }}</div>
     <div class="form-group">{{ form.slug.label_tag }} :{{ form.slug }}</div>
                 <div class="form-group">
-             <div class="row">
+                  <a id="change_color" title="{% trans "Change category color" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Change color" %}</a>
+                  <a id="cancel_change_color" title="{% trans "Cancel color changing" %}" style="display:none;"><span class="glyphicon glyphicon-remove"></span> {% trans "Cancel" %}</a>
+             <div class="row" id="color_form" style="display: none">
                <div class="col-md-8 form_section" id="color">
                {{ form.color.label_tag }}
                {{ form.color }}
@@ -97,8 +106,29 @@
       $(function () {
         $('#submitsavedcategory').tooltip();
         $('#cancel_edit_category').tooltip();
+        $('#cancel_change_color').tooltip();
+        $('#change_color').tooltip();
       });
     </script>
+
+    <script>
+      $('#change_color').click(function() {
+        $('#change_color').hide();
+        $('#cancel_change_color').show();
+        $('#color_form').show();
+      });
+    </script>
+
+    <script>
+      $('#cancel_change_color').click(function() {
+        $('#change_color').show();
+        $('#cancel_change_color').hide();
+        $('#color_form').hide();
+        $('#id_color').val('{{ category.color }}');
+        $('#id_color').css("background-color", "{{ category.color }}")
+      });
+    </script>
+
 
 <script>
       $(document).ready(function(){

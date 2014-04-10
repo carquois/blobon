@@ -934,34 +934,31 @@ def translatepost(request, id):
                                 context_instance=RequestContext(request))
 
 @login_required
-def quicktranslation(request, slug):
-      blog = get_object_or_404(Blog, slug=slug)
-      posts = Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('-pub_date')[:1]
-      if not posts:
-        return HttpResponseRedirect(reverse('blogs.views.translation', args=(blog.slug,)))
+def quicktranslation(request, id):
+      post = get_object_or_404(Post, id=id)
+      blog = post.blog
+      if request.method == 'POST':
+        form = PostForm(request.POST or None,request.FILES or None, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            if not post.translated_title:
+              post.is_ready = True
+              post.status = 'D'
+              post.is_discarded = True
+              post.save()
+              latest_post = Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('id')[:1]
+              return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(latest_post[0].id,)))
+            else:
+              post.is_ready = True
+              post.status = 'D'
+              post.save()
+              latest_post = Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('id')[:1]
+              return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(latest_post[0].id,)))
       else:
-        for post in posts:
-          post.id
-        if request.method == 'POST':
-          form = PostForm(request.POST or None,request.FILES or None, instance=post)
-          if form.is_valid():
-              post = form.save(commit=False)
-              if not post.translated_title:
-                post.is_ready = True
-                post.status = 'D'
-                post.is_discarded = True
-                post.save()
-                return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
-              else:
-                post.is_ready = True
-                post.status = 'D'
-                post.save()
-                return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
-        else:
-          form = PostForm(instance=post,)
-        return render_to_response('blogs/quicktranslation.html',
-                                  {'blog': blog, 'form': form,'post': post },
-                                  context_instance=RequestContext(request))
+        form = PostForm(instance=post,)
+      return render_to_response('blogs/quicktranslation.html',
+                                {'blog': blog, 'form': form,'post': post, },
+                                context_instance=RequestContext(request))
 
 @login_required
 def translation(request, slug):
@@ -970,8 +967,9 @@ def translation(request, slug):
       posts = paginate(request,
                        Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('-pub_date'),
                        15)
+      latest_post = Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('id')[:1]
       return render_to_response('blogs/translation.html',
-                                {'blog': blog, 'posts': posts, },
+                                {'blog': blog, 'posts': posts,'latest_post': latest_post, },
                                 context_instance=RequestContext(request))
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
@@ -1139,7 +1137,8 @@ def deletepost_trans(request, id):
         post.is_discarded = True
         post.save()
         messages.add_message(request, messages.INFO, _(u"The post has been deleted"))
-      return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(blog.slug,)))
+      latest_post = Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('id')[:1]
+      return HttpResponseRedirect(reverse('blogs.views.quicktranslation', args=(latest_post[0].id,)))
 
 @login_required
 def deletepage(request, id):
