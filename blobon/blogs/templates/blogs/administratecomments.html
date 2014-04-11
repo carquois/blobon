@@ -23,7 +23,15 @@ word-wrap:break-word;
   {% endblock %}
   {% block content %}
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Comments to be approve" %}</div>
+            <div class="panel-heading">
+
+           {% block status %}
+            {% trans "Comments to be approve" %}
+            <a href="{% url 'blogs.views.publishedcomments' blog.slug %}" class="btn btn-default btn-xs pull-right" id="all" title="{% trans "Published comments" %}">{% trans "View published comments" %}</a>
+           {% endblock %}
+
+
+            </div>
             {% if comments %}
               <div class="panel-body">
               </div>
@@ -48,8 +56,12 @@ word-wrap:break-word;
                 <tr>
                   <td>{{ comment.comment }}
                     <div class="edit_buttons">
+
+                     {% block approve %}
                       <a href="{% url 'blogs.views.approvecomment' comment.id %}" type="button" class="btn btn-default btn-xs" id="approve_comment" title="{% trans "Approve this comment" %}"><span class="glyphicon glyphicon-star"></span> {% trans "Approve" %}</a>
                       <a href="{% url 'blogs.views.signalcomment' comment.id %}" type="button" class="btn btn-default btn-xs signal_comment" title="{% trans "Signal this comment to the administrator" %}"><span class="glyphicon glyphicon-bell"></span> {% trans "Signal" %}</a>
+                     {% endblock %}
+
                       <a href="#" type="button" class="btn btn-default btn-xs delete_comment" title="{% trans "Delete this comment" %}" data-toggle="modal" data-target="#{{ comment.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
                     </div>
                   </td>
@@ -86,108 +98,29 @@ word-wrap:break-word;
               </tbody>
             </table>
             {% else %}
+            {% block no_comment %}
               <div class="panel-body">
               {% trans "This blog has no comment to approve" %}
               </div>
+            {% endblock %}
             {% endif %}
           </div>
-
-
-
-
-
-
-
-
-
-
-
-          <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Published comments" %}</div>
-            {% if comments_pu %}
-              <div class="panel-body">
-              </div>
-<div class="table-responsive">
-            <table class="table table-striped">
-              <colgroup>
-                <col class="col-xs-4">
-                <col class="col-xs-2">
-                <col class="col-xs-1">
-                <col class="col-xs-3">
-              </colgroup>
-              <thead>
-                <tr>
-                  <th>{% trans "Comment" %}
-                  </th>
-                  <th>{% trans "Post" %}</th>
-                  <th>{% trans "Name" %}</th>
-                  <th>{% trans "Email" %}</th>
-                </tr>
-              </thead>
-              <tbody>
-              {% for comment in comments_pu %}
-                <tr>
-                  <td>{{ comment.comment }}
-                    <div class="edit_buttons">
-                      <a href="#" type="button" class="btn btn-default btn-xs delete_comment_pu" title="{% trans "Delete this comment" %}" data-toggle="modal" data-target="#{{ comment.id }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
-                    </div>
-                  </td>
-                  <td>{{ comment.post }}
-                    <div class="edit_buttons">
-                      <a href="{{ comment.post.get_absolute_url }}" target="_blank" type="button" class="btn btn-default btn-xs view_post" title="{% trans "View This Post" %}"><span class="glyphicon glyphicon-new-window"></span> {% trans "View" %}</a>
-                    </div>
-                  </td>
-                  <td>{{ comment.name }}</td>
-                  <td>{{ comment.email }}
-                    <div class="edit_buttons">
-                      <a href="mailto:{{ comment.email }}" target="_blank"  type="button" class="btn btn-default btn-xs send_mail" title="{% trans "Send an Email to the Author of the Comment" %}"><span class="glyphicon glyphicon-send"></span> {% trans "Send Email" %}</a>
-                    </div>
-                  </td>
-                </tr>
-  <div class="modal fade" id="{{ comment.id }}">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">{% trans "Delete Comment" %}</h4>
-        </div>
-        <div class="modal-body">
-          <p>{% trans "Are you Sure You Want to Delete This Comment?" %}</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
-          <a href="{% url 'blogs.views.deletecomment' comment.id %}" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
-        </div>
-      </div>
-    </div>
-  </div>
-              {% endfor %}
-              </tbody>
-            </table>
-  </div>
-            {% else %}
-              <div class="panel-body">
-              {% trans "This has no published comment" %}
-              </div>
-            {% endif %}
-          </div>
-
 
     <ul class="pager">
     <div class="row">
       <div class="col-md-4">
-        {% if comments_pu.has_previous %}
-            <li><a class="pull-left" href="?page={{ comments_pu.previous_page_number }}">{% trans "Previous" %}</a></li>
+        {% if comments.has_previous %}
+            <li><a class="pull-left" href="?page={{ comments.previous_page_number }}">{% trans "Previous" %}</a></li>
         {% endif %}
       </div>
       <div class="col-md-4">
         <span class="current">
-            {% trans "Page" %} {{ comments_pu.number }} {% trans "of" %} {{ comments_pu.paginator.num_pages }}
+            {% trans "Page" %} {{ comments.number }} {% trans "of" %} {{ comments.paginator.num_pages }}
         </span>
       </div>
       <div class="col-md-4">
-        {% if comments_pu.has_next %}
-           <li><a class="pull-right" href="?page={{ comments_pu.next_page_number }}">{% trans "Next" %}</a></li>
+        {% if comments.has_next %}
+           <li><a class="pull-right" href="?page={{ comments.next_page_number }}">{% trans "Next" %}</a></li>
         {% endif %}
       </div>
     </div>
@@ -202,6 +135,7 @@ word-wrap:break-word;
         $(".send_mail").tooltip({container: 'body', placement: 'bottom'});
         $('#approve_comment').tooltip({container: 'body', placement: 'bottom'});
         $(".delete_comment_pu").tooltip({container: 'body', placement: 'bottom'});
+        $(".btn").tooltip({container: 'body', placement: 'bottom'});
       });
     </script>  
   {% endblock %}

@@ -1,0 +1,17 @@
+{% extends "blogs/administratecomments.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block status %}
+{% trans "Published comments" %}
+<a href="{% url 'blogs.views.administratecomments' blog.slug %}" class="btn btn-default btn-xs pull-right" id="all" title="{% trans "View comments that are waiting for approval" %}">{% trans "View pending comments" %}</a>
+{% endblock %}
+
+{% block approve %}
+{% endblock %}
+
+            {% block no_comment %}
+              <div class="panel-body">
+              {% trans "This blog has no published comment" %}
+              </div>
+            {% endblock %}

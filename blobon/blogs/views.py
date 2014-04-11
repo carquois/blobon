@@ -714,13 +714,24 @@ def administratepages(request, slug):
 def administratecomments(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
     if request.user == blog.creator:
-      comments = Comment.objects.filter(blog=blog).filter(comment_status='pe').order_by('-id')
-      comments_pu = paginate(request,
-                          Comment.objects.filter(blog=blog).filter(comment_status='pu').order_by('-id'),
-                       15)
-      pucomments = Comment.objects.filter(blog=blog).filter(comment_status='pu').order_by('-id')
+      comments = paginate(request,
+                          Comment.objects.filter(blog=blog).filter(comment_status='pe').order_by('-id'),
+                          15)
       return render_to_response('blogs/administratecomments.html',
-                                {'blog': blog, 'comments': comments, 'pucomments': pucomments,'comments_pu' : comments_pu, },
+                                {'blog': blog, 'comments': comments, },
+                                context_instance=RequestContext(request))
+    else:
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+
+@login_required
+def publishedcomments(request, slug):
+    blog = get_object_or_404(Blog, slug=slug)
+    if request.user == blog.creator:
+      comments = paginate(request,
+                          Comment.objects.filter(blog=blog).filter(comment_status='pu').order_by('-id'),
+                          15)
+      return render_to_response('blogs/publishedcomments.html',
+                                {'blog': blog, 'comments' : comments, },
                                 context_instance=RequestContext(request))
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
