@@ -27,6 +27,9 @@ word-wrap:break-word;
 
            {% block status %}
             {% trans "Comments to be approve" %}
+            {% if comments %}
+            <a href="{% url 'blogs.views.delete_pending_comments' blog.slug %}" class="btn btn-default btn-xs pull-right" id="del_all" title="{% trans "Delete all pending comments" %}">{% trans "Delete all" %}</a>
+            {% endif %}
             <a href="{% url 'blogs.views.publishedcomments' blog.slug %}" class="btn btn-default btn-xs pull-right" id="all" title="{% trans "Published comments" %}">{% trans "View published comments" %}</a>
            {% endblock %}
 

@@ -51,7 +51,7 @@ def index(request):
           return render_to_response('blogs/blobon.html',
                                     {'form': form, },
                                      context_instance=RequestContext(request))
-      if host == "gabrieldancause.com":
+      elif host == "gabrieldancause.com":
         return render_to_response('blogs/gabrieldancause.html',
                                   {},
                                    context_instance=RequestContext(request))
@@ -1198,6 +1198,14 @@ def deletecomment(request, id):
       comment = get_object_or_404(Comment, id=id)
       blog = comment.blog
       comment.delete()
+      return HttpResponseRedirect(reverse('blogs.views.administratecomments', args=(blog.slug,)))
+
+@login_required
+def delete_pending_comments(request, slug):
+      blog = get_object_or_404(Blog, slug=slug)
+      comments = Comment.objects.filter(blog=blog).filter(comment_status='pe').order_by('-id')
+      for comment in comments:
+        comment.delete()
       return HttpResponseRedirect(reverse('blogs.views.administratecomments', args=(blog.slug,)))
 
 @login_required
