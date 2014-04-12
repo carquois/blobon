@@ -1,0 +1,8 @@
+{% extends "template_blog.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+{% load markup %}
+{% load blog_tags %}
+{% load i18n thumbnail punn_tags humanize %}
+
+      {% ultrarender blog.single %}
