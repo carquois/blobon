@@ -234,6 +234,14 @@ def get_file_path_main(instance, filename):
     filename = "%s_%s.%s" % (prefix, variable, ext)
     return os.path.join('', filename)
 
+class Template(models.Model):
+    name = models.CharField(verbose_name=_("Name"), max_length=60)
+    base = models.TextField(verbose_name=_("Base"), max_length=10000, blank=True)
+    single = models.TextField(verbose_name=_("Single"), max_length=10000, blank=True)
+    category = models.TextField(verbose_name=_("Category"), max_length=10000, blank=True)
+    def __unicode__(self):
+        return self.name
+
 class Blog(models.Model):
     creator = models.ForeignKey(User, null=True)
     moderator_email = models.EmailField(verbose_name=_("Moderator email"),blank=True, null=True)
@@ -256,9 +264,7 @@ class Blog(models.Model):
     has_artists = models.BooleanField(default=False)
     short_description = models.CharField(verbose_name=_("Short description"), max_length=140, blank=True)
     draft_notice = models.BooleanField(default=False)
-    base = models.TextField(verbose_name=_("Base"), max_length=10000, blank=True)
-    single = models.TextField(verbose_name=_("Single"), max_length=10000, blank=True)
-    category = models.TextField(verbose_name=_("Category"), max_length=10000, blank=True)
+    template = models.ForeignKey(Template, null=True, blank=True)
     def __unicode__(self):
         return self.title
 

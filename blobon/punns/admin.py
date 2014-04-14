@@ -32,6 +32,7 @@ from books.models import Time
 from books.models import Item
 from blogs.models import Menu
 from blogs.models import MenuItem
+from blogs.models import Template
 
 class PunnAdmin(admin.ModelAdmin):
     exclude = ('original_punn',)
@@ -70,3 +71,4 @@ admin.site.register(Item)
 admin.site.register(Rss)
 admin.site.register(Menu)
 admin.site.register(MenuItem)
+admin.site.register(Template)
