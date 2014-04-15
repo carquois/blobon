@@ -32,7 +32,11 @@ from django.views.decorators.cache import never_cache
 def index(request):
       request.subdomain = None
       host = request.META.get('HTTP_HOST', '')
+      host_clean = host.replace('www.', '')
       host_s = host.replace('www.', '').split('.')
+      host_one = host.split('.')
+      if host_one[0] == "www":
+        return HttpResponseRedirect("http://%s" % host_clean)
       if len(host_s) > 2:
           request.subdomain = host_s[0]
       if host == "blobon.com":
@@ -55,8 +59,6 @@ def index(request):
         return render_to_response('blogs/gabrieldancause.html',
                                   {},
                                    context_instance=RequestContext(request))
-      elif host == "www.checkdonc.ca":
-        return HttpResponseRedirect("http://checkdonc.ca")
       elif Blog.objects.filter(custom_domain=host).exists():
           blog = Blog.objects.get(custom_domain=host)
           menus = Menu.objects.filter(blog=blog)
