@@ -525,10 +525,10 @@ padding-top:0px !important;
 
 
            {% endif %}
-{% if post.content %}{% load markup %}{{ post.content|safe|urlize }}{% endif %}
+{% if post.content %}{% load markup %}{{ post.content|safe|linebreaksbr|urlize }}{% endif %}
 {% if post.content_0 %}{% load markup %}{{ post.content_0|safe|urlize }}{% endif %}
-{% if post.text %}{% load markup %}{{ post.text|safe|urlize }}{% endif %}
-{% if post.content_video %}{% load markup %}{{ post.content_video|safe|urlize }}{% endif %}
+{% if post.text %}{% load markup %}{{ post.text|safe|urlize|linebreaksbr }}{% endif %}
+{% if post.content_video %}{% load markup %}{{ post.content_video|safe|linebreaksbr|urlize }}{% endif %}
 
 
           {% block share %}
