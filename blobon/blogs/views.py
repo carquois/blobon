@@ -1069,6 +1069,30 @@ def editcategory(request, id):
                                 context_instance=RequestContext(request))
 
 @login_required
+def add_sub_category(request, id):
+      p_category = get_object_or_404(Category, id=id)
+      blog = p_category.blog
+      form = CategoriesForm()
+      return render_to_response('blogs/add_sub_category.html',
+                                {'blog': blog, 'form': form,'p_category': p_category },
+                                context_instance=RequestContext(request))
+
+@login_required
+def newcategorysub(request, id):
+      p_category = get_object_or_404(Category, id=id)
+      blog = p_category.blog
+      form = CategoriesForm(request.POST or None)
+      if request.method == 'POST':
+        if form.is_valid():
+          category = form.save(commit=False)
+          category.author = request.user
+          category.blog = blog
+          category.parent_category = p_category
+          category.save()
+          return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
+      return HttpResponseRedirect(reverse('blogs.views.add_sub_category', args=(p_category.id,)))
+
+@login_required
 def editemail(request, id):
       info_email = get_object_or_404(Info_email, id=id)
       blog = info_email.blog

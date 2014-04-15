@@ -1,0 +1,163 @@
+{% extends "blogs/administratecategories.html" %}
+{% load i18n %}
+{% load url from future %}
+  {% block dashboard-active %}{% endblock %}
+  {% block categories-active %}class="active"{% endblock %}
+  {% block additional-js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/google-code-prettify/prettify.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}farbastic/farbtastic.js" type="text/javascript"></script>
+  {% endblock %}
+  {% block additional-css %}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/css/bootstrap.min.css">
+    <style>
+      .titlefield{
+        padding: 15px;
+      }
+      .fields{
+        padding: 15px;
+      }
+      .current_image{
+      }
+      .changed_image{
+      }
+      img {
+	max-width: 100%;
+	height: auto;
+      }
+      #change_color{
+        padding-bottom:10px;
+        cursor: pointer;
+      }
+      #cancel_change_color{
+        padding-bottom:10px;
+        cursor: pointer;
+      } 
+    </style>
+    <link rel="stylesheet" href="{{ STATIC_URL }}farbastic/farbtastic.css" type="text/css" />
+  {% endblock %}
+{% block content %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}{{ field.name }}</strong>
+            </div>
+        {% endfor %}
+        
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+<div class="panel panel-default">
+ <div class="panel-heading">
+  <b>{% trans "Add a sub-category to " %}{{ p_category.name }} </b>
+ </div>
+  <div class="panel-body">
+    <form enctype="multipart/form-data" action="{% url 'blogs.views.newcategorysub' p_category.id %}" role="form" method="post" id=savedcategory>{% csrf_token %}
+                <div class="form-group" style="display:none;">
+                  {{form.parent_category}}
+                </div>
+                <div class="form-group" style="display:none;">
+                  {{form.slug}}
+                </div>
+    <div class="form-group">{{ form.name.label_tag }} :{{ form.name }}</div>  
+    <div class="form-group">{{ form.description.label_tag }} :{{ form.description }}</div>
+                <div class="form-group">
+                  <a id="change_color" title="{% trans "Add a color to your category" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add color" %}</a>
+                  <a id="cancel_change_color" title="{% trans "Cancel color" %}" style="display:none;"><span class="glyphicon glyphicon-remove"></span> {% trans "Cancel" %}</a>
+             <div class="row" id="color_form" style="display: none">
+               <div class="col-md-8 form_section" id="color">
+               {{ form.color.label_tag }}
+               {{ form.color }}
+               </div>
+               <div class="col-md-4 form_section" id="colorpicker"></div>
+
+             </div>
+                </div>
+      </form>
+    <div class="row savedcategory_submit_cancel">
+      <div class="col-md-6">   
+        <button type="submit" class="btn btn-primary btn-xs" id="submitsavedcategory" title="{% trans "Save Changes" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
+      </div>
+      <div class="col-md-6">  
+        <a class="btn btn-danger btn-xs pull-right" href="{% url 'blogs.views.administratecategories' blog.slug %}" id="cancel_edit_category" title="{% trans "Cancel" %}"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</a>      
+      </div>
+    </div>
+  </div>
+</div>
+    <script>
+      $(document).ready(function(){
+        $('#id_parent_category').addClass("form-control setting_form input-block-level");
+      });
+    </script>
+    <script>
+      $(document).ready(function() {
+        $('#colorpicker').farbtastic('#id_color');
+        $('#id_color').val("#000000"); 
+        setTimeout(function() { 
+         $(".mceNoEditor").removeAttr("style");
+        },10);
+
+      });
+         
+    </script>
+
+    <script type="text/javascript">
+      $(function () {
+        $('#submitsavedcategory').tooltip();
+        $('#cancel_edit_category').tooltip();
+        $('#cancel_change_color').tooltip();
+        $('#change_color').tooltip();
+      });
+    </script>
+
+    <script>
+      $('#change_color').click(function() {
+        $('#change_color').hide();
+        $('#cancel_change_color').show();
+        $('#color_form').show();
+      });
+    </script>
+
+    <script>
+      $('#cancel_change_color').click(function() {
+        $('#change_color').show();
+        $('#cancel_change_color').hide();
+        $('#color_form').hide();
+        $('#id_color').val("#000000");
+        $('#id_color').css("background-color", "{{ category.color }}")
+      });
+    </script>
+
+
+<script>
+      $(document).ready(function(){
+        $('#id_slug').keyup(function() {
+        if ($(this).val() != '') {
+          $('#submitsavedcategory').prop("disabled", false);
+          }
+        else {
+          $('#submitsavedcategory').prop("disabled", true);
+        }
+        });
+      });
+    </script>
+
+    <script>
+      $('#submitsavedcategory').click(function() {
+        $('#savedcategory').submit();
+      });
+    </script>
+
+
+
+
+{% endblock %}
