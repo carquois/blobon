@@ -55,6 +55,8 @@ def index(request):
         return render_to_response('blogs/gabrieldancause.html',
                                   {},
                                    context_instance=RequestContext(request))
+      elif host == "www.checkdonc.ca":
+        return HttpResponseRedirect("http://checkdonc.ca")
       elif Blog.objects.filter(custom_domain=host).exists():
           blog = Blog.objects.get(custom_domain=host)
           menus = Menu.objects.filter(blog=blog)
