@@ -1,0 +1,41 @@
+{% extends "blogs/blog.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load i18n thumbnail punn_tags humanize %}
+{% load url from future %}
+{% load markup %}
+{% load blog_tags %}
+
+    {% block open-graphs %}
+    <title>{% block title %}{{ blog.title }}{% endblock %}</title>
+
+    <!-- Le open graphs tags -->
+    <meta property="og:title" content="{{ blog.title }}" />
+    <meta property="og:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}/{{ year }}{% if month %}/{{ month }}{% endif %}{% if day %}/{{ day }}{% endif %}{% else %}http://{{ blog.slug }}.blobon.com/{{ year }}{% if month %}/{{ month }}{% endif %}{% if day %}/{{ day }}{% endif %}{% endif %}" />
+    <meta property="og:image" content="{{ MEDIA_URL }}{{ blog.main_image }}" />
+    <!-- Le twitter cards -->
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}/{{ year }}{% if month %}/{{ month }}{% endif %}{% if day %}/{{ day }}{% endif %}{% else %}http://{{ blog.slug }}.blobon.com/{{ year }}{% if month %}/{{ month }}{% endif %}{% if day %}/{{ day }}{% endif %}{% endif %}">
+    <meta name="twitter:title" content="{{ blog.title }}">
+    <meta name="twitter:image" content="{{ MEDIA_URL }}{{ blog.main_image }}">
+    <!-- Le canonical url -->
+    <link rel="canonical" href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}/{{ year }}{% if month %}/{{ month }}{% endif %}{% if day %}/{{ day }}{% endif %}{% else %}http://{{ blog.slug }}.blobon.com/{{ year }}{% if month %}/{{ month }}{% endif %}{% if day %}/{{ day }}{% endif %}{% endif %}" />
+    {% endblock %}
+
+    {% block breadcrumbs %}
+
+    <div class="container" style="padding-top:10px;">
+
+      <ol class="breadcrumb">
+        <li><a href="http://{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}">{% trans "Home" %}</a></li>
+        <li {% if not month %}class="active"{% endif %}>{% if month %}<a href="http://{% if blog.custom_domain %}{{ blog.custom_domain }}/{{ year }}{% else %}{{ blog.slug }}.blobon.com/{{ year }}{% endif %}">{{ year }}</a>{% else %}{{ year }}{% endif %}</li>
+        {% if month %}
+        <li {% if not day %}class="active"{% endif %}>{% if day %}<a href="http://{% if blog.custom_domain %}{{ blog.custom_domain }}/{{ year }}/{{ month }}{% else %}{{ blog.slug }}.blobon.com/{{ year }}/{{ month }}{% endif %}">{{ month }}</a>{% else %}{{ month }}{% endif %}</li>
+        {% endif %} 
+       {% if day %}
+        <li class="active">{{ day }}</li>
+        {% endif %}
+      </ol>
+
+    </div>
+    {% endblock %}
+

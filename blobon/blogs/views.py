@@ -204,6 +204,112 @@ def category(request, slug):
                                   context_instance=RequestContext(request))
 
 
+def year_archive(request, year):
+      request.subdomain = None
+      host = request.META.get('HTTP_HOST', '')
+      host_clean = host.replace('www.', '')
+      host_s = host.replace('www.', '').split('.')
+      host_one = host.split('.')
+      if len(host_s) > 2:
+        request.subdomain = host_s[0]
+      year = year
+      if Blog.objects.filter(custom_domain=host).exists():
+        blog = Blog.objects.get(custom_domain=host)
+      elif Blog.objects.filter(slug=request.subdomain).exists():
+        blog = Blog.objects.get(slug=request.subdomain)
+      else:
+        return render_to_response('404.html',
+                                 {},
+                                  context_instance=RequestContext(request)) 
+      posts = paginate(request,
+                       Post.objects.filter(status='P').filter(blog=blog).filter(is_discarded=False).filter(pub_date__year=year).order_by('-pub_date'),
+                       10)
+      form = SubscriptionForm()
+      cat = category
+      categories = Category.objects.filter(blog=blog)
+      menus = Menu.objects.filter(blog=blog)
+      if blog.is_bootblog == True:
+        return render_to_response('blogs/blog_time.html',
+                                  {'menus': menus, 'cat': cat,'form': form, 'blog': blog,'posts': posts, 'categories': categories, 'year': year,},
+                                  context_instance=RequestContext(request))
+      else:
+        return render_to_response('blogs/category.html',
+                                  {'form': form, 'blog': blog,'posts': posts, 'cat': cat,},
+                                  context_instance=RequestContext(request))
+
+
+def month_archive(request, year, month):
+      request.subdomain = None
+      host = request.META.get('HTTP_HOST', '')
+      host_clean = host.replace('www.', '')
+      host_s = host.replace('www.', '').split('.')
+      host_one = host.split('.')
+      if len(host_s) > 2:
+        request.subdomain = host_s[0]
+      month = month
+      year = year
+      if Blog.objects.filter(custom_domain=host).exists():
+        blog = Blog.objects.get(custom_domain=host)
+      elif Blog.objects.filter(slug=request.subdomain).exists():
+        blog = Blog.objects.get(slug=request.subdomain)
+      else:
+        return render_to_response('404.html',
+                                 {},
+                                  context_instance=RequestContext(request))
+      posts = paginate(request,
+                       Post.objects.filter(status='P').filter(blog=blog).filter(is_discarded=False).filter(pub_date__year=year).filter(pub_date__month=month).order_by('-pub_date'),
+                       10)
+      form = SubscriptionForm()
+      cat = category
+      categories = Category.objects.filter(blog=blog)
+      menus = Menu.objects.filter(blog=blog)
+      if blog.is_bootblog == True:
+        return render_to_response('blogs/blog_time.html',
+                                  {'menus': menus, 'cat': cat,'form': form, 'blog': blog,'posts': posts, 'categories': categories,'year': year,'month': month,},
+                                  context_instance=RequestContext(request))
+      else:
+        return render_to_response('blogs/category.html',
+                                  {'form': form, 'blog': blog,'posts': posts, 'cat': cat,},
+                                  context_instance=RequestContext(request))
+
+def day_archive(request, year, month, day):
+      request.subdomain = None
+      host = request.META.get('HTTP_HOST', '')
+      host_clean = host.replace('www.', '')
+      host_s = host.replace('www.', '').split('.')
+      host_one = host.split('.')
+      if len(host_s) > 2:
+        request.subdomain = host_s[0]
+      day = day
+      month = month
+      year = year
+      if Blog.objects.filter(custom_domain=host).exists():
+        blog = Blog.objects.get(custom_domain=host)
+      elif Blog.objects.filter(slug=request.subdomain).exists():
+        blog = Blog.objects.get(slug=request.subdomain)
+      else:
+        return render_to_response('404.html',
+                                 {},
+                                  context_instance=RequestContext(request))
+      posts = paginate(request,
+                       Post.objects.filter(status='P').filter(blog=blog).filter(is_discarded=False).filter(pub_date__year=year).filter(pub_date__month=month).filter(pub_date__day=day).order_by('-pub_date'),
+                       10)
+      form = SubscriptionForm()
+      cat = category
+      categories = Category.objects.filter(blog=blog)
+      menus = Menu.objects.filter(blog=blog)
+      if blog.is_bootblog == True:
+        return render_to_response('blogs/blog_time.html',
+                                  {'menus': menus, 'cat': cat,'form': form, 'blog': blog,'posts': posts, 'categories': categories,'year': year,'month': month, 'day': day,},
+                                  context_instance=RequestContext(request))
+      else:
+        return render_to_response('blogs/category.html',
+                                  {'form': form, 'blog': blog,'posts': posts, 'cat': cat,},
+                                  context_instance=RequestContext(request))
+
+
+
+
 def page(request, slug):
       page = get_object_or_404(Page, slug=slug)
       blog = page.blog
