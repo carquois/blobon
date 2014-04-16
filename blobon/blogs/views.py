@@ -41,9 +41,14 @@ def index(request):
           request.subdomain = host_s[0]
       if host == "blobon.com":
         if request.user.is_authenticated():
-          return render_to_response('blogs/read.html',
-                                    {},
+          blogs = Blog.objects.filter(creator=request.user,is_online=True)
+          return render_to_response('blogs/dashboard.html',
+                                    {'blogs': blogs,},
                                     context_instance=RequestContext(request))
+
+#          return render_to_response('blogs/read.html',
+#                                    {},
+#                                    context_instance=RequestContext(request))
         else:
           if request.method == 'POST':
               form = InvitationForm(request.POST)
@@ -329,6 +334,7 @@ def rss_auto_post(request, slug):
       return render_to_response('blogs/rss_auto_post.html',
                                 {'rsss': rsss, 'blog': blog, 'form': form,},
                                 context_instance=RequestContext(request))
+@never_cache
 @login_required
 def administrateemails(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
@@ -341,7 +347,7 @@ def administrateemails(request, slug):
                                 context_instance=RequestContext(request))
 
 
- 
+@never_cache 
 @login_required
 def dashboard(request):
       blogs = Blog.objects.filter(creator=request.user,is_online=True)
@@ -680,7 +686,7 @@ def single(request, shorturl):
     #site_description = settings.MAIN_SITE_DESCRIPTION
     #site = get_current_site(request)
 
-
+@never_cache
 @login_required
 def newpost(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
@@ -701,6 +707,8 @@ def newpost(request, slug):
           messages.add_message(request, messages.INFO, _(u"Error! Please post a valide youtube url.")) 
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
       return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
+
+@never_cache
 @login_required
 def savedraft(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
@@ -720,6 +728,7 @@ def savedraft(request, slug):
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
       return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
 
+@never_cache
 @login_required
 def newcategory(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
@@ -734,6 +743,7 @@ def newcategory(request, slug):
       return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
 
 
+@never_cache
 @login_required
 def newrss(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
@@ -756,6 +766,7 @@ def draft(request):
                                 context_instance=RequestContext(request))
 
 
+@never_cache
 @login_required
 def createalbum(request):
       post = request.POST
@@ -763,6 +774,7 @@ def createalbum(request):
                                 {'post': post},
                                 context_instance=RequestContext(request))
 
+@never_cache
 @login_required
 def createblog(request):
       if request.method == 'POST':
@@ -796,6 +808,7 @@ def createblog(request):
                                 {'form': form},
                                 context_instance=RequestContext(request))
 
+@never_cache
 @login_required
 def administrateblog(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
@@ -831,6 +844,7 @@ def administrateblog(request, slug):
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
     
+@never_cache
 @login_required
 def administrateposts(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
@@ -845,6 +859,7 @@ def administrateposts(request, slug):
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
 
+@never_cache
 @login_required
 def queue(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
@@ -858,6 +873,7 @@ def queue(request, slug):
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
 
+@never_cache
 @login_required
 def published(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
@@ -870,6 +886,9 @@ def published(request, slug):
                                 context_instance=RequestContext(request))
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
+
+
+@never_cache
 @login_required
 def administratepages(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
@@ -884,6 +903,7 @@ def administratepages(request, slug):
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
 
+@never_cache
 @login_required
 def administratecomments(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
@@ -897,6 +917,7 @@ def administratecomments(request, slug):
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
 
+@never_cache
 @login_required
 def publishedcomments(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
@@ -910,6 +931,7 @@ def publishedcomments(request, slug):
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
 
+@never_cache
 @login_required
 def administratecategories(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
@@ -924,6 +946,7 @@ def administratecategories(request, slug):
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
 
+@never_cache
 @login_required
 def administratetags(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
@@ -960,6 +983,7 @@ def deletetag(request, id):
         messages.add_message(request, messages.INFO, _(u"The tag has been deleted"))
       return HttpResponseRedirect(reverse('blogs.views.administratetags', args=(blog.slug,)))
 
+@never_cache
 @login_required
 def edittag(request, id):
       tag = get_object_or_404(Tag, id=id)
@@ -1004,6 +1028,7 @@ def convertcategory(request, id):
       messages.add_message(request, messages.INFO, _(u"The category has been change to a tag"))
       return HttpResponseRedirect(reverse('blogs.views.administratetags', args=(blog.slug,)))
 
+@never_cache
 @login_required
 def administratesettings(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
@@ -1027,6 +1052,7 @@ def administratesettings(request, slug):
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
 
+@never_cache
 @login_required
 def administrateemails(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
@@ -1041,6 +1067,7 @@ def administrateemails(request, slug):
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
 
+@never_cache
 @login_required
 def editpost(request, id):
       post = get_object_or_404(Post, id=id)
@@ -1068,7 +1095,7 @@ def editpost(request, id):
                                 {'blog': blog, 'form': form,'post': post, 'categories': categories, },
                                 context_instance=RequestContext(request))
 
-
+@never_cache
 @login_required
 def editpage(request, id):
       page = get_object_or_404(Page, id=id)
@@ -1089,6 +1116,7 @@ def editpage(request, id):
       return render_to_response('blogs/editpage.html',
                                 {'blog': blog, 'form': form,'page': page, },
                                 context_instance=RequestContext(request))
+@never_cache
 @login_required
 def translatepost(request, id):
       post = get_object_or_404(Post, id=id)
@@ -1118,6 +1146,7 @@ def translatepost(request, id):
                                 {'blog': blog, 'form': form,'post': post },
                                 context_instance=RequestContext(request))
 
+@never_cache
 @login_required
 def quicktranslation(request, id):
       post = get_object_or_404(Post, id=id)
@@ -1145,6 +1174,7 @@ def quicktranslation(request, id):
                                 {'blog': blog, 'form': form,'post': post, },
                                 context_instance=RequestContext(request))
 
+@never_cache
 @login_required
 def translation(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
@@ -1159,6 +1189,7 @@ def translation(request, slug):
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
 
+@never_cache
 @login_required
 def editcategory(request, id):
       category = get_object_or_404(Category, id=id)
@@ -1174,6 +1205,7 @@ def editcategory(request, id):
                                 {'blog': blog, 'form': form,'category': category },
                                 context_instance=RequestContext(request))
 
+@never_cache
 @login_required
 def add_sub_category(request, id):
       p_category = get_object_or_404(Category, id=id)
@@ -1198,6 +1230,7 @@ def newcategorysub(request, id):
           return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
       return HttpResponseRedirect(reverse('blogs.views.add_sub_category', args=(p_category.id,)))
 
+@never_cache
 @login_required
 def editemail(request, id):
       info_email = get_object_or_404(Info_email, id=id)
@@ -1213,6 +1246,7 @@ def editemail(request, id):
                                 {'blog': blog, 'form': form,'info_email': info_email },
                                 context_instance=RequestContext(request))
 
+@never_cache
 @login_required
 def view_info_letter(request, id):
       info_email = get_object_or_404(Info_email, id=id)
@@ -1222,25 +1256,18 @@ def view_info_letter(request, id):
                                 context_instance=RequestContext(request))
 
 
-
+@never_cache
 @login_required
 def fastedit(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
       posts = paginate(request,
                        Post.objects.filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('-pub_date'),
                        10)
-#      PostFormset = modelformset_factory(Post, fields=('title', 'translated_title','content', 'translated_content', 'is_ready'))
-#      if request.method == 'POST':
-#        formset = PostFormset(request.POST or None,request.FILES or None, queryset=Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date')[:40])
-#        if formset.is_valid():
-#            formset.save()
-#            return HttpResponseRedirect(reverse('blogs.views.administratecategories', args=(blog.slug,)))
-#      else:
-#        formset = PostFormset(queryset=Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).order_by('-pub_date')[:40])
       return render_to_response('blogs/fastedit.html',
                                 {'blog': blog, 'posts': posts},
                                 context_instance=RequestContext(request))
 
+@never_cache
 @login_required
 def fasteditpost(request, id):
       post = get_object_or_404(Post, id=id)
@@ -1250,15 +1277,13 @@ def fasteditpost(request, id):
         if form.is_valid():
             form.save()
         return HttpResponseRedirect(reverse('blogs.views.fastedit', args=(blog.slug,)))
-#        return render_to_response('fastedit.html',
-#                                  {'blog': blog, 'form': form },
-#                                  context_instance=RequestContext(request))
       else:
         form = PostForm(instance=post,)
       return render_to_response('blogs/fasteditpost.html',
                                 {'blog': blog, 'form': form,'post': post },
                                 context_instance=RequestContext(request))
 
+@never_cache
 @login_required
 def createpage(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
@@ -1658,7 +1683,6 @@ def newcomment(request, id):
              subscription = subs_form.save(commit=False)
              subscription.blog = blog
              subscription.email = comment.email
-#             subscription = Subscription.objects.create_subscription(blog=blog, email=comment.email)
              subscription.save()
              messages.add_message(request, messages.INFO, _(u"Thank you. Your comment is now awaiting moderation"))
            return HttpResponseRedirect(reverse('blogs.views.single', args=(post.base62id,)))
@@ -1667,11 +1691,6 @@ def newcomment(request, id):
                                    {'form': form,'blog': blog,'post': post,},
                                    context_instance=RequestContext(request))
 
-#     else:
-#       form = PasswordForm()
-#       return render_to_response('passwordsingle.html',
-#                                 {'form': form,'blog': blog,'post': post,},
-#                                 context_instance=RequestContext(request))
 
 
 def contact(request):
@@ -1681,7 +1700,6 @@ def contact(request):
         subject = form.cleaned_data['subject']
         message = form.cleaned_data['message']
         from_email = form.cleaned_data['from_email']
-#modifier le recipients pour info@blobon.com avant de migrer
         recipients = ['info@blobon.com']
         messages.add_message(request, messages.INFO, _(u"Your message has been sent, thank you!"))
         from django.core.mail import send_mail
@@ -1712,7 +1730,6 @@ def entreprise(request):
         subject = form.cleaned_data['subject']
         message = form.cleaned_data['message']
         from_email = form.cleaned_data['from_email']
-#modifier le recipients pour info@blobon.com avant de migrer
         recipients = ['info@blobon.com']
         messages.add_message(request, messages.INFO, _(u"Your message has been sent, thank you!"))
         from django.core.mail import send_mail

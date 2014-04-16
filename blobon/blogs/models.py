@@ -239,6 +239,7 @@ class Template(models.Model):
     base = models.TextField(verbose_name=_("Base"), max_length=10000, blank=True)
     single = models.TextField(verbose_name=_("Single"), max_length=10000, blank=True)
     category = models.TextField(verbose_name=_("Category"), max_length=10000, blank=True)
+    archives = models.TextField(verbose_name=_("Archives"), max_length=10000, blank=True) 
     def __unicode__(self):
         return self.name
 

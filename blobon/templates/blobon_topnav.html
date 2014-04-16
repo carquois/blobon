@@ -13,7 +13,7 @@
     </div>
     <div class="collapse navbar-collapse" id="blobon_topnav">
 
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" style="display:none;">
         <li {% if not blogs and not blog%}class="active"{% else %}{% endif %}  id="li_read" style="height:57px;"><a href="{% url 'blogs.views.index' %}" style="height:57px;"><span class="glyphicon glyphicon-home"></span>{% trans " Read" %}</a></li>
 
         <li {% if blogs or blog %}class="active"{% else %}{% endif %} id="li_write" style="height:57px;"><a href="{% url 'blogs.views.dashboard' %}" style="height:57px;"><span class="glyphicon glyphicon-pencil"></span>{% trans " Write" %}
