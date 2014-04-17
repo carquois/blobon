@@ -2,6 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 
+STATUS = (
+    ('Se', 'Sent'),
+    ('Dr', 'Draft'),
+    ('Su', 'Submission'),
+    ('Pa', 'Paid'),
+)
+
 class Client(models.Model):
     organization_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
@@ -22,9 +29,12 @@ class Invoice(models.Model):
     date_of_issue = models.DateTimeField(auto_now_add = True)
     invoice_number = models.PositiveIntegerField(blank=True)
     terms = models.CharField(max_length=1000)
+    sub_notes = models.CharField(max_length=1000, blank=True)
+    paid_notes = models.CharField(max_length=1000, blank=True)
     notes = models.CharField(max_length=1000)
     created = models.DateTimeField(auto_now_add = True)
     last_modified = models.DateTimeField(auto_now = True,  null=True, blank=True)
+    status = models.CharField(max_length=2, choices=STATUS, default="Dr", null=True)
     def __unicode__(self):
         return unicode(self.invoice_number)
 
