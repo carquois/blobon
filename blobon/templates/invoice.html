@@ -108,7 +108,7 @@
                   <td>{{ time.notes }}</td>
                   <td>{{ time.rate_per_hour }}</td>
                   <td>{{ time.time }}</td>
-                  <td style="text-align:right;padding-right:30px;"><div class="for_subtotal">{{ time.rate_per_hour|mul:time.time}}</div></td>
+                  <td style="text-align:right;padding-right:30px;"><div class="for_subtotal">{{ time.rate_per_hour|mul:time.time|floatformat:"2" }}</div></td>
                 </tr>
               {% endfor %}
               </tbody>
@@ -168,7 +168,7 @@
               <tbody style="border:2px solid #999;">
                 <tr class="active">
                   <td style="text-align:right;"><b>{% trans "Sous-total:" %}</b></td>
-                  <td><b>{{ subtotal }}</b></td>
+                  <td><b>{{ subtotal|floatformat:"2" }}</b></td>
                 </tr>
               {% for tax in taxs %}
                 {% if not tax.compound_tax %}
@@ -191,6 +191,11 @@
             </table>
         </div>
 </div>
+        {% if invoice.sub_description %}
+        <div class="well">
+        {% load markup %}{{ invoice.sub_description|safe|linebreaksbr|urlize }}
+        </div>
+        {% endif %}
 <div class="page-break">
         <div class="row" style="text-align:center;padding-bottom:25px;">
          <div>{{ invoice.terms }}</div>
@@ -204,9 +209,7 @@
           {% endif %}
         {% endif %}           
         </div>
-        <div class="well">
-        {% load markup %}{{ invoice.sub_description|safe|linebreaksbr|urlize }}
-        </div>
+
 
 </div>
 </div>
