@@ -58,7 +58,12 @@
             {% endif %}
           </div>
           <div class="col-xs-6" style="text-align:right;">
+
+    {% if invoice.status == "Su"%}
+              <b>{% trans "Soumission #" %}{{ invoice.invoice_number }}</b>    
+    {% else %}
               <b>{% trans "Facture #" %}{{ invoice.invoice_number }}</b>
+    {% endif %}
           </div>
         </div>
         <div class="row">
