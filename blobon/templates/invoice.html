@@ -204,6 +204,10 @@
           {% endif %}
         {% endif %}           
         </div>
+        <div class="well">
+        {% load markup %}{{ invoice.sub_description|safe|linebreaksbr|urlize }}
+        </div>
+
 </div>
 </div>
 

@@ -40,8 +40,9 @@ class Invoice(models.Model):
     invoice_number = models.PositiveIntegerField(blank=True)
     terms = models.CharField(max_length=1000)
     sub_notes = models.CharField(max_length=1000, blank=True)
+    sub_description = models.TextField(verbose_name=_("Contenu"),max_length=10000, blank=True)
     paid_notes = models.CharField(max_length=1000, blank=True)
-    notes = models.CharField(max_length=1000)
+    notes = models.CharField(max_length=1000)    
     created = models.DateTimeField(auto_now_add = True)
     last_modified = models.DateTimeField(auto_now = True,  null=True, blank=True)
     status = models.CharField(max_length=2, choices=STATUS, default="Dr", null=True)
@@ -102,7 +103,7 @@ class Time(models.Model):
     task = models.ForeignKey(Task, null=True, blank=True)
     notes = models.CharField(max_length=1000)
     rate_per_hour = models.DecimalField(max_digits=5, decimal_places=2)
-    time = models.PositiveIntegerField(blank=True)
+    time = models.DecimalField(max_digits=5, decimal_places=2,blank=True)
     invoice = models.ForeignKey(Invoice, null=True, blank=True)
     #add taxes
     def __unicode__(self):
