@@ -18,6 +18,63 @@ from books.models import Client, Project, Task, Time, Invoice, Tax, Expense, Ite
 from django.contrib.auth.models import User
 
 @login_required
+def viewexpense(request):
+    expenses = Expense.objects.filter(author=request.user).order_by('-date')
+    t = 0
+    total = 0
+    for expense in expenses:
+      t = t + expense.amount
+    total = ("%.2f" % round(t,2))
+    return render_to_response('viewexpense.html',
+                                {'expenses': expenses,'total': total,},
+                                context_instance=RequestContext(request))
+
+@login_required
+def viewexpense_year(request, year):
+    expenses = Expense.objects.filter(author=request.user).filter(date__year=year).order_by('-date')
+    t = 0
+    total = 0
+    year = year
+    for expense in expenses:
+      t = t + expense.amount
+    total = ("%.2f" % round(t,2))
+    return render_to_response('viewexpense.html',
+                                {'expenses': expenses,'total': total,'year': year,},
+                                context_instance=RequestContext(request))
+
+@login_required
+def viewexpense_month(request, year, month):
+    expenses = Expense.objects.filter(author=request.user).filter(date__year=year).filter(date__month=month).order_by('-date')
+    t = 0
+    total = 0
+    month = month
+    year = year
+    for expense in expenses:
+      t = t + expense.amount
+    total = ("%.2f" % round(t,2))
+    return render_to_response('viewexpense.html',
+                                {'expenses': expenses,'total': total,'year': year,'month': month,},
+                                context_instance=RequestContext(request))
+
+@login_required
+def viewexpense_day(request, year, month, day):
+    expenses = Expense.objects.filter(author=request.user).filter(date__year=year).filter(date__month=month).filter(date__day=day).order_by('-date')
+    t = 0
+    total = 0
+    day = day
+    month = month
+    year = year
+    for expense in expenses:
+      t = t + expense.amount
+    total = ("%.2f" % round(t,2))
+    return render_to_response('viewexpense.html',
+                                {'expenses': expenses,'total': total,'year': year,'month': month, 'day': day,},
+                                context_instance=RequestContext(request))
+
+
+
+
+@login_required
 def invoice(request, id):
     invoice = get_object_or_404(Invoice, id=id)
     client = invoice.client

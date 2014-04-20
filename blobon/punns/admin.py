@@ -26,7 +26,7 @@ from books.models import Client
 from books.models import Invoice
 from books.models import Project
 from books.models import Tax
-from books.models import Expense
+from books.models import Expense, Vendor, Category
 from books.models import Task
 from books.models import Time
 from books.models import Item
@@ -72,3 +72,4 @@ admin.site.register(Rss)
 admin.site.register(Menu)
 admin.site.register(MenuItem)
 admin.site.register(Template)
+admin.site.register(Vendor)

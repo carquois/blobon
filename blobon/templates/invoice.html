@@ -5,13 +5,36 @@
 
     {% block additional-css %}
 <style>
-.page-break { display: block; page-break-before: auto; }
+
+  .page-break { 
+    display: block; 
+    page-break-before: auto; 
+  }
+
+  .status {
+    font-size: 20px;   
+    text-align: center;
+  } 
+
 </style>
     {% endblock %}
 
     {% block container %}
 
       <div class="container" style="max-width:768px;">
+
+    {% if invoice.status == "Su"%}
+        <div class="row status" style="padding-top:10px;">
+          <b>{% trans "* Soumission *" %}</b>
+        </div>
+    {% else %}
+      {% if invoice.status == "Pa"%}
+          <div class="row status" style="padding-top:10px;">
+            <b>{% trans "* Payée *" %}</b>
+          </div>
+      {% endif %}
+    {% endif %}
+
         <div class="row" style="padding-top:25px;">
           <div class="col-xs-6">
             <address>
@@ -28,10 +51,19 @@
         </div>
         <div class="row" style="padding-top:25px;">
           <div class="col-xs-6">
+            {% if invoice.status == "Su"%}
+              <b>{% trans "Pour :" %}</b>
+            {% else %}
               <b>{% trans "Facturé à:" %}</b>
+            {% endif %}
           </div>
           <div class="col-xs-6" style="text-align:right;">
+
+    {% if invoice.status == "Su"%}
+              <b>{% trans "Soumission #" %}{{ invoice.invoice_number }}</b>    
+    {% else %}
               <b>{% trans "Facture #" %}{{ invoice.invoice_number }}</b>
+    {% endif %}
           </div>
         </div>
         <div class="row">
@@ -45,7 +77,12 @@
             </address>
           </div>
           <div class="col-xs-6" style="text-align:right;">
-            <b>{% trans "Date de facturation :" %}</b>&nbsp;{{ invoice.last_modified|date:"d M Y" }}
+            {% if invoice.status == "Su"%}
+              <b>{% trans "Date :" %}</b>
+            {% else %}
+            <b>{% trans "Date de facturation :" %}</b>
+            {% endif %}            
+             &nbsp;{{ invoice.last_modified|date:"d M Y" }}
           </div>
         </div>
 <div class="page-break">
@@ -76,7 +113,7 @@
                   <td>{{ time.notes }}</td>
                   <td>{{ time.rate_per_hour }}</td>
                   <td>{{ time.time }}</td>
-                  <td style="text-align:right;padding-right:30px;"><div class="for_subtotal">{{ time.rate_per_hour|mul:time.time}}</div></td>
+                  <td style="text-align:right;padding-right:30px;"><div class="for_subtotal">{{ time.rate_per_hour|mul:time.time|floatformat:"2" }}</div></td>
                 </tr>
               {% endfor %}
               </tbody>
@@ -136,7 +173,7 @@
               <tbody style="border:2px solid #999;">
                 <tr class="active">
                   <td style="text-align:right;"><b>{% trans "Sous-total:" %}</b></td>
-                  <td><b>{{ subtotal }}</b></td>
+                  <td><b>{{ subtotal|floatformat:"2" }}</b></td>
                 </tr>
               {% for tax in taxs %}
                 {% if not tax.compound_tax %}
@@ -159,11 +196,26 @@
             </table>
         </div>
 </div>
+        {% if invoice.sub_description %}
+        <div class="well">
+        {% load markup %}{{ invoice.sub_description|safe|linebreaksbr|urlize }}
+        </div>
+        {% endif %}
 <div class="page-break">
         <div class="row" style="text-align:center;padding-bottom:25px;">
          <div>{{ invoice.terms }}</div>
+        {% if invoice.status == "Su" %}
+         <div>{{ invoice.sub_notes }}</div>
+        {% else %}
+          {% if invoice.status == "Pa" %}
+         <div>{{ invoice.paid_notes }}</div>
+          {% else %}
          <div>{{ invoice.notes }}</div>
+          {% endif %}
+        {% endif %}           
         </div>
+
+
 </div>
 </div>
 

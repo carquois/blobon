@@ -1,0 +1,84 @@
+{% extends "dashboard_base.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+{% load mathfilters %}
+
+    {% block additional-css %}
+<style>
+
+  .page-break { 
+    display: block; 
+    page-break-before: auto; 
+  }
+
+</style>
+    {% endblock %}
+
+    {% block container %}
+
+      <div class="container" style="max-width:768px;padding-top:30px;">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+          {% if day %}
+            {% trans "Expenses for : " %}{{ year }}/{{ month }}/{{ day }}
+          {% else %}
+            {% if month %}
+            {% trans "Expenses for : " %}{{ year }}/{{ month }}
+            {% else %}
+              {% if year %}
+            {% trans "Expenses for : " %}{{ year }}
+              {% else %}
+            {% trans "All expenses" %}  
+              {% endif %}
+            {% endif %}
+          {% endif %}
+          </div>
+          <table class="table table-condensed">
+            <colgroup>
+              <col class="col-xs-2">
+              <col class="col-xs-3">
+              <col class="col-xs-3">
+              <col class="col-xs-1">
+              <col class="col-xs-1">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Category" %}</th>
+                <th>{% trans "Notes" %}</th>
+                <th>{% trans "Amount" %}</th>
+                <th>{% trans "Receipt" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for expense in expenses %}
+              <tr>
+                <td>{{ expense.date|date:"j M Y" }}</td>
+                <td>{{ expense.category }} {% if expense.vendor %}<br /><small>{{ expense.vendor.name }}</small>{% endif %}</td>
+                <td>{{ expense.notes }} {% if expense.client %}<br /><small>{{ expense.client.organization_name }}</small>{% endif %}</td>
+                <td>{{ expense.amount }}</td>
+                <td style="text-align:center;">
+                {% if expense.receipt %}
+                  <a href="http://i.blobon.com/{{ expense.receipt }}" target="_blank"><span class="glyphicon glyphicon-download"></span></a>
+                {% endif %}
+                </td>
+              </tr> 
+              {% endfor expense %}
+              <tr class="active">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{% trans "Total :" %}</td>
+                <td>{{ total }}</td>
+              </tr> 
+            </tbody>
+          </table>
+        </div>
+      </div> 
+
+
+
+
+      </div>
+
+    {% endblock %}
