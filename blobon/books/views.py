@@ -110,23 +110,27 @@ def invoice(request, id):
       subtotal_3 = 0
       sub_tax2 = 0
       total = 0
-      for item in items:
-        subtotal_2 = subtotal_2 + item.cost
+      if invoice.with_items:
+        for item in items:
+          subtotal_2 = subtotal_2 + item.cost
       for time in times:
         number_of_hours = number_of_hours + time.time
         subtotal_1 = subtotal_1 + (time.time * time.rate_per_hour)
       subtotal = subtotal_1 + subtotal_2
-      for tax in taxs:
-        if not tax.compound_tax:
-          tax1 = tax.rate
-          x = (tax1 * subtotal)/100
-          sub_tax1 = ("%.2f" % round(x,2))
-        else:
-          subtotal_3 = subtotal + x
-          tax2 = tax.rate
-          y = (tax2 * subtotal_3)/100
-          sub_tax2 = ("%.2f" % round(y,2))
-      z = subtotal_3 + y
+      if invoice.with_taxes:
+        for tax in taxs:
+          if not tax.compound_tax:
+            tax1 = tax.rate
+            x = (tax1 * subtotal)/100
+            sub_tax1 = ("%.2f" % round(x,2))
+          else:
+            subtotal_3 = subtotal + x
+            tax2 = tax.rate
+            y = (tax2 * subtotal_3)/100
+            sub_tax2 = ("%.2f" % round(y,2))
+        z = subtotal_3 + y
+      else:
+        z = subtotal
       total = ("%.2f" % round(z,2))
       return render_to_response('books/invoice.html',
                                {'invoice': invoice, 'client': client, 'times': times,'taxs': taxs, 
@@ -165,15 +169,22 @@ def viewreport(request, id):
       tax2_rate = 1 + (tax2.rate/100)
       taxable_expense_total = 0
       x = 0
+      z = 0
       for invoice in invoices:
         tot = 0
         tot2 = 0
-        for item in invoice.client.item_set.all():
-          tot +=  item.cost * item.quantity
+        if invoice.with_items:
+          for item in invoice.client.item_set.all():
+            tot +=  item.cost * item.quantity
         for time in Time.objects.filter(invoice=invoice):
           tot2 += time.rate_per_hour * time.time
-        sub_tot = (tot + tot2) * tax1_rate
-        invoice.total = sub_tot * tax2_rate
+        if invoice.with_taxes:
+          sub_tot = (tot + tot2) * tax1_rate
+          invoice.total = sub_tot * tax2_rate
+        else:
+          invoice.total = tot + tot2
+        if invoice.with_taxes:
+          z += invoice.total
         x += invoice.total
       expenses = Expense.objects.filter(author=request.user).filter(date__range=[report.start_date, report.end_date]).order_by('date')
       t = 0
@@ -188,7 +199,7 @@ def viewreport(request, id):
       tax2_total = (taxable_expense_total)-(taxable_expense_total_before)
       tax1_total =  (taxable_expense_total_before)-(taxable_expense_total_before/tax1_rate)
       return render_to_response('books/report.html',
-                                 {'x':x,'invoices': invoices, 'taxable_expense_total': taxable_expense_total, 'expenses': expenses, 'report': report, 'expenses_total': expenses_total,'tax1_rate': tax1_rate, 'tax2_rate': tax2_rate,'tax1': tax1, 'tax2': tax2,'tax1_total': tax1_total,'tax2_total': tax2_total,},
+                                 {'z':z, 'x':x,'invoices': invoices, 'taxable_expense_total': taxable_expense_total, 'expenses': expenses, 'report': report, 'expenses_total': expenses_total,'tax1_rate': tax1_rate, 'tax2_rate': tax2_rate,'tax1': tax1, 'tax2': tax2,'tax1_total': tax1_total,'tax2_total': tax2_total,},
                                   context_instance=RequestContext(request))
     else:
       return HttpResponseRedirect(reverse('books.views.newreport'))
