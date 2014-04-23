@@ -1,0 +1,148 @@
+{% extends "dashboard_base.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+{% load mathfilters %}
+
+    {% block additional-css %}
+<style>
+
+  .page-break { 
+    display: block; 
+    page-break-before: auto; 
+  }
+
+</style>
+    {% endblock %}
+
+  {% block container %}
+
+      <div class="container" style="max-width:768px;padding-top:30px;">
+        <div class="row" style="padding-top:25px;">
+          <div class="col-xs-6">
+            <address>
+              <strong>{{ user.userprofile.entreprise}}</strong><br>
+              {{ user.userprofile.ent_street_adress}}<br>
+              {{ user.userprofile.ent_city }}, {{ user.userprofile.ent_state }}, {{ user.userprofile.ent_country }}<br>
+              {{ user.userprofile.ent_postal_code }}<br>
+              {{ user.userprofile.ent_phone }}<br>
+            </address>
+          </div>
+          <div class="col-xs-6">
+          </div>
+        </div>      
+      </div>
+
+    {% block invoice %}
+    {% endblock %}
+
+
+    {% block expense %}
+
+
+    {% if expenses %}
+
+      <div class="container" style="max-width:768px;padding-top:30px;">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+    {% block title_expense %}
+          {% if day %}
+            {% trans "Expenses for : " %}{{ year }}/{{ month }}/{{ day }}
+          {% else %}
+            {% if month %}
+            {% trans "Expenses for : " %}{{ year }}/{{ month }}
+            {% else %}
+              {% if year %}
+            {% trans "Expenses for : " %}{{ year }}
+              {% else %}
+            {% trans "All expenses" %}  
+              {% endif %}
+            {% endif %}
+          {% endif %}
+    {% endblock %}
+          </div>
+          <table class="table table-condensed">
+            <colgroup>
+              <col class="col-xs-2">
+              <col class="col-xs-3">
+              <col class="col-xs-2">
+              <col class="col-xs-1">
+              <col class="col-xs-1">
+              <col class="col-xs-1">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Category" %}</th>
+                <th>{% trans "Notes" %}</th>
+                <th>{% trans "Amount" %}</th>
+                <th>{% trans "Taxes" %}</th>
+                <th>{% trans "Receipt" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for expense in expenses %}
+              <tr>
+                <td>{{ expense.date|date:"j M Y" }}</td>
+                <td>{{ expense.category }} {% if expense.vendor %}<br /><small>{{ expense.vendor.name }}</small>{% endif %}</td>
+                <td>{{ expense.notes }} {% if expense.client %}<br /><small>{{ expense.client.organization_name }}</small>{% endif %}</td>
+                <td>{{ expense.amount }}</td>
+                <td>{% if expense.taxes %}
+                     {% for tax in expense.taxes.all|dictsort:"name" %}
+                     <small>{{ tax.name }}:
+                     {% if tax.compound_tax%}
+                     {% with expense.amount|div:tax2_rate as x %} 
+                     {{ expense.amount|sub:x|floatformat:"2" }}
+                     {% endwith %}
+                     {% else %}
+                     {% with expense.amount|div:tax2_rate as before_compound %} 
+                       {% with before_compound|div:tax1_rate as x %}
+                       {{ before_compound|sub:x|floatformat:"2" }}
+                       {% endwith %}
+                     {% endwith %}
+                     {% endif %}
+                     </small>
+                     {% endfor %}
+                   {% endif %}
+                </td>
+                <td style="text-align:center;">
+                {% if expense.receipt %}
+                  <a href="http://i.blobon.com/{{ expense.receipt }}" target="_blank"><span class="glyphicon glyphicon-download"></span></a>
+                {% endif %}
+                </td>
+              </tr> 
+              {% endfor %}
+            </tbody>
+          </table>
+              <div class="row " style="padding:25px;">
+                <div class="col-xs-12" style="padding-top:5px;border-top: 1px solid;"><b class="pull-right">{% trans "Total expenses :" %}
+                {{ expenses_total }}</b>
+                </div>
+              {% if taxable_expense_total %}
+                <div class="col-xs-12"><b class="pull-right">{% trans "Paid taxes :" %}
+                    {% if tax1 %}
+                     <small>{{ tax1.name }}: {{ tax1_total|floatformat:"2" }}
+                     </small>
+                    {% endif %}
+                    {% if tax2 %}
+                     <small>{{ tax2.name }}:
+                     {{ tax2_total|floatformat:"2" }}
+                     </small>
+                    {% endif %}
+                    </b>
+                </div>
+              {% endif %}
+              </div>
+
+        </div>
+      </div> 
+
+
+
+
+    {% endif %}
+    {% endblock %}
+    {% block calcul %}
+    {% endblock %}
+    {% block taxes %}
+    {% endblock %}
+  {% endblock %}

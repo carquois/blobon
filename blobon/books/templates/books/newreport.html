@@ -1,0 +1,73 @@
+{% extends "dashboard_base.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+{% load mathfilters %}
+{% block container %}
+
+
+
+      <div class="container" style="max-width:768px;padding-top:30px;">
+
+
+
+
+
+        {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+          </div>
+          {% endfor %}
+        {% endif %}
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+         <h4> {% trans "New report" %}</h4>
+          </div>
+          <form enctype="multipart/form-data" class="form" style="padding:25px;" id="newreport" role="form" method="post" action="{% url 'books.views.newreport' %}">{% csrf_token %}
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-6">
+                 <b> {% trans "From : " %}</b>
+                  {{ form.start_date }}
+                </div>
+                <div class="col-xs-6">
+                 <b> {% trans "to : " %}</b>
+                  {{ form.end_date}}
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+                <h4>{% trans "Include :" %}</h4>
+            </div>
+            <div class="form-group">
+              <b> {% trans "Invoices" %}</b>
+                 {{ form.invoice }}
+            </div>
+            <div class="form-group">
+              <b> {% trans "Expenses" %}</b>
+                 {{ form.expense }}
+            </div>
+            <div class="form-group">
+                 {{ form.taxes.label_tag }}
+                 {{ form.taxes }}
+            </div>
+            <div class="form-group">
+                 {{ form.timesheet.label_tag }}
+                 {{ form.timesheet }}
+            </div>
+<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Create report" %}</button>
+          </form>
+        </div>
+      </div>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <script>
+  $(function() {
+    $( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
+  });
+  </script>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends "books/viewexpense.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+{% load mathfilters %}
+
+    {% block additional-css %}
+<style>
+
+  .page-break { 
+    display: block; 
+    page-break-before: auto; 
+  }
+
+</style>
+    {% endblock %}
+
+
+    {% block invoice %}
+{% if invoices %}
+      <div class="container" style="max-width:768px;padding-top:30px;">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+      {% trans "Incomes from " %} {{report.start_date}} {% trans " to " %} {{report.end_date}}
+         </div>
+          <table class="table table-condensed">
+            <colgroup>
+              <col class="col-xs-2">
+              <col class="col-xs-5">
+              <col class="col-xs-1">
+              <col class="col-xs-1">
+              <col class="col-xs-1">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Client" %}</th>
+                <th>{% trans "Amount" %}</th>
+                <th>{% trans "Taxes" %}</th>
+                <th>{% trans "Number" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for invoice in invoices %}
+              <tr>
+                <td>{{ invoice.date_of_issue|date:"j M Y" }}</td>
+                <td>{{ invoice.client }} {% if invoice.client.city %}<br /><small>{{ invoice.client.city }}</small>{% endif %}</td>
+                <td>
+                {{ invoice.total|floatformat:"2" }}   
+                </td>
+                <td>
+                     <small>{{ tax1.name }}:
+                     {% with invoice.total|div:tax2_rate as before_compound %}
+                       {% with before_compound|div:tax1_rate as y %}
+                       {{ before_compound|sub:y|floatformat:"2" }}
+                       {% endwith %}
+                     {% endwith %}
+                     </small>
+                     <small>{{ tax2.name }}:
+                     {% with invoice.total|div:tax2_rate as y %}
+                     {{ invoice.total|sub:y|floatformat:"2" }}
+                     {% endwith %}
+                     </small>
+                </td>
+                <td style="text-align:center;"><a href="{% url 'books.views.invoice' invoice.id %}" target="_blank">{{ invoice.invoice_number }}</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+              <div class="row " style="padding:25px;">
+                <div class="col-xs-12" style="padding-top:5px;border-top: 1px solid;"><b class="pull-right">{% trans "Total income :" %}
+                {{ x|floatformat:"2" }}</b>
+                </div>
+                <div class="col-xs-12"><b class="pull-right">{% trans "Recieved taxes :" %}
+                     <small>{{ tax1.name }}:
+                     {% with x|div:tax2_rate as before_compound %}
+                       {% with before_compound|div:tax1_rate as y %}
+                       {{ before_compound|sub:y|floatformat:"2" }}
+                       {% endwith %}
+                     {% endwith %}
+                     </small>
+                     <small>{{ tax2.name }}:
+                     {% with x|div:tax2_rate as y %}
+                     {{ x|sub:y|floatformat:"2" }}
+                     {% endwith %}
+                     </small>
+                    </b>
+                </div>
+              </div>
+        </div>
+      </div>
+
+    {% endif %}
+
+    {% endblock %}
+
+    {% block title_expense %}
+      {% trans "Expenses from " %} {{report.start_date}} {% trans " to " %} {{report.end_date}}
+    {% endblock %}
+    {% block exp_total %}
+      {{ expenses_total }}
+    {% endblock %}
+    {% block total %}
+    {% endblock %}
+    {% block taxes %}
+  {% endblock %}
