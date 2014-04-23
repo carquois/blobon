@@ -16,6 +16,7 @@
 
 
     {% block invoice %}
+{% if report.invoice %}
 {% if invoices %}
       <div class="container" style="max-width:768px;padding-top:30px;">
         <div class="panel panel-default">
@@ -88,9 +89,12 @@
               </div>
         </div>
       </div>
-
+    {% else %}
+      <div class="container" style="max-width:768px;padding-top:30px;">
+     {% trans "There is no income for that period" %}
+      </div>
     {% endif %}
-
+    {% endif %}
     {% endblock %}
 
     {% block title_expense %}

@@ -37,8 +37,9 @@
 
 
     {% block expense %}
+{% if not report.expense %}
 
-
+{% else %}
     {% if expenses %}
 
       <div class="container" style="max-width:768px;padding-top:30px;">
@@ -137,9 +138,12 @@
       </div> 
 
 
-
-
+    {% else %}
+      <div class="container" style="max-width:768px;padding-top:30px;">
+      {% trans "There is no expense for that period" %}
+      </div>
     {% endif %}
+{% endif %}
     {% endblock %}
     {% block calcul %}
     {% endblock %}
