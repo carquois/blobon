@@ -51,18 +51,6 @@ class Invoice(models.Model):
     def __unicode__(self):
         return unicode(self.invoice_number)
 
-class Report(models.Model):
-    date = models.DateTimeField(auto_now_add = True)
-    start_date = models.DateTimeField(auto_now_add = False)
-    end_date = models.DateTimeField(auto_now_add = False)
-    author = models.ForeignKey(User)
-    invoice = models.BooleanField(default=False)
-    expense = models.BooleanField(default=False)
-    taxes = models.BooleanField(default=False)
-    timesheet = models.BooleanField(default=False)
-    def __unicode__(self):
-        return u'%s - %s - %s' % (self.author, self.date, self.id)
-
 class Project(models.Model):
     name = models.CharField(max_length=50)
     client = models.ForeignKey(Client)
@@ -130,3 +118,18 @@ class Item(models.Model):
     description = models.CharField(max_length=1000, blank=True)
     def __unicode__(self):
         return u'%s - %s' % (self.name, self.client)
+
+class Report(models.Model):
+    date = models.DateTimeField(auto_now_add = True)
+    start_date = models.DateTimeField(auto_now_add = False)
+    end_date = models.DateTimeField(auto_now_add = False)
+    author = models.ForeignKey(User)
+    client = models.ForeignKey(Client, null=True, blank=True, default=None)
+    vendor = models.ForeignKey(Vendor, null=True, blank=True, default=None)
+    category = models.ForeignKey(Category, null=True, blank=True, default=None)
+    invoice = models.BooleanField(default=False)
+    expense = models.BooleanField(default=False)
+    taxes = models.BooleanField(default=False)
+    timesheet = models.BooleanField(default=False)
+    def __unicode__(self):
+        return u'%s - %s - %s' % (self.author, self.date, self.id)

@@ -21,7 +21,12 @@
       <div class="container" style="max-width:768px;padding-top:30px;">
         <div class="panel panel-default">
           <div class="panel-heading">
-      {% trans "Incomes from " %} {{report.start_date}} {% trans " to " %} {{report.end_date}}
+            {% trans "Incomes from " %} {{ report.start_date|date:"d M Y" }} {% trans " to " %} {{ report.end_date|date:"d M Y" }}
+            {% if report.client %}
+            <div class="pull-right">
+              {% trans "Client :  " %} {{ report.client }}
+            </div>
+            {% endif %}
          </div>
           <table class="table table-condensed">
             <colgroup>
@@ -100,7 +105,12 @@
     {% endblock %}
 
     {% block title_expense %}
-      {% trans "Expenses from " %} {{report.start_date}} {% trans " to " %} {{report.end_date}}
+            {% trans "Expenses from " %} {{ report.start_date|date:"d M Y" }} {% trans " to " %} {{ report.end_date|date:"d M Y" }}
+            {% if report.client %}
+            <div class="pull-right">
+              {% trans "Client :  " %} {{ report.client }}
+            </div>
+            {% endif %}
     {% endblock %}
     {% block exp_total %}
       {{ expenses_total }}

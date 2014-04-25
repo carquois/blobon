@@ -139,7 +139,7 @@ def invoice(request, id):
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
 
- 
+
 @login_required
 def newreport(request):
     if request.method == 'POST':
@@ -153,16 +153,20 @@ def newreport(request):
         messages.add_message(request, messages.INFO, _(u"An error has occur please try again"))
         return HttpResponseRedirect(reverse('books.views.newreport'))
     else:
-      form = ReportForm() 
+      form = ReportForm()
       return render_to_response('books/newreport.html',
                                 {'form': form},
                                 context_instance=RequestContext(request))
 
+ 
 @login_required
 def viewreport(request, id):
     report = get_object_or_404(Report, id=id)
     if request.user == report.author:
-      invoices = Invoice.objects.filter(author=request.user).filter(date_of_issue__range=[report.start_date, report.end_date]).filter(status="Pa").order_by('date_of_issue')
+      if report.client:
+        invoices = Invoice.objects.filter(author=request.user).filter(date_of_issue__range=[report.start_date, report.end_date]).filter(status="Pa").filter(client=report.client).order_by('date_of_issue')
+      else:
+        invoices = Invoice.objects.filter(author=request.user).filter(date_of_issue__range=[report.start_date, report.end_date]).filter(status="Pa").order_by('date_of_issue')
       tax1 = get_object_or_404(Tax, name="TPS")
       tax2 = get_object_or_404(Tax, name="TVQ")
       tax1_rate = 1 + (tax1.rate/100)
@@ -186,7 +190,10 @@ def viewreport(request, id):
         if invoice.with_taxes:
           z += invoice.total
         x += invoice.total
-      expenses = Expense.objects.filter(author=request.user).filter(date__range=[report.start_date, report.end_date]).order_by('date')
+      if report.client:
+        expenses = Expense.objects.filter(author=request.user).filter(date__range=[report.start_date, report.end_date]).filter(client=report.client).order_by('date')
+      else:
+        expenses = Expense.objects.filter(author=request.user).filter(date__range=[report.start_date, report.end_date]).order_by('date')
       t = 0
       expenses_total = 0
       taxed_expenses = Expense.objects.filter(author=request.user).filter(taxes__isnull=False).filter(date__range=[report.start_date, report.end_date]).order_by('date').distinct()
