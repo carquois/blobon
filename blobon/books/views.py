@@ -196,7 +196,10 @@ def viewreport(request, id):
         expenses = Expense.objects.filter(author=request.user).filter(date__range=[report.start_date, report.end_date]).order_by('date')
       t = 0
       expenses_total = 0
-      taxed_expenses = Expense.objects.filter(author=request.user).filter(taxes__isnull=False).filter(date__range=[report.start_date, report.end_date]).order_by('date').distinct()
+      if report.client:
+        taxed_expenses = Expense.objects.filter(author=request.user).filter(taxes__isnull=False).filter(date__range=[report.start_date, report.end_date]).filter(client=report.client).order_by('date').distinct()
+      else:
+        taxed_expenses = Expense.objects.filter(author=request.user).filter(taxes__isnull=False).filter(date__range=[report.start_date, report.end_date]).order_by('date').distinct()
       for expense in expenses:
         t = t + expense.amount
       expenses_total = ("%.2f" % round(t,2))
