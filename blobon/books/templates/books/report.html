@@ -10,7 +10,11 @@
     display: block; 
     page-break-before: auto; 
   }
-
+@media print {
+  .noprint {
+    display: none;
+  }
+}
 </style>
     {% endblock %}
 
@@ -69,7 +73,8 @@
                      </small>
                {% endif %}
                 </td>
-                <td style="text-align:center;"><a href="{% url 'books.views.invoice' invoice.id %}" target="_blank">{{ invoice.invoice_number }}</a></td>
+                <td style="text-align:center;">{{ invoice.invoice_number }}
+                <a class="noprint" href="{% url 'books.views.invoice' invoice.id %}" target="_blank"><span class="glyphicon glyphicon-pencil"></span></a></td>
               </tr>
               {% endfor %}
             </tbody>
