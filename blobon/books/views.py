@@ -95,10 +95,9 @@ def viewexpense_day(request, year, month, day):
 
 
 
-@login_required
 def invoice(request, id):
-    invoice = get_object_or_404(Invoice, id=id)
-    if request.user == invoice.author:
+      invoice = get_object_or_404(Invoice, id=id)
+      entreprise = invoice.author
       client = invoice.client
       times = Time.objects.filter(invoice=invoice)
       taxs = Tax.objects.all()
@@ -133,11 +132,9 @@ def invoice(request, id):
         z = subtotal
       total = ("%.2f" % round(z,2))
       return render_to_response('books/invoice.html',
-                               {'invoice': invoice, 'client': client, 'times': times,'taxs': taxs, 
+                               {'entreprise': entreprise, 'invoice': invoice, 'client': client, 'times': times,'taxs': taxs, 
                                 'items': items,'total': total, 'sub_tax2':sub_tax2 ,'sub_tax1':sub_tax1 ,'subtotal': subtotal, 'subtotal_1': subtotal_1, 'subtotal_2': subtotal_2, 'number_of_hours': number_of_hours},
                                context_instance=RequestContext(request))
-    else:
-      return HttpResponseRedirect(reverse('blogs.views.index'))
 
 
 @login_required
@@ -159,14 +156,13 @@ def newreport(request):
                                 context_instance=RequestContext(request))
 
  
-@login_required
 def viewreport(request, id):
-    report = get_object_or_404(Report, id=id)
-    if request.user == report.author:
+      report = get_object_or_404(Report, id=id)
+      entreprise = report.author
       if report.client:
-        invoices = Invoice.objects.filter(author=request.user).filter(date_of_issue__range=[report.start_date, report.end_date]).filter(status="Pa").filter(client=report.client).order_by('date_of_issue')
+        invoices = Invoice.objects.filter(author=report.author).filter(date_of_issue__range=[report.start_date, report.end_date]).filter(status="Pa").filter(client=report.client).order_by('date_of_issue')
       else:
-        invoices = Invoice.objects.filter(author=request.user).filter(date_of_issue__range=[report.start_date, report.end_date]).filter(status="Pa").order_by('date_of_issue')
+        invoices = Invoice.objects.filter(author=report.author).filter(date_of_issue__range=[report.start_date, report.end_date]).filter(status="Pa").order_by('date_of_issue')
       tax1 = get_object_or_404(Tax, name="TPS")
       tax2 = get_object_or_404(Tax, name="TVQ")
       tax1_rate = 1 + (tax1.rate/100)
@@ -191,15 +187,15 @@ def viewreport(request, id):
           z += invoice.total
         x += invoice.total
       if report.client:
-        expenses = Expense.objects.filter(author=request.user).filter(date__range=[report.start_date, report.end_date]).filter(client=report.client).order_by('date')
+        expenses = Expense.objects.filter(author=report.author).filter(date__range=[report.start_date, report.end_date]).filter(client=report.client).order_by('date')
       else:
-        expenses = Expense.objects.filter(author=request.user).filter(date__range=[report.start_date, report.end_date]).order_by('date')
+        expenses = Expense.objects.filter(author=report.author).filter(date__range=[report.start_date, report.end_date]).order_by('date')
       t = 0
       expenses_total = 0
       if report.client:
-        taxed_expenses = Expense.objects.filter(author=request.user).filter(taxes__isnull=False).filter(date__range=[report.start_date, report.end_date]).filter(client=report.client).order_by('date').distinct()
+        taxed_expenses = Expense.objects.filter(author=report.author).filter(taxes__isnull=False).filter(date__range=[report.start_date, report.end_date]).filter(client=report.client).order_by('date').distinct()
       else:
-        taxed_expenses = Expense.objects.filter(author=request.user).filter(taxes__isnull=False).filter(date__range=[report.start_date, report.end_date]).order_by('date').distinct()
+        taxed_expenses = Expense.objects.filter(author=report.author).filter(taxes__isnull=False).filter(date__range=[report.start_date, report.end_date]).order_by('date').distinct()
       for expense in expenses:
         t = t + expense.amount
       expenses_total = ("%.2f" % round(t,2))
@@ -209,7 +205,5 @@ def viewreport(request, id):
       tax2_total = (taxable_expense_total)-(taxable_expense_total_before)
       tax1_total =  (taxable_expense_total_before)-(taxable_expense_total_before/tax1_rate)
       return render_to_response('books/report.html',
-                                 {'z':z, 'x':x,'invoices': invoices, 'taxable_expense_total': taxable_expense_total, 'expenses': expenses, 'report': report, 'expenses_total': expenses_total,'tax1_rate': tax1_rate, 'tax2_rate': tax2_rate,'tax1': tax1, 'tax2': tax2,'tax1_total': tax1_total,'tax2_total': tax2_total,},
+                                 {'entreprise': entreprise, 'z':z, 'x':x,'invoices': invoices, 'taxable_expense_total': taxable_expense_total, 'expenses': expenses, 'report': report, 'expenses_total': expenses_total,'tax1_rate': tax1_rate, 'tax2_rate': tax2_rate,'tax1': tax1, 'tax2': tax2,'tax1_total': tax1_total,'tax2_total': tax2_total,},
                                   context_instance=RequestContext(request))
-    else:
-      return HttpResponseRedirect(reverse('books.views.newreport'))

@@ -1741,6 +1741,7 @@ border-radius: 4px;
               {% endif %}
             </div>
             {% if posts %}
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-7">
@@ -1764,6 +1765,7 @@ border-radius: 4px;
               {% endfor %}
               </tbody>
             </table>
+</div>
             {% endif %}
           </div>
 
@@ -1775,6 +1777,7 @@ border-radius: 4px;
               <div class="panel-body">
                 <p><a href="{% url 'blogs.views.administratepages' blog.slug %}" id="show_all_pages" title="{% trans "Show All Pages" %}">{% trans "All" %}</a> ({{ pages.paginator.num_pages }})</p>
             </div>
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-7">
@@ -1801,6 +1804,7 @@ border-radius: 4px;
               {% endfor %}
               </tbody>
             </table>
+</div>
           </div>
 
 
@@ -1822,6 +1826,7 @@ border-radius: 4px;
               {% endif %}
               </div>
             {% if info_emails %}
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-4">
@@ -1849,6 +1854,7 @@ border-radius: 4px;
               {% endfor %}
               </tbody>
             </table>
+</div>
             {% endif %}
           </div>
 
@@ -1867,6 +1873,7 @@ border-radius: 4px;
               {% endif %}
               </div>
             {% if posts_to_translate %}
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-7">
@@ -1894,6 +1901,7 @@ border-radius: 4px;
               {% endfor %}
               </tbody>
             </table>
+</div>
             {% endif %}
           </div>
 
@@ -1912,6 +1920,7 @@ border-radius: 4px;
               {% endif %}
              </div>
             {% if comments %}
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-4">
@@ -1940,7 +1949,8 @@ border-radius: 4px;
                 </tr>
               {% endfor %}
               </tbody>
-            </table>      
+            </table>
+</div>      
             {% endif %}   
           </div>
         <div class="row cate_tag">
@@ -1958,6 +1968,7 @@ border-radius: 4px;
               {% endif %}
             </div>
             {% if categories %}
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-2">
@@ -1979,6 +1990,7 @@ border-radius: 4px;
               {% endfor %}
               </tbody>
             </table>
+</div>
             {% endif %}
           </div>
          </div>
@@ -2022,6 +2034,7 @@ border-radius: 4px;
               <div class="panel-body">
                 <p><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="show_all_tags" title="{% trans "Show All Tags" %}">{% trans "All" %}</a> ({{ tags|length }})</p>
             </div>
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-2">
@@ -2043,6 +2056,7 @@ border-radius: 4px;
               {% endfor %}
               </tbody>
             </table>
+</div>
           </div>
          </div>
 

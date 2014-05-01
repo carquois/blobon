@@ -66,7 +66,7 @@
 
 
 
-         <div class="col-md-12">
+         <div class="col-md-12" style="padding-top:15px;">
            <form enctype="multipart/form-data" role="form" action="{% url 'blogs.views.administratesettings' blog.slug %}" method="post" id=newsettings>{% csrf_token %}
           <div class="panel panel-primary" id="setting_form">
             <div class="panel-heading">{% trans "Edit your settings :" %}<a href="#" class="btn btn-xs btn-danger pull-right" id="delete_blog_button" data-toggle="modal" data-target="#{{ blog.slug }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete blog" %}</a></div>
@@ -111,16 +111,23 @@
              </div>
              {% if blog.is_bootblog %}
              <div class="row">
-               <div class="col-md-7 form_section" id="settings_main_image">
+               <div class="col-xs-12 col-md-7 form_section" id="settings_main_image">
                  <p><b>{% trans "Blog main image" %}</b></p>
                {% if not blog.main_image %}
                  <p><b>{% trans "This blog has no main image, you can add one anytime" %}</b></p>
                {% endif %}
                  <img style="max-width:100%;" id="current_main_image" src="{{ MEDIA_URL }}{{ blog.main_image }}" alt="Current image" />
                </div>
-               <div class="col-md-5 form_section" id="settings_choose_main_image">
+               <div class="col-xs-12 col-md-5 form_section" id="settings_choose_main_image">
+<div class="row">
+<div class="col-xs-12 col-md-10"style="padding-top:0px;"> {{ form.main_image }}</div> 
+<div class="col-xs-12 col-md-2">
 <a id="info_main_image" class="pull-right info" title="{% trans "Info about your blog main image" %}"data-toggle="modal" data-target="#info_main_image_modal">{% trans "More info" %}</a>              
-<div style="padding-top:0px;"> {{ form.main_image }}</div> 
+</div>
+</div>
+
+
+
                </div>
              </div>
              <hr>

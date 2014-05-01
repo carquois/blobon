@@ -24,7 +24,7 @@
       <div class="container" style="max-width:768px;padding-top:30px;">
 
         <div class="row noprint" style="padding-top:10px;">
-          <div class="col-xs-2 pull-right">
+          <div class="col-xs-12" style="text-align:right;">
             <button id="print_button" type="button" class="btn btn-default">{% trans "Imprimer" %}</button>
           </div>
         </div>
@@ -38,11 +38,11 @@
         <div class="row" style="padding-top:25px;">
           <div class="col-xs-6">
             <address>
-              <strong>{{ user.userprofile.entreprise}}</strong><br>
-              {{ user.userprofile.ent_street_adress}}<br>
-              {{ user.userprofile.ent_city }}, {{ user.userprofile.ent_state }}, {{ user.userprofile.ent_country }}<br>
-              {{ user.userprofile.ent_postal_code }}<br>
-              {{ user.userprofile.ent_phone }}<br>
+              <strong>{{ entreprise.userprofile.entreprise}}</strong><br>
+              {{ entreprise.userprofile.ent_street_adress}}<br>
+              {{ entreprise.userprofile.ent_city }}, {{ entreprise.userprofile.ent_state }}, {{ entreprise.userprofile.ent_country }}<br>
+              {{ entreprise.userprofile.ent_postal_code }}<br>
+              {{ entreprise.userprofile.ent_phone }}<br>
             </address>
           </div>
           <div class="col-xs-6">
@@ -79,6 +79,7 @@
           {% endif %}
     {% endblock %}
           </div>
+<div class="table-responsive">
           <table class="table table-condensed">
             <colgroup>
               <col class="col-xs-2">
@@ -90,11 +91,11 @@
             </colgroup>
             <thead>
               <tr>
-                <th>{% trans "Date" %}</th>
-                <th>{% trans "Category" %}</th>
-                <th>{% trans "Notes" %}</th>
-                <th>{% trans "Amount" %}</th>
-                <th>{% trans "Taxes" %}</th>
+                <th><p>{% trans "Date" %}</p></th>
+                <th><p>{% trans "Category" %}</p></th>
+                <th><p>{% trans "Notes" %}</p></th>
+                <th><p>{% trans "Amount" %}</p></th>
+                <th><p>{% trans "Taxes" %}</p></th>
                 <th><p class="noprint">{% trans "Receipt" %}</p></th>
               </tr>
             </thead>
@@ -127,12 +128,13 @@
                 {% if expense.receipt %}
                   <a class="noprint" href="http://i.blobon.com/{{ expense.receipt }}" target="_blank"><span class="glyphicon glyphicon-download"></span></a>
                 {% endif %}
-                  <a class="noprint" href="http://blobon.com/admin/books/expense/{{ expense.id }}" target="_blank"><span class="glyphicon glyphicon-pencil"></span></a>
+                  <a class="noprint" style="display:none;" href="http://blobon.com/admin/books/expense/{{ expense.id }}" target="_blank"><span class="glyphicon glyphicon-pencil"></span></a>
                 </td>
               </tr> 
               {% endfor %}
             </tbody>
           </table>
+</div>
               <div class="row " style="padding:25px;">
                 <div class="col-xs-12" style="padding-top:5px;border-top: 1px solid;"><b class="pull-right">{% trans "Total expenses :" %}
                 {{ expenses_total }}</b>

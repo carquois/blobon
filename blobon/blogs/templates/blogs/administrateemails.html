@@ -50,6 +50,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Campaigns" %}<a href="#" class="btn btn-default btn-xs pull-right" id="add_new_email" title="{% trans "Create a new campaign" %}">{% trans "Create new" %}</a></div>
             {% if info_emails %}
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-6">
@@ -103,6 +104,7 @@
             {% endfor %}
               </tbody>
             </table>
+</div>
             {% else %}
             <div class="panel-body">
             {% trans "This blog has no mailing list" %}
@@ -141,6 +143,7 @@
     </script>
             </div>
             {% if subscriptions%}
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-7">
@@ -185,6 +188,7 @@
 
               </tbody>
             </table>
+</div>
             {% else %}
             <div class="panel-body">
             {% trans "This blog has no subscriber" %}

@@ -32,6 +32,7 @@
             </div>
             {% endif %}
          </div>
+<div class="table-responsive">
           <table class="table table-condensed">
             <colgroup>
               <col class="col-xs-2">
@@ -74,11 +75,12 @@
                {% endif %}
                 </td>
                 <td style="text-align:center;">{{ invoice.invoice_number }}
-                <a class="noprint" href="{% url 'books.views.invoice' invoice.id %}" target="_blank"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                <a class="noprint" style= "display:none;" href="{% url 'books.views.invoice' invoice.id %}" target="_blank"><span class="glyphicon glyphicon-pencil"></span></a></td>
               </tr>
               {% endfor %}
             </tbody>
           </table>
+</div>
               <div class="row " style="padding:25px;">
                 <div class="col-xs-12" style="padding-top:5px;border-top: 1px solid;"><b class="pull-right">{% trans "Total income :" %}
                 {{ x|floatformat:"2" }}</b>
@@ -110,13 +112,20 @@
     {% endblock %}
 
     {% block title_expense %}
-            {% trans "Expenses from " %} {{ report.start_date|date:"d M Y" }} {% trans " to " %} {{ report.end_date|date:"d M Y" }}
+<div class="row">
+<div class="col-xs-12 col-md-6">   
+
+         {% trans "Expenses from " %} {{ report.start_date|date:"d M Y" }} {% trans " to " %} {{ report.end_date|date:"d M Y" }}
+</div>
             {% if report.client %}
-            <div class="pull-right">
+
+            <div class="col-xs-12 col-md-6">
               {% trans "Client :  " %} {{ report.client }}
             </div>
+
             {% endif %}
-    {% endblock %}
+</div>   
+ {% endblock %}
     {% block exp_total %}
       {{ expenses_total }}
     {% endblock %}
