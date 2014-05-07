@@ -189,6 +189,7 @@ def index(request):
                                   context_instance=RequestContext(request))
 
 
+@never_cache
 def category(request, slug):
       category = get_object_or_404(Category, slug=slug)
       posts = paginate(request,
@@ -208,6 +209,27 @@ def category(request, slug):
                                   {'form': form, 'blog': blog,'posts': posts, 'category': category,},
                                   context_instance=RequestContext(request))
 
+@never_cache
+def category_main(request, slug):
+      category = get_object_or_404(Category, slug=slug)
+      blog = category.blog
+      form = SubscriptionForm()
+      sub_cats = Category.objects.filter(blog=blog).filter(parent_category=category)
+      menus = Menu.objects.filter(blog=blog)
+      categories = Category.objects.filter(blog=blog)
+      if blog.is_bootblog == True:
+        return render_to_response('blogs/blog_category_main.html',
+                                  {'menus': menus,'categories':categories, 'form': form, 'blog': blog, 'category': category, 'sub_cats': sub_cats,},
+                                  context_instance=RequestContext(request))
+      elif blog.template:
+        template = blog.template
+        return render_to_response('blogs/template_blog.html',
+                                  {'template': template, 'menus': menus,'categories':categories, 'form': form, 'blog': blog,'category': category, 'sub_cats': sub_cats,},
+                                  context_instance=RequestContext(request))
+      else:
+        return render_to_response('blogs/category.html',
+                                  {'menus': menus,'form': form, 'blog': blog, 'category': category,'categories':categories, 'sub_cats': sub_cats,},
+                                  context_instance=RequestContext(request))
 
 def year_archive(request, year):
       request.subdomain = None

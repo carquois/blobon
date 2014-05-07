@@ -234,6 +234,13 @@ def get_file_path_main(instance, filename):
     filename = "%s_%s.%s" % (prefix, variable, ext)
     return os.path.join('', filename)
 
+def get_file_path_cat(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.id
+    variable = ('cat')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
 class Template(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=60)
     base = models.TextField(verbose_name=_("Base"), max_length=10000, blank=True)
@@ -318,6 +325,7 @@ class Category(models.Model):
     created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#000000", blank=False)
     parent_category = models.ForeignKey('self',  null=True, blank=True, related_name='child_category')
+    cat_image = ImageField(verbose_name=_("Cat image"), upload_to=get_file_path_cat, null=True, blank=True)
     def __unicode__(self):
         if self.parent_category:
           return u'%s -  %s' % (self.parent_category, self.name)

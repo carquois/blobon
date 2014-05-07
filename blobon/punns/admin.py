@@ -26,7 +26,7 @@ from books.models import Client
 from books.models import Invoice
 from books.models import Project
 from books.models import Tax
-from books.models import Expense, Vendor, Category, Report
+from books.models import Expense, Vendor, Report
 from books.models import Task
 from books.models import Time
 from books.models import Item
