@@ -261,8 +261,8 @@ border-radius: 4px;
               <ul class="nav nav-tabs nav-justified" id="tabbar">
                 <li class="active" id="litext"><a href="#text" id="texttab" title="{% trans "Write a new post quickly" %}" data-toggle="tab"><span class="glyphicon glyphicon-font"></span> {% trans "Quick post" %}</a></li>
                 <li id="liblog_post"><a href="#blog_post" id="blog_posttab" title="{% trans "Write a blog post" %}" data-toggle="tab"><span class="glyphicon glyphicon-book"></span> {% trans "Blog post" %}</a></li>
-                <li id="liimage"><a href="#image" id="imagetab" title="{% trans "Submit One or More Images" %}" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span> {% trans "Image" %}</a></li>
-                <li id="livideo"><a href="#video" id="videotab" title="{% trans "Submit A Youtube Video" %}" data-toggle="tab"><span class="glyphicon glyphicon-film"></span> {% trans "Video" %}</a></li>
+                <li id="liimage"><a href="#image" id="imagetab" title="{% trans "Submit one or more images" %}" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span> {% trans "Image" %}</a></li>
+                <li id="livideo"><a href="#video" id="videotab" title="{% trans "Submit a Youtube or Vimeo Video" %}" data-toggle="tab"><span class="glyphicon glyphicon-film"></span> {% trans "Video" %}</a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="text">
@@ -1683,7 +1683,7 @@ border-radius: 4px;
                           {{ post_form.title }}
                         </div>
                         <div class="youtube_url" id="youtube_url">
-                          {{ post_form.youtube_url }}
+                          {{ post_form.video_url }}
                         </div>
                         <div class="row">
                           <div class="col-xs-3 addcomment" id="addcomment_video">
@@ -2127,7 +2127,7 @@ border-radius: 4px;
     <script>
       $('#livideo').click(function() {
         setTimeout(function() { 
-        $( "#youtube_url :input" ).focus();
+        $( "#video_url :input" ).focus();
         },10);
       });
     </script>
@@ -3114,7 +3114,7 @@ border-radius: 4px;
         $('#addedcomment_video').hide();
         $('#newvideo textarea[name=content_video]').val('');
         setTimeout(function() { 
-          $('#id_youtube_url').focus();
+          $('#id_video_url').focus();
         });
       });
     </script>
@@ -3173,7 +3173,7 @@ border-radius: 4px;
     <script>
       $('#addtitle_video_cancel').click(function() {
         setTimeout(function() { 
-          $('#id_youtube_url').focus();
+          $('#id_video_url').focus();
         },10);
       });
     </script>
@@ -3284,7 +3284,7 @@ border-radius: 4px;
 
     <script>
       $(document).ready(function(){
-        $('#id_youtube_url').keyup(function() {
+        $('#id_video_url').keyup(function() {
         if($(this).val() != '') {
           $(".submitvideo").prop("disabled", false);
           $('#save_draft_video').prop("disabled", false);

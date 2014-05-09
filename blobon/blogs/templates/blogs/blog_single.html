@@ -54,6 +54,136 @@
         color: {% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %} !important;
         
     }
+    .play span {
+     background: url("http://i.imgur.com/JPuqcE9.png") no-repeat scroll center -380px #000000;
+     border-radius: 4px 4px 4px 4px;
+     box-shadow: 0 4px 2px -4px rgba(0, 0, 0, 0.4);
+     display: block;
+     height: 40px;
+     opacity: 0.8;
+     width: 65px;
+     }
+     #vimeoEmbedder {
+     width:600px;
+     height:400px;
+     display: table; 
+     margin:0 auto;
+     }
+     #video {
+     width:600px;
+     height:400px;
+     }
+    @media (max-width:991px) and (min-width: 768px) {
+     #vimeoEmbedder {
+     width:480px;
+     height:340px;
+     }
+     #video {
+     width:480px;
+     height:340px;
+     }
+    }
+    @media (max-width:666px) and (min-width: 575px) {
+     #vimeoEmbedder {
+     width:500px;
+     height:350px;
+     }
+     #video {
+     width:500px;
+     height:350px;
+     }
+    }
+    @media (max-width:574px) and (min-width: 481px) {
+     #vimeoEmbedder {
+     width:410px;
+     height:305px;
+     }
+     #video {
+     width:410px;
+     height:305px;
+     }
+    }
+    @media (max-width:480px) {
+     #vimeoEmbedder {
+     width:320px;
+     height:260px;
+     }
+     #video {
+     width:320px;
+     height:260px;
+     }
+    }
+
+     .youtubeEmbedder {
+     width:600px;
+     height:400px;
+     display: table;
+     margin:0 auto;
+     }
+
+    @media (max-width:991px) and (min-width: 768px) {
+     .youtubeEmbedder {
+     width:480px;
+     height:340px;
+     }
+
+    }
+    @media (max-width:666px) and (min-width: 575px) {
+     .youtubeEmbedder {
+     width:500px;
+     height:350px;
+     }
+
+    }
+    @media (max-width:574px) and (min-width: 481px) {
+     .youtubeEmbedder {
+     width:410px;
+     height:305px;
+     }
+
+    }
+    @media (max-width:480px) {
+     .youtubeEmbedder {
+     width:320px;
+     height:260px;
+     }
+
+    }
+     .blobon_videoEmbedder{
+     width:600px;
+     height:auto;
+     display: table;
+     margin:0 auto;
+     }
+
+    @media (max-width:991px) and (min-width: 768px) {
+     .blobon_videoEmbedder {
+     width:480px;
+     height:auto;
+     }
+
+    }
+    @media (max-width:666px) and (min-width: 575px) {
+     .blobon_videoEmbedder {
+     width:500px;
+     height:auto;
+     }
+
+    }
+    @media (max-width:574px) and (min-width: 481px) {
+     .blobon_videoEmbedder {
+     width:410px;
+     height:auto;
+     }
+
+    }
+    @media (max-width:480px) {
+     .blobon_videoEmbedder {
+     width:320px;
+     height:auto;
+     }
+
+    }
     </style>
     {% endblock %}
 
@@ -92,15 +222,72 @@
 
            <h2 class="blog-post-title" id="titleh2">{{ post.title }}</h2>
            {% if post.video %}
-           <video width="620" height="440" controls>
+         <div class="blobon_videoEmbedder">
+           <video style="width:100%;height:auto;" controls>
              <source src="{{ MEDIA_URL }}{{ post.video }}" type="video/mp4">
              <source src="{{ MEDIA_URL }}{{ post.video_ogg }}" type="video/ogg">
              Your browser does not support the video tag.
            </video>
+         </div>
            {% endif %}
            {% if post.youtube_id %}
-           <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+           <iframe class="youtubeEmbedder" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
            {% else %}
+             {% if post.vimeo_id %}
+
+
+<div id="vimeoEmbedder"></div>
+<script>
+$( document ).ready(function() {
+                var vimeoID = "{{ post.vimeo_id }}"; // specify Vimeo video ID to be played
+                var width = "100%"; // define WIDTH of Vimeo video canvas
+                var height = "100%";      // define HEIGHT of Vimeo video canvas
+                var vimeoColor = "{{ blog.main_color|cut:"#" }}"; // specify the color of the video controls
+                var playButtonColor= "{{ blog.main_color|cut:"#" }}"; // set the background color of play button
+                var vimeoBgColor = "red"; // set the background color of Vimeo player
+
+                $('#vimeoEmbedder').html("<div id=\"video\" vimeo-color="+ vimeoColor +" vimeo-id="+ vimeoID +"><div class=\"video-container\" style=\"width:"+ width +"; height:"+ height +"; background-color:#"+ vimeoBgColor +";\"><span class=\"play\"><span style=\"background-color:#"+ playButtonColor +";\"></span></span> <img class=\"placeholder\"></div></div>"); // Get the HTML contents of the video player
+
+});
+
+vimeoEmbedder = function(){
+
+        $("#video").each(function(){
+                
+                var videoObj = $(this),
+                videoContainer = $(".video-container", this),
+                placeholderImg = videoObj.find(".placeholder"),
+                videoColour = "aaaaaa";
+        
+                if((placeholderImg.attr("height") / placeholderImg.attr("width")) > .57) $(".video-container", this).addClass("fourbythree");
+                
+                if(videoObj.attr("vimeo-color")) videoColour = videoObj.attr("vimeo-color");
+                
+                var videoHTML = '<iframe src="http://player.vimeo.com/video/' + videoObj.attr("vimeo-id") + '?title=0&amp;byline=0&amp;portrait=0&amp;color=' + videoColour + '&amp;autoplay=1&amp;api=1" width="'+ placeholderImg.attr("width") +'" height="'+ placeholderImg.attr("height") +'" width="'+ placeholderImg.attr("width") +'" height="'+ placeholderImg.attr("height") +'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+                        
+                $(".play", this).on("click", function(e){
+                        videoContainer.empty().append(videoHTML);
+                });
+        
+        });
+        
+        if($("body").hasClass("home")) $("html").addClass("hideScroll");
+        else $("html").removeClass("hideScroll");
+
+}
+
+$(document).ready(function() { vimeoEmbedder();
+
+var vimeoVideoID = "{{ post.vimeo_id }}";
+$.getJSON('http://www.vimeo.com/api/v2/video/' + vimeoVideoID + '.json?callback=?', {format: "json"}, function(data) {
+         $(".placeholder").attr('src', data[0].thumbnail_large);
+});
+
+
+ }); // Initiate the plugin</script>
+
+
+             {% else %}
 
 
            {% if post.pic %}
@@ -121,6 +308,7 @@
            {% thumbnail post.pic_0 "700" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
+           {% endif %}
            {% endif %}
            {% endif %}
            {% endif %}

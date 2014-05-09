@@ -117,8 +117,43 @@ padding-top:10px;
 padding-top:0px !important;
 }
 #twlogo{
-padding-top:0px !important;
 }
+
+     .youtubeEmbedder {
+     width:600px;
+     height:400px;
+     display: table;
+     margin:0 auto;
+     }
+
+    @media (max-width:991px) and (min-width: 768px) {
+     .youtubeEmbedder {
+     width:480px;
+     height:340px;
+     }
+
+    }
+    @media (max-width:666px) and (min-width: 575px) {
+     .youtubeEmbedder {
+     width:500px;
+     height:350px;
+     }
+
+    }
+    @media (max-width:574px) and (min-width: 481px) {
+     .youtubeEmbedder {
+     width:410px;
+     height:305px;
+     }
+
+    }
+    @media (max-width:480px) {
+     .youtubeEmbedder {
+     width:320px;
+     height:260px;
+     }
+
+    }
 </style>
     {% block additional_css %}
     {% endblock %}
@@ -252,8 +287,14 @@ padding-top:0px !important;
          <a href="{{ post.get_absolute_url }}">
            <h2 class="blog-post-title">{{ post.title }}</h2></a>
            {% if post.youtube_id %}
-           <iframe width="600" height="360" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+           <iframe class="youtubeEmbedder" src="http://www.youtube.com/embed/{{ post.youtube_id }}" frameborder="0" allowfullscreen></iframe>
            {% else %}
+             {% if post.vimeo_id %}
+           <iframe class="youtubeEmbedder" src="//player.vimeo.com/video/{{ post.vimeo_id }}?portrait=0&byline=0&badge=0&title=0&color={{ blog.main_color|cut:"#" }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+             {% else %}
+
+
 
            {% if post.pic %}
            {% if post.file_extension == ".gif" %}
@@ -523,7 +564,7 @@ padding-top:0px !important;
 
 
 
-
+           {% endif %}
            {% endif %}
 {% if post.content %}{% load markup %}{{ post.content|safe|linebreaksbr|urlize }}{% endif %}
 {% if post.content_0 %}{% load markup %}{{ post.content_0|safe|urlize }}{% endif %}
