@@ -1107,10 +1107,20 @@ def editpost(request, id):
         form = PostForm(request.POST or None,request.FILES or None, instance=post)
         if form.is_valid():
             form.save()
-            if post.youtube_url:
-              query = urlparse(post.youtube_url)
-              p = parse_qs(query.query)
-              post.youtube_id = p['v'][0]
+
+
+            if post.video_url:
+              v_url = post.video_url
+              video_type = v_url.split('.')
+              if video_type[1] == "youtube" :
+                query = urlparse(post.video_url)
+                p = parse_qs(query.query)
+                post.youtube_id = p['v'][0]
+              elif video_type[0] == "http://vimeo" :
+                v_id = urlparse(v_url)
+                v_id_2 = v_id.path
+                v_id_final = v_id_2.replace('/', '')
+                post.vimeo_id = v_id_final
               post.save()  
             if 'save_quit' in request.POST:
               return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))

@@ -258,6 +258,7 @@ class Blog(models.Model):
     title = models.CharField(verbose_name=_("Title"), max_length=240)
     facebook_link = models.URLField(max_length=100, blank=True)
     twitter_link = models.URLField(max_length=100, blank=True)
+    pinterest_link = models.URLField(max_length=100, blank=True)
     twitter_oauth_token = models.CharField(max_length=100, blank=True)
     twitter_oauth_token_secret = models.CharField(max_length=100, blank=True)
     header_image = ImageField(verbose_name=_("Main image"), upload_to=get_file_path_main, null=True, blank=True)

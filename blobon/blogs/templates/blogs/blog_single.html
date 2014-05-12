@@ -118,7 +118,7 @@ top:25%;
      height:305px;
      }
     }
-    @media (max-width:480px) {
+    @media (max-width:480px) and (min-width:321px) {
      #vimeoEmbedder {
      width:320px;
      height:260px;
@@ -133,8 +133,6 @@ top:25%;
      height:100%;
      }
      .youtubeEmbedder {
-     width:600px;
-     height:400px;
      display: table;
      margin:0 auto;
      }
@@ -159,10 +157,43 @@ top:25%;
      }
 
     }
-    @media (max-width:480px) {
+    @media (max-width:480px) and (min-width:321px) {
      .youtubeEmbedder {
      width:320px;
      height:260px;
+     }
+
+    }
+     .blobon_videoEmbedder{
+     width:600px;
+     height:auto;
+     display: table;
+     margin:0 auto;
+     }
+
+
+    @media (max-width:320px){
+     #vimeoEmbedder {
+     width:280px;
+     height:240px;
+     }
+     #video {
+     width:280px;
+     height:240px;
+     }
+    }
+     .placeholder{
+     width:100%;
+     height:100%;
+     }
+     .youtubeEmbedder {
+     display: table;
+     margin:0 auto;
+     }
+    @media (max-width:320px) {
+     .youtubeEmbedder {
+     width:280px;
+     height:240px;
      }
 
     }
@@ -253,56 +284,7 @@ top:25%;
              {% if post.vimeo_id %}
 
 
-<div id="vimeoEmbedder"></div>
-<script>
-$( document ).ready(function() {
-                var vimeoID = "{{ post.vimeo_id }}"; // specify Vimeo video ID to be played
-                var width = "100%"; // define WIDTH of Vimeo video canvas
-                var height = "100%";      // define HEIGHT of Vimeo video canvas
-                var vimeoColor = "{{ blog.main_color|cut:"#" }}"; // specify the color of the video controls
-                var playButtonColor= "{{ blog.main_color|cut:"#" }}"; // set the background color of play button
-                var vimeoBgColor = "red"; // set the background color of Vimeo player
-
-                $('#vimeoEmbedder').html("<div id=\"video\" vimeo-color="+ vimeoColor +" vimeo-id="+ vimeoID +"><div class=\"video-container\" style=\"width:"+ width +"; height:"+ height +"; background-color:#"+ vimeoBgColor +";\"><span class=\"play\"><span style=\"background-color:#"+ playButtonColor +";\"></span></span> <img class=\"placeholder\"></div></div>"); // Get the HTML contents of the video player
-
-});
-
-vimeoEmbedder = function(){
-
-        $("#video").each(function(){
-                
-                var videoObj = $(this),
-                videoContainer = $(".video-container", this),
-                placeholderImg = videoObj.find(".placeholder"),
-                videoColour = "aaaaaa";
-        
-                if((placeholderImg.attr("height") / placeholderImg.attr("width")) > .57) $(".video-container", this).addClass("fourbythree");
-                
-                if(videoObj.attr("vimeo-color")) videoColour = videoObj.attr("vimeo-color");
-                
-                var videoHTML = '<iframe src="http://player.vimeo.com/video/' + videoObj.attr("vimeo-id") + '?title=0&amp;byline=0&amp;portrait=0&amp;color=' + videoColour + '&amp;autoplay=1&amp;api=1" width="'+ placeholderImg.attr("width") +'" height="'+ placeholderImg.attr("height") +'" width="'+ placeholderImg.attr("width") +'" height="'+ placeholderImg.attr("height") +'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
-                        
-                $(".play", this).on("click", function(e){
-                        videoContainer.empty().append(videoHTML);
-                });
-        
-        });
-        
-        if($("body").hasClass("home")) $("html").addClass("hideScroll");
-        else $("html").removeClass("hideScroll");
-
-}
-
-$(document).ready(function() { vimeoEmbedder();
-
-var vimeoVideoID = "{{ post.vimeo_id }}";
-$.getJSON('http://www.vimeo.com/api/v2/video/' + vimeoVideoID + '.json?callback=?', {format: "json"}, function(data) {
-         $(".placeholder").attr('src', data[0].thumbnail_large);
-});
-
-
- }); // Initiate the plugin</script>
-
+           <iframe class="youtubeEmbedder" src="//player.vimeo.com/video/{{ post.vimeo_id }}?portrait=0&byline=0&badge=0&title=0&color={{ blog.main_color|cut:"#" }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
              {% else %}
 
