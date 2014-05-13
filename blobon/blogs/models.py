@@ -241,6 +241,41 @@ def get_file_path_cat(instance, filename):
     filename = "%s_%s.%s" % (prefix, variable, ext)
     return os.path.join('', filename)
 
+def get_file_path_cat_email(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.id
+    variable = ('email')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_cat_fb(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.id
+    variable = ('fb')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_cat_tw(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.id
+    variable = ('tw')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_cat_pint(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.id
+    variable = ('pint')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_cat_caret(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.id
+    variable = ('caret')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
 class Template(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=60)
     base = models.TextField(verbose_name=_("Base"), max_length=10000, blank=True)
@@ -327,6 +362,13 @@ class Category(models.Model):
     color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#000000", blank=False)
     parent_category = models.ForeignKey('self',  null=True, blank=True, related_name='child_category')
     cat_image = ImageField(verbose_name=_("Cat image"), upload_to=get_file_path_cat, null=True, blank=True)
+    cat_image_email = ImageField(verbose_name=_("Cat email image"), upload_to=get_file_path_cat_email, null=True, blank=True)
+    cat_image_fb = ImageField(verbose_name=_("Cat fb image"), upload_to=get_file_path_cat_fb, null=True, blank=True)
+    cat_image_tw = ImageField(verbose_name=_("Cat tw image"), upload_to=get_file_path_cat_tw, null=True, blank=True)
+    cat_image_pint = ImageField(verbose_name=_("Cat pint image"), upload_to=get_file_path_cat_pint, null=True, blank=True)
+    cat_image_caret = ImageField(verbose_name=_("Cat caret image"), upload_to=get_file_path_cat_caret, null=True, blank=True)     
+
+
     def __unicode__(self):
         if self.parent_category:
           return u'%s -  %s' % (self.parent_category, self.name)
@@ -386,6 +428,7 @@ class Post(models.Model):
     source = models.URLField(verbose_name=_("Source"), max_length=300, blank=True)
     content = models.TextField(verbose_name=_("Contenu"),max_length=10000, blank=True)
     is_top = models.BooleanField(default=False)
+    is_sticky = models.BooleanField(default=False)
     is_discarded = models.BooleanField(default=False)
     publish_on_facebook = models.BooleanField(default=False)
     youtube_id = models.CharField(max_length=50, null=True, blank=True)
