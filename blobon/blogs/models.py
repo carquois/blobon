@@ -227,6 +227,69 @@ def get_file_path_24(instance, filename):
     filename = "%s_%s.%s" % (prefix, variable, ext)
     return os.path.join('', filename)
 
+def get_file_path_25(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('25')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_26(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('26')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_27(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('27')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_28(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('28')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_29(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('29')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_30(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('30')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_31(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('31')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_32(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('32')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_33(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.base62id
+    variable = ('33')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
 def get_file_path_main(instance, filename):
     ext = filename.split('.')[-1]
     prefix = instance.id
@@ -461,6 +524,15 @@ class Post(models.Model):
     pic_22 = ImageField(verbose_name=_("Image_22"), upload_to=get_file_path_22, null=True, blank=True)
     pic_23 = ImageField(verbose_name=_("Image_23"), upload_to=get_file_path_23, null=True, blank=True)
     pic_24 = ImageField(verbose_name=_("Image_24"), upload_to=get_file_path_24, null=True, blank=True)
+    pic_25 = ImageField(verbose_name=_("Image_25"), upload_to=get_file_path_25, null=True, blank=True)
+    pic_26 = ImageField(verbose_name=_("Image_26"), upload_to=get_file_path_26, null=True, blank=True)
+    pic_27 = ImageField(verbose_name=_("Image_27"), upload_to=get_file_path_27, null=True, blank=True)
+    pic_28 = ImageField(verbose_name=_("Image_28"), upload_to=get_file_path_28, null=True, blank=True)
+    pic_29 = ImageField(verbose_name=_("Image_29"), upload_to=get_file_path_29, null=True, blank=True)
+    pic_30 = ImageField(verbose_name=_("Image_30"), upload_to=get_file_path_30, null=True, blank=True)
+    pic_31 = ImageField(verbose_name=_("Image_31"), upload_to=get_file_path_31, null=True, blank=True)
+    pic_32 = ImageField(verbose_name=_("Image_32"), upload_to=get_file_path_32, null=True, blank=True)
+    pic_33 = ImageField(verbose_name=_("Image_33"), upload_to=get_file_path_33, null=True, blank=True)
     pic_04 = ImageField(verbose_name=_("Image_04"), upload_to=get_file_path_04, null=True, blank=True)
     text = models.TextField(verbose_name=_("Text"),max_length=10000, blank=True)
     translated_content = models.TextField(verbose_name=_("Contenu traduit"),max_length=10000, blank=True)
@@ -596,6 +668,42 @@ class Post(models.Model):
 
     def file_extension_24(self):
         basename, extension = os.path.splitext(self.pic_24.name)
+        return extension
+
+    def file_extension_25(self):
+        basename, extension = os.path.splitext(self.pic_25.name)
+        return extension
+
+    def file_extension_26(self):
+        basename, extension = os.path.splitext(self.pic_26.name)
+        return extension
+
+    def file_extension_27(self):
+        basename, extension = os.path.splitext(self.pic_27.name)
+        return extension
+
+    def file_extension_28(self):
+        basename, extension = os.path.splitext(self.pic_28.name)
+        return extension
+
+    def file_extension_29(self):
+        basename, extension = os.path.splitext(self.pic_29.name)
+        return extension
+
+    def file_extension_30(self):
+        basename, extension = os.path.splitext(self.pic_30.name)
+        return extension
+
+    def file_extension_31(self):
+        basename, extension = os.path.splitext(self.pic_31.name)
+        return extension
+
+    def file_extension_32(self):
+        basename, extension = os.path.splitext(self.pic_32.name)
+        return extension
+
+    def file_extension_33(self):
+        basename, extension = os.path.splitext(self.pic_33.name)
         return extension
 
     @models.permalink

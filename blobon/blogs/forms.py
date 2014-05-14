@@ -324,12 +324,22 @@ class PostForm(ModelForm):
     pic_22 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_22(this);"}))
     pic_23 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_23(this);"}))
     pic_24 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_24(this);"}))
+    pic_25 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_25(this);"}))
+    pic_26 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_26(this);"}))
+    pic_27 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_27(this);"}))
+    pic_28 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_28(this);"}))
+    pic_29 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_29(this);"}))
+    pic_30 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_30(this);"}))
+    pic_31 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_31(this);"}))
+    pic_32 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_32(this);"}))
+    pic_33 = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_33(this);"}))
     is_ready = forms.BooleanField(required=False) 
     class Meta:
         model = Post
         exclude=('author',' category',) 
-        fields = ('youtube_id','title','content','source','status','artist','text','translated_title','is_ready','translated_content','content_0','content_01','content_1','content_2','content_3','content_4','content_5','content_6','content_video', 'pic','pic_0','pic_04','pic_1','pic_2','pic_3','pic_4','pic_5','pic_6','video_url','category',
-                 'pic_7','pic_8','pic_9','pic_10','pic_11','pic_12','pic_13','pic_14','pic_15','pic_16','pic_17','pic_18','pic_19','pic_20','pic_21','pic_22','pic_23','pic_24','layout_type', )
+        fields = ('is_sticky', 'youtube_id','title','content','source','status','artist','text','translated_title','is_ready','translated_content','content_0','content_01','content_1','content_2','content_3','content_4','content_5','content_6','content_video', 'pic','pic_0','pic_04','pic_1','pic_2','pic_3','pic_4','pic_5','pic_6','video_url','category',
+'pic_7','pic_8','pic_9','pic_10','pic_11','pic_12','pic_13','pic_14','pic_15','pic_16','pic_17','pic_18','pic_19','pic_20','pic_21','pic_22','pic_23',
+'pic_24','pic_25','pic_26','pic_27','pic_28','pic_29','pic_30','pic_31','pic_32','pic_33','layout_type', )
     def __init__(self, *args, **kwargs):
         blog = kwargs.pop('blog', None)
         super(PostForm, self).__init__(*args, **kwargs)
