@@ -339,6 +339,27 @@ def get_file_path_cat_caret(instance, filename):
     filename = "%s_%s.%s" % (prefix, variable, ext)
     return os.path.join('', filename)
 
+def get_file_path_cat_left(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.id
+    variable = ('left')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_cat_right(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.id
+    variable = ('right')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
+def get_file_path_cat_close(instance, filename):
+    ext = filename.split('.')[-1]
+    prefix = instance.id
+    variable = ('close')
+    filename = "%s_%s.%s" % (prefix, variable, ext)
+    return os.path.join('', filename)
+
 class Template(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=60)
     base = models.TextField(verbose_name=_("Base"), max_length=10000, blank=True)
@@ -430,8 +451,9 @@ class Category(models.Model):
     cat_image_tw = ImageField(verbose_name=_("Cat tw image"), upload_to=get_file_path_cat_tw, null=True, blank=True)
     cat_image_pint = ImageField(verbose_name=_("Cat pint image"), upload_to=get_file_path_cat_pint, null=True, blank=True)
     cat_image_caret = ImageField(verbose_name=_("Cat caret image"), upload_to=get_file_path_cat_caret, null=True, blank=True)     
-
-
+    cat_image_left = ImageField(verbose_name=_("Cat caret left"), upload_to=get_file_path_cat_left, null=True, blank=True)
+    cat_image_right = ImageField(verbose_name=_("Cat caret right"), upload_to=get_file_path_cat_right, null=True, blank=True)
+    cat_image_close = ImageField(verbose_name=_("Cat close"), upload_to=get_file_path_cat_close, null=True, blank=True)    
     def __unicode__(self):
         if self.parent_category:
           return u'%s -  %s' % (self.parent_category, self.name)
