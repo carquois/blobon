@@ -408,6 +408,8 @@ def single(request, shorturl):
     subd = host_s[0]    
     post = get_object_or_404(Post, base62id=shorturl)
     blog = post.blog
+    cats = post.category.all()
+    latest_post_cat = Post.objects.filter(blog=blog).filter(status='P').filter(category__in=cats).filter(is_discarded=False).order_by('-pub_date').exclude(pk=post.id)[:1]
     menus = Menu.objects.filter(blog=blog)
     slug = blog.slug
     comments = Comment.objects.filter(post=post).filter(comment_status='pu').order_by('-id')
@@ -458,7 +460,7 @@ def single(request, shorturl):
               elif blog.template:
                 template = blog.template
                 return render_to_response('blogs/template_single.html',
-                                         {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
+                                         {'menus': menus, 'categories': categories, 'post': post,'latest_post_cat':latest_post_cat, 'latest_post_list': latest_post_list,
                                          'next_post_cat':next_post_cat, 'next_post': next_post, 'prev_post': prev_post,'template': template,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
@@ -479,7 +481,7 @@ def single(request, shorturl):
               elif blog.template:
                 template = blog.template
                 return render_to_response('blogs/template_single.html',
-                                         {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
+                                         {'menus': menus, 'categories': categories, 'post': post, 'latest_post_cat':latest_post_cat,'latest_post_list': latest_post_list,
                                          'next_post_cat':next_post_cat, 'next_post': next_post, 'prev_post': prev_post,'template': template,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
@@ -519,7 +521,7 @@ def single(request, shorturl):
         elif blog.template:
           template = blog.template
           return render_to_response('blogs/template_single.html',
-                                   {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
+                                   {'menus': menus, 'categories': categories, 'post': post, 'latest_post_cat':latest_post_cat,'latest_post_list': latest_post_list,
                                    'next_post_cat':next_post_cat, 'next_post': next_post, 'prev_post': prev_post,'template': template,
                                    'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                    context_instance=RequestContext(request))
@@ -567,7 +569,7 @@ def single(request, shorturl):
               elif blog.template:
                 template = blog.template
                 return render_to_response('blogs/template_single.html',
-                                         {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
+                                         {'menus': menus, 'categories': categories, 'post': post,'latest_post_cat':latest_post_cat, 'latest_post_list': latest_post_list,
                                          'next_post_cat':next_post_cat, 'next_post': next_post, 'prev_post': prev_post,'template': template,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
@@ -588,7 +590,7 @@ def single(request, shorturl):
               elif blog.template:
                 template = blog.template
                 return render_to_response('blogs/template_single.html',
-                                         {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
+                                         {'menus': menus, 'categories': categories, 'post': post,'latest_post_cat':latest_post_cat, 'latest_post_list': latest_post_list,
                                          'next_post': next_post, 'next_post_cat':next_post_cat, 'prev_post': prev_post,'template': template,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
@@ -629,7 +631,7 @@ def single(request, shorturl):
         elif blog.template:
           template = blog.template
           return render_to_response('blogs/template_single.html',
-                                   {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
+                                   {'menus': menus, 'categories': categories, 'post': post, 'latest_post_cat':latest_post_cat,'latest_post_list': latest_post_list,
                                    'next_post': next_post, 'next_post_cat':next_post_cat, 'prev_post': prev_post,'template': template,
                                    'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                    context_instance=RequestContext(request))
