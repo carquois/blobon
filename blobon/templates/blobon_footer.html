@@ -2,13 +2,12 @@
 {% load url from future %}
         <div class="mastfoot" id="footer">
             <div class="inner">
-              <a href="http://blog.blobon.com/p/QgwolHRA/" target="_blank">{% trans "Blog" %}</a>
+              <a href="http://blog.blobon.com" target="_blank">{% trans "Blog" %}</a>
               {% block contact %}
               <a href="{% url 'blogs.views.contact' %}" target="_blank">{% trans "Contact" %}</a>
               {% endblock %}
               <a href="http://blobon.com/terms" target="_blank">{% trans "Terms" %}</a>
               <a href="http://blobon.com/privacypolicy" target="_blank">{% trans "Privacy" %}</a>
-              <a href="http://blog.blobon.com/p/HuUmPRkO/" target="_blank">{% trans "Jobs" %}</a>
               <a href="http://blobon.com/entreprise" target="_blank">{% trans "Entreprise" %}</a>
               <a href="https://github.com/GabrielDancause/blobon" target="_blank">{% trans "Github" %}</a>
               <p>{% trans " © 2013 Blobon, Inc." %}</p>

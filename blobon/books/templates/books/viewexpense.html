@@ -1,0 +1,173 @@
+{% extends "dashboard_base.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+{% load mathfilters %}
+
+    {% block additional-css %}
+<style>
+
+  .page-break { 
+    display: block; 
+    page-break-before: auto; 
+  }
+@media print {
+  .noprint {
+    display: none !important;
+  }
+}
+
+</style>
+    {% endblock %}
+
+  {% block container %}
+
+      <div class="container" style="max-width:768px;padding-top:30px;">
+
+        <div class="row noprint" style="padding-top:10px;">
+          <div class="col-xs-12" style="text-align:right;">
+            <button id="print_button" type="button" class="btn btn-default">{% trans "Imprimer" %}</button>
+          </div>
+        </div>
+
+    <script type="text/javascript">
+      $('#print_button').click(function() {
+        window.print();
+      });
+    </script>
+
+        <div class="row" style="padding-top:25px;">
+          <div class="col-xs-6">
+            <address>
+              <strong>{{ entreprise.userprofile.entreprise}}</strong><br>
+              {{ entreprise.userprofile.ent_street_adress}}<br>
+              {{ entreprise.userprofile.ent_city }}, {{ entreprise.userprofile.ent_state }}, {{ entreprise.userprofile.ent_country }}<br>
+              {{ entreprise.userprofile.ent_postal_code }}<br>
+              {{ entreprise.userprofile.ent_phone }}<br>
+            </address>
+          </div>
+          <div class="col-xs-6">
+          </div>
+        </div>      
+      </div>
+
+    {% block invoice %}
+    {% endblock %}
+
+
+    {% block expense %}
+{% if not report.expense %}
+
+{% else %}
+    {% if expenses %}
+
+      <div class="container" style="max-width:768px;padding-top:30px;">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+    {% block title_expense %}
+          {% if day %}
+            {% trans "Expenses for : " %}{{ year }}/{{ month }}/{{ day }}
+          {% else %}
+            {% if month %}
+            {% trans "Expenses for : " %}{{ year }}/{{ month }}
+            {% else %}
+              {% if year %}
+            {% trans "Expenses for : " %}{{ year }}
+              {% else %}
+            {% trans "All expenses" %}  
+              {% endif %}
+            {% endif %}
+          {% endif %}
+    {% endblock %}
+          </div>
+<div class="table-responsive">
+          <table class="table table-condensed">
+            <colgroup>
+              <col class="col-xs-2">
+              <col class="col-xs-3">
+              <col class="col-xs-2">
+              <col class="col-xs-1">
+              <col class="col-xs-1">
+              <col class="col-xs-1">
+            </colgroup>
+            <thead>
+              <tr>
+                <th><p>{% trans "Date" %}</p></th>
+                <th><p>{% trans "Category" %}</p></th>
+                <th><p>{% trans "Notes" %}</p></th>
+                <th><p>{% trans "Amount" %}</p></th>
+                <th><p>{% trans "Taxes" %}</p></th>
+                <th><p class="noprint">{% trans "Receipt" %}</p></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for expense in expenses %}
+              <tr>
+                <td>{{ expense.date|date:"j M Y" }}</td>
+                <td>{{ expense.category }} {% if expense.vendor %}<br /><small>{{ expense.vendor.name }}</small>{% endif %}</td>
+                <td>{{ expense.notes }} {% if expense.client %}<br /><small>{{ expense.client.organization_name }}</small>{% endif %}</td>
+                <td>{{ expense.amount }}</td>
+                <td>{% if expense.taxes %}
+                     {% for tax in expense.taxes.all|dictsort:"name" %}
+                     <small>{{ tax.name }}:
+                     {% if tax.compound_tax%}
+                     {% with expense.amount|div:tax2_rate as x %} 
+                     {{ expense.amount|sub:x|floatformat:"2" }}
+                     {% endwith %}
+                     {% else %}
+                     {% with expense.amount|div:tax2_rate as before_compound %} 
+                       {% with before_compound|div:tax1_rate as x %}
+                       {{ before_compound|sub:x|floatformat:"2" }}
+                       {% endwith %}
+                     {% endwith %}
+                     {% endif %}
+                     </small>
+                     {% endfor %}
+                   {% endif %}
+                </td>
+                <td style="text-align:center;">
+                {% if expense.receipt %}
+                  <a class="noprint" href="http://i.blobon.com/{{ expense.receipt }}" target="_blank"><span class="glyphicon glyphicon-download"></span></a>
+                {% endif %}
+                  <a class="noprint" style="display:none;" href="http://blobon.com/admin/books/expense/{{ expense.id }}" target="_blank"><span class="glyphicon glyphicon-pencil"></span></a>
+                </td>
+              </tr> 
+              {% endfor %}
+            </tbody>
+          </table>
+</div>
+              <div class="row " style="padding:25px;">
+                <div class="col-xs-12" style="padding-top:5px;border-top: 1px solid;"><b class="pull-right">{% trans "Total expenses :" %}
+                {{ expenses_total }}</b>
+                </div>
+              {% if taxable_expense_total %}
+                <div class="col-xs-12"><b class="pull-right">{% trans "Paid taxes :" %}
+                    {% if tax1 %}
+                     <small>{{ tax1.name }}: {{ tax1_total|floatformat:"2" }}
+                     </small>
+                    {% endif %}
+                    {% if tax2 %}
+                     <small>{{ tax2.name }}:
+                     {{ tax2_total|floatformat:"2" }}
+                     </small>
+                    {% endif %}
+                    </b>
+                </div>
+              {% endif %}
+              </div>
+
+        </div>
+      </div> 
+
+
+    {% else %}
+      <div class="container" style="max-width:768px;padding-top:30px;">
+      {% trans "There is no expense for that period" %}
+      </div>
+    {% endif %}
+{% endif %}
+    {% endblock %}
+    {% block calcul %}
+    {% endblock %}
+    {% block taxes %}
+    {% endblock %}
+  {% endblock %}

@@ -9,15 +9,7 @@
         padding: 10px;0px;5px;0px;
       }
 .table{
-    margin:0px !important;
-    table-layout:fixed;
-max-width:100%; 
 word-wrap:break-word; 
-  }
-  .table td{
-    padding-bottom: 0px !important;  
-    overflow:hidden;
-    max-width:100%;
   }
     </style>
   {% endblock %}
@@ -26,11 +18,17 @@ word-wrap:break-word;
             <div class="panel-heading">
 
            {% block status %}
-            {% trans "Comments to be approve" %}
+<div class="row">
+<div class="col-xs-12 col-md-6"> 
+           {% trans "Comments to be approve" %}
+</div>
+<div class="col-xs-12 col-md-6">
             {% if comments %}
             <a href="{% url 'blogs.views.delete_pending_comments' blog.slug %}" class="btn btn-default btn-xs pull-right" id="del_all" title="{% trans "Delete all pending comments" %}">{% trans "Delete all" %}</a>
             {% endif %}
             <a href="{% url 'blogs.views.publishedcomments' blog.slug %}" class="btn btn-default btn-xs pull-right" id="all" title="{% trans "Published comments" %}">{% trans "View published comments" %}</a>
+</div>
+</div>
            {% endblock %}
 
 
@@ -38,6 +36,7 @@ word-wrap:break-word;
             {% if comments %}
               <div class="panel-body">
               </div>
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-4">
@@ -100,6 +99,7 @@ word-wrap:break-word;
               {% endfor %}
               </tbody>
             </table>
+</div>
             {% else %}
             {% block no_comment %}
               <div class="panel-body">

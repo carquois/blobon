@@ -15,6 +15,11 @@
     font-size: 20px;   
     text-align: center;
   } 
+@media print {
+  .print {
+    display: none;
+  }
+}
 
 </style>
     {% endblock %}
@@ -22,7 +27,11 @@
     {% block container %}
 
       <div class="container" style="max-width:768px;">
-
+        <div class="row print" style="padding-top:10px;">
+          <div class="col-xs-12" style="text-align:right;">
+            <button id="print_button" type="button" class="btn btn-default">{% trans "Imprimer" %}</button>
+          </div>
+        </div>
     {% if invoice.status == "Su"%}
         <div class="row status" style="padding-top:10px;">
           <b>{% trans "* Soumission *" %}</b>
@@ -82,7 +91,7 @@
             {% else %}
             <b>{% trans "Date de facturation :" %}</b>
             {% endif %}            
-             &nbsp;{{ invoice.last_modified|date:"d M Y" }}
+             &nbsp;{{ invoice.date_of_issue|date:"d M Y" }}
           </div>
         </div>
 <div class="page-break">
@@ -122,6 +131,7 @@
         {% endif %}
         </div>
 </div>
+{% if invoice.with_items %}
         {% if items %}
 <div class="page-break">
         <div class="panel panel-default">
@@ -159,6 +169,7 @@
         </div>
 </div>
         {% endif %}
+{% endif %}
 <div class="page-break">
         <div class="panel panel-default">
             <table class="table">
@@ -218,5 +229,9 @@
 
 </div>
 </div>
-
+    <script type="text/javascript">
+      $('#print_button').click(function() {
+        window.print();
+      });
+    </script>
     {% endblock %}

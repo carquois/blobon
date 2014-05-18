@@ -15,6 +15,7 @@
             <div class="panel-heading">{% trans "Pages" %}<a href="{% url 'blogs.views.createpage' blog.slug %}" class="btn btn-default btn-xs pull-right" id="add_new_page" title="{% trans "Add a New Page" %}">{% trans "Add new" %}</a></div>
               <div class="panel-body">
               </div>
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-6">
@@ -73,6 +74,7 @@
               {% endfor %}
               </tbody>
             </table>
+</div>
           </div>
     <ul class="pager">
     <div class="row">

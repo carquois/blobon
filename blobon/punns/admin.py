@@ -26,7 +26,7 @@ from books.models import Client
 from books.models import Invoice
 from books.models import Project
 from books.models import Tax
-from books.models import Expense, Vendor, Category
+from books.models import Expense, Vendor, Report
 from books.models import Task
 from books.models import Time
 from books.models import Item
@@ -36,6 +36,9 @@ from blogs.models import Template
 
 class PunnAdmin(admin.ModelAdmin):
     exclude = ('original_punn',)
+
+class PostAdmin(admin.ModelAdmin):
+    search_fields = ['title']
 admin.site.register(Punn, PunnAdmin)
 admin.site.register(Link)
 admin.site.register(Video)
@@ -43,7 +46,7 @@ admin.site.register(Blog)
 admin.site.register(Page)
 admin.site.register(Tag)
 admin.site.register(Category)
-admin.site.register(Post)
+admin.site.register(Post, PostAdmin)
 admin.site.register(Invitation)
 admin.site.register(Album)
 admin.site.register(Earning)
@@ -73,3 +76,4 @@ admin.site.register(Menu)
 admin.site.register(MenuItem)
 admin.site.register(Template)
 admin.site.register(Vendor)
+admin.site.register(Report)

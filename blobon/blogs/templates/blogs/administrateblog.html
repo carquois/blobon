@@ -261,8 +261,8 @@ border-radius: 4px;
               <ul class="nav nav-tabs nav-justified" id="tabbar">
                 <li class="active" id="litext"><a href="#text" id="texttab" title="{% trans "Write a new post quickly" %}" data-toggle="tab"><span class="glyphicon glyphicon-font"></span> {% trans "Quick post" %}</a></li>
                 <li id="liblog_post"><a href="#blog_post" id="blog_posttab" title="{% trans "Write a blog post" %}" data-toggle="tab"><span class="glyphicon glyphicon-book"></span> {% trans "Blog post" %}</a></li>
-                <li id="liimage"><a href="#image" id="imagetab" title="{% trans "Submit One or More Images" %}" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span> {% trans "Image" %}</a></li>
-                <li id="livideo"><a href="#video" id="videotab" title="{% trans "Submit A Youtube Video" %}" data-toggle="tab"><span class="glyphicon glyphicon-film"></span> {% trans "Video" %}</a></li>
+                <li id="liimage"><a href="#image" id="imagetab" title="{% trans "Submit one or more images" %}" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span> {% trans "Image" %}</a></li>
+                <li id="livideo"><a href="#video" id="videotab" title="{% trans "Submit a Youtube or Vimeo Video" %}" data-toggle="tab"><span class="glyphicon glyphicon-film"></span> {% trans "Video" %}</a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="text">
@@ -289,6 +289,7 @@ border-radius: 4px;
                         {% if tags %}
                          <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
                         {% endif %}
+                        <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
                         <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                         <div class="row" style="display: none">{{ post_form.status }} </div>
                         <div class="row" style="display: none">{{ post_form.is_ready }} </div>      
@@ -332,6 +333,7 @@ border-radius: 4px;
                         {% if tags %}
                          <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
                         {% endif %}
+                        <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
                         <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                         <div class="row" style="display: none">{{ post_form.status }} </div>
                         <div class="row" style="display: none">{{ post_form.is_ready }} </div>
@@ -741,9 +743,6 @@ border-radius: 4px;
                                   </div>
                                 </div>
                               </div>
-                        {% if categories %}
-                         <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>
-                        {% endif %}
                         {% if tags %}
                          <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
                         {% endif %}
@@ -771,7 +770,7 @@ border-radius: 4px;
                                     {{ post_form.category.label_tag }} {{ post_form.category }}
                                   </div>
                                 {% endif %}
-
+                               <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
                        <div class="btn-group pull-right">
                          <button type="button" class="btn btn-xs btn-primary submitimagealbum1form" disabled="disabled">{% trans "Submit post" %}</button>
                          <button id="save_draft_al1" title="{% trans "More options" %}" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" disabled="disabled">
@@ -1138,10 +1137,148 @@ border-radius: 4px;
                                     </div>
                                   </div>
                                 </div>
+
+
+
+
+
+                                <div class="row" style="text-align:center;">
+                                  <div class="col-sm-4">
+                                    <div class="form-group">
+                                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div>
+                                          <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_23 }}</span>
+                                          <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                        </div>
+                                        <div class="fileinput-preview thumbnail smallimgpreview album2preview"  data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4">
+                                    <div class="form-group">
+                                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div>
+                                          <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_24 }}</span>
+                                          <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                       </div>
+                                        <div class="fileinput-preview thumbnail smallimgpreview album2preview"  data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                     </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4">
+                                    <div class="form-group">
+                                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div>
+                                          <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_25 }}</span>
+                                          <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                        </div>
+                                        <div class="fileinput-preview thumbnail smallimgpreview album2preview" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="row" style="text-align:center;">
+                                  <div class="col-sm-4">
+                                    <div class="form-group">
+                                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div>
+                                          <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_26 }}</span>
+                                          <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                        </div>
+                                        <div class="fileinput-preview thumbnail smallimgpreview album2preview"  data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4">
+                                    <div class="form-group">
+                                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div>
+                                          <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_27 }}</span>
+                                          <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                       </div>
+                                        <div class="fileinput-preview thumbnail smallimgpreview album2preview"  data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                     </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4">
+                                    <div class="form-group">
+                                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div>
+                                          <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_28 }}</span>
+                                          <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                        </div>
+                                        <div class="fileinput-preview thumbnail smallimgpreview album2preview" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="row" style="text-align:center;">
+                                  <div class="col-sm-4">
+                                    <div class="form-group">
+                                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div>
+                                          <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_29 }}</span>
+                                          <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                        </div>
+                                        <div class="fileinput-preview thumbnail smallimgpreview album2preview"  data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4">
+                                    <div class="form-group">
+                                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div>
+                                          <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_30 }}</span>
+                                          <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                       </div>
+                                        <div class="fileinput-preview thumbnail smallimgpreview album2preview"  data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                     </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4">
+                                    <div class="form-group">
+                                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div>
+                                          <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_31 }}</span>
+                                          <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                        </div>
+                                        <div class="fileinput-preview thumbnail smallimgpreview album2preview" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="row" style="text-align:center;">
+                                  <div class="col-sm-4 col-sm-offset-2">
+                                    <div class="form-group">
+                                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div>
+                                          <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_32 }}</span>
+                                          <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                        </div>
+                                        <div class="fileinput-preview thumbnail smallimgpreview album2preview"  data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4">
+                                    <div class="form-group">
+                                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div>
+                                          <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_33 }}</span>
+                                          <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                       </div>
+                                        <div class="fileinput-preview thumbnail smallimgpreview album2preview"  data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                     </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+
+
+
                               </div>
-                        {% if categories %}
-                         <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>
-                        {% endif %}
                         {% if tags %}
                          <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
                         {% endif %}
@@ -1169,7 +1306,7 @@ border-radius: 4px;
                                     {{ post_form.category.label_tag }} {{ post_form.category }}
                                   </div>
                                 {% endif %}
-
+                                <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
 
                        <div class="btn-group pull-right">
                          <button type="button" class="btn btn-xs btn-primary submitimagealbum2form" disabled="disabled">{% trans "Submit post" %}</button>
@@ -1540,10 +1677,125 @@ border-radius: 4px;
                                   </div>
                                 </div>
                               </div>
+
+
+
+
+
+
+                              <div class="row" id="image_al3_1_form">
+                                <div class="col-sm-4" id="image_al3_1_form">
+                                  <div class="form-group">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                      <div>
+                                        <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_25 }}</span>
+                                        <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                      </div>
+                                      <div class="fileinput-preview thumbnail smallimgpreview album3preview" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-4" id="image_al3_2_form">
+                                  <div class="form-group">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                      <div>
+                                        <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_26 }}</span>
+                                        <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                      </div>
+                                      <div class="fileinput-preview thumbnail smallimgpreview album3preview" id="preview_al_3_2" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-4" id="image_al3_3_form">
+                                  <div class="form-group">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                      <div>
+                                        <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_27 }}</span>
+                                        <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                      </div>
+                                      <div class="fileinput-preview thumbnail smallimgpreview album3preview" id="preview_al_3_3" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row" id="image_al3_1_form">
+                                <div class="col-sm-4" id="image_al3_1_form">
+                                  <div class="form-group">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                      <div>
+                                        <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_28 }}</span>
+                                        <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                      </div>
+                                      <div class="fileinput-preview thumbnail smallimgpreview album3preview" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-4" id="image_al3_2_form">
+                                  <div class="form-group">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                      <div>
+                                        <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_29 }}</span>
+                                        <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                      </div>
+                                      <div class="fileinput-preview thumbnail smallimgpreview album3preview" id="preview_al_3_2" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-4" id="image_al3_3_form">
+                                  <div class="form-group">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                      <div>
+                                        <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_30 }}</span>
+                                        <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                      </div>
+                                      <div class="fileinput-preview thumbnail smallimgpreview album3preview" id="preview_al_3_3" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row" id="image_al3_1_form">
+                                <div class="col-sm-4" id="image_al3_1_form">
+                                  <div class="form-group">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                      <div>
+                                        <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_31 }}</span>
+                                        <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                      </div>
+                                      <div class="fileinput-preview thumbnail smallimgpreview album3preview" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-4" id="image_al3_2_form">
+                                  <div class="form-group">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                      <div>
+                                        <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_32 }}</span>
+                                        <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                      </div>
+                                      <div class="fileinput-preview thumbnail smallimgpreview album3preview" id="preview_al_3_2" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-4" id="image_al3_3_form">
+                                  <div class="form-group">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                      <div>
+                                        <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{{ post_form.pic_33 }}</span>
+                                        <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                      </div>
+                                      <div class="fileinput-preview thumbnail smallimgpreview album3preview" id="preview_al_3_3" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+
+
+
+
+
+
                             </div>
-                        {% if categories %}
-                         <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>
-                        {% endif %}
                         {% if tags %}
                          <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
                         {% endif %}
@@ -1571,7 +1823,7 @@ border-radius: 4px;
                                     {{ post_form.category.label_tag }} {{ post_form.category }}
                                   </div>
                                 {% endif %}
-
+                                   <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
 
                        <div class="btn-group pull-right">
                          <button type="button" class="btn btn-xs btn-primary submitimagealbum3form" disabled="disabled">{% trans "Submit post" %}</button>
@@ -1619,9 +1871,6 @@ border-radius: 4px;
                                       <div id=addedcomment_image style="display: none">{{ post_form.content_0 }}<span id="addcomment_image_cancel" title="{% trans "Cancel Comment" %}" class="glyphicon glyphicon-remove-circle pull-right"></span></div>
                                     </div>
                                 </div>
-                        {% if categories %}
-                         <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>
-                        {% endif %}
                         {% if tags %}
                          <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
                         {% endif %}
@@ -1649,7 +1898,7 @@ border-radius: 4px;
                                {{ post_form.category.label_tag }} {{ post_form.category }}
                               </div>
                                 {% endif %}
-
+                                 <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
                        <div class="btn-group pull-right">
                          <button type="button" class="btn btn-xs btn-primary submitimageform" disabled="disabled">{% trans "Submit post" %}</button>
                          <button id="save_draft_image" title="{% trans "More options" %}" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" disabled="disabled">
@@ -1683,7 +1932,7 @@ border-radius: 4px;
                           {{ post_form.title }}
                         </div>
                         <div class="youtube_url" id="youtube_url">
-                          {{ post_form.youtube_url }}
+                          {{ post_form.video_url }}
                         </div>
                         <div class="row">
                           <div class="col-xs-3 addcomment" id="addcomment_video">
@@ -1741,6 +1990,7 @@ border-radius: 4px;
               {% endif %}
             </div>
             {% if posts %}
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-7">
@@ -1764,6 +2014,7 @@ border-radius: 4px;
               {% endfor %}
               </tbody>
             </table>
+</div>
             {% endif %}
           </div>
 
@@ -1775,6 +2026,7 @@ border-radius: 4px;
               <div class="panel-body">
                 <p><a href="{% url 'blogs.views.administratepages' blog.slug %}" id="show_all_pages" title="{% trans "Show All Pages" %}">{% trans "All" %}</a> ({{ pages.paginator.num_pages }})</p>
             </div>
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-7">
@@ -1801,6 +2053,7 @@ border-radius: 4px;
               {% endfor %}
               </tbody>
             </table>
+</div>
           </div>
 
 
@@ -1822,6 +2075,7 @@ border-radius: 4px;
               {% endif %}
               </div>
             {% if info_emails %}
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-4">
@@ -1849,6 +2103,7 @@ border-radius: 4px;
               {% endfor %}
               </tbody>
             </table>
+</div>
             {% endif %}
           </div>
 
@@ -1867,6 +2122,7 @@ border-radius: 4px;
               {% endif %}
               </div>
             {% if posts_to_translate %}
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-7">
@@ -1894,6 +2150,7 @@ border-radius: 4px;
               {% endfor %}
               </tbody>
             </table>
+</div>
             {% endif %}
           </div>
 
@@ -1912,6 +2169,7 @@ border-radius: 4px;
               {% endif %}
              </div>
             {% if comments %}
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-4">
@@ -1940,7 +2198,8 @@ border-radius: 4px;
                 </tr>
               {% endfor %}
               </tbody>
-            </table>      
+            </table>
+</div>      
             {% endif %}   
           </div>
         <div class="row cate_tag">
@@ -1958,6 +2217,7 @@ border-radius: 4px;
               {% endif %}
             </div>
             {% if categories %}
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-2">
@@ -1979,6 +2239,7 @@ border-radius: 4px;
               {% endfor %}
               </tbody>
             </table>
+</div>
             {% endif %}
           </div>
          </div>
@@ -2022,6 +2283,7 @@ border-radius: 4px;
               <div class="panel-body">
                 <p><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="show_all_tags" title="{% trans "Show All Tags" %}">{% trans "All" %}</a> ({{ tags|length }})</p>
             </div>
+<div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
                 <col class="col-xs-2">
@@ -2043,6 +2305,7 @@ border-radius: 4px;
               {% endfor %}
               </tbody>
             </table>
+</div>
           </div>
          </div>
 
@@ -2113,7 +2376,7 @@ border-radius: 4px;
     <script>
       $('#livideo').click(function() {
         setTimeout(function() { 
-        $( "#youtube_url :input" ).focus();
+        $( "#video_url :input" ).focus();
         },10);
       });
     </script>
@@ -3100,7 +3363,7 @@ border-radius: 4px;
         $('#addedcomment_video').hide();
         $('#newvideo textarea[name=content_video]').val('');
         setTimeout(function() { 
-          $('#id_youtube_url').focus();
+          $('#id_video_url').focus();
         });
       });
     </script>
@@ -3159,7 +3422,7 @@ border-radius: 4px;
     <script>
       $('#addtitle_video_cancel').click(function() {
         setTimeout(function() { 
-          $('#id_youtube_url').focus();
+          $('#id_video_url').focus();
         },10);
       });
     </script>
@@ -3270,7 +3533,7 @@ border-radius: 4px;
 
     <script>
       $(document).ready(function(){
-        $('#id_youtube_url').keyup(function() {
+        $('#id_video_url').keyup(function() {
         if($(this).val() != '') {
           $(".submitvideo").prop("disabled", false);
           $('#save_draft_video').prop("disabled", false);

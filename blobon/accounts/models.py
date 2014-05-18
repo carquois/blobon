@@ -71,10 +71,17 @@ class UserProfile(models.Model):
 
     fr_user = models.ForeignKey(User, related_name='french_related_user', blank=True, null=True)  
     main_blog = models.ForeignKey(Blog, blank=True, null=True)  
-    
+    entreprise = models.CharField(max_length=100, blank=True)
+    ent_phone = models.CharField(max_length=100, blank=True)
+    ent_street_adress = models.CharField(max_length=100, blank=True)
+    ent_city = models.CharField(max_length=100, blank=True)
+    ent_postal_code = models.CharField(max_length=100, blank=True)
+    ent_country = models.CharField(max_length=100, blank=True)
+    ent_state = models.CharField(max_length=100, blank=True)
+    ent_first_name = models.CharField(max_length=100, blank=True)
+    ent_last_name = models.CharField(max_length=100, blank=True)
     def __unicode__(self):
-        return self.description
-
+        return u'%s - %s' % (self.user, self.description)
 
 
 

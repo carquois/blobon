@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect, render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.db.models import Max
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.core.files.temp import NamedTemporaryFile
@@ -66,6 +67,7 @@ def index(request):
                                    context_instance=RequestContext(request))
       elif Blog.objects.filter(custom_domain=host).exists():
           blog = Blog.objects.get(custom_domain=host)
+          last_sticky = Post.objects.filter(blog=blog).filter(status="P").filter(is_discarded=False).filter(is_ready=True).filter(is_sticky=True).order_by('-pub_date')[:1]
           menus = Menu.objects.filter(blog=blog)
           if blog.is_online == False:
             return render_to_response('blogs/closed.html',context_instance=RequestContext(request))
@@ -90,7 +92,7 @@ def index(request):
                 elif blog.template:
                   template = blog.template
                   return render_to_response('blogs/template_blog.html',
-                                            {'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template,},
+                                            {'last_sticky': last_sticky,'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template,},
                                             context_instance=RequestContext(request))
                 else:
                   return render_to_response('blogs/index.html',
@@ -124,6 +126,7 @@ def index(request):
 
       elif Blog.objects.filter(slug=request.subdomain).exists():
           blog = Blog.objects.get(slug=request.subdomain)
+          last_sticky = Post.objects.filter(blog=blog).filter(status="P").filter(is_discarded=False).filter(is_ready=True).filter(is_sticky=True).order_by('-pub_date')[:1]
           menus = Menu.objects.filter(blog=blog)
           if blog.is_online == False:
            return render_to_response('blogs/closed.html',context_instance=RequestContext(request))
@@ -150,7 +153,7 @@ def index(request):
                 elif blog.template:
                   template = blog.template
                   return render_to_response('blogs/template_blog.html',
-                                            {'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template,},
+                                            {'last_sticky':last_sticky, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template,},
                                             context_instance=RequestContext(request))
                 else:
                   return render_to_response('blogs/index.html',
@@ -189,6 +192,7 @@ def index(request):
                                   context_instance=RequestContext(request))
 
 
+@never_cache
 def category(request, slug):
       category = get_object_or_404(Category, slug=slug)
       posts = paginate(request,
@@ -208,6 +212,30 @@ def category(request, slug):
                                   {'form': form, 'blog': blog,'posts': posts, 'category': category,},
                                   context_instance=RequestContext(request))
 
+@never_cache
+def category_main(request, slug):
+      category = get_object_or_404(Category, slug=slug)
+      blog = category.blog
+      form = SubscriptionForm()
+      sub_cats = Category.objects.filter(blog=blog).filter(parent_category=category)
+      menus = Menu.objects.filter(blog=blog)
+      categories = Category.objects.filter(blog=blog)
+      latests_posts = []
+      for item in sub_cats:
+        latests_posts.extend(list(Post.objects.filter(blog=blog).filter(status='P').filter(category__in=[item]).filter(is_discarded=False).order_by('-pub_date')[:1]))
+      if blog.is_bootblog == True:
+        return render_to_response('blogs/blog_category_main.html',
+                                  {'menus': menus,'categories':categories, 'form': form, 'blog': blog, 'category': category, 'sub_cats': sub_cats,},
+                                  context_instance=RequestContext(request))
+      elif blog.template:
+        template = blog.template
+        return render_to_response('blogs/template_blog.html',
+                                  {'latests_posts':latests_posts, 'template': template, 'menus': menus,'categories':categories, 'form': form, 'blog': blog,'category': category, 'sub_cats': sub_cats,},
+                                  context_instance=RequestContext(request))
+      else:
+        return render_to_response('blogs/category.html',
+                                  {'menus': menus,'form': form, 'blog': blog, 'category': category,'categories':categories, 'sub_cats': sub_cats,},
+                                  context_instance=RequestContext(request))
 
 def year_archive(request, year):
       request.subdomain = None
@@ -380,10 +408,17 @@ def single(request, shorturl):
     subd = host_s[0]    
     post = get_object_or_404(Post, base62id=shorturl)
     blog = post.blog
+    cats = post.category.all()
+    latest_post_cat = Post.objects.filter(blog=blog).filter(status='P').filter(category__in=cats).filter(is_discarded=False).order_by('-pub_date').exclude(pk=post.id)[:1]
     menus = Menu.objects.filter(blog=blog)
     slug = blog.slug
     comments = Comment.objects.filter(post=post).filter(comment_status='pu').order_by('-id')
     categories = Category.objects.filter(blog=blog)
+    next_post_cat = ""
+    for item in post.category.all():
+      next_post_cat_query = Post.objects.filter(blog=blog).filter(pub_date__lt=post.pub_date).filter(category__in=[item]).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
+      if (next_post_cat_query.count() > 0):
+        next_post_cat = next_post_cat_query[0] 
     if host == blog.custom_domain:
 #    if post.blog.custom_domain:
 #      home = post.blog.custom_domain
@@ -406,11 +441,11 @@ def single(request, shorturl):
                                       context_instance=RequestContext(request))
           else:
             if Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]:
-              next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
+              next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
               if (next_post_query.count() > 0):
                 next_post = next_post_query[0]
             if Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).order_by('pub_date').exclude(pk=post.id)[:1]:
-              prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(is_top=True).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
+              prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
               if (prev_post_query.count() > 0):
                 prev_post = prev_post_query[0]
 
@@ -425,8 +460,8 @@ def single(request, shorturl):
               elif blog.template:
                 template = blog.template
                 return render_to_response('blogs/template_single.html',
-                                         {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
-                                         'next_post': next_post, 'prev_post': prev_post,'template': template,
+                                         {'menus': menus, 'categories': categories, 'post': post,'latest_post_cat':latest_post_cat, 'latest_post_list': latest_post_list,
+                                         'next_post_cat':next_post_cat, 'next_post': next_post, 'prev_post': prev_post,'template': template,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
               else:
@@ -446,8 +481,8 @@ def single(request, shorturl):
               elif blog.template:
                 template = blog.template
                 return render_to_response('blogs/template_single.html',
-                                         {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
-                                         'next_post': next_post, 'prev_post': prev_post,'template': template,
+                                         {'menus': menus, 'categories': categories, 'post': post, 'latest_post_cat':latest_post_cat,'latest_post_list': latest_post_list,
+                                         'next_post_cat':next_post_cat, 'next_post': next_post, 'prev_post': prev_post,'template': template,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
               else:
@@ -486,8 +521,8 @@ def single(request, shorturl):
         elif blog.template:
           template = blog.template
           return render_to_response('blogs/template_single.html',
-                                   {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
-                                   'next_post': next_post, 'prev_post': prev_post,'template': template,
+                                   {'menus': menus, 'categories': categories, 'post': post, 'latest_post_cat':latest_post_cat,'latest_post_list': latest_post_list,
+                                   'next_post_cat':next_post_cat, 'next_post': next_post, 'prev_post': prev_post,'template': template,
                                    'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                    context_instance=RequestContext(request))
         else:
@@ -514,11 +549,11 @@ def single(request, shorturl):
                                       context_instance=RequestContext(request))
           else:
             if Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]:
-              next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
+              next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
               if (next_post_query.count() > 0):
                 next_post = next_post_query[0]
             if Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).order_by('pub_date').exclude(pk=post.id)[:1]:
-              prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(is_top=True).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
+              prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
               if (prev_post_query.count() > 0):
                 prev_post = prev_post_query[0]
 
@@ -534,8 +569,8 @@ def single(request, shorturl):
               elif blog.template:
                 template = blog.template
                 return render_to_response('blogs/template_single.html',
-                                         {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
-                                         'next_post': next_post, 'prev_post': prev_post,'template': template,
+                                         {'menus': menus, 'categories': categories, 'post': post,'latest_post_cat':latest_post_cat, 'latest_post_list': latest_post_list,
+                                         'next_post_cat':next_post_cat, 'next_post': next_post, 'prev_post': prev_post,'template': template,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
               else:
@@ -555,8 +590,8 @@ def single(request, shorturl):
               elif blog.template:
                 template = blog.template
                 return render_to_response('blogs/template_single.html',
-                                         {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
-                                         'next_post': next_post, 'prev_post': prev_post,'template': template,
+                                         {'menus': menus, 'categories': categories, 'post': post,'latest_post_cat':latest_post_cat, 'latest_post_list': latest_post_list,
+                                         'next_post': next_post, 'next_post_cat':next_post_cat, 'prev_post': prev_post,'template': template,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
               else:
@@ -596,8 +631,8 @@ def single(request, shorturl):
         elif blog.template:
           template = blog.template
           return render_to_response('blogs/template_single.html',
-                                   {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
-                                   'next_post': next_post, 'prev_post': prev_post,'template': template,
+                                   {'menus': menus, 'categories': categories, 'post': post, 'latest_post_cat':latest_post_cat,'latest_post_list': latest_post_list,
+                                   'next_post': next_post, 'next_post_cat':next_post_cat, 'prev_post': prev_post,'template': template,
                                    'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                    context_instance=RequestContext(request))
         else:
@@ -696,15 +731,23 @@ def newpost(request, slug):
           post = form.save(commit=False)
           post.author = request.user
           post.blog = blog
-          if post.youtube_url:
-            query = urlparse(post.youtube_url)
-            p = parse_qs(query.query)
-            post.youtube_id = p['v'][0]
+          if post.video_url:
+            v_url = post.video_url
+            video_type = v_url.split('.')
+            if video_type[1] == "youtube" :
+              query = urlparse(post.video_url)
+              p = parse_qs(query.query)
+              post.youtube_id = p['v'][0]
+            elif video_type[0] == "http://vimeo" :
+              v_id = urlparse(v_url)
+              v_id_2 = v_id.path
+              v_id_final = v_id_2.replace('/', '') 
+              post.vimeo_id = v_id_final
           post.save()
           form.save_m2m()
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
         else:
-          messages.add_message(request, messages.INFO, _(u"Error! Please post a valide youtube url.")) 
+          messages.add_message(request, messages.INFO, _(u"Error!")) 
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
       return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
 
@@ -1077,10 +1120,20 @@ def editpost(request, id):
         form = PostForm(request.POST or None,request.FILES or None, instance=post)
         if form.is_valid():
             form.save()
-            if post.youtube_url:
-              query = urlparse(post.youtube_url)
-              p = parse_qs(query.query)
-              post.youtube_id = p['v'][0]
+
+
+            if post.video_url:
+              v_url = post.video_url
+              video_type = v_url.split('.')
+              if video_type[1] == "youtube" :
+                query = urlparse(post.video_url)
+                p = parse_qs(query.query)
+                post.youtube_id = p['v'][0]
+              elif video_type[0] == "http://vimeo" :
+                v_id = urlparse(v_url)
+                v_id_2 = v_id.path
+                v_id_final = v_id_2.replace('/', '')
+                post.vimeo_id = v_id_final
               post.save()  
             if 'save_quit' in request.POST:
               return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))

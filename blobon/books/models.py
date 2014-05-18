@@ -36,20 +36,20 @@ class Client(models.Model):
 class Invoice(models.Model):
     author = models.ForeignKey(User)
     client = models.ForeignKey(Client)
-    date_of_issue = models.DateTimeField(auto_now_add = True)
+    date_of_issue = models.DateTimeField(default=datetime.now, blank=True)
     invoice_number = models.PositiveIntegerField(blank=True)
     terms = models.CharField(max_length=1000)
     sub_notes = models.CharField(max_length=1000, blank=True)
-    sub_description = models.TextField(verbose_name=_("Contenu"),max_length=10000, blank=True)
+    sub_description = models.TextField(max_length=10000, blank=True)
     paid_notes = models.CharField(max_length=1000, blank=True)
     notes = models.CharField(max_length=1000)    
     created = models.DateTimeField(auto_now_add = True)
     last_modified = models.DateTimeField(auto_now = True,  null=True, blank=True)
     status = models.CharField(max_length=2, choices=STATUS, default="Dr", null=True)
+    with_items = models.BooleanField(default=True) 
+    with_taxes = models.BooleanField(default=True)
     def __unicode__(self):
         return unicode(self.invoice_number)
-
- 
 
 class Project(models.Model):
     name = models.CharField(max_length=50)
@@ -96,12 +96,13 @@ class Expense(models.Model):
     date = models.DateField(auto_now_add = False)
     receipt = models.FileField(verbose_name=_("receipt"), upload_to=get_file_path_receipt, null=True, blank=True)
     notes = models.CharField(max_length=1000, null=True, blank=True)
+    taxes = models.ManyToManyField(Tax, null=True, blank=True)
     def __unicode__(self):
-        return unicode(self.id)
+        return u'%s - %s - %s' % (self.date, self.category, self.amount)
 
 class Time(models.Model):
     task = models.ForeignKey(Task, null=True, blank=True)
-    notes = models.CharField(max_length=1000)
+    notes = models.CharField(max_length=1000, blank=True, default=None)
     rate_per_hour = models.DecimalField(max_digits=5, decimal_places=2)
     time = models.DecimalField(max_digits=5, decimal_places=2,blank=True)
     invoice = models.ForeignKey(Invoice, null=True, blank=True)
@@ -117,3 +118,18 @@ class Item(models.Model):
     description = models.CharField(max_length=1000, blank=True)
     def __unicode__(self):
         return u'%s - %s' % (self.name, self.client)
+
+class Report(models.Model):
+    date = models.DateTimeField(auto_now_add = True)
+    start_date = models.DateTimeField(auto_now_add = False)
+    end_date = models.DateTimeField(auto_now_add = False)
+    author = models.ForeignKey(User)
+    client = models.ForeignKey(Client, null=True, blank=True, default=None)
+    vendor = models.ForeignKey(Vendor, null=True, blank=True, default=None)
+    category = models.ForeignKey(Category, null=True, blank=True, default=None)
+    invoice = models.BooleanField(default=False)
+    expense = models.BooleanField(default=False)
+    taxes = models.BooleanField(default=False)
+    timesheet = models.BooleanField(default=False)
+    def __unicode__(self):
+        return u'%s - %s - %s' % (self.author, self.date, self.id)
