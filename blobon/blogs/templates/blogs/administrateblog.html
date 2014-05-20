@@ -262,7 +262,7 @@ border-radius: 4px;
                 <li class="active" id="litext"><a href="#text" id="texttab" title="{% trans "Write a new post quickly" %}" data-toggle="tab"><span class="glyphicon glyphicon-font"></span> {% trans "Quick post" %}</a></li>
                 <li id="liblog_post"><a href="#blog_post" id="blog_posttab" title="{% trans "Write a blog post" %}" data-toggle="tab"><span class="glyphicon glyphicon-book"></span> {% trans "Blog post" %}</a></li>
                 <li id="liimage"><a href="#image" id="imagetab" title="{% trans "Submit one or more images" %}" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span> {% trans "Image" %}</a></li>
-                <li id="livideo"><a href="#video" id="videotab" title="{% trans "Submit a Youtube or Vimeo Video" %}" data-toggle="tab"><span class="glyphicon glyphicon-film"></span> {% trans "Video" %}</a></li>
+                <li id="livideo"><a href="#video" id="videotab" title="{% trans "Submit a Youtube video,a Vimeo Video or a Soundcloud playlist" %}" data-toggle="tab"><span class="glyphicon glyphicon-film"></span> {% trans "Video and Music" %}</a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="text">
@@ -1918,15 +1918,28 @@ border-radius: 4px;
                       </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="video">
+
+
+              <div class="tab-pane fade" id="video">
+               
+               
+                 <div class="row" id="intro" style="padding:15px;">
+                  <div class="btn-group btn-group-justified">
+                    <a class="btn btn-default" id="video_link" title="{% trans "Create a post with a youtube or vimeo video" %}" role="button">{% trans "Video" %}</a>
+                    <a class="btn btn-default" id="music_link" title="{% trans "Create a post with a soundcloud playlist" %}" role="button">{% trans "Music" %}</a>
+                  </div>
+                 </div>
+                 
+                 
+                 
+                 
                   <div class="row">
                     <div class="col-xs-6 col-xs-offset-3" id="videoform">
                       <form enctype="multipart/form-data" id="newvideo" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
-                        <div class="row">
+                       <div class="row" id="type_video" style="display:none;">
                           <div class="col-xs-3 addtitle" id="addtitle_video">
                             <a id="addtitletovideo" title="{% trans "Add a Title to Your Video" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Title" %}</a>
-                          </div>
-                        </div>
+                          </div> 
                         <div class="row" id="addedtitle_video" style="display: none">
                           {{ post_form.title.label_tag }}<span id="addtitle_video_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                           {{ post_form.title }}
@@ -1943,36 +1956,63 @@ border-radius: 4px;
                           {{ post_form.content_video }}
                           <span id="addcomment_video_cancel" title="Cancel Comment" class="glyphicon glyphicon-remove-circle pull-right"></span>
                         </div>
-                        {% if categories %}
-                         <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>  
-                        {% endif %}
+                       </div>                       
+                       <div class="row" style="display: none">{{ post_form.layout_type }} </div>
+                       <div class="row" style="display: none">{{ post_form.status }} </div>
+                       <div class="row" style="display: none">{{ post_form.is_ready }} </div>
+                       <div class="row" id="type_playlist" style="padding:10px;display:none;">
+                         <div class="col-md-12 text_field soundcloud_url" id="soundcloud_url">
+                           <b>{% trans "URL" %}</b> {{ post_form.soundcloud_url }}
+                         </div>
+                              {% if blog.has_artists %}
+                         <div class="col-md-12 text_field">
+                               {{ post_form.artist.label_tag }}{{ post_form.artist }}
+                         </div>
+                               {% endif %}
+                         <div class="col-md-12 text_field">
+                               {{ post_form.title.label_tag }}{{ post_form.title }}
+                         </div>
+                         <div class="col-md-12 text_field">
+                           <label for="id_content">{% trans "Text" %}</label>{{ post_form.content }}
+                         </div>
+                         <div class="col-md-12 text_field">
+                                 {{ post_form.source.label_tag }}{{ post_form.source }}
+                         </div>
+                        </div>
+                        <div class="row" id="cats_tags" style="display:none;">
+                                {% if categories %}
+                            <div class="col-md-12 text_field">
+                              <div class="form-group" id="cate_image">
+                                     {{ post_form.category.label_tag }} {{ post_form.category }}
+                              </div>
+                            </div>
+                                {% endif %}
                         {% if tags %}
-                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
+                            <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
                         {% endif %}
-                        <div class="row" style="display: none">{{ post_form.layout_type }} </div>
-                        <div class="row" style="display: none">{{ post_form.status }} </div>
-                        <div class="row" style="display: none">{{ post_form.is_ready }} </div>
-
-
-                       <div class="btn-group pull-right">
-                         <button type="button" class="btn btn-xs btn-primary submitvideo" disabled="disabled">{% trans "Submit post" %}</button>
-                         <button id="save_draft_video" title="{% trans "More options" %}" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" disabled="disabled">
-                         <span class="caret"></span>
-                         <span class="sr-only">Toggle Dropdown</span>
-                         </button>
-                         <ul class="dropdown-menu" role="menu">
-                           <li><a class="submitvideo" href="#">{% trans "Post now" %}</a></li>
-                           <li class="divider"></li>
-                           <li><a id="add_queue_video" href="#">{% trans "Add to the queue" %}</a></li>
-                           {% if blog.translation %}<li><a id="add_translate_video" href="#">{% trans "To be translated" %}</a></li>{% endif %}
-                         </ul>
-                       </div>
-
-
+                        </div>
+                        <div class="row" id="media_submit" style="display:none;">
+                          <div class="btn-group pull-right" style="padding-right:10px;">
+                            <button type="button" class="btn btn-xs btn-primary submitvideo" disabled="disabled">{% trans "Submit post" %}</button>
+                            <button id="save_draft_video" title="{% trans "More options" %}" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" disabled="disabled">
+                              <span class="caret"></span>
+                              <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                              <li><a class="submitvideo" href="#">{% trans "Post now" %}</a></li>
+                              <li class="divider"></li>
+                              <li><a id="add_queue_video" href="#">{% trans "Add to the queue" %}</a></li>
+                              {% if blog.translation %}
+                              <li><a id="add_translate_video" href="#">{% trans "To be translated" %}</a></li>{% endif %}
+                            </ul>
+                          </div>
+                        </div>
+                        
                       </form>
-                    </div>
-                  </div> 
+                  </div>
                 </div>
+              </div>
+
               </div>
             </div>
           </div>
@@ -3473,6 +3513,31 @@ border-radius: 4px;
     </script>
 
 
+
+
+
+    <script>
+      $('#video_link').click(function() {
+        $('#type_video').show();
+        $('#cats_tags').show();
+        $('#media_submit').show();
+        $('#intro').hide();
+      });
+    </script>
+
+    <script>
+      $('#music_link').click(function() {
+        $('#type_playlist').show();
+        $('#media_submit').show();
+        $('#cats_tags').show();
+        $('#intro').hide();
+      });
+    </script>
+
+
+
+
+
     <script>
       $('#addcomment_al2_cancel').click(function() {
         $('#addcomment_al_2').show();
@@ -3534,6 +3599,21 @@ border-radius: 4px;
     <script>
       $(document).ready(function(){
         $('#id_video_url').keyup(function() {
+        if($(this).val() != '') {
+          $(".submitvideo").prop("disabled", false);
+          $('#save_draft_video').prop("disabled", false);
+          }
+        else {
+          $(".submitvideo").prop("disabled", true);
+          $('#save_draft_video').prop("disabled", true);
+        }
+        });
+      });
+    </script>
+
+    <script>
+      $(document).ready(function(){
+        $('#id_soundcloud_url').keyup(function() {
         if($(this).val() != '') {
           $(".submitvideo").prop("disabled", false);
           $('#save_draft_video').prop("disabled", false);
@@ -3667,6 +3747,8 @@ border-radius: 4px;
         $('#save_draft_al3').tooltip({container: 'body'});
         $('#save_draft_image').tooltip({container: 'body'});
         $('#save_draft_video').tooltip({container: 'body'});
+        $('#video_link').tooltip({container: 'body'});
+        $('#music_link').tooltip({container: 'body'});
       });
     </script>
   {% endblock %}

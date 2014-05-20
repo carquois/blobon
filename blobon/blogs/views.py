@@ -28,6 +28,8 @@ from django.forms.models import modelformset_factory
 from django.core.mail import send_mail
 from django.views.decorators.cache import never_cache
 
+import soundcloud
+
 
 @never_cache
 def index(request):
@@ -743,6 +745,17 @@ def newpost(request, slug):
               v_id_2 = v_id.path
               v_id_final = v_id_2.replace('/', '') 
               post.vimeo_id = v_id_final
+          if post.soundcloud_url:
+            s_url = post.soundcloud_url
+            sound_type = s_url.split('/')
+            client = soundcloud.Client(client_id='3612a61add5bb1dd62999cd375354762')
+            if sound_type[4] == "sets":
+              prefix = "playlists"
+            else:
+              prefix = "tracks"
+            track_url = s_url
+            track = client.get('/resolve', url=track_url)
+            post.soundcloud_id = "%s/%s" % (prefix, track.id)  
           post.save()
           form.save_m2m()
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
