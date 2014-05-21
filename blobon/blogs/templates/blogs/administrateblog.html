@@ -1937,9 +1937,18 @@ border-radius: 4px;
                     <div class="col-xs-6 col-xs-offset-3" id="videoform">
                       <form enctype="multipart/form-data" id="newvideo" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
                        <div class="row" id="type_video" style="display:none;">
+
+
+                      <div class="row" style="padding:10px;">
+                      <div class="pull-right">
+                        <span id="cancel_type_video" style="cursor:pointer;" title="{% trans "Cancel video" %}" class="pull-right glyphicon glyphicon-remove-circle"></span>
+                      </div>
+                      </div>
+                        <div class="row">
                           <div class="col-xs-3 addtitle" id="addtitle_video">
                             <a id="addtitletovideo" title="{% trans "Add a Title to Your Video" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Title" %}</a>
                           </div> 
+                        </div>
                         <div class="row" id="addedtitle_video" style="display: none">
                           {{ post_form.title.label_tag }}<span id="addtitle_video_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
                           {{ post_form.title }}
@@ -1961,6 +1970,13 @@ border-radius: 4px;
                        <div class="row" style="display: none">{{ post_form.status }} </div>
                        <div class="row" style="display: none">{{ post_form.is_ready }} </div>
                        <div class="row" id="type_playlist" style="padding:10px;display:none;">
+
+                      <div class="row" style="padding:10px;">
+                      <div class="pull-right">
+                        <span id="cancel_type_playlist" style="cursor:pointer;" title="{% trans "Cancel Music" %}" class="pull-right glyphicon glyphicon-remove-circle"></span>
+                      </div>
+                      </div>
+
                          <div class="col-md-12 text_field soundcloud_url" id="soundcloud_url">
                            <b>{% trans "URL" %}</b> {{ post_form.soundcloud_url }}
                          </div>
@@ -2543,6 +2559,12 @@ border-radius: 4px;
         $('#save_draft_video').prop("disabled", true);
         $(".submitblog_post").prop("disabled", true);
         $('#save_draft_blog_post').prop("disabled", true);
+        $('#type_playlist').hide();
+        $('#type_video').hide();
+        $('#media_submit').hide();
+        $('#cats_tags').hide();
+        $('#intro').show();
+        $('#newvideo').trigger("reset");
       });
     </script>
 
@@ -2610,6 +2632,12 @@ border-radius: 4px;
         $('#addtitle_al_1').show();
         $('#addtitle_al_2').show();
         $('#addtitle_al_3').show();
+        $('#type_playlist').hide();
+        $('#type_video').hide();
+        $('#media_submit').hide();
+        $('#cats_tags').hide();
+        $('#intro').show();
+        $('#newvideo').trigger("reset");
         $(".submitvideo").prop("disabled", true);
         $('#save_draft_video').prop("disabled", true);
         $(".submittext").prop("disabled", true);
@@ -2656,6 +2684,12 @@ border-radius: 4px;
         $('#save_draft_blog_post').prop("disabled", true);
         $(".submitvideo").prop("disabled", true);
         $('#save_draft_video').prop("disabled", true);
+        $('#type_playlist').hide();
+        $('#type_video').hide();
+        $('#media_submit').hide();
+        $('#cats_tags').hide();
+        $('#intro').show();
+        $('#newvideo').trigger("reset");
       });
     </script>
     <script>
@@ -3522,6 +3556,7 @@ border-radius: 4px;
         $('#cats_tags').show();
         $('#media_submit').show();
         $('#intro').hide();
+        $('#id_video_url').focus();
       });
     </script>
 
@@ -3531,11 +3566,31 @@ border-radius: 4px;
         $('#media_submit').show();
         $('#cats_tags').show();
         $('#intro').hide();
+        $('#id_soundcloud_url').focus();
       });
     </script>
 
 
 
+    <script>
+      $('#cancel_type_video').click(function() {
+        $('#type_video').hide();
+        $('#media_submit').hide();
+        $('#cats_tags').hide();
+        $('#intro').show();
+        $('#newvideo').trigger("reset");
+      });
+    </script>
+
+    <script>
+      $('#cancel_type_playlist').click(function() {
+        $('#type_playlist').hide();
+        $('#media_submit').hide();
+        $('#cats_tags').hide();
+        $('#intro').show();
+        $('#newvideo').trigger("reset");
+      });
+    </script>
 
 
     <script>
@@ -3749,6 +3804,8 @@ border-radius: 4px;
         $('#save_draft_video').tooltip({container: 'body'});
         $('#video_link').tooltip({container: 'body'});
         $('#music_link').tooltip({container: 'body'});
+        $('#cancel_type_playlist').tooltip({container: 'body'});
+        $('#cancel_type_video').tooltip({container: 'body'});
       });
     </script>
   {% endblock %}
