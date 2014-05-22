@@ -426,7 +426,7 @@ def single(request, shorturl):
 #      home = post.blog.custom_domain
 #    else:
 #      home = "http://blobon.com"
-      latest_post_list = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:6]
+      latest_post_list = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:6]
       next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]
       prev_post = ""
       next_post = ""
@@ -500,11 +500,11 @@ def single(request, shorturl):
                                     context_instance=RequestContext(request))
       else:
         if Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]:
-          next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
+          next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
           if (next_post_query.count() > 0):
             next_post = next_post_query[0]
         if Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).order_by('pub_date').exclude(pk=post.id)[:1]:
-          prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(is_top=True).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
+          prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
           if (prev_post_query.count() > 0):
             prev_post = prev_post_query[0]
 #      url = request.build_absolute_uri()
@@ -534,7 +534,7 @@ def single(request, shorturl):
                                     'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                     context_instance=RequestContext(request))                           
     elif subd == blog.slug:
-      latest_post_list = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:6]
+      latest_post_list = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:6]
       next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]
       prev_post = ""
       next_post = ""
@@ -610,11 +610,11 @@ def single(request, shorturl):
                                     context_instance=RequestContext(request))
       else:
         if Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]:
-          next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(is_top=True).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
+          next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
           if (next_post_query.count() > 0):
             next_post = next_post_query[0]
         if Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).order_by('pub_date').exclude(pk=post.id)[:1]:
-          prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(is_top=True).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
+          prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
           if (prev_post_query.count() > 0):
             prev_post = prev_post_query[0]
 #      url = request.build_absolute_uri()
