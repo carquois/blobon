@@ -419,6 +419,11 @@ def single(request, shorturl):
     slug = blog.slug
     comments = Comment.objects.filter(post=post).filter(comment_status='pu').order_by('-id')
     categories = Category.objects.filter(blog=blog)
+    next_post_cat = ""
+    for item in post.category.all():
+      next_post_cat_query = Post.objects.filter(blog=blog).filter(pub_date__lt=post.pub_date).filter(category__in=[item]).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
+      if (next_post_cat_query.count() > 0):
+        next_post_cat = next_post_cat_query[0] 
     if host == blog.custom_domain:
       latest_post_list = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:6]
       next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]
@@ -444,7 +449,6 @@ def single(request, shorturl):
               prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
               if (prev_post_query.count() > 0):
                 prev_post = prev_post_query[0]
-            next_post_cat = next_post
             if request.user.is_authenticated():
               comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
               if blog.is_bootblog == False and not blog.template:
@@ -503,7 +507,6 @@ def single(request, shorturl):
             prev_post = prev_post_query[0]
 #      url = request.build_absolute_uri()
 
-        next_post_cat = next_post
         if request.user.is_authenticated():
           comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
         else:
