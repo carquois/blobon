@@ -742,6 +742,13 @@ def newpost(request, slug):
               v_id_2 = v_id.path
               v_id_final = v_id_2.replace('/', '') 
               post.vimeo_id = v_id_final
+              import requests
+              import json
+              r = requests.get("http://vimeo.com/api/v2/video/" + v_id_final + ".json")
+              r.text
+              data = json.loads(r.text)
+              img_url = data[0]['thumbnail_large']
+              post.vimeo_thumb_url = img_url
           if post.soundcloud_url:
             s_url = post.soundcloud_url
             sound_type = s_url.split('/')

@@ -518,6 +518,7 @@ class Post(models.Model):
     publish_on_facebook = models.BooleanField(default=False)
     youtube_id = models.CharField(max_length=50, null=True, blank=True)
     vimeo_id = models.CharField(max_length=50, null=True, blank=True)
+    vimeo_thumb_url = models.URLField(verbose_name=_("Vimeo thumb URL"), max_length=300, blank=True)
     soundcloud_id = models.CharField(max_length=500, null=True, blank=True) 
     video = models.FileField(verbose_name=_("Video"), upload_to=get_file_path, null=True, blank=True)
     video_ogg = models.FileField(verbose_name=_("Video"), upload_to=get_file_path, null=True, blank=True)

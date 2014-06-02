@@ -17,7 +17,16 @@
                   {% thumbnail post.pic "400x300" crop="center" as im %}
     <meta property="og:image" content="{{ im.url }}" />
                   {% endthumbnail %}
-                  {% endif %} 
+{% else %}
+{% if post.youtube_id%}
+    <meta property="og:image" content="http://img.youtube.com/vi/{{post.youtube_id}}/0.jpg" />
+{% else %}
+{% if post.vimeo_id %}
+    <meta property="og:image" content="{{ post.vimeo_thumb_url }}" />
+
+{% endif %}
+{% endif %}
+{% endif %} 
    <!-- Le twitter cards -->
     <meta name="twitter:card" content="photo">
     <meta name="twitter:url" content="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}">
@@ -648,7 +657,7 @@ top:25%;
 
 
 
-
+<div id="thumb_wrapper"></div>
 
 
 {% if post.content %}{% load markup %}{{ post.content|safe|linebreaksbr|urlize }}{% endif %}
@@ -863,8 +872,6 @@ $('#new_comment').validate({
         $(".btn").tooltip({container: 'body', placement: 'top'});
       });
     </script>
-
-
 
 
        </div>
