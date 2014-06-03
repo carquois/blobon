@@ -239,6 +239,156 @@ def category_main(request, slug):
                                   {'menus': menus,'form': form, 'blog': blog, 'category': category,'categories':categories, 'sub_cats': sub_cats,},
                                   context_instance=RequestContext(request))
 
+
+@never_cache
+def author(request, username):
+      author = get_object_or_404(User, username=username)
+      request.subdomain = None
+      host = request.META.get('HTTP_HOST', '')
+      host_clean = host.replace('www.', '')
+      host_s = host.replace('www.', '').split('.')
+      host_one = host.split('.')
+      if host_one[0] == "www":
+        return HttpResponseRedirect("http://%s" % host_clean)
+      if len(host_s) > 2:
+          request.subdomain = host_s[0]
+      if Blog.objects.filter(custom_domain=host).exists():
+        blog = Blog.objects.get(custom_domain=host)
+        last_sticky = Post.objects.filter(blog=blog).filter(status="P").filter(author=author).filter(is_discarded=False).filter(is_ready=True).filter(is_sticky=True).order_by('-pub_date')[:1]
+        menus = Menu.objects.filter(blog=blog)
+        if blog.is_online == False:
+          return render_to_response('blogs/closed.html',context_instance=RequestContext(request))
+        if blog.is_open == False:
+          if 'is_legit' in request.session:
+            b = request.session['blog']
+            if b != blog:
+              form = PasswordForm()
+              return render_to_response('blogs/password.html',
+                                        {'form': form,'blog': blog,},
+                                        context_instance=RequestContext(request))
+            else:
+              posts = paginate(request,
+                               Post.objects.filter(blog=blog).filter(status='P').filter(author=author).order_by('-pub_date'),
+                               6)
+              form = SubscriptionForm()
+              categories = Category.objects.filter(blog=blog)
+              if blog.is_bootblog == True:
+                return render_to_response('blogs/blog.html',
+                                          {'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories, 'author' : author,},
+                                          context_instance=RequestContext(request))
+              elif blog.template:
+                template = blog.template
+                return render_to_response('blogs/template_blog.html',
+                                          {'last_sticky': last_sticky,'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template, 'author' : author,},
+                                          context_instance=RequestContext(request))
+              else:
+                return render_to_response('blogs/index.html',
+                                          {'posts': posts, 'blog': blog, 'form': form,'categories': categories, 'author' : author,},
+                                          context_instance=RequestContext(request))
+          else:
+            form = PasswordForm()
+            return render_to_response('blogs/password.html',
+                                      {'form': form,'blog': blog,},
+                                      context_instance=RequestContext(request))
+        else:
+          posts = paginate(request,
+                           Post.objects.filter(blog=blog).filter(status='P').filter(author=author).order_by('-pub_date'),
+                           6)
+          form = SubscriptionForm()
+          categories = Category.objects.filter(blog=blog)
+          if blog.is_bootblog == True:
+            return render_to_response('blogs/blog.html',
+                                      {'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,'author' : author,},
+                                      context_instance=RequestContext(request))
+          elif blog.template:
+            template = blog.template
+            return render_to_response('blogs/template_blog.html',
+                                      {'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template, 'author' : author,},
+                                      context_instance=RequestContext(request))
+          else:
+            return render_to_response('blogs/index.html',
+                                      {'posts': posts, 'blog': blog, 'form': form,'categories': categories, 'author' : author,},
+                                      context_instance=RequestContext(request))
+
+      elif Blog.objects.filter(slug=request.subdomain).exists():
+        blog = Blog.objects.get(slug=request.subdomain)
+        last_sticky = Post.objects.filter(blog=blog).filter(status="P").filter(author=author).filter(is_discarded=False).filter(is_ready=True).filter(is_sticky=True).order_by('-pub_date')[:1]
+        menus = Menu.objects.filter(blog=blog)
+
+        if blog.is_online == False:
+         return render_to_response('blogs/closed.html',context_instance=RequestContext(request))
+        if blog.is_open == False:
+          if 'is_legit' in request.session:
+            b = request.session['blog']
+            if b != blog:
+              form = PasswordForm()
+              return render_to_response('blogs/password.html',
+                                        {'form': form,'blog': blog,},
+                                        context_instance=RequestContext(request))
+            else:
+              if blog.custom_domain:
+                return HttpResponseRedirect("http://%s/%s/" % (blog.custom_domain,author))
+              posts = paginate(request,
+                             Post.objects.filter(blog=blog).filter(status='P').filter(author=author).order_by('-pub_date'),
+                             6)
+              form = SubscriptionForm()
+              categories = Category.objects.filter(blog=blog)
+              if blog.is_bootblog == True:
+                return render_to_response('blogs/blog.html',
+                                          {'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories, 'author' : author,},
+                                          context_instance=RequestContext(request))
+              elif blog.template:
+                template = blog.template
+                return render_to_response('blogs/template_blog.html',
+                                          {'last_sticky':last_sticky, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template, 'author' : author,},
+                                          context_instance=RequestContext(request))
+              else:
+                return render_to_response('blogs/index.html',
+                                          {'posts': posts, 'blog': blog, 'form': form, 'categories': categories, 'author' : author,},
+                                          context_instance=RequestContext(request))
+          else:
+            form = PasswordForm()
+            return render_to_response('blogs/password.html',
+                                      {'form': form,'blog': blog,},
+                                      context_instance=RequestContext(request))
+        else:
+          if blog.custom_domain:
+            return HttpResponseRedirect("http://%s/%s/" % (blog.custom_domain,author))
+          posts = paginate(request,
+                         Post.objects.filter(blog=blog).filter(status='P').filter(author=author).order_by('-pub_date'),
+                         6)
+          form = SubscriptionForm()
+          categories = Category.objects.filter(blog=blog)
+          if blog.is_bootblog == True:
+            return render_to_response('blogs/blog.html',
+                                      {'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories, 'author' : author,},
+                                      context_instance=RequestContext(request))
+          elif blog.template:
+            template = blog.template
+            return render_to_response('blogs/template_blog.html',
+                                      {'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template, 'author' : author,},
+                                      context_instance=RequestContext(request))
+          else:
+            return render_to_response('blogs/index.html',
+                                      {'posts': posts, 'blog': blog, 'form': form,'categories': categories, 'author' : author,},
+                                      context_instance=RequestContext(request))
+
+
+      else:
+        return render_to_response('404.html',
+                                 {},
+                                  context_instance=RequestContext(request))
+
+
+
+
+
+
+
+
+
+
+
 def year_archive(request, year):
       request.subdomain = None
       host = request.META.get('HTTP_HOST', '')
