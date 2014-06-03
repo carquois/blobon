@@ -58,8 +58,16 @@ color: {% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %
 text-decoration: none;
 }
 
+.blog-nav{
 
+}
 h2 {
+color: {% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};
+text-decoration: none;
+}
+
+
+h3 {
 color: {% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};
 text-decoration: none;
 }
@@ -257,6 +265,41 @@ padding-top:0px !important;
     {% endblock %}
 
     {% block blog_header %}
+    {% if author %}
+      <div class="container" style="text-align:left;margin-top:20px;">
+        <div class="col-xs-12 col-sm-8">
+          <div class="media">
+    {% if author.userprofile.avatar %}
+            <a class="pull-left" href="#">
+           {% thumbnail author.userprofile.avatar "100x100" crop="center" as im %}
+           <img class="media-object" src="{{ im.url }}" alt="{{ author.first_name }} {{ author.last_name }}" />
+           {% endthumbnail %}
+            </a>
+    {% endif %}
+            <div class="media-body">
+              <h4 class="media-heading">{% if author.first_name or author.last_name %}{{ author.first_name }} {{ author.last_name }}{% else %}{{ author.username }}{% endif %}</h4>
+                {% if author.userprofile.description %}
+                <b>{% trans "Bio : " %}</b>{{ author.userprofile.description }}<br />
+                {% endif %}
+                {% if author.userprofile.facebook_link or author.userprofile.twitter_link %}
+                <b>{% trans "Social : " %}</b>{% if author.userprofile.facebook_link %}<a href="{{ author.userprofile.facebook_link }}" target="_blank">{% trans "Facebook" %}&nbsp;&nbsp;&nbsp;&nbsp;</a>{% endif %}{% if author.userprofile.twitter_link %}<a href="{{ author.userprofile.twitter_link }}"target="_blank">{% trans "Twitter" %}&nbsp;&nbsp;&nbsp;&nbsp;</a>{% endif %}<br />
+                {% endif %} 
+                {% if author.userprofile.domain %}
+                <b>{% trans "Website : " %}</b><a href="{{ author.userprofile.domain }}" target="_blank">{{ author.userprofile.domain|cut:"http://"|slice:":-1" }}<br />
+                {% endif %}
+            </div>
+          </div>
+
+
+
+
+        </div>
+        <div class="col-xs-12 col-sm-3 col-sm-offset-1">
+          <h3>{{ blog.title }}</h3><p class="lead blog-description">{{ blog.short_description }}</p>
+        </div>
+      </div>
+      <div class="container"><hr></div>
+    {% else %}
     <div class="topimg" style="text-align:center;">
     {% block top_image %}
     {% if blog.header_image %}
@@ -266,14 +309,11 @@ padding-top:0px !important;
       <div class="container" style="text-align:left;">
         <div class="blog-header">
           <h1 class="blog-title">{{ blog.title }}</h1><p class="lead blog-description">{{ blog.short_description }}</p>
-
-
-
-
         </div>
       </div>
       <div class="container"><hr></div>
     </div>
+    {% endif %}
     {% endblock %}
 
 

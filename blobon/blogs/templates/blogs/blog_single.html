@@ -699,8 +699,10 @@ top:25%;
          <div class="media" id="heading">
            <div class="pull-left">
            {% if post.author.userprofile.avatar %}
+            <a href="http://{% if blog.custom_domain %}{{ blog.custom_domain }}/a/{{ post.author.username }}{% else %}{{ blog.slug }}.blobon.com/a/{{ post.author.username }}{% endif %}">
            {% thumbnail post.author.userprofile.avatar "64x64" crop="center" as im %}
            <img src="{{ im.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }}" />{% endthumbnail %}
+            </a>
            {% endif %}
            </div>
            <div class="btn-group pull-right">
@@ -713,11 +715,10 @@ top:25%;
              </a>
            </div>
            <div class="media-body fontBlobon">
-             <h5 class="media-heading fontBlobon" style="margin-right: 10px;">{{ post.author.first_name }} {{ post.author.last_name }} <small>@{{ post.author.username }}</small>
-             {% if post.author.userprofile.fan_page_access_token %}
-               <div class="fb-like" data-href="{{ post.author.userprofile.facebook_link }}" data-width="120" data-layout="button_count" data-show-faces="false" data-send="false">
-               </div>
-             {% endif %}
+             <h5 class="media-heading fontBlobon" style="margin-right: 10px;">
+               <a href="http://{% if blog.custom_domain %}{{ blog.custom_domain }}/a/{{ post.author.username }}{% else %}{{ blog.slug }}.blobon.com/a/{{ post.author.username }}{% endif %}">
+               {{ post.author.first_name }} {{ post.author.last_name }} <small>@{{ post.author.username }}</small>
+               </a>
              </h5>
              <p class="text-muted">{% trans "Published" %} {{ post.pub_date|naturaltime }}{% if post.source %} via <a href="{{ post.source }}" target="_blank">Source</a>{% endif %}</p>
            </div>
