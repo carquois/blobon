@@ -30,28 +30,32 @@ class Command(BaseCommand):
         post = p[0]
         publish_draft(post)
         publish_twitter_link(post)
+        if b.fb_page_access_token:
+          publish_facebook_link(post)
         if post.translated_title and post.blog.translation and post.translated_content and post.youtube_id: 
           post.save()
           new_post = Post(title=post.translated_title, content=post.translated_content, youtube_id=post.youtube_id, author=tb.creator, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
           publish_twitter_link(new_post)
+          publish_facebook_link(new_post)
         elif post.translated_title and post.blog.translation and post.youtube_id:
           post.save()
           new_post = Post(title=post.translated_title, youtube_id=post.youtube_id, author=tb.creator, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
           publish_twitter_link(new_post)
-
+          publish_facebook_link(new_post)
         elif post.translated_title and post.blog.translation and post.translated_content:
           post.save()
           new_post = Post(title=post.translated_title, content=post.translated_content, author=tb.creator, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
           publish_twitter_link(new_post)
+          publish_facebook_link(new_post)
         elif post.translated_title and post.blog.translation:
           post.save()
           new_post = Post(title=post.translated_title, author=tb.creator, blog=post.blog.translation, pic=post.pic, source=post.source, is_top=True)
           publish_draft(new_post)
           publish_twitter_link(new_post)
-
+          publish_facebook_link(new_post)
 def publish_draft(post):
         post.status = "P"
         post.is_top = True 
@@ -65,9 +69,15 @@ def publish_twitter_link(post):
         twitter.update_status(status="%s\n\nhttp://%s%s" % (post.title.encode('utf-8') , settings.MAIN_SITE_DOMAIN, post.get_absolute_url() ))
 
 def publish_facebook_link(post):
-      up = UserProfile.objects.get(user=post.author)
-      graph = facebook.GraphAPI(up.fan_page_access_token)
-      profile = graph.get_object("me")
-      graph.put_object("me", "feed", link="http://%s%s" % (settings.MAIN_SITE_DOMAIN, post.get_absolute_url() ))
+      if post.blog.fb_page_access_token: 
+        bl = post.blog 
+        graph = facebook.GraphAPI(bl.fb_page_access_token)
+        profile = graph.get_object("me")
+        if bl.custom_domain:
+          domain = bl.custom_domain
+        else:
+          main = "blobon.com"
+          domain = "%s.%s" % (bl.slug,main)
+        graph.put_object("me", "feed", link="http://%s%s" % (domain, post.get_absolute_url() ))
 
 
