@@ -28,6 +28,9 @@ from django.forms.models import modelformset_factory
 from django.core.mail import send_mail
 from django.views.decorators.cache import never_cache
 
+from operator import and_
+from django.db.models import Q
+
 import soundcloud
 
 
@@ -219,7 +222,7 @@ def category_main(request, slug):
       category = get_object_or_404(Category, slug=slug)
       blog = category.blog
       form = SubscriptionForm()
-      sub_cats = Category.objects.filter(blog=blog).filter(parent_category=category)
+      sub_cats = Category.objects.filter(blog=blog).filter(parent_category=category).order_by('id')
       menus = Menu.objects.filter(blog=blog)
       categories = Category.objects.filter(blog=blog)
       latests_posts = []
@@ -572,10 +575,6 @@ def single(request, shorturl):
       if (next_post_cat_query.count() > 0):
         next_post_cat = next_post_cat_query[0] 
     if host == blog.custom_domain:
-#    if post.blog.custom_domain:
-#      home = post.blog.custom_domain
-#    else:
-#      home = "http://blobon.com"
       latest_post_list = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:6]
       next_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__lt=post.pub_date).order_by('-pub_date').exclude(pk=post.id)[:1]
       prev_post = ""
@@ -600,7 +599,6 @@ def single(request, shorturl):
               prev_post_query = Post.objects.filter(blog=post.blog).filter(pub_date__gt=post.pub_date).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
               if (prev_post_query.count() > 0):
                 prev_post = prev_post_query[0]
-
             if request.user.is_authenticated():
               comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
               if blog.is_bootblog == False and not blog.template:
@@ -658,7 +656,6 @@ def single(request, shorturl):
           if (prev_post_query.count() > 0):
             prev_post = prev_post_query[0]
 #      url = request.build_absolute_uri()
-
 
         if request.user.is_authenticated():
           comment_form = CommentForm(initial={'email':request.user.email,'name':request.user.get_full_name,})
@@ -895,6 +892,13 @@ def newpost(request, slug):
               v_id_2 = v_id.path
               v_id_final = v_id_2.replace('/', '') 
               post.vimeo_id = v_id_final
+              import requests
+              import json
+              r = requests.get("http://vimeo.com/api/v2/video/" + v_id_final + ".json")
+              r.text
+              data = json.loads(r.text)
+              img_url = data[0]['thumbnail_large']
+              post.vimeo_thumb_url = img_url
           if post.soundcloud_url:
             s_url = post.soundcloud_url
             sound_type = s_url.split('/')
