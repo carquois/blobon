@@ -37,7 +37,42 @@ SUBSCRIBERS = (
     ('A', 'All'),
     ('N', 'New'),
 )
+FREQ = (
+    ('15m', '15m'),
+    ('30m', '30m'),
+    ('1h', '1h'),
+    ('3h', '3h'),
+    ('6h', '6h'),
+    ('12h', '12h'),
+    ('24h', '24h'),
+)
 
+HOURS = (
+    ('00:00', '00:00'),
+    ('01:00', '01:00'),
+    ('02:00', '02:00'),
+    ('03:00', '03:00'),
+    ('04:00', '04:00'),
+    ('05:00', '05:00'),
+    ('06:00', '06:00'),
+    ('07:00', '07:00'),
+    ('08:00', '08:00'),
+    ('09:00', '09:00'),
+    ('10:00', '10:00'),
+    ('11:00', '11:00'),
+    ('12:00', '12:00'),
+    ('13:00', '13:00'),
+    ('14:00', '14:00'),
+    ('15:00', '15:00'),
+    ('16:00', '16:00'),
+    ('17:00', '17:00'),
+    ('18:00', '18:00'),
+    ('19:00', '19:00'),
+    ('20:00', '20:00'),
+    ('21:00', '21:00'),
+    ('22:00', '22:00'),
+    ('23:00', '23:00'),
+)
 
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -375,6 +410,10 @@ class Blog(models.Model):
     is_open = models.BooleanField(default=True)
     slug = models.SlugField(verbose_name=_("URL"), max_length=30, unique=True)
     title = models.CharField(verbose_name=_("Title"), max_length=240)
+    analytics_account = models.CharField(max_length=50, blank=True)
+    exclusion_start = models.CharField(max_length=5, choices=HOURS,blank=True)
+    exclusion_end = models.CharField(max_length=5, choices=HOURS,blank=True)
+    frequency = models.CharField(max_length=5, choices=FREQ,blank=True)
     facebook_link = models.URLField(max_length=100, blank=True)
     twitter_link = models.URLField(max_length=100, blank=True)
     pinterest_link = models.URLField(max_length=100, blank=True)
@@ -382,7 +421,7 @@ class Blog(models.Model):
     twitter_oauth_token_secret = models.CharField(max_length=100, blank=True)
     fb_page_access_token = models.CharField(max_length=260, blank=True)
     header_image = ImageField(verbose_name=_("Main image"), upload_to=get_file_path_main, null=True, blank=True)
-    main_color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#ff7f00", blank=False)
+    main_color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#ff7f00", blank=True)
     language = models.CharField(max_length=7, choices=LANGUAGES,blank=True)
     password = models.CharField(verbose_name=_("Password"), max_length=140, blank=True)
     custom_domain = models.CharField(verbose_name=_("Custom domain"), max_length=300, blank=True)

@@ -161,7 +161,49 @@
                </div>
              </div>
 
-            
+
+
+             <div class="row">
+               <div class="col-sm-4 col-xs-12 form_section">
+                <b>{% trans "Facebook link: " %}</b>
+               {{ form.facebook_link }}
+               </div>
+               <div class="col-sm-4 col-xs-12 form_section">
+                <b>{% trans "Twitter link: " %}</b>
+               {{ form.twitter_link }}
+               </div>
+               <div class="col-sm-4 col-xs-12 form_section">
+                <b>{% trans "Pinterest link: " %}</b>
+               {{ form.pinterest_link }}
+               </div>
+             </div>
+
+
+             <div class="row">
+               <div class="col-sm-6 col-xs-6 form_section">
+                <b>{% trans "Google Analytics account number: " %}</b>
+               {{ form.analytics_account }}
+               </div>
+             </div>
+
+             <div class="row">
+               <div class="col-sm-4 col-xs-12 form_section">
+               <b>{% trans "Auto-publish frequency: " %}</b><a id="info_frequency" class="pull-right info" title="{% trans "Choose a frequency if you want your drafted posts to be publish automatically" %}"data-toggle="modal" data-target="#info_frequency_modal">{% trans "More info" %}</a>
+               {{ form.frequency }} 
+               </div>
+               <div class="col-sm-4 col-xs-12 form_section">
+               <b>{% trans "Exclusion start: " %}</b><a id="info_exclusion_start" class="pull-right info" title="{% trans "Choose an exclusion starting time if you want the auto-posting to stop during a certain part of the day" %}"data-toggle="modal" data-target="#info_exclusion_start_modal">{% trans "More info" %}</a>
+               {{ form.exclusion_start }} 
+               </div>
+               <div class="col-sm-4 col-xs-12 form_section">
+               <b>{% trans "Exclusion end: " %}</b><a id="info_exclusion_end" class="pull-right info" title="{% trans "Choose an exclusion ending time if you want the auto-posting to stop during a certain part of the day" %}"data-toggle="modal" data-target="#info_exclusion_end_modal">{% trans "More info" %}</a>
+               {{ form.exclusion_end }} 
+               </div>
+             </div>           
+
+
+
+ 
                <div class="checkbox" id="settings_draft_notice">
                 {% trans "Get notified when draft is empty" %}
                {{ form.draft_notice }}
@@ -268,6 +310,9 @@
   </div>
 
 
+
+
+
   <div class="modal fade" id="info_short_description_modal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -319,6 +364,57 @@
     </div>
   </div>
 
+  <div class="modal fade" id="info_frequency_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Frequency" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Choose a frequency if you want your drafted posts to be publish automatically" %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="info_exclusion_start_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Exclusion starting time" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Choose an exclusion starting time if you want the auto-posting to stop during a certain part of the day" %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="info_exclusion_end_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Exclusion ending time" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Choose an exclusion ending time if you want the auto-posting to stop during a certain part of the day" %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal fade" id="{{ blog.slug }}">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -338,6 +434,13 @@
     </div>
   </div>
 
+
+    <script>
+      $(document).ready(function() {
+          $('select').addClass("form-control");
+                   });
+         
+    </script>
     <script>
       $('#submitsettings').click(function() {
         $('#newsettings').submit();
@@ -402,6 +505,9 @@ $("#id_main_image").change(function(){
         $('#info_short_description').tooltip({container: 'body'});
         $('#info_main_image').tooltip({container: 'body'});
         $('#info_main_color').tooltip({container: 'body'});
+        $('#info_frequency').tooltip({container: 'body'});
+        $('#info_exclusion_end').tooltip({container: 'body'});
+        $('#info_exclusion_start').tooltip({container: 'body'});
       });
     </script>
 {% endblock %}

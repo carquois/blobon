@@ -9,6 +9,45 @@ from django.db import models
 from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page, Rss, Tag
 
 
+FREQ = (
+    ('15m', '15m'),
+    ('30m', '30m'),
+    ('1h', '1h'),
+    ('3h', '3h'),
+    ('6h', '6h'),
+    ('12h', '12h'),
+    ('24h', '24h'),
+)
+
+HOURS = (
+    ('00:00', '00:00'),
+    ('01:00', '01:00'),
+    ('02:00', '02:00'),
+    ('03:00', '03:00'),
+    ('04:00', '04:00'),
+    ('05:00', '05:00'),
+    ('06:00', '06:00'),
+    ('07:00', '07:00'),
+    ('08:00', '08:00'),
+    ('09:00', '09:00'),
+    ('10:00', '10:00'),
+    ('11:00', '11:00'),
+    ('12:00', '12:00'),
+    ('13:00', '13:00'),
+    ('14:00', '14:00'),
+    ('15:00', '15:00'),
+    ('16:00', '16:00'),
+    ('17:00', '17:00'),
+    ('18:00', '18:00'),
+    ('19:00', '19:00'),
+    ('20:00', '20:00'),
+    ('21:00', '21:00'),
+    ('22:00', '22:00'),
+    ('23:00', '23:00'),
+)
+
+
+
 class PageForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Enter your page title'),
                                                     'type': 'text',
@@ -111,9 +150,25 @@ class SettingsForm(ModelForm):
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level"}))
     main_image = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_30(this);"}))
+    
+    pinterest_link = URLField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Link to your Pinterest page here'),
+                                                    'type': 'text',
+                                                    'class': "form-control"}))
+
+    facebook_link = URLField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Link to your Facebook page here'),
+                                                    'type': 'text',
+                                                    'class': "form-control"}))
+
+    twitter_link = URLField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Link to your Twitter page here'),
+                                                    'type': 'text',
+                                                    'class': "form-control"}))    
+    analytics_account = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Your Google Analytics account number'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+
     class Meta:
         model = Blog 
-        fields = ('title', 'slug', 'main_color', 'main_image', 'password', 'custom_domain','description','is_online','is_open','short_description','draft_notice' )
+        fields = ('pinterest_link','facebook_link', 'twitter_link', 'analytics_account', 'exclusion_start', 'exclusion_end', 'frequency', 'title', 'slug', 'main_color', 'main_image', 'password', 'custom_domain','description','is_online','is_open','short_description','draft_notice' )
 
 class PasswordForm(ModelForm):
     password = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Enter the blog password'),
