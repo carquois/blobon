@@ -53,9 +53,36 @@
 
 
 <style>
+@media (max-width: 767px){
+.title_author{
+margin-top:30px;
+}
+.big_avatar{
+max-height:70px;
+max-width:70px;
+}
+}
+
+.small_desc{
+border-color:{% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};
+border-bottom:solid 1px;
+border-top:solid 1px;
+}
+.navbar-default {
+background-color: #fff;
+background-image:none;
+}
+body{
+padding-top:70px;
+}
 a {
 color: {% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};
 text-decoration: none;
+}
+
+.navbar-default {
+background-color: #f8f8f8;
+border-color:{% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};
 }
 
 .blog-nav{
@@ -229,33 +256,50 @@ padding-top:0px !important;
 </head>
   <body>
     {% block navbar %}
-    <div class="blog-masthead">
-      <div class="container">
-        <nav class="blog-nav">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li {% if category or page %}{% else %}{% if posts %}class="active"{% endif %}{% endif %}>
           <a class="blog-nav-item {% if category or page %}{% else %}{% if posts %}active{% endif %}{% endif %}" style="padding-left:25px;padding-right:25px;" href="http://{{blog.slug}}.blobon.com">{% trans "Home" %}</a>
-
+       </li>
 
 
     {% if menus %}
       {% for menu in menus %}
         {% if menu.is_main %}
           {% for menuitem in menu.menuitem_set.all|dictsort:"position" %}
+       <li {% if category and menuitem.category %}{% if category == menuitem.category %}class="active"{% else %}{% endif %}{% endif %}{% if page and menuitem.page %}{% if page == menuitem.page %}class="active"{% else %}{% endif %}{% endif %}>
           <a class="blog-nav-item {% if category and menuitem.category %}{% if category == menuitem.category %}active{% else %}{% endif %}{% endif %}{% if page and menuitem.page %}{% if page == menuitem.page %}active{% else %}{% endif %}{% endif %}" style="padding-left:10px;padding-right:10px;" href="{% if menuitem.external_link %}{{ menuitem.external_link}}{% else %}{% if menuitem.category %}http://{{ blog.slug }}.blobon.com/cat/{{ menuitem.category.slug }}{% else %}http://{{ blog.slug }}.blobon.com/page/{{ menuitem.page.slug }}{% endif %}{% endif %}" {% if menuitem.external_link %}target="_blank"{% endif %}>{% if menuitem.external_link %}{{ menuitem.title}}{% else %}{% if menuitem.category %}{{ menuitem.category.name }}{% else %}{{ menuitem.page.title }}{% endif %}{% endif %}</a>
+       </li>
           {% endfor %}
-        {% endif %} 
+        {% endif %}
       {% endfor %}
     {% endif %}
-
+      </ul>
+    {% if blog.facebook_link or blog.twitter_link %}
+      <ul class="nav navbar-nav navbar-right">
     {% if blog.facebook_link %}
-          <a class="blog-nav-item pull-right" href="{{ blog.facebook_link }}" target="_blank" style="height:40px;" ><img id="fblogo" style="padding-top:none !important;margin-top:-8px;" width="35" height="35" src="http://i.imgur.com/ghz9zWC.png" alt="FB"></a>
+         <li><a class="blog-nav-item pull-right" href="{{ blog.facebook_link }}" target="_blank" style="height:40px;" ><img id="fblogo" style="padding-top:none !important;margin-top:-8px;" width="35" height="35" src="http://i.imgur.com/ghz9zWC.png" alt="FB"></a></li>
     {% endif %}
     {% if blog.twitter_link %}
-          <a class="blog-nav-item pull-right" href="{{ blog.twitter_link }}" target="_blank" style="height:40px;"><img id="twlogo" style="padding-top:none !important;margin-top:-8px;" width="35" height="35" src="http://i.imgur.com/7Arr9wb.png" alt="Twitter"></a>
+          <li><a class="blog-nav-item pull-right" href="{{ blog.twitter_link }}" target="_blank" style="height:40px;"><img id="twlogo" style="padding-top:none !important;margin-top:-8px;" width="35" height="35" src="http://i.imgur.com/r7bzwHd.png" alt="Twitter"></a></li>
     {% endif %}
-          <a class="blog-nav-item pull-right" style="display:none;" href="http://blobon.com">Powered by blobon.com</a>
-        </nav>
-      </div>
+      </ul>
+    {% endif %}
     </div>
+  </div>
+</nav>
+
+
 
 
 
@@ -266,13 +310,14 @@ padding-top:0px !important;
 
     {% block blog_header %}
     {% if author %}
-      <div class="container" style="text-align:left;margin-top:20px;">
+      <div style="min-height:160px;">
+      <div class="container big_desc" style="text-align:left;margin-top:20px;">
         <div class="col-xs-12 col-sm-8">
           <div class="media">
     {% if author.userprofile.avatar %}
             <a class="pull-left" href="#">
-           {% thumbnail author.userprofile.avatar "100x100" crop="center" as im %}
-           <img class="media-object" src="{{ im.url }}" alt="{{ author.first_name }} {{ author.last_name }}" />
+           {% thumbnail author.userprofile.avatar "200x200" crop="center" as im %}
+           <img class="media-object big_avatar" src="{{ im.url }}" alt="{{ author.first_name }} {{ author.last_name }}" />
            {% endthumbnail %}
             </a>
     {% endif %}
@@ -294,11 +339,43 @@ padding-top:0px !important;
 
 
         </div>
-        <div class="col-xs-12 col-sm-3 col-sm-offset-1">
+        <div class="title_author col-xs-12 col-sm-3 col-sm-offset-1">
           <h3>{{ blog.title }}</h3><p class="lead blog-description">{{ blog.short_description }}</p>
         </div>
       </div>
-      <div class="container"><hr></div>
+      </div>
+      <div class="container pad_desc"><hr style="border-color:{% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};"></div>
+
+
+      <div class="container-fluid small_desc" style="background-color:#f8f8f8;z-index: 1030;text-align:left;display:none;position:fixed;padding-top:10px;padding:10px;top:50px;width:100%;">
+       <div class="col-sm-8 col-xs-12">
+          <div class="media" style="margin-top:0px;">
+    {% if author.userprofile.avatar %}
+            <a class="pull-left" href="#">
+           {% thumbnail author.userprofile.avatar "40x40" crop="center" as im %}
+           <img class="media-object" style="margin-top:-9px;" src="{{ im.url }}" alt="{{ author.first_name }} {{ author.last_name }}" />
+           {% endthumbnail %}
+            </a>
+    {% endif %}
+            <div class="media-body">
+              <h4 class="media-heading">{% if author.first_name or author.last_name %}{{ author.first_name }} {{ author.last_name }}{% else %}{{ author.username }}{% endif %}</h4>
+                {% if author.userprofile.description %}
+                <b>{% trans "Bio : " %}</b>{{ author.userprofile.description }}<br />
+                {% endif %}
+            </div>
+
+          </div>
+        </div>
+       <div class="col-sm-4 hidden-xs">     
+             <h3 class="" style="margin-right:20px;">{{ blog.title }} <small> {{ blog.short_description }}</small></h3>
+       </div>
+      </div>
+
+
+
+
+
+
     {% else %}
     <div class="topimg" style="text-align:center;">
     {% block top_image %}
@@ -718,5 +795,25 @@ padding-top:0px !important;
         </div>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
     <script src="{{ STATIC_URL }}lightbox/js/bootstrap-lightbox.js"></script>
+
+<script>
+$(window).on('scroll', function() {
+    var y_scroll_pos = window.pageYOffset;
+    var scroll_pos_test = 40;
+
+    if(y_scroll_pos > scroll_pos_test) {
+     $('.small_desc').fadeIn().css("display","block");
+     $('.pad_desc').fadeOut().css("display","none");
+     $('.big_desc').fadeOut().css("display","none");
+    }else{
+     $('.small_desc').fadeOut().css("display","none");
+     $('.big_desc').fadeIn().css("display","block");
+     $('.pad_desc').fadeIn().css("display","block");
+}
+});
+</script>
+
+
+
   </body>
 </html>
