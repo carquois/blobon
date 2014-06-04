@@ -31,6 +31,8 @@ from django.views.decorators.cache import never_cache
 from operator import and_
 from django.db.models import Q
 
+from datetime import datetime  
+
 import soundcloud
 
 
@@ -1348,6 +1350,7 @@ def translatepost(request, id):
             if 'save_ready_publish' in request.POST:
               post.is_ready = True
               post.status = 'P'
+              post.pub_date = datetime.now()
               post.save()
               messages.add_message(request, messages.INFO, _(u"Your post has been publish"))
               return HttpResponseRedirect(reverse('blogs.views.translation', args=(blog.slug,)))
@@ -1623,6 +1626,7 @@ def publish_now(request, id):
       post = get_object_or_404(Post, id=id)
       blog = post.blog
       post.status = 'P'
+      post.pub_date = datetime.now()
       post.save()
       messages.add_message(request, messages.INFO, _(u"The post has been publish"))
       return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))

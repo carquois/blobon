@@ -1936,8 +1936,11 @@ border-radius: 4px;
                   <div class="row">
                     <div class="col-xs-6 col-xs-offset-3" id="videoform">
                       <form enctype="multipart/form-data" id="newvideo" role="form" method="post" action="{% url 'blogs.views.newpost' blog.slug %}">{% csrf_token %}
+                        <div class="row" id="addedtitle_video" style="display: none">
+                          {{ post_form.title.label_tag }}<span id="addtitle_video_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                          {{ post_form.title }}
+                        </div>
                        <div class="row" id="type_video" style="display:none;">
-
 
                       <div class="row" style="padding:10px;">
                       <div class="pull-right">
@@ -1948,10 +1951,6 @@ border-radius: 4px;
                           <div class="col-xs-3 addtitle" id="addtitle_video">
                             <a id="addtitletovideo" title="{% trans "Add a Title to Your Video" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Title" %}</a>
                           </div> 
-                        </div>
-                        <div class="row" id="addedtitle_video" style="display: none">
-                          {{ post_form.title.label_tag }}<span id="addtitle_video_cancel" title="{% trans "Cancel Title" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
-                          {{ post_form.title }}
                         </div>
                         <div class="youtube_url" id="youtube_url">
                           {{ post_form.video_url }}
@@ -1971,6 +1970,12 @@ border-radius: 4px;
                        <div class="row" style="display: none">{{ post_form.is_ready }} </div>
                        <div class="row" id="type_playlist" style="padding:10px;display:none;">
 
+                        <div class="row">
+                          <div class="col-xs-3 addtitle" id="addtitle_soundcloud">
+                            <a id="addtitletosoundcloud" title="{% trans "Add a Title to Your music" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a Title" %}</a>
+                          </div> 
+                        </div>
+
                       <div class="row" style="padding:10px;">
                       <div class="pull-right">
                         <span id="cancel_type_playlist" style="cursor:pointer;" title="{% trans "Cancel Music" %}" class="pull-right glyphicon glyphicon-remove-circle"></span>
@@ -1985,9 +1990,6 @@ border-radius: 4px;
                                {{ post_form.artist.label_tag }}{{ post_form.artist }}
                          </div>
                                {% endif %}
-                         <div class="col-md-12 text_field">
-                               {{ post_form.title.label_tag }}{{ post_form.title }}
-                         </div>
                          <div class="col-md-12 text_field">
                            <label for="id_content">{% trans "Text" %}</label>{{ post_form.content }}
                          </div>
@@ -2444,6 +2446,15 @@ border-radius: 4px;
         },10);
       });
     </script>
+
+    <script>
+      $('#addtitletosoundcloud').click(function() {
+        setTimeout(function() { 
+        $( "#addedtitle_video :input" ).focus();
+        },10);
+      });
+    </script>
+
     <script>
       $('#addcommenttovideo').click(function() {
         setTimeout(function() { 
@@ -2536,6 +2547,7 @@ border-radius: 4px;
         $('#al3_add_more_images_2').hide();
         $('#al3_add_more_images_3').hide();
         $('#addtitle_video').show();
+        $('#addtitle_soundcloud').show();
         $('#addedtitle_video').hide();
         $('#addcomment_video').show();
         $('#addedcomment_video').hide();
@@ -2613,6 +2625,7 @@ border-radius: 4px;
         $('#al3_add_more_images_2').hide();
         $('#al3_add_more_images_3').hide();
         $('#addtitle_video').show();
+        $('#addtitle_soundcloud').show();
         $('#addedtitle_video').hide();
         $('#addcomment_video').show();
         $('#addedcomment_video').hide();
@@ -2675,6 +2688,7 @@ border-radius: 4px;
         $('#addtitle_post').show();
         $('#addedtitle_post').hide();
         $('#addtitle_video').show();
+        $('#addtitle_soundcloud').show();
         $('#addedtitle_video').hide();
         $('#addcomment_video').show();
         $('#addedcomment_video').hide();
@@ -2787,6 +2801,7 @@ border-radius: 4px;
         $('#modelalbum2').hide();
         $('#modelalbum3').hide();
         $('#addtitle_video').show();
+        $('#addtitle_soundcloud').show();
         $('#addedtitle_video').hide();
         $(".submitimageform").prop("disabled", true);
         $('#save_draft_image').prop("disabled", true);
@@ -2812,6 +2827,7 @@ border-radius: 4px;
         $('#modelalbum2').hide();
         $('#modelalbum3').hide();
         $('#addtitle_video').show();
+        $('#addtitle_soundcloud').show();
         $('#addedtitle_video').hide();
         $(".submitimageform").prop("disabled", true);
         $('#save_draft_image').prop("disabled", true);
@@ -3444,9 +3460,21 @@ border-radius: 4px;
     <script>
       $('#addtitletovideo').click(function() {
         $('#addtitle_video').hide();
+        $('#addtitle_soundcloud').hide();
         $('#addedtitle_video').show();
       });
     </script>
+
+
+    <script>
+      $('#addtitletosoundcloud').click(function() {
+        $('#addtitle_video').hide();
+        $('#addtitle_soundcloud').hide();
+        $('#addedtitle_video').show();
+      });
+    </script>
+
+
     <script>
       $('#addtitletovideo').click(function() {
         setTimeout(function() { 
@@ -3454,6 +3482,16 @@ border-radius: 4px;
         },10);
       });
     </script>
+
+
+    <script>
+      $('#addtitletosoundcloud').click(function() {
+        setTimeout(function() { 
+          $(".video_title").focus();
+        },10);
+      });
+    </script>
+
     <script>
       $('#addtitletoal1').click(function() {
         $('#addtitle_al_1').hide();
@@ -3503,6 +3541,7 @@ border-radius: 4px;
     <script>
       $('#addtitle_video_cancel').click(function() {
         $('#addtitle_video').show();
+        $('#addtitle_soundcloud').show();
         $('#addedtitle_video').hide();
         $('#newvideo input[name=title]').val('');
       });
@@ -3744,6 +3783,7 @@ border-radius: 4px;
         $(".cate_img").tooltip({container: 'body'});
         $('#addtitletopost').tooltip({container: 'body'});
         $('#addtitletovideo').tooltip({container: 'body'});
+        $('#addtitletosoundcloud').tooltip({container: 'body'});
         $('#moreformating').tooltip({container: 'body'});
         $('#texttab').tooltip({container: 'body'});
         $('#imagetab').tooltip({container: 'body'});
