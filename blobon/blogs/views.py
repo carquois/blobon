@@ -914,6 +914,12 @@ def newpost(request, slug):
             post.soundcloud_id = "%s/%s" % (prefix, track.id)  
           post.save()
           form.save_m2m()
+          if post.temp_tag_field:
+            temp_tag = post.temp_tag_field
+            tags = temp_tag.split(',')
+            for tag in tags:
+              tag, created = Tag.objects.get_or_create(name=tag, description=tag,author=post.author,blog=blog)
+              post.tag.add(tag)
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
         else:
           messages.add_message(request, messages.INFO, _(u"Error!")) 
@@ -1284,36 +1290,49 @@ def administrateemails(request, slug):
 def editpost(request, id):
       post = get_object_or_404(Post, id=id)
       blog = post.blog
-      categories = Category.objects.filter(blog=blog).order_by('-id')
+      categories = Category.objects.filter(blog=blog)       
+      tags = Tag.objects.filter(blog=blog)
       if request.method == 'POST':
         form = PostForm(request.POST or None,request.FILES or None, instance=post)
         if form.is_valid():
-            form.save()
+          form.save()
 
 
-            if post.video_url:
-              v_url = post.video_url
-              video_type = v_url.split('.')
-              if video_type[1] == "youtube" :
-                query = urlparse(post.video_url)
-                p = parse_qs(query.query)
-                post.youtube_id = p['v'][0]
-              elif video_type[0] == "http://vimeo" :
-                v_id = urlparse(v_url)
-                v_id_2 = v_id.path
-                v_id_final = v_id_2.replace('/', '')
-                post.vimeo_id = v_id_final
-              post.save()  
-            if 'save_quit' in request.POST:
-              return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
+          if post.video_url:
+            v_url = post.video_url
+            video_type = v_url.split('.')
+            if video_type[1] == "youtube" :
+              query = urlparse(post.video_url)
+              p = parse_qs(query.query)
+              post.youtube_id = p['v'][0]
+            elif video_type[0] == "http://vimeo" :
+              v_id = urlparse(v_url)
+              v_id_2 = v_id.path
+              v_id_final = v_id_2.replace('/', '')
+              post.vimeo_id = v_id_final
+          if post.soundcloud_url:
+            s_url = post.soundcloud_url
+            sound_type = s_url.split('/')
+            client = soundcloud.Client(client_id='3612a61add5bb1dd62999cd375354762')
+            if sound_type[4] == "sets":
+              prefix = "playlists"
             else:
-              form = PostForm(instance=post,)
-              return render_to_response('blogs/editpost.html',
-                                       {'blog': blog, 'form': form,'post': post,'categories': categories, },
-                                       context_instance=RequestContext(request))
+              prefix = "tracks"
+            track_url = s_url
+            track = client.get('/resolve', url=track_url)
+            post.soundcloud_id = "%s/%s" % (prefix, track.id)  
+          post.save()  
+            
+          if 'save_quit' in request.POST:
+            return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
+          else:
+            form = PostForm(instance=post,)
+            return render_to_response('blogs/edit_post.html',
+                                     {'blog': blog,'tags':tags, 'form': form,'post': post,'categories': categories, },
+                                     context_instance=RequestContext(request))
       else:
         form = PostForm(instance=post, blog=blog)
-      return render_to_response('blogs/editpost.html',
+      return render_to_response('blogs/edit_post.html',
                                 {'blog': blog, 'form': form,'post': post, 'categories': categories, },
                                 context_instance=RequestContext(request))
 

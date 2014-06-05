@@ -168,6 +168,10 @@ border-radius: 4px;
         padding:15px 0px 0px 0px;
         cursor: pointer;
       }
+      #add_tag_cancel_quick{
+        
+        cursor: pointer;
+      }
       .uploadPreview{
         padding:5px 5px 5px 5px;
         margin-left: auto;
@@ -286,16 +290,28 @@ border-radius: 4px;
                         {% if categories %}
                          <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>  
                         {% endif %}
-                        {% if tags %}
                          <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
-                        {% endif %}
+                         <div class="fields addtitle" id="add_tag_quick">
+                           <a id="addtagtoquick" title="{% trans "Create and add a new tag to your post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a new tag" %}</a>     
+                         </div>
+                         <div class="title" id="added_tag_quick" style="display: none">
+                         <small><em>{% trans "You can add more than one tag by separating them with commas" %}</em></small>
+
+                           <span id="add_tag_cancel_quick" title="{% trans "Cancel add new tag" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                              {{ post_form.temp_tag_field }}
+                              
+                         </div>
                         <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
                         <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                         <div class="row" style="display: none">{{ post_form.status }} </div>
                         <div class="row" style="display: none">{{ post_form.is_ready }} </div>      
                        
-         
-                       <div class="btn-group pull-right" style="padding-top:10px;">
+
+
+
+
+ 
+                       <div class="btn-group pull-right" style="padding-top:20px;">
                          <button type="button" class="btn btn-xs btn-primary submittext" disabled="disabled">{% trans "Submit post" %}</button>
                          <button id="save_draft_text" title="{% trans "More options" %}" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" disabled="disabled">
                          <span class="caret"></span>
@@ -330,16 +346,26 @@ border-radius: 4px;
                         {% if categories %}
                          <div class="fields">{{ post_form.category.label_tag }} :{{ post_form.category }}</div>
                         {% endif %}
-                        {% if tags %}
+
                          <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
-                        {% endif %}
+                         <div class="fields addtitle" id="add_tag_blog">
+                           <a id="addtagtoblog" title="{% trans "Create and add a new tag to your post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a new tag" %}</a>
+                         </div>
+                         <div class="title" id="added_tag_blog" style="display: none">
+                         <small><em>{% trans "You can add more than one tag by separating them with commas" %}</em></small>
+
+                           <span id="add_tag_cancel_blog" title="{% trans "Cancel add new tag" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                              {{ post_form.temp_tag_field }}
+
+                         </div>
+
                         <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
                         <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                         <div class="row" style="display: none">{{ post_form.status }} </div>
                         <div class="row" style="display: none">{{ post_form.is_ready }} </div>
 
 
-                       <div class="btn-group pull-right">
+                       <div class="btn-group pull-right" style="padding-top:20px;">
                          <button type="button" class="btn btn-xs btn-primary submitblog_post" disabled="disabled">{% trans "Submit post" %}</button>
                          <button id="save_draft_blog_post" title="{% trans "More options" %}" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" disabled="disabled">
                          <span class="caret"></span>
@@ -743,9 +769,9 @@ border-radius: 4px;
                                   </div>
                                 </div>
                               </div>
-                        {% if tags %}
-                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
-                        {% endif %}
+
+
+
                               <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                               <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row" style="display: none">{{ post_form.is_ready }} </div>
@@ -770,8 +796,23 @@ border-radius: 4px;
                                     {{ post_form.category.label_tag }} {{ post_form.category }}
                                   </div>
                                 {% endif %}
-                               <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
-                       <div class="btn-group pull-right">
+
+                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
+                         <div class="fields addtitle" id="add_tag_a1">
+                           <a id="addtagtoa1" title="{% trans "Create and add a new tag to your post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a new tag" %}</a>
+                         </div>
+                         <div class="title" id="added_tag_a1" style="display: none">
+                         <small><em>{% trans "You can add more than one tag by separating them with commas" %}</em></small>
+
+                           <span id="add_tag_cancel_a1" title="{% trans "Cancel add new tag" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                              {{ post_form.temp_tag_field }}
+
+                         </div>
+
+
+                   
+                       <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
+                       <div class="btn-group pull-right" style="padding-top:20px;">
                          <button type="button" class="btn btn-xs btn-primary submitimagealbum1form" disabled="disabled">{% trans "Submit post" %}</button>
                          <button id="save_draft_al1" title="{% trans "More options" %}" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" disabled="disabled">
                          <span class="caret"></span>
@@ -1279,9 +1320,8 @@ border-radius: 4px;
 
 
                               </div>
-                        {% if tags %}
-                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
-                        {% endif %}
+
+
                               <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                               <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row" style="display: none">{{ post_form.is_ready }} </div>
@@ -1306,9 +1346,22 @@ border-radius: 4px;
                                     {{ post_form.category.label_tag }} {{ post_form.category }}
                                   </div>
                                 {% endif %}
-                                <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
+                     
+                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
+                         <div class="fields addtitle" id="add_tag_a2">
+                           <a id="addtagtoa2" title="{% trans "Create and add a new tag to your post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a new tag" %}</a>
+                         </div>
+                         <div class="title" id="added_tag_a2" style="display: none">
+                         <small><em>{% trans "You can add more than one tag by separating them with commas" %}</em></small>
 
-                       <div class="btn-group pull-right">
+                           <span id="add_tag_cancel_a2" title="{% trans "Cancel add new tag" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                              {{ post_form.temp_tag_field }}
+
+                         </div>
+         
+                       <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
+
+                       <div class="btn-group pull-right" style="padding-top20:px;">
                          <button type="button" class="btn btn-xs btn-primary submitimagealbum2form" disabled="disabled">{% trans "Submit post" %}</button>
                          <button id="save_draft_al2" title="{% trans "More options" %}" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" disabled="disabled">
                          <span class="caret"></span>
@@ -1796,9 +1849,10 @@ border-radius: 4px;
 
 
                             </div>
-                        {% if tags %}
-                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
-                        {% endif %}
+
+
+
+
                               <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                               <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row" style="display: none">{{ post_form.is_ready }} </div>
@@ -1823,9 +1877,23 @@ border-radius: 4px;
                                     {{ post_form.category.label_tag }} {{ post_form.category }}
                                   </div>
                                 {% endif %}
-                                   <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
 
-                       <div class="btn-group pull-right">
+                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
+                         <div class="fields addtitle" id="add_tag_a3">
+                           <a id="addtagtoa3" title="{% trans "Create and add a new tag to your post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a new tag" %}</a>
+                         </div>
+                         <div class="title" id="added_tag_a3" style="display: none">
+                         <small><em>{% trans "You can add more than one tag by separating them with commas" %}</em></small>
+
+                           <span id="add_tag_cancel_a3" title="{% trans "Cancel add new tag" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                              {{ post_form.temp_tag_field }}
+
+                         </div>
+
+
+                       <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
+
+                       <div class="btn-group pull-right" style="padding-top:20px;">
                          <button type="button" class="btn btn-xs btn-primary submitimagealbum3form" disabled="disabled">{% trans "Submit post" %}</button>
                          <button id="save_draft_al3" title="{% trans "More options" %}" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" disabled="disabled">
                          <span class="caret"></span>
@@ -1871,9 +1939,8 @@ border-radius: 4px;
                                       <div id=addedcomment_image style="display: none">{{ post_form.content_0 }}<span id="addcomment_image_cancel" title="{% trans "Cancel Comment" %}" class="glyphicon glyphicon-remove-circle pull-right"></span></div>
                                     </div>
                                 </div>
-                        {% if tags %}
-                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
-                        {% endif %}
+                        
+
                                 <div class="row" style="display: none">{{ post_form.layout_type }} </div>
                                 <div class="row" style="display: none">{{ post_form.status }} </div>
                               <div class="row" style="display: none">{{ post_form.is_ready }} </div>
@@ -1898,8 +1965,21 @@ border-radius: 4px;
                                {{ post_form.category.label_tag }} {{ post_form.category }}
                               </div>
                                 {% endif %}
-                                 <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
-                       <div class="btn-group pull-right">
+
+                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
+                         <div class="fields addtitle" id="add_tag_img">
+                           <a id="addtagtoimg" title="{% trans "Create and add a new tag to your post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a new tag" %}</a>
+                         </div>
+                         <div class="title" id="added_tag_img" style="display: none">
+                         <small><em>{% trans "You can add more than one tag by separating them with commas" %}</em></small>
+
+                           <span id="add_tag_cancel_img" title="{% trans "Cancel add new tag" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                              {{ post_form.temp_tag_field }}
+
+                         </div>
+
+                       <div class="fields" {% if blog.template %}{% else %}style="display: none"{% endif %}>{{ post_form.is_sticky.label_tag }} :{{ post_form.is_sticky }}</div>
+                       <div class="btn-group pull-right" style="padding-top:20px">
                          <button type="button" class="btn btn-xs btn-primary submitimageform" disabled="disabled">{% trans "Submit post" %}</button>
                          <button id="save_draft_image" title="{% trans "More options" %}" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" disabled="disabled">
                          <span class="caret"></span>
@@ -2005,11 +2085,19 @@ border-radius: 4px;
                               </div>
                             </div>
                                 {% endif %}
-                        {% if tags %}
-                            <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
-                        {% endif %}
+                         <div class="fields">{{ post_form.tag.label_tag }} :{{ post_form.tag }}</div>
+                         <div class="fields addtitle" id="add_tag_vid">
+                           <a id="addtagtovid" title="{% trans "Create and add a new tag to your post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a new tag" %}</a>
+                         </div>
+                         <div class="title" id="added_tag_vid" style="display: none">
+                         <small><em>{% trans "You can add more than one tag by separating them with commas" %}</em></small>
+
+                           <span id="add_tag_cancel_vid" title="{% trans "Cancel add new tag" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                              {{ post_form.temp_tag_field }}
+
+                         </div>
                         </div>
-                        <div class="row" id="media_submit" style="display:none;">
+                        <div class="row" id="media_submit" style="display:none;padding-top:20px;">
                           <div class="btn-group pull-right" style="padding-right:10px;">
                             <button type="button" class="btn btn-xs btn-primary submitvideo" disabled="disabled">{% trans "Submit post" %}</button>
                             <button id="save_draft_video" title="{% trans "More options" %}" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" disabled="disabled">
@@ -2577,6 +2665,27 @@ border-radius: 4px;
         $('#cats_tags').hide();
         $('#intro').show();
         $('#newvideo').trigger("reset");
+        $('#newtag_vid').val(''); 
+        $('#add_tag_vid').show();
+        $('#added_tag_vid').hide();
+        $('#newtag_a3').val(''); 
+        $('#add_tag_a3').show();
+        $('#added_tag_a3').hide();
+        $('#newtag_a2').val(''); 
+        $('#add_tag_a2').show();
+        $('#added_tag_a2').hide();        
+        $('#newtag_a1').val(''); 
+        $('#add_tag_a1').show();
+        $('#added_tag_a1').hide();
+        $('#newtag_img').val(''); 
+        $('#add_tag_img').show();
+        $('#added_tag_img').hide();
+        $('#newtag_blog').val(''); 
+        $('#add_tag_blog').show();
+        $('#added_tag_blog').hide();
+        $('#newtag_quick').val(''); 
+        $('#add_tag_quick').show();
+        $('#added_tag_quick').hide();  
       });
     </script>
 
@@ -2650,6 +2759,27 @@ border-radius: 4px;
         $('#media_submit').hide();
         $('#cats_tags').hide();
         $('#intro').show();
+        $('#newtag_vid').val(''); 
+        $('#add_tag_vid').show();
+        $('#added_tag_vid').hide();
+        $('#newtag_a3').val(''); 
+        $('#add_tag_a3').show();
+        $('#added_tag_a3').hide();
+        $('#newtag_a2').val(''); 
+        $('#add_tag_a2').show();
+        $('#added_tag_a2').hide();        
+        $('#newtag_a1').val(''); 
+        $('#add_tag_a1').show();
+        $('#added_tag_a1').hide();
+        $('#newtag_img').val(''); 
+        $('#add_tag_img').show();
+        $('#added_tag_img').hide();
+        $('#newtag_blog').val(''); 
+        $('#add_tag_blog').show();
+        $('#added_tag_blog').hide();
+        $('#newtag_quick').val(''); 
+        $('#add_tag_quick').show();
+        $('#added_tag_quick').hide();  
         $('#newvideo').trigger("reset");
         $(".submitvideo").prop("disabled", true);
         $('#save_draft_video').prop("disabled", true);
@@ -2691,6 +2821,27 @@ border-radius: 4px;
         $('#addtitle_soundcloud').show();
         $('#addedtitle_video').hide();
         $('#addcomment_video').show();
+        $('#newtag_vid').val(''); 
+        $('#add_tag_vid').show();
+        $('#added_tag_vid').hide();
+        $('#newtag_a3').val(''); 
+        $('#add_tag_a3').show();
+        $('#added_tag_a3').hide();
+        $('#newtag_a2').val(''); 
+        $('#add_tag_a2').show();
+        $('#added_tag_a2').hide();        
+        $('#newtag_a1').val(''); 
+        $('#add_tag_a1').show();
+        $('#added_tag_a1').hide();
+        $('#newtag_img').val(''); 
+        $('#add_tag_img').show();
+        $('#added_tag_img').hide();
+        $('#newtag_blog').val(''); 
+        $('#add_tag_blog').show();
+        $('#added_tag_blog').hide();
+        $('#newtag_quick').val(''); 
+        $('#add_tag_quick').show();
+        $('#added_tag_quick').hide();  
         $('#addedcomment_video').hide();
         $(".submittext").prop("disabled", true);
         $('#save_draft_text').prop("disabled", true);
@@ -2742,6 +2893,27 @@ border-radius: 4px;
         $('#add_more_images_1').hide();
         $('#add_more_images_2').hide();
         $('#add_more_images_3').hide();
+        $('#newtag_vid').val(''); 
+        $('#add_tag_vid').show();
+        $('#added_tag_vid').hide();
+        $('#newtag_a3').val(''); 
+        $('#add_tag_a3').show();
+        $('#added_tag_a3').hide();
+        $('#newtag_a2').val(''); 
+        $('#add_tag_a2').show();
+        $('#added_tag_a2').hide();        
+        $('#newtag_a1').val(''); 
+        $('#add_tag_a1').show();
+        $('#added_tag_a1').hide();
+        $('#newtag_img').val(''); 
+        $('#add_tag_img').show();
+        $('#added_tag_img').hide();
+        $('#newtag_blog').val(''); 
+        $('#add_tag_blog').show();
+        $('#added_tag_blog').hide();
+        $('#newtag_quick').val(''); 
+        $('#add_tag_quick').show();
+        $('#added_tag_quick').hide();  
         $('#add_more_images_4').hide();
         $('#add_more_images_5').hide();
         $('#add_more_images_6').hide();
@@ -3767,6 +3939,120 @@ border-radius: 4px;
         }
       });
     </script>
+
+
+
+    <script>
+      $('#add_tag_quick').click(function() {
+        $('#add_tag_quick').hide();
+        $('#added_tag_quick').show();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_cancel_quick').click(function() {
+        $('#newtag_quick').val(''); 
+        $('#add_tag_quick').show();
+        $('#added_tag_quick').hide();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_blog').click(function() {
+        $('#add_tag_blog').hide();
+        $('#added_tag_blog').show();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_cancel_blog').click(function() {
+        $('#newtag_blog').val(''); 
+        $('#add_tag_blog').show();
+        $('#added_tag_blog').hide();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_img').click(function() {
+        $('#add_tag_img').hide();
+        $('#added_tag_img').show();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_cancel_img').click(function() {
+        $('#newtag_img').val(''); 
+        $('#add_tag_img').show();
+        $('#added_tag_img').hide();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_a1').click(function() {
+        $('#add_tag_a1').hide();
+        $('#added_tag_a1').show();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_cancel_a1').click(function() {
+        $('#newtag_a1').val(''); 
+        $('#add_tag_a1').show();
+        $('#added_tag_a1').hide();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_a2').click(function() {
+        $('#add_tag_a2').hide();
+        $('#added_tag_a2').show();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_cancel_a2').click(function() {
+        $('#newtag_a2').val(''); 
+        $('#add_tag_a2').show();
+        $('#added_tag_a2').hide();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_a3').click(function() {
+        $('#add_tag_a3').hide();
+        $('#added_tag_a3').show();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_cancel_a3').click(function() {
+        $('#newtag_a3').val(''); 
+        $('#add_tag_a3').show();
+        $('#added_tag_a3').hide();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_vid').click(function() {
+        $('#add_tag_vid').hide();
+        $('#added_tag_vid').show();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_cancel_vid').click(function() {
+        $('#newtag_vid').val(''); 
+        $('#add_tag_vid').show();
+        $('#added_tag_vid').hide();
+      });
+    </script>
+
+
+
+
+
+
+
     <script type="text/javascript">
       $(function () {
         $('#addtitle_post_cancel').tooltip({container: 'body'});
@@ -3846,6 +4132,13 @@ border-radius: 4px;
         $('#music_link').tooltip({container: 'body'});
         $('#cancel_type_playlist').tooltip({container: 'body'});
         $('#cancel_type_video').tooltip({container: 'body'});
+        $('#addtagtoquick').tooltip({container: 'body'});
+        $('#addtagtoblog').tooltip({container: 'body'});
+        $('#addtagtovid').tooltip({container: 'body'});
+        $('#addtagtoimg').tooltip({container: 'body'});
+        $('#addtagtoa1').tooltip({container: 'body'});
+        $('#addtagtoa2').tooltip({container: 'body'});
+        $('#addtagtoa3').tooltip({container: 'body'});
       });
     </script>
   {% endblock %}

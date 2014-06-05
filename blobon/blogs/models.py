@@ -545,6 +545,7 @@ class Post(models.Model):
     base62id = models.CharField(max_length=140, blank=True)
     blog = models.ForeignKey(Blog, null=True)
     title = models.CharField(verbose_name=_("Title"), max_length=140, blank=True)
+    temp_tag_field = models.CharField(verbose_name=_("Temp tag field"), max_length=1000, blank=True)
     status = models.CharField(max_length=2, choices=STATUS, default="P", null=True)
     translated_title = models.CharField(verbose_name=_("Titre traduit"), max_length=140, blank=True)
     slug = models.SlugField(max_length=140, blank=True)
