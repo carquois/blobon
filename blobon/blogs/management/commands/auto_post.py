@@ -21,7 +21,7 @@ class Command(NoArgsCommand):
   def handle(self, **options):
        blogs = Blog.objects.filter(is_online=True).exclude(frequency__isnull=True).exclude(frequency__exact='')
        for blog in blogs:
-         last_draft = Post.objects.filter(blog=blog).filter(is_discarded=False).filter(status="D").filter(is_ready=True).order_by('-pub_date')[:1]
+         last_draft = Post.objects.filter(blog=blog).filter(is_discarded=False).filter(status="D").filter(is_ready=True).order_by('pub_date')[:1]
          last_publish = Post.objects.filter(blog=blog).filter(is_discarded=False).filter(status="P").filter(is_ready=True).order_by('-pub_date')[:1]
          if last_draft.count() >=1:
            now = datetime.now()
