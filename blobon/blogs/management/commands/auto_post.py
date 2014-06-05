@@ -65,7 +65,7 @@ class Command(NoArgsCommand):
                    post.save()
                  else:
                    print "exclu"
-             elif int(start) > int(end) and now.hour < int(start):
+             elif int(start) > int(end) and now.hour <= int(start):
                d2 = now.day-1
                exc_begin = datetime(y,m,d2,start)
                exc_end = datetime(y,m,d,end)   
