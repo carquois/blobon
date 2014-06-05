@@ -32,7 +32,7 @@ class Command(NoArgsCommand):
              freq = blog.frequency.replace('m', '')
            else:
              a = blog.frequency.replace('h', '')   
-             freq = a * 60
+             freq = int(a) * 60
            if blog.exclusion_start and blog.exclusion_end:
              s = blog.exclusion_start.replace(':','') 
              e = blog.exclusion_end.replace(':','')
@@ -49,14 +49,14 @@ class Command(NoArgsCommand):
                  post.pub_date = datetime.now()
                  post.save()
                else:
-                 print "exclu"
+                 print "exclu1"
              elif int(start) == now.hour or int(end) == now.hour + 1:
-               print "exclu"  
+               print "exclu2"  
              elif int(start) < int(end): 
                exc_begin = datetime(y,m,d,start)
                exc_end = datetime(y,m,d,end)
                if exc_begin < now < exc_end:
-                 print "exclu"
+                 print "exclu3"
                else:
                  if int(minutes_diff) >= int(freq):
                    post = last_draft[0]
@@ -64,13 +64,13 @@ class Command(NoArgsCommand):
                    post.pub_date = datetime.now()
                    post.save()
                  else:
-                   print "exclu"
+                   print "exclu4"
              elif int(start) > int(end) and now.hour <= int(start):
                d2 = now.day-1
                exc_begin = datetime(y,m,d2,start)
                exc_end = datetime(y,m,d,end)   
                if exc_begin < now < exc_end:
-                 print "exclu"
+                 print "exclu5"
                else:
                  if int(minutes_diff) >= int(freq):
                    post = last_draft[0]
@@ -78,13 +78,19 @@ class Command(NoArgsCommand):
                    post.pub_date = datetime.now()
                    post.save()
                  else:
-                   print "exclu"
+                   print blog
+                   print freq
+                   print minutes_diff
+                   print "exclu6"
+                   print exc_begin
+                   print exc_end
+                   print now
              elif int(start) > int(end) and now.hour > int(start):
                d3 = now.day+1
                exc_begin = datetime(y,m,d,start)
                exc_end = datetime(y,m,d3,end)
                if exc_begin < now < exc_end:
-                 print "exclu"
+                 print "exclu7"
                else:
                  if int(minutes_diff) >= int(freq):
                    post = last_draft[0]
@@ -92,7 +98,7 @@ class Command(NoArgsCommand):
                    post.pub_date = datetime.now()
                    post.save()
                  else:
-                   print "exclu"
+                   print "exclu8"
            else:
              if int(minutes_diff) >= int(freq):
                post = last_draft[0]
@@ -100,4 +106,4 @@ class Command(NoArgsCommand):
                post.pub_date = datetime.now()
                post.save()
              else:
-               print "exclu"
+               print "exclu9"
