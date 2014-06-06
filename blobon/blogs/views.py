@@ -220,6 +220,26 @@ def category(request, slug):
                                   context_instance=RequestContext(request))
 
 @never_cache
+def tag(request, slug):
+      tag = get_object_or_404(Tag, slug=slug)
+      posts = paginate(request,
+                       Post.objects.filter(status='P').filter(tag=tag).filter(is_discarded=False).order_by('-pub_date'),
+                       6)
+      blog = tag.blog
+      form = SubscriptionForm()
+      main_tag = tag
+      categories = Category.objects.filter(blog=blog)
+      menus = Menu.objects.filter(blog=blog)
+      if blog.is_bootblog == True:
+        return render_to_response('blogs/blog_tag.html',
+                                  {'menus': menus, 'main_tag': main_tag,'form': form, 'blog': blog,'posts': posts, 'tag': tag, 'categories': categories,},
+                                  context_instance=RequestContext(request))
+      else:
+        return render_to_response('404.html',
+                                 {},
+                                  context_instance=RequestContext(request))
+
+@never_cache
 def category_main(request, slug):
       category = get_object_or_404(Category, slug=slug)
       blog = category.blog
@@ -920,6 +940,8 @@ def newpost(request, slug):
             for tag in tags:
               tag, created = Tag.objects.get_or_create(name=tag, description=tag,author=post.author,blog=blog)
               post.tag.add(tag)
+              post.temp_tag_field = ""
+              post.save()
           return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
         else:
           messages.add_message(request, messages.INFO, _(u"Error!")) 
@@ -1296,8 +1318,6 @@ def editpost(request, id):
         form = PostForm(request.POST or None,request.FILES or None, instance=post)
         if form.is_valid():
           form.save()
-
-
           if post.video_url:
             v_url = post.video_url
             video_type = v_url.split('.')
@@ -1322,7 +1342,14 @@ def editpost(request, id):
             track = client.get('/resolve', url=track_url)
             post.soundcloud_id = "%s/%s" % (prefix, track.id)  
           post.save()  
-            
+          if post.temp_tag_field:
+            temp_tag = post.temp_tag_field
+            tags = temp_tag.split(',')
+            for tag in tags:
+              tag, created = Tag.objects.get_or_create(name=tag, description=tag,author=post.author,blog=blog)
+              post.tag.add(tag)
+              post.temp_tag_field = ""
+              post.save()  
           if 'save_quit' in request.POST:
             return HttpResponseRedirect(reverse('blogs.views.administrateposts', args=(blog.slug,)))
           else:

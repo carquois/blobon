@@ -146,7 +146,7 @@ class SettingsForm(ModelForm):
                                                     'rows': '2',
                                                     'class': "form-control setting_form input-block-level mceNoEditor"}))
 
-    main_color = CharField(required=True, widget=forms.TextInput(attrs={'readonly':'readonly', 'placeholder': _('Your blog main color'),
+    main_color = CharField(required=False, widget=forms.TextInput(attrs={'readonly':'readonly', 'placeholder': _('Your blog main color'),
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level"}))
     main_image = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_img_30(this);"}))

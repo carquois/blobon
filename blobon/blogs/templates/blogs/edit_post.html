@@ -34,9 +34,17 @@ tinyMCE.init({
       }
       .changed_image{
       }
+      .addtagtoquick{
+        cursor: pointer;
+      }
       img {
 	max-width: 100%;
 	height: auto;
+      }
+      .addtitle{
+        font-size:x-small;
+        padding:5px 0px 10px 15px;
+        cursor: pointer;
       }
  
     </style>
@@ -655,10 +663,24 @@ tinyMCE.init({
         <div class="col-md-12">
           {{ form.tag.label_tag }} {{ form.tag }}
         </div>
+        <div class="col-md-12">
+                         <div class="fields addtitle" id="add_tag_quick">
+                           <a id="addtagtoquick" title="{% trans "Create and add a new tag to your post" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add a new tag" %}</a>
+                         </div>
+                         <div class="title" id="added_tag_quick" style="display: none">
+                         <small><em>{% trans "You can add more than one tag by separating them with commas" %}</em></small>
+
+                           <span id="add_tag_cancel_quick" title="{% trans "Cancel add new tag" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+                              {{ form.temp_tag_field }}
+
+                         </div>
+
+        </div>
+
       </div>
 
 
-    <div class="row savedpost_submit_cancel">
+    <div class="row savedpost_submit_cancel" style="padding-top:20px;">
       <div class="col-md-6">
         <button class="btn btn-primary btn-xs" value="save_quit" name="save_quit" id="submitsavedpost" title="{% trans "Save changes and quit" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
         <button class="btn btn-info btn-xs" value="save_continue" name="save_continue" id="submitsavedpost_continue" title="{% trans "Save changes and continue editing" %}"><span class="glyphicon glyphicon-save"></span> {% trans "Save and continue editing" %}</button>
@@ -686,12 +708,28 @@ tinyMCE.init({
       });
     </script>
 
+    <script>
+      $('#add_tag_quick').click(function() {
+        $('#add_tag_quick').hide();
+        $('#added_tag_quick').show();
+      });
+    </script>
+
+    <script>
+      $('#add_tag_cancel_quick').click(function() {
+        $('#newtag_quick').val(''); 
+        $('#add_tag_quick').show();
+        $('#added_tag_quick').hide();
+      });
+    </script>
 
     <script type="text/javascript">
       $(function () {
         $('#submitsavedpost').tooltip();
         $('#submitsavedpost_continue').tooltip();
         $('#cancel_edit_post').tooltip();
+        $('#add_tag_cancel_quick').tooltip();
+        $('#addtagtoquick').tooltip();
       });
     </script>
 
@@ -1126,6 +1164,153 @@ tinyMCE.init({
         }
 
     </script>
+
+
+
+    <script type="text/javascript">
+
+        function upload_img_25(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_25').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_26(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_26').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_27(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_27').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_28(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_28').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_29(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_29').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_30(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_30').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_31(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_31').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_32(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_32').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_img_33(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_id_33').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
 
 
 {% endblock %}

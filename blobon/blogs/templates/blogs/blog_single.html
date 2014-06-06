@@ -59,6 +59,66 @@
 
     {% block additional_css %}
     <style>
+
+.tag_span{
+margin:5px;
+
+}
+.bordureGrise_sm{
+
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+
+
+}
+
+.bordureGrise_med{
+
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+
+
+}
+
+.big_img{
+padding-left:0px;
+padding-right:0px;
+cursor:pointer;
+border:solid 5px transparent;
+}
+
+.med_img{
+padding-left:0px;
+padding-right:0px;
+height: 360px;
+overflow: hidden;
+cursor:pointer;
+border:solid 5px transparent;
+}
+
+.sm_img{
+padding-left:0px;
+padding-right:0px;
+height: 200px;
+overflow: hidden;
+cursor:pointer;
+border:solid 5px transparent;
+}
+.carousel-inner>.item>img {
+    margin: 0 auto;
+    height: 95%;
+}
+.item{
+height:100%;
+}
     .blog-post-title:hover, .blog-post-title:focus {
         color: {% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %} !important;
         
@@ -260,7 +320,7 @@ top:25%;
 
       <ol class="breadcrumb">
         <li><a href="http://{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}">{% trans "Home" %}</a></li>
-        {% if post.category.all %}<li>{% for category in post.category.all %}<a href="{% url "blogs.views.category" category.slug %}">{% if post.category.count >= 2 %}&nbsp;&nbsp;{% endif %}{{ category.name }}</a>{% endfor %}</li>{% endif %}
+        {% if post.category.count >= 1 %}<li>{% for category in post.category.all %}<a href="{% url "blogs.views.category" category.slug %}">{% if post.category.count >= 2 %}&nbsp;&nbsp;{% endif %}{{ category.name }}</a>{% endfor %}</li>{% endif %}
         <li class="active">{{ post.title }}</li>
       </ol>
 
@@ -308,18 +368,7 @@ top:25%;
            {% if post.file_extension == ".gif" %}
            <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic }}" alt="{{ post.title }}" />
            {% else %}
-           {% thumbnail post.pic "700" as im %}
-           <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
-           {% endthumbnail %}
-           {% endif %}
-           {% endif %}
-
-
-           {% if post.pic_0 %}
-           {% if post.file_extension_0 == ".gif" %}
-           <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_0 }}" alt="{{ post.title }}" />
-           {% else %}
-           {% thumbnail post.pic_0 "700" as im %}
+           {% thumbnail post.pic "2000" as im %}
            <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
            {% endthumbnail %}
            {% endif %}
@@ -330,94 +379,305 @@ top:25%;
 
 
 
-
+         {% if post.layout_type == "h" %}
            {% if post.pic_1 %}
            <div class="row">
-             <div class="col-xs-12">
+             <div class="col-xs-12 big_img">
+<a class="btn_modal" data-slide-index="0">
                {% if post.file_extension_1 == ".gif" %}
                <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
                {% else %}
-               {% thumbnail post.pic_1 "700" as im %}
+               {% thumbnail post.pic_1 "2000" as im %}
                <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
                {% endthumbnail %}
                {% endif %}
+</a>
              </div>
            </div>
            {% endif %}
 
            
            {% if post.pic_2 %}
-           <div class="row">
-             <div class="col-xs-4">        
+           <div class="row" style="margin-top:10px;">
+             <div class="col-xs-4 sm_img">      
+<a class="btn_modal" data-slide-index="1">  
                {% if post.file_extension_2 == ".gif" %}
-               <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
+               <img class="bordureGrise"  src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
                {% else %}
-               {% thumbnail post.pic_2 "700" as im %}
-               <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+               {% thumbnail post.pic_2 "400" as im %}
+               <img class="bordureGrise_sm"  src="{{ im.url }}" alt="{{ post.title }}" />
                {% endthumbnail %}
                {% endif %}
+</a>
              </div>
              {% if post.pic_3 %}
-             <div class="col-xs-4"> 
+             <div class="col-xs-4 sm_img"> 
+<a class="btn_modal" data-slide-index="2">
                {% if post.file_extension_3 == ".gif" %}
-               <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}" />
+               <img class="bordureGrise"  src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}" />
                {% else %}
-               {% thumbnail post.pic_3 "700" as im %}
-               <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+               {% thumbnail post.pic_3 "400" as im %}
+               <img class="bordureGrise_sm" src="{{ im.url }}" alt="{{ post.title }}" />
                {% endthumbnail %}
                {% endif %}
+</a>
              </div>
              {% endif %}
              {% if post.pic_4 %}
-             <div class="col-xs-4">
+             <div class="col-xs-4 sm_img">
+<a class="btn_modal" data-slide-index="3">
                {% if post.file_extension_4 == ".gif" %}
-               <img class="bordureGrise" style="width: 100%;" src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="{{ post.title }}" />
+               <img class="bordureGrise"  src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="{{ post.title }}" />
                {% else %}
-               {% thumbnail post.pic_4 "700" as im %}
-               <img class="bordureGrise" style="width: 100%;" src="{{ im.url }}" alt="{{ post.title }}" />
+               {% thumbnail post.pic_4 "400" as im %}
+               <img class="bordureGrise_sm" src="{{ im.url }}" alt="{{ post.title }}" />
                {% endthumbnail %}
                {% endif %}
+</a>
              </div>
              {% endif %}
            </div>
            {% endif %}
 
-{% if post.pic_5 %}
 
-<div class="row">
-  <div class="col-xs-12" style="padding-bottom:10px;">
-    <a href="#" title="{% trans "See other images" %}" data-toggle="modal" data-target="#img_box" class="btn btn-default btn-xs"> {% trans "More images" %}</a>
-  </div>
-</div>
-<div class="modal" id="img_box" role="dialog">
-  <div class="modal-dialog">
-  <div class="modal-content">
+
+
+
+
+       {% endif %}
+
+
+         {% if post.layout_type == "g" %}
+           {% if post.pic_1 %}
+           <div class="row">
+             <div class="col-xs-4 sm_img">
+<a class="btn_modal" data-slide-index="0">
+               {% if post.file_extension_1 == ".gif" %}
+               <img class="bordureGrise"  src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
+               {% else %}
+               {% thumbnail post.pic_1 "400" as im %}
+               <img class="bordureGrise_sm"  src="{{ im.url }}" alt="{{ post.title }}" />
+               {% endthumbnail %}
+               {% endif %}
+</a>
+             </div>
+
+           {% endif %}
+
+
+           {% if post.pic_2 %}
+             <div class="col-xs-4 sm_img">
+<a class="btn_modal" data-slide-index="1">
+               {% if post.file_extension_2 == ".gif" %}
+               <img class="bordureGrise"  src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
+               {% else %}
+               {% thumbnail post.pic_2 "400" as im %}
+               <img class="bordureGrise_sm"  src="{{ im.url }}" alt="{{ post.title }}" />
+               {% endthumbnail %}
+               {% endif %}
+</a>
+             </div>
+             {% if post.pic_3 %}
+             <div class="col-xs-4 sm_img">
+<a class="btn_modal" data-slide-index="2">
+               {% if post.file_extension_3 == ".gif" %}
+               <img class="bordureGrise"  src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}" />
+               {% else %}
+               {% thumbnail post.pic_3 "400" as im %}
+               <img class="bordureGrise_sm" src="{{ im.url }}" alt="{{ post.title }}" />
+               {% endthumbnail %}
+               {% endif %}
+</a>
+             </div>
+             {% endif %}
+           </div>
+           {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+           {% if post.pic_4 %}
+           <div class="row">
+             <div class="col-xs-4 sm_img">
+<a class="btn_modal" data-slide-index="3">
+               {% if post.file_extension_4 == ".gif" %}
+               <img class="bordureGrise"  src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="{{ post.title }}" />
+               {% else %}
+               {% thumbnail post.pic_4 "400" as im %}
+               <img class="bordureGrise_sm"  src="{{ im.url }}" alt="{{ post.title }}" />
+               {% endthumbnail %}
+               {% endif %}
+</a>
+             </div>
+           
+           {% endif %}
+        
+        
+           {% if post.pic_5 %}
+             <div class="col-xs-4 sm_img">
+<a class="btn_modal" data-slide-index="4">
+               {% if post.file_extension_5 == ".gif" %}
+               <img class="bordureGrise"  src="{{ MEDIA_URL }}{{ post.pic_5 }}" alt="{{ post.title }}" />
+               {% else %}
+               {% thumbnail post.pic_5 "400" as im %}
+               <img class="bordureGrise_sm"  src="{{ im.url }}" alt="{{ post.title }}" />
+               {% endthumbnail %}
+               {% endif %}
+</a>
+             </div>
+             {% if post.pic_6 %}
+             <div class="col-xs-4 sm_img">
+<a class="btn_modal" data-slide-index="5">
+               {% if post.file_extension_6 == ".gif" %}
+               <img class="bordureGrise"  src="{{ MEDIA_URL }}{{ post.pic_6 }}" alt="{{ post.title }}" />
+               {% else %}
+               {% thumbnail post.pic_6 "400" as im %}
+               <img class="bordureGrise_sm" src="{{ im.url }}" alt="{{ post.title }}" />
+               {% endthumbnail %}
+               {% endif %}
+</a>
+             </div>
+             {% endif %}
+           </div>
+           {% endif %}
+
+
+
+
+
+
+
+
+
+       {% endif %}
+
+
+
+
+       {% if post.layout_type == "v" %}
+
+           {% if post.pic_1 %}
+           <div class="row">
+             <div class="col-xs-6 med_img">
+<a class="btn_modal" data-slide-index="0">
+               {% if post.file_extension_1 == ".gif" %}
+               <img class="bordureGrise"  src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}" />
+               {% else %}
+               {% thumbnail post.pic_1 "1000" as im %}
+               <img class="bordureGrise_med" src="{{ im.url }}" alt="{{ post.title }}" />
+               {% endthumbnail %}
+               {% endif %}
+</a>
+             </div>
+
+
+             <div class="col-xs-6 med_img">
+<a class="btn_modal" data-slide-index="1">
+               {% if post.file_extension_2 == ".gif" %}
+               <img class="bordureGrise" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}" />
+               {% else %}
+               {% thumbnail post.pic_2 "1000" as im %}
+               <img class="bordureGrise_med" src="{{ im.url }}" alt="{{ post.title }}" />
+               {% endthumbnail %}
+               {% endif %}
+</a>    
+             </div>
+
+           </div>
+           {% endif %}
+
+       {% endif %}
+     
+
+<div class="modal blobon_modal" id="img_box" role="dialog">
+  <div class="modal-dialog" style="width:95%;height:95%;">
+  <div class="modal-content" style="height:95%;">
 	<div class="modal-header">
         	
 	<button class="close" type="button" data-dismiss="modal">×</button>
         <h3> {{ post.title }}</h3> 
 	</div>
-	<div class="modal-body">
-		<div id="modalCarousel" class="carousel slide" data-interval="false" data-ride="carousel">
+	<div class="modal-body" style="height:80%">
+
+         <div id="modalCarousel" class="carousel slide" data-interval="false" data-ride="carousel" style="height:100%;">
  
-          <div class="carousel-inner">
+          <div class="carousel-inner" style="height:100%;">
+
+
+     {% if post.pic_1 %}
       <div class="item active">
-        {% if post.file_extension_5 == ".gif" %}
-        <img class="thumbnail img-responsive" style="padding:0px;" src="{{ MEDIA_URL }}{{ post.pic_5 }}" alt="{{ post.title }}">
+        {% if post.file_extension_1 == ".gif" %}
+        <img class="thumbnail img-responsive" style="padding:0px;" src="{{ MEDIA_URL }}{{ post.pic_1 }}" alt="{{ post.title }}">
         {% else %}
-        {% thumbnail post.pic_5 "700" as im %}
+        {% thumbnail post.pic_1 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
       </div>
+     {% endif %}
 
+     {% if post.pic_2 %}
+      <div class="item">
+        {% if post.file_extension_2 == ".gif" %}
+        <img class="thumbnail img-responsive" style="padding:0px;" src="{{ MEDIA_URL }}{{ post.pic_2 }}" alt="{{ post.title }}">
+        {% else %}
+        {% thumbnail post.pic_2 "2000" as im %}
+        <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
+        {% endthumbnail %}
+        {% endif %}
+      </div>
+     {% endif %}
+
+     {% if post.pic_3 %}
+      <div class="item">
+        {% if post.file_extension_3 == ".gif" %}
+        <img class="thumbnail img-responsive" style="padding:0px;" src="{{ MEDIA_URL }}{{ post.pic_3 }}" alt="{{ post.title }}">
+        {% else %}
+        {% thumbnail post.pic_3 "2000" as im %}
+        <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
+        {% endthumbnail %}
+        {% endif %}
+      </div>
+     {% endif %}
+
+     {% if post.pic_4 %}
+      <div class="item">
+        {% if post.file_extension_4 == ".gif" %}
+        <img class="thumbnail img-responsive" style="padding:0px;" src="{{ MEDIA_URL }}{{ post.pic_4 }}" alt="{{ post.title }}">
+        {% else %}
+        {% thumbnail post.pic_4 "2000" as im %}
+        <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
+        {% endthumbnail %}
+        {% endif %}
+      </div>
+     {% endif %}
+
+
+     {% if post.pic_5 %}
+      <div class="item">
+        {% if post.file_extension_5 == ".gif" %}
+        <img class="thumbnail img-responsive" style="padding:0px;" src="{{ MEDIA_URL }}{{ post.pic_5 }}" alt="{{ post.title }}">
+        {% else %}
+        {% thumbnail post.pic_5 "2000" as im %}
+        <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
+        {% endthumbnail %}
+        {% endif %}
+      </div>
+     {% endif %}
 
      {% if post.pic_6 %}
       <div class="item" style="padding-top:0px;">
         {% if post.file_extension_6 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_6 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_6 "700" as im %}
+        {% thumbnail post.pic_6 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -429,7 +689,7 @@ top:25%;
         {% if post.file_extension_7 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_7 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_7 "700" as im %}
+        {% thumbnail post.pic_7 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -441,7 +701,7 @@ top:25%;
         {% if post.file_extension_8 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_8 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_8 "700" as im %}
+        {% thumbnail post.pic_8 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -453,7 +713,7 @@ top:25%;
         {% if post.file_extension_9 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_9 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_9 "700" as im %}
+        {% thumbnail post.pic_9 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -465,7 +725,7 @@ top:25%;
         {% if post.file_extension_10 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_10 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_10 "700" as im %}
+        {% thumbnail post.pic_10 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -477,7 +737,7 @@ top:25%;
         {% if post.file_extension_11 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_11 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_11 "700" as im %}
+        {% thumbnail post.pic_11 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -489,7 +749,7 @@ top:25%;
         {% if post.file_extension_12 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_12 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_12 "700" as im %}
+        {% thumbnail post.pic_12 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -501,7 +761,7 @@ top:25%;
         {% if post.file_extension_13 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_13 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_13 "700" as im %}
+        {% thumbnail post.pic_13 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -513,7 +773,7 @@ top:25%;
         {% if post.file_extension_14 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_14 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_14 "700" as im %}
+        {% thumbnail post.pic_14 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -525,7 +785,7 @@ top:25%;
         {% if post.file_extension_15 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_15 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_15 "700" as im %}
+        {% thumbnail post.pic_15 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -537,7 +797,7 @@ top:25%;
         {% if post.file_extension_16 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_16 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_16 "700" as im %}
+        {% thumbnail post.pic_16 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -549,7 +809,7 @@ top:25%;
         {% if post.file_extension_17 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_17 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_17 "700" as im %}
+        {% thumbnail post.pic_17 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -561,7 +821,7 @@ top:25%;
         {% if post.file_extension_18 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_18 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_18 "700" as im %}
+        {% thumbnail post.pic_18 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -573,7 +833,7 @@ top:25%;
         {% if post.file_extension_19 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_19 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_19 "700" as im %}
+        {% thumbnail post.pic_19 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -585,7 +845,7 @@ top:25%;
         {% if post.file_extension_20 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_20 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_20 "700" as im %}
+        {% thumbnail post.pic_20 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -597,7 +857,7 @@ top:25%;
         {% if post.file_extension_21 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_21 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_21 "700" as im %}
+        {% thumbnail post.pic_21 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -609,7 +869,7 @@ top:25%;
         {% if post.file_extension_22 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_22 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_22 "700" as im %}
+        {% thumbnail post.pic_22 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -621,7 +881,7 @@ top:25%;
         {% if post.file_extension_23 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_23 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_23 "700" as im %}
+        {% thumbnail post.pic_23 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -633,7 +893,7 @@ top:25%;
         {% if post.file_extension_24 == ".gif" %}
         <img class="img-responsive" src="{{ MEDIA_URL }}{{ post.pic_24 }}" alt="{{ post.title }}" style="padding:0px;">
         {% else %}
-        {% thumbnail post.pic_24 "700" as im %}
+        {% thumbnail post.pic_24 "2000" as im %}
         <img class="img-responsive" src="{{ im.url }}" alt="{{ post.title }}" style="padding:0px;">
         {% endthumbnail %}
         {% endif %}
@@ -651,7 +911,6 @@ top:25%;
   </div>
 </div>
 
-{% endif %}
 
 
 
@@ -665,19 +924,43 @@ top:25%;
 {% if post.text %}{% load markup %}{{ post.text|safe|linebreaksbr|urlize }}{% endif %}
 {% if post.content_video %}{% load markup %}{{ post.content_video|safe|linebreaksbr|urlize }}{% endif %}
 
-
+<div class="row tags">
+  <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+    {% for tag in post.tag.all %}<div style="float:left;"><a href={% url "blogs.views.tag" tag.slug %}><span class="label label-default tag_span">#{{ tag.name }}</span></a></div>{% endfor %}
+  </div>
+</div>
 
 
 
         <div class="row" style="padding-bottom:10px;">
           <div class="col-xs-12" style="padding-top:10px;padding-left:30px;" >
             <div class="addthis_toolbox addthis_default_style">
+
+              <div class="pull-right">
+              <div class="g-plusone" data-size="medium" data-href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}"></div>
+
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+            </div>
+<div class="hidden-xs">
+              <div class="pull-right">
+<a href="//www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark"  data-pin-color="white"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_20.png" /></a>
+              </div>
+</div>
+
               <div id="tw">
                 <a class="addthis_button_tweet pull-right" style="width:90px;!important;height:20px !important;"></a>
               </div>
+<div class="hidden-xs">
               <div id="fb_share">
                 <a class="addthis_button_facebook_share pull-right" fb:share:layout="button" style="width:75px !important;height:20px !important;padding:none;"></a>
               </div>
+</div>
               <div id="fb">
                 <a class="addthis_button_facebook_like pull-right" fb:like:href="{% if blog.custom_domain %}http://{{ blog.custom_domain }}{{ post.get_absolute_url }}{% else %}http://{{ blog.slug }}.blobon.com{{ post.get_absolute_url }}{% endif %}" fb:like:layout="button_count" style="width:95px !important;height:20px !important;"></a>
               </div>
@@ -696,6 +979,9 @@ top:25%;
 {% endfor %}
          </div>
          <hr>
+
+<div class="row" style="padding-bottom:20px;">
+  <div class="col-lg-6 col-md-6 col-sm-6 col-sx-12">
          <div class="media" id="heading">
            <div class="pull-left">
            {% if post.author.userprofile.avatar %}
@@ -705,15 +991,8 @@ top:25%;
             </a>
            {% endif %}
            </div>
-           <div class="btn-group pull-right">
-             <a href="{{ prev_post.get_absolute_url }}" class="btn btn-sm btn-default prev_next" title="{% trans "View previous post" %}">
-               <span class="glyphicon glyphicon-chevron-left"></span>{% trans "Previous" %}
-             </a>
-             <a href="{{ next_post.get_absolute_url }}" class="btn btn-sm btn-default prev_next" title="{% trans "View next post" %}">
-                {% trans "Next" %}
-               <span class="glyphicon glyphicon-chevron-right"></span>
-             </a>
-           </div>
+
+
            <div class="media-body fontBlobon">
              <h5 class="media-heading fontBlobon" style="margin-right: 10px;">
                <a href="http://{% if blog.custom_domain %}{{ blog.custom_domain }}/a/{{ post.author.username }}{% else %}{{ blog.slug }}.blobon.com/a/{{ post.author.username }}{% endif %}">
@@ -723,12 +1002,26 @@ top:25%;
              <p class="text-muted">{% trans "Published" %} {{ post.pub_date|naturaltime }}{% if post.source %} via <a href="{{ post.source }}" target="_blank">Source</a>{% endif %}</p>
            </div>
          </div>
-         <div id="infos" class="panel">
+
+  </div>
 
 
+  <div class="col-lg-6 col-md-6 col-sm-6 col-sx-12">
+           <div class="btn-group pull-right">
+             <a href="{{ prev_post.get_absolute_url }}" class="btn btn-sm btn-default prev_next" title="{% trans "View previous post" %}">
+               <span class="glyphicon glyphicon-chevron-left"></span>{% trans "Previous" %}
+             </a>
+             <a href="{{ next_post.get_absolute_url }}" class="btn btn-sm btn-default prev_next" title="{% trans "View next post" %}">
+                {% trans "Next" %}
+               <span class="glyphicon glyphicon-chevron-right"></span>
+             </a>
+           </div>
+  </div>
+</div>
 
 
-         </div>
+    <hr>
+
 
 {% if comments %}
 <div class="row comment">
@@ -874,6 +1167,26 @@ $('#new_comment').validate({
       });
     </script>
 
+
+<script>
+$(document).ready(function(){
+var $myModal = $('#img_box').modal({show: false});
+var $myCarousel = $('#modalCarousel').carousel({'interval': false});
+
+
+$('.btn_modal').click(function() {
+        $myModal.modal('show');
+        $myCarousel.carousel($(this).index('.btn_modal'));
+
+
+});
+
+
+
+
+
+});
+</script>
 
        </div>
       {% endblock %}
