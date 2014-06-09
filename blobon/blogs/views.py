@@ -599,12 +599,40 @@ def videos(request):
 
 @never_cache
 def single(request, shorturl):
+    prev_cat_1 = request.GET.get('cat', '')
+    prev_tag_1 = request.GET.get('tag', '')
     request.subdomain = None
     host = request.META.get('HTTP_HOST', '')
     host_s = host.replace('www.', '').split('.')
     subd = host_s[0]    
     post = get_object_or_404(Post, base62id=shorturl)
     blog = post.blog
+    next_post_c = ""
+    prev_post_c = ""
+    next_post_t = ""
+    prev_post_t = ""
+    if prev_cat_1 == '':
+      prev_cat = ""
+    else:
+      prev_cat = get_object_or_404(Category, blog=blog, slug=prev_cat_1)
+      next_post_c_query = Post.objects.filter(blog=blog).filter(category__in=[prev_cat]).filter(pub_date__lt=post.pub_date).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
+      prev_post_c_query = Post.objects.filter(blog=blog).filter(category__in=[prev_cat]).filter(pub_date__gt=post.pub_date).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
+      if (next_post_c_query.count() > 0):
+        next_post_c = next_post_c_query[0]
+     
+      if (prev_post_c_query.count() > 0):
+        prev_post_c = prev_post_c_query[0]
+    if prev_tag_1 == '':
+      prev_tag = ""
+    else:
+      prev_tag = get_object_or_404(Tag, blog=blog, slug=prev_tag_1)
+      next_post_t_query = Post.objects.filter(blog=blog).filter(tag__in=[prev_tag]).filter(pub_date__lt=post.pub_date).filter(status='P').order_by('-pub_date').exclude(pk=post.id)[:1]
+      prev_post_t_query = Post.objects.filter(blog=blog).filter(tag__in=[prev_tag]).filter(pub_date__gt=post.pub_date).filter(status='P').order_by('pub_date').exclude(pk=post.id)[:1]
+      if (next_post_t_query.count() > 0):
+        next_post_t = next_post_t_query[0]
+      
+      if (prev_post_t_query.count() > 0):
+        prev_post_t = prev_post_t_query[0]
     cats = post.category.all()
     latest_post_cat = Post.objects.filter(blog=blog).filter(status='P').filter(category__in=cats).filter(is_discarded=False).order_by('-pub_date').exclude(pk=post.id)[:1]
     menus = Menu.objects.filter(blog=blog)
@@ -653,13 +681,14 @@ def single(request, shorturl):
                 template = blog.template
                 return render_to_response('blogs/template_single.html',
                                          {'menus': menus, 'categories': categories, 'post': post,'latest_post_cat':latest_post_cat, 'latest_post_list': latest_post_list,
-                                         'next_post_cat':next_post_cat, 'next_post': next_post, 'prev_post': prev_post,'template': template,
+                                         'prev_cat': prev_cat,'next_post_cat':next_post_cat, 'next_post': next_post, 'prev_post': prev_post,'template': template,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
               else:
                 return render_to_response('blogs/blog_single.html',
                                          {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
-                                         'next_post': next_post, 'prev_post': prev_post,
+                                         'next_post': next_post, 'prev_post': prev_post,'prev_cat':prev_cat,'next_post_c': next_post_c, 'prev_post_c': prev_post_c,
+                                         'prev_tag':prev_tag,'next_post_t': next_post_t, 'prev_post_t': prev_post_t,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
             else:
@@ -680,7 +709,8 @@ def single(request, shorturl):
               else:
                 return render_to_response('blogs/blog_single.html',
                                          {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
-                                         'next_post': next_post, 'prev_post': prev_post,
+                                         'next_post': next_post,'prev_cat': prev_cat, 'prev_post': prev_post,'next_post_c': next_post_c, 'prev_post_c': prev_post_c,
+                                         'prev_tag':prev_tag,'next_post_t': next_post_t, 'prev_post_t': prev_post_t,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
         else:
@@ -719,7 +749,8 @@ def single(request, shorturl):
         else:
           return render_to_response('blogs/blog_single.html',
                                     {'menus': menus, 'categories': categories, 'subd': subd, 'slug': slug, 'post': post, 'latest_post_list': latest_post_list,
-                                    'next_post': next_post, 'prev_post': prev_post,
+                                    'next_post': next_post, 'prev_post': prev_post,'prev_cat': prev_cat,'next_post_c': next_post_c, 'prev_post_c': prev_post_c,
+                                    'prev_tag':prev_tag,'next_post_t': next_post_t, 'prev_post_t': prev_post_t,
                                     'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                     context_instance=RequestContext(request))                           
     elif subd == blog.slug:
@@ -767,7 +798,8 @@ def single(request, shorturl):
               else:
                 return render_to_response('blogs/blog_single.html',
                                          {'menus': menus, 'categories': categories, 'post': post, 'latest_post_list': latest_post_list,
-                                         'next_post': next_post, 'prev_post': prev_post,
+                                         'next_post': next_post, 'prev_post': prev_post,'prev_cat': prev_cat,'next_post_c': next_post_c, 'prev_post_c': prev_post_c,
+                                         'prev_tag':prev_tag,'next_post_t': next_post_t, 'prev_post_t': prev_post_t,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
             else:
@@ -788,7 +820,8 @@ def single(request, shorturl):
               else:
                 return render_to_response('blogs/blog_single.html',
                                          {'menus': menus, 'categories': categories, 'subd': subd, 'slug': slug,'post': post, 'latest_post_list': latest_post_list,
-                                         'next_post': next_post, 'prev_post': prev_post,
+                                         'next_post': next_post, 'prev_post': prev_post,'prev_cat': prev_cat,'next_post_c': next_post_c, 'prev_post_c': prev_post_c,
+                                         'prev_tag':prev_tag,'next_post_t': next_post_t, 'prev_post_t': prev_post_t,
                                          'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments,},
                                          context_instance=RequestContext(request))
 
@@ -829,7 +862,8 @@ def single(request, shorturl):
         else:
           return render_to_response('blogs/blog_single.html',
                                     {'menus': menus, 'categories': categories, 'subd': subd, 'slug': slug, 'post': post, 'latest_post_list': latest_post_list,
-                                    'next_post': next_post, 'prev_post': prev_post,
+                                    'next_post': next_post, 'prev_post': prev_post,'prev_cat': prev_cat,'next_post_c': next_post_c, 'prev_post_c': prev_post_c,
+                                    'prev_tag':prev_tag,'next_post_t': next_post_t, 'prev_post_t': prev_post_t,       
                                     'user': post.author, 'blog': post.blog, 'form': form, 'comment_form': comment_form, 'comments': comments, },
                                     context_instance=RequestContext(request))
 

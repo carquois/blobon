@@ -891,7 +891,6 @@ top:25%;
 
 <div id="thumb_wrapper"></div>
 
-
 {% if post.content %}{% load markup %}{{ post.content|safe|linebreaksbr|urlize }}{% endif %}
 {% if post.content_0 %}{% load markup %}{{ post.content_0|safe|urlize }}{% endif %}
 {% if post.text %}{% load markup %}{{ post.text|safe|linebreaksbr|urlize }}{% endif %}
@@ -981,6 +980,29 @@ top:25%;
 
   <div class="col-lg-6 col-md-6 col-sm-6 col-sx-12">
            <div class="btn-group pull-right">
+
+ {% if prev_cat %}
+             <a href="{{ prev_post_c.get_absolute_url }}?cat={{ prev_cat.slug }}" class="btn btn-sm btn-default prev_next" title="{% trans "View previous post" %}">
+               <span class="glyphicon glyphicon-chevron-left"></span>{% trans "Previous" %}
+             </a>
+             <a href="{{ next_post_c.get_absolute_url }}?cat={{ prev_cat.slug }}" class="btn btn-sm btn-default prev_next" title="{% trans "View next post" %}">
+                {% trans "Next" %}
+               <span class="glyphicon glyphicon-chevron-right"></span>
+             </a>
+
+
+
+
+ {% else %}
+ {% if prev_tag %}
+             <a href="{{ prev_post_t.get_absolute_url }}?tag={{ prev_tag.slug }}" class="btn btn-sm btn-default prev_next" title="{% trans "View previous post" %}">
+               <span class="glyphicon glyphicon-chevron-left"></span>{% trans "Previous" %}
+             </a>
+             <a href="{{ next_post_t.get_absolute_url }}?tag={{ prev_tag.slug }}" class="btn btn-sm btn-default prev_next" title="{% trans "View next post" %}">
+                {% trans "Next" %}
+               <span class="glyphicon glyphicon-chevron-right"></span>
+             </a>
+ {% else %}
              <a href="{{ prev_post.get_absolute_url }}" class="btn btn-sm btn-default prev_next" title="{% trans "View previous post" %}">
                <span class="glyphicon glyphicon-chevron-left"></span>{% trans "Previous" %}
              </a>
@@ -988,6 +1010,12 @@ top:25%;
                 {% trans "Next" %}
                <span class="glyphicon glyphicon-chevron-right"></span>
              </a>
+
+ {% endif %}
+ {% endif %}
+
+
+
            </div>
   </div>
 </div>
