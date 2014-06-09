@@ -201,11 +201,21 @@ def index(request):
 
 @never_cache
 def category(request, slug):
-      category = get_object_or_404(Category, slug=slug)
+      request.subdomain = None
+      host = request.META.get('HTTP_HOST', '')
+      host_clean = host.replace('www.', '')
+      host_s = host.replace('www.', '').split('.')
+      host_one = host.split('.')
+      if len(host_s) > 2:
+          request.subdomain = host_s[0]
+      if Blog.objects.filter(custom_domain=host).exists():
+        blog = Blog.objects.get(custom_domain=host)
+      elif Blog.objects.filter(slug=request.subdomain).exists():
+          blog = Blog.objects.get(slug=request.subdomain)
+      category = get_object_or_404(Category, blog=blog, slug=slug)
       posts = paginate(request,
                        Post.objects.filter(status='P').filter(category=category).filter(is_discarded=False).order_by('-pub_date'),
                        6)
-      blog = category.blog
       form = SubscriptionForm()
       cat = category
       categories = Category.objects.filter(blog=blog)
@@ -221,11 +231,21 @@ def category(request, slug):
 
 @never_cache
 def tag(request, slug):
-      tag = get_object_or_404(Tag, slug=slug)
+      request.subdomain = None
+      host = request.META.get('HTTP_HOST', '')
+      host_clean = host.replace('www.', '')
+      host_s = host.replace('www.', '').split('.')
+      host_one = host.split('.')
+      if len(host_s) > 2:
+          request.subdomain = host_s[0]
+      if Blog.objects.filter(custom_domain=host).exists():
+        blog = Blog.objects.get(custom_domain=host)
+      elif Blog.objects.filter(slug=request.subdomain).exists():
+          blog = Blog.objects.get(slug=request.subdomain)
+      tag = get_object_or_404(Tag, blog=blog, slug=slug)
       posts = paginate(request,
                        Post.objects.filter(status='P').filter(tag=tag).filter(is_discarded=False).order_by('-pub_date'),
                        6)
-      blog = tag.blog
       form = SubscriptionForm()
       main_tag = tag
       categories = Category.objects.filter(blog=blog)

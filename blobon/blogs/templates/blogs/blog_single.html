@@ -439,13 +439,7 @@ top:25%;
            </div>
            {% endif %}
 
-
-
-
-
-
        {% endif %}
-
 
          {% if post.layout_type == "g" %}
            {% if post.pic_1 %}
@@ -462,8 +456,6 @@ top:25%;
 </a>
              </div>
 
-           {% endif %}
-
 
            {% if post.pic_2 %}
              <div class="col-xs-4 sm_img">
@@ -477,6 +469,8 @@ top:25%;
                {% endif %}
 </a>
              </div>
+
+            {% endif %}
              {% if post.pic_3 %}
              <div class="col-xs-4 sm_img">
 <a class="btn_modal" data-slide-index="2">
@@ -493,18 +487,8 @@ top:25%;
            </div>
            {% endif %}
 
-
-
-
-
-
-
-
-
-
-
-           {% if post.pic_4 %}
            <div class="row">
+           {% if post.pic_4 %}
              <div class="col-xs-4 sm_img">
 <a class="btn_modal" data-slide-index="3">
                {% if post.file_extension_4 == ".gif" %}
@@ -516,10 +500,7 @@ top:25%;
                {% endif %}
 </a>
              </div>
-           
            {% endif %}
-        
-        
            {% if post.pic_5 %}
              <div class="col-xs-4 sm_img">
 <a class="btn_modal" data-slide-index="4">
@@ -532,6 +513,7 @@ top:25%;
                {% endif %}
 </a>
              </div>
+          {% endif %}
              {% if post.pic_6 %}
              <div class="col-xs-4 sm_img">
 <a class="btn_modal" data-slide-index="5">
@@ -546,15 +528,6 @@ top:25%;
              </div>
              {% endif %}
            </div>
-           {% endif %}
-
-
-
-
-
-
-
-
 
        {% endif %}
 
