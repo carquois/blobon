@@ -526,15 +526,14 @@ class Tag(models.Model):
     blog = models.ForeignKey(Blog, related_name="Blog_tag", null=True)
     name = models.CharField(verbose_name=_("Name"), max_length=140, null=True, blank=True)
     description = models.CharField(verbose_name=_("Description"), max_length=1000, null=True, blank=True)
-    slug = models.SlugField(max_length=140, unique=True)
+    slug = models.SlugField(max_length=140, blank=True)
     created = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     def __unicode__(self):
-        return self.slug 
+        return self.name 
     def save(self, *args, **kwargs):
         if not self.slug:
             unique_slugify(self, self.name)
         super(Tag, self).save(*args, **kwargs)
-
 
 
 class Post(models.Model):
