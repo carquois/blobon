@@ -1,0 +1,8 @@
+Hello you have a new comment for your blog : {{ blog_title }}.
+
+    Comment: {{ comment }}
+    Name: {{ name }}
+    Email: {{ email }}
+    Website: {{ website }}
+
+Manage this comment

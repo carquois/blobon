@@ -3864,7 +3864,7 @@ border-radius: 4px;
 
     <script>
       $(document).ready(function(){
-        $('#id_video_url').keyup(function() {
+        $('#id_video_url').change(function() {
         if($(this).val() != '') {
           $(".submitvideo").prop("disabled", false);
           $('#save_draft_video').prop("disabled", false);
@@ -3879,7 +3879,7 @@ border-radius: 4px;
 
     <script>
       $(document).ready(function(){
-        $('#id_soundcloud_url').keyup(function() {
+        $('#id_soundcloud_url').change(function() {
         if($(this).val() != '') {
           $(".submitvideo").prop("disabled", false);
           $('#save_draft_video').prop("disabled", false);

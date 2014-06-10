@@ -52,7 +52,7 @@
 
     <script>
       $(document).ready(function(){
-        $('#id_email').keyup(function() {
+        $('#id_email').change(function() {
         if($(this).val() != '') {
           $('#subscribe_submit').prop("disabled", false);
           }

@@ -231,8 +231,8 @@
 
     <script>
       $(document).ready(function(){
-        $('#id_name').keyup(function() {
-        if($(this).val() != '' && $('#id_subject').val() != '' & $('#id_content').val() != '') {
+        $('#id_name').change(function() {
+        if($(this).val() != '' && $('#id_subject').val() != '' && $('#id_message').val() != '') {
           $('#submitemail').prop("disabled", false);
           }
         else {
@@ -244,8 +244,8 @@
 
     <script>
       $(document).ready(function(){
-        $('#id_subject').keyup(function() {
-        if($(this).val() != '' && $('#id_name').val() != '' & $('#id_content').val() != '') {
+        $('#id_subject').change(function() {
+        if($(this).val() != '' && $('#id_name').val() != '' && $('#id_message').val() != '') {
           $('#submitemail').prop("disabled", false);
           }
         else {
@@ -257,8 +257,8 @@
 
     <script>
       $(document).ready(function(){
-        $('#id_content').keyup(function() {
-        if($(this).val() != '' && $('#id_subject').val() != '' & $('#id_name').val() != '') {
+        $('#id_message').change(function() {
+        if($(this).val() != '' && $('#id_subject').val() != '' && $('#id_name').val() != '') {
           $('#submitemail').prop("disabled", false);
           }
         else {
