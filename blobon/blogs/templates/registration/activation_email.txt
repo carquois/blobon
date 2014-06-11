@@ -1,11 +1,15 @@
+{% load i18n %}
+
+{% blocktrans with activation_key as key %}
 Welcome to blobon.com
 
 Please use this link to activate your account:
 
-http://blobon.com/accounts/activate/{{ activation_key }}/
+http://blobon.com/accounts/activate/{{ key }}/
 
 After activation you can login to the site:
 
-http://blobon.com/accounts/login/
+http://blobon.com/login/
 
 Thank you
+{% endblocktrans %}

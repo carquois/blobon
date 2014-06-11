@@ -43,8 +43,6 @@ a:hover {
 .btn-default:focus {
   color: #333;
   text-shadow: none; /* Prevent inheritence from `body` */
-  background-color: #fff;
-  border: 1px solid #fff;
 }
 
 
@@ -61,7 +59,6 @@ body {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  box-shadow: inset 0 0 100px rgba(0,0,0,.5);
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -128,6 +125,9 @@ body {
   .masthead-nav {
     float: right;
   }
+  .cover{
+    margin-top:70px;
+  }
 }
 
 
@@ -151,9 +151,17 @@ body {
 .mastfoot {
   color: #999; /* IE8 proofing */
   color: rgba(255,255,255,.5);
+
 }
-
-
+@media (min-width: 768px) {
+.mastfoot {
+background-color: #ff7f00;
+border-top: solid 1px #fff;
+}
+.site-wrapper{
+margin-bottom: 70px;
+}
+}
 /*
  * Affix and center
  */
@@ -165,10 +173,11 @@ body {
   .masthead {
     position: fixed;
     top: 0;
+    background-color:#ff7f00;
   }
   .mastfoot {
-    position: fixed;
     bottom: 0;
+    position: fixed; 
   }
   {% endblock %}
   /* Start the vertical centering */
@@ -231,15 +240,18 @@ body {
 
           <div class="inner cover">
   {% block slogan %}
-            <h1 class="cover-heading">{% trans "Blobon" %}</h1>
-  {% endblock %}
+            <h1 class="cover-heading" style="padding-bottom:10px;">{% trans "Blobon" %}</h1>
+		    <h4 class="cover-heading" style="padding-bottom:15px;">{% trans "Efficient - Lightweight - Social" %}</h4>
+                    <h4 class="cover-heading" style="padding-bottom:15px;">{% trans "The Ultimate Blogging Tool" %}</h4>            
+{% endblock %}
   {% block reg_form %}
   {% endblock %}
 
 
   {% block form %}
             <p class="lead">
-              <a href="#" class="btn btn-lg btn-default" id=invitation_request>{% trans "Request an invitation" %}</a>
+              <a href="/accounts/register/" class="btn btn-lg btn-primary">{% trans "Create an account" %}</a>
+              <a href="/about/" class="btn btn-lg btn-default">{% trans "Learn more" %}</a>
             </p>
           <form id="invitation-form" role="form" action="{% url 'blogs.views.index' %}" method="post" style="display:none;">{% csrf_token %}
             <div class="form-group" style="padding:10px;">

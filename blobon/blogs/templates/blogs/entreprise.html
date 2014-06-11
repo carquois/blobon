@@ -298,7 +298,7 @@ body {
 
     <script>
       $(document).ready(function(){
-        $('#id_message').keyup(function() {
+        $('#id_message').change(function() {
         if($(this).val() != '' && $('#id_from_email').val() != '') {
           $('#send').prop("disabled", false);
           }

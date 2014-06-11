@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-28 09:59-0400\n"
+"POT-Creation-Date: 2014-06-11 13:01-0400\n"
 "PO-Revision-Date: 2014-04-17 13:23-0400\n"
 "Last-Translator: Gabriel Dancause <gab@blobon.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,579 +17,586 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: forms.py:13
+#: forms.py:52
 msgid "Enter your page title"
 msgstr "Entrez le titre de votre page"
 
-#: forms.py:17
+#: forms.py:56
 msgid "Your page content here"
 msgstr "Votre contenu ici"
 
-#: forms.py:28
+#: forms.py:67
 msgid "Enter your title"
 msgstr "Entrez votre titre"
 
-#: forms.py:31 forms.py:92
+#: forms.py:70 forms.py:131
 msgid "Your blog adress"
 msgstr "L'adresse de votre blogue"
 
-#: forms.py:34
+#: forms.py:73
 msgid "Enter the blog moderator email here"
 msgstr "Entrez le modérateur du blogue ici"
 
-#: forms.py:42
+#: forms.py:81
 msgid "Title :"
 msgstr "Titre :"
 
-#: forms.py:42
+#: forms.py:81
 msgid "Enter your title here."
 msgstr "Entrez le titre ici"
 
-#: forms.py:43
+#: forms.py:82
 msgid "Title translated :"
 msgstr "Titre traduit :"
 
-#: forms.py:43
+#: forms.py:82
 msgid "Enter your translation here."
 msgstr "Entrez votre traduction ici."
 
-#: forms.py:44
+#: forms.py:83
 msgid "Source :"
 msgstr "Source :"
 
-#: forms.py:45
+#: forms.py:84
 msgid "Enter your content here"
 msgstr "Entrez votre contenu ici"
 
-#: forms.py:49 forms.py:294
+#: forms.py:88 forms.py:353
 msgid "Enter your translation here"
 msgstr "Entrez votre traduction ici"
 
-#: forms.py:53 forms.py:149
+#: forms.py:92 forms.py:204
 msgid "Enter your message here"
 msgstr "Entrez votre message ici"
 
-#: forms.py:66
+#: forms.py:105
 msgid "Your name"
 msgstr "Votre nom"
 
-#: forms.py:70
+#: forms.py:109
 msgid "Leave your comment here"
 msgstr "Laissez votre commentaire ici"
 
-#: forms.py:74 forms.py:153
+#: forms.py:113 forms.py:208
 msgid "Enter your email here"
 msgstr "Entrez votre courriel ici"
 
-#: forms.py:77
+#: forms.py:116
 msgid "Your website url here"
 msgstr "Le lien vers votre site Web"
 
-#: forms.py:80
+#: forms.py:119
 msgid "Your occupation here"
 msgstr "Votre emploi"
 
-#: forms.py:88
+#: forms.py:127
 msgid "Your blog title"
 msgstr "Le titre de votre blogue"
 
-#: forms.py:95
+#: forms.py:134
 msgid "Your blog password"
 msgstr "Le mot de passe de votre blogue"
 
-#: forms.py:98
+#: forms.py:137
 msgid "Your custom domain"
 msgstr "Votre domaine personnalisé"
 
-#: forms.py:101 forms.py:105
+#: forms.py:140 forms.py:144
 msgid "Describe Your Blog"
 msgstr "Décrivez votre blogue"
 
-#: forms.py:110
+#: forms.py:149
 msgid "Your blog main color"
 msgstr "La couleur principale de votre blogue"
 
-#: forms.py:119
+#: forms.py:154
+msgid "Link to your Pinterest page here"
+msgstr "Entrez le lien vers cotre page Pinterest ici"
+
+#: forms.py:158
+msgid "Link to your Facebook page here"
+msgstr "Entrez le lien vers votre page Facebook ici"
+
+#: forms.py:162
+msgid "Link to your Twitter page here"
+msgstr "Entrez le lien vers cotre page Twitter ici"
+
+#: forms.py:165
+msgid "Your Google Analytics account number"
+msgstr "Votre # de compte Google Analytic"
+
+#: forms.py:174
 msgid "Enter the blog password"
 msgstr "Entrez le mot de passe de votre blogue"
 
-#: forms.py:126
+#: forms.py:181
 msgid "Enter email here"
 msgstr "Entrez votre courriel"
 
-#: forms.py:136
-#, fuzzy
+#: forms.py:191
 msgid "Enter feed url here"
-msgstr "Entrez votre courriel"
+msgstr "Entrez l'url du flux rss ici"
 
-#: forms.py:146
+#: forms.py:201
 msgid "Your subject here"
 msgstr "Votre sujet ici"
 
-#: forms.py:159
-#, fuzzy
+#: forms.py:214
 msgid "Your campaign name here"
-msgstr "Le nom de votre catégorie"
+msgstr "Entrez le nom de votre campagne ici"
 
-#: forms.py:163
+#: forms.py:218
 msgid "Your subject"
 msgstr "Votre sujet"
 
-#: forms.py:167
+#: forms.py:222
 msgid "Your message"
 msgstr "Votre message"
 
-#: forms.py:176
-#, fuzzy
+#: forms.py:231
 msgid "Your tag name here"
-msgstr "Le nom de votre catégorie"
+msgstr "Entrez le nom de votre étiquette ici"
 
-#: forms.py:180
-#, fuzzy
+#: forms.py:235
 msgid "Describe your tag"
-msgstr "Décrivez votre catégorie"
+msgstr "Décrivez votre étiquette"
 
-#: forms.py:184 forms.py:202 templates/blogs/administratesettings.html:210
+#: forms.py:239 forms.py:257 templates/blogs/administratesettings.html:252
 msgid "Slug"
 msgstr "URL"
 
-#: forms.py:194
+#: forms.py:249
 msgid "Your category name here"
 msgstr "Le nom de votre catégorie"
 
-#: forms.py:198
+#: forms.py:253
 msgid "Describe your category"
 msgstr "Décrivez votre catégorie"
 
-#: forms.py:205
+#: forms.py:260
 msgid "Your category color"
 msgstr "La couleur de votre catégorie"
 
-#: forms.py:221
+#: forms.py:276
 msgid "Write your title here"
 msgstr "Entrez votre titre ici"
 
-#: forms.py:225
+#: forms.py:280
+msgid "Write your tag name or tags separated by commas"
+msgstr ""
+"Mettre le nom de votre étiquette, vous pouvez en mettre plusieurs en les "
+"séparant par des virgules"
+
+#: forms.py:284
 msgid "Write your translated title here"
 msgstr "Entrez votre traduction ici"
 
-#: forms.py:229
+#: forms.py:288
 msgid "Your source"
 msgstr "Votre source"
 
-#: forms.py:233
+#: forms.py:292
 msgid "Write artist name here"
 msgstr "Écrivez le nom de l'artiste ici"
 
-#: forms.py:237
+#: forms.py:296
 msgid "Write a new post"
 msgstr "Écrivez un nouvel article"
 
-#: forms.py:242
+#: forms.py:301
 msgid "Write your text here"
 msgstr "Entrez votre texte ici"
 
-#: forms.py:249 forms.py:254 forms.py:259 forms.py:264 forms.py:269
-#: forms.py:274 forms.py:279 forms.py:284
+#: forms.py:308 forms.py:313 forms.py:318 forms.py:323 forms.py:328
+#: forms.py:333 forms.py:338 forms.py:343
 msgid "Write something about this image"
 msgstr "Écrivez quelque chose à propos de votre image"
 
-#: forms.py:289
+#: forms.py:348
 msgid "Write something about this video"
 msgstr "Écrivez quelque chose à propos de cette vidéo"
 
-#: forms.py:298
-#, fuzzy
+#: forms.py:357
 msgid "Youtube or Vimeo url here"
-msgstr "Le lien vers votre site Web"
+msgstr "Entrez le lien du vidéo Youtube ou Vimeo ici"
 
-#: forms.py:302
+#: forms.py:361
 msgid "Soundcloud playlist url here"
-msgstr ""
+msgstr "Entrez le lien de votre playlist Soundcloud ici"
 
-#: models.py:364 models.py:442 models.py:468 models.py:487 models.py:756
-#: models.py:785 templates/blogs/administrateblog.html:2241
-#: templates/blogs/administrateblog.html:2284
-#: templates/blogs/administrateblog.html:2350
+#: models.py:400 models.py:483 models.py:509 models.py:528 models.py:798
+#: models.py:827 templates/blogs/administrateblog.html:2331
+#: templates/blogs/administrateblog.html:2374
+#: templates/blogs/administrateblog.html:2440
 #: templates/blogs/administratecomments.html:52
 #: templates/blogs/administratetags.html:54
 msgid "Name"
 msgstr "Nom"
 
-#: models.py:365
+#: models.py:401
 msgid "Base"
-msgstr ""
+msgstr "Base"
 
-#: models.py:366
+#: models.py:402
 msgid "Single"
 msgstr "Seul"
 
-#: models.py:367 templates/blogs/administrateposts.html:59
+#: models.py:403 templates/blogs/administrateposts.html:59
 msgid "Category"
 msgstr "Catégorie"
 
-#: models.py:368
-#, fuzzy
+#: models.py:404
 msgid "Archives"
-msgstr "Archive"
+msgstr "Archives"
 
-#: models.py:374
+#: models.py:410
 msgid "Moderator email"
 msgstr "Courriel du modérateur"
 
-#: models.py:376 templates/blogs/administrateblog.html:1981
+#: models.py:412 templates/blogs/administrateblog.html:2066
 msgid "URL"
 msgstr "URL"
 
-#: models.py:377 models.py:412 models.py:430 models.py:475 models.py:507
-#: templates/blogs/administrateblog.html:2058
-#: templates/blogs/administrateblog.html:2095
-#: templates/blogs/administrateblog.html:2190
+#: models.py:413 models.py:453 models.py:471 models.py:516 models.py:547
+#: templates/blogs/administrateblog.html:2148
+#: templates/blogs/administrateblog.html:2185
+#: templates/blogs/administrateblog.html:2280
 #: templates/blogs/administratepages.html:28
 #: templates/blogs/administrateposts.html:57
-#: templates/blogs/administratesettings.html:194
+#: templates/blogs/administratesettings.html:236
 #: templates/blogs/createblog.html:42 templates/blogs/translation.html:62
 msgid "Title"
 msgstr "Titre"
 
-#: models.py:383 templates/blogs/administratesettings.html:310
+#: models.py:424 templates/blogs/administratesettings.html:355
 msgid "Main image"
 msgstr "Image principale"
 
-#: models.py:384 models.py:446 templates/blogs/administratesettings.html:293
+#: models.py:425 models.py:487 templates/blogs/administratesettings.html:338
 msgid "Main color"
 msgstr "Couleur principale"
 
-#: models.py:386 templates/blogs/administratesettings.html:226
+#: models.py:427 templates/blogs/administratesettings.html:268
 msgid "Password"
 msgstr "Mot de passe"
 
-#: models.py:387 templates/blogs/administratesettings.html:242
+#: models.py:428 templates/blogs/administratesettings.html:284
 msgid "Custom domain"
 msgstr "Domaine"
 
-#: models.py:388 models.py:443 models.py:488
-#: templates/blogs/administrateblog.html:2285
-#: templates/blogs/administrateblog.html:2351
-#: templates/blogs/administratesettings.html:258
+#: models.py:429 models.py:484 models.py:529
+#: templates/blogs/administrateblog.html:2375
+#: templates/blogs/administrateblog.html:2441
+#: templates/blogs/administratesettings.html:300
 #: templates/blogs/administratetags.html:55
 msgid "Description"
 msgstr "Description"
 
-#: models.py:393 templates/blogs/administratesettings.html:276
+#: models.py:434 templates/blogs/administratesettings.html:321
 msgid "Short description"
 msgstr "Courte description"
 
-#: models.py:402 templates/blogs/rss_auto_post.html:55
+#: models.py:443 templates/blogs/rss_auto_post.html:55
 msgid "Feed url"
 msgstr "URL du fil"
 
-#: models.py:413 models.py:754
+#: models.py:454 models.py:796
 msgid "Content"
 msgstr "Contenu"
 
-#: models.py:431 models.py:563 templates/blogs/contact.html:49
+#: models.py:472 models.py:605 templates/blogs/contact.html:49
 msgid "Message"
 msgstr "Message"
 
-#: models.py:432 templates/blogs/administrateblog.html:2145
+#: models.py:473 templates/blogs/administrateblog.html:2235
 #: templates/blogs/administrateemails.html:63 templates/blogs/contact.html:43
 msgid "Subject"
 msgstr "Sujet"
 
-#: models.py:448
-#, fuzzy
+#: models.py:489
 msgid "Cat image"
-msgstr "Image principale"
+msgstr "Image de la catégorie"
 
-#: models.py:449
-#, fuzzy
+#: models.py:490
 msgid "Cat email image"
-msgstr "Image principale"
+msgstr "Image du email"
 
-#: models.py:450
-#, fuzzy
+#: models.py:491
 msgid "Cat fb image"
-msgstr "Image principale"
+msgstr "Image fb"
 
-#: models.py:451
-#, fuzzy
+#: models.py:492
 msgid "Cat tw image"
-msgstr "Image principale"
+msgstr "Image tw"
 
-#: models.py:452
-#, fuzzy
+#: models.py:493
 msgid "Cat pint image"
-msgstr "Image principale"
+msgstr "Image pinterest"
 
-#: models.py:453
-#, fuzzy
+#: models.py:494
 msgid "Cat caret image"
-msgstr "Image :"
+msgstr "Image caret"
 
-#: models.py:454
+#: models.py:495
 msgid "Cat caret left"
-msgstr ""
+msgstr "Cat caret left"
 
-#: models.py:455
+#: models.py:496
 msgid "Cat caret right"
-msgstr ""
+msgstr "Cat caret right"
 
-#: models.py:456
-#, fuzzy
+#: models.py:497
 msgid "Cat close"
-msgstr "Fermer"
+msgstr "Cat close"
 
-#: models.py:509
+#: models.py:548
+msgid "Temp tag field"
+msgstr "Temp tag field"
+
+#: models.py:550
 msgid "Titre traduit"
 msgstr "Titre traduit"
 
-#: models.py:513
+#: models.py:554
 msgid "Source"
 msgstr "Source"
 
-#: models.py:514
+#: models.py:555
 msgid "Contenu"
 msgstr "Contenu"
 
-#: models.py:522 models.py:523 templates/blogs/administrateblog.html:1928
+#: models.py:562
+msgid "Vimeo thumb URL"
+msgstr "Vimeo thumb URL"
+
+#: models.py:564 models.py:565 templates/blogs/administrateblog.html:2008
 msgid "Video"
 msgstr "Vidéo"
 
-#: models.py:524 templates/blogs/administrateblog.html:264
+#: models.py:566 templates/blogs/administrateblog.html:268
 msgid "Image"
 msgstr "Image"
 
-#: models.py:525
+#: models.py:567
 msgid "Image_0"
 msgstr "Image_0"
 
-#: models.py:526
+#: models.py:568
 msgid "Image_1"
 msgstr "Image_1"
 
-#: models.py:527
+#: models.py:569
 msgid "Image_2"
 msgstr "Image_2"
 
-#: models.py:528
+#: models.py:570
 msgid "Image_3"
 msgstr "Image_3"
 
-#: models.py:529
+#: models.py:571
 msgid "Image_4"
 msgstr "Image_4"
 
-#: models.py:530
+#: models.py:572
 msgid "Image_5"
 msgstr "Image_5"
 
-#: models.py:531
+#: models.py:573
 msgid "Image_6"
 msgstr "Image_6"
 
-#: models.py:532
+#: models.py:574
 msgid "Image_7"
 msgstr "Image_7"
 
-#: models.py:533
+#: models.py:575
 msgid "Image_8"
 msgstr "Image_8"
 
-#: models.py:534
+#: models.py:576
 msgid "Image_9"
 msgstr "Image_9"
 
-#: models.py:535
+#: models.py:577
 msgid "Image_10"
 msgstr "Image_10"
 
-#: models.py:536
+#: models.py:578
 msgid "Image_11"
 msgstr "Image_11"
 
-#: models.py:537
+#: models.py:579
 msgid "Image_12"
 msgstr "Image_12"
 
-#: models.py:538
+#: models.py:580
 msgid "Image_13"
 msgstr "Image_13"
 
-#: models.py:539
+#: models.py:581
 msgid "Image_14"
 msgstr "Image_14"
 
-#: models.py:540
+#: models.py:582
 msgid "Image_15"
 msgstr "Image_15"
 
-#: models.py:541
+#: models.py:583
 msgid "Image_16"
 msgstr "Image_16"
 
-#: models.py:542
+#: models.py:584
 msgid "Image_17"
 msgstr "Image_17"
 
-#: models.py:543
+#: models.py:585
 msgid "Image_18"
 msgstr "Image_18"
 
-#: models.py:544
+#: models.py:586
 msgid "Image_19"
 msgstr "Image_19"
 
-#: models.py:545
+#: models.py:587
 msgid "Image_20"
 msgstr "Image_20"
 
-#: models.py:546
+#: models.py:588
 msgid "Image_21"
 msgstr "Image_21"
 
-#: models.py:547
+#: models.py:589
 msgid "Image_22"
 msgstr "Image_22"
 
-#: models.py:548
+#: models.py:590
 msgid "Image_23"
 msgstr "Image_23"
 
-#: models.py:549
+#: models.py:591
 msgid "Image_24"
 msgstr "Image_24"
 
-#: models.py:550
-#, fuzzy
+#: models.py:592
 msgid "Image_25"
-msgstr "Image_2"
+msgstr "Image_25"
 
-#: models.py:551
-#, fuzzy
+#: models.py:593
 msgid "Image_26"
-msgstr "Image_2"
+msgstr "Image_26"
 
-#: models.py:552
-#, fuzzy
+#: models.py:594
 msgid "Image_27"
-msgstr "Image_2"
+msgstr "Image_27"
 
-#: models.py:553
-#, fuzzy
+#: models.py:595
 msgid "Image_28"
 msgstr "Image_2"
 
-#: models.py:554
-#, fuzzy
+#: models.py:596
 msgid "Image_29"
-msgstr "Image_2"
+msgstr "Image_29"
 
-#: models.py:555
-#, fuzzy
+#: models.py:597
 msgid "Image_30"
-msgstr "Image_0"
+msgstr "Image_30"
 
-#: models.py:556
-#, fuzzy
+#: models.py:598
 msgid "Image_31"
-msgstr "Image_1"
+msgstr "Image_31"
 
-#: models.py:557
-#, fuzzy
+#: models.py:599
 msgid "Image_32"
-msgstr "Image_2"
+msgstr "Image_32"
 
-#: models.py:558
-#, fuzzy
+#: models.py:600
 msgid "Image_33"
-msgstr "Image_3"
+msgstr "Image_33"
 
-#: models.py:559
+#: models.py:601
 msgid "Image_04"
 msgstr "Image_04"
 
-#: models.py:560 templates/blogs/administrateblog.html:1890
-#: templates/blogs/administrateblog.html:1992
+#: models.py:602 templates/blogs/administrateblog.html:1957
+#: templates/blogs/administrateblog.html:2074
 msgid "Text"
 msgstr "Texte"
 
-#: models.py:561
+#: models.py:603
 msgid "Contenu traduit"
 msgstr "Contenu traduit"
 
-#: models.py:564
+#: models.py:606
 msgid "Content_0"
 msgstr "Contenu_0"
 
-#: models.py:565
+#: models.py:607
 msgid "Content_01"
 msgstr "Contenu_01"
 
-#: models.py:566
+#: models.py:608
 msgid "Content_1"
 msgstr "Contenu_1"
 
-#: models.py:567
+#: models.py:609
 msgid "Content_2"
 msgstr "Contenu_2"
 
-#: models.py:568
+#: models.py:610
 msgid "Content_3"
 msgstr "Contenu_3"
 
-#: models.py:569
+#: models.py:611
 msgid "Content_4"
 msgstr "Contenu_4"
 
-#: models.py:570
+#: models.py:612
 msgid "Content_5"
 msgstr "Contenu_5"
 
-#: models.py:571
+#: models.py:613
 msgid "Content_6"
 msgstr "Contenu_6"
 
-#: models.py:572
+#: models.py:614
 msgid "Content_video"
 msgstr "Contenu_vidéo"
 
-#: models.py:573
-#, fuzzy
+#: models.py:615
 msgid "Video URL"
-msgstr "Vidéo"
+msgstr "Vidéo Url"
 
-#: models.py:574
+#: models.py:616
 msgid "Soundcloud URL"
 msgstr ""
 
-#: models.py:577
+#: models.py:619
 msgid "Artist"
 msgstr "Artiste"
 
-#: models.py:755 models.py:773 templates/blogs/administrateblog.html:2242
+#: models.py:797 models.py:815 templates/blogs/administrateblog.html:2332
 #: templates/blogs/administratecomments.html:53
 #: templates/blogs/administrateemails.html:155
 msgid "Email"
 msgstr "Courriel"
 
-#: models.py:757
+#: models.py:799
 msgid "Website"
 msgstr "Site Web"
 
-#: models.py:766
+#: models.py:808
 msgid "Occupation"
 msgstr "Occupation"
 
-#: models.py:779
+#: models.py:821
 msgid "Language_name"
 msgstr "Langue"
 
-#: models.py:780
+#: models.py:822
 msgid "Language_code"
 msgstr "Code de la langue"
 
-#: views.py:63
+#: views.py:65
 #, python-format
 msgid ""
 "Thank you for your interest in the project. %s has been added to our queue "
@@ -598,177 +605,237 @@ msgstr ""
 "Merci pour votre intérêt. Votre courreil %s a été ajouté. Nous entrerons en "
 "contact avec vous sous peu"
 
-#: views.py:768 templates/blogs/createblog.html:30
+#: views.py:1001 templates/blogs/createblog.html:30
 #: templates/blogs/createblog.html.py:36
 msgid "Error!"
 msgstr "Erreur!"
 
-#: views.py:788
+#: views.py:1021
 msgid "Error! Please post a valide youtube url."
 msgstr "Erreur! Veuillez entrer un url Youtube valide"
 
-#: views.py:817
-#, fuzzy
+#: views.py:1050
 msgid "The feed has been added"
 msgstr "Le fil a été ajouté"
 
-#: views.py:864
+#: views.py:1097
 msgid "Congratulation, you just created a blog"
 msgstr "Félicitations, vous venez de créer un blogue"
 
-#: views.py:1023
-#, fuzzy
+#: views.py:1256
 msgid "The tag has been created"
-msgstr "La page est maintenant effacée"
+msgstr "L'étiquette a été crée"
 
-#: views.py:1041
-#, fuzzy
+#: views.py:1274
 msgid "Your tag has been deleted"
-msgstr "Votre page est maintenant effacée"
+msgstr "L'étiquette a été supprimé"
 
-#: views.py:1044
-#, fuzzy
+#: views.py:1277
 msgid "The tag has been deleted"
-msgstr "La page est maintenant effacée"
+msgstr "L'étiquette a été supprimé"
 
-#: views.py:1074
-#, fuzzy
+#: views.py:1307
 msgid "The tag has been change to a category"
-msgstr "Ce blogue n'a aucun catégorie"
+msgstr "L'étiquette a été changé en catégorie"
 
-#: views.py:1089
-#, fuzzy
+#: views.py:1322
 msgid "The category has been change to a tag"
-msgstr "La catégorie est maintenant effacée"
+msgstr "La catégorie a été changé en étiquette"
 
-#: views.py:1106
+#: views.py:1339
 msgid "Your settings have been saved"
 msgstr "Vos paramêtres ont été enregistrés"
 
-#: views.py:1203
+#: views.py:1455
 msgid "Your post has been publish"
 msgstr "Votre article est maintenant publié"
 
-#: views.py:1208
+#: views.py:1460
 msgid "Your post has been add to queue"
 msgstr "Votre article est maintenant ajouté à la queue"
 
-#: views.py:1212
+#: views.py:1464
 msgid "Your post has been save"
 msgstr "Votre article est sauvegardé"
 
-#: views.py:1368
+#: views.py:1620
 msgid "Your page has been created"
 msgstr "Votre page est maintenant créée"
 
-#: views.py:1425 views.py:1440
+#: views.py:1677 views.py:1692
 msgid "Your post has been deleted"
 msgstr "Votre article a été effacé"
 
-#: views.py:1428 views.py:1444
+#: views.py:1680 views.py:1696
 msgid "The post has been deleted"
 msgstr "L'article est maintenant effacé"
 
-#: views.py:1454
+#: views.py:1706
 msgid "Your page has been deleted"
 msgstr "Votre page est maintenant effacée"
 
-#: views.py:1457
+#: views.py:1709
 msgid "The page has been deleted"
 msgstr "La page est maintenant effacée"
 
-#: views.py:1466
+#: views.py:1718
 msgid "Your category has been deleted"
 msgstr "Votre catégorie est maintenant effacée"
 
-#: views.py:1469
+#: views.py:1721
 msgid "The category has been deleted"
 msgstr "La catégorie est maintenant effacée"
 
-#: views.py:1478
+#: views.py:1731
 msgid "The post has been publish"
 msgstr "L'article est maintenant publié"
 
-#: views.py:1487
+#: views.py:1740
 msgid "The page has been publish"
 msgstr "La page est maintenant publiée"
 
-#: views.py:1517
+#: views.py:1770
 msgid "The subscriber has been deleted"
 msgstr "L'abonné est maintenant effacé"
 
-#: views.py:1526
+#: views.py:1779
 msgid "The feed has been deleted"
 msgstr "Le fil est maintenant effacé"
 
-#: views.py:1536
+#: views.py:1789
 msgid "Your blog has been deleted"
 msgstr "Votre blogue est maintenant effacé"
 
-#: views.py:1540
+#: views.py:1793
 msgid "The blog has been deleted"
 msgstr "Le blogue est maintenant effacé"
 
-#: views.py:1585
+#: views.py:1838
 msgid "Your email has been deleted"
 msgstr "Votre courriel est maintenant effacé"
 
-#: views.py:1588
+#: views.py:1841
 msgid "The email has been deleted"
 msgstr "Le courriel est maintenant effacé"
 
-#: views.py:1600
+#: views.py:1853
 msgid "A new subscriber has been added to your blog"
 msgstr "Un nouvel abonné vient d'être ajouté à votre blogue"
 
-#: views.py:1637 views.py:1647 views.py:1775 views.py:1805
+#: views.py:1890 views.py:1900 views.py:2028 views.py:2058
 msgid "Your message has been sent, thank you!"
 msgstr "Votre message a été envoyé, merci!"
 
-#: views.py:1663 views.py:1695 templates/blogs/password.html:15
+#: views.py:1916 views.py:1948 templates/blogs/password.html:15
 #: templates/blogs/passwordsingle.html:15
 msgid "The password didn't match. Please try again."
 msgstr ""
 "Les mots de passe ne correspondent pas. S'il vous plaît essayez de nouveau"
 
-#: views.py:1758
+#: views.py:2011
 msgid "Thank you. Your comment is now awaiting moderation"
 msgstr "Merci. Votre commentaire sera maintenant modéré avant d'être publié"
 
-#: views.py:1781 views.py:1811
+#: views.py:2034 views.py:2064
 msgid "Oups! It didn't work, please try again with a valid email"
 msgstr "Oups! Essayez de nouveau avec un courriel valide"
 
+#: templates/blogs/about.html:5 templates/blogs/blobon.html:243
+msgid "Blobon"
+msgstr "Blobon"
+
+#: templates/blogs/about.html:9
+msgid ""
+"Blobon is a young innovative digital company, made in Canada. Our mission is "
+"to develop lightweight, simple and effective interfaces for both small and "
+"large businesses and individuals. Our vision is to connect all these "
+"entities together as a large social network.\n"
+"<br />\n"
+"<br />\n"
+"Blobon is an open and flexible technology that adapts to you and to all "
+"types of devices. We are mobile, such as your public.\n"
+"<br />\n"
+"<br />\n"
+"Blobon is also a one-stop turnkey solutions for all your digital needs: "
+"architecture, design, content, strategy, branding. We offer customized and "
+"effective solutions that will simplify your work.\n"
+"<br />\n"
+"<br />\n"
+"Because your audiences are overstretched and increasingly difficult to "
+"satisfy, give them Blobon, a young, social, engaging, easy to use, dynamic "
+"and friendly platform.\n"
+"<br />\n"
+"<br />\n"
+"Finally, Blobon is a straight to the point, friendly and entertaining "
+"network - because life is too short to be bored.\n"
+"<br />\n"
+"<br />\n"
+"You've already spent too long Blobon:"
+msgstr ""
+"Blobon est une jeune entreprise numérique innovante, made in Québec. Notre "
+"mission : développer des interfaces légères, simples et efficaces destinées "
+"aussi bien aux petites et aux grandes entreprises qu'aux individus. Notre "
+"vision : faire communiquer toutes ces entités entre elles sous la forme d'un "
+"vaste réseau social.\n"
+"<br />\n"
+"<br />\n"
+"Blobon est une technologie ouverte et flexible qui s'adapte à vous comme à "
+"tous les types d'appareils. Nous sommes mobiles, comme vos publics.\n"
+"<br />\n"
+"<br />\n"
+"Blobon, c'est aussi un guichet unique de solutions clés en main pour tous "
+"vos besoins numériques : architecture, design, contenus, stratégie, image de "
+"marque. Nous vous offrons des solutions personnalisées et performantes qui "
+"vous simplifieront la tâche.\n"
+"<br />\n"
+"<br />\n"
+"Parce que vos publics sont sursollicités et de plus en plus difficiles à "
+"atteindre, offrez-leur Blobon, une plateforme jeune, sociale, engageante, "
+"simple à utiliser, dynamique et sympathique.\n"
+"<br />\n"
+"<br />\n"
+"Finalement, Blobon, c'est un contact direct, amical et divertissant – parce "
+"que la vie est trop courte pour s'ennuyer.\n"
+"<br />\n"
+"<br />\n"
+"Vous vous êtes déjà passé de Blobon trop longtemps :"
+
+#: templates/blogs/about.html:24
+msgid " contact us now!"
+msgstr " contactez-nous maintenant"
+
+#: templates/blogs/about.html:28 templates/blogs/blobon.html:253
+msgid "Create an account"
+msgstr "Créez un compte"
+
 #: templates/blogs/add_sub_category.html:61
-#, fuzzy
 msgid "Add a sub-category to "
-msgstr "Ajouter une nouvelle catégorie :"
+msgstr "Ajouter une sous-catégorie à "
 
 #: templates/blogs/add_sub_category.html:74
-#, fuzzy
 msgid "Add a color to your category"
-msgstr "Ajouter un titre à vos images"
+msgstr "Ajouter une couleur à votre catégorie"
 
 #: templates/blogs/add_sub_category.html:74
-#, fuzzy
 msgid "Add color"
-msgstr "Couleur principale"
+msgstr "Ajouter une couleur"
 
 #: templates/blogs/add_sub_category.html:75
-#, fuzzy
 msgid "Cancel color"
-msgstr "Couleur principale"
+msgstr "Annuler"
 
 #: templates/blogs/add_sub_category.html:75
 #: templates/blogs/add_sub_category.html:91
 #: templates/blogs/administratecategories.html:92
-#: templates/blogs/administratesettings.html:178
+#: templates/blogs/administratesettings.html:220
 #: templates/blogs/contact.html:62 templates/blogs/createblog.html:70
-#: templates/blogs/createpage.html:13 templates/blogs/editcategory.html:68
-#: templates/blogs/editcategory.html:84 templates/blogs/editemail.html:63
-#: templates/blogs/editpage.html:13 templates/blogs/editpost.html:533
-#: templates/blogs/edittag.html:62 templates/blogs/quicktranslation.html:147
+#: templates/blogs/createpage.html:13 templates/blogs/edit_post.html:689
+#: templates/blogs/editcategory.html:68 templates/blogs/editcategory.html:84
+#: templates/blogs/editemail.html:63 templates/blogs/editpage.html:13
+#: templates/blogs/editpost.html:531 templates/blogs/edittag.html:62
+#: templates/blogs/quicktranslation.html:147
 #: templates/blogs/subscription.html:46 templates/blogs/translatepost.html:193
+#: templates/registration/registration_form.html:12
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -781,589 +848,635 @@ msgstr "Sauvegarder les changements"
 #: templates/blogs/add_sub_category.html:88
 #: templates/blogs/administratecategories.html:105
 #: templates/blogs/administrateemails.html:46
-#: templates/blogs/administratesettings.html:177
-#: templates/blogs/administratetags.html:34
+#: templates/blogs/administratesettings.html:219
+#: templates/blogs/administratetags.html:34 templates/blogs/edit_post.html:685
 #: templates/blogs/editcategory.html:81 templates/blogs/editemail.html:60
-#: templates/blogs/editpage.html:27 templates/blogs/editpost.html:529
+#: templates/blogs/editpage.html:27 templates/blogs/editpost.html:527
 #: templates/blogs/edittag.html:59
 msgid "Save"
 msgstr "Sauvegarder"
 
-#: templates/blogs/administrateblog.html:257
+#: templates/blogs/administrateblog.html:261
 msgid "View blog"
 msgstr "Voir le blogue"
 
-#: templates/blogs/administrateblog.html:257
+#: templates/blogs/administrateblog.html:261
 msgid "All my blogs"
 msgstr "Tous mes blogues"
 
-#: templates/blogs/administrateblog.html:262
-#, fuzzy
+#: templates/blogs/administrateblog.html:266
 msgid "Write a new post quickly"
 msgstr "Écrivez un nouvel article"
 
-#: templates/blogs/administrateblog.html:262
+#: templates/blogs/administrateblog.html:266
 msgid "Quick post"
 msgstr "Article rapide"
 
-#: templates/blogs/administrateblog.html:263
-#, fuzzy
+#: templates/blogs/administrateblog.html:267
 msgid "Write a blog post"
 msgstr "Écrivez un nouvel article"
 
-#: templates/blogs/administrateblog.html:263
+#: templates/blogs/administrateblog.html:267
 msgid "Blog post"
 msgstr "Billet de blogue"
 
-#: templates/blogs/administrateblog.html:264
-#, fuzzy
+#: templates/blogs/administrateblog.html:268
 msgid "Submit one or more images"
-msgstr "Soumettre une ou plusieurs images"
+msgstr "Ajouter une ou plusieurs images"
 
-#: templates/blogs/administrateblog.html:265
+#: templates/blogs/administrateblog.html:269
 msgid "Submit a Youtube video,a Vimeo Video or a Soundcloud playlist"
-msgstr ""
+msgstr "Ajouter un vidéo Youtube, un Viméo ou une piste de Soundcloud"
 
-#: templates/blogs/administrateblog.html:265
+#: templates/blogs/administrateblog.html:269
 msgid "Video and Music"
-msgstr ""
+msgstr "Vidéo et Musique"
 
-#: templates/blogs/administrateblog.html:273
-#: templates/blogs/administrateblog.html:394
-#: templates/blogs/administrateblog.html:810
-#: templates/blogs/administrateblog.html:1348
-#: templates/blogs/administrateblog.html:1861
-#: templates/blogs/administrateblog.html:1953
+#: templates/blogs/administrateblog.html:277
+#: templates/blogs/administrateblog.html:420
+#: templates/blogs/administrateblog.html:851
+#: templates/blogs/administrateblog.html:1401
+#: templates/blogs/administrateblog.html:1929
+#: templates/blogs/administrateblog.html:2020
 msgid "Cancel Title"
 msgstr "Annuler titre"
 
-#: templates/blogs/administrateblog.html:278
+#: templates/blogs/administrateblog.html:282
 msgid "Add a Title to Your Post"
 msgstr "Ajouter un titre à votre article"
 
-#: templates/blogs/administrateblog.html:278
-#: templates/blogs/administrateblog.html:387
-#: templates/blogs/administrateblog.html:803
-#: templates/blogs/administrateblog.html:1341
-#: templates/blogs/administrateblog.html:1854
+#: templates/blogs/administrateblog.html:282
+#: templates/blogs/administrateblog.html:413
+#: templates/blogs/administrateblog.html:844
+#: templates/blogs/administrateblog.html:1394
+#: templates/blogs/administrateblog.html:1922
 msgid "Add a title"
 msgstr "Ajouter un titre"
 
-#: templates/blogs/administrateblog.html:281
+#: templates/blogs/administrateblog.html:285
 msgid "Get More Formating Options"
 msgstr "Avoir plus d'options"
 
-#: templates/blogs/administrateblog.html:281
+#: templates/blogs/administrateblog.html:285
 msgid "Formating Options"
 msgstr "Options de formatage"
 
-#: templates/blogs/administrateblog.html:299
-#: templates/blogs/administrateblog.html:343
-#: templates/blogs/administrateblog.html:775
-#: templates/blogs/administrateblog.html:1312
-#: templates/blogs/administrateblog.html:1829
-#: templates/blogs/administrateblog.html:1903
-#: templates/blogs/administrateblog.html:2012
+#: templates/blogs/administrateblog.html:295
+#: templates/blogs/administrateblog.html:352
+#: templates/blogs/administrateblog.html:802
+#: templates/blogs/administrateblog.html:1352
+#: templates/blogs/administrateblog.html:1883
+#: templates/blogs/administrateblog.html:1971
+#: templates/blogs/administrateblog.html:2090
+#: templates/blogs/edit_post.html:668
+msgid "Create and add a new tag to your post"
+msgstr "Créez et ajouter un nouvel étiquette à votre article"
+
+#: templates/blogs/administrateblog.html:295
+#: templates/blogs/administrateblog.html:352
+#: templates/blogs/administrateblog.html:802
+#: templates/blogs/administrateblog.html:1352
+#: templates/blogs/administrateblog.html:1883
+#: templates/blogs/administrateblog.html:1971
+#: templates/blogs/administrateblog.html:2090
+#: templates/blogs/edit_post.html:668
+msgid "Add a new tag"
+msgstr "Ajouter un nouvel étiquette :"
+
+#: templates/blogs/administrateblog.html:298
+#: templates/blogs/administrateblog.html:355
+#: templates/blogs/administrateblog.html:805
+#: templates/blogs/administrateblog.html:1355
+#: templates/blogs/administrateblog.html:1886
+#: templates/blogs/administrateblog.html:1974
+#: templates/blogs/administrateblog.html:2093
+#: templates/blogs/edit_post.html:671
+msgid "You can add more than one tag by separating them with commas"
+msgstr ""
+"Vous pouvez ajouter un étiquette ou plusieurs en les séparant par des "
+"virgules"
+
+#: templates/blogs/administrateblog.html:300
+#: templates/blogs/administrateblog.html:357
+#: templates/blogs/administrateblog.html:807
+#: templates/blogs/administrateblog.html:1357
+#: templates/blogs/administrateblog.html:1888
+#: templates/blogs/administrateblog.html:1976
+#: templates/blogs/administrateblog.html:2095
+#: templates/blogs/edit_post.html:673
+msgid "Cancel add new tag"
+msgstr "Annuler"
+
+#: templates/blogs/administrateblog.html:315
+#: templates/blogs/administrateblog.html:369
+#: templates/blogs/administrateblog.html:816
+#: templates/blogs/administrateblog.html:1365
+#: templates/blogs/administrateblog.html:1897
+#: templates/blogs/administrateblog.html:1983
+#: templates/blogs/administrateblog.html:2102
 msgid "Submit post"
 msgstr "Soumettre l'article"
 
-#: templates/blogs/administrateblog.html:300
-#: templates/blogs/administrateblog.html:344
-#: templates/blogs/administrateblog.html:776
-#: templates/blogs/administrateblog.html:1313
-#: templates/blogs/administrateblog.html:1830
-#: templates/blogs/administrateblog.html:1904
-#: templates/blogs/administrateblog.html:2013
+#: templates/blogs/administrateblog.html:316
+#: templates/blogs/administrateblog.html:370
+#: templates/blogs/administrateblog.html:817
+#: templates/blogs/administrateblog.html:1366
+#: templates/blogs/administrateblog.html:1898
+#: templates/blogs/administrateblog.html:1984
+#: templates/blogs/administrateblog.html:2103
 #: templates/blogs/createpage.html:27
 msgid "More options"
 msgstr "Plus d'options"
 
-#: templates/blogs/administrateblog.html:305
-#: templates/blogs/administrateblog.html:349
-#: templates/blogs/administrateblog.html:781
-#: templates/blogs/administrateblog.html:1318
-#: templates/blogs/administrateblog.html:1835
-#: templates/blogs/administrateblog.html:1909
-#: templates/blogs/administrateblog.html:2018
+#: templates/blogs/administrateblog.html:321
+#: templates/blogs/administrateblog.html:375
+#: templates/blogs/administrateblog.html:822
+#: templates/blogs/administrateblog.html:1371
+#: templates/blogs/administrateblog.html:1903
+#: templates/blogs/administrateblog.html:1989
+#: templates/blogs/administrateblog.html:2108
 #: templates/blogs/email_empty_draft.html:47
 msgid "Post now"
 msgstr "Publier maintenant"
 
-#: templates/blogs/administrateblog.html:307
-#: templates/blogs/administrateblog.html:351
-#: templates/blogs/administrateblog.html:783
-#: templates/blogs/administrateblog.html:1320
-#: templates/blogs/administrateblog.html:1837
-#: templates/blogs/administrateblog.html:1911
-#: templates/blogs/administrateblog.html:2020
+#: templates/blogs/administrateblog.html:323
+#: templates/blogs/administrateblog.html:377
+#: templates/blogs/administrateblog.html:824
+#: templates/blogs/administrateblog.html:1373
+#: templates/blogs/administrateblog.html:1905
+#: templates/blogs/administrateblog.html:1991
+#: templates/blogs/administrateblog.html:2110
 #: templates/blogs/createpage.html:34
 msgid "Add to the queue"
 msgstr "Ajouter à la queue"
 
-#: templates/blogs/administrateblog.html:308
-#: templates/blogs/administrateblog.html:784
-#: templates/blogs/administrateblog.html:1321
-#: templates/blogs/administrateblog.html:1838
-#: templates/blogs/administrateblog.html:1912
-#: templates/blogs/administrateblog.html:2022
+#: templates/blogs/administrateblog.html:324
+#: templates/blogs/administrateblog.html:825
+#: templates/blogs/administrateblog.html:1374
+#: templates/blogs/administrateblog.html:1906
+#: templates/blogs/administrateblog.html:1992
+#: templates/blogs/administrateblog.html:2112
 #: templates/blogs/administrateposts.html:85
-#, fuzzy
 msgid "To be translated"
-msgstr "Titre traduit :"
+msgstr "À traduire :"
 
-#: templates/blogs/administrateblog.html:366
+#: templates/blogs/administrateblog.html:392
 msgid "Upload a Single Image"
 msgstr "Transférer une image"
 
-#: templates/blogs/administrateblog.html:366
-#, fuzzy
+#: templates/blogs/administrateblog.html:392
 msgid "Single Image"
 msgstr "Image principale"
 
-#: templates/blogs/administrateblog.html:367
+#: templates/blogs/administrateblog.html:393
 msgid "Create an Album of Images"
 msgstr "Créer un album"
 
-#: templates/blogs/administrateblog.html:367
+#: templates/blogs/administrateblog.html:393
 msgid "Create An Album"
 msgstr "Créer un album"
 
-#: templates/blogs/administrateblog.html:372
+#: templates/blogs/administrateblog.html:398
 msgid "Vertical layout : Show two images side by side"
 msgstr "Affichage vertical : montrez deux images l'une à côté de l'autre"
 
-#: templates/blogs/administrateblog.html:373
+#: templates/blogs/administrateblog.html:399
 msgid "Horizontal Layout : Show one big image with 3 thumbnails under it"
 msgstr ""
 "Affichage horizontal : montrez une grosse image avec 3 petites en dessous"
 
-#: templates/blogs/administrateblog.html:374
+#: templates/blogs/administrateblog.html:400
 msgid ""
 "Grid Layout : Shows all the images on one page as thumbnails. Best for "
 "albums with many images."
 msgstr "Affichage d'une grille"
 
-#: templates/blogs/administrateblog.html:376
+#: templates/blogs/administrateblog.html:402
 msgid "Cancel Album"
 msgstr "Annuler album"
 
-#: templates/blogs/administrateblog.html:381
+#: templates/blogs/administrateblog.html:407
 msgid "Cancel vertical album"
 msgstr "Annuler album vertical"
 
-#: templates/blogs/administrateblog.html:387
-#: templates/blogs/administrateblog.html:803
-#: templates/blogs/administrateblog.html:1341
+#: templates/blogs/administrateblog.html:413
+#: templates/blogs/administrateblog.html:844
+#: templates/blogs/administrateblog.html:1394
 msgid "Add a Title to Your Album"
 msgstr "Ajouter un titre à votre album"
 
-#: templates/blogs/administrateblog.html:390
-#: templates/blogs/administrateblog.html:806
-#: templates/blogs/administrateblog.html:1344
+#: templates/blogs/administrateblog.html:416
+#: templates/blogs/administrateblog.html:847
+#: templates/blogs/administrateblog.html:1397
 msgid "Add a Comment to Your Images"
 msgstr "Ajouter un commentaire à vos images"
 
-#: templates/blogs/administrateblog.html:390
-#: templates/blogs/administrateblog.html:806
-#: templates/blogs/administrateblog.html:1344
-#: templates/blogs/administrateblog.html:1857
-#: templates/blogs/administrateblog.html:1961
+#: templates/blogs/administrateblog.html:416
+#: templates/blogs/administrateblog.html:847
+#: templates/blogs/administrateblog.html:1397
+#: templates/blogs/administrateblog.html:1925
+#: templates/blogs/administrateblog.html:2040
 #, fuzzy
 msgid "Add content"
 msgstr "Ajouter du contenu"
 
-#: templates/blogs/administrateblog.html:429
-#: templates/blogs/administrateblog.html:458
-#: templates/blogs/administrateblog.html:487
-#: templates/blogs/administrateblog.html:516
-#: templates/blogs/administrateblog.html:545
-#: templates/blogs/administrateblog.html:574
-#: templates/blogs/administrateblog.html:603
-#: templates/blogs/administrateblog.html:632
-#: templates/blogs/administrateblog.html:661
-#: templates/blogs/administrateblog.html:690
-#: templates/blogs/administrateblog.html:719
-#: templates/blogs/administrateblog.html:874
-#: templates/blogs/administrateblog.html:920
-#: templates/blogs/administrateblog.html:966
-#: templates/blogs/administrateblog.html:1010
-#: templates/blogs/administrateblog.html:1055
-#: templates/blogs/administrateblog.html:1099
-#: templates/blogs/administrateblog.html:1443
-#: templates/blogs/administrateblog.html:1523
-#: templates/blogs/administrateblog.html:1603
+#: templates/blogs/administrateblog.html:455
+#: templates/blogs/administrateblog.html:484
+#: templates/blogs/administrateblog.html:513
+#: templates/blogs/administrateblog.html:542
+#: templates/blogs/administrateblog.html:571
+#: templates/blogs/administrateblog.html:600
+#: templates/blogs/administrateblog.html:629
+#: templates/blogs/administrateblog.html:658
+#: templates/blogs/administrateblog.html:687
+#: templates/blogs/administrateblog.html:716
+#: templates/blogs/administrateblog.html:745
+#: templates/blogs/administrateblog.html:915
+#: templates/blogs/administrateblog.html:961
+#: templates/blogs/administrateblog.html:1007
+#: templates/blogs/administrateblog.html:1051
+#: templates/blogs/administrateblog.html:1096
+#: templates/blogs/administrateblog.html:1140
+#: templates/blogs/administrateblog.html:1496
+#: templates/blogs/administrateblog.html:1576
+#: templates/blogs/administrateblog.html:1656
 msgid "Add more images"
 msgstr "Ajouter plus d'images"
 
-#: templates/blogs/administrateblog.html:429
-#: templates/blogs/administrateblog.html:458
-#: templates/blogs/administrateblog.html:487
-#: templates/blogs/administrateblog.html:516
-#: templates/blogs/administrateblog.html:545
-#: templates/blogs/administrateblog.html:574
-#: templates/blogs/administrateblog.html:603
-#: templates/blogs/administrateblog.html:632
-#: templates/blogs/administrateblog.html:661
-#: templates/blogs/administrateblog.html:690
-#: templates/blogs/administrateblog.html:719
-#: templates/blogs/administrateblog.html:874
-#: templates/blogs/administrateblog.html:920
-#: templates/blogs/administrateblog.html:966
-#: templates/blogs/administrateblog.html:1010
-#: templates/blogs/administrateblog.html:1055
-#: templates/blogs/administrateblog.html:1099
-#: templates/blogs/administrateblog.html:1443
-#: templates/blogs/administrateblog.html:1523
-#: templates/blogs/administrateblog.html:1603
-#: templates/blogs/blog_single.html:380
+#: templates/blogs/administrateblog.html:455
+#: templates/blogs/administrateblog.html:484
+#: templates/blogs/administrateblog.html:513
+#: templates/blogs/administrateblog.html:542
+#: templates/blogs/administrateblog.html:571
+#: templates/blogs/administrateblog.html:600
+#: templates/blogs/administrateblog.html:629
+#: templates/blogs/administrateblog.html:658
+#: templates/blogs/administrateblog.html:687
+#: templates/blogs/administrateblog.html:716
+#: templates/blogs/administrateblog.html:745
+#: templates/blogs/administrateblog.html:915
+#: templates/blogs/administrateblog.html:961
+#: templates/blogs/administrateblog.html:1007
+#: templates/blogs/administrateblog.html:1051
+#: templates/blogs/administrateblog.html:1096
+#: templates/blogs/administrateblog.html:1140
+#: templates/blogs/administrateblog.html:1496
+#: templates/blogs/administrateblog.html:1576
+#: templates/blogs/administrateblog.html:1656
 #, fuzzy
 msgid "More images"
 msgstr "Image principale"
 
-#: templates/blogs/administrateblog.html:797
+#: templates/blogs/administrateblog.html:838
 msgid "Cancel horizontal album"
 msgstr "Annuler album horizontal"
 
-#: templates/blogs/administrateblog.html:866
-#: templates/blogs/administrateblog.html:1435
+#: templates/blogs/administrateblog.html:907
+#: templates/blogs/administrateblog.html:1488
 #, fuzzy
 msgid "Cancel Comments"
 msgstr "Commentaires"
 
-#: templates/blogs/administrateblog.html:1335
+#: templates/blogs/administrateblog.html:1388
 msgid "Cancel grid album"
 msgstr "Annuler album"
 
-#: templates/blogs/administrateblog.html:1848
+#: templates/blogs/administrateblog.html:1916
 #, fuzzy
 msgid "Cancel single image"
 msgstr "Image principale"
 
-#: templates/blogs/administrateblog.html:1854
+#: templates/blogs/administrateblog.html:1922
 msgid "Add a Title to Your Image"
 msgstr "Ajouter un titre à vos images"
 
-#: templates/blogs/administrateblog.html:1857
+#: templates/blogs/administrateblog.html:1925
 msgid "Add a Comment to Your Image"
 msgstr "Ajouter un commentaire à vos images"
 
-#: templates/blogs/administrateblog.html:1871
+#: templates/blogs/administrateblog.html:1939
 #, fuzzy
 msgid "Cancel Comment"
 msgstr "Commentaires"
 
-#: templates/blogs/administrateblog.html:1928
+#: templates/blogs/administrateblog.html:2008
 msgid "Create a post with a youtube or vimeo video"
 msgstr ""
 
-#: templates/blogs/administrateblog.html:1929
+#: templates/blogs/administrateblog.html:2009
 msgid "Create a post with a soundcloud playlist"
 msgstr ""
 
-#: templates/blogs/administrateblog.html:1929
+#: templates/blogs/administrateblog.html:2009
 msgid "Music"
 msgstr ""
 
-#: templates/blogs/administrateblog.html:1944
+#: templates/blogs/administrateblog.html:2027
 #, fuzzy
 msgid "Cancel video"
 msgstr "Annuler titre"
 
-#: templates/blogs/administrateblog.html:1949
+#: templates/blogs/administrateblog.html:2032
 msgid "Add a Title to Your Video"
 msgstr "Ajouter un titre à votre vidéo"
 
-#: templates/blogs/administrateblog.html:1949
+#: templates/blogs/administrateblog.html:2032
+#: templates/blogs/administrateblog.html:2055
 #, fuzzy
 msgid "Add a Title"
 msgstr "Titre"
 
-#: templates/blogs/administrateblog.html:1961
+#: templates/blogs/administrateblog.html:2040
 msgid "Add a Comment to Your Video"
 msgstr "Ajouter un commentaire à votre vidéo"
 
-#: templates/blogs/administrateblog.html:1976
+#: templates/blogs/administrateblog.html:2055
+#, fuzzy
+msgid "Add a Title to Your music"
+msgstr "Ajouter un titre à votre article"
+
+#: templates/blogs/administrateblog.html:2061
 #, fuzzy
 msgid "Cancel Music"
 msgstr "Annuler titre"
 
-#: templates/blogs/administrateblog.html:2038
+#: templates/blogs/administrateblog.html:2128
 msgid "Last Post"
 msgstr "Dernier article"
 
-#: templates/blogs/administrateblog.html:2039
+#: templates/blogs/administrateblog.html:2129
 msgid "Manage Your Posts"
 msgstr "Gérer vos articles"
 
-#: templates/blogs/administrateblog.html:2039
-#: templates/blogs/administrateblog.html:2079
-#: templates/blogs/administrateblog.html:2120
-#: templates/blogs/administrateblog.html:2171
-#: templates/blogs/administrateblog.html:2218
-#: templates/blogs/administrateblog.html:2265
-#: templates/blogs/administrateblog.html:2336
-#: templates/blogs/administrateblog.html:3814
+#: templates/blogs/administrateblog.html:2129
+#: templates/blogs/administrateblog.html:2169
+#: templates/blogs/administrateblog.html:2210
+#: templates/blogs/administrateblog.html:2261
+#: templates/blogs/administrateblog.html:2308
+#: templates/blogs/administrateblog.html:2355
+#: templates/blogs/administrateblog.html:2426
+#: templates/blogs/administrateblog.html:4147
 #: templates/blogs/dashboard.html:59
 #, fuzzy
 msgid "Manage"
 msgstr "Image principale"
 
-#: templates/blogs/administrateblog.html:2043
+#: templates/blogs/administrateblog.html:2133
 msgid "Show All Posts"
 msgstr "Montrer tous les articles"
 
-#: templates/blogs/administrateblog.html:2043
-#: templates/blogs/administrateblog.html:2083
-#: templates/blogs/administrateblog.html:2222
-#: templates/blogs/administrateblog.html:2270
-#: templates/blogs/administrateblog.html:2340
+#: templates/blogs/administrateblog.html:2133
+#: templates/blogs/administrateblog.html:2173
+#: templates/blogs/administrateblog.html:2312
+#: templates/blogs/administrateblog.html:2360
+#: templates/blogs/administrateblog.html:2430
 msgid "All"
 msgstr "Tous"
 
-#: templates/blogs/administrateblog.html:2045
+#: templates/blogs/administrateblog.html:2135
 #: templates/blogs/administrateposts.html:111
 msgid "There are no posts for this blog"
 msgstr "Il n'y a aucun article pour ce blogue"
 
-#: templates/blogs/administrateblog.html:2059
-#: templates/blogs/administrateblog.html:2096
-#: templates/blogs/administrateblog.html:2192
+#: templates/blogs/administrateblog.html:2149
+#: templates/blogs/administrateblog.html:2186
+#: templates/blogs/administrateblog.html:2282
 #: templates/blogs/administratepages.html:30
 #: templates/blogs/administrateposts.html:61
 #: templates/blogs/translation.html:64
 msgid "Author"
 msgstr "Auteur"
 
-#: templates/blogs/administrateblog.html:2060
-#: templates/blogs/administrateblog.html:2098
-#: templates/blogs/administrateblog.html:2193
+#: templates/blogs/administrateblog.html:2150
+#: templates/blogs/administrateblog.html:2188
+#: templates/blogs/administrateblog.html:2283
 #: templates/blogs/administratepages.html:31
 #: templates/blogs/administrateposts.html:63
 #: templates/blogs/translation.html:66
 msgid "Date"
 msgstr "Date"
 
-#: templates/blogs/administrateblog.html:2066
-#: templates/blogs/administrateblog.html:2199
+#: templates/blogs/administrateblog.html:2156
+#: templates/blogs/administrateblog.html:2289
 #: templates/blogs/administratecomments.html:72
 #: templates/blogs/administrateposts.html:73
 #: templates/blogs/translation.html:76
 msgid "View This Post"
 msgstr "Voir cet article"
 
-#: templates/blogs/administrateblog.html:2078
+#: templates/blogs/administrateblog.html:2168
 #, fuzzy
 msgid "Last Page"
 msgstr "Page"
 
-#: templates/blogs/administrateblog.html:2079
+#: templates/blogs/administrateblog.html:2169
 msgid "Manage Your Pages"
 msgstr "Gérer vos pages"
 
-#: templates/blogs/administrateblog.html:2080
+#: templates/blogs/administrateblog.html:2170
 #: templates/blogs/administratepages.html:15
 msgid "Add a New Page"
 msgstr "Ajouter une nouvelle page"
 
-#: templates/blogs/administrateblog.html:2080
-#: templates/blogs/administrateblog.html:2266
-#: templates/blogs/administrateblog.html:2337
+#: templates/blogs/administrateblog.html:2170
+#: templates/blogs/administrateblog.html:2356
+#: templates/blogs/administrateblog.html:2427
 msgid "Add New"
 msgstr "Ajouter"
 
-#: templates/blogs/administrateblog.html:2083
+#: templates/blogs/administrateblog.html:2173
 msgid "Show All Pages"
 msgstr "Montrer toutes les pages"
 
-#: templates/blogs/administrateblog.html:2097
+#: templates/blogs/administrateblog.html:2187
 #: templates/blogs/translation.html:65
 msgid "Stats"
 msgstr "Stats"
 
-#: templates/blogs/administrateblog.html:2104
+#: templates/blogs/administrateblog.html:2194
 #: templates/blogs/administratepages.html:41
 msgid "View This Page"
 msgstr "Voir cette page"
 
-#: templates/blogs/administrateblog.html:2106
+#: templates/blogs/administrateblog.html:2196
 msgid "Coming soon"
 msgstr "À venir"
 
-#: templates/blogs/administrateblog.html:2119
+#: templates/blogs/administrateblog.html:2209
 msgid "Info-letters"
 msgstr "Info-lettres"
 
-#: templates/blogs/administrateblog.html:2120
+#: templates/blogs/administrateblog.html:2210
 msgid "Manage your Info-letters"
 msgstr "Gérer vos info-lettres"
 
-#: templates/blogs/administrateblog.html:2124
+#: templates/blogs/administrateblog.html:2214
 msgid "Number of subscriber: "
 msgstr "Nombre d'abonnés : "
 
-#: templates/blogs/administrateblog.html:2126
+#: templates/blogs/administrateblog.html:2216
 msgid "Last subscriber: "
 msgstr "Dernier abonné : "
 
-#: templates/blogs/administrateblog.html:2128
+#: templates/blogs/administrateblog.html:2218
 #: templates/blogs/administrateemails.html:110
 msgid "This blog has no mailing list"
 msgstr "Ce blogue n'a pas de liste d'envoi"
 
-#: templates/blogs/administrateblog.html:2130
+#: templates/blogs/administrateblog.html:2220
 #: templates/blogs/administrateemails.html:194
 msgid "This blog has no subscriber"
 msgstr "Ce blogue n'a pas d'abonné"
 
-#: templates/blogs/administrateblog.html:2130
+#: templates/blogs/administrateblog.html:2220
 msgid " and no mailing list"
 msgstr " et aucune info-lettre"
 
-#: templates/blogs/administrateblog.html:2143
+#: templates/blogs/administrateblog.html:2233
 msgid "Email function"
 msgstr "Fonction de courriel"
 
-#: templates/blogs/administrateblog.html:2146
+#: templates/blogs/administrateblog.html:2236
 #: templates/blogs/administrateemails.html:64
 msgid "Who"
 msgstr "Qui"
 
-#: templates/blogs/administrateblog.html:2170
-#: templates/blogs/administrateblog.html:3824
+#: templates/blogs/administrateblog.html:2260
+#: templates/blogs/administrateblog.html:4157
 msgid "Translation"
 msgstr "Traduction"
 
-#: templates/blogs/administrateblog.html:2171
-#: templates/blogs/administrateblog.html:3824
+#: templates/blogs/administrateblog.html:2261
+#: templates/blogs/administrateblog.html:4157
 msgid "Translate your posts"
 msgstr "Traduire vos articles"
 
-#: templates/blogs/administrateblog.html:2175
+#: templates/blogs/administrateblog.html:2265
 msgid "Number of posts to be translate: "
 msgstr "Nombre d'articles à traduire: "
 
-#: templates/blogs/administrateblog.html:2177
+#: templates/blogs/administrateblog.html:2267
 #: templates/blogs/translation.html:105
 msgid "This blog has no post to translate"
 msgstr "Aucun article à traduire"
 
-#: templates/blogs/administrateblog.html:2217
+#: templates/blogs/administrateblog.html:2307
 msgid "Last comment to be approve"
 msgstr "Dernier commentaire à être approuvé"
 
-#: templates/blogs/administrateblog.html:2218
+#: templates/blogs/administrateblog.html:2308
 #, fuzzy
 msgid "Moderate Comments"
 msgstr "Commentaires"
 
-#: templates/blogs/administrateblog.html:2222
+#: templates/blogs/administrateblog.html:2312
 #, fuzzy
 msgid "Show All Comments"
 msgstr "Commentaires"
 
-#: templates/blogs/administrateblog.html:2224
+#: templates/blogs/administrateblog.html:2314
 #: templates/blogs/administratecomments.html:106
 msgid "This blog has no comment to approve"
 msgstr "Ce blogue n'a aucun commentaire à approuver"
 
-#: templates/blogs/administrateblog.html:2238
-#: templates/blogs/administratecomments.html:49 templates/blogs/blog.html:601
+#: templates/blogs/administrateblog.html:2328
+#: templates/blogs/administratecomments.html:49 templates/blogs/blog.html:507
 #, fuzzy
 msgid "Comment"
 msgstr "Commentaires"
 
-#: templates/blogs/administrateblog.html:2240
+#: templates/blogs/administrateblog.html:2330
 #: templates/blogs/administratecomments.html:51
 msgid "Post"
 msgstr "Article"
 
-#: templates/blogs/administrateblog.html:2248
+#: templates/blogs/administrateblog.html:2338
 msgid "Manage comment"
 msgstr "Gérer les commentaires"
 
-#: templates/blogs/administrateblog.html:2249
+#: templates/blogs/administrateblog.html:2339
 #, fuzzy
 msgid "View post"
 msgstr "Écrivez un nouvel article"
 
-#: templates/blogs/administrateblog.html:2252
+#: templates/blogs/administrateblog.html:2342
 msgid "Send email"
 msgstr "Envoyer courriel"
 
-#: templates/blogs/administrateblog.html:2264
+#: templates/blogs/administrateblog.html:2354
 #, fuzzy
 msgid "Your Categories"
 msgstr "La couleur de votre catégorie"
 
-#: templates/blogs/administrateblog.html:2265
+#: templates/blogs/administrateblog.html:2355
 msgid "Manage Your Categoriess"
 msgstr "Gérer vos catégories"
 
-#: templates/blogs/administrateblog.html:2266
+#: templates/blogs/administrateblog.html:2356
 #: templates/blogs/administratecategories.html:57
 #: templates/blogs/administratecategories.html:61
 #, fuzzy
 msgid "Add a New Category"
 msgstr "Catégorie"
 
-#: templates/blogs/administrateblog.html:2270
+#: templates/blogs/administrateblog.html:2360
 msgid "Show All Categories"
 msgstr "Montrer toutes les catégories"
 
-#: templates/blogs/administrateblog.html:2272
+#: templates/blogs/administrateblog.html:2362
 #: templates/blogs/administratecategories.html:63
 msgid "This blog has no category"
 msgstr "Ce blogue n'a aucun catégorie"
 
-#: templates/blogs/administrateblog.html:2304
+#: templates/blogs/administrateblog.html:2394
 #, fuzzy
 msgid "Your blog settings"
 msgstr "Le titre de votre blogue"
 
-#: templates/blogs/administrateblog.html:2305
-#: templates/blogs/administrateblog.html:3828
+#: templates/blogs/administrateblog.html:2395
+#: templates/blogs/administrateblog.html:4161
 msgid "Change your settings"
 msgstr "Changer vos paramêtres"
 
-#: templates/blogs/administrateblog.html:2305
+#: templates/blogs/administrateblog.html:2395
 #: templates/blogs/administrateemails.html:72
 #: templates/blogs/administratepages.html:39
 #: templates/blogs/administrateposts.html:71
 msgid "Edit"
 msgstr "Modifier"
 
-#: templates/blogs/administrateblog.html:2308
+#: templates/blogs/administrateblog.html:2398
 #, fuzzy
 msgid "Name : "
 msgstr "Nom"
 
-#: templates/blogs/administrateblog.html:2312
+#: templates/blogs/administrateblog.html:2402
 #, fuzzy
 msgid "Short description: "
 msgstr "Courte description"
 
-#: templates/blogs/administrateblog.html:2315
+#: templates/blogs/administrateblog.html:2405
 #, fuzzy
 msgid "Description : "
 msgstr "Description"
 
-#: templates/blogs/administrateblog.html:2317
+#: templates/blogs/administrateblog.html:2407
 msgid "Creator : "
 msgstr "Créateur : "
 
-#: templates/blogs/administrateblog.html:2318
+#: templates/blogs/administrateblog.html:2408
 msgid "Url : "
 msgstr "URL : "
 
-#: templates/blogs/administrateblog.html:2319
+#: templates/blogs/administrateblog.html:2409
 msgid "Private : "
 msgstr "Privé : "
 
-#: templates/blogs/administrateblog.html:2319
+#: templates/blogs/administrateblog.html:2409
 msgid "Yes"
 msgstr "Oui"
 
-#: templates/blogs/administrateblog.html:2319
+#: templates/blogs/administrateblog.html:2409
 #: templates/blogs/administratecategories.html:146
 #: templates/blogs/administratecategories.html:290
 #: templates/blogs/administratecategories.html:311
@@ -1375,98 +1488,98 @@ msgstr "Oui"
 #: templates/blogs/administrateemails.html:180
 #: templates/blogs/administratepages.html:65
 #: templates/blogs/administrateposts.html:99
-#: templates/blogs/administratesettings.html:334
+#: templates/blogs/administratesettings.html:430
 #: templates/blogs/administratetags.html:80
-#: templates/blogs/blog_single.html:767 templates/blogs/rss_auto_post.html:79
+#: templates/blogs/blog_single.html:1071 templates/blogs/rss_auto_post.html:79
 #: templates/blogs/single.html:871 templates/blogs/translation.html:94
 msgid "No"
 msgstr "Non"
 
-#: templates/blogs/administrateblog.html:2321
+#: templates/blogs/administrateblog.html:2411
 #, fuzzy
 msgid "Password : "
 msgstr "Mot de passe"
 
-#: templates/blogs/administrateblog.html:2335
+#: templates/blogs/administrateblog.html:2425
 #, fuzzy
 msgid "Your Tags"
 msgstr "Votre nom"
 
-#: templates/blogs/administrateblog.html:2336
+#: templates/blogs/administrateblog.html:2426
 msgid "Manage Your Tags"
 msgstr "Gérer vos étiquettes"
 
-#: templates/blogs/administrateblog.html:2337
+#: templates/blogs/administrateblog.html:2427
 #: templates/blogs/administratetags.html:42
 msgid "Add a New Tag"
 msgstr "Ajouter une nouvelle étiquette"
 
-#: templates/blogs/administrateblog.html:2340
+#: templates/blogs/administrateblog.html:2430
 msgid "Show All Tags"
 msgstr "Montrer toutes les étiquettes"
 
-#: templates/blogs/administrateblog.html:3814
+#: templates/blogs/administrateblog.html:4147
 #: templates/blogs/dashboard.html:59
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
-#: templates/blogs/administrateblog.html:3815
+#: templates/blogs/administrateblog.html:4148
 msgid "Manage your posts"
 msgstr "Gérer vos articles"
 
-#: templates/blogs/administrateblog.html:3815
+#: templates/blogs/administrateblog.html:4148
 #: templates/blogs/administrateposts.html:35
 msgid "Posts"
 msgstr "Articles"
 
-#: templates/blogs/administrateblog.html:3816
+#: templates/blogs/administrateblog.html:4149
 #, fuzzy
 msgid "Manage your pages"
 msgstr "Entrez le titre de votre page"
 
-#: templates/blogs/administrateblog.html:3816
+#: templates/blogs/administrateblog.html:4149
 #: templates/blogs/administratepages.html:15
 #, fuzzy
 msgid "Pages"
 msgstr "Page"
 
-#: templates/blogs/administrateblog.html:3817
+#: templates/blogs/administrateblog.html:4150
 msgid "Moderate comments"
 msgstr "Modérer les commentaires"
 
-#: templates/blogs/administrateblog.html:3817
+#: templates/blogs/administrateblog.html:4150
 msgid "Comments"
 msgstr "Commentaires"
 
-#: templates/blogs/administrateblog.html:3818
+#: templates/blogs/administrateblog.html:4151
 msgid "Create, modify or delete categories"
 msgstr "Créer, modifier ou effacer des catégories"
 
-#: templates/blogs/administrateblog.html:3818
+#: templates/blogs/administrateblog.html:4151
 #: templates/blogs/administratecategories.html:61
 #, fuzzy
 msgid "Categories"
 msgstr "Catégories"
 
-#: templates/blogs/administrateblog.html:3819
+#: templates/blogs/administrateblog.html:4152
 msgid "Create, modify or delete tags"
 msgstr "Créer, modifier ou effacer des étiquettes"
 
-#: templates/blogs/administrateblog.html:3819
+#: templates/blogs/administrateblog.html:4152
 #: templates/blogs/administratetags.html:42
 #, fuzzy
 msgid "Tags"
 msgstr "Étiquettes"
 
-#: templates/blogs/administrateblog.html:3820
+#: templates/blogs/administrateblog.html:4153
 msgid "Create and manage mailing list"
 msgstr "Créer et gérer vos info-lettres"
 
-#: templates/blogs/administrateblog.html:3820
+#: templates/blogs/administrateblog.html:4153
 msgid "Mailing list"
 msgstr "Info-lettre"
 
-#: templates/blogs/administrateblog.html:3828
+#: templates/blogs/administrateblog.html:4161
 msgid "Settings"
 msgstr "Paramêtres"
 
@@ -1550,9 +1663,8 @@ msgstr "Ajouter une nouvelle catégorie :"
 #: templates/blogs/administratecategories.html:221
 #: templates/blogs/administratecategories.html:246
 #: templates/blogs/administratecategories.html:269
-#, fuzzy
 msgid "Convert this category to a tag"
-msgstr "Modifier cette catégorie"
+msgstr "Changer cet étiquette en catégorie"
 
 #: templates/blogs/administratecategories.html:127
 #: templates/blogs/administratecategories.html:174
@@ -1561,7 +1673,7 @@ msgstr "Modifier cette catégorie"
 #: templates/blogs/administratecategories.html:246
 #: templates/blogs/administratecategories.html:269
 msgid "Convert to a tag"
-msgstr ""
+msgstr "Changer en catégorie"
 
 #: templates/blogs/administratecategories.html:130
 #: templates/blogs/administratecategories.html:177
@@ -1569,7 +1681,6 @@ msgstr ""
 #: templates/blogs/administratecategories.html:224
 #: templates/blogs/administratecategories.html:249
 #: templates/blogs/administratecategories.html:272
-#, fuzzy
 msgid "Delete this category"
 msgstr "Effacer cette catégorie"
 
@@ -1579,9 +1690,8 @@ msgstr "Effacer cette catégorie"
 #: templates/blogs/administratecategories.html:329
 #: templates/blogs/administratecategories.html:358
 #: templates/blogs/administratecategories.html:381
-#, fuzzy
 msgid "Delete Category"
-msgstr "Catégorie"
+msgstr "Supprimer la catégorie"
 
 #: templates/blogs/administratecategories.html:143
 #: templates/blogs/administratecategories.html:287
@@ -1613,7 +1723,7 @@ msgstr "?"
 #: templates/blogs/administratepages.html:66
 #: templates/blogs/administrateposts.html:100
 #: templates/blogs/administratetags.html:81
-#: templates/blogs/blog_single.html:768 templates/blogs/rss_auto_post.html:80
+#: templates/blogs/blog_single.html:1072 templates/blogs/rss_auto_post.html:80
 #: templates/blogs/single.html:872 templates/blogs/translation.html:95
 msgid "Yes, I Want to Delete it"
 msgstr "Oui, je veux l'effacer"
@@ -1659,7 +1769,7 @@ msgid "Signal"
 msgstr "Signaler"
 
 #: templates/blogs/administratecomments.html:67
-#: templates/blogs/blog_single.html:742 templates/blogs/single.html:846
+#: templates/blogs/blog_single.html:1046 templates/blogs/single.html:846
 msgid "Delete this comment"
 msgstr "Effacer ce commentaire"
 
@@ -1688,20 +1798,21 @@ msgid "Send Email"
 msgstr "Envoyer courriel"
 
 #: templates/blogs/administratecomments.html:87
-#: templates/blogs/blog_single.html:761 templates/blogs/single.html:865
+#: templates/blogs/blog_single.html:1065 templates/blogs/single.html:865
 #, fuzzy
 msgid "Delete Comment"
 msgstr "Effacer commentaire"
 
 #: templates/blogs/administratecomments.html:90
-#: templates/blogs/blog_single.html:764 templates/blogs/single.html:868
+#: templates/blogs/blog_single.html:1068 templates/blogs/single.html:868
 msgid "Are you Sure You Want to Delete This Comment?"
 msgstr "Êtes-vous certain de vouloir effacer ce commentaire?"
 
 #: templates/blogs/administratecomments.html:116
 #: templates/blogs/administratepages.html:83
-#: templates/blogs/administrateposts.html:122 templates/blogs/blog.html:610
-#: templates/blogs/blog_single.html:699 templates/blogs/translation.html:115
+#: templates/blogs/administrateposts.html:122 templates/blogs/blog.html:516
+#: templates/blogs/blog_single.html:986 templates/blogs/blog_single.html:999
+#: templates/blogs/blog_single.html:1007 templates/blogs/translation.html:115
 msgid "Previous"
 msgstr "Précédent"
 
@@ -1721,8 +1832,9 @@ msgstr "de"
 
 #: templates/blogs/administratecomments.html:126
 #: templates/blogs/administratepages.html:93
-#: templates/blogs/administrateposts.html:132 templates/blogs/blog.html:618
-#: templates/blogs/blog_single.html:702 templates/blogs/translation.html:125
+#: templates/blogs/administrateposts.html:132 templates/blogs/blog.html:524
+#: templates/blogs/blog_single.html:989 templates/blogs/blog_single.html:1002
+#: templates/blogs/blog_single.html:1010 templates/blogs/translation.html:125
 msgid "Next"
 msgstr "Suivant"
 
@@ -1956,6 +2068,9 @@ msgstr "Plus d'infos à propos du titre"
 #: templates/blogs/administratesettings.html:125
 #: templates/blogs/administratesettings.html:136
 #: templates/blogs/administratesettings.html:155
+#: templates/blogs/administratesettings.html:191
+#: templates/blogs/administratesettings.html:195
+#: templates/blogs/administratesettings.html:199
 msgid "More info"
 msgstr "Plus d'infos"
 
@@ -2035,19 +2150,69 @@ msgstr "Cochez si vous voulez que votre blogue soit public"
 msgid "Write a password here if you want your blog to be private"
 msgstr "Écrivez un mot de passe ici si vous voulez que votre blogue soit privé"
 
-#: templates/blogs/administratesettings.html:166
+#: templates/blogs/administratesettings.html:168
+msgid "Facebook link: "
+msgstr ""
+
+#: templates/blogs/administratesettings.html:172
+#, fuzzy
+msgid "Twitter link: "
+msgstr "Titre"
+
+#: templates/blogs/administratesettings.html:176
+msgid "Pinterest link: "
+msgstr ""
+
+#: templates/blogs/administratesettings.html:184
+msgid "Google Analytics account number: "
+msgstr ""
+
+#: templates/blogs/administratesettings.html:191
+msgid "Auto-publish frequency: "
+msgstr ""
+
+#: templates/blogs/administratesettings.html:191
+#: templates/blogs/administratesettings.html:375
+#, fuzzy
+msgid ""
+"Choose a frequency if you want your drafted posts to be publish automatically"
+msgstr "Cochez si vous voulez que votre blogue soit public"
+
+#: templates/blogs/administratesettings.html:195
+msgid "Exclusion start: "
+msgstr ""
+
+#: templates/blogs/administratesettings.html:195
+#: templates/blogs/administratesettings.html:392
+msgid ""
+"Choose an exclusion starting time if you want the auto-posting to stop "
+"during a certain part of the day"
+msgstr ""
+
+#: templates/blogs/administratesettings.html:199
+msgid "Exclusion end: "
+msgstr ""
+
+#: templates/blogs/administratesettings.html:199
+#: templates/blogs/administratesettings.html:409
+msgid ""
+"Choose an exclusion ending time if you want the auto-posting to stop during "
+"a certain part of the day"
+msgstr ""
+
+#: templates/blogs/administratesettings.html:208
 msgid "Get notified when draft is empty"
 msgstr ""
 
-#: templates/blogs/administratesettings.html:177
+#: templates/blogs/administratesettings.html:219
 msgid "Save your settings"
 msgstr "Sauvegarder vos paramêtres"
 
-#: templates/blogs/administratesettings.html:178
+#: templates/blogs/administratesettings.html:220
 msgid "Cancel edit settings"
 msgstr "Annuler modifier paramêtres"
 
-#: templates/blogs/administratesettings.html:197
+#: templates/blogs/administratesettings.html:239
 msgid ""
 "Your blog title is what people see on top of your blog, idealy it should be "
 "short a representative of your blog subjet. Etc..."
@@ -2055,22 +2220,25 @@ msgstr ""
 "Le titre de votre blogue est ce que les gens verront en haut de votre "
 "blogue. Dans le meilleur des mondes, il est court et représentatif."
 
-#: templates/blogs/administratesettings.html:200
-#: templates/blogs/administratesettings.html:216
-#: templates/blogs/administratesettings.html:232
-#: templates/blogs/administratesettings.html:248
-#: templates/blogs/administratesettings.html:264
-#: templates/blogs/administratesettings.html:282
-#: templates/blogs/administratesettings.html:299
-#: templates/blogs/administratesettings.html:316
+#: templates/blogs/administratesettings.html:242
+#: templates/blogs/administratesettings.html:258
+#: templates/blogs/administratesettings.html:274
+#: templates/blogs/administratesettings.html:290
+#: templates/blogs/administratesettings.html:306
+#: templates/blogs/administratesettings.html:327
+#: templates/blogs/administratesettings.html:344
+#: templates/blogs/administratesettings.html:361
+#: templates/blogs/administratesettings.html:378
+#: templates/blogs/administratesettings.html:395
+#: templates/blogs/administratesettings.html:412
 msgid "Close"
 msgstr "Fermer"
 
-#: templates/blogs/administratesettings.html:213
+#: templates/blogs/administratesettings.html:255
 msgid "A slug is the part of a URL which identifies a page..."
 msgstr "Un slug est une partie d'un URL qui identifie une page"
 
-#: templates/blogs/administratesettings.html:229
+#: templates/blogs/administratesettings.html:271
 msgid ""
 "If you enter a password, your blog will be hidden except to the people who "
 "you give the password to."
@@ -2078,45 +2246,57 @@ msgstr ""
 "Si vous entrez un mot de passe, votre blogue sera caché exepté aux personnes "
 "à qui vous donnerez le mot de passe"
 
-#: templates/blogs/administratesettings.html:245
+#: templates/blogs/administratesettings.html:287
 msgid ""
 "You can enter your custom domain here. You need to do a DNS setup before."
 msgstr ""
 
-#: templates/blogs/administratesettings.html:261
+#: templates/blogs/administratesettings.html:303
 #, fuzzy
 msgid "This section is to write a full description of your blog."
 msgstr "Cette section sert à écrire une description complète de votre blogue"
 
-#: templates/blogs/administratesettings.html:279
+#: templates/blogs/administratesettings.html:324
 #, fuzzy
 msgid "This section is to write a small description of your blog."
 msgstr "Cette section sert à écrire une courte description de votre blogue"
 
-#: templates/blogs/administratesettings.html:296
+#: templates/blogs/administratesettings.html:341
 msgid "This color is for the navbar and the link of your blog"
 msgstr ""
 "Vous allez pouvoir utiliser cette couleur dans la barre de navigation et "
 "pour les liens de votre blogue"
 
-#: templates/blogs/administratesettings.html:313
+#: templates/blogs/administratesettings.html:358
 #, fuzzy
 msgid "This is the image that is going to be at the top of your blog main page"
 msgstr "L'image de couverture"
 
-#: templates/blogs/administratesettings.html:327
+#: templates/blogs/administratesettings.html:372
+msgid "Frequency"
+msgstr ""
+
+#: templates/blogs/administratesettings.html:389
+msgid "Exclusion starting time"
+msgstr ""
+
+#: templates/blogs/administratesettings.html:406
+msgid "Exclusion ending time"
+msgstr ""
+
+#: templates/blogs/administratesettings.html:423
 msgid "Delete this blog"
 msgstr "Effacer ce blogue"
 
-#: templates/blogs/administratesettings.html:330
+#: templates/blogs/administratesettings.html:426
 msgid "Are you sure you want to delete the blog : "
 msgstr "Êtes-vous certain de vouloir effacer ce blogue :"
 
-#: templates/blogs/administratesettings.html:331
+#: templates/blogs/administratesettings.html:427
 msgid "This action is irreversible"
 msgstr "Cette action est irréversible"
 
-#: templates/blogs/administratesettings.html:335
+#: templates/blogs/administratesettings.html:431
 msgid "Yes, I want to delete it"
 msgstr "Oui, je veux l'effacer"
 
@@ -2162,82 +2342,101 @@ msgstr "Effacer étiquette"
 msgid "Are you Sure You Want to Delete This Tag?"
 msgstr "Êtes-vous certain de vouloir effacer cette étiquette?"
 
-#: templates/blogs/blobon.html:213
+#: templates/blogs/blobon.html:222
 msgid "Blobon.com"
 msgstr "Blobon.com"
 
-#: templates/blogs/blobon.html:216
+#: templates/blogs/blobon.html:225 templates/registration/activate.html:9
+#: templates/registration/activation_complete.html:9
 msgid "Login"
 msgstr "Se connecter"
 
-#: templates/blogs/blobon.html:234
-msgid "Blobon"
-msgstr "Blobon"
+#: templates/blogs/blobon.html:244
+msgid "Efficient - Lightweight - Social"
+msgstr "Efficace – Léger – Social"
 
-#: templates/blogs/blobon.html:238
-msgid "Request an invitation"
-msgstr "Demander une invitation"
+#: templates/blogs/blobon.html:245
+msgid "The Ultimate Blogging Tool"
+msgstr "Le meilleur système de gestion de contenu, tout simplement."
 
-#: templates/blogs/blobon.html:242
+#: templates/blogs/blobon.html:254
+msgid "Learn more"
+msgstr "En savoir plus"
+
+#: templates/blogs/blobon.html:258
 msgid "Cancel the invitation request"
 msgstr "Annuler la demande d'invitation"
 
-#: templates/blogs/blobon.html:247 templates/blogs/blog_single.html:816
+#: templates/blogs/blobon.html:263 templates/blogs/blog_single.html:1120
 #: templates/blogs/password.html:26 templates/blogs/passwordsingle.html:26
 #: templates/blogs/single.html:935
-#, fuzzy
+#: templates/registration/registration_form.html:59
 msgid "Submit"
-msgstr "Sujet"
+msgstr "Soummettre"
 
-#: templates/blogs/blog.html:227 templates/blogs/blog_category.html:29
+#: templates/blogs/blog.html:284 templates/blogs/blog_category.html:29
 #: templates/blogs/blog_category_main.html:29
-#: templates/blogs/blog_single.html:253 templates/blogs/blog_time.html:29
+#: templates/blogs/blog_single.html:322 templates/blogs/blog_time.html:29
 #: templates/blogs/closed.html:12 templates/blogs/entreprise.html:172
 #: templates/blogs/page.html:20
 msgid "Home"
 msgstr "Accueil"
 
-#: templates/blogs/blog.html:631 templates/blogs/gabrieldancause.html:98
+#: templates/blogs/blog.html:339 templates/blogs/blog.html.py:375
+msgid "Bio : "
+msgstr ""
+
+#: templates/blogs/blog.html:342
+msgid "Social : "
+msgstr ""
+
+#: templates/blogs/blog.html:342 templates/blogs/gabrieldancause.html:121
+msgid "Facebook"
+msgstr ""
+
+#: templates/blogs/blog.html:342 templates/blogs/gabrieldancause.html:112
+msgid "Twitter"
+msgstr ""
+
+#: templates/blogs/blog.html:345
+msgid "Website : "
+msgstr "Site Web"
+
+#: templates/blogs/blog.html:539 templates/blogs/gabrieldancause.html:98
 msgid "About"
 msgstr "À propos"
 
-#: templates/blogs/blog.html:635
+#: templates/blogs/blog.html:546
 msgid "Subscribe to the mailing list"
 msgstr "S'inscrire à l'infolettre"
 
-#: templates/blogs/blog.html:642 templates/blogs/subscription.html:45
+#: templates/blogs/blog.html:553 templates/blogs/subscription.html:45
 msgid "Subscribe"
 msgstr "S'inscrire"
 
-#: templates/blogs/blog_single.html:380
-#, fuzzy
-msgid "See other images"
-msgstr "Image principale"
-
-#: templates/blogs/blog_single.html:698
-msgid "View previous post"
-msgstr "Voir l'article précédent"
-
-#: templates/blogs/blog_single.html:701
-#, fuzzy
-msgid "View next post"
-msgstr "Écrivez un nouvel article"
-
-#: templates/blogs/blog_single.html:713
+#: templates/blogs/blog_single.html:974
 msgid "Published"
 msgstr "Publié"
 
-#: templates/blogs/blog_single.html:726 templates/blogs/single.html:830
-#, fuzzy
+#: templates/blogs/blog_single.html:985 templates/blogs/blog_single.html:998
+#: templates/blogs/blog_single.html:1006
+msgid "View previous post"
+msgstr "Voir l'article précédent"
+
+#: templates/blogs/blog_single.html:988 templates/blogs/blog_single.html:1001
+#: templates/blogs/blog_single.html:1009
+msgid "View next post"
+msgstr "Voir l'article suivant"
+
+#: templates/blogs/blog_single.html:1030 templates/blogs/single.html:830
 msgid "Comments:"
 msgstr "Commentaires"
 
-#: templates/blogs/blog_single.html:781 templates/blogs/single.html:885
-#, fuzzy
+#: templates/blogs/blog_single.html:1085 templates/blogs/single.html:885
 msgid "Leave a comment"
 msgstr "Laissez votre commentaire ici"
 
-#: templates/blogs/blog_single.html:809
+#: templates/blogs/blog_single.html:1113
 msgid "Receive following comments"
 msgstr "Recevoir des alertes pour les commentaires"
 
@@ -2300,7 +2499,6 @@ msgid "info@blobon.com"
 msgstr "info@blobon.com"
 
 #: templates/blogs/contact.html:55
-#, fuzzy
 msgid "Your email"
 msgstr "Courriel du modérateur"
 
@@ -2309,9 +2507,8 @@ msgid "Send"
 msgstr "Envoyer"
 
 #: templates/blogs/createblog.html:25 templates/blogs/dashboard.html:65
-#, fuzzy
 msgid "Create a new blog"
-msgstr "Écrivez un nouvel article"
+msgstr "Créez un nouveau blogue"
 
 #: templates/blogs/createblog.html:30
 msgid "- A title is required"
@@ -2330,7 +2527,6 @@ msgid "(You can always change it later)"
 msgstr "(Vous pouvez toujours le changer plus tard)"
 
 #: templates/blogs/createblog.html:54
-#, fuzzy
 msgid "Blog moderator email"
 msgstr "Courriel du modérateur"
 
@@ -2343,12 +2539,10 @@ msgstr ""
 "nouveau commentaire qui sera entré sur votre blogue)"
 
 #: templates/blogs/createblog.html:60
-#, fuzzy
 msgid "Protect this blog with a password"
-msgstr "Entrez le mot de passe de votre blogue"
+msgstr "Entrez un mot de passe pour rendre votre blogue privé"
 
 #: templates/blogs/createblog.html:64
-#, fuzzy
 msgid "Enter the password here:"
 msgstr "Entrez le mot de passe de votre blogue"
 
@@ -2357,9 +2551,8 @@ msgid "Create your blog"
 msgstr "Créer votre blogue"
 
 #: templates/blogs/createpage.html:13
-#, fuzzy
 msgid "Create a new page :"
-msgstr "Écrivez un nouvel article"
+msgstr "Créez une nouvelle page"
 
 #: templates/blogs/createpage.html:26
 msgid "Submit page"
@@ -2393,6 +2586,196 @@ msgstr " dans un nouvel onglet"
 msgid "Visit blog"
 msgstr "Visiter le blogue"
 
+#: templates/blogs/edit_post.html:90 templates/blogs/editpost.html:89
+msgid "Current video :"
+msgstr "Vidéo :"
+
+#: templates/blogs/edit_post.html:101 templates/blogs/editpost.html:99
+msgid "New video url :"
+msgstr "Nouveau lien du vidéo"
+
+#: templates/blogs/edit_post.html:108 templates/blogs/edit_post.html.py:136
+#: templates/blogs/editpost.html:105 templates/blogs/editpost.html.py:130
+msgid "Text :"
+msgstr "Texte"
+
+#: templates/blogs/edit_post.html:108 templates/blogs/edit_post.html.py:136
+#: templates/blogs/editpost.html:105 templates/blogs/editpost.html.py:130
+msgid "Content :"
+msgstr "Contenu"
+
+#: templates/blogs/edit_post.html:120 templates/blogs/editpost.html:118
+msgid "Current playlist :"
+msgstr "En ce moment"
+
+#: templates/blogs/edit_post.html:127 templates/blogs/editpost.html:124
+msgid "New soundcloud url :"
+msgstr "Nouveau lien de la piste"
+
+#: templates/blogs/edit_post.html:149 templates/blogs/editpost.html:70
+msgid "Current image :"
+msgstr "Image :"
+
+#: templates/blogs/edit_post.html:178 templates/blogs/editpost.html:184
+msgid "Current image 1 :"
+msgstr "Image 1 :"
+
+#: templates/blogs/edit_post.html:192 templates/blogs/editpost.html:198
+msgid "Current image 2 :"
+msgstr "Image 2 :"
+
+#: templates/blogs/edit_post.html:206 templates/blogs/editpost.html:212
+msgid "Current image 3 :"
+msgstr "Image 3 :"
+
+#: templates/blogs/edit_post.html:220 templates/blogs/editpost.html:226
+msgid "Current image 4 :"
+msgstr "Image 4 :"
+
+#: templates/blogs/edit_post.html:234 templates/blogs/editpost.html:240
+msgid "Current image 5 :"
+msgstr "Image 5 :"
+
+#: templates/blogs/edit_post.html:248 templates/blogs/editpost.html:254
+msgid "Current image 6 :"
+msgstr "Image 6 :"
+
+#: templates/blogs/edit_post.html:262 templates/blogs/editpost.html:268
+msgid "Current image 7 :"
+msgstr "Image 7 :"
+
+#: templates/blogs/edit_post.html:276 templates/blogs/editpost.html:282
+msgid "Current image 8 :"
+msgstr "Image 8 :"
+
+#: templates/blogs/edit_post.html:290 templates/blogs/editpost.html:296
+msgid "Current image 9 :"
+msgstr "Image 9 :"
+
+#: templates/blogs/edit_post.html:304 templates/blogs/editpost.html:310
+msgid "Current image 10 :"
+msgstr "Image 10 :"
+
+#: templates/blogs/edit_post.html:318 templates/blogs/editpost.html:324
+msgid "Current image 11 :"
+msgstr "Image 11 :"
+
+#: templates/blogs/edit_post.html:332 templates/blogs/editpost.html:338
+msgid "Current image 12 :"
+msgstr "Image 12 :"
+
+#: templates/blogs/edit_post.html:346 templates/blogs/editpost.html:352
+msgid "Current image 13 :"
+msgstr "Image 13 :"
+
+#: templates/blogs/edit_post.html:360 templates/blogs/editpost.html:366
+msgid "Current image 14 :"
+msgstr "Image 14 :"
+
+#: templates/blogs/edit_post.html:374 templates/blogs/editpost.html:380
+msgid "Current image 15 :"
+msgstr "Image 15"
+
+#: templates/blogs/edit_post.html:388 templates/blogs/editpost.html:394
+msgid "Current image 16 :"
+msgstr "Image 16 :"
+
+#: templates/blogs/edit_post.html:402 templates/blogs/editpost.html:408
+msgid "Current image 17 :"
+msgstr "Image 17 :"
+
+#: templates/blogs/edit_post.html:416 templates/blogs/editpost.html:422
+msgid "Current image 18 :"
+msgstr "Image 18 :"
+
+#: templates/blogs/edit_post.html:430 templates/blogs/editpost.html:436
+msgid "Current image 19 :"
+msgstr "Image 19 :"
+
+#: templates/blogs/edit_post.html:444 templates/blogs/editpost.html:450
+msgid "Current image 20 :"
+msgstr "Image 20 :"
+
+#: templates/blogs/edit_post.html:458 templates/blogs/editpost.html:464
+msgid "Current image 21 :"
+msgstr "Image 21"
+
+#: templates/blogs/edit_post.html:472 templates/blogs/editpost.html:478
+msgid "Current image 22 :"
+msgstr "Image 22 :"
+
+#: templates/blogs/edit_post.html:486 templates/blogs/editpost.html:492
+msgid "Current image 23 :"
+msgstr "Image 23 :"
+
+#: templates/blogs/edit_post.html:500 templates/blogs/editpost.html:506
+msgid "Current image 24 :"
+msgstr "Image 24 :"
+
+#: templates/blogs/edit_post.html:515
+#, fuzzy
+msgid "Current image 25 :"
+msgstr "Image 2 :"
+
+#: templates/blogs/edit_post.html:529
+#, fuzzy
+msgid "Current image 26 :"
+msgstr "Image 2 :"
+
+#: templates/blogs/edit_post.html:543
+#, fuzzy
+msgid "Current image 27 :"
+msgstr "Image 2 :"
+
+#: templates/blogs/edit_post.html:557
+#, fuzzy
+msgid "Current image 28 :"
+msgstr "Image 2 :"
+
+#: templates/blogs/edit_post.html:571
+#, fuzzy
+msgid "Current image 29 :"
+msgstr "Image 2 :"
+
+#: templates/blogs/edit_post.html:585
+#, fuzzy
+msgid "Current image 30 :"
+msgstr "Image 3 :"
+
+#: templates/blogs/edit_post.html:599
+#, fuzzy
+msgid "Current image 31 :"
+msgstr "Image 1 :"
+
+#: templates/blogs/edit_post.html:613
+#, fuzzy
+msgid "Current image 32 :"
+msgstr "Image 2 :"
+
+#: templates/blogs/edit_post.html:627
+#, fuzzy
+msgid "Current image 33 :"
+msgstr "Image 3 :"
+
+#: templates/blogs/edit_post.html:685 templates/blogs/editpost.html:527
+msgid "Save changes and quit"
+msgstr "Sauvegarder et quitter"
+
+#: templates/blogs/edit_post.html:686 templates/blogs/editpost.html:528
+msgid "Save changes and continue editing"
+msgstr "Sauvegarder et continuer"
+
+#: templates/blogs/edit_post.html:686 templates/blogs/editpage.html:28
+#: templates/blogs/editpost.html:528
+msgid "Save and continue editing"
+msgstr "Sauvegarder et continuer"
+
+#: templates/blogs/edit_post.html:689 templates/blogs/editcategory.html:84
+#: templates/blogs/editemail.html:63 templates/blogs/editpost.html:531
+#: templates/blogs/edittag.html:62
+msgid "Cancel editing"
+msgstr "Annuler l'édition"
+
 #: templates/blogs/editcategory.html:67
 #, fuzzy
 msgid "Change category color"
@@ -2408,11 +2791,6 @@ msgstr "Couleur principale"
 msgid "Cancel color changing"
 msgstr "Entrez votre traduction ici"
 
-#: templates/blogs/editcategory.html:84 templates/blogs/editemail.html:63
-#: templates/blogs/editpost.html:533 templates/blogs/edittag.html:62
-msgid "Cancel editing"
-msgstr "Annuler l'édition"
-
 #: templates/blogs/editemail.html:53
 msgid "Email purpose :"
 msgstr "Le but du courriel :"
@@ -2422,154 +2800,13 @@ msgstr "Le but du courriel :"
 msgid "Edit your page :"
 msgstr "Entrez le titre de votre page"
 
-#: templates/blogs/editpage.html:28 templates/blogs/editpost.html:530
-msgid "Save and continue editing"
-msgstr "Sauvegarder et continuer"
-
-#: templates/blogs/editpost.html:70
-msgid "Current image :"
-msgstr "Image :"
-
-#: templates/blogs/editpost.html:89
-msgid "Current video :"
-msgstr "Vidéo :"
-
-#: templates/blogs/editpost.html:99
-#, fuzzy
-msgid "New video url :"
-msgstr "Copiez un lien YouTube ici"
-
-#: templates/blogs/editpost.html:105 templates/blogs/editpost.html.py:130
-#, fuzzy
-msgid "Text :"
-msgstr "Texte"
-
-#: templates/blogs/editpost.html:105 templates/blogs/editpost.html.py:130
-#, fuzzy
-msgid "Content :"
-msgstr "Contenu"
-
-#: templates/blogs/editpost.html:118
-#, fuzzy
-msgid "Current playlist :"
-msgstr "Image :"
-
-#: templates/blogs/editpost.html:124
-#, fuzzy
-msgid "New soundcloud url :"
-msgstr "Copiez un lien YouTube ici"
-
-#: templates/blogs/editpost.html:186
-msgid "Current image 1 :"
-msgstr "Image 1 :"
-
-#: templates/blogs/editpost.html:200
-msgid "Current image 2 :"
-msgstr "Image 2 :"
-
-#: templates/blogs/editpost.html:214
-msgid "Current image 3 :"
-msgstr "Image 3 :"
-
-#: templates/blogs/editpost.html:228
-msgid "Current image 4 :"
-msgstr "Image 4 :"
-
-#: templates/blogs/editpost.html:242
-msgid "Current image 5 :"
-msgstr "Image 5 :"
-
-#: templates/blogs/editpost.html:256
-msgid "Current image 6 :"
-msgstr "Image 6 :"
-
-#: templates/blogs/editpost.html:270
-msgid "Current image 7 :"
-msgstr "Image 7 :"
-
-#: templates/blogs/editpost.html:284
-msgid "Current image 8 :"
-msgstr "Image 8 :"
-
-#: templates/blogs/editpost.html:298
-msgid "Current image 9 :"
-msgstr "Image 9 :"
-
-#: templates/blogs/editpost.html:312
-msgid "Current image 10 :"
-msgstr "Image 10 :"
-
-#: templates/blogs/editpost.html:326
-msgid "Current image 11 :"
-msgstr "Image 11 :"
-
-#: templates/blogs/editpost.html:340
-msgid "Current image 12 :"
-msgstr "Image 12 :"
-
-#: templates/blogs/editpost.html:354
-msgid "Current image 13 :"
-msgstr "Image 13 :"
-
-#: templates/blogs/editpost.html:368
-msgid "Current image 14 :"
-msgstr "Image 14 :"
-
-#: templates/blogs/editpost.html:382
-msgid "Current image 15 :"
-msgstr "Image 15"
-
-#: templates/blogs/editpost.html:396
-msgid "Current image 16 :"
-msgstr "Image 16 :"
-
-#: templates/blogs/editpost.html:410
-msgid "Current image 17 :"
-msgstr "Image 17 :"
-
-#: templates/blogs/editpost.html:424
-msgid "Current image 18 :"
-msgstr "Image 18 :"
-
-#: templates/blogs/editpost.html:438
-msgid "Current image 19 :"
-msgstr "Image 19 :"
-
-#: templates/blogs/editpost.html:452
-msgid "Current image 20 :"
-msgstr "Image 20 :"
-
-#: templates/blogs/editpost.html:466
-msgid "Current image 21 :"
-msgstr "Image 21"
-
-#: templates/blogs/editpost.html:480
-msgid "Current image 22 :"
-msgstr "Image 22 :"
-
-#: templates/blogs/editpost.html:494
-msgid "Current image 23 :"
-msgstr "Image 23 :"
-
-#: templates/blogs/editpost.html:508
-msgid "Current image 24 :"
-msgstr "Image 24 :"
-
-#: templates/blogs/editpost.html:529
-msgid "Save changes and quit"
-msgstr "Sauvegarder et quitter"
-
-#: templates/blogs/editpost.html:530
-msgid "Save changes and continue editing"
-msgstr "Sauvegarder et continuer"
-
 #: templates/blogs/email_empty_draft.html:40
 msgid "draft is now empty"
 msgstr ""
 
 #: templates/blogs/email_empty_draft.html:43
 msgid "Thank you"
-msgstr ""
+msgstr "Merci"
 
 #: templates/blogs/entreprise.html:168
 msgid "Blobon Business Solutions"
@@ -2733,21 +2970,12 @@ msgid ""
 "politique et les voyages. J'ai visité plus de 35 pays."
 msgstr ""
 
-#: templates/blogs/gabrieldancause.html:112
-#, fuzzy
-msgid "Twitter"
-msgstr "Titre"
-
 #: templates/blogs/gabrieldancause.html:114
 msgid "Linkedin"
 msgstr ""
 
 #: templates/blogs/gabrieldancause.html:116
 msgid "gabrieldancause@gmail.com"
-msgstr ""
-
-#: templates/blogs/gabrieldancause.html:121
-msgid "Facebook"
 msgstr ""
 
 #: templates/blogs/gabrieldancause.html:123
@@ -2938,6 +3166,75 @@ msgstr "Quitter la prévisualisation"
 #: templates/blogs/view_info_letter.html:59
 msgid "Quit"
 msgstr "Quitter"
+
+#: templates/registration/activate.html:8
+msgid "Your account is now active!"
+msgstr "Votre compte est maintenant activé"
+
+#: templates/registration/activation_complete.html:8
+msgid "Activation complete! Your account is now active."
+msgstr "Actvivation réussie! Votre compte est maintenant prêt à être utilisé"
+
+#: templates/registration/activation_email.txt:3
+#, fuzzy, python-format
+msgid ""
+"\n"
+"Welcome to blobon.com\n"
+"\n"
+"Please use this link to activate your account:\n"
+"\n"
+"http://blobon.com/accounts/activate/%(key)s/\n"
+"\n"
+"After activation you can login to the site:\n"
+"\n"
+"http://blobon.com/login/\n"
+"\n"
+"Thank you\n"
+msgstr ""
+"\n"
+"Bienvenue sur blobon.com\n"
+"\n"
+"Cliquez sur ce lien pour activer votre compte:\n"
+"\n"
+"http://blobon.com/accounts/activate/%(key)s/\n"
+"\n"
+"Vous pourrez ensuite vous connecter à cette adresse:\n"
+"\n"
+"http://blobon.com/login/\n"
+"\n"
+"Merci\n"
+
+#: templates/registration/registration_complete.html:8
+msgid ""
+"Registration complete! You will receive an email to activate your account, "
+"thank you."
+msgstr ""
+"Enregistrement terminé! Vous receverez un courriel pour activer votre "
+"compte, merci."
+
+#: templates/registration/registration_form.html:14
+msgid ""
+"Enter a username, a password and a valid email address to receive an "
+"activation key"
+msgstr ""
+"Entrez un nom d'utilisateur, un mot de passe et une adresse courriel valide "
+"pour recevoir uneclé d'activation"
+
+#~ msgid "Welcome to blobon.com"
+#~ msgstr "Bienvenue sur Blobon.com"
+
+#~ msgid "Please use this link to activate your account:"
+#~ msgstr "Cliquez sur ce lien pour activer votre compte blobon"
+
+#~ msgid "After activation you can login to the site:"
+#~ msgstr "Après l'activation de votre compte, vous pouvez vous connecter ici:"
+
+#~ msgid "Request an invitation"
+#~ msgstr "Demander une invitation"
+
+#, fuzzy
+#~ msgid "See other images"
+#~ msgstr "Image principale"
 
 #, fuzzy
 #~ msgid "Your newsletter name here"

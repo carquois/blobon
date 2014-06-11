@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe 
 from django.conf.global_settings import LANGUAGES
 from punns.utils import BASE10, BASE62, baseconvert
+from registration.models import RegistrationProfile
 
 import uuid
 import os
@@ -546,7 +547,7 @@ class Post(models.Model):
     title = models.CharField(verbose_name=_("Title"), max_length=140, blank=True)
     temp_tag_field = models.CharField(verbose_name=_("Temp tag field"), max_length=1000, blank=True)
     status = models.CharField(max_length=2, choices=STATUS, default="P", null=True)
-    translated_title = models.CharField(verbose_name=_("Titre traduit"), max_length=140, blank=True)
+    translated_title = models.CharField(verbose_name=_("Translated title"), max_length=140, blank=True)
     slug = models.SlugField(max_length=140, blank=True)
     karma = models.IntegerField(default=0)
     views = models.IntegerField(default=0, blank=True)

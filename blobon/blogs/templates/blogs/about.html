@@ -1,0 +1,32 @@
+{% extends "blogs/blobon.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+  {% block slogan %}
+<h1 class="cover-heading" style="padding-bottom:20px;">{% trans "Blobon" %}</h1>
+<div style="text-align:left;font-size:16px;">
+
+
+         <p>{% blocktrans %}Blobon is a young innovative digital company, made in Canada. Our mission is to develop lightweight, simple and effective interfaces for both small and large businesses and individuals. Our vision is to connect all these entities together as a large social network.
+<br />
+<br />
+Blobon is an open and flexible technology that adapts to you and to all types of devices. We are mobile, such as your public.
+<br />
+<br />
+Blobon is also a one-stop turnkey solutions for all your digital needs: architecture, design, content, strategy, branding. We offer customized and effective solutions that will simplify your work.
+<br />
+<br />
+Because your audiences are overstretched and increasingly difficult to satisfy, give them Blobon, a young, social, engaging, easy to use, dynamic and friendly platform.
+<br />
+<br />
+Finally, Blobon is a straight to the point, friendly and entertaining network - because life is too short to be bored.
+<br />
+<br />
+You've already spent too long Blobon:{% endblocktrans %}<a href="/contact/">{% trans " contact us now!"%}</a></p>
+<br />
+</div>
+            <p class="lead">
+              <a href="/accounts/register/" class="btn btn-lg btn-primary">{% trans "Create an account" %}</a>
+            </p>
+  {% endblock %}
+  {% block form %}
+  {% endblock %}

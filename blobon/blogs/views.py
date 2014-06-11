@@ -15,6 +15,8 @@ from urlparse import urlparse
 from django.core.files import File
 from cgi import parse_qs
 
+from django.http import Http404
+
 from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm, TagsForm
 from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email, Rss, Menu, MenuItem
 from django.contrib.auth.models import User
@@ -194,10 +196,7 @@ def index(request):
                                         context_instance=RequestContext(request))
 
       else:
-        return render_to_response('404.html',
-                                 {},
-                                  context_instance=RequestContext(request))
-
+        raise Http404  
 
 @never_cache
 def category(request, slug):
@@ -241,7 +240,7 @@ def tag(request, slug):
       if Blog.objects.filter(custom_domain=host).exists():
         blog = Blog.objects.get(custom_domain=host)
       elif Blog.objects.filter(slug=request.subdomain).exists():
-          blog = Blog.objects.get(slug=request.subdomain)
+        blog = Blog.objects.get(slug=request.subdomain)
       tag = get_object_or_404(Tag, blog=blog, slug=slug)
       posts = paginate(request,
                        Post.objects.filter(status='P').filter(tag=tag).filter(is_discarded=False).order_by('-pub_date'),
@@ -255,9 +254,10 @@ def tag(request, slug):
                                   {'menus': menus, 'main_tag': main_tag,'form': form, 'blog': blog,'posts': posts, 'tag': tag, 'categories': categories,},
                                   context_instance=RequestContext(request))
       else:
-        return render_to_response('404.html',
-                                 {},
-                                  context_instance=RequestContext(request))
+        raise Http404
+       # return render_to_response('404.html',
+        #                         {},
+        #                          context_instance=RequestContext(request))
 
 @never_cache
 def category_main(request, slug):

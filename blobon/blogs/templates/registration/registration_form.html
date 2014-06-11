@@ -8,9 +8,13 @@
   {% block form %}
   {% endblock %}
   {% block reg_form %}
-
+ <div class="col-md-12" style="padding-bottom:20px;">
+  <a href="http://blobon.com/" id="cancel" style="margin-left:5px;"><span title="{% trans "Cancel" %}" style="padding-left:5px;" id="cancel_button" class="glyphicon glyphicon-remove-circle pull-right"></span></a>
+&nbsp;&nbsp;
+  <span title="{% trans "Enter a username, a password and a valid email address to receive an activation key" %}" id="info_button" class="glyphicon glyphicon-question-sign pull-right"></span>
+ </div>
  <form role="form" action="/accounts/register/" method="POST">{% csrf_token %}
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-6">
    <div class="form-group">
    {{ form.username.label_tag }} 
    {{ form.username }}
@@ -19,6 +23,8 @@
      </div>
    
    </div>
+  </div>
+  <div class="col-md-6">
    <div class="form-group">
    {{ form.email.label_tag }} 
    {{ form.email }}
@@ -26,6 +32,8 @@
      {{ form.email.errors }}
      </div>
    </div>
+  </div>
+  <div class="col-md-6">
    <div class="form-group">
    {{ form.password1.label_tag }} 
    {{ form.password1 }}
@@ -35,7 +43,8 @@
      </div>
 
    </div>
-
+  </div>
+  <div class="col-md-6">
    <div class="form-group">
    {{ form.password2.label_tag }}
    {{ form.password2 }}
@@ -45,6 +54,8 @@
      </div>
 
    </div>
+ </div>
+  <div class="col-md-12">
 <button type="submit" id="register_submit" class="btn btn-default" disabled>{% trans "Submit" %}</button>
   </div>
  </form>
@@ -105,6 +116,11 @@ $('form').find(':input:not(:submit)').addClass('form-control');
       });
 </script>
 
-
+    <script type="text/javascript">
+      $(function () {
+        $('#cancel_button').tooltip();
+        $('#info_button').tooltip();
+      });
+    </script>
   {% endblock %}
 
