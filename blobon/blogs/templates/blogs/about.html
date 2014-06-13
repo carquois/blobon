@@ -1,10 +1,15 @@
 {% extends "blogs/blobon.html" %}
 {% load thumbnail i18n compress calculate_age %}
 {% load url from future %}
-  {% block slogan %}
-<h1 class="cover-heading" style="padding-bottom:20px;">{% trans "Blobon" %}</h1>
-<div style="text-align:left;font-size:16px;">
 
+  {% block indication %}
+  <a href="http://blobon.com"><h3 class="masthead-brand">{% trans "Blobon.com" %}</a>{% trans " - About" %}</h3>
+  {% endblock %}
+
+  {% block slogan %}
+<div class="col-md-10 col-md-offset-1" style="text-align:left;font-size:16px;">
+
+                    <h4 class="cover-heading" style="padding-bottom:15px;text-align: center;">{% trans "Efficient - Lightweight - Social" %}</h4>
 
          <p>{% blocktrans %}Blobon is a young innovative digital company, made in Canada. Our mission is to develop lightweight, simple and effective interfaces for both small and large businesses and individuals. Our vision is to connect all these entities together as a large social network.
 <br />

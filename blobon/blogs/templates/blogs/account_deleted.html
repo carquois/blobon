@@ -1,0 +1,17 @@
+{% extends "blogs/about.html" %}
+{% load thumbnail i18n compress calculate_age %}
+{% load url from future %}
+
+  {% block indication %}
+  <a href="http://blobon.com"><h3 class="masthead-brand">{% trans "Blobon.com" %}</a>{% trans " - Account deleted" %}</h3>
+  {% endblock %}
+
+  {% block slogan %}
+<div class="col-md-10 col-md-offset-1" style="text-align:left;font-size:16px;">
+
+                    <h3 class="cover-heading" style="padding-bottom:15px;text-align: center;">{% trans "Your account has been deleted" %}</h3>
+
+</div>
+  {% endblock %}
+  {% block form %}
+  {% endblock %}

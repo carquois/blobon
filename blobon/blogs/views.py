@@ -15,9 +15,11 @@ from urlparse import urlparse
 from django.core.files import File
 from cgi import parse_qs
 
+from django.contrib.auth import logout
+
 from django.http import Http404
 
-from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm, TagsForm
+from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm, TagsForm, ProfileForm, PlusProfileForm
 from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email, Rss, Menu, MenuItem
 from django.contrib.auth.models import User
 
@@ -37,6 +39,34 @@ from datetime import datetime
 
 import soundcloud
 
+
+
+
+
+@never_cache 
+@login_required
+def editprofile(request):
+      if request.method == 'POST':
+        form1 = ProfileForm(request.POST or None, request.FILES or None, instance=request.user, prefix="form1") 
+        form2 = PlusProfileForm(request.POST or None, request.FILES or None, instance=request.user.userprofile, prefix="form2")
+        if form1.is_valid() and form2.is_valid():
+          user = form1.save()
+          userprofile = form2.save()
+          user.save()
+          userprofile.save()
+          messages.add_message(request, messages.INFO, _(u"Your profile has been saved"))
+          return HttpResponseRedirect(reverse('blogs.views.index'))
+        else:
+          messages.add_message(request, messages.INFO, _(u"Error")) 
+          return render_to_response('blogs/editprofile.html',
+                                   {'form1': form1, 'form2': form2,},
+                                   context_instance=RequestContext(request))         
+      else:
+        form1 = ProfileForm(instance=request.user, prefix="form1")     
+        form2 = PlusProfileForm(instance=request.user.userprofile, prefix="form2")        
+        return render_to_response('blogs/editprofile.html',
+                                  {'form1': form1, 'form2': form2,},
+                                  context_instance=RequestContext(request))
 
 @never_cache
 def index(request):
@@ -1276,7 +1306,13 @@ def deletetag(request, id):
         tag.delete()
         messages.add_message(request, messages.INFO, _(u"The tag has been deleted"))
       return HttpResponseRedirect(reverse('blogs.views.administratetags', args=(blog.slug,)))
-
+@login_required
+def deleteuser(request):
+    user = request.user
+    logout(request)
+    user.is_active = False
+    user.save()
+    return render_to_response('blogs/account_deleted.html')
 @never_cache
 @login_required
 def edittag(request, id):

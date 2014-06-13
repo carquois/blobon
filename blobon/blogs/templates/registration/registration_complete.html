@@ -3,6 +3,11 @@
 {% load url from future %}
   {% block login_link %}
   {% endblock %}
+
+  {% block indication %}
+  <a href="http://blobon.com"><h3 class="masthead-brand">{% trans "Blobon.com" %}</a>{% trans " - Registration complete" %}</h3>
+  {% endblock %}
+
   {% block slogan %}
 
         <h2>{% trans "Registration complete! You will receive an email to activate your account, thank you." %}</h2>

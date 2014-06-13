@@ -41,9 +41,9 @@
             <ul class="dropdown-menu" style="min-width:190px;">
 
               <li><a href="/createblog/">{% trans "Create a new blog" %}</a></li>
-
-
-              <li class="divider"></li>
+              <li><a href="/dashboard/">{% trans "All my blogs" %}</a></li>
+              <li><a href="/editprofile/">{% trans "Edit profile" %}</a></li>
+      <li class="divider"></li>
 
               <li><a href="{% url 'django.contrib.auth.views.logout' %}">{% trans "Logout" %}</a></li>
 

@@ -1,27 +1,24 @@
 {% extends "blogs/blobon.html" %}
 {% load thumbnail i18n compress calculate_age %}
 {% load url from future %}
-  {% block nav %}
-  {% endblock %}
-  {% block for_contact %}
+
+
+  {% block indication %}
+  <a href="http://blobon.com"><h3 class="masthead-brand">{% trans "Blobon.com" %}</a>{% trans " - Contact" %}</h3>
   {% endblock %}
 
   {% block leaderboard %}
   {% endblock %}
   {% block slogan %}
   {% endblock %}
-  {% block blobonheader %}
-  {% endblock %}
-  {% block blobonfooter %}
-  {% endblock %}
-  {% block footer-css %}
-  {% endblock %}
   {% block form %}
     {% if form.errors %}
       {% trans "Please try again." %}
     {% endif %}
   <div class="row">
-  </div>
+  </div> 
+
+<div class="col-md-6 col-md-offset-3">
   <div class="contact_info" style="text-align:left;padding:15px;">
     <h4>{% trans "Contact Blobon, Inc" %}</h4>
     <p>
@@ -62,7 +59,9 @@
         <a id="send_cancel" href="{% url 'blogs.views.index' %}" class="btn btn-default btn-sm">{% trans "Cancel" %}</a>
   </div>
      </form>
-          {% include 'blobon_footer.html' %}
+
+</div>
+
     <script>
       $('#send').click(function() {
         $('#contact_form').submit();

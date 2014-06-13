@@ -40,6 +40,13 @@
 	border-right:100px solid{% if blog.main_color %}{{ blog.main_color }}{% else %}#ff7f00{% endif %};
 	line-height:20px;
       }
+.navbar-default {
+background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
+}
+
+.panel-default>.panel-heading {
+background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
+}
     </style>
     <link rel="stylesheet" href="{{ STATIC_URL }}farbastic/farbtastic.css" type="text/css" />
 
@@ -68,7 +75,7 @@
 
          <div class="col-md-12" style="padding-top:15px;">
            <form enctype="multipart/form-data" role="form" action="{% url 'blogs.views.administratesettings' blog.slug %}" method="post" id=newsettings>{% csrf_token %}
-          <div class="panel panel-primary" id="setting_form">
+          <div class="panel panel-default" id="setting_form">
             <div class="panel-heading">{% trans "Edit your settings :" %}<a href="#" class="btn btn-xs btn-danger pull-right" id="delete_blog_button" data-toggle="modal" data-target="#{{ blog.slug }}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete blog" %}</a></div>
             <div class="panel-body">         
              <div class="row">
@@ -217,7 +224,6 @@
            </form>
            <div id="formbuttons">
              <button type="submit" class="btn btn-xs btn-primary" id=submitsettings title="{% trans "Save your settings" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
-             <button class="btn btn-xs btn-default" id=cancelsettings title="{% trans "Cancel edit settings" %}"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</button>
            </div>
          </div>
 

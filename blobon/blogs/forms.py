@@ -6,8 +6,11 @@ from django.utils.translation import ugettext_lazy as _
 from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
 from django.db import models
 
+from django.contrib.auth.models import User
+
 from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page, Rss, Tag
 
+from accounts.models import UserProfile
 
 FREQ = (
     ('15m', '15m'),
@@ -169,6 +172,43 @@ class SettingsForm(ModelForm):
     class Meta:
         model = Blog 
         fields = ('pinterest_link','facebook_link', 'twitter_link', 'analytics_account', 'exclusion_start', 'exclusion_end', 'frequency', 'title', 'slug', 'main_color', 'main_image', 'password', 'custom_domain','description','is_online','is_open','short_description','draft_notice' )
+
+
+class ProfileForm(ModelForm):
+    username = CharField(required=True, widget=forms.TextInput(attrs={'placeholder': _('Your new username here'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+
+    first_name = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Your first name here'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+
+    last_name = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Your last name here'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+
+    password = CharField(required=True, widget=forms.TextInput(attrs={'placeholder': _('Your new password here'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+
+    email = EmailField(required=True, widget=forms.TextInput(attrs={'placeholder': _('Enter your email here'),
+                                                    'type': 'text',
+                                                    'class': "form-control input-block-level"}))
+    class Meta:
+        model = User
+        fields = ('first_name','last_name','username', 'email', 'password' )
+
+
+class PlusProfileForm(ModelForm):
+    description = CharField(required=False, widget=forms.Textarea(attrs={'placeholder': _('Enter your message here'),
+                                                    'type': 'text',
+                                                    'rows': '4',
+                                                    'class': "form-control input-block-level mceNoEditor"}))
+
+    avatar = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_avatar(this);"}))
+    class Meta:
+        model = UserProfile
+        fields = ('description', 'avatar')
 
 class PasswordForm(ModelForm):
     password = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Enter the blog password'),

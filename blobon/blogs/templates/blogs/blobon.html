@@ -53,12 +53,16 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #ff7f00;
+  background-color: #C4BDB2;
 }
 body {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+.account_about{
+padding-top:80px;
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -101,10 +105,8 @@ body {
   padding-left: 0;
   padding-right: 0;
   font-size: 16px;
-  font-weight: bold;
   color: #fff; /* IE8 proofing */
   color: rgba(255,255,255,.75);
-  border-bottom: 2px solid transparent;
 }
 .masthead-nav > li > a:hover,
 .masthead-nav > li > a:focus {
@@ -121,9 +123,11 @@ body {
 @media (min-width: 768px) {
   .masthead-brand {
     float: left;
+    margin-left: 50px;
   }
   .masthead-nav {
     float: right;
+    margin-right: 50px;
   }
   .cover{
     margin-top:70px;
@@ -155,11 +159,17 @@ body {
 }
 @media (min-width: 768px) {
 .mastfoot {
-background-color: #ff7f00;
+background-color: #C4BDB2;
 border-top: solid 1px #fff;
 }
 .site-wrapper{
 margin-bottom: 70px;
+}
+}
+
+@media (max-width: 767px) {
+.account_about{
+padding-top:20px;
 }
 }
 /*
@@ -173,7 +183,7 @@ margin-bottom: 70px;
   .masthead {
     position: fixed;
     top: 0;
-    background-color:#ff7f00;
+    background-color:#C4BDB2;
   }
   .mastfoot {
     bottom: 0;
@@ -196,7 +206,7 @@ margin-bottom: 70px;
   .masthead,
   .mastfoot,
   .cover-container {
-    width: 700px;
+    width: 100%;
   }
 }
 
@@ -217,9 +227,9 @@ margin-bottom: 70px;
 
         <div class="cover-container">
   {% block blobonheader %}
-          <div class="masthead clearfix">
+          <div class="masthead clearfix" style="border-bottom: solid 1px #fff;">
             <div class="inner">
-              <h3 class="masthead-brand">{% trans "Blobon.com" %}</h3>
+             {% block indication %} <h3 class="masthead-brand">{% trans "Blobon.com" %}</h3>{% endblock %}
               <ul class="nav masthead-nav">
                 {% block login_link %}
                 <li class="active"><a href="{% url 'accounts.views.login' %}">{% trans "Login" %}</a></li>
@@ -240,8 +250,7 @@ margin-bottom: 70px;
 
           <div class="inner cover">
   {% block slogan %}
-            <h1 class="cover-heading" style="padding-bottom:10px;">{% trans "Blobon" %}</h1>
-		    <h4 class="cover-heading" style="padding-bottom:15px;">{% trans "Efficient - Lightweight - Social" %}</h4>
+            <h1 class="cover-heading" style="padding-bottom:30px;">{% trans "Blobon" %}</h1>
                     <h4 class="cover-heading" style="padding-bottom:15px;">{% trans "The Ultimate Blogging Tool" %}</h4>            
 {% endblock %}
   {% block reg_form %}
@@ -249,10 +258,12 @@ margin-bottom: 70px;
 
 
   {% block form %}
+<div class="account_about">
             <p class="lead">
               <a href="/accounts/register/" class="btn btn-lg btn-primary">{% trans "Create an account" %}</a>
               <a href="/about/" class="btn btn-lg btn-default">{% trans "Learn more" %}</a>
             </p>
+</div>
           <form id="invitation-form" role="form" action="{% url 'blogs.views.index' %}" method="post" style="display:none;">{% csrf_token %}
             <div class="form-group" style="padding:10px;">
             <span id="cancel_invitation" title="{% trans "Cancel the invitation request" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>

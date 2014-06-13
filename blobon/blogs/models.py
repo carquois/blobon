@@ -422,7 +422,7 @@ class Blog(models.Model):
     twitter_oauth_token_secret = models.CharField(max_length=100, blank=True)
     fb_page_access_token = models.CharField(max_length=260, blank=True)
     header_image = ImageField(verbose_name=_("Main image"), upload_to=get_file_path_main, null=True, blank=True)
-    main_color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#ff7f00", blank=True)
+    main_color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#C4BDB2", blank=True)
     language = models.CharField(max_length=7, choices=LANGUAGES,blank=True)
     password = models.CharField(verbose_name=_("Password"), max_length=140, blank=True)
     custom_domain = models.CharField(verbose_name=_("Custom domain"), max_length=300, blank=True)

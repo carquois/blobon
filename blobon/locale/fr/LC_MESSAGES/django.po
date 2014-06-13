@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-11 14:55-0400\n"
+"POT-Creation-Date: 2014-06-13 11:11-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgid "Nom d'utilisateur"
 msgstr ""
 
 #: accounts/forms.py:58 blogs/models.py:566
-#: blogs/templates/blogs/administrateblog.html:268 posts/models.py:87
+#: blogs/templates/blogs/administrateblog.html:279 posts/models.py:87
 #: punns/forms.py:29 punns/forms.py:45 punns/forms.py:59 punns/models.py:73
 msgid "Image"
 msgstr ""
@@ -37,7 +37,7 @@ msgid "Username"
 msgstr ""
 
 #: accounts/forms.py:66 blogs/models.py:427
-#: blogs/templates/blogs/administratesettings.html:268
+#: blogs/templates/blogs/administratesettings.html:274
 #: templates/registration/form_field.html:5
 msgid "Password"
 msgstr ""
@@ -83,220 +83,240 @@ msgstr ""
 msgid "Merci. Vos paramètres ont été enregistrés."
 msgstr ""
 
-#: blogs/forms.py:52
+#: blogs/forms.py:55
 msgid "Enter your page title"
 msgstr "Titre de la page"
 
-#: blogs/forms.py:56
+#: blogs/forms.py:59
 msgid "Your page content here"
 msgstr "Entrez votre texte ici"
 
-#: blogs/forms.py:67 pages/forms.py:10
+#: blogs/forms.py:70 pages/forms.py:10
 msgid "Enter your title"
 msgstr "Entrez votre titre"
 
-#: blogs/forms.py:70 blogs/forms.py:131
+#: blogs/forms.py:73 blogs/forms.py:134
 msgid "Your blog adress"
 msgstr "L'adresse de votre blog "
 
-#: blogs/forms.py:73
+#: blogs/forms.py:76
 msgid "Enter the blog moderator email here"
 msgstr "Courriel du modérateur"
 
-#: blogs/forms.py:81 punns/forms.py:10 punns/models.py:176
+#: blogs/forms.py:84 punns/forms.py:10 punns/models.py:176
 msgid "Title :"
 msgstr "Titre :"
 
-#: blogs/forms.py:81 punns/forms.py:10 punns/models.py:176
+#: blogs/forms.py:84 punns/forms.py:10 punns/models.py:176
 msgid "Enter your title here."
 msgstr "Votre titre ici"
 
-#: blogs/forms.py:82 punns/forms.py:11
+#: blogs/forms.py:85 punns/forms.py:11
 msgid "Title translated :"
 msgstr "Titre traduit"
 
-#: blogs/forms.py:82 punns/forms.py:11
+#: blogs/forms.py:85 punns/forms.py:11
 msgid "Enter your translation here."
 msgstr "Votre traduction"
 
-#: blogs/forms.py:83 punns/forms.py:12 punns/models.py:177
+#: blogs/forms.py:86 punns/forms.py:12 punns/models.py:177
 msgid "Source :"
 msgstr "Sourece :"
 
-#: blogs/forms.py:84
+#: blogs/forms.py:87
 msgid "Enter your content here"
 msgstr "Votre texte ici"
 
-#: blogs/forms.py:88 blogs/forms.py:353
+#: blogs/forms.py:91 blogs/forms.py:393
 msgid "Enter your translation here"
 msgstr "Votre traduction ici"
 
-#: blogs/forms.py:92 blogs/forms.py:204
+#: blogs/forms.py:95 blogs/forms.py:203 blogs/forms.py:244
 msgid "Enter your message here"
 msgstr "Votre message ici"
 
-#: blogs/forms.py:105
+#: blogs/forms.py:108
 msgid "Your name"
 msgstr "Votre nom"
 
-#: blogs/forms.py:109
+#: blogs/forms.py:112
 msgid "Leave your comment here"
 msgstr "Votre commentaire"
 
-#: blogs/forms.py:113 blogs/forms.py:208
+#: blogs/forms.py:116 blogs/forms.py:194 blogs/forms.py:248
 msgid "Enter your email here"
 msgstr "Votre adresse email"
 
-#: blogs/forms.py:116
+#: blogs/forms.py:119
 msgid "Your website url here"
 msgstr "Le lien vers votre site Web"
 
-#: blogs/forms.py:119
+#: blogs/forms.py:122
 msgid "Your occupation here"
 msgstr "Votre occuptation"
 
-#: blogs/forms.py:127
+#: blogs/forms.py:130
 msgid "Your blog title"
 msgstr "Le titre de votre blogue"
 
-#: blogs/forms.py:134
+#: blogs/forms.py:137
 msgid "Your blog password"
 msgstr "Le mot de passe de votre blogue"
 
-#: blogs/forms.py:137
+#: blogs/forms.py:140
 msgid "Your custom domain"
 msgstr "Votre nom de domaine personnalisé"
 
-#: blogs/forms.py:140 blogs/forms.py:144
+#: blogs/forms.py:143 blogs/forms.py:147
 msgid "Describe Your Blog"
 msgstr "Décrivez votre blogue"
 
-#: blogs/forms.py:149
+#: blogs/forms.py:152
 msgid "Your blog main color"
 msgstr "La couleur principale de votre blogue"
 
-#: blogs/forms.py:154
+#: blogs/forms.py:157
 msgid "Link to your Pinterest page here"
 msgstr "Le lien vers votre page Pinterest"
 
-#: blogs/forms.py:158
+#: blogs/forms.py:161
 msgid "Link to your Facebook page here"
 msgstr "Le lien vers votre page Facebook"
 
-#: blogs/forms.py:162
+#: blogs/forms.py:165
 msgid "Link to your Twitter page here"
 msgstr "Le lien vers votre page Twitter"
 
-#: blogs/forms.py:165
+#: blogs/forms.py:168
 msgid "Your Google Analytics account number"
 msgstr "Votre numero de compte Google Analytics"
 
-#: blogs/forms.py:174
+#: blogs/forms.py:178
+#, fuzzy
+msgid "Your new username here"
+msgstr "Le nom de votre étiquette"
+
+#: blogs/forms.py:182
+#, fuzzy
+msgid "Your first name here"
+msgstr "Le nom de votre étiquette"
+
+#: blogs/forms.py:186
+#, fuzzy
+msgid "Your last name here"
+msgstr "Le nom de votre étiquette"
+
+#: blogs/forms.py:190
+#, fuzzy
+msgid "Your new password here"
+msgstr "Le mot de passe de votre blogue"
+
+#: blogs/forms.py:214
 msgid "Enter the blog password"
 msgstr "Entrez le mot de passe du blogue"
 
-#: blogs/forms.py:181
+#: blogs/forms.py:221
 msgid "Enter email here"
 msgstr "Votre courriel"
 
-#: blogs/forms.py:191
+#: blogs/forms.py:231
 msgid "Enter feed url here"
 msgstr "Entrez l'url du fil ici"
 
-#: blogs/forms.py:201
+#: blogs/forms.py:241
 msgid "Your subject here"
 msgstr "Votre sujet"
 
-#: blogs/forms.py:214
+#: blogs/forms.py:254
 msgid "Your campaign name here"
 msgstr "Le nom de votre campagne"
 
-#: blogs/forms.py:218
+#: blogs/forms.py:258
 msgid "Your subject"
 msgstr "Sujet"
 
-#: blogs/forms.py:222
+#: blogs/forms.py:262
 msgid "Your message"
 msgstr "Votre message"
 
-#: blogs/forms.py:231
+#: blogs/forms.py:271
 msgid "Your tag name here"
 msgstr "Le nom de votre étiquette"
 
-#: blogs/forms.py:235
+#: blogs/forms.py:275
 msgid "Describe your tag"
 msgstr "Décrivez votre étiquette"
 
-#: blogs/forms.py:239 blogs/forms.py:257
-#: blogs/templates/blogs/administratesettings.html:252
+#: blogs/forms.py:279 blogs/forms.py:297
+#: blogs/templates/blogs/administratesettings.html:258
 msgid "Slug"
 msgstr ""
 
-#: blogs/forms.py:249
+#: blogs/forms.py:289
 msgid "Your category name here"
 msgstr ""
 
-#: blogs/forms.py:253
+#: blogs/forms.py:293
 msgid "Describe your category"
 msgstr ""
 
-#: blogs/forms.py:260
+#: blogs/forms.py:300
 msgid "Your category color"
 msgstr ""
 
-#: blogs/forms.py:276
+#: blogs/forms.py:316
 msgid "Write your title here"
 msgstr ""
 
-#: blogs/forms.py:280
+#: blogs/forms.py:320
 msgid "Write your tag name or tags separated by commas"
 msgstr ""
 
-#: blogs/forms.py:284
+#: blogs/forms.py:324
 msgid "Write your translated title here"
 msgstr ""
 
-#: blogs/forms.py:288
+#: blogs/forms.py:328
 msgid "Your source"
 msgstr ""
 
-#: blogs/forms.py:292
+#: blogs/forms.py:332
 msgid "Write artist name here"
 msgstr ""
 
-#: blogs/forms.py:296
+#: blogs/forms.py:336
 msgid "Write a new post"
 msgstr ""
 
-#: blogs/forms.py:301
+#: blogs/forms.py:341
 msgid "Write your text here"
 msgstr ""
 
-#: blogs/forms.py:308 blogs/forms.py:313 blogs/forms.py:318 blogs/forms.py:323
-#: blogs/forms.py:328 blogs/forms.py:333 blogs/forms.py:338 blogs/forms.py:343
+#: blogs/forms.py:348 blogs/forms.py:353 blogs/forms.py:358 blogs/forms.py:363
+#: blogs/forms.py:368 blogs/forms.py:373 blogs/forms.py:378 blogs/forms.py:383
 msgid "Write something about this image"
 msgstr ""
 
-#: blogs/forms.py:348
+#: blogs/forms.py:388
 msgid "Write something about this video"
 msgstr ""
 
-#: blogs/forms.py:357
+#: blogs/forms.py:397
 #, fuzzy
 msgid "Youtube or Vimeo url here"
 msgstr "Le lien vers votre site Web"
 
-#: blogs/forms.py:361
+#: blogs/forms.py:401
 msgid "Soundcloud playlist url here"
 msgstr ""
 
 #: blogs/models.py:400 blogs/models.py:483 blogs/models.py:509
 #: blogs/models.py:528 blogs/models.py:798 blogs/models.py:827
-#: blogs/templates/blogs/administrateblog.html:2331
-#: blogs/templates/blogs/administrateblog.html:2374
-#: blogs/templates/blogs/administrateblog.html:2440
-#: blogs/templates/blogs/administratecomments.html:52
-#: blogs/templates/blogs/administratetags.html:54 posts/models.py:68
+#: blogs/templates/blogs/administrateblog.html:2342
+#: blogs/templates/blogs/administrateblog.html:2385
+#: blogs/templates/blogs/administrateblog.html:2451
+#: blogs/templates/blogs/administratecomments.html:60
+#: blogs/templates/blogs/administratetags.html:63 posts/models.py:68
 msgid "Name"
 msgstr "Nom"
 
@@ -308,7 +328,7 @@ msgstr ""
 msgid "Single"
 msgstr ""
 
-#: blogs/models.py:403 blogs/templates/blogs/administrateposts.html:59
+#: blogs/models.py:403 blogs/templates/blogs/administrateposts.html:67
 #: books/templates/books/viewexpense.html:95
 msgid "Category"
 msgstr ""
@@ -321,47 +341,47 @@ msgstr ""
 msgid "Moderator email"
 msgstr ""
 
-#: blogs/models.py:412 blogs/templates/blogs/administrateblog.html:2066
+#: blogs/models.py:412 blogs/templates/blogs/administrateblog.html:2077
 msgid "URL"
 msgstr ""
 
 #: blogs/models.py:413 blogs/models.py:453 blogs/models.py:471
 #: blogs/models.py:516 blogs/models.py:547
-#: blogs/templates/blogs/administrateblog.html:2148
-#: blogs/templates/blogs/administrateblog.html:2185
-#: blogs/templates/blogs/administrateblog.html:2280
-#: blogs/templates/blogs/administratepages.html:28
-#: blogs/templates/blogs/administrateposts.html:57
-#: blogs/templates/blogs/administratesettings.html:236
+#: blogs/templates/blogs/administrateblog.html:2159
+#: blogs/templates/blogs/administrateblog.html:2196
+#: blogs/templates/blogs/administrateblog.html:2291
+#: blogs/templates/blogs/administratepages.html:37
+#: blogs/templates/blogs/administrateposts.html:65
+#: blogs/templates/blogs/administratesettings.html:242
 #: blogs/templates/blogs/createblog.html:42
 #: blogs/templates/blogs/translation.html:62 pages/models.py:23
 #: posts/models.py:59 posts/models.py:92
 msgid "Title"
 msgstr ""
 
-#: blogs/models.py:424 blogs/templates/blogs/administratesettings.html:355
+#: blogs/models.py:424 blogs/templates/blogs/administratesettings.html:361
 msgid "Main image"
 msgstr ""
 
 #: blogs/models.py:425 blogs/models.py:487
-#: blogs/templates/blogs/administratesettings.html:338
+#: blogs/templates/blogs/administratesettings.html:344
 msgid "Main color"
 msgstr ""
 
-#: blogs/models.py:428 blogs/templates/blogs/administratesettings.html:284
+#: blogs/models.py:428 blogs/templates/blogs/administratesettings.html:290
 msgid "Custom domain"
 msgstr ""
 
 #: blogs/models.py:429 blogs/models.py:484 blogs/models.py:529
-#: blogs/templates/blogs/administrateblog.html:2375
-#: blogs/templates/blogs/administrateblog.html:2441
-#: blogs/templates/blogs/administratesettings.html:300
-#: blogs/templates/blogs/administratetags.html:55
+#: blogs/templates/blogs/administrateblog.html:2386
+#: blogs/templates/blogs/administrateblog.html:2452
+#: blogs/templates/blogs/administratesettings.html:306
+#: blogs/templates/blogs/administratetags.html:64
 #: books/templates/books/invoice.html:150 punns/forms.py:30 punns/forms.py:46
 msgid "Description"
 msgstr ""
 
-#: blogs/models.py:434 blogs/templates/blogs/administratesettings.html:321
+#: blogs/models.py:434 blogs/templates/blogs/administratesettings.html:327
 msgid "Short description"
 msgstr ""
 
@@ -375,13 +395,13 @@ msgid "Content"
 msgstr ""
 
 #: blogs/models.py:472 blogs/models.py:605
-#: blogs/templates/blogs/contact.html:49
+#: blogs/templates/blogs/contact.html:46
 msgid "Message"
 msgstr ""
 
-#: blogs/models.py:473 blogs/templates/blogs/administrateblog.html:2235
-#: blogs/templates/blogs/administrateemails.html:63
-#: blogs/templates/blogs/contact.html:43
+#: blogs/models.py:473 blogs/templates/blogs/administrateblog.html:2246
+#: blogs/templates/blogs/administrateemails.html:72
+#: blogs/templates/blogs/contact.html:40
 msgid "Subject"
 msgstr ""
 
@@ -443,7 +463,7 @@ msgid "Vimeo thumb URL"
 msgstr ""
 
 #: blogs/models.py:564 blogs/models.py:565
-#: blogs/templates/blogs/administrateblog.html:2008
+#: blogs/templates/blogs/administrateblog.html:2019
 msgid "Video"
 msgstr ""
 
@@ -587,8 +607,8 @@ msgstr ""
 msgid "Image_04"
 msgstr ""
 
-#: blogs/models.py:602 blogs/templates/blogs/administrateblog.html:1957
-#: blogs/templates/blogs/administrateblog.html:2074
+#: blogs/models.py:602 blogs/templates/blogs/administrateblog.html:1968
+#: blogs/templates/blogs/administrateblog.html:2085
 msgid "Text"
 msgstr ""
 
@@ -645,9 +665,9 @@ msgid "Artist"
 msgstr ""
 
 #: blogs/models.py:797 blogs/models.py:815
-#: blogs/templates/blogs/administrateblog.html:2332
-#: blogs/templates/blogs/administratecomments.html:53
-#: blogs/templates/blogs/administrateemails.html:155 notifications/forms.py:13
+#: blogs/templates/blogs/administrateblog.html:2343
+#: blogs/templates/blogs/administratecomments.html:61
+#: blogs/templates/blogs/administrateemails.html:164 notifications/forms.py:13
 #: posts/models.py:67
 msgid "Email"
 msgstr "Courriel"
@@ -668,157 +688,179 @@ msgstr ""
 msgid "Language_code"
 msgstr ""
 
-#: blogs/views.py:65 posts/views.py:31 punns/views.py:66
+#: blogs/views.py:57
+msgid "Your profile has been saved"
+msgstr ""
+
+#: blogs/views.py:60
+msgid "Error"
+msgstr ""
+
+#: blogs/views.py:97 posts/views.py:31 punns/views.py:66
 #, python-format
 msgid ""
 "Thank you for your interest in the project. %s has been added to our queue "
 "and we will contact you as soon as we can"
 msgstr ""
 
-#: blogs/views.py:1001 blogs/templates/blogs/createblog.html:30
+#: blogs/views.py:1031 blogs/templates/blogs/createblog.html:30
 #: blogs/templates/blogs/createblog.html:36 templates/createblogpost.html:20
 #: templates/createblogpost.html.py:26
 msgid "Error!"
 msgstr ""
 
-#: blogs/views.py:1021
+#: blogs/views.py:1051
 msgid "Error! Please post a valide youtube url."
 msgstr ""
 
-#: blogs/views.py:1050
+#: blogs/views.py:1080
 msgid "The feed has been added"
 msgstr ""
 
-#: blogs/views.py:1097
+#: blogs/views.py:1127
 msgid "Congratulation, you just created a blog"
 msgstr ""
 
-#: blogs/views.py:1256
+#: blogs/views.py:1286
 msgid "The tag has been created"
 msgstr ""
 
-#: blogs/views.py:1274
+#: blogs/views.py:1304
 msgid "Your tag has been deleted"
 msgstr ""
 
-#: blogs/views.py:1277
+#: blogs/views.py:1307
 msgid "The tag has been deleted"
 msgstr ""
 
-#: blogs/views.py:1307
+#: blogs/views.py:1343
 msgid "The tag has been change to a category"
 msgstr ""
 
-#: blogs/views.py:1322
+#: blogs/views.py:1358
 msgid "The category has been change to a tag"
 msgstr ""
 
-#: blogs/views.py:1339
+#: blogs/views.py:1375
 msgid "Your settings have been saved"
 msgstr ""
 
-#: blogs/views.py:1455
+#: blogs/views.py:1491
 msgid "Your post has been publish"
 msgstr ""
 
-#: blogs/views.py:1460
+#: blogs/views.py:1496
 msgid "Your post has been add to queue"
 msgstr ""
 
-#: blogs/views.py:1464
+#: blogs/views.py:1500
 msgid "Your post has been save"
 msgstr ""
 
-#: blogs/views.py:1620 pages/views.py:32
+#: blogs/views.py:1656 pages/views.py:32
 msgid "Your page has been created"
 msgstr ""
 
-#: blogs/views.py:1677 blogs/views.py:1692
+#: blogs/views.py:1713 blogs/views.py:1728
 msgid "Your post has been deleted"
 msgstr ""
 
-#: blogs/views.py:1680 blogs/views.py:1696
+#: blogs/views.py:1716 blogs/views.py:1732
 msgid "The post has been deleted"
 msgstr ""
 
-#: blogs/views.py:1706
+#: blogs/views.py:1742
 msgid "Your page has been deleted"
 msgstr ""
 
-#: blogs/views.py:1709
+#: blogs/views.py:1745
 msgid "The page has been deleted"
 msgstr ""
 
-#: blogs/views.py:1718
+#: blogs/views.py:1754
 msgid "Your category has been deleted"
 msgstr ""
 
-#: blogs/views.py:1721
+#: blogs/views.py:1757
 msgid "The category has been deleted"
 msgstr ""
 
-#: blogs/views.py:1731
+#: blogs/views.py:1767
 msgid "The post has been publish"
 msgstr ""
 
-#: blogs/views.py:1740
+#: blogs/views.py:1776
 msgid "The page has been publish"
 msgstr ""
 
-#: blogs/views.py:1770
+#: blogs/views.py:1806
 msgid "The subscriber has been deleted"
 msgstr ""
 
-#: blogs/views.py:1779
+#: blogs/views.py:1815
 msgid "The feed has been deleted"
 msgstr ""
 
-#: blogs/views.py:1789
+#: blogs/views.py:1825
 msgid "Your blog has been deleted"
 msgstr ""
 
-#: blogs/views.py:1793
+#: blogs/views.py:1829
 msgid "The blog has been deleted"
 msgstr ""
 
-#: blogs/views.py:1838
+#: blogs/views.py:1874
 msgid "Your email has been deleted"
 msgstr ""
 
-#: blogs/views.py:1841
+#: blogs/views.py:1877
 msgid "The email has been deleted"
 msgstr ""
 
-#: blogs/views.py:1853
+#: blogs/views.py:1889
 msgid "A new subscriber has been added to your blog"
 msgstr ""
 
-#: blogs/views.py:1890 blogs/views.py:1900 blogs/views.py:2028
-#: blogs/views.py:2058
+#: blogs/views.py:1926 blogs/views.py:1936 blogs/views.py:2064
+#: blogs/views.py:2094
 msgid "Your message has been sent, thank you!"
 msgstr ""
 
-#: blogs/views.py:1916 blogs/views.py:1948
+#: blogs/views.py:1952 blogs/views.py:1984
 #: blogs/templates/blogs/password.html:15
 #: blogs/templates/blogs/passwordsingle.html:15
 msgid "The password didn't match. Please try again."
 msgstr ""
 
-#: blogs/views.py:2011
+#: blogs/views.py:2047
 msgid "Thank you. Your comment is now awaiting moderation"
 msgstr ""
 
-#: blogs/views.py:2034 blogs/views.py:2064
+#: blogs/views.py:2070 blogs/views.py:2100
 msgid "Oups! It didn't work, please try again with a valid email"
 msgstr ""
 
-#: blogs/templates/blogs/about.html:5 blogs/templates/blogs/blobon.html:243
-#: registration/activate.html:234 registration/activation_complete.html:234
-#: registration/registration_complete.html:234 templates/blobon_topnav.html:12
-msgid "Blobon"
+#: blogs/templates/blogs/about.html:6
+#: blogs/templates/blogs/account_deleted.html:6
+#: blogs/templates/blogs/blobon.html:232 blogs/templates/blogs/contact.html:7
+#: blogs/templates/registration/activation_complete.html:6
+#: blogs/templates/registration/registration_complete.html:8
+#: blogs/templates/registration/registration_form.html:5
+#: registration/activate.html:213 registration/activation_complete.html:213
+#: registration/registration_complete.html:213 templates/login.html:18
+msgid "Blobon.com"
 msgstr ""
 
-#: blogs/templates/blogs/about.html:9
+#: blogs/templates/blogs/about.html:6
+#, fuzzy
+msgid " - About"
+msgstr "À propos"
+
+#: blogs/templates/blogs/about.html:12
+msgid "Efficient - Lightweight - Social"
+msgstr ""
+
+#: blogs/templates/blogs/about.html:14
 msgid ""
 "Blobon is a young innovative digital company, made in Canada. Our mission is "
 "to develop lightweight, simple and effective interfaces for both small and "
@@ -847,14 +889,22 @@ msgid ""
 "You've already spent too long Blobon:"
 msgstr ""
 
-#: blogs/templates/blogs/about.html:24
+#: blogs/templates/blogs/about.html:29
 msgid " contact us now!"
 msgstr ""
 
-#: blogs/templates/blogs/about.html:28 blogs/templates/blogs/blobon.html:253
+#: blogs/templates/blogs/about.html:33 blogs/templates/blogs/blobon.html:263
 #, fuzzy
 msgid "Create an account"
 msgstr "Écrire un commentaire"
+
+#: blogs/templates/blogs/account_deleted.html:6
+msgid " - Account deleted"
+msgstr ""
+
+#: blogs/templates/blogs/account_deleted.html:12
+msgid "Your account has been deleted"
+msgstr ""
 
 #: blogs/templates/blogs/add_sub_category.html:61
 msgid "Add a sub-category to "
@@ -874,885 +924,889 @@ msgstr ""
 
 #: blogs/templates/blogs/add_sub_category.html:75
 #: blogs/templates/blogs/add_sub_category.html:91
-#: blogs/templates/blogs/administratecategories.html:92
-#: blogs/templates/blogs/administratesettings.html:220
-#: blogs/templates/blogs/contact.html:62
+#: blogs/templates/blogs/administratecategories.html:98
+#: blogs/templates/blogs/contact.html:59
 #: blogs/templates/blogs/createblog.html:70
 #: blogs/templates/blogs/createpage.html:13
 #: blogs/templates/blogs/edit_post.html:689
-#: blogs/templates/blogs/editcategory.html:68
-#: blogs/templates/blogs/editcategory.html:84
-#: blogs/templates/blogs/editemail.html:63
+#: blogs/templates/blogs/editcategory.html:76
+#: blogs/templates/blogs/editcategory.html:92
+#: blogs/templates/blogs/editemail.html:71
 #: blogs/templates/blogs/editpage.html:13
 #: blogs/templates/blogs/editpost.html:531
-#: blogs/templates/blogs/edittag.html:62
+#: blogs/templates/blogs/editprofile.html:140
+#: blogs/templates/blogs/editprofile.html:152
+#: blogs/templates/blogs/edittag.html:70
 #: blogs/templates/blogs/quicktranslation.html:147
 #: blogs/templates/blogs/subscription.html:46
 #: blogs/templates/blogs/translatepost.html:193
-#: blogs/templates/registration/registration_form.html:12
-#: templates/login.html:31
+#: blogs/templates/registration/registration_form.html:20
+#: templates/login.html:34
 msgid "Cancel"
 msgstr ""
 
 #: blogs/templates/blogs/add_sub_category.html:88
-#: blogs/templates/blogs/editcategory.html:81
-#: blogs/templates/blogs/editemail.html:60
-#: blogs/templates/blogs/edittag.html:59
+#: blogs/templates/blogs/editcategory.html:89
+#: blogs/templates/blogs/editemail.html:68
+#: blogs/templates/blogs/edittag.html:67
 msgid "Save Changes"
 msgstr ""
 
 #: blogs/templates/blogs/add_sub_category.html:88
-#: blogs/templates/blogs/administratecategories.html:105
-#: blogs/templates/blogs/administrateemails.html:46
-#: blogs/templates/blogs/administratesettings.html:219
-#: blogs/templates/blogs/administratetags.html:34
+#: blogs/templates/blogs/administratecategories.html:111
+#: blogs/templates/blogs/administrateemails.html:55
+#: blogs/templates/blogs/administratesettings.html:226
+#: blogs/templates/blogs/administratetags.html:43
 #: blogs/templates/blogs/edit_post.html:685
-#: blogs/templates/blogs/editcategory.html:81
-#: blogs/templates/blogs/editemail.html:60
+#: blogs/templates/blogs/editcategory.html:89
+#: blogs/templates/blogs/editemail.html:68
 #: blogs/templates/blogs/editpage.html:27
 #: blogs/templates/blogs/editpost.html:527
-#: blogs/templates/blogs/edittag.html:59
+#: blogs/templates/blogs/editprofile.html:151
+#: blogs/templates/blogs/edittag.html:67
 msgid "Save"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:261
+#: blogs/templates/blogs/administrateblog.html:272
 msgid "View blog"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:261
+#: blogs/templates/blogs/administrateblog.html:272
+#: templates/blobon_topnav.html:44
 msgid "All my blogs"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:266
+#: blogs/templates/blogs/administrateblog.html:277
 msgid "Write a new post quickly"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:266
+#: blogs/templates/blogs/administrateblog.html:277
 msgid "Quick post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:267
+#: blogs/templates/blogs/administrateblog.html:278
 msgid "Write a blog post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:267
+#: blogs/templates/blogs/administrateblog.html:278
 msgid "Blog post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:268
+#: blogs/templates/blogs/administrateblog.html:279
 msgid "Submit one or more images"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:269
+#: blogs/templates/blogs/administrateblog.html:280
 msgid "Submit a Youtube video,a Vimeo Video or a Soundcloud playlist"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:269
+#: blogs/templates/blogs/administrateblog.html:280
 msgid "Video and Music"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:277
-#: blogs/templates/blogs/administrateblog.html:420
-#: blogs/templates/blogs/administrateblog.html:851
-#: blogs/templates/blogs/administrateblog.html:1401
-#: blogs/templates/blogs/administrateblog.html:1929
-#: blogs/templates/blogs/administrateblog.html:2020
+#: blogs/templates/blogs/administrateblog.html:288
+#: blogs/templates/blogs/administrateblog.html:431
+#: blogs/templates/blogs/administrateblog.html:862
+#: blogs/templates/blogs/administrateblog.html:1412
+#: blogs/templates/blogs/administrateblog.html:1940
+#: blogs/templates/blogs/administrateblog.html:2031
 msgid "Cancel Title"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:282
+#: blogs/templates/blogs/administrateblog.html:293
 msgid "Add a Title to Your Post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:282
-#: blogs/templates/blogs/administrateblog.html:413
-#: blogs/templates/blogs/administrateblog.html:844
-#: blogs/templates/blogs/administrateblog.html:1394
-#: blogs/templates/blogs/administrateblog.html:1922
+#: blogs/templates/blogs/administrateblog.html:293
+#: blogs/templates/blogs/administrateblog.html:424
+#: blogs/templates/blogs/administrateblog.html:855
+#: blogs/templates/blogs/administrateblog.html:1405
+#: blogs/templates/blogs/administrateblog.html:1933
 msgid "Add a title"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:285
+#: blogs/templates/blogs/administrateblog.html:296
 msgid "Get More Formating Options"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:285
+#: blogs/templates/blogs/administrateblog.html:296
 msgid "Formating Options"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:295
-#: blogs/templates/blogs/administrateblog.html:352
-#: blogs/templates/blogs/administrateblog.html:802
-#: blogs/templates/blogs/administrateblog.html:1352
-#: blogs/templates/blogs/administrateblog.html:1883
-#: blogs/templates/blogs/administrateblog.html:1971
-#: blogs/templates/blogs/administrateblog.html:2090
+#: blogs/templates/blogs/administrateblog.html:306
+#: blogs/templates/blogs/administrateblog.html:363
+#: blogs/templates/blogs/administrateblog.html:813
+#: blogs/templates/blogs/administrateblog.html:1363
+#: blogs/templates/blogs/administrateblog.html:1894
+#: blogs/templates/blogs/administrateblog.html:1982
+#: blogs/templates/blogs/administrateblog.html:2101
 #: blogs/templates/blogs/edit_post.html:668
 msgid "Create and add a new tag to your post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:295
-#: blogs/templates/blogs/administrateblog.html:352
-#: blogs/templates/blogs/administrateblog.html:802
-#: blogs/templates/blogs/administrateblog.html:1352
-#: blogs/templates/blogs/administrateblog.html:1883
-#: blogs/templates/blogs/administrateblog.html:1971
-#: blogs/templates/blogs/administrateblog.html:2090
+#: blogs/templates/blogs/administrateblog.html:306
+#: blogs/templates/blogs/administrateblog.html:363
+#: blogs/templates/blogs/administrateblog.html:813
+#: blogs/templates/blogs/administrateblog.html:1363
+#: blogs/templates/blogs/administrateblog.html:1894
+#: blogs/templates/blogs/administrateblog.html:1982
+#: blogs/templates/blogs/administrateblog.html:2101
 #: blogs/templates/blogs/edit_post.html:668
 msgid "Add a new tag"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:298
-#: blogs/templates/blogs/administrateblog.html:355
-#: blogs/templates/blogs/administrateblog.html:805
-#: blogs/templates/blogs/administrateblog.html:1355
-#: blogs/templates/blogs/administrateblog.html:1886
-#: blogs/templates/blogs/administrateblog.html:1974
-#: blogs/templates/blogs/administrateblog.html:2093
+#: blogs/templates/blogs/administrateblog.html:309
+#: blogs/templates/blogs/administrateblog.html:366
+#: blogs/templates/blogs/administrateblog.html:816
+#: blogs/templates/blogs/administrateblog.html:1366
+#: blogs/templates/blogs/administrateblog.html:1897
+#: blogs/templates/blogs/administrateblog.html:1985
+#: blogs/templates/blogs/administrateblog.html:2104
 #: blogs/templates/blogs/edit_post.html:671
 msgid "You can add more than one tag by separating them with commas"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:300
-#: blogs/templates/blogs/administrateblog.html:357
-#: blogs/templates/blogs/administrateblog.html:807
-#: blogs/templates/blogs/administrateblog.html:1357
-#: blogs/templates/blogs/administrateblog.html:1888
-#: blogs/templates/blogs/administrateblog.html:1976
-#: blogs/templates/blogs/administrateblog.html:2095
+#: blogs/templates/blogs/administrateblog.html:311
+#: blogs/templates/blogs/administrateblog.html:368
+#: blogs/templates/blogs/administrateblog.html:818
+#: blogs/templates/blogs/administrateblog.html:1368
+#: blogs/templates/blogs/administrateblog.html:1899
+#: blogs/templates/blogs/administrateblog.html:1987
+#: blogs/templates/blogs/administrateblog.html:2106
 #: blogs/templates/blogs/edit_post.html:673
 msgid "Cancel add new tag"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:315
-#: blogs/templates/blogs/administrateblog.html:369
-#: blogs/templates/blogs/administrateblog.html:816
-#: blogs/templates/blogs/administrateblog.html:1365
-#: blogs/templates/blogs/administrateblog.html:1897
-#: blogs/templates/blogs/administrateblog.html:1983
-#: blogs/templates/blogs/administrateblog.html:2102
+#: blogs/templates/blogs/administrateblog.html:326
+#: blogs/templates/blogs/administrateblog.html:380
+#: blogs/templates/blogs/administrateblog.html:827
+#: blogs/templates/blogs/administrateblog.html:1376
+#: blogs/templates/blogs/administrateblog.html:1908
+#: blogs/templates/blogs/administrateblog.html:1994
+#: blogs/templates/blogs/administrateblog.html:2113
 msgid "Submit post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:316
-#: blogs/templates/blogs/administrateblog.html:370
-#: blogs/templates/blogs/administrateblog.html:817
-#: blogs/templates/blogs/administrateblog.html:1366
-#: blogs/templates/blogs/administrateblog.html:1898
-#: blogs/templates/blogs/administrateblog.html:1984
-#: blogs/templates/blogs/administrateblog.html:2103
+#: blogs/templates/blogs/administrateblog.html:327
+#: blogs/templates/blogs/administrateblog.html:381
+#: blogs/templates/blogs/administrateblog.html:828
+#: blogs/templates/blogs/administrateblog.html:1377
+#: blogs/templates/blogs/administrateblog.html:1909
+#: blogs/templates/blogs/administrateblog.html:1995
+#: blogs/templates/blogs/administrateblog.html:2114
 #: blogs/templates/blogs/createpage.html:27
 msgid "More options"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:321
-#: blogs/templates/blogs/administrateblog.html:375
-#: blogs/templates/blogs/administrateblog.html:822
-#: blogs/templates/blogs/administrateblog.html:1371
-#: blogs/templates/blogs/administrateblog.html:1903
-#: blogs/templates/blogs/administrateblog.html:1989
-#: blogs/templates/blogs/administrateblog.html:2108
+#: blogs/templates/blogs/administrateblog.html:332
+#: blogs/templates/blogs/administrateblog.html:386
+#: blogs/templates/blogs/administrateblog.html:833
+#: blogs/templates/blogs/administrateblog.html:1382
+#: blogs/templates/blogs/administrateblog.html:1914
+#: blogs/templates/blogs/administrateblog.html:2000
+#: blogs/templates/blogs/administrateblog.html:2119
 #: blogs/templates/blogs/email_empty_draft.html:47
 msgid "Post now"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:323
-#: blogs/templates/blogs/administrateblog.html:377
-#: blogs/templates/blogs/administrateblog.html:824
-#: blogs/templates/blogs/administrateblog.html:1373
-#: blogs/templates/blogs/administrateblog.html:1905
-#: blogs/templates/blogs/administrateblog.html:1991
-#: blogs/templates/blogs/administrateblog.html:2110
+#: blogs/templates/blogs/administrateblog.html:334
+#: blogs/templates/blogs/administrateblog.html:388
+#: blogs/templates/blogs/administrateblog.html:835
+#: blogs/templates/blogs/administrateblog.html:1384
+#: blogs/templates/blogs/administrateblog.html:1916
+#: blogs/templates/blogs/administrateblog.html:2002
+#: blogs/templates/blogs/administrateblog.html:2121
 #: blogs/templates/blogs/createpage.html:34
 msgid "Add to the queue"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:324
-#: blogs/templates/blogs/administrateblog.html:825
-#: blogs/templates/blogs/administrateblog.html:1374
-#: blogs/templates/blogs/administrateblog.html:1906
-#: blogs/templates/blogs/administrateblog.html:1992
-#: blogs/templates/blogs/administrateblog.html:2112
-#: blogs/templates/blogs/administrateposts.html:85
+#: blogs/templates/blogs/administrateblog.html:335
+#: blogs/templates/blogs/administrateblog.html:836
+#: blogs/templates/blogs/administrateblog.html:1385
+#: blogs/templates/blogs/administrateblog.html:1917
+#: blogs/templates/blogs/administrateblog.html:2003
+#: blogs/templates/blogs/administrateblog.html:2123
+#: blogs/templates/blogs/administrateposts.html:93
 msgid "To be translated"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:392
+#: blogs/templates/blogs/administrateblog.html:403
 msgid "Upload a Single Image"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:392
+#: blogs/templates/blogs/administrateblog.html:403
 msgid "Single Image"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:393
+#: blogs/templates/blogs/administrateblog.html:404
 msgid "Create an Album of Images"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:393
+#: blogs/templates/blogs/administrateblog.html:404
 msgid "Create An Album"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:398
+#: blogs/templates/blogs/administrateblog.html:409
 msgid "Vertical layout : Show two images side by side"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:399
+#: blogs/templates/blogs/administrateblog.html:410
 msgid "Horizontal Layout : Show one big image with 3 thumbnails under it"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:400
+#: blogs/templates/blogs/administrateblog.html:411
 msgid ""
 "Grid Layout : Shows all the images on one page as thumbnails. Best for "
 "albums with many images."
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:402
+#: blogs/templates/blogs/administrateblog.html:413
 msgid "Cancel Album"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:407
+#: blogs/templates/blogs/administrateblog.html:418
 msgid "Cancel vertical album"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:413
-#: blogs/templates/blogs/administrateblog.html:844
-#: blogs/templates/blogs/administrateblog.html:1394
+#: blogs/templates/blogs/administrateblog.html:424
+#: blogs/templates/blogs/administrateblog.html:855
+#: blogs/templates/blogs/administrateblog.html:1405
 msgid "Add a Title to Your Album"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:416
-#: blogs/templates/blogs/administrateblog.html:847
-#: blogs/templates/blogs/administrateblog.html:1397
+#: blogs/templates/blogs/administrateblog.html:427
+#: blogs/templates/blogs/administrateblog.html:858
+#: blogs/templates/blogs/administrateblog.html:1408
 msgid "Add a Comment to Your Images"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:416
-#: blogs/templates/blogs/administrateblog.html:847
-#: blogs/templates/blogs/administrateblog.html:1397
-#: blogs/templates/blogs/administrateblog.html:1925
-#: blogs/templates/blogs/administrateblog.html:2040
+#: blogs/templates/blogs/administrateblog.html:427
+#: blogs/templates/blogs/administrateblog.html:858
+#: blogs/templates/blogs/administrateblog.html:1408
+#: blogs/templates/blogs/administrateblog.html:1936
+#: blogs/templates/blogs/administrateblog.html:2051
 msgid "Add content"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:455
-#: blogs/templates/blogs/administrateblog.html:484
-#: blogs/templates/blogs/administrateblog.html:513
-#: blogs/templates/blogs/administrateblog.html:542
-#: blogs/templates/blogs/administrateblog.html:571
-#: blogs/templates/blogs/administrateblog.html:600
-#: blogs/templates/blogs/administrateblog.html:629
-#: blogs/templates/blogs/administrateblog.html:658
-#: blogs/templates/blogs/administrateblog.html:687
-#: blogs/templates/blogs/administrateblog.html:716
-#: blogs/templates/blogs/administrateblog.html:745
-#: blogs/templates/blogs/administrateblog.html:915
-#: blogs/templates/blogs/administrateblog.html:961
-#: blogs/templates/blogs/administrateblog.html:1007
-#: blogs/templates/blogs/administrateblog.html:1051
-#: blogs/templates/blogs/administrateblog.html:1096
-#: blogs/templates/blogs/administrateblog.html:1140
-#: blogs/templates/blogs/administrateblog.html:1496
-#: blogs/templates/blogs/administrateblog.html:1576
-#: blogs/templates/blogs/administrateblog.html:1656
+#: blogs/templates/blogs/administrateblog.html:466
+#: blogs/templates/blogs/administrateblog.html:495
+#: blogs/templates/blogs/administrateblog.html:524
+#: blogs/templates/blogs/administrateblog.html:553
+#: blogs/templates/blogs/administrateblog.html:582
+#: blogs/templates/blogs/administrateblog.html:611
+#: blogs/templates/blogs/administrateblog.html:640
+#: blogs/templates/blogs/administrateblog.html:669
+#: blogs/templates/blogs/administrateblog.html:698
+#: blogs/templates/blogs/administrateblog.html:727
+#: blogs/templates/blogs/administrateblog.html:756
+#: blogs/templates/blogs/administrateblog.html:926
+#: blogs/templates/blogs/administrateblog.html:972
+#: blogs/templates/blogs/administrateblog.html:1018
+#: blogs/templates/blogs/administrateblog.html:1062
+#: blogs/templates/blogs/administrateblog.html:1107
+#: blogs/templates/blogs/administrateblog.html:1151
+#: blogs/templates/blogs/administrateblog.html:1507
+#: blogs/templates/blogs/administrateblog.html:1587
+#: blogs/templates/blogs/administrateblog.html:1667
 msgid "Add more images"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:455
-#: blogs/templates/blogs/administrateblog.html:484
-#: blogs/templates/blogs/administrateblog.html:513
-#: blogs/templates/blogs/administrateblog.html:542
-#: blogs/templates/blogs/administrateblog.html:571
-#: blogs/templates/blogs/administrateblog.html:600
-#: blogs/templates/blogs/administrateblog.html:629
-#: blogs/templates/blogs/administrateblog.html:658
-#: blogs/templates/blogs/administrateblog.html:687
-#: blogs/templates/blogs/administrateblog.html:716
-#: blogs/templates/blogs/administrateblog.html:745
-#: blogs/templates/blogs/administrateblog.html:915
-#: blogs/templates/blogs/administrateblog.html:961
-#: blogs/templates/blogs/administrateblog.html:1007
-#: blogs/templates/blogs/administrateblog.html:1051
-#: blogs/templates/blogs/administrateblog.html:1096
-#: blogs/templates/blogs/administrateblog.html:1140
-#: blogs/templates/blogs/administrateblog.html:1496
-#: blogs/templates/blogs/administrateblog.html:1576
-#: blogs/templates/blogs/administrateblog.html:1656
+#: blogs/templates/blogs/administrateblog.html:466
+#: blogs/templates/blogs/administrateblog.html:495
+#: blogs/templates/blogs/administrateblog.html:524
+#: blogs/templates/blogs/administrateblog.html:553
+#: blogs/templates/blogs/administrateblog.html:582
+#: blogs/templates/blogs/administrateblog.html:611
+#: blogs/templates/blogs/administrateblog.html:640
+#: blogs/templates/blogs/administrateblog.html:669
+#: blogs/templates/blogs/administrateblog.html:698
+#: blogs/templates/blogs/administrateblog.html:727
+#: blogs/templates/blogs/administrateblog.html:756
+#: blogs/templates/blogs/administrateblog.html:926
+#: blogs/templates/blogs/administrateblog.html:972
+#: blogs/templates/blogs/administrateblog.html:1018
+#: blogs/templates/blogs/administrateblog.html:1062
+#: blogs/templates/blogs/administrateblog.html:1107
+#: blogs/templates/blogs/administrateblog.html:1151
+#: blogs/templates/blogs/administrateblog.html:1507
+#: blogs/templates/blogs/administrateblog.html:1587
+#: blogs/templates/blogs/administrateblog.html:1667
 msgid "More images"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:838
+#: blogs/templates/blogs/administrateblog.html:849
 msgid "Cancel horizontal album"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:907
-#: blogs/templates/blogs/administrateblog.html:1488
+#: blogs/templates/blogs/administrateblog.html:918
+#: blogs/templates/blogs/administrateblog.html:1499
 msgid "Cancel Comments"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:1388
+#: blogs/templates/blogs/administrateblog.html:1399
 msgid "Cancel grid album"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:1916
+#: blogs/templates/blogs/administrateblog.html:1927
 msgid "Cancel single image"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:1922
+#: blogs/templates/blogs/administrateblog.html:1933
 msgid "Add a Title to Your Image"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:1925
+#: blogs/templates/blogs/administrateblog.html:1936
 msgid "Add a Comment to Your Image"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:1939
+#: blogs/templates/blogs/administrateblog.html:1950
 msgid "Cancel Comment"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2008
+#: blogs/templates/blogs/administrateblog.html:2019
 msgid "Create a post with a youtube or vimeo video"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2009
+#: blogs/templates/blogs/administrateblog.html:2020
 msgid "Create a post with a soundcloud playlist"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2009
+#: blogs/templates/blogs/administrateblog.html:2020
 msgid "Music"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2027
+#: blogs/templates/blogs/administrateblog.html:2038
 msgid "Cancel video"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2032
+#: blogs/templates/blogs/administrateblog.html:2043
 msgid "Add a Title to Your Video"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2032
-#: blogs/templates/blogs/administrateblog.html:2055
+#: blogs/templates/blogs/administrateblog.html:2043
+#: blogs/templates/blogs/administrateblog.html:2066
 msgid "Add a Title"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2040
+#: blogs/templates/blogs/administrateblog.html:2051
 msgid "Add a Comment to Your Video"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2055
+#: blogs/templates/blogs/administrateblog.html:2066
 msgid "Add a Title to Your music"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2061
+#: blogs/templates/blogs/administrateblog.html:2072
 msgid "Cancel Music"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2128
+#: blogs/templates/blogs/administrateblog.html:2139
 msgid "Last Post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2129
+#: blogs/templates/blogs/administrateblog.html:2140
 msgid "Manage Your Posts"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2129
-#: blogs/templates/blogs/administrateblog.html:2169
-#: blogs/templates/blogs/administrateblog.html:2210
-#: blogs/templates/blogs/administrateblog.html:2261
-#: blogs/templates/blogs/administrateblog.html:2308
-#: blogs/templates/blogs/administrateblog.html:2355
-#: blogs/templates/blogs/administrateblog.html:2426
-#: blogs/templates/blogs/administrateblog.html:4147
-#: blogs/templates/blogs/dashboard.html:59
+#: blogs/templates/blogs/administrateblog.html:2140
+#: blogs/templates/blogs/administrateblog.html:2180
+#: blogs/templates/blogs/administrateblog.html:2221
+#: blogs/templates/blogs/administrateblog.html:2272
+#: blogs/templates/blogs/administrateblog.html:2319
+#: blogs/templates/blogs/administrateblog.html:2366
+#: blogs/templates/blogs/administrateblog.html:2437
+#: blogs/templates/blogs/administrateblog.html:4158
+#: blogs/templates/blogs/dashboard.html:69
 msgid "Manage"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2133
+#: blogs/templates/blogs/administrateblog.html:2144
 msgid "Show All Posts"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2133
-#: blogs/templates/blogs/administrateblog.html:2173
-#: blogs/templates/blogs/administrateblog.html:2312
-#: blogs/templates/blogs/administrateblog.html:2360
-#: blogs/templates/blogs/administrateblog.html:2430
+#: blogs/templates/blogs/administrateblog.html:2144
+#: blogs/templates/blogs/administrateblog.html:2184
+#: blogs/templates/blogs/administrateblog.html:2323
+#: blogs/templates/blogs/administrateblog.html:2371
+#: blogs/templates/blogs/administrateblog.html:2441
 msgid "All"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2135
-#: blogs/templates/blogs/administrateposts.html:111
+#: blogs/templates/blogs/administrateblog.html:2146
+#: blogs/templates/blogs/administrateposts.html:119
 msgid "There are no posts for this blog"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2149
-#: blogs/templates/blogs/administrateblog.html:2186
-#: blogs/templates/blogs/administrateblog.html:2282
-#: blogs/templates/blogs/administratepages.html:30
-#: blogs/templates/blogs/administrateposts.html:61
+#: blogs/templates/blogs/administrateblog.html:2160
+#: blogs/templates/blogs/administrateblog.html:2197
+#: blogs/templates/blogs/administrateblog.html:2293
+#: blogs/templates/blogs/administratepages.html:39
+#: blogs/templates/blogs/administrateposts.html:69
 #: blogs/templates/blogs/translation.html:64
 msgid "Author"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2150
-#: blogs/templates/blogs/administrateblog.html:2188
-#: blogs/templates/blogs/administrateblog.html:2283
-#: blogs/templates/blogs/administratepages.html:31
-#: blogs/templates/blogs/administrateposts.html:63
+#: blogs/templates/blogs/administrateblog.html:2161
+#: blogs/templates/blogs/administrateblog.html:2199
+#: blogs/templates/blogs/administrateblog.html:2294
+#: blogs/templates/blogs/administratepages.html:40
+#: blogs/templates/blogs/administrateposts.html:71
 #: blogs/templates/blogs/translation.html:66
 #: books/templates/books/report.html:46
 #: books/templates/books/viewexpense.html:94 templates/earnings.html:13
 msgid "Date"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2156
-#: blogs/templates/blogs/administrateblog.html:2289
-#: blogs/templates/blogs/administratecomments.html:72
-#: blogs/templates/blogs/administrateposts.html:73
+#: blogs/templates/blogs/administrateblog.html:2167
+#: blogs/templates/blogs/administrateblog.html:2300
+#: blogs/templates/blogs/administratecomments.html:80
+#: blogs/templates/blogs/administrateposts.html:81
 #: blogs/templates/blogs/translation.html:76
 msgid "View This Post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2168
+#: blogs/templates/blogs/administrateblog.html:2179
 msgid "Last Page"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2169
+#: blogs/templates/blogs/administrateblog.html:2180
 msgid "Manage Your Pages"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2170
-#: blogs/templates/blogs/administratepages.html:15
+#: blogs/templates/blogs/administrateblog.html:2181
+#: blogs/templates/blogs/administratepages.html:24
 msgid "Add a New Page"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2170
-#: blogs/templates/blogs/administrateblog.html:2356
-#: blogs/templates/blogs/administrateblog.html:2427
+#: blogs/templates/blogs/administrateblog.html:2181
+#: blogs/templates/blogs/administrateblog.html:2367
+#: blogs/templates/blogs/administrateblog.html:2438
 msgid "Add New"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2173
+#: blogs/templates/blogs/administrateblog.html:2184
 msgid "Show All Pages"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2187
+#: blogs/templates/blogs/administrateblog.html:2198
 #: blogs/templates/blogs/translation.html:65
 msgid "Stats"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2194
-#: blogs/templates/blogs/administratepages.html:41
+#: blogs/templates/blogs/administrateblog.html:2205
+#: blogs/templates/blogs/administratepages.html:50
 msgid "View This Page"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2196
+#: blogs/templates/blogs/administrateblog.html:2207
 msgid "Coming soon"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2209
+#: blogs/templates/blogs/administrateblog.html:2220
 msgid "Info-letters"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2210
+#: blogs/templates/blogs/administrateblog.html:2221
 msgid "Manage your Info-letters"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2214
+#: blogs/templates/blogs/administrateblog.html:2225
 msgid "Number of subscriber: "
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2216
+#: blogs/templates/blogs/administrateblog.html:2227
 msgid "Last subscriber: "
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2218
-#: blogs/templates/blogs/administrateemails.html:110
+#: blogs/templates/blogs/administrateblog.html:2229
+#: blogs/templates/blogs/administrateemails.html:119
 msgid "This blog has no mailing list"
 msgstr "Ce blogue n'a pas de liste d'envoi"
 
-#: blogs/templates/blogs/administrateblog.html:2220
-#: blogs/templates/blogs/administrateemails.html:194
+#: blogs/templates/blogs/administrateblog.html:2231
+#: blogs/templates/blogs/administrateemails.html:203
 msgid "This blog has no subscriber"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2220
+#: blogs/templates/blogs/administrateblog.html:2231
 msgid " and no mailing list"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2233
+#: blogs/templates/blogs/administrateblog.html:2244
 msgid "Email function"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2236
-#: blogs/templates/blogs/administrateemails.html:64
+#: blogs/templates/blogs/administrateblog.html:2247
+#: blogs/templates/blogs/administrateemails.html:73
 msgid "Who"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2260
-#: blogs/templates/blogs/administrateblog.html:4157
+#: blogs/templates/blogs/administrateblog.html:2271
+#: blogs/templates/blogs/administrateblog.html:4168
 msgid "Translation"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2261
-#: blogs/templates/blogs/administrateblog.html:4157
+#: blogs/templates/blogs/administrateblog.html:2272
+#: blogs/templates/blogs/administrateblog.html:4168
 msgid "Translate your posts"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2265
+#: blogs/templates/blogs/administrateblog.html:2276
 msgid "Number of posts to be translate: "
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2267
+#: blogs/templates/blogs/administrateblog.html:2278
 #: blogs/templates/blogs/translation.html:105
 msgid "This blog has no post to translate"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2307
+#: blogs/templates/blogs/administrateblog.html:2318
 msgid "Last comment to be approve"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2308
+#: blogs/templates/blogs/administrateblog.html:2319
 msgid "Moderate Comments"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2312
+#: blogs/templates/blogs/administrateblog.html:2323
 msgid "Show All Comments"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2314
-#: blogs/templates/blogs/administratecomments.html:106
+#: blogs/templates/blogs/administrateblog.html:2325
+#: blogs/templates/blogs/administratecomments.html:114
 msgid "This blog has no comment to approve"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2328
-#: blogs/templates/blogs/administratecomments.html:49
+#: blogs/templates/blogs/administrateblog.html:2339
+#: blogs/templates/blogs/administratecomments.html:57
 #: blogs/templates/blogs/blog.html:507
 msgid "Comment"
 msgstr "Commenter"
 
-#: blogs/templates/blogs/administrateblog.html:2330
-#: blogs/templates/blogs/administratecomments.html:51
+#: blogs/templates/blogs/administrateblog.html:2341
+#: blogs/templates/blogs/administratecomments.html:59
 msgid "Post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2338
+#: blogs/templates/blogs/administrateblog.html:2349
 msgid "Manage comment"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2339
+#: blogs/templates/blogs/administrateblog.html:2350
 msgid "View post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2342
+#: blogs/templates/blogs/administrateblog.html:2353
 msgid "Send email"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2354
+#: blogs/templates/blogs/administrateblog.html:2365
 msgid "Your Categories"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2355
+#: blogs/templates/blogs/administrateblog.html:2366
 msgid "Manage Your Categoriess"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2356
-#: blogs/templates/blogs/administratecategories.html:57
-#: blogs/templates/blogs/administratecategories.html:61
+#: blogs/templates/blogs/administrateblog.html:2367
+#: blogs/templates/blogs/administratecategories.html:63
+#: blogs/templates/blogs/administratecategories.html:67
 msgid "Add a New Category"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2360
+#: blogs/templates/blogs/administrateblog.html:2371
 msgid "Show All Categories"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2362
-#: blogs/templates/blogs/administratecategories.html:63
+#: blogs/templates/blogs/administrateblog.html:2373
+#: blogs/templates/blogs/administratecategories.html:69
 msgid "This blog has no category"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2394
+#: blogs/templates/blogs/administrateblog.html:2405
 msgid "Your blog settings"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2395
-#: blogs/templates/blogs/administrateblog.html:4161
+#: blogs/templates/blogs/administrateblog.html:2406
+#: blogs/templates/blogs/administrateblog.html:4172
 msgid "Change your settings"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2395
-#: blogs/templates/blogs/administrateemails.html:72
-#: blogs/templates/blogs/administratepages.html:39
-#: blogs/templates/blogs/administrateposts.html:71
+#: blogs/templates/blogs/administrateblog.html:2406
+#: blogs/templates/blogs/administrateemails.html:81
+#: blogs/templates/blogs/administratepages.html:48
+#: blogs/templates/blogs/administrateposts.html:79
 msgid "Edit"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2398
+#: blogs/templates/blogs/administrateblog.html:2409
 msgid "Name : "
 msgstr "Nom : "
 
-#: blogs/templates/blogs/administrateblog.html:2402
+#: blogs/templates/blogs/administrateblog.html:2413
 msgid "Short description: "
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2405
+#: blogs/templates/blogs/administrateblog.html:2416
 msgid "Description : "
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2407
+#: blogs/templates/blogs/administrateblog.html:2418
 msgid "Creator : "
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2408
+#: blogs/templates/blogs/administrateblog.html:2419
 msgid "Url : "
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2409
+#: blogs/templates/blogs/administrateblog.html:2420
 msgid "Private : "
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2409
+#: blogs/templates/blogs/administrateblog.html:2420
 msgid "Yes"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2409
-#: blogs/templates/blogs/administratecategories.html:146
-#: blogs/templates/blogs/administratecategories.html:290
-#: blogs/templates/blogs/administratecategories.html:311
-#: blogs/templates/blogs/administratecategories.html:335
-#: blogs/templates/blogs/administratecategories.html:364
-#: blogs/templates/blogs/administratecategories.html:387
-#: blogs/templates/blogs/administratecomments.html:93
-#: blogs/templates/blogs/administrateemails.html:95
-#: blogs/templates/blogs/administrateemails.html:180
-#: blogs/templates/blogs/administratepages.html:65
-#: blogs/templates/blogs/administrateposts.html:99
-#: blogs/templates/blogs/administratesettings.html:430
-#: blogs/templates/blogs/administratetags.html:80
+#: blogs/templates/blogs/administrateblog.html:2420
+#: blogs/templates/blogs/administratecategories.html:152
+#: blogs/templates/blogs/administratecategories.html:296
+#: blogs/templates/blogs/administratecategories.html:317
+#: blogs/templates/blogs/administratecategories.html:341
+#: blogs/templates/blogs/administratecategories.html:370
+#: blogs/templates/blogs/administratecategories.html:393
+#: blogs/templates/blogs/administratecomments.html:101
+#: blogs/templates/blogs/administrateemails.html:104
+#: blogs/templates/blogs/administrateemails.html:189
+#: blogs/templates/blogs/administratepages.html:74
+#: blogs/templates/blogs/administrateposts.html:107
+#: blogs/templates/blogs/administratesettings.html:436
+#: blogs/templates/blogs/administratetags.html:89
 #: blogs/templates/blogs/blog_single.html:1071
+#: blogs/templates/blogs/editprofile.html:171
 #: blogs/templates/blogs/rss_auto_post.html:79
 #: blogs/templates/blogs/single.html:871
 #: blogs/templates/blogs/translation.html:94
 msgid "No"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2411
+#: blogs/templates/blogs/administrateblog.html:2422
 msgid "Password : "
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2425
+#: blogs/templates/blogs/administrateblog.html:2436
 msgid "Your Tags"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2426
+#: blogs/templates/blogs/administrateblog.html:2437
 msgid "Manage Your Tags"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2427
-#: blogs/templates/blogs/administratetags.html:42
+#: blogs/templates/blogs/administrateblog.html:2438
+#: blogs/templates/blogs/administratetags.html:51
 msgid "Add a New Tag"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:2430
+#: blogs/templates/blogs/administrateblog.html:2441
 msgid "Show All Tags"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4147
-#: blogs/templates/blogs/dashboard.html:59
+#: blogs/templates/blogs/administrateblog.html:4158
+#: blogs/templates/blogs/dashboard.html:69
 msgid "Dashboard"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4148
+#: blogs/templates/blogs/administrateblog.html:4159
 msgid "Manage your posts"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4148
-#: blogs/templates/blogs/administrateposts.html:35
+#: blogs/templates/blogs/administrateblog.html:4159
+#: blogs/templates/blogs/administrateposts.html:43
 msgid "Posts"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4149
+#: blogs/templates/blogs/administrateblog.html:4160
 msgid "Manage your pages"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4149
-#: blogs/templates/blogs/administratepages.html:15
+#: blogs/templates/blogs/administrateblog.html:4160
+#: blogs/templates/blogs/administratepages.html:24
 msgid "Pages"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4150
+#: blogs/templates/blogs/administrateblog.html:4161
 msgid "Moderate comments"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4150
+#: blogs/templates/blogs/administrateblog.html:4161
 msgid "Comments"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4151
+#: blogs/templates/blogs/administrateblog.html:4162
 msgid "Create, modify or delete categories"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4151
-#: blogs/templates/blogs/administratecategories.html:61
+#: blogs/templates/blogs/administrateblog.html:4162
+#: blogs/templates/blogs/administratecategories.html:67
 msgid "Categories"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4152
+#: blogs/templates/blogs/administrateblog.html:4163
 msgid "Create, modify or delete tags"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4152
-#: blogs/templates/blogs/administratetags.html:42
+#: blogs/templates/blogs/administrateblog.html:4163
+#: blogs/templates/blogs/administratetags.html:51
 msgid "Tags"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4153
+#: blogs/templates/blogs/administrateblog.html:4164
 msgid "Create and manage mailing list"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4153
+#: blogs/templates/blogs/administrateblog.html:4164
 msgid "Mailing list"
 msgstr ""
 
-#: blogs/templates/blogs/administrateblog.html:4161
+#: blogs/templates/blogs/administrateblog.html:4172
 msgid "Settings"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:57
+#: blogs/templates/blogs/administratecategories.html:63
 msgid "Categories : "
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:57
-#: blogs/templates/blogs/administratepages.html:15
-#: blogs/templates/blogs/administrateposts.html:37
-#: blogs/templates/blogs/administratetags.html:42
+#: blogs/templates/blogs/administratecategories.html:63
+#: blogs/templates/blogs/administratepages.html:24
+#: blogs/templates/blogs/administrateposts.html:45
+#: blogs/templates/blogs/administratetags.html:51
 msgid "Add new"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:61
+#: blogs/templates/blogs/administratecategories.html:67
 msgid "Add one"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:69
+#: blogs/templates/blogs/administratecategories.html:75
 msgid "Add a new category :"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:74
+#: blogs/templates/blogs/administratecategories.html:80
 msgid "Parent: "
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:91
+#: blogs/templates/blogs/administratecategories.html:97
 msgid "Choose a color for your category, default is black"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:91
+#: blogs/templates/blogs/administratecategories.html:97
 msgid "Choose a color"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:92
+#: blogs/templates/blogs/administratecategories.html:98
 msgid "Cancel and leave the default color"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:105
+#: blogs/templates/blogs/administratecategories.html:111
 msgid "Save your new category"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:106
+#: blogs/templates/blogs/administratecategories.html:112
 msgid "Cancel add category"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:117
-#: blogs/templates/blogs/administratecategories.html:164
-#: blogs/templates/blogs/administratecategories.html:183
-#: blogs/templates/blogs/administratecategories.html:211
-#: blogs/templates/blogs/administratecategories.html:236
-#: blogs/templates/blogs/administratecategories.html:259
+#: blogs/templates/blogs/administratecategories.html:123
+#: blogs/templates/blogs/administratecategories.html:170
+#: blogs/templates/blogs/administratecategories.html:189
+#: blogs/templates/blogs/administratecategories.html:217
+#: blogs/templates/blogs/administratecategories.html:242
+#: blogs/templates/blogs/administratecategories.html:265
 msgid "Modify This Category"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:126
-#: blogs/templates/blogs/administratecategories.html:173
-#: blogs/templates/blogs/administratecategories.html:192
-#: blogs/templates/blogs/administratecategories.html:220
-#: blogs/templates/blogs/administratecategories.html:245
-#: blogs/templates/blogs/administratecategories.html:268
+#: blogs/templates/blogs/administratecategories.html:132
+#: blogs/templates/blogs/administratecategories.html:179
+#: blogs/templates/blogs/administratecategories.html:198
+#: blogs/templates/blogs/administratecategories.html:226
+#: blogs/templates/blogs/administratecategories.html:251
+#: blogs/templates/blogs/administratecategories.html:274
 msgid "Add a sub-category to this category"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:126
-#: blogs/templates/blogs/administratecategories.html:173
-#: blogs/templates/blogs/administratecategories.html:192
-#: blogs/templates/blogs/administratecategories.html:220
-#: blogs/templates/blogs/administratecategories.html:245
-#: blogs/templates/blogs/administratecategories.html:268
+#: blogs/templates/blogs/administratecategories.html:132
+#: blogs/templates/blogs/administratecategories.html:179
+#: blogs/templates/blogs/administratecategories.html:198
+#: blogs/templates/blogs/administratecategories.html:226
+#: blogs/templates/blogs/administratecategories.html:251
+#: blogs/templates/blogs/administratecategories.html:274
 msgid "Add a sub-category"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:127
-#: blogs/templates/blogs/administratecategories.html:174
-#: blogs/templates/blogs/administratecategories.html:193
-#: blogs/templates/blogs/administratecategories.html:221
-#: blogs/templates/blogs/administratecategories.html:246
-#: blogs/templates/blogs/administratecategories.html:269
+#: blogs/templates/blogs/administratecategories.html:133
+#: blogs/templates/blogs/administratecategories.html:180
+#: blogs/templates/blogs/administratecategories.html:199
+#: blogs/templates/blogs/administratecategories.html:227
+#: blogs/templates/blogs/administratecategories.html:252
+#: blogs/templates/blogs/administratecategories.html:275
 msgid "Convert this category to a tag"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:127
-#: blogs/templates/blogs/administratecategories.html:174
-#: blogs/templates/blogs/administratecategories.html:193
-#: blogs/templates/blogs/administratecategories.html:221
-#: blogs/templates/blogs/administratecategories.html:246
-#: blogs/templates/blogs/administratecategories.html:269
+#: blogs/templates/blogs/administratecategories.html:133
+#: blogs/templates/blogs/administratecategories.html:180
+#: blogs/templates/blogs/administratecategories.html:199
+#: blogs/templates/blogs/administratecategories.html:227
+#: blogs/templates/blogs/administratecategories.html:252
+#: blogs/templates/blogs/administratecategories.html:275
 msgid "Convert to a tag"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:130
-#: blogs/templates/blogs/administratecategories.html:177
-#: blogs/templates/blogs/administratecategories.html:196
-#: blogs/templates/blogs/administratecategories.html:224
-#: blogs/templates/blogs/administratecategories.html:249
-#: blogs/templates/blogs/administratecategories.html:272
+#: blogs/templates/blogs/administratecategories.html:136
+#: blogs/templates/blogs/administratecategories.html:183
+#: blogs/templates/blogs/administratecategories.html:202
+#: blogs/templates/blogs/administratecategories.html:230
+#: blogs/templates/blogs/administratecategories.html:255
+#: blogs/templates/blogs/administratecategories.html:278
 msgid "Delete this category"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:140
-#: blogs/templates/blogs/administratecategories.html:284
-#: blogs/templates/blogs/administratecategories.html:305
-#: blogs/templates/blogs/administratecategories.html:329
-#: blogs/templates/blogs/administratecategories.html:358
-#: blogs/templates/blogs/administratecategories.html:381
+#: blogs/templates/blogs/administratecategories.html:146
+#: blogs/templates/blogs/administratecategories.html:290
+#: blogs/templates/blogs/administratecategories.html:311
+#: blogs/templates/blogs/administratecategories.html:335
+#: blogs/templates/blogs/administratecategories.html:364
+#: blogs/templates/blogs/administratecategories.html:387
 msgid "Delete Category"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:143
-#: blogs/templates/blogs/administratecategories.html:287
-#: blogs/templates/blogs/administratecategories.html:308
-#: blogs/templates/blogs/administratecategories.html:332
-#: blogs/templates/blogs/administratecategories.html:361
-#: blogs/templates/blogs/administratecategories.html:384
+#: blogs/templates/blogs/administratecategories.html:149
+#: blogs/templates/blogs/administratecategories.html:293
+#: blogs/templates/blogs/administratecategories.html:314
+#: blogs/templates/blogs/administratecategories.html:338
+#: blogs/templates/blogs/administratecategories.html:367
+#: blogs/templates/blogs/administratecategories.html:390
 msgid "Are you sure you want to delete the category "
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:143
-#: blogs/templates/blogs/administratecategories.html:287
-#: blogs/templates/blogs/administratecategories.html:308
-#: blogs/templates/blogs/administratecategories.html:332
-#: blogs/templates/blogs/administratecategories.html:361
-#: blogs/templates/blogs/administratecategories.html:384
+#: blogs/templates/blogs/administratecategories.html:149
+#: blogs/templates/blogs/administratecategories.html:293
+#: blogs/templates/blogs/administratecategories.html:314
+#: blogs/templates/blogs/administratecategories.html:338
+#: blogs/templates/blogs/administratecategories.html:367
+#: blogs/templates/blogs/administratecategories.html:390
 msgid "?"
 msgstr ""
 
-#: blogs/templates/blogs/administratecategories.html:147
-#: blogs/templates/blogs/administratecategories.html:291
-#: blogs/templates/blogs/administratecategories.html:312
-#: blogs/templates/blogs/administratecategories.html:336
-#: blogs/templates/blogs/administratecategories.html:365
-#: blogs/templates/blogs/administratecategories.html:388
-#: blogs/templates/blogs/administratecomments.html:94
-#: blogs/templates/blogs/administrateemails.html:96
-#: blogs/templates/blogs/administrateemails.html:181
-#: blogs/templates/blogs/administratepages.html:66
-#: blogs/templates/blogs/administrateposts.html:100
-#: blogs/templates/blogs/administratetags.html:81
+#: blogs/templates/blogs/administratecategories.html:153
+#: blogs/templates/blogs/administratecategories.html:297
+#: blogs/templates/blogs/administratecategories.html:318
+#: blogs/templates/blogs/administratecategories.html:342
+#: blogs/templates/blogs/administratecategories.html:371
+#: blogs/templates/blogs/administratecategories.html:394
+#: blogs/templates/blogs/administratecomments.html:102
+#: blogs/templates/blogs/administrateemails.html:105
+#: blogs/templates/blogs/administrateemails.html:190
+#: blogs/templates/blogs/administratepages.html:75
+#: blogs/templates/blogs/administrateposts.html:108
+#: blogs/templates/blogs/administratetags.html:90
 #: blogs/templates/blogs/blog_single.html:1072
 #: blogs/templates/blogs/rss_auto_post.html:80
 #: blogs/templates/blogs/single.html:872
@@ -1760,87 +1814,87 @@ msgstr ""
 msgid "Yes, I Want to Delete it"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:23
+#: blogs/templates/blogs/administratecomments.html:31
 msgid "Comments to be approve"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:27
+#: blogs/templates/blogs/administratecomments.html:35
 msgid "Delete all pending comments"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:27
+#: blogs/templates/blogs/administratecomments.html:35
 msgid "Delete all"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:29
+#: blogs/templates/blogs/administratecomments.html:37
 #: blogs/templates/blogs/publishedcomments.html:6
 msgid "Published comments"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:29
+#: blogs/templates/blogs/administratecomments.html:37
 msgid "View published comments"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:63
+#: blogs/templates/blogs/administratecomments.html:71
 msgid "Approve this comment"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:63
+#: blogs/templates/blogs/administratecomments.html:71
 msgid "Approve"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:64
+#: blogs/templates/blogs/administratecomments.html:72
 msgid "Signal this comment to the administrator"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:64
+#: blogs/templates/blogs/administratecomments.html:72
 msgid "Signal"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:67
+#: blogs/templates/blogs/administratecomments.html:75
 #: blogs/templates/blogs/blog_single.html:1046
 #: blogs/templates/blogs/single.html:846
 msgid "Delete this comment"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:67
-#: blogs/templates/blogs/administrateemails.html:73
-#: blogs/templates/blogs/administratepages.html:40
-#: blogs/templates/blogs/administrateposts.html:72
+#: blogs/templates/blogs/administratecomments.html:75
+#: blogs/templates/blogs/administrateemails.html:82
+#: blogs/templates/blogs/administratepages.html:49
+#: blogs/templates/blogs/administrateposts.html:80
 #: blogs/templates/blogs/translation.html:75
 msgid "Delete"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:72
-#: blogs/templates/blogs/administratepages.html:41
-#: blogs/templates/blogs/administrateposts.html:73
+#: blogs/templates/blogs/administratecomments.html:80
+#: blogs/templates/blogs/administratepages.html:50
+#: blogs/templates/blogs/administrateposts.html:81
 #: blogs/templates/blogs/translation.html:76
 msgid "View"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:78
+#: blogs/templates/blogs/administratecomments.html:86
 msgid "Send an Email to the Author of the Comment"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:78
+#: blogs/templates/blogs/administratecomments.html:86
 msgid "Send Email"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:87
+#: blogs/templates/blogs/administratecomments.html:95
 #: blogs/templates/blogs/blog_single.html:1065
 #: blogs/templates/blogs/single.html:865
 msgid "Delete Comment"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:90
+#: blogs/templates/blogs/administratecomments.html:98
 #: blogs/templates/blogs/blog_single.html:1068
 #: blogs/templates/blogs/single.html:868
 msgid "Are you Sure You Want to Delete This Comment?"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:116
-#: blogs/templates/blogs/administratepages.html:83
-#: blogs/templates/blogs/administrateposts.html:122
+#: blogs/templates/blogs/administratecomments.html:124
+#: blogs/templates/blogs/administratepages.html:92
+#: blogs/templates/blogs/administrateposts.html:130
 #: blogs/templates/blogs/blog.html:516
 #: blogs/templates/blogs/blog_single.html:986
 #: blogs/templates/blogs/blog_single.html:999
@@ -1849,23 +1903,23 @@ msgstr ""
 msgid "Previous"
 msgstr "Précédent"
 
-#: blogs/templates/blogs/administratecomments.html:121
-#: blogs/templates/blogs/administratepages.html:88
-#: blogs/templates/blogs/administrateposts.html:127
+#: blogs/templates/blogs/administratecomments.html:129
+#: blogs/templates/blogs/administratepages.html:97
+#: blogs/templates/blogs/administrateposts.html:135
 #: blogs/templates/blogs/translation.html:120
 msgid "Page"
 msgstr ""
 
-#: blogs/templates/blogs/administratecomments.html:121
-#: blogs/templates/blogs/administratepages.html:88
-#: blogs/templates/blogs/administrateposts.html:127
+#: blogs/templates/blogs/administratecomments.html:129
+#: blogs/templates/blogs/administratepages.html:97
+#: blogs/templates/blogs/administrateposts.html:135
 #: blogs/templates/blogs/translation.html:120
 msgid "of"
 msgstr "de"
 
-#: blogs/templates/blogs/administratecomments.html:126
-#: blogs/templates/blogs/administratepages.html:93
-#: blogs/templates/blogs/administrateposts.html:132
+#: blogs/templates/blogs/administratecomments.html:134
+#: blogs/templates/blogs/administratepages.html:102
+#: blogs/templates/blogs/administrateposts.html:140
 #: blogs/templates/blogs/blog.html:524
 #: blogs/templates/blogs/blog_single.html:989
 #: blogs/templates/blogs/blog_single.html:1002
@@ -1875,511 +1929,505 @@ msgstr "de"
 msgid "Next"
 msgstr "Suivant"
 
-#: blogs/templates/blogs/administrateemails.html:18
+#: blogs/templates/blogs/administrateemails.html:27
 msgid "Create a campaign :"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:22
-#: blogs/templates/blogs/administrateemails.html:62
+#: blogs/templates/blogs/administrateemails.html:31
+#: blogs/templates/blogs/administrateemails.html:71
 msgid "Campaign name"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:46
+#: blogs/templates/blogs/administrateemails.html:55
 msgid "Save your new email"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:47
+#: blogs/templates/blogs/administrateemails.html:56
 msgid "Cancel new campaign"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:51
+#: blogs/templates/blogs/administrateemails.html:60
 msgid "Campaigns"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:51
+#: blogs/templates/blogs/administrateemails.html:60
 msgid "Create a new campaign"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:51
+#: blogs/templates/blogs/administrateemails.html:60
 msgid "Create new"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:72
+#: blogs/templates/blogs/administrateemails.html:81
 msgid "Modify this campaign"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:73
+#: blogs/templates/blogs/administrateemails.html:82
 msgid "Delete this campaign"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:74
+#: blogs/templates/blogs/administrateemails.html:83
 msgid "View email content"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:74
+#: blogs/templates/blogs/administrateemails.html:83
 msgid "View email"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:75
+#: blogs/templates/blogs/administrateemails.html:84
 msgid "Send email now"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:75
+#: blogs/templates/blogs/administrateemails.html:84
 msgid "Send now"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:89
+#: blogs/templates/blogs/administrateemails.html:98
 msgid "Delete mailing list"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:92
+#: blogs/templates/blogs/administrateemails.html:101
 msgid "Are you sure you want to delete this mailing list : "
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:120
+#: blogs/templates/blogs/administrateemails.html:129
 msgid "Blog subscribers"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:124
+#: blogs/templates/blogs/administrateemails.html:133
 #: blogs/templates/blogs/rss_auto_post.html:26
 msgid "Add new : "
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:128
+#: blogs/templates/blogs/administrateemails.html:137
 #: blogs/templates/blogs/rss_auto_post.html:30
 msgid "Add"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:156
+#: blogs/templates/blogs/administrateemails.html:165
 msgid "New"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:166
+#: blogs/templates/blogs/administrateemails.html:175
 msgid "Delete this subscriber"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:174
+#: blogs/templates/blogs/administrateemails.html:183
 msgid "Delete subscriber"
 msgstr ""
 
-#: blogs/templates/blogs/administrateemails.html:177
+#: blogs/templates/blogs/administrateemails.html:186
 msgid "Are you sure you want to delete this subscriber?"
 msgstr ""
 
-#: blogs/templates/blogs/administratepages.html:29
-#: blogs/templates/blogs/administrateposts.html:62
+#: blogs/templates/blogs/administratepages.html:38
+#: blogs/templates/blogs/administrateposts.html:70
 msgid "Status"
 msgstr ""
 
-#: blogs/templates/blogs/administratepages.html:39
+#: blogs/templates/blogs/administratepages.html:48
 msgid "Modify This Page"
 msgstr ""
 
-#: blogs/templates/blogs/administratepages.html:40
+#: blogs/templates/blogs/administratepages.html:49
 msgid "Delete This Page"
 msgstr ""
 
-#: blogs/templates/blogs/administratepages.html:43
+#: blogs/templates/blogs/administratepages.html:52
 msgid "Publish this page now"
 msgstr ""
 
-#: blogs/templates/blogs/administratepages.html:43
-#: blogs/templates/blogs/administrateposts.html:75
+#: blogs/templates/blogs/administratepages.html:52
+#: blogs/templates/blogs/administrateposts.html:83
 #: blogs/templates/blogs/createpage.html:32
 msgid "Publish now"
 msgstr ""
 
-#: blogs/templates/blogs/administratepages.html:58
+#: blogs/templates/blogs/administratepages.html:67
 msgid "Delete Page"
 msgstr ""
 
-#: blogs/templates/blogs/administratepages.html:61
+#: blogs/templates/blogs/administratepages.html:70
 msgid "Are you Sure You Want to Delete This Page?"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:37
+#: blogs/templates/blogs/administrateposts.html:45
 msgid "Add a New Post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:39
+#: blogs/templates/blogs/administrateposts.html:47
 msgid "View only the draft posts"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:39
+#: blogs/templates/blogs/administrateposts.html:47
 #: blogs/templates/blogs/published.html:6
 msgid "View queue"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:40
+#: blogs/templates/blogs/administrateposts.html:48
 #: blogs/templates/blogs/queue.html:6
 msgid "View only published posts"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:40
+#: blogs/templates/blogs/administrateposts.html:48
 msgid "View publish"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:60
+#: blogs/templates/blogs/administrateposts.html:68
 msgid "Tag"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:69
+#: blogs/templates/blogs/administrateposts.html:77
 #: blogs/templates/blogs/translation.html:72
 msgid "This post has no title"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:71
+#: blogs/templates/blogs/administrateposts.html:79
 msgid "Modify This Post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:72
+#: blogs/templates/blogs/administrateposts.html:80
 #: blogs/templates/blogs/translation.html:75
 msgid "Delete This Post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:75
+#: blogs/templates/blogs/administrateposts.html:83
 msgid "Publish this post now"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:78
+#: blogs/templates/blogs/administrateposts.html:86
 #: blogs/templates/blogs/translation.html:74
 msgid "Translate this post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:78
+#: blogs/templates/blogs/administrateposts.html:86
 #: blogs/templates/blogs/translation.html:74
 msgid "Translate"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:82
-#: blogs/templates/blogs/administrateposts.html:83
+#: blogs/templates/blogs/administrateposts.html:90
+#: blogs/templates/blogs/administrateposts.html:91
 msgid "None"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:82
+#: blogs/templates/blogs/administrateposts.html:90
 msgid "Edit this category"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:83
+#: blogs/templates/blogs/administrateposts.html:91
 msgid "Edit this tag"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:93
+#: blogs/templates/blogs/administrateposts.html:101
 #: blogs/templates/blogs/translation.html:88
 msgid "Delete Post"
 msgstr ""
 
-#: blogs/templates/blogs/administrateposts.html:96
+#: blogs/templates/blogs/administrateposts.html:104
 #: blogs/templates/blogs/translation.html:91
 msgid "Are you Sure You Want to Delete This Post : "
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:72
+#: blogs/templates/blogs/administratesettings.html:79
 msgid "Edit your settings :"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:72
+#: blogs/templates/blogs/administratesettings.html:79
 msgid "Delete blog"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:76
+#: blogs/templates/blogs/administratesettings.html:83
 msgid "More Info About Title"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:76
-#: blogs/templates/blogs/administratesettings.html:81
+#: blogs/templates/blogs/administratesettings.html:83
 #: blogs/templates/blogs/administratesettings.html:88
-#: blogs/templates/blogs/administratesettings.html:96
+#: blogs/templates/blogs/administratesettings.html:95
 #: blogs/templates/blogs/administratesettings.html:103
-#: blogs/templates/blogs/administratesettings.html:125
-#: blogs/templates/blogs/administratesettings.html:136
-#: blogs/templates/blogs/administratesettings.html:155
-#: blogs/templates/blogs/administratesettings.html:191
-#: blogs/templates/blogs/administratesettings.html:195
-#: blogs/templates/blogs/administratesettings.html:199
+#: blogs/templates/blogs/administratesettings.html:110
+#: blogs/templates/blogs/administratesettings.html:132
+#: blogs/templates/blogs/administratesettings.html:143
+#: blogs/templates/blogs/administratesettings.html:162
+#: blogs/templates/blogs/administratesettings.html:198
+#: blogs/templates/blogs/administratesettings.html:202
+#: blogs/templates/blogs/administratesettings.html:206
 msgid "More info"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:78
+#: blogs/templates/blogs/administratesettings.html:85
 msgid "Write your new title here"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:81
+#: blogs/templates/blogs/administratesettings.html:88
 msgid "What is a Slug"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:85
+#: blogs/templates/blogs/administratesettings.html:92
 msgid "Write your new slug here"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:88
+#: blogs/templates/blogs/administratesettings.html:95
 msgid "Info About Customs Domains"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:90
+#: blogs/templates/blogs/administratesettings.html:97
 msgid "Write the url of your custom domain here"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:96
+#: blogs/templates/blogs/administratesettings.html:103
 msgid "Info About Blog Description"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:98
+#: blogs/templates/blogs/administratesettings.html:105
 msgid "Describe your blog here"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:103
+#: blogs/templates/blogs/administratesettings.html:110
 msgid "Info About Blog Short Description"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:105
+#: blogs/templates/blogs/administratesettings.html:112
 msgid "Write a short description of your blog here"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:115
+#: blogs/templates/blogs/administratesettings.html:122
 msgid "Blog main image"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:117
+#: blogs/templates/blogs/administratesettings.html:124
 msgid "This blog has no main image, you can add one anytime"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:125
+#: blogs/templates/blogs/administratesettings.html:132
 msgid "Info about your blog main image"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:136
+#: blogs/templates/blogs/administratesettings.html:143
 msgid "Info a bout your blog main color"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:155
+#: blogs/templates/blogs/administratesettings.html:162
 msgid ""
 "If you enter a password in the field below, your blog will be hidden except "
 "to the people who you give the password to."
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:157
+#: blogs/templates/blogs/administratesettings.html:164
 msgid "Check if you want your blog to be public"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:160
+#: blogs/templates/blogs/administratesettings.html:167
 msgid "Write a password here if you want your blog to be private"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:168
+#: blogs/templates/blogs/administratesettings.html:175
 msgid "Facebook link: "
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:172
+#: blogs/templates/blogs/administratesettings.html:179
 msgid "Twitter link: "
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:176
+#: blogs/templates/blogs/administratesettings.html:183
 msgid "Pinterest link: "
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:184
+#: blogs/templates/blogs/administratesettings.html:191
 msgid "Google Analytics account number: "
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:191
+#: blogs/templates/blogs/administratesettings.html:198
 msgid "Auto-publish frequency: "
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:191
-#: blogs/templates/blogs/administratesettings.html:375
+#: blogs/templates/blogs/administratesettings.html:198
+#: blogs/templates/blogs/administratesettings.html:381
 msgid ""
 "Choose a frequency if you want your drafted posts to be publish automatically"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:195
+#: blogs/templates/blogs/administratesettings.html:202
 msgid "Exclusion start: "
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:195
-#: blogs/templates/blogs/administratesettings.html:392
+#: blogs/templates/blogs/administratesettings.html:202
+#: blogs/templates/blogs/administratesettings.html:398
 msgid ""
 "Choose an exclusion starting time if you want the auto-posting to stop "
 "during a certain part of the day"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:199
+#: blogs/templates/blogs/administratesettings.html:206
 msgid "Exclusion end: "
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:199
-#: blogs/templates/blogs/administratesettings.html:409
+#: blogs/templates/blogs/administratesettings.html:206
+#: blogs/templates/blogs/administratesettings.html:415
 msgid ""
 "Choose an exclusion ending time if you want the auto-posting to stop during "
 "a certain part of the day"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:208
+#: blogs/templates/blogs/administratesettings.html:215
 msgid "Get notified when draft is empty"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:219
+#: blogs/templates/blogs/administratesettings.html:226
+#: blogs/templates/blogs/editprofile.html:151
 msgid "Save your settings"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:220
-msgid "Cancel edit settings"
-msgstr ""
-
-#: blogs/templates/blogs/administratesettings.html:239
+#: blogs/templates/blogs/administratesettings.html:245
 msgid ""
 "Your blog title is what people see on top of your blog, idealy it should be "
 "short a representative of your blog subjet. Etc..."
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:242
-#: blogs/templates/blogs/administratesettings.html:258
-#: blogs/templates/blogs/administratesettings.html:274
-#: blogs/templates/blogs/administratesettings.html:290
-#: blogs/templates/blogs/administratesettings.html:306
-#: blogs/templates/blogs/administratesettings.html:327
-#: blogs/templates/blogs/administratesettings.html:344
-#: blogs/templates/blogs/administratesettings.html:361
-#: blogs/templates/blogs/administratesettings.html:378
-#: blogs/templates/blogs/administratesettings.html:395
-#: blogs/templates/blogs/administratesettings.html:412
+#: blogs/templates/blogs/administratesettings.html:248
+#: blogs/templates/blogs/administratesettings.html:264
+#: blogs/templates/blogs/administratesettings.html:280
+#: blogs/templates/blogs/administratesettings.html:296
+#: blogs/templates/blogs/administratesettings.html:312
+#: blogs/templates/blogs/administratesettings.html:333
+#: blogs/templates/blogs/administratesettings.html:350
+#: blogs/templates/blogs/administratesettings.html:367
+#: blogs/templates/blogs/administratesettings.html:384
+#: blogs/templates/blogs/administratesettings.html:401
+#: blogs/templates/blogs/administratesettings.html:418
 msgid "Close"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:255
+#: blogs/templates/blogs/administratesettings.html:261
 msgid "A slug is the part of a URL which identifies a page..."
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:271
+#: blogs/templates/blogs/administratesettings.html:277
 msgid ""
 "If you enter a password, your blog will be hidden except to the people who "
 "you give the password to."
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:287
+#: blogs/templates/blogs/administratesettings.html:293
 msgid ""
 "You can enter your custom domain here. You need to do a DNS setup before."
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:303
+#: blogs/templates/blogs/administratesettings.html:309
 msgid "This section is to write a full description of your blog."
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:324
+#: blogs/templates/blogs/administratesettings.html:330
 msgid "This section is to write a small description of your blog."
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:341
+#: blogs/templates/blogs/administratesettings.html:347
 msgid "This color is for the navbar and the link of your blog"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:358
+#: blogs/templates/blogs/administratesettings.html:364
 msgid "This is the image that is going to be at the top of your blog main page"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:372
+#: blogs/templates/blogs/administratesettings.html:378
 msgid "Frequency"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:389
+#: blogs/templates/blogs/administratesettings.html:395
 msgid "Exclusion starting time"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:406
+#: blogs/templates/blogs/administratesettings.html:412
 msgid "Exclusion ending time"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:423
+#: blogs/templates/blogs/administratesettings.html:429
 msgid "Delete this blog"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:426
+#: blogs/templates/blogs/administratesettings.html:432
 msgid "Are you sure you want to delete the blog : "
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:427
+#: blogs/templates/blogs/administratesettings.html:433
+#: blogs/templates/blogs/editprofile.html:168
 msgid "This action is irreversible"
 msgstr ""
 
-#: blogs/templates/blogs/administratesettings.html:431
+#: blogs/templates/blogs/administratesettings.html:437
+#: blogs/templates/blogs/editprofile.html:172
 msgid "Yes, I want to delete it"
 msgstr ""
 
-#: blogs/templates/blogs/administratetags.html:17
+#: blogs/templates/blogs/administratetags.html:26
 msgid "Add a new tag :"
 msgstr ""
 
-#: blogs/templates/blogs/administratetags.html:34
+#: blogs/templates/blogs/administratetags.html:43
 msgid "Save your new tag"
 msgstr ""
 
-#: blogs/templates/blogs/administratetags.html:35
+#: blogs/templates/blogs/administratetags.html:44
 msgid "Cancel add tag"
 msgstr ""
 
-#: blogs/templates/blogs/administratetags.html:62
+#: blogs/templates/blogs/administratetags.html:71
 msgid "Modify This tag"
 msgstr ""
 
-#: blogs/templates/blogs/administratetags.html:64
+#: blogs/templates/blogs/administratetags.html:73
 msgid "Convert this tag to a category"
 msgstr ""
 
-#: blogs/templates/blogs/administratetags.html:64
+#: blogs/templates/blogs/administratetags.html:73
 msgid "Convert to a category"
 msgstr ""
 
-#: blogs/templates/blogs/administratetags.html:65
+#: blogs/templates/blogs/administratetags.html:74
 msgid "Delete this tag"
 msgstr ""
 
-#: blogs/templates/blogs/administratetags.html:74
+#: blogs/templates/blogs/administratetags.html:83
 msgid "Delete Tag"
 msgstr ""
 
-#: blogs/templates/blogs/administratetags.html:77
+#: blogs/templates/blogs/administratetags.html:86
 msgid "Are you Sure You Want to Delete This Tag?"
 msgstr ""
 
-#: blogs/templates/blogs/blobon.html:222 registration/activate.html:213
-#: registration/activation_complete.html:213
-#: registration/registration_complete.html:213
-msgid "Blobon.com"
-msgstr ""
-
-#: blogs/templates/blogs/blobon.html:225
+#: blogs/templates/blogs/blobon.html:235
 #: blogs/templates/registration/activate.html:9
-#: blogs/templates/registration/activation_complete.html:9
+#: blogs/templates/registration/activation_complete.html:12
 #: registration/activate.html:216 registration/activation_complete.html:216
-#: registration/registration_complete.html:216 templates/login.html:30
+#: registration/registration_complete.html:216 templates/login.html:33
 msgid "Login"
 msgstr "Se connecter"
 
-#: blogs/templates/blogs/blobon.html:244
-msgid "Efficient - Lightweight - Social"
-msgstr ""
-
-#: blogs/templates/blogs/blobon.html:245
-msgid "The Ultimate Blogging Tool"
+#: blogs/templates/blogs/blobon.html:253 registration/activate.html:234
+#: registration/activation_complete.html:234
+#: registration/registration_complete.html:234 templates/blobon_topnav.html:12
+msgid "Blobon"
 msgstr ""
 
 #: blogs/templates/blogs/blobon.html:254
+msgid "The Ultimate Blogging Tool"
+msgstr ""
+
+#: blogs/templates/blogs/blobon.html:264
 msgid "Learn more"
 msgstr ""
 
-#: blogs/templates/blogs/blobon.html:258 registration/activate.html:242
+#: blogs/templates/blogs/blobon.html:269 registration/activate.html:242
 #: registration/activation_complete.html:242
 #: registration/registration_complete.html:242
 msgid "Cancel the invitation request"
 msgstr ""
 
-#: blogs/templates/blogs/blobon.html:263
+#: blogs/templates/blogs/blobon.html:274
 #: blogs/templates/blogs/blog_single.html:1120
 #: blogs/templates/blogs/password.html:26
 #: blogs/templates/blogs/passwordsingle.html:26
-#: blogs/templates/blogs/single.html:935
-#: blogs/templates/registration/registration_form.html:59
-#: registration/activate.html:247 registration/activation_complete.html:247
+#: blogs/templates/blogs/single.html:935 registration/activate.html:247
+#: registration/activation_complete.html:247
 #: registration/registration_complete.html:247
 #: templates/createblogpost.html:89 templates/createcat.html:25
 msgid "Submit"
@@ -2488,67 +2536,72 @@ msgstr ""
 msgid "Contact Blobon.com"
 msgstr ""
 
-#: blogs/templates/blogs/contact.html:21
+#: blogs/templates/blogs/contact.html:7
+#, fuzzy
+msgid " - Contact"
+msgstr "Contact"
+
+#: blogs/templates/blogs/contact.html:16
 msgid "Please try again."
 msgstr ""
 
-#: blogs/templates/blogs/contact.html:26
+#: blogs/templates/blogs/contact.html:23
 #: blogs/templates/blogs/entreprise.html:253
 msgid "Contact Blobon, Inc"
 msgstr ""
 
-#: blogs/templates/blogs/contact.html:28
+#: blogs/templates/blogs/contact.html:25
 msgid ""
 "Here is the adress to join us, you can also use the contact form below. "
 "Don't be shy, we’re here to help you. If you just want to say hi, that's "
 "cool too."
 msgstr ""
 
-#: blogs/templates/blogs/contact.html:32
+#: blogs/templates/blogs/contact.html:29
 #: blogs/templates/blogs/entreprise.html:259
 #: books/templates/books/invoice.html:50
 msgid "Blobon, Inc"
 msgstr ""
 
-#: blogs/templates/blogs/contact.html:33
+#: blogs/templates/blogs/contact.html:30
 #: blogs/templates/blogs/entreprise.html:260
 #: books/templates/books/invoice.html:51
 msgid "201 St-Louis, App 401"
 msgstr ""
 
-#: blogs/templates/blogs/contact.html:34
+#: blogs/templates/blogs/contact.html:31
 #: blogs/templates/blogs/entreprise.html:261
 #: books/templates/books/invoice.html:52
 msgid "St-Jean-sur-Richelieu, Québec, Canada"
 msgstr ""
 
-#: blogs/templates/blogs/contact.html:35
+#: blogs/templates/blogs/contact.html:32
 #: blogs/templates/blogs/entreprise.html:262
 #: books/templates/books/invoice.html:53
 msgid "J3B 1X9"
 msgstr ""
 
-#: blogs/templates/blogs/contact.html:36
+#: blogs/templates/blogs/contact.html:33
 #: blogs/templates/blogs/entreprise.html:263
 msgid "+1 (514) 887-1868"
 msgstr ""
 
-#: blogs/templates/blogs/contact.html:37
+#: blogs/templates/blogs/contact.html:34
 #: blogs/templates/blogs/entreprise.html:264
 msgid "info@blobon.com"
 msgstr ""
 
-#: blogs/templates/blogs/contact.html:55
+#: blogs/templates/blogs/contact.html:52
 msgid "Your email"
 msgstr ""
 
-#: blogs/templates/blogs/contact.html:61
+#: blogs/templates/blogs/contact.html:58
 #: blogs/templates/blogs/entreprise.html:283
 msgid "Send"
 msgstr ""
 
 #: blogs/templates/blogs/createblog.html:25
-#: blogs/templates/blogs/dashboard.html:65 templates/blobon_topnav.html:43
+#: blogs/templates/blogs/dashboard.html:75 templates/blobon_topnav.html:43
 #: templates/createblogpost.html:15
 msgid "Create a new blog"
 msgstr ""
@@ -2599,29 +2652,29 @@ msgstr ""
 msgid "Submit page"
 msgstr ""
 
-#: blogs/templates/blogs/dashboard.html:34
+#: blogs/templates/blogs/dashboard.html:44
 msgid "My Blogs"
 msgstr ""
 
-#: blogs/templates/blogs/dashboard.html:35
+#: blogs/templates/blogs/dashboard.html:45
 msgid ""
 "Here's an overview of all your blogs. From here, you can manage posts, "
 "pages, comments, and much more."
 msgstr ""
 
-#: blogs/templates/blogs/dashboard.html:37
+#: blogs/templates/blogs/dashboard.html:47
 msgid "Create another blog "
 msgstr ""
 
-#: blogs/templates/blogs/dashboard.html:60
+#: blogs/templates/blogs/dashboard.html:70
 msgid "View "
 msgstr ""
 
-#: blogs/templates/blogs/dashboard.html:60
+#: blogs/templates/blogs/dashboard.html:70
 msgid " in new tab"
 msgstr ""
 
-#: blogs/templates/blogs/dashboard.html:60
+#: blogs/templates/blogs/dashboard.html:70
 msgid "Visit blog"
 msgstr ""
 
@@ -2838,31 +2891,94 @@ msgid "Save and continue editing"
 msgstr ""
 
 #: blogs/templates/blogs/edit_post.html:689
-#: blogs/templates/blogs/editcategory.html:84
-#: blogs/templates/blogs/editemail.html:63
+#: blogs/templates/blogs/editcategory.html:92
+#: blogs/templates/blogs/editemail.html:71
 #: blogs/templates/blogs/editpost.html:531
-#: blogs/templates/blogs/edittag.html:62
+#: blogs/templates/blogs/editprofile.html:152
+#: blogs/templates/blogs/edittag.html:70
 msgid "Cancel editing"
 msgstr ""
 
-#: blogs/templates/blogs/editcategory.html:67
+#: blogs/templates/blogs/editcategory.html:75
 msgid "Change category color"
 msgstr ""
 
-#: blogs/templates/blogs/editcategory.html:67
+#: blogs/templates/blogs/editcategory.html:75
 msgid "Change color"
 msgstr ""
 
-#: blogs/templates/blogs/editcategory.html:68
+#: blogs/templates/blogs/editcategory.html:76
 msgid "Cancel color changing"
 msgstr ""
 
-#: blogs/templates/blogs/editemail.html:53
+#: blogs/templates/blogs/editemail.html:61
 msgid "Email purpose :"
 msgstr ""
 
 #: blogs/templates/blogs/editpage.html:13
 msgid "Edit your page :"
+msgstr ""
+
+#: blogs/templates/blogs/editprofile.html:82
+#, fuzzy
+msgid "Edit your profile :"
+msgstr "Entrez votre titre"
+
+#: blogs/templates/blogs/editprofile.html:84
+#, fuzzy
+msgid "Delete account"
+msgstr "Écrire un commentaire"
+
+#: blogs/templates/blogs/editprofile.html:92
+#, fuzzy
+msgid "Write your new username here"
+msgstr "Votre message ici"
+
+#: blogs/templates/blogs/editprofile.html:99
+#, fuzzy
+msgid "Write your new email here"
+msgstr "Votre adresse email"
+
+#: blogs/templates/blogs/editprofile.html:106
+#, fuzzy
+msgid "Write your first name here"
+msgstr "Le lien vers votre page Pinterest"
+
+#: blogs/templates/blogs/editprofile.html:113
+#, fuzzy
+msgid "Write your last name here"
+msgstr "Le nom de votre étiquette"
+
+#: blogs/templates/blogs/editprofile.html:123
+msgid "You have no avatar yet, you can add one anytime"
+msgstr ""
+
+#: blogs/templates/blogs/editprofile.html:135
+msgid "Write a little description here"
+msgstr ""
+
+#: blogs/templates/blogs/editprofile.html:137
+#, fuzzy
+msgid "Change your password"
+msgstr "Le mot de passe de votre blogue"
+
+#: blogs/templates/blogs/editprofile.html:137
+#, fuzzy
+msgid "Change password"
+msgstr "Le mot de passe de votre blogue"
+
+#: blogs/templates/blogs/editprofile.html:143
+#, fuzzy
+msgid "Write your new password here"
+msgstr "Votre message ici"
+
+#: blogs/templates/blogs/editprofile.html:164
+#, fuzzy
+msgid "Delete this account?"
+msgstr "Écrire un commentaire"
+
+#: blogs/templates/blogs/editprofile.html:167
+msgid "Are you sure you want to delete your accounts"
 msgstr ""
 
 #: blogs/templates/blogs/email_empty_draft.html:40
@@ -3223,7 +3339,11 @@ msgstr ""
 msgid "Your account is now active!"
 msgstr ""
 
-#: blogs/templates/registration/activation_complete.html:8
+#: blogs/templates/registration/activation_complete.html:6
+msgid " - Activation complete"
+msgstr ""
+
+#: blogs/templates/registration/activation_complete.html:11
 msgid "Activation complete! Your account is now active."
 msgstr ""
 
@@ -3245,16 +3365,33 @@ msgid ""
 msgstr ""
 
 #: blogs/templates/registration/registration_complete.html:8
+msgid " - Registration complete"
+msgstr ""
+
+#: blogs/templates/registration/registration_complete.html:13
 msgid ""
 "Registration complete! You will receive an email to activate your account, "
 "thank you."
 msgstr ""
 
-#: blogs/templates/registration/registration_form.html:14
+#: blogs/templates/registration/registration_form.html:5
+msgid " - Signup"
+msgstr ""
+
+#: blogs/templates/registration/registration_form.html:11
+msgid "Join Blobon now"
+msgstr ""
+
+#: blogs/templates/registration/registration_form.html:22
 msgid ""
 "Enter a username, a password and a valid email address to receive an "
 "activation key"
 msgstr ""
+
+#: blogs/templates/registration/registration_form.html:67
+#, fuzzy
+msgid "Create account"
+msgstr "Écrire un commentaire"
 
 #: books/models.py:97
 msgid "receipt"
@@ -3624,6 +3761,10 @@ msgstr ""
 msgid " Write"
 msgstr ""
 
+#: templates/blobon_topnav.html:45
+msgid "Edit profile"
+msgstr ""
+
 #: templates/blobon_topnav.html:48
 msgid "Logout"
 msgstr ""
@@ -3706,9 +3847,13 @@ msgstr ""
 msgid "Des erreurs se sont glissées. Veuillez réessayer."
 msgstr ""
 
-#: templates/login.html:71
+#: templates/login.html:18
+msgid " - Login"
+msgstr " - Se connecter"
+
+#: templates/login.html:74
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
+msgstr "Votre mot de passe et nom d'utilisateur ne correspondent pas. Essayez de nouveau."
 
 #: templates/modify.html:4 templates/modify.html.py:6
 msgid "Modifier du contenu"

@@ -1,0 +1,269 @@
+{% extends "blogs/administrateblog.html" %}
+{% load i18n %}
+{% load url from future %}
+{% block dashboard-active %}{% endblock %}
+  {% block additional-js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="http://mindmup.github.io/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script> 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js"></script>
+
+    <script src="{{ STATIC_URL }}js/tinymce/js/tinymce/tinymce.min.js" type="text/javascript">// <![CDATA[
+/tiny_mce/tiny_mce.js">
+// ]]></script>
+
+  {% endblock %}
+{% block settings-active %}class="active"{% endblock %}
+    {% block additional-css %}
+    <style>
+      .settings_submit {
+        padding-top:10px;
+      }
+      .form_section {
+        padding-top:10px;
+        padding-bottom:10px;
+      }
+      .info {
+        cursor: pointer;      
+      }
+      .under_text {
+        padding:10px;
+      }
+      textarea {
+        resize: none;
+      }
+.navbar-default {
+background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
+}
+
+.panel-default>.panel-heading {
+background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
+}
+    </style>
+    {% endblock %}
+{% block content %}
+{% if form1.errors %}
+    {% for field in form1 %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}</strong>{{ field.name }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form1.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+{% if form2.errors %}
+    {% for field in form2 %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}</strong>{{ field.name }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form2.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+
+         <div class="col-md-12" style="padding-top:15px;">
+           <form enctype="multipart/form-data" role="form" action="{% url 'blogs.views.editprofile' %}" method="post" id=newsettings>{% csrf_token %}
+          <div class="panel panel-default" id="setting_form">
+            <div class="panel-heading">{% trans "Edit your profile :" %}
+
+<a href="#" class="btn btn-xs btn-danger pull-right" id="delete_blog_button" data-toggle="modal" data-target="#delete_account"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete account" %}</a></div>
+
+            <div class="panel-body">         
+               <div class="col-xs-12 col-sm-6 form_section">
+
+               {{ form1.username.label_tag }}
+               {{ form1.username }}
+
+                 <div class="under_text"><small><em>{% trans "Write your new username here" %}</em></small></div>
+               </div>
+               <div class="col-xs-6 col-sm-6 form_section">
+
+               {{ form1.email.label_tag }}
+               {{ form1.email }}
+
+                 <div class="under_text"><small><em>{% trans "Write your new email here" %}</em></small></div>
+               </div>
+               <div class="col-xs-6 col-sm-6 form_section">
+
+               {{ form1.first_name.label_tag }}
+               {{ form1.first_name }}
+
+                 <div class="under_text"><small><em>{% trans "Write your first name here" %}</em></small></div>
+               </div>
+               <div class="col-xs-6 col-sm-6 form_section">
+
+               {{ form1.last_name.label_tag }}
+               {{ form1.last_name }}
+
+                 <div class="under_text"><small><em>{% trans "Write your last name here" %}</em></small></div>
+               </div>
+               <div class="col-xs-12 col-sm-6 form_section">
+                <div class="row">
+                 <div class="col-xs-12">
+               {{ form2.avatar.label_tag }}
+                 </div>
+                </div>
+
+               {% if not user.userprofile.avatar %}
+                 <p><b>{% trans "You have no avatar yet, you can add one anytime" %}</b></p>
+               {% endif %}
+                 <div class="col-xs-4"style="padding-top:0px;">
+                 <img style="max-width:100%;" id="current_main_image" src="{{ MEDIA_URL }}{{ user.userprofile.avatar }}" alt="Current image" />
+                 </div>
+                 <div class="col-xs-4"style="padding-top:0px;"> {{ form2.avatar }}</div> 
+               </div>
+               <div class="col-xs-6 col-sm-6 form_section">
+
+               {{ form2.description.label_tag }}
+               {{ form2.description }}
+
+                 <div class="under_text"><small><em>{% trans "Write a little description here" %}</em></small></div>
+               </div>
+               <a id="change_pw" style="display:none;" title="{% trans "Change your password" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Change password" %}</a>
+               <div class="col-xs-6 col-sm-6 form_section" id="pw" style="display:none;">
+
+               {{ form1.password.label_tag }}<span id="cancel_pw" title="{% trans "Cancel" %}" class="glyphicon glyphicon-remove-circle pull-right"></span>
+               {{ form1.password }}
+
+                 <div class="under_text"><small><em>{% trans "Write your new password here" %}</em></small></div>
+               </div>
+
+
+             </div>
+          </div>
+           </form>
+           <div id="formbuttons">
+             <button type="submit" class="btn btn-xs btn-primary" id=submitsettings title="{% trans "Save your settings" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
+             <a href="/dashboard/" class="btn btn-xs btn-default" id="cancel" title="{% trans "Cancel editing" %}"><span class="glyphicon glyphicon-remove-circle"></span> {% trans "Cancel" %}</a>
+           </div>
+
+         </div>
+
+
+
+  <div class="modal fade" id="delete_account">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Delete this account?" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Are you sure you want to delete your accounts" %} {{ user.username }}?</p>
+          <h3>{% trans "This action is irreversible" %}</h3>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
+          <a href={% url 'blogs.views.deleteuser' %} class="btn btn-danger">{% trans "Yes, I want to delete it" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <script>
+      $(document).ready(function() {
+          $('select').addClass("form-control");
+                   });
+         
+    </script>
+    <script>
+      $('#submitsettings').click(function() {
+        $('#newsettings').submit();
+      });
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        setTimeout(function() { 
+         $(".mceNoEditor").removeAttr("style");
+        },10);
+                   });
+         
+    </script>
+
+    <script>
+      $('#edit_blog_button').click(function() {
+        $('#info').hide();
+        $('#newsettings').show();
+        $('#formbuttons').show();
+      });
+    </script>
+
+    <script>
+      $('#cancelsettings').click(function() {
+        $('#info').show();
+        $('#newsettings').hide();
+        $('#formbuttons').hide();
+      });
+    </script>
+    <script>
+      $('#change_pw').click(function() {
+        $('#pw').show();
+        $('#change_pw').hide();
+      });
+    </script>
+    <script>
+      $('#cancel_pw').click(function() {
+        $('#change_pw').show();
+        $('#pw').hide();
+      });
+    </script>
+
+    <script type="text/javascript">
+
+        function upload_avatar(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#current_main_image').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+$("#id_main_image").change(function(){
+    readPath(this);
+});
+
+    </script>
+
+    <script type="text/javascript">
+      $(function () {
+        $('#submitsettings').tooltip({container: 'body', placement: 'top'});
+        $('#cancel').tooltip({container: 'body', placement: 'top'});
+        $('#info_title').tooltip({container: 'body', placement: 'top'});
+        $('#info_slug').tooltip({container: 'body'});
+        $('#info_password').tooltip({container: 'body'});
+        $('#info_custom_domain').tooltip({container: 'body'});
+        $('#info_description').tooltip({container: 'body'});
+        $('#info_short_description').tooltip({container: 'body'});
+        $('#info_main_image').tooltip({container: 'body'});
+        $('#info_main_color').tooltip({container: 'body'});
+        $('#info_frequency').tooltip({container: 'body'});
+        $('#info_exclusion_end').tooltip({container: 'body'});
+        $('#info_exclusion_start').tooltip({container: 'body'});
+        $('#change_pw').tooltip({container: 'body', placement: 'top'});
+        $('#cancel_pw').tooltip({container: 'body', placement: 'top'});
+      });
+    </script>
+{% endblock %}
+
+

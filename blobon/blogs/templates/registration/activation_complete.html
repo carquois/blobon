@@ -1,12 +1,15 @@
 {% extends "blogs/blobon.html" %}
 {% load thumbnail i18n compress calculate_age %}
 {% load url from future %}
-  {% block login_link %}
+
+  {% block indication %}
+  <a href="http://blobon.com"><h3 class="masthead-brand">{% trans "Blobon.com" %}</a>{% trans " - Activation complete" %}</h3>
   {% endblock %}
+
   {% block slogan %}
 
         <h2>{% trans "Activation complete! Your account is now active." %}</h2>
-        <a href="/login/" style="font-size:16px;margin-top:20px;">{% trans "Login" %}</a>
+        <a href="/login/" class="btn btn-default btn-lg" style="font-size:16px;margin-top:20px;">{% trans "Login" %}</a>
   
   {% endblock %}
   {% block form %}
