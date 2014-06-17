@@ -8,7 +8,7 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
-from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page, Rss, Tag
+from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page, Rss, Tag, CustomPost, FieldCustomPost
 
 from accounts.models import UserProfile
 
@@ -49,8 +49,6 @@ HOURS = (
     ('23:00', '23:00'),
 )
 
-
-
 class PageForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Enter your page title'),
                                                     'type': 'text',
@@ -79,6 +77,24 @@ class BlogForm(ModelForm):
     class Meta:
         model = Blog 
         fields = ('title', 'slug','moderator_email')
+
+
+
+class CustomForm(ModelForm):
+    name = CharField(required=True, widget=forms.TextInput(attrs={'placeholder': _('Name of the post type'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    }))
+    class Meta:
+        model = CustomPost
+        fields = ('name',)
+
+class FieldCustomForm(ModelForm):
+
+
+    class Meta:
+        model = FieldCustomPost
+        fields = ('post_type',)
 
 class SubmitForm(ModelForm):
     title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.'), 'class': 'form-control'}), required=False)
@@ -208,7 +224,7 @@ class PlusProfileForm(ModelForm):
     avatar = ImageField(required=False, widget=forms.ClearableFileInput(attrs={'onchange':"upload_avatar(this);"}))
     class Meta:
         model = UserProfile
-        fields = ('description', 'avatar')
+        fields = ('description', 'avatar', 'is_blogadmin')
 
 class PasswordForm(ModelForm):
     password = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Enter the blog password'),

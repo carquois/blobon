@@ -23,6 +23,8 @@ class UserForm(ModelForm):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
+    is_bloguser = models.BooleanField(default=False)
+    is_blogadmin = models.BooleanField(default=False)
     #Basic infos
     description = models.CharField(verbose_name=_('Biographie'), max_length=160, blank=True)
     avatar = models.ImageField(verbose_name=_('Photo'), upload_to='pics', blank=True)

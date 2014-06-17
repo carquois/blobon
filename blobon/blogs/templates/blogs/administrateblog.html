@@ -2175,7 +2175,7 @@ border-radius: 4px;
             {% endif %}
           </div>
 
-          <div class="panel panel-default" style="display:none;">
+          <div class="panel panel-default" style="">
             <div class="panel-heading">{% trans "Last Page" %}
                 <a href="{% url 'blogs.views.administratepages' blog.slug %}" class="btn btn-default btn-xs managepages pull-right" title="{% trans "Manage Your Pages" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
                 <a href="#" class="btn btn-default btn-xs addnewpage pull-right" title="{% trans "Add a New Page" %}" style="display: none"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
@@ -2214,7 +2214,7 @@ border-radius: 4px;
           </div>
 
 
-
+{% if user == blog.creator %}
 
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Info-letters" %}
@@ -2264,7 +2264,10 @@ border-radius: 4px;
             {% endif %}
           </div>
 
+{% endif %}
 
+
+{% if user == blog.creator %}
 
 
           <div class="panel panel-default">
@@ -2359,10 +2362,13 @@ border-radius: 4px;
 </div>      
             {% endif %}   
           </div>
+
+{% endif %}
+
         <div class="row cate_tag">
          <div class="col-md-6">
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Your Categories" %}
+            <div class="panel-heading">{% trans "Categories" %}
                 <a href="{% url 'blogs.views.administratecategories' blog.slug %}" class="btn btn-default btn-xs managecategoriess pull-right" title="{% trans "Manage Your Categoriess" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
                 <a href="#" class="btn btn-default btn-xs addnewcategory pull-right" title="{% trans "Add a New Category" %}" style="display: none"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>    
             </div>
@@ -2400,7 +2406,11 @@ border-radius: 4px;
             {% endif %}
           </div>
          </div>
-         <div class="col-md-6">
+       
+
+{% if user == blog.creator %}
+
+  <div class="col-md-6">
           <div class="panel panel-default">
             <div class="panel-heading">{% trans "Your blog settings" %}
                 <a href="{% url 'blogs.views.administratesettings' blog.slug %}" class="btn btn-default btn-xs managetags pull-right" title="{% trans "Change your settings" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}</a>
@@ -2428,12 +2438,12 @@ border-radius: 4px;
       
 
 
-
+{% endif %}
 
 
          <div class="col-md-6">
           <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Your Tags" %}
+            <div class="panel-heading">{% trans "Tags" %}
                 <a href="{% url 'blogs.views.administratetags' blog.slug %}" class="btn btn-default btn-xs managetags pull-right" title="{% trans "Manage Your Tags" %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Manage" %}</a>
                 <a href="#" class="btn btn-default btn-xs addnewpage pull-right" title="{% trans "Add a New Tag" %}" style="display: none"><span class="glyphicon glyphicon-new-window"></span> {% trans "Add New" %}</a>
             </div>
@@ -4154,22 +4164,43 @@ border-radius: 4px;
     </script>
   {% endblock %}
   {% block sidebar %}
+{% if blog %}
     <ul class="nav nav-pills nav-stacked">
       <li {% block dashboard-active %}class="active"{% endblock %}><a href="{% url 'blogs.views.administrateblog' blog.slug %}" id="dashboard_button" title="{% trans "Manage" %} {{ blog.title }}" ><span class="glyphicon glyphicon-home"></span> {% trans "Dashboard" %}</a></li>
+
+
       <li {% block posts-active %}{% endblock %}><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="posts_button" title="{% trans "Manage your posts" %}"><span class="glyphicon glyphicon-pushpin"></span> {% trans "Posts" %}</a></li>
+
+
       <li {% block pages-active %}{% endblock %}><a href="{% url 'blogs.views.administratepages' blog.slug %}" id="pages_button" title="{% trans "Manage your pages" %}"><span class="glyphicon glyphicon-file"></span> {% trans "Pages" %}</a></li>
+
+{% if user in blog.contributors.all and user.userprofile.is_blogadmin or user == blog.creator %}
       <li {% block comments-active %}{% endblock %}><a href="{% url 'blogs.views.administratecomments' blog.slug %}" id="comments_button" title="{% trans "Moderate comments" %}"><span class="glyphicon glyphicon-comment"></span> {% trans "Comments" %} <span class="badge">{{ num_of_comments }}</span></a></li>
+{% endif %}
       <li {% block categories-active %}{% endblock %}><a href="{% url 'blogs.views.administratecategories' blog.slug %}" id="categories_button" title="{% trans "Create, modify or delete categories" %}"><span class="glyphicon glyphicon-folder-open"></span> {% trans "Categories" %}</a></li>
       <li {% block tags-active %}{% endblock %}><a href="{% url 'blogs.views.administratetags' blog.slug %}" id="tags_button" title="{% trans "Create, modify or delete tags" %}"><span class="glyphicon glyphicon-tag"></span> {% trans "Tags" %}</a></li>
+
+{% if user in blog.contributors.all and user.userprofile.is_blogadmin or user == blog.creator %}
       <li {% block emails-active %}{% endblock %}><a href="{% url 'blogs.views.administrateemails' blog.slug %}" id="emails_button" title="{% trans "Create and manage mailing list" %}"><span class="glyphicon glyphicon-envelope"></span> {% trans "Mailing list" %}</a></li>
-
-
-{% if blog.translation %}
-      <li {% block translation-active %}{% endblock %}><a href="{% url 'blogs.views.translation' blog.slug %}" id="translations_button" title="{% trans "Translate your posts" %}"><span class="glyphicon glyphicon-euro"></span> {% trans "Translation" %}</a></li>   
 {% endif %}
 
-
+{% if blog.translation %}
+{% if user in blog.contributors.all and user.userprofile.is_blogadmin or user == blog.creator %}
+      <li {% block translation-active %}{% endblock %}><a href="{% url 'blogs.views.translation' blog.slug %}" id="translations_button" title="{% trans "Translate your posts" %}"><span class="glyphicon glyphicon-euro"></span> {% trans "Translation" %}</a></li>   
+{% endif %}
+{% endif %}
+{% if user in blog.contributors.all and user.userprofile.is_blogadmin or user == blog.creator %}
  <li {% block settings-active %}{% endblock %}><a href="{% url 'blogs.views.administratesettings' blog.slug %}" id="settings_button" title="{% trans "Change your settings" %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Settings" %}</a></li>
+{% if blog.has_superuser %}
+ <li {% block contributors-active %}{% endblock %}><a href="{% url 'blogs.views.administratecontributor' blog.slug %}" id="contributor_button" title="{% trans "Manage contributor" %}"><span class="glyphicon glyphicon-plus"></span> {% trans "Contributor" %}</a></li>
+
+
+ <li {% block custom-active %}{% endblock %}><a href="{% url 'blogs.views.custom_post' blog.slug %}" id="custom_button" title="{% trans "Manage custom type of post" %}"><span class="glyphicon glyphicon-certificate"></span> {% trans "Custom posts" %}</a></li>
+
+
+
+{% endif %}
+{% endif %}
     </ul>
     <script type="text/javascript">
       $(function () {
@@ -4182,6 +4213,7 @@ border-radius: 4px;
         $('#settings_button').tooltip();
         $('#translations_button').tooltip();
         $('#emails_button').tooltip();
+        $('#contributor_button').tooltip();
       });
     </script>
 
@@ -4282,4 +4314,5 @@ $.fn.myTextEditor = function(options){
 
 //});
 </script>
+{% endif %}
   {% endblock %}

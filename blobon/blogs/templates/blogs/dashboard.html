@@ -57,6 +57,8 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
           </div>
           {% endfor %}
         {% endif %}
+
+
         {% block content %}
 
         {% for blog in blogs %}
@@ -71,6 +73,27 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
             </div>
           </div>
         {% endfor %}
+
+
+        {% if contributor_blogs %}
+                {% for blog in contributor_blogs %}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{ blog.title }}<small><b> - Contributor</b></small></h3>
+            </div>
+            <div class="panel-body">
+              <p><small><em>{% if blog.custom_domain %}{{ blog.custom_domain }}{% else %}{{ blog.slug }}.blobon.com{% endif %}</em></small></p>
+              <a href="{% url 'blogs.views.administrateblog' blog.slug %}" class="btn btn-xs btn-primary manage_blog" title="{% trans "Manage" %} {{ blog.title }}"><span class="glyphicon glyphicon-cog"></span> {% trans "Dashboard" %}</a>
+              <a href="http://{{ blog.slug }}.blobon.com" class="btn btn-xs btn-default view_blog" title="{% trans "View " %}{{ blog.title }}{% trans " in new tab" %}" target="_blank"><span class="glyphicon glyphicon-globe"></span> {% trans "Visit blog" %}</a>
+            </div>
+          </div>
+        {% endfor %}
+
+
+
+
+        {% endif %}
+
           <div class="add_blog" style="padding:15px;">
             <a href="/createblog/" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-plus"></span> {% trans "Create a new blog" %}</a>
           </div>     

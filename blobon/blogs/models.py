@@ -28,6 +28,12 @@ STATUS = (
     ('P', 'Publish'),
     ('D', 'Draft'),
 )
+FIELD_TYPE = (
+    ('Text', 'TextField'),
+    ('URL', 'URLField'),
+    ('Email', 'EmailField'),
+    ('Date', 'DateField'), 
+)
 FREQUENCY = (
     ('Da', 'Daily'),
     ('We', 'Weekly'),
@@ -405,9 +411,12 @@ class Template(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class Blog(models.Model):
     creator = models.ForeignKey(User, null=True)
     moderator_email = models.EmailField(verbose_name=_("Moderator email"),blank=True, null=True)
+    contributors = models.ManyToManyField(User, related_name='blogcontributor', null=True, blank=True)
+    has_superuser = models.BooleanField(default=False)
     is_open = models.BooleanField(default=True)
     slug = models.SlugField(verbose_name=_("URL"), max_length=30, unique=True)
     title = models.CharField(verbose_name=_("Title"), max_length=240)
@@ -436,8 +445,6 @@ class Blog(models.Model):
     template = models.ForeignKey(Template, null=True, blank=True)
     def __unicode__(self):
         return self.title
-
-
 
 class Rss(models.Model):
     feed_url = models.URLField(verbose_name=_("Feed url"), max_length=300, blank=True)
@@ -536,6 +543,17 @@ class Tag(models.Model):
             unique_slugify(self, self.name)
         super(Tag, self).save(*args, **kwargs)
 
+class CustomPost(models.Model):
+    name = models.CharField(max_length=60)
+    blog = models.ForeignKey(Blog, related_name="Custom_post", null=True)
+    def __unicode__(self):
+        return self.name
+
+class FieldCustomPost(models.Model):
+    custom_post = models.ForeignKey(CustomPost, null=True)
+    post_type = models.CharField(default="Text", max_length=10, choices=FIELD_TYPE)
+    def __unicode__(self):
+        return u"%s" % self.id
 
 class Post(models.Model):
     author = models.ForeignKey(User, null=True)
@@ -544,6 +562,7 @@ class Post(models.Model):
     pub_date = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     base62id = models.CharField(max_length=140, blank=True)
     blog = models.ForeignKey(Blog, null=True)
+    custom_post = models.ForeignKey(CustomPost, blank=True, null=True)
     title = models.CharField(verbose_name=_("Title"), max_length=140, blank=True)
     temp_tag_field = models.CharField(verbose_name=_("Temp tag field"), max_length=1000, blank=True)
     status = models.CharField(max_length=2, choices=STATUS, default="P", null=True)

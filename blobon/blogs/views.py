@@ -19,8 +19,8 @@ from django.contrib.auth import logout
 
 from django.http import Http404
 
-from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm, TagsForm, ProfileForm, PlusProfileForm
-from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email, Rss, Menu, MenuItem
+from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm, TagsForm, ProfileForm, PlusProfileForm, CustomForm, FieldCustomForm
+from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email, Rss, Menu, MenuItem, CustomPost, FieldCustomPost
 from django.contrib.auth.models import User
 
 from notifications.forms import InvitationForm
@@ -80,10 +80,17 @@ def index(request):
       if len(host_s) > 2:
           request.subdomain = host_s[0]
       if host == "blobon.com":
-        if request.user.is_authenticated():
+        if request.user.is_authenticated() and request.user.userprofile.is_bloguser == False:
           blogs = Blog.objects.filter(creator=request.user,is_online=True)
           return render_to_response('blogs/dashboard.html',
                                     {'blogs': blogs,},
+                                    context_instance=RequestContext(request))
+        elif request.user.is_authenticated() and request.user.userprofile.is_bloguser == True :
+          current_user = request.user
+          contributor_blogs = Blog.objects.filter(contributors__in=[current_user],is_online=True)
+          blogs = Blog.objects.filter(creator=request.user,is_online=True)
+          return render_to_response('blogs/dashboard.html',
+                                    {'contributor_blogs': contributor_blogs, 'blogs': blogs, 'current_user':current_user,},
                                     context_instance=RequestContext(request))
 
 #          return render_to_response('blogs/read.html',
@@ -1136,7 +1143,7 @@ def createblog(request):
 @login_required
 def administrateblog(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
-    if request.user == blog.creator:    
+    if request.user == blog.creator or request.user in blog.contributors.all():    
       posts = paginate(request,
                        Post.objects.filter(blog=blog).filter(is_discarded=False).order_by('-pub_date'),
                        1)
@@ -1172,7 +1179,7 @@ def administrateblog(request, slug):
 @login_required
 def administrateposts(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
-    if request.user == blog.creator:
+    if request.user == blog.creator or request.user in blog.contributors.all():
       posts = Post.objects.filter(blog=blog).filter(is_discarded=False).order_by('-pub_date')
       posts = paginate(request,
                        Post.objects.filter(blog=blog).filter(is_discarded=False).order_by('-pub_date'),
@@ -1187,7 +1194,7 @@ def administrateposts(request, slug):
 @login_required
 def queue(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
-    if request.user == blog.creator:
+    if request.user == blog.creator or request.user in blog.contributors.all():
       posts = paginate(request,
                        Post.objects.filter(blog=blog).filter(is_ready=True).filter(status="D").filter(is_discarded=False).order_by('-pub_date'),
                        20)
@@ -1201,7 +1208,7 @@ def queue(request, slug):
 @login_required
 def published(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
-    if request.user == blog.creator:
+    if request.user == blog.creator or request.user in blog.contributors.all():
       posts = paginate(request,
                        Post.objects.filter(blog=blog).filter(is_ready=True).filter(status="P").filter(is_discarded=False).order_by('-pub_date'),
                        20)
@@ -1216,7 +1223,7 @@ def published(request, slug):
 @login_required
 def administratepages(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
-    if request.user == blog.creator:
+    if request.user == blog.creator or request.user in blog.contributors.all():
       pages = Page.objects.filter(blog=blog).order_by('-pub_date')
       pages = paginate(request,
                        Page.objects.filter(blog=blog).order_by('-pub_date'),
@@ -1229,9 +1236,163 @@ def administratepages(request, slug):
 
 @never_cache
 @login_required
+def administratecontributor(request, slug):
+    blog = get_object_or_404(Blog, slug=slug)
+    contributors = blog.contributors.all()
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
+      if request.method == 'POST':
+        form1 = ProfileForm(request.POST or None, request.FILES or None, instance=request.user, prefix="form1") 
+        form2 = PlusProfileForm(request.POST or None, request.FILES or None, instance=request.user.userprofile, prefix="form2")
+        if form1.is_valid() and form2.is_valid():
+          new_user = User.objects.create_user(form1.cleaned_data['username'],
+                                              form1.cleaned_data['email'],
+                                              form1.cleaned_data['password'])
+          new_user.first_name = form1.cleaned_data['first_name']
+          new_user.last_name = form1.cleaned_data['last_name']
+          new_user.save()
+          new_user.userprofile.is_blogadmin = form2.cleaned_data['is_blogadmin']
+          new_user.userprofile.is_bloguser = True
+          new_user.userprofile.save() 
+          blog.contributors.add(new_user)
+          messages.add_message(request, messages.INFO, _(u"The contributor profile has been added"))
+          return HttpResponseRedirect(reverse('blogs.views.administratecontributor', args=(blog.slug,)))
+        else:
+          messages.add_message(request, messages.INFO, _(u"Error")) 
+          return render_to_response('blogs/contributors.html',
+                                   {'form1': form1, 'form2': form2,'blog':blog,'contributors': contributors,},
+                                   context_instance=RequestContext(request))         
+      else: 
+        form1 = ProfileForm(prefix="form1")     
+        form2 = PlusProfileForm(prefix="form2")  
+        return render_to_response('blogs/contributors.html',
+                                  {'blog': blog, 'contributors': contributors,'form1': form1, 'form2': form2, },
+                                  context_instance=RequestContext(request))
+    else:
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+
+@never_cache 
+@login_required
+def editcontributor(request, id, slug):
+    blog = get_object_or_404(Blog, slug=slug)
+    contributor = get_object_or_404(User, id=id)
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
+      if request.method == 'POST':
+        form1 = ProfileForm(request.POST or None, request.FILES or None, instance=contributor, prefix="form1") 
+        form2 = PlusProfileForm(request.POST or None, request.FILES or None, instance=contributor.userprofile, prefix="form2")
+        if form1.is_valid() and form2.is_valid():
+          user = form1.save()
+          userprofile = form2.save()
+          user.save()
+          userprofile.save()
+          messages.add_message(request, messages.INFO, _(u"Your contributor has been saved"))
+          return HttpResponseRedirect(reverse('blogs.views.index'))
+        else:
+          messages.add_message(request, messages.INFO, _(u"Error")) 
+          return render_to_response('blogs/editcontributor.html',
+                                   {'form1': form1, 'form2': form2,'blog':blog, 'contributor':contributor,},
+                                   context_instance=RequestContext(request))         
+      else:
+        form1 = ProfileForm(instance=contributor, prefix="form1")     
+        form2 = PlusProfileForm(instance=contributor.userprofile, prefix="form2")        
+        return render_to_response('blogs/editcontributor.html',
+                                  {'form1': form1, 'form2': form2,'blog':blog, 'contributor':contributor,},
+                                  context_instance=RequestContext(request))
+    else:
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+
+@never_cache
+@login_required
+def custom_post(request, slug):
+    blog = get_object_or_404(Blog, slug=slug)
+    custom_posts = CustomPost.objects.filter(blog=blog)
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
+      if request.method == 'POST':
+        form = CustomForm(request.POST or None)
+        if form.is_valid():
+          custompost = form.save(commit=False)
+          custompost.blog = blog
+          custompost.save()
+          return HttpResponseRedirect(reverse('blogs.views.custom_post', args=(blog.slug,)))
+        else:
+          messages.add_message(request, messages.INFO, _(u"Error"))
+          form = CustomForm()
+          return render_to_response('blogs/custom_post.html',
+                                   {'blog':blog,'form':form,'custom_posts':custom_posts,},
+                                   context_instance=RequestContext(request))  
+      else: 
+        form = CustomForm()  
+        return render_to_response('blogs/custom_post.html',
+                                  {'blog':blog,'form':form,'custom_posts':custom_posts,},
+                                  context_instance=RequestContext(request))    
+    else:
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+
+@never_cache
+@login_required
+def editcustom(request, id):
+    custom_post = get_object_or_404(CustomPost, id=id)
+    blog = get_object_or_404(Blog, slug=custom_post.blog.slug)
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
+      if request.method == 'POST':
+        form1 = CustomForm(request.POST or None, request.FILES or None, instance=custom_post, prefix="form1")    
+        form2 = FieldCustomForm(request.POST or None, prefix="form2") 
+        if form1.is_valid() and form2.is_valid():
+          form1.save()
+          field = form2.save(commit=False)
+
+          new_field = FieldCustomPost(**form2.cleaned_data)
+          new_field.custom_post = custom_post
+          new_field.save()
+          form2 = FieldCustomForm(prefix="form2")
+          messages.add_message(request, messages.INFO, _(u"The field has been added"))  
+          return render_to_response('blogs/editcustom.html',
+                                   {'form1': form1,'form2': form2, 'blog':blog, 'custom_post':custom_post,},
+                                   context_instance=RequestContext(request))          
+        else:
+          messages.add_message(request, messages.INFO, _(u"Error"))
+          return render_to_response('blogs/editcustom.html',
+                                   {'form1': form1,'form2': form2, 'blog':blog, 'custom_post':custom_post,},
+                                   context_instance=RequestContext(request))
+      else:
+        form1 = CustomForm(instance=custom_post, prefix="form1")
+        form2 = FieldCustomForm(prefix="form2")   
+        return render_to_response('blogs/editcustom.html',
+                                 {'form1': form1,'form2': form2, 'blog':blog, 'custom_post':custom_post,},
+                                 context_instance=RequestContext(request))
+    else:
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+
+@never_cache
+@login_required
+def deletecustom(request, id):
+    custom_post = get_object_or_404(CustomPost, id=id)
+    blog = get_object_or_404(Blog, slug=custom_post.blog.slug) 
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
+      custom_post.delete()
+      return HttpResponseRedirect(reverse('blogs.views.custom_post', args=(blog.slug,)))
+    else:
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+
+@never_cache
+@login_required
+def deletecontributor(request, id, slug):
+    blog = get_object_or_404(Blog, slug=slug)
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
+      contributor = get_object_or_404(User, id=id)
+      blog.contributors.remove(contributor)
+      messages.add_message(request, messages.INFO, _(u"Your contributor has been remove"))
+      if request.user == contributor:
+        return HttpResponseRedirect(reverse('blogs.views.index'))
+      else:
+        return HttpResponseRedirect(reverse('blogs.views.administratecontributor', args=(blog.slug,)))
+    else: 
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+
+@never_cache
+@login_required
 def administratecomments(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
-    if request.user == blog.creator:
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
       comments = paginate(request,
                           Comment.objects.filter(blog=blog).filter(comment_status='pe').order_by('-id'),
                           15)
@@ -1245,7 +1406,7 @@ def administratecomments(request, slug):
 @login_required
 def publishedcomments(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
-    if request.user == blog.creator:
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
       comments = paginate(request,
                           Comment.objects.filter(blog=blog).filter(comment_status='pu').order_by('-id'),
                           15)
@@ -1259,7 +1420,7 @@ def publishedcomments(request, slug):
 @login_required
 def administratecategories(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
-    if request.user == blog.creator:
+    if request.user == blog.creator or request.user in blog.contributors.all():
       categories = Category.objects.filter(blog=blog).order_by('-id')
       categories_form = CategoriesForm(blog=blog)
       cats_no_familly = Category.objects.filter(blog=blog).exclude(parent_category__isnull=False).exclude(child_category__isnull=False).order_by('name')
@@ -1275,7 +1436,7 @@ def administratecategories(request, slug):
 def administratetags(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
     form = TagsForm()
-    if request.user == blog.creator:
+    if request.user == blog.creator or request.user in blog.contributors.all():
       if request.method == 'POST':
         form = TagsForm(request.POST or None,)
         if form.is_valid():
@@ -1362,7 +1523,7 @@ def convertcategory(request, id):
 @login_required
 def administratesettings(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
-    if request.user == blog.creator:
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
       if request.method == 'POST':
         form = SettingsForm(request.POST or None, request.FILES or None, instance=blog,)
         if form.is_valid():
@@ -1386,7 +1547,7 @@ def administratesettings(request, slug):
 @login_required
 def administrateemails(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
-    if request.user == blog.creator:
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
       info_emails = Info_email.objects.filter(blog=blog).order_by('-id')
       subscriptions = Subscription.objects.filter(blog=blog).order_by('-email')
       form = EmailForm()
@@ -1537,7 +1698,7 @@ def quicktranslation(request, id):
 @login_required
 def translation(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
-    if request.user == blog.creator:
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
       posts = paginate(request,
                        Post.objects.filter(blog=blog).filter(status="D").filter(is_ready=False).filter(is_discarded=False).order_by('-pub_date'),
                        15)
@@ -1819,7 +1980,7 @@ def deleterss(request, id):
 @login_required
 def deleteblog(request, slug):
       blog = get_object_or_404(Blog, slug=slug)
-      if request.user == blog.creator:
+      if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
         blog.is_online=False
         blog.save()
         messages.add_message(request, messages.INFO, _(u"Your blog has been deleted"))
@@ -1833,7 +1994,7 @@ def deleteblog(request, slug):
 def approvecomment(request, id):
       comment = get_object_or_404(Comment, id=id)
       blog = comment.blog
-      if request.user == blog.creator:
+      if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
         comment.comment_status = "pu"
         comment.save()
       elif request.user.is_staff:

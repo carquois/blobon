@@ -11,7 +11,7 @@ from notifications.models import Invitation
 from images.models import Image
 from votes.models import CommentVote, PunnVote
 from django.contrib import admin
-from blogs.models import Blog, Tag, Category, Post
+from blogs.models import Blog, Tag, Category, Post, CustomPost, FieldCustomPost
 from blogs.models import Page
 from posts.models import Image
 from posts.models import Album
@@ -77,3 +77,5 @@ admin.site.register(MenuItem)
 admin.site.register(Template)
 admin.site.register(Vendor)
 admin.site.register(Report)
+admin.site.register(FieldCustomPost)
+admin.site.register(CustomPost)
