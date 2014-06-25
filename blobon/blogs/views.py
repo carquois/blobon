@@ -19,8 +19,8 @@ from django.contrib.auth import logout
 
 from django.http import Http404
 
-from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm, TagsForm, ProfileForm, PlusProfileForm, CustomForm, FieldCustomForm
-from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email, Rss, Menu, MenuItem, CustomPost, FieldCustomPost
+from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm, TagsForm, ProfileForm, PlusProfileForm, CustomForm, FieldCustomForm, DataCustomForm
+from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email, Rss, Menu, MenuItem, CustomPost, FieldCustomPost, DataCustomPost
 from django.contrib.auth.models import User
 
 from notifications.forms import InvitationForm
@@ -1334,30 +1334,50 @@ def editcustom(request, id):
     blog = get_object_or_404(Blog, slug=custom_post.blog.slug)
     if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
       if request.method == 'POST':
-        form1 = CustomForm(request.POST or None, request.FILES or None, instance=custom_post, prefix="form1")    
         form2 = FieldCustomForm(request.POST or None, prefix="form2") 
-        if form1.is_valid() and form2.is_valid():
-          form1.save()
-          field = form2.save(commit=False)
-
+        if form2.is_valid():
           new_field = FieldCustomPost(**form2.cleaned_data)
           new_field.custom_post = custom_post
           new_field.save()
-          form2 = FieldCustomForm(prefix="form2")
-          messages.add_message(request, messages.INFO, _(u"The field has been added"))  
-          return render_to_response('blogs/editcustom.html',
-                                   {'form1': form1,'form2': form2, 'blog':blog, 'custom_post':custom_post,},
-                                   context_instance=RequestContext(request))          
+          return HttpResponseRedirect(reverse('blogs.views.adddata', args=(new_field.id,)))
         else:
+          form2 = FieldCustomForm(prefix="form2")
           messages.add_message(request, messages.INFO, _(u"Error"))
           return render_to_response('blogs/editcustom.html',
-                                   {'form1': form1,'form2': form2, 'blog':blog, 'custom_post':custom_post,},
+                                   {'form2': form2, 'blog':blog, 'custom_post':custom_post,},
                                    context_instance=RequestContext(request))
       else:
-        form1 = CustomForm(instance=custom_post, prefix="form1")
         form2 = FieldCustomForm(prefix="form2")   
         return render_to_response('blogs/editcustom.html',
-                                 {'form1': form1,'form2': form2, 'blog':blog, 'custom_post':custom_post,},
+                                 {'form2': form2, 'blog':blog, 'custom_post':custom_post,},
+                                 context_instance=RequestContext(request))
+    else:
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+
+@never_cache
+@login_required
+def adddata(request, id):
+    field = get_object_or_404(FieldCustomPost, id=id)
+    custom_post = field.custom_post
+    blog = get_object_or_404(Blog, slug=custom_post.blog.slug)
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
+      if request.method == 'POST':
+        form = DataCustomForm(request.POST or None,)
+        if form.is_valid():
+          new_data = DataCustomPost(**form.cleaned_data)
+          new_data.field = field
+          new_data.save()
+          messages.add_message(request, messages.INFO, _(u"The type has been added"))
+          return HttpResponseRedirect(reverse('blogs.views.editcustom', args=(custom_post.id,)))
+        else:
+          messages.add_message(request, messages.INFO, _(u"Error"))
+          return render_to_response('blogs/adddata.html',
+                                   {'field':field, 'form': form, 'blog':blog, 'custom_post':custom_post,},
+                                   context_instance=RequestContext(request))
+      else:
+        form = DataCustomForm()   
+        return render_to_response('blogs/adddata.html',
+                                 {'field':field, 'form': form, 'blog':blog, 'custom_post':custom_post,},
                                  context_instance=RequestContext(request))
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
@@ -1372,6 +1392,18 @@ def deletecustom(request, id):
       return HttpResponseRedirect(reverse('blogs.views.custom_post', args=(blog.slug,)))
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
+
+@never_cache
+@login_required
+def deletefield(request, id):
+    field = get_object_or_404(FieldCustomPost, id=id)
+    blog = get_object_or_404(Blog, slug=field.custom_post.blog.slug)
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
+      field.delete()
+      return HttpResponseRedirect(reverse('blogs.views.editcustom', args=(field.custom_post.id,)))
+    else:
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+
 
 @never_cache
 @login_required

@@ -29,26 +29,100 @@
           {% endfor %}
         {% endif %}
 
+<a href="{% url 'blogs.views.custom_post' blog.slug %}"><h4>{% trans "See all type" %}</h4></a>
 
 <div class="panel panel-default">
             <div class="panel-heading">
-             {{ custom_post.name }}
+            {% trans "Fields for " %}<b> {{ custom_post.name }}</b>{% trans " type" %}
+            </div>
+            <div class="panel-body">
+
+ {% if custom_post.fieldcustompost_set.all.0 %}
+
+<div class="table-responsive">
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-3">
+                <col class="col-xs-6">
+                <col class="col-xs-1">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>{% trans "Type" %}</th>
+                  <th>{% trans "Data" %}</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for field in custom_post.fieldcustompost_set.all %}
+                <tr>
+                  <td>{{ field.post_type }}
+                  </td>
+                  <td>
+                  {% if field.datacustompost_set.all.0.date %}
+                  {{ field.datacustompost_set.all.0.date }}
+                  {% endif %}
+                  {% if field.datacustompost_set.all.0.text %}
+                  {{ field.datacustompost_set.all.0.text }}
+                  {% endif %}
+                  {% if field.datacustompost_set.all.0.email %}
+                  {{ field.datacustompost_set.all.0.email }}
+                  {% endif %}
+                  {% if field.datacustompost_set.all.0.url %}
+                  {{ field.datacustompost_set.all.0.url }}
+                  {% endif %}
+            
+                  </td>
+
+                  <td><a href="#" class="deletefield pull-left" id="deletesubscriber" title="{% trans "Delete this field" %}" data-toggle="modal" data-target="#{{ field.id }}"><button type="button" class="close">&times;</button></td>
+                </tr>
+
+  <div class="modal fade" id="{{ field.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Delete field" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Are you sure you want to delete this field?" %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
+          <a href="{% url 'blogs.views.deletefield' field.id %}" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+            {% endfor %}
+
+              </tbody>
+            </table>
+</div>
+            {% else %}
+            <div class="panel-body">
+            {% trans "This custom type has no field yet" %}
+            </div>
+
+  {% endif %}
+
+            </div>
+            </div>
+
+
+
+
+<div class="panel panel-default">
+            <div class="panel-heading">
+             {% trans "Add a new field" %}
             </div>
             <div class="panel-body">
              <form enctype="multipart/form-data" action="{% url 'blogs.views.editcustom' custom_post.id %}" role="form" method="post" id=savedemail>{% csrf_token %}
-              <div class="row">
-               <div class="col-xs-12 col-sm-6 form_section">
-
-               {{ form1.name.label_tag }}
-               {{ form1.name }}
-
-                 <div class="under_text"><small><em>{% trans "Write your custom post name here" %}</em></small></div>
-               </div>
-              </div>
 
               <div class="row" style="margin-top:20px;">
                <div class="col-xs-12 col-sm-12 form_section">
-                <b> {% trans "Add a new field: " %}</b>
+                <b> {% trans "Choose a type: " %}</b>
                </div>
               </div>
               <div class="row" style="margin-top:20px;">
@@ -59,7 +133,7 @@
                </div>
               </div>
               <div class="row" style="margin-top:20px;margin-left:20px;">
-                <button type="submit" class="btn btn-primary btn-xs" title="{% trans "Save" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
+                <button type="submit" class="btn btn-primary btn-xs" title="{% trans "Add" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Add" %}</button>
               </div>
              </form>
             </div>
@@ -77,6 +151,10 @@
          
     </script>
 
-
+    <script type="text/javascript">
+      $(function () {
+        $('.deletefield').tooltip({container: 'body'});
+      });
+    </script>
 
   {% endblock %}

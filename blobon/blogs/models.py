@@ -555,6 +555,15 @@ class FieldCustomPost(models.Model):
     def __unicode__(self):
         return u"%s" % self.id
 
+class DataCustomPost(models.Model):
+    field = models.ForeignKey(FieldCustomPost, null=True)
+    text = models.CharField(verbose_name=_("Text"), max_length=140, blank=True)
+    email = models.EmailField(max_length=100, blank=True)
+    url = models.URLField(max_length=140, blank=True)
+    date = models.DateField(blank=True, null=True)
+    def __unicode__(self):
+        return u"%s" % self.id
+    
 class Post(models.Model):
     author = models.ForeignKey(User, null=True)
     created = models.DateTimeField(auto_now_add = True)

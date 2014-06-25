@@ -4169,7 +4169,7 @@ border-radius: 4px;
       <li {% block dashboard-active %}class="active"{% endblock %}><a href="{% url 'blogs.views.administrateblog' blog.slug %}" id="dashboard_button" title="{% trans "Manage" %} {{ blog.title }}" ><span class="glyphicon glyphicon-home"></span> {% trans "Dashboard" %}</a></li>
 
 
-      <li {% block posts-active %}{% endblock %}><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="posts_button" title="{% trans "Manage your posts" %}"><span class="glyphicon glyphicon-pushpin"></span> {% trans "Posts" %}</a></li>
+      <li {% block posts-active %}{% endblock %}><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="posts_button" title="{% trans "Manage your posts" %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Posts" %}</a></li>
 
 
       <li {% block pages-active %}{% endblock %}><a href="{% url 'blogs.views.administratepages' blog.slug %}" id="pages_button" title="{% trans "Manage your pages" %}"><span class="glyphicon glyphicon-file"></span> {% trans "Pages" %}</a></li>

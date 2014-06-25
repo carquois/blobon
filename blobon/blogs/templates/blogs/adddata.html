@@ -1,0 +1,90 @@
+{% extends "blogs/administrateblog.html" %}
+{% load i18n %}
+{% load url from future %}
+  {% block dashboard-active %}{% endblock %}
+  {% block custom-active %}class="active"{% endblock %}
+{% block sidebar %}
+{% endblock %}
+  {% block content %}
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}</strong>{{ field.name }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+        {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+          </div>
+          {% endfor %}
+        {% endif %}
+
+
+<div class="panel panel-default">
+            <div class="panel-heading">
+             {{ custom_post.name }}
+            </div>
+            <div class="panel-body">
+             <form enctype="multipart/form-data" action="{% url 'blogs.views.adddata' field.id %}" role="form" method="post" id=savedemail>{% csrf_token %}
+
+              <div class="row" style="margin-top:20px;">
+               <div class="col-xs-12 col-sm-12 form_section">
+                <b> {% trans "Add your data: " %}</b>
+               </div>
+              </div>
+              <div class="row" style="margin-top:20px;">
+               <div class="col-xs-12 col-sm-6 form_section" style="padding-top:10px;">
+               {% if field.post_type == "Date" %}
+               {{ form.date }}
+               {% endif %} 
+               {% if field.post_type == "Text" %}
+               {{ form.text }}
+               {% endif %}
+               {% if field.post_type == "Email" %}
+               {{ form.email }}
+               {% endif %}
+               {% if field.post_type == "URL" %}
+               {{ form.url }}
+               {% endif %}
+                 <div class="under_text"><small><em>{% trans "Enter your data and save" %}</em></small></div>
+               </div>
+              </div>
+              <div class="row" style="margin-top:20px;margin-left:20px;">
+                <button type="submit" class="btn btn-primary btn-xs" title="{% trans "Save" %}"><span class="glyphicon glyphicon-ok-circle"></span> {% trans "Save" %}</button>
+              </div>
+             </form>
+            </div>
+
+
+
+</div>
+
+
+    <script>
+      $(document).ready(function() {
+          $('select').addClass("form-control");
+                   });
+         
+    </script>
+
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <script>
+  $(function() {
+    $( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
+  });
+  </script>
+
+  {% endblock %}

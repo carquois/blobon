@@ -8,7 +8,7 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
-from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page, Rss, Tag, CustomPost, FieldCustomPost
+from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page, Rss, Tag, CustomPost, FieldCustomPost, DataCustomPost
 
 from accounts.models import UserProfile
 
@@ -95,6 +95,22 @@ class FieldCustomForm(ModelForm):
     class Meta:
         model = FieldCustomPost
         fields = ('post_type',)
+
+class DataCustomForm(ModelForm):
+    text = CharField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Your text here'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    }))
+    email = EmailField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Email here'),
+                                                    'type': 'text',
+                                                    'class': "form-control input-block-level"}))
+    url = URLField(required=False, widget=forms.TextInput(attrs={'placeholder': _('Your website url here'),
+                                                    'type': 'text',
+                                                    'class': "form-control"}))
+    date = DateField(required=False, widget=forms.TextInput(attrs={'class':'datepicker form-control'}))
+    class Meta:
+        model =DataCustomPost
+        fields = ('text','email','url','date',)
 
 class SubmitForm(ModelForm):
     title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.'), 'class': 'form-control'}), required=False)

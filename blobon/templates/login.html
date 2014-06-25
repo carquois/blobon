@@ -19,6 +19,18 @@
   {% endblock %}
 
 
+
+  {% block pw_error %}
+    {% if form.errors %}
+      <div class="container">
+        <div class="alert alert-danger alert-dismissable">
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      {% trans "Your username and password didn't match. Please try again." %}
+        </div>
+      </div>
+    {% endif %}
+  {% endblock %}
+
   {% block form %}
 
       <form method="post" id="login_form" role="form" style="min-width:250px;display: inline-block;text-align: center;" action="{% url 'django.contrib.auth.views.login' %}">
@@ -30,7 +42,7 @@
           {{ form.password }}
         </div>
 
-        <button id="login_submit"type="submit" disabled="disabled"class="btn btn-primary btn-sm">{% trans "Login" %}</button>
+        <button id="login_submit" type="submit" disabled="disabled" class="btn btn-primary btn-sm">{% trans "Login" %}</button>
         <a id="login_cancel" href="{% url 'blogs.views.index' %}" class="btn btn-default btn-sm">{% trans "Cancel" %}</a>
   </form>
     <script>
@@ -54,7 +66,7 @@
 
     <script>
       $(document).ready(function(){
-        $('#id_password').change(function() {
+        $('#id_password').keyup(function() {
         if($(this).val() != '' && $('#id_username').val() != '') {
           $('#login_submit').prop("disabled", false);
           }
@@ -68,10 +80,3 @@
   {% endblock %}
 
 
-  {% block pw_error %}
-    {% if form.errors %}
-        <div class="spacer" style="padding-top:20px;">
-      {% trans "Your username and password didn't match. Please try again." %}
-        </div>
-    {% endif %}
-  {% endblock %}

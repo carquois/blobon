@@ -9,7 +9,8 @@
             <div class="panel-heading" style="min-height:52px;">
              <div class="row">
               <div class="col-sm-4">
-              {% trans "Custom posts" %}
+
+              <b>{% trans "Custom type" %}</b>
               </div>              
               <div class="col-sm-6 col-sm-offset-2">
                <form class="form-inline" enctype="multipart/form-data" id="newsubs" role="form" method="post" action="{% url 'blogs.views.custom_post' blog.slug %}">{% csrf_token %}
