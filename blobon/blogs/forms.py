@@ -8,7 +8,7 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
-from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page, Rss, Tag, CustomPost, FieldCustomPost, DataCustomPost
+from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page, Rss, Tag, Model, ModelField, ModelData, ModelFieldData
 
 from accounts.models import UserProfile
 
@@ -86,14 +86,14 @@ class CustomForm(ModelForm):
                                                     'class': "form-control setting_form input-block-level",
                                                     }))
     class Meta:
-        model = CustomPost
+        model = Model
         fields = ('name',)
 
 class FieldCustomForm(ModelForm):
 
 
     class Meta:
-        model = FieldCustomPost
+        model = ModelField
         fields = ('post_type',)
 
 class DataCustomForm(ModelForm):
@@ -109,7 +109,7 @@ class DataCustomForm(ModelForm):
                                                     'class': "form-control"}))
     date = DateField(required=False, widget=forms.TextInput(attrs={'class':'datepicker form-control'}))
     class Meta:
-        model =DataCustomPost
+        model = ModelFieldData
         fields = ('text','email','url','date',)
 
 class SubmitForm(ModelForm):

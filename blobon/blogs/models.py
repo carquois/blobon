@@ -543,20 +543,28 @@ class Tag(models.Model):
             unique_slugify(self, self.name)
         super(Tag, self).save(*args, **kwargs)
 
-class CustomPost(models.Model):
+class Model(models.Model):
     name = models.CharField(max_length=60)
     blog = models.ForeignKey(Blog, related_name="Custom_post", null=True)
     def __unicode__(self):
         return self.name
 
-class FieldCustomPost(models.Model):
-    custom_post = models.ForeignKey(CustomPost, null=True)
+class ModelField(models.Model):
+    model = models.ForeignKey(Model, null=True)
     post_type = models.CharField(default="Text", max_length=10, choices=FIELD_TYPE)
     def __unicode__(self):
         return u"%s" % self.id
 
-class DataCustomPost(models.Model):
-    field = models.ForeignKey(FieldCustomPost, null=True)
+class ModelData(models.Model):
+    model = models.ForeignKey(Model, null=True)
+    def __unicode__(self):
+        return u"%s" % self.id
+
+
+class ModelFieldData(models.Model):
+    model_data = models.ForeignKey(ModelData, null=True)
+    model = models.ForeignKey(Model, null=True)
+    model_field = models.ForeignKey(ModelField, null=True)
     text = models.CharField(verbose_name=_("Text"), max_length=140, blank=True)
     email = models.EmailField(max_length=100, blank=True)
     url = models.URLField(max_length=140, blank=True)
@@ -571,7 +579,7 @@ class Post(models.Model):
     pub_date = models.DateTimeField(auto_now_add = True, null=True, blank=True)
     base62id = models.CharField(max_length=140, blank=True)
     blog = models.ForeignKey(Blog, null=True)
-    custom_post = models.ForeignKey(CustomPost, blank=True, null=True)
+    custom_post = models.ForeignKey(Model, blank=True, null=True)
     title = models.CharField(verbose_name=_("Title"), max_length=140, blank=True)
     temp_tag_field = models.CharField(verbose_name=_("Temp tag field"), max_length=1000, blank=True)
     status = models.CharField(max_length=2, choices=STATUS, default="P", null=True)

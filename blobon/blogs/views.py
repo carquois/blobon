@@ -20,7 +20,7 @@ from django.contrib.auth import logout
 from django.http import Http404
 
 from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm, TagsForm, ProfileForm, PlusProfileForm, CustomForm, FieldCustomForm, DataCustomForm
-from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email, Rss, Menu, MenuItem, CustomPost, FieldCustomPost, DataCustomPost
+from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email, Rss, Menu, MenuItem, Model, ModelField, ModelData, ModelFieldData
 from django.contrib.auth.models import User
 
 from notifications.forms import InvitationForm
@@ -1304,7 +1304,7 @@ def editcontributor(request, id, slug):
 @login_required
 def custom_post(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
-    custom_posts = CustomPost.objects.filter(blog=blog)
+    custom_posts = Model.objects.filter(blog=blog)
     if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
       if request.method == 'POST':
         form = CustomForm(request.POST or None)
@@ -1330,7 +1330,7 @@ def custom_post(request, slug):
 @never_cache
 @login_required
 def editcustom(request, id):
-    custom_post = get_object_or_404(CustomPost, id=id)
+    custom_post = get_object_or_404(Model, id=id)
     blog = get_object_or_404(Blog, slug=custom_post.blog.slug)
     if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
       if request.method == 'POST':
@@ -1357,8 +1357,8 @@ def editcustom(request, id):
 @never_cache
 @login_required
 def adddata(request, id):
-    field = get_object_or_404(FieldCustomPost, id=id)
-    custom_post = field.custom_post
+    field = get_object_or_404(ModelField, id=id)
+    custom_post = field.model
     blog = get_object_or_404(Blog, slug=custom_post.blog.slug)
     if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
       if request.method == 'POST':
@@ -1385,7 +1385,7 @@ def adddata(request, id):
 @never_cache
 @login_required
 def deletecustom(request, id):
-    custom_post = get_object_or_404(CustomPost, id=id)
+    custom_post = get_object_or_404(Model, id=id)
     blog = get_object_or_404(Blog, slug=custom_post.blog.slug) 
     if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
       custom_post.delete()
@@ -1396,7 +1396,7 @@ def deletecustom(request, id):
 @never_cache
 @login_required
 def deletefield(request, id):
-    field = get_object_or_404(FieldCustomPost, id=id)
+    field = get_object_or_404(ModelField, id=id)
     blog = get_object_or_404(Blog, slug=field.custom_post.blog.slug)
     if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
       field.delete()

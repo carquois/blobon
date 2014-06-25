@@ -18,7 +18,7 @@
   <a href="http://blobon.com"><h3 class="masthead-brand">{% trans "Blobon.com" %}</a>{% trans " - Login" %}</h3>
   {% endblock %}
 
-
+  {% block form %}
 
   {% block pw_error %}
     {% if form.errors %}
@@ -31,7 +31,6 @@
     {% endif %}
   {% endblock %}
 
-  {% block form %}
 
       <form method="post" id="login_form" role="form" style="min-width:250px;display: inline-block;text-align: center;" action="{% url 'django.contrib.auth.views.login' %}">
         {% csrf_token %}
@@ -55,7 +54,7 @@
       $(document).ready(function(){
         $('#id_username').change(function() {
         if($(this).val() != '' && $('#id_password').val() != '') {
-          $('#login_submit').prop("disabled", false);
+          $('#login_submit').removeAttr('disabled');
           }
         else {
           $('#login_submit').prop("disabled", true);
@@ -68,7 +67,7 @@
       $(document).ready(function(){
         $('#id_password').keyup(function() {
         if($(this).val() != '' && $('#id_username').val() != '') {
-          $('#login_submit').prop("disabled", false);
+          $('#login_submit').removeAttr('disabled');
           }
         else {
           $('#login_submit').prop("disabled", true);
