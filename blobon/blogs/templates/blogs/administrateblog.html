@@ -4212,10 +4212,10 @@ border-radius: 4px;
 {% if user in blog.contributors.all and user.userprofile.is_blogadmin or user == blog.creator %}
  <li {% block settings-active %}{% endblock %}><a href="{% url 'blogs.views.administratesettings' blog.slug %}" id="settings_button" title="{% trans "Change your settings" %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Settings" %}</a></li>
 {% if blog.has_superuser %}
- <li {% block contributors-active %}{% endblock %}><a href="{% url 'blogs.views.administratecontributor' blog.slug %}" id="contributor_button" title="{% trans "Manage contributor" %}"><span class="glyphicon glyphicon-plus"></span> {% trans "Contributor" %}</a></li>
+ <li {% block contributors-active %}{% endblock %} style="display:none;"><a href="{% url 'blogs.views.administratecontributor' blog.slug %}" id="contributor_button" title="{% trans "Manage contributor" %}"><span class="glyphicon glyphicon-plus"></span> {% trans "Contributor" %}</a></li>
 
 
- <li {% block custom-active %}{% endblock %}><a href="{% url 'blogs.views.custom_post' blog.slug %}" id="custom_button" title="{% trans "Manage custom type of post" %}"><span class="glyphicon glyphicon-certificate"></span> {% trans "Custom posts" %}</a></li>
+ <li {% block custom-active %}{% endblock %} style="display:none;"><a href="{% url 'blogs.views.custom_post' blog.slug %}" id="custom_button" title="{% trans "Manage custom type of post" %}"><span class="glyphicon glyphicon-certificate"></span> {% trans "Custom posts" %}</a></li>
 
 
 

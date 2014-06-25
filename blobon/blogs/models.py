@@ -552,8 +552,9 @@ class Model(models.Model):
 class ModelField(models.Model):
     model = models.ForeignKey(Model, null=True)
     post_type = models.CharField(default="Text", max_length=10, choices=FIELD_TYPE)
+    name = models.CharField(verbose_name=_("Name"), max_length=140, null=True, blank=True)
     def __unicode__(self):
-        return u"%s" % self.id
+        return self.name
 
 class ModelData(models.Model):
     model = models.ForeignKey(Model, null=True)
