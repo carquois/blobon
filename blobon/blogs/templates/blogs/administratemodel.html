@@ -1,0 +1,202 @@
+{% extends "blogs/administrateblog.html" %}
+{% load i18n %}
+{% load url from future %}
+    {% block additional-css %}
+    <style>
+      .edit_buttons {
+        padding: 10px;0px;5px;0px;
+      }
+
+.navbar-default {
+background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
+}
+
+.panel-default>.panel-heading {
+background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
+}
+
+    </style>
+  {% endblock %}
+  {% block dashboard-active %}{% endblock %}
+  {% block content %}
+
+
+{% if formset.errors %}
+  {% for form in formset.forms %}
+    {% for field in form %}
+
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }}</strong>{{ field.name }}
+            </div>
+        {% endfor %}
+
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+
+
+<a type="button" class="btn btn-primary" id="addform"style="margin-bottom:20px;">{% trans "Add a new " %}{{model.name}}</a>  
+<br />
+<div class="panel panel-default" id="form" style="display:none;">
+  <div class="panel-heading">
+    {% trans "Adding a new " %}{{ model.name }}
+  </div>
+  <div class="panel-body">
+   <form enctype="multipart/form-data" role="form" method="post" action="{% url 'blogs.views.administratemodel' blog.slug model.id %}" id="new" >{% csrf_token %}
+{{formset.management_form}}
+  {% for field,form in mixlist %}
+    <div class="form-group"> 
+   {{field.name}}
+   {% if field.post_type == "Text" %}
+   {{form.text}}
+   {% endif %}
+   {% if field.post_type == "URL" %}
+   {{form.url}}
+   {% endif %}
+   {% if field.post_type == "Date" %}
+   {{form.date}}
+   {% endif %}
+   {% if field.post_type == "Email" %}
+   {{form.email}}
+   {% endif %}
+    </div>
+  {% endfor %}
+    <div class="form-group">
+     <button type="button" id="cancel" class="btn btn-danger pull-right">{% trans "Cancel" %}</button>
+     <button type="submit"  class="btn btn-default pull-right">{% trans "Save" %}</button>
+    </div>
+   </form>
+  </div>
+</div>
+
+
+  {% if model_instances %}
+  {% for model_instance in model_instances %}
+          <div class="panel panel-default">
+            <div class="panel-heading">{{model.name}} - {{model_instance.id}}<a href="#" type="button" data-toggle="modal" data-target="#{{ model_instance.id }}" class="btn btn-sm btn-danger pull-right" style="margin-top:-4px;">{% trans "Delete" %}</a><a href="{% url 'blogs.views.editmodeldata' blog.slug model_instance.id %}" type="button" class="pull-right btn btn-sm btn-default" style="margin-top:-4px;">{% trans "Edit" %}</a></div>
+<div class="table-responsive">
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-4">
+                <col class="col-xs-4">
+                <col class="col-xs-2">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for modelfielddata in model_instance.modelfielddata_set.all  %}
+                <tr>
+                  <td>{{ modelfielddata.model_field.name }}
+                  </td>
+                  <td>
+                  {% if modelfielddata.text %}
+                   {{ modelfielddata.text }}
+                  {% endif %}
+                  {% if modelfielddata.url %}
+                   {{ modelfielddata.url }}
+                  {% endif %}
+                  {% if modelfielddata.date %}
+                   {{ modelfielddata.date }}
+                  {% endif %}
+                  {% if modelfielddata.email %}
+                   {{ modelfielddata.email }}
+                  {% endif %}
+                  </td>
+                  <td></td>
+                </tr>
+
+              {% endfor %}
+              </tbody>
+            </table>
+</div>
+          </div>
+  <div class="modal fade" id="{{ model_instance.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{% trans "Delete" %}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{% trans "Are you sure you want to delete the object? " %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">{% trans "No" %}</button>
+          <a href="{% url 'blogs.views.deletemodeldata' blog.slug model_instance.id %}" class="btn btn-danger">{% trans "Yes, I Want to Delete it" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+  {% endif %}
+
+
+
+
+
+
+          <div class="panel panel-default">
+            <div class="panel-heading">{{model.name}} - {% trans "structure" %}</div>
+              <div class="panel-body">
+              </div>
+<div class="table-responsive">
+            <table class="table table-striped">
+              <colgroup>
+                <col class="col-xs-4">
+                <col class="col-xs-4">
+                <col class="col-xs-2">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>{% trans "Name" %}</th>
+                  <th>{% trans "Type" %}</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for field in fields %}
+                <tr>
+                  <td>{{ field.name }}
+                  </td>
+                  <td>{{ field.post_type }}</td>
+                  <td></td>
+                </tr>
+
+              {% endfor %}
+              </tbody>
+            </table>
+</div>
+          </div>
+
+    <script>
+      $('#addform').click(function() {
+        $('#addform').hide();
+        $('#form').show();
+      });
+    </script>
+
+    <script>
+      $('#cancel').click(function() {
+        $('#addform').show();
+        $('#form').hide();
+        $('#new').trigger("reset");
+      });
+    </script>
+
+    <script>
+      $(document).ready(function(){
+        $('input').removeAttr('placeholder');
+      });
+    </script>
+
+
+
+  {% endblock %}
+

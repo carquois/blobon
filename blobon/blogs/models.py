@@ -564,8 +564,8 @@ class ModelData(models.Model):
 
 class ModelFieldData(models.Model):
     model_data = models.ForeignKey(ModelData, null=True)
-    model = models.ForeignKey(Model, null=True)
     model_field = models.ForeignKey(ModelField, null=True)
+    model = models.ForeignKey(Model, null=True)
     text = models.CharField(verbose_name=_("Text"), max_length=140, blank=True)
     email = models.EmailField(max_length=100, blank=True)
     url = models.URLField(max_length=140, blank=True)

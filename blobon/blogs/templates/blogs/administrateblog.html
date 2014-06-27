@@ -4188,7 +4188,15 @@ border-radius: 4px;
     <ul class="nav nav-pills nav-stacked">
       <li {% block dashboard-active %}class="active"{% endblock %}><a href="{% url 'blogs.views.administrateblog' blog.slug %}" id="dashboard_button" title="{% trans "Manage" %} {{ blog.title }}" ><span class="glyphicon glyphicon-home"></span> {% trans "Dashboard" %}</a></li>
 
+{% if models %}
+{% with active=model %}
+ {% for model in models %}
+    
+      <li {% if active == model %}class="active"{% endif %}><a href="{% url 'blogs.views.administratemodel' blog.slug model.id %}" class="model_button" title="{% trans "Manage this model" %}"><span class="glyphicon glyphicon-th"></span> {{model.name}}</a></li>
 
+ {% endfor %}
+{% endwith %}
+{% endif %}
       <li {% block posts-active %}{% endblock %}><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="posts_button" title="{% trans "Manage your posts" %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Posts" %}</a></li>
 
 

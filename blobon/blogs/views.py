@@ -27,7 +27,8 @@ from notifications.forms import InvitationForm
 from notifications.models import Invitation
 
 from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, EmailField
-from django.forms.models import modelformset_factory
+from django.forms.models import modelformset_factory, inlineformset_factory
+from django.forms.formsets import formset_factory
 
 from django.core.mail import send_mail
 from django.views.decorators.cache import never_cache
@@ -234,6 +235,9 @@ def index(request):
 
       else:
         raise Http404  
+
+
+
 
 @never_cache
 def category(request, slug):
@@ -1141,6 +1145,88 @@ def createblog(request):
 
 @never_cache
 @login_required
+def administratemodel(request, slug, id):
+    blog = get_object_or_404(Blog, slug=slug)
+    model = get_object_or_404(Model, id=id)
+    fields = ModelField.objects.filter(model=model).order_by('id')
+    model_instances = ModelData.objects.filter(model=model).order_by('id')
+    ModelFieldDataFormset = formset_factory(DataCustomForm, extra=fields.count())
+    models = Model.objects.filter(blog=blog).order_by('id')
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
+      if request.method == 'POST':
+        formset = ModelFieldDataFormset(request.POST, request.FILES)
+        if formset.is_valid():
+          mix = zip(fields,formset.forms)
+          new_object = ModelData.objects.create()
+          new_object.model = model
+          new_object.save()
+          for field,form in mix:
+            data = form.save(commit=False)
+            data.model_data = new_object
+            data.model_field = field
+            data.model = model
+            data.save()
+          messages.add_message(request, messages.INFO, _(u"Your new object has been saved"))
+          return HttpResponseRedirect(reverse('blogs.views.administratemodel', args=(blog.slug, model.id,)))
+        else:
+          messages.add_message(request, messages.INFO, _(u"Error"))
+          return HttpResponseRedirect(reverse('blogs.views.administratemodel', args=(blog.slug, model.id,)))   
+      else:
+        formset = ModelFieldDataFormset()
+        mixlist = zip(fields,formset)
+        return render_to_response('blogs/administratemodel.html',
+                                  {'models':models, 'mixlist':mixlist, 'formset': formset,'blog': blog,'model': model, 'fields': fields, 'model_instances': model_instances,},
+                                  context_instance=RequestContext(request))
+    else:
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+@never_cache
+@login_required
+def editmodeldata(request, slug, id):
+    blog = get_object_or_404(Blog, slug=slug)
+    modeldata = get_object_or_404(ModelData, id=id)
+    model = modeldata.model
+    fields = ModelField.objects.filter(model=model).order_by('id')
+    model_instances = ModelData.objects.filter(model=model).order_by('id')
+    ModelFieldDataFormset = modelformset_factory(ModelFieldData, form=DataCustomForm, extra=fields.count())
+    models = Model.objects.filter(blog=blog).order_by('id')
+    data = ModelFieldData.objects.filter(model_data=modeldata).order_by('id')
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
+      if request.method == 'POST':
+        formset = ModelFieldDataFormset(request.POST,request.FILES)
+        if formset.is_valid():
+          formset.save()
+          messages.add_message(request, messages.INFO, _(u"The object has been saved"))
+          return HttpResponseRedirect(reverse('blogs.views.administratemodel', args=(blog.slug, model.id,)))           
+
+      else:
+        formset = ModelFieldDataFormset(queryset = data)
+        mixlist = zip(fields,formset)
+        return render_to_response('blogs/editmodeldata.html',
+                                  {'modeldata':modeldata, 'models':models, 'mixlist':mixlist, 'formset': formset,'blog': blog,'model': model, 'fields': fields, 'model_instances': model_instances,},
+                                  context_instance=RequestContext(request))
+    else:
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+@never_cache
+@login_required
+def deletemodeldata(request, slug, id):
+    blog = get_object_or_404(Blog, slug=slug)
+    modeldata = get_object_or_404(ModelData, id=id)
+    model = modeldata.model
+    fields = ModelField.objects.filter(model=model).order_by('id')
+    model_instances = ModelData.objects.filter(model=model).order_by('id')
+    ModelFieldDataFormset = formset_factory(DataCustomForm, extra=fields.count())
+    models = Model.objects.filter(blog=blog).order_by('id')
+    modeldata.delete()
+    if request.user == blog.creator or request.user in blog.contributors.all() and request.user.userprofile.is_blogadmin == True:
+      messages.add_message(request, messages.INFO, _(u"Your object has been deleted"))
+      formset = ModelFieldDataFormset()
+      mixlist = zip(fields,formset)
+      return HttpResponseRedirect(reverse('blogs.views.administratemodel', args=(blog.slug, model.id,)))
+    else:
+      return HttpResponseRedirect(reverse('blogs.views.index'))
+
+@never_cache
+@login_required
 def administrateblog(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
     if request.user == blog.creator or request.user in blog.contributors.all():    
@@ -1169,8 +1255,9 @@ def administrateblog(request, slug):
       categories = Category.objects.filter(blog=blog).order_by('-id')
       tags = Tag.objects.filter(blog=blog).order_by('-id')
       post_form = PostForm(blog=blog)
+      models = Model.objects.filter(blog=blog).order_by('id')
       return render_to_response('blogs/administrateblog.html',
-                                {'blog': blog,'info_emails':info_emails, 'posts_to_translate': posts_to_translate, 'last_posts_to_translate': last_posts_to_translate,'subscribers': subscribers, 'last_subscriber': last_subscriber, 'posts': posts, 'pages': pages , 'comments': comments , 'categories': categories, 'tags': tags, 'post_form': post_form},
+                                {'models': models, 'blog': blog,'info_emails':info_emails, 'posts_to_translate': posts_to_translate, 'last_posts_to_translate': last_posts_to_translate,'subscribers': subscribers, 'last_subscriber': last_subscriber, 'posts': posts, 'pages': pages , 'comments': comments , 'categories': categories, 'tags': tags, 'post_form': post_form},
                                 context_instance=RequestContext(request))
     else:
       return HttpResponseRedirect(reverse('blogs.views.index'))
