@@ -11,7 +11,7 @@
 /tiny_mce/tiny_mce.js">
 // ]]></script>
 
-
+  {% block mce %}
 <script type="text/javascript">// <![CDATA[
 tinyMCE.init({
     mode : "textareas",
@@ -19,6 +19,8 @@ tinyMCE.init({
     theme : "simple"
 });
 // ]]></script>
+  {% endblock %}
+
   {% endblock %}
 
 

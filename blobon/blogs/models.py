@@ -24,6 +24,48 @@ PRIVACY = (
     ('Pr', 'Private'),
 )
 
+ONETOFIVE = (
+    ('1','1'),
+    ('2','2'),
+    ('3','3'),
+    ('4','4'),
+    ('5','5'),   
+)
+
+ONETOTHIRTY = (
+    ('a','a'),
+    ('b','b'),
+    ('c','c'),
+    ('d','d'),
+    ('e','e'),
+    ('f','f'),
+    ('g','g'),
+    ('h','h'),
+    ('i','i'),
+    ('j','j'),
+    ('k','k'),
+    ('l','l'),
+    ('m','m'),
+    ('n','n'),
+    ('o','o'),
+    ('p','p'),
+    ('q','q'),
+    ('r','r'),
+    ('s','s'),
+    ('t','t'),  
+    ('u','u'),
+    ('v','v'),
+    ('w','w'),
+    ('x','x'),
+    ('y','y'),
+    ('z','z'),
+    ('za','za'),
+    ('zb','zb'),
+    ('zc','zc'),
+    ('zd','zd'),
+)
+
+
 STATUS = (
     ('P', 'Publish'),
     ('D', 'Draft'),
@@ -33,6 +75,11 @@ FIELD_TYPE = (
     ('URL', 'URLField'),
     ('Email', 'EmailField'),
     ('Date', 'DateField'), 
+    ('Onetofive', 'OnetofiveField'),
+    ('Positiveinteger', 'PositiveintegerField'),
+    ('Longtext', 'LongtextField'),
+    ('Nullboolean', 'NullbooleanField'),
+    ('Price', 'PriceField'),
 )
 FREQUENCY = (
     ('Da', 'Daily'),
@@ -551,8 +598,9 @@ class Model(models.Model):
 
 class ModelField(models.Model):
     model = models.ForeignKey(Model, null=True)
-    post_type = models.CharField(default="Text", max_length=10, choices=FIELD_TYPE)
+    post_type = models.CharField(default="Text", max_length=40, choices=FIELD_TYPE)
     name = models.CharField(verbose_name=_("Name"), max_length=140, null=True, blank=True)
+    rank = models.CharField(default="1", max_length=2, choices=ONETOTHIRTY)
     def __unicode__(self):
         return self.name
 
@@ -566,10 +614,15 @@ class ModelFieldData(models.Model):
     model_data = models.ForeignKey(ModelData, null=True)
     model_field = models.ForeignKey(ModelField, null=True)
     model = models.ForeignKey(Model, null=True)
-    text = models.CharField(verbose_name=_("Text"), max_length=140, blank=True)
+    text = models.CharField(max_length=140, blank=True)
     email = models.EmailField(max_length=100, blank=True)
     url = models.URLField(max_length=140, blank=True)
     date = models.DateField(blank=True, null=True)
+    onetofive = models.CharField(max_length=2, choices=ONETOFIVE,blank=True, null=True)
+    positiveinteger = models.PositiveIntegerField(blank=True, null=True)
+    longtext = models.TextField(blank=True, null=True)
+    nullboolean = models.NullBooleanField(blank=True, null=True, default=None,)
+    price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     def __unicode__(self):
         return u"%s" % self.id
     

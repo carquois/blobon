@@ -35,6 +35,12 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
   {% endfor %}
 {% endif %}
 
+{% for dict in formset.errors %}
+    {% for error in dict.values %}
+        {{ error }}
+    {% endfor %}
+{% endfor %}
+
 
 <a type="button" class="btn btn-primary" id="addform"style="margin-bottom:20px;">{% trans "Add a new " %}{{model.name}}</a>  
 <br />
@@ -60,6 +66,26 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
    {% if field.post_type == "Email" %}
    {{form.email}}
    {% endif %}
+   {% if field.post_type == "Onetofive" %}
+   {{form.onetofive}}
+   {% endif %}
+   {% if field.post_type == "Positiveinteger" %}
+   {{form.positiveinteger}}
+   {% endif %}
+   {% if field.post_type == "Longtext" %}
+   {{form.longtext}}
+   {% endif %}
+   {% if field.post_type == "Nullboolean" %}
+   {{form.nullboolean}}
+   {% endif %}
+   {% if field.post_type == "Price" %}
+   {{form.price}}
+   {% endif %}
+
+
+
+
+
     </div>
   {% endfor %}
     <div class="form-group">
@@ -106,6 +132,21 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
                   {% endif %}
                   {% if modelfielddata.email %}
                    {{ modelfielddata.email }}
+                  {% endif %}
+                  {% if modelfielddata.onetofive %}
+                   {{ modelfielddata.onetofive }}
+                  {% endif %}
+                  {% if modelfielddata.positiveinteger %}
+                   {{ modelfielddata.positiveinteger }}
+                  {% endif %}
+                  {% if modelfielddata.longtext %}
+                   {{ modelfielddata.longtext }}
+                  {% endif %}
+                  {% if modelfielddata.nullboolean %}
+                   {{ modelfielddata.nullboolean }}
+                  {% endif %}
+                  {% if modelfielddata.price %}
+                   {{ modelfielddata.price }}
                   {% endif %}
                   </td>
                   <td></td>
@@ -177,8 +218,9 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
 
     <script>
       $('#addform').click(function() {
-        $('#addform').hide();
+        $('#addform').hide();        
         $('#form').show();
+        $(".mceNoEditor").removeAttr("style");
       });
     </script>
 
@@ -193,6 +235,7 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
     <script>
       $(document).ready(function(){
         $('input').removeAttr('placeholder');
+        $(".mceNoEditor").removeAttr("style");
       });
     </script>
 

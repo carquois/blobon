@@ -3,7 +3,7 @@
 from django import forms
 from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, ImageField, ModelMultipleChoiceField, EmailField
 from django.utils.translation import ugettext_lazy as _
-from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
+from django.forms.fields import DecimalField, DateField, ChoiceField, MultipleChoiceField
 from django.db import models
 
 from django.contrib.auth.models import User
@@ -48,6 +48,48 @@ HOURS = (
     ('22:00', '22:00'),
     ('23:00', '23:00'),
 )
+
+ONETOFIVE = (
+    ('1','1'),
+    ('2','2'),
+    ('3','3'),
+    ('4','4'),
+    ('5','5'),
+)
+
+ONETOTHIRTY = (
+    ('a','a'),
+    ('b','b'),
+    ('c','c'),
+    ('d','d'),
+    ('e','e'),
+    ('f','f'),
+    ('g','g'),
+    ('h','h'),
+    ('i','i'),
+    ('j','j'),
+    ('k','k'),
+    ('l','l'),
+    ('m','m'),
+    ('n','n'),
+    ('o','o'),
+    ('p','p'),
+    ('q','q'),
+    ('r','r'),
+    ('s','s'),
+    ('t','t'),  
+    ('u','u'),
+    ('v','v'),
+    ('w','w'),
+    ('x','x'),
+    ('y','y'),
+    ('z','z'),
+    ('za','za'),
+    ('zb','zb'),
+    ('zc','zc'),
+    ('zd','zd'),
+)
+
 
 class PageForm(ModelForm):
     title = CharField(widget=forms.TextInput(attrs={'placeholder': _('Enter your page title'),
@@ -108,9 +150,20 @@ class DataCustomForm(ModelForm):
                                                     'type': 'text',
                                                     'class': "form-control"}))
     date = DateField(required=False, widget=forms.TextInput(attrs={'class':'datepicker form-control'}))
+   
+    longtext = CharField(required=False, widget=forms.Textarea(attrs={
+                                                    'type': 'text',
+                                                    'rows': '5',
+                                                    'class': "form-control setting_form input-block-level mceNoEditor",
+                                                    }))
+    price = DecimalField(required=False, max_digits=6, decimal_places=2, localize=True, widget=forms.TextInput(attrs={
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level",
+                                                    }))
+
     class Meta:
         model = ModelFieldData
-        fields = ('text','email','url','date',)
+        fields = ('text','email','url','date','onetofive','positiveinteger','longtext','nullboolean','price',)
 
 class SubmitForm(ModelForm):
     title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.'), 'class': 'form-control'}), required=False)

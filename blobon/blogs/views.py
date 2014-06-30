@@ -247,11 +247,13 @@ def category(request, slug):
       host_s = host.replace('www.', '').split('.')
       host_one = host.split('.')
       if len(host_s) > 2:
-          request.subdomain = host_s[0]
+        request.subdomain = host_s[0]
       if Blog.objects.filter(custom_domain=host).exists():
         blog = Blog.objects.get(custom_domain=host)
       elif Blog.objects.filter(slug=request.subdomain).exists():
-          blog = Blog.objects.get(slug=request.subdomain)
+        blog = Blog.objects.get(slug=request.subdomain)
+      else:
+        raise Http404
       category = get_object_or_404(Category, blog=blog, slug=slug)
       posts = paginate(request,
                        Post.objects.filter(status='P').filter(category=category).filter(is_discarded=False).order_by('-pub_date'),
@@ -1148,7 +1150,7 @@ def createblog(request):
 def administratemodel(request, slug, id):
     blog = get_object_or_404(Blog, slug=slug)
     model = get_object_or_404(Model, id=id)
-    fields = ModelField.objects.filter(model=model).order_by('id')
+    fields = ModelField.objects.filter(model=model).order_by('rank')
     model_instances = ModelData.objects.filter(model=model).order_by('id')
     ModelFieldDataFormset = formset_factory(DataCustomForm, extra=fields.count())
     models = Model.objects.filter(blog=blog).order_by('id')
@@ -1170,7 +1172,10 @@ def administratemodel(request, slug, id):
           return HttpResponseRedirect(reverse('blogs.views.administratemodel', args=(blog.slug, model.id,)))
         else:
           messages.add_message(request, messages.INFO, _(u"Error"))
-          return HttpResponseRedirect(reverse('blogs.views.administratemodel', args=(blog.slug, model.id,)))   
+          mixlist = zip(fields,formset)
+          return render_to_response('blogs/administratemodel.html',
+                                    {'models':models, 'mixlist':mixlist, 'formset': formset,'blog': blog,'model': model, 'fields': fields, 'model_instances': model_instances,},
+                                    context_instance=RequestContext(request))
       else:
         formset = ModelFieldDataFormset()
         mixlist = zip(fields,formset)
