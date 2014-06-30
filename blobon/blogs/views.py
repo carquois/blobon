@@ -279,11 +279,13 @@ def tag(request, slug):
       host_s = host.replace('www.', '').split('.')
       host_one = host.split('.')
       if len(host_s) > 2:
-          request.subdomain = host_s[0]
+        request.subdomain = host_s[0]
       if Blog.objects.filter(custom_domain=host).exists():
         blog = Blog.objects.get(custom_domain=host)
       elif Blog.objects.filter(slug=request.subdomain).exists():
         blog = Blog.objects.get(slug=request.subdomain)
+      else:
+        raise Http404
       tag = get_object_or_404(Tag, blog=blog, slug=slug)
       posts = paginate(request,
                        Post.objects.filter(status='P').filter(tag=tag).filter(is_discarded=False).order_by('-pub_date'),
