@@ -1161,8 +1161,12 @@ def administratemodel(request, slug, id):
         formset = ModelFieldDataFormset(request.POST, request.FILES)
         if formset.is_valid():
           mix = zip(fields,formset.forms)
+          for field,form in mix:
+            name = form.cleaned_data['text']
+            break
           new_object = ModelData.objects.create()
           new_object.model = model
+          new_object.name = name
           new_object.save()
           for field,form in mix:
             data = form.save(commit=False)
@@ -2345,8 +2349,9 @@ def contact(request):
       form = ContactForm(request.POST or None, request.FILES or None)
       if form.is_valid():
         subject = form.cleaned_data['subject']
-        message = form.cleaned_data['message']
+        mess = form.cleaned_data['message']
         from_email = form.cleaned_data['from_email']
+        message = "%s    ----------------   %s" % (mess, from_email)
         recipients = ['info@blobon.com']
         messages.add_message(request, messages.INFO, _(u"Your message has been sent, thank you!"))
         from django.core.mail import send_mail

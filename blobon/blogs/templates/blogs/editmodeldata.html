@@ -90,7 +90,20 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
    </form>
   </div>
 </div>
-
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <script>
+  $(function() {
+    $( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
+  });
+  </script>
+    <script>
+      $(document).ready(function() {
+          $('select').addClass("form-control");
+                   });
+         
+    </script>
     <script>
         $(".mceNoEditor").removeAttr("style");
     </script>

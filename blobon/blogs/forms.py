@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, ImageField, ModelMultipleChoiceField, EmailField
+from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, ImageField, ModelMultipleChoiceField, EmailField, IntegerField
 from django.utils.translation import ugettext_lazy as _
 from django.forms.fields import DecimalField, DateField, ChoiceField, MultipleChoiceField
 from django.db import models
@@ -160,6 +160,8 @@ class DataCustomForm(ModelForm):
                                                     'type': 'text',
                                                     'class': "form-control setting_form input-block-level",
                                                     }))
+
+    positiveinteger = IntegerField(required=False,min_value=0, max_value=99999999, widget=forms.TextInput(attrs={'class':'form-control'}))
 
     class Meta:
         model = ModelFieldData

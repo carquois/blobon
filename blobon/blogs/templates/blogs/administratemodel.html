@@ -53,7 +53,7 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
 {{formset.management_form}}
   {% for field,form in mixlist %}
     <div class="form-group"> 
-   {{field.name}}
+  <b>{{field.name}} : </b>
    {% if field.post_type == "Text" %}
    {{form.text}}
    {% endif %}
@@ -100,7 +100,7 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
   {% if model_instances %}
   {% for model_instance in model_instances %}
           <div class="panel panel-default">
-            <div class="panel-heading">{{model.name}} - {{model_instance.id}}<a href="#" type="button" data-toggle="modal" data-target="#{{ model_instance.id }}" class="btn btn-sm btn-danger pull-right" style="margin-top:-4px;">{% trans "Delete" %}</a><a href="{% url 'blogs.views.editmodeldata' blog.slug model_instance.id %}" type="button" class="pull-right btn btn-sm btn-default" style="margin-top:-4px;">{% trans "Edit" %}</a></div>
+            <div class="panel-heading"><b>{{model.name}} - {{ model_instance.name}}</b><a href="#" type="button" data-toggle="modal" data-target="#{{ model_instance.id }}" class="btn btn-sm btn-danger pull-right" style="margin-top:-4px;">{% trans "Delete" %}</a><a href="{% url 'blogs.views.editmodeldata' blog.slug model_instance.id %}" type="button" class="pull-right btn btn-sm btn-default" style="margin-top:-4px;">{% trans "Edit" %}</a></div>
 <div class="table-responsive">
             <table class="table table-striped">
               <colgroup>
@@ -216,6 +216,17 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
 </div>
           </div>
 
+
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <script>
+  $(function() {
+    $( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
+  });
+  </script>
+
+
     <script>
       $('#addform').click(function() {
         $('#addform').hide();        
@@ -239,7 +250,12 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
       });
     </script>
 
-
+    <script>
+      $(document).ready(function() {
+          $('select').addClass("form-control");
+                   });
+         
+    </script>
 
   {% endblock %}
 

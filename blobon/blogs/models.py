@@ -606,8 +606,9 @@ class ModelField(models.Model):
 
 class ModelData(models.Model):
     model = models.ForeignKey(Model, null=True)
+    name = models.CharField(verbose_name=_("Name"), max_length=140, default="Unknown")
     def __unicode__(self):
-        return u"%s" % self.id
+        return self.name
 
 
 class ModelFieldData(models.Model):
@@ -623,6 +624,7 @@ class ModelFieldData(models.Model):
     longtext = models.TextField(blank=True, null=True)
     nullboolean = models.NullBooleanField(blank=True, null=True, default=None,)
     price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    relation = models.ManyToManyField(ModelData,related_name='relation', null=True, blank=True)
     def __unicode__(self):
         return u"%s" % self.id
     
