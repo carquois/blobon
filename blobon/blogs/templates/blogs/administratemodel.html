@@ -81,6 +81,9 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
    {% if field.post_type == "Price" %}
    {{form.price}}
    {% endif %}
+   {% if field.post_type == "Relation" %}
+   {{form.relation}}
+   {% endif %}
 
 
 
@@ -116,7 +119,7 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
                 </tr>
               </thead>
               <tbody>
-              {% for modelfielddata in model_instance.modelfielddata_set.all  %}
+              {% for modelfielddata in model_instance.modelfielddata_set.all|dictsort:"model_field.rank" %}
                 <tr>
                   <td>{{ modelfielddata.model_field.name }}
                   </td>
@@ -148,6 +151,10 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
                   {% if modelfielddata.price %}
                    {{ modelfielddata.price }}
                   {% endif %}
+                  {% if modelfielddata.relation.all %}
+{% for item in modelfielddata.relation.all %}{{ item }}<br />{% endfor %}
+                  {% endif %}
+
                   </td>
                   <td></td>
                 </tr>

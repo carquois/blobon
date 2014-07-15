@@ -80,6 +80,7 @@ FIELD_TYPE = (
     ('Longtext', 'LongtextField'),
     ('Nullboolean', 'NullbooleanField'),
     ('Price', 'PriceField'),
+    ('Relation', 'RelationField'),
 )
 FREQUENCY = (
     ('Da', 'Daily'),
@@ -492,6 +493,14 @@ class Blog(models.Model):
     template = models.ForeignKey(Template, null=True, blank=True)
     def __unicode__(self):
         return self.title
+
+class Subuser(models.Model):
+    blog = models.ForeignKey(Blog, related_name="Blog_user", null=True)
+    username = models.CharField(verbose_name=_("Name"), max_length=40, unique=True)
+    email = models.EmailField(verbose_name=_("Email"),blank=True, null=True)
+    password = models.CharField(verbose_name=_("Name"), max_length=40)
+    def __unicode__(self):
+        return self.username
 
 class Rss(models.Model):
     feed_url = models.URLField(verbose_name=_("Feed url"), max_length=300, blank=True)

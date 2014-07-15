@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, ImageField, ModelMultipleChoiceField, EmailField, IntegerField
+from django.forms import ModelForm, Textarea, TextInput, CharField, URLField, ImageField, PasswordInput, ModelChoiceField, ModelMultipleChoiceField, EmailField, IntegerField
 from django.utils.translation import ugettext_lazy as _
 from django.forms.fields import DecimalField, DateField, ChoiceField, MultipleChoiceField
 from django.db import models
 
 from django.contrib.auth.models import User
 
-from blogs.models import Blog, Post, Category, Subscription, Info_email, Comment, Page, Rss, Tag, Model, ModelField, ModelData, ModelFieldData
+from blogs.models import Blog, Subuser, Post, Category, Subscription, Info_email, Comment, Page, Rss, Tag, Model, ModelField, ModelData, ModelFieldData
 
 from accounts.models import UserProfile
 
@@ -163,9 +163,11 @@ class DataCustomForm(ModelForm):
 
     positiveinteger = IntegerField(required=False,min_value=0, max_value=99999999, widget=forms.TextInput(attrs={'class':'form-control'}))
 
+    relation = ModelMultipleChoiceField(required=False, widget=forms.SelectMultiple, queryset=ModelData.objects.all())
+
     class Meta:
         model = ModelFieldData
-        fields = ('text','email','url','date','onetofive','positiveinteger','longtext','nullboolean','price',)
+        fields = ('relation','text','email','url','date','onetofive','positiveinteger','longtext','nullboolean','price',)
 
 class SubmitForm(ModelForm):
     title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.'), 'class': 'form-control'}), required=False)
@@ -337,6 +339,21 @@ class ContactForm(forms.Form):
                                                     'class': "form-control input-block-level"}))
     cc_myself = forms.BooleanField(required=False)
 
+class BlogContactForm(forms.Form):
+    name = forms.CharField(required=False, max_length=100, widget=forms.TextInput(attrs={'placeholder': _('YOUR NAME'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+    entreprise = forms.CharField(required=False, max_length=100, widget=forms.TextInput(attrs={'placeholder': _('YOUR ENTREPRISE OR ORGANIZATION'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+    message = forms.CharField(widget=forms.Textarea(attrs={
+                                                    'type': 'text',
+                                                    'rows': '3',
+                                                    'class': "form-control input-block-level"}))
+    from_email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': _('YOUR EMAIL'),
+                                                    'type': 'text',
+                                                    'class': "form-control input-block-level"}))
+
 class EmailForm(ModelForm):
     name = CharField(widget=forms.TextInput(attrs={'placeholder': _('Your campaign name here'),
                                                     'type': 'text',
@@ -397,6 +414,21 @@ class CategoriesForm(ModelForm):
         if blog:
             self.fields['parent_category'].queryset = Category.objects.filter(blog=blog)
 
+class SubuserForm(ModelForm):
+    username = CharField(required=True, widget=forms.TextInput(attrs={'placeholder': _('USERNAME'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+
+    password = CharField(required=True, widget=forms.PasswordInput(attrs={'placeholder': _('PASSWORD'),
+                                                    'type': 'text',
+                                                    'class': "form-control setting_form input-block-level"}))
+
+    email = EmailField(required=True, widget=forms.TextInput(attrs={'placeholder': _('YOUR EMAIL'),
+                                                    'type': 'text',
+                                                    'class': "form-control input-block-level"}))
+    class Meta:
+        model = Subuser
+        fields = ('username', 'email', 'password' )
 
 
 class PostForm(ModelForm):

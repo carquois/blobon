@@ -11,7 +11,7 @@ from notifications.models import Invitation
 from images.models import Image
 from votes.models import CommentVote, PunnVote
 from django.contrib import admin
-from blogs.models import Blog, Tag, Category, Post, Model, ModelField, ModelData, ModelFieldData
+from blogs.models import Subuser, Blog, Tag, Category, Post, Model, ModelField, ModelData, ModelFieldData
 from blogs.models import Page
 from posts.models import Image
 from posts.models import Album
@@ -81,3 +81,4 @@ admin.site.register(ModelField)
 admin.site.register(Model)
 admin.site.register(ModelData)
 admin.site.register(ModelFieldData)
+admin.site.register(Subuser)

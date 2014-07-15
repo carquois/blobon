@@ -19,8 +19,8 @@ from django.contrib.auth import logout
 
 from django.http import Http404
 
-from blogs.forms import BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm, TagsForm, ProfileForm, PlusProfileForm, CustomForm, FieldCustomForm, DataCustomForm
-from blogs.models import Blog, Page, Tag, Category, Post, Comment, Subscription, Info_email, Rss, Menu, MenuItem, Model, ModelField, ModelData, ModelFieldData
+from blogs.forms import SubuserForm, BlogContactForm, BlogForm, SettingsForm, PostForm, CategoriesForm, SubscriptionForm, EmailForm, ContactForm, PasswordForm, CommentForm, PageForm, RssForm, TagsForm, ProfileForm, PlusProfileForm, CustomForm, FieldCustomForm, DataCustomForm
+from blogs.models import Blog, Page, Subuser, Tag, Category, Post, Comment, Subscription, Info_email, Rss, Menu, MenuItem, Model, ModelField, ModelData, ModelFieldData
 from django.contrib.auth.models import User
 
 from notifications.forms import InvitationForm
@@ -114,6 +114,7 @@ def index(request):
                                    context_instance=RequestContext(request))
       elif Blog.objects.filter(custom_domain=host).exists():
           blog = Blog.objects.get(custom_domain=host)
+          subusers = Subuser.objects.filter(blog=blog)
           last_sticky = Post.objects.filter(blog=blog).filter(status="P").filter(is_discarded=False).filter(is_ready=True).filter(is_sticky=True).order_by('-pub_date')[:1]
           menus = Menu.objects.filter(blog=blog)
           if blog.is_online == False:
@@ -131,19 +132,21 @@ def index(request):
                                  Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
                                  6)
                 form = SubscriptionForm()
+                form2 = BlogContactForm()
+                form3 = SubuserForm()
                 categories = Category.objects.filter(blog=blog)
                 if blog.is_bootblog == True:
                   return render_to_response('blogs/blog.html',
-                                            {'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                            {'subusers':subusersc, 'form2':form2, 'form3':form3, 'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                             context_instance=RequestContext(request))
                 elif blog.template:
                   template = blog.template
                   return render_to_response('blogs/template_blog.html',
-                                            {'last_sticky': last_sticky,'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template,},
+                                            {'subusers':subusers,'form2':form2, 'form3':form3, 'last_sticky': last_sticky,'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template,},
                                             context_instance=RequestContext(request))
                 else:
                   return render_to_response('blogs/index.html',
-                                            {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                            {'subusers':subusers,'form2':form2 ,'form3':form3, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                             context_instance=RequestContext(request))
 
             else:
@@ -156,23 +159,26 @@ def index(request):
                              Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
                              6)
             form = SubscriptionForm()
+            form2 = BlogContactForm()
+            form3 = SubuserForm()
             categories = Category.objects.filter(blog=blog)
             if blog.is_bootblog == True:
               return render_to_response('blogs/blog.html',
-                                        {'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                        {'subusers':subusers,'form3':form3, 'form2':form2, 'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                         context_instance=RequestContext(request))
             elif blog.template:
               template = blog.template
               return render_to_response('blogs/template_blog.html',
-                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template,},
+                                        {'subusers':subusers,'form3':form3, 'form2':form2, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template,},
                                         context_instance=RequestContext(request))
             else:
               return render_to_response('blogs/index.html',
-                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                        {'subusers':subusers,'form3':form3, 'form2':form2, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                         context_instance=RequestContext(request))
 
       elif Blog.objects.filter(slug=request.subdomain).exists():
           blog = Blog.objects.get(slug=request.subdomain)
+          subusers = Subuser.objects.filter(blog=blog)
           last_sticky = Post.objects.filter(blog=blog).filter(status="P").filter(is_discarded=False).filter(is_ready=True).filter(is_sticky=True).order_by('-pub_date')[:1]
           menus = Menu.objects.filter(blog=blog)
           if blog.is_online == False:
@@ -192,19 +198,21 @@ def index(request):
                                Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
                                6)
                 form = SubscriptionForm()
+                form2 = BlogContactForm()
+                form3 = SubuserForm()
                 categories = Category.objects.filter(blog=blog)
                 if blog.is_bootblog == True:
                   return render_to_response('blogs/blog.html',
-                                            {'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                            {'subusers':subusers,'form3':form3, 'form2':form2, 'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                             context_instance=RequestContext(request)) 
                 elif blog.template:
                   template = blog.template
                   return render_to_response('blogs/template_blog.html',
-                                            {'last_sticky':last_sticky, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template,},
+                                            {'subusers':subusers,'form3':form3, 'form2':form2, 'last_sticky':last_sticky, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template,},
                                             context_instance=RequestContext(request))
                 else:
                   return render_to_response('blogs/index.html',
-                                            {'posts': posts, 'blog': blog, 'form': form, 'categories': categories,},
+                                            {'subusers':subusers,'form3':form3, 'form2':form2, 'posts': posts, 'blog': blog, 'form': form, 'categories': categories,},
                                             context_instance=RequestContext(request))
             else:
               form = PasswordForm()
@@ -218,19 +226,21 @@ def index(request):
                            Post.objects.filter(blog=blog).filter(status='P').order_by('-pub_date'),
                            6)
             form = SubscriptionForm()
+            form2 = BlogContactForm()
+            form3 = SubuserForm()
             categories = Category.objects.filter(blog=blog)
             if blog.is_bootblog == True:
               return render_to_response('blogs/blog.html',
-                                        {'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                        {'subusers':subusers, 'form3':form3, 'form2':form2, 'menus': menus, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                         context_instance=RequestContext(request))
             elif blog.template:
               template = blog.template
               return render_to_response('blogs/template_blog.html',
-                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template,},
+                                        {'subusers':subusers, 'form3':form3, 'form2':form2, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,'template' : template,},
                                         context_instance=RequestContext(request))
             else:
               return render_to_response('blogs/index.html',
-                                        {'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
+                                        {'subusers':subusers, 'form3':form3, 'form2':form2, 'posts': posts, 'blog': blog, 'form': form,'categories': categories,},
                                         context_instance=RequestContext(request))
 
       else:
@@ -1174,6 +1184,7 @@ def administratemodel(request, slug, id):
             data.model_field = field
             data.model = model
             data.save()
+            form.save_m2m()
           messages.add_message(request, messages.INFO, _(u"Your new object has been saved"))
           return HttpResponseRedirect(reverse('blogs.views.administratemodel', args=(blog.slug, model.id,)))
         else:
@@ -1185,6 +1196,9 @@ def administratemodel(request, slug, id):
       else:
         formset = ModelFieldDataFormset()
         mixlist = zip(fields,formset)
+        for field,form in mixlist:
+          if field.post_type == 'Relation':
+            form.fields['relation'].queryset = ModelData.objects.filter(model__name=field.name)
         return render_to_response('blogs/administratemodel.html',
                                   {'models':models, 'mixlist':mixlist, 'formset': formset,'blog': blog,'model': model, 'fields': fields, 'model_instances': model_instances,},
                                   context_instance=RequestContext(request))
@@ -1206,12 +1220,18 @@ def editmodeldata(request, slug, id):
         formset = ModelFieldDataFormset(request.POST,request.FILES)
         if formset.is_valid():
           formset.save()
+#          for form in formset:
+#            form.save(commit=False)
+#            form.save_m2m()
           messages.add_message(request, messages.INFO, _(u"The object has been saved"))
           return HttpResponseRedirect(reverse('blogs.views.administratemodel', args=(blog.slug, model.id,)))           
 
       else:
         formset = ModelFieldDataFormset(queryset = data)
         mixlist = zip(fields,formset)
+        for field,form in mixlist:          
+          if field.post_type == 'Relation':
+            form.fields['relation'].queryset = ModelData.objects.filter(model__name=field.name)
         return render_to_response('blogs/editmodeldata.html',
                                   {'modeldata':modeldata, 'models':models, 'mixlist':mixlist, 'formset': formset,'blog': blog,'model': model, 'fields': fields, 'model_instances': model_instances,},
                                   context_instance=RequestContext(request))
@@ -2375,6 +2395,50 @@ def contact(request):
          return render_to_response('blogs/contact.html',
                                    {'form': form},
                                    context_instance=RequestContext(request))     
+def contactblog(request, slug):
+     blog = get_object_or_404(Blog, slug=slug)
+     if request.method == 'POST':
+       if blog.moderator_email:
+         receiver = blog.moderator_email
+       else:
+         receiver = 'info@blobon.com'
+       form = BlogContactForm(request.POST or None, request.FILES or None)
+       if form.is_valid():
+         subject = "New mail for %s" % (blog.title,)
+         recipients = [receiver]
+         name = form.cleaned_data['name']
+         ent = form.cleaned_data['entreprise']
+         mess = form.cleaned_data['message']
+         from_email = form.cleaned_data['from_email']
+         message = "Name : %s  , Entreprise : %s  , Email : %s ,  Message : %s " % (name, ent, from_email, mess)
+         messages.add_message(request, messages.INFO, _(u"You message has been send, thank you!"))
+         from django.core.mail import send_mail
+         send_mail(subject, message, from_email, recipients)
+         return HttpResponseRedirect("http://%s.blobon.com" % blog.slug)
+       else:
+         messages.add_message(request, messages.INFO, _(u"Oups! It didn't work, please try again."))
+         return HttpResponseRedirect("http://%s.blobon.com" % blog.slug)
+     else:
+       raise Http404  
+
+def new_subuser(request, slug):
+     blog = get_object_or_404(Blog, slug=slug)
+     if request.method == 'POST':
+       form = SubuserForm(request.POST or None, request.FILES or None)
+       if form.is_valid():
+         subuser = form.save(commit=False)
+         subuser.blog = blog
+         subuser.save()
+         messages.add_message(request, messages.INFO, _(u"Your user has been created, thank you!"))
+         return HttpResponseRedirect("http://%s.blobon.com" % blog.slug)
+       else:
+         messages.add_message(request, messages.INFO, _(u"Oups! It didn't work, please try again."))
+         return HttpResponseRedirect("http://%s.blobon.com" % blog.slug)
+     else:
+       raise Http404
+
+
+
 def entreprise(request):
      if request.method == 'POST':
       form = ContactForm(request.POST or None, request.FILES or None)

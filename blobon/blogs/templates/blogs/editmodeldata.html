@@ -80,6 +80,10 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
    {{form.price}}
    {% endif %}
 
+   {% if field.post_type == "Relation" %}
+   {{form.relation}}
+   {% endif %}
+
 
     </div>
   {% endfor %}
