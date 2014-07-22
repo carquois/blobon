@@ -103,7 +103,7 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
   {% if model_instances %}
   {% for model_instance in model_instances %}
           <div class="panel panel-default">
-            <div class="panel-heading"><b>{{model.name}} - {{ model_instance.name}}</b><a href="#" type="button" data-toggle="modal" data-target="#{{ model_instance.id }}" class="btn btn-sm btn-danger pull-right" style="margin-top:-4px;">{% trans "Delete" %}</a><a href="{% url 'blogs.views.editmodeldata' blog.slug model_instance.id %}" type="button" class="pull-right btn btn-sm btn-default" style="margin-top:-4px;">{% trans "Edit" %}</a></div>
+            <div class="panel-heading"><b>{{model.name}} - {{ model_instance.name}}</b><a type="button" data-toggle="modal" data-target="#{{ model_instance.id }}" class="btn btn-sm btn-danger pull-right" style="margin-top:-4px;">{% trans "Delete" %}</a><a href="{% url 'blogs.views.editmodeldata' blog.slug model_instance.id %}" type="button" class="pull-right btn btn-sm btn-default" style="margin-top:-4px;">{% trans "Edit" %}</a></div>
 <div class="table-responsive">
             <table class="table table-striped">
               <colgroup>

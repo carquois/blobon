@@ -246,7 +246,15 @@ padding-top:20px;
 </div>
             {% endfor %}
           {% endif %}
+<div class="container">
+<ol class="breadcrumb container" style="{% block breadmargin %}{% endblock %}position: fixed;
+top: 75px;text-align:left;">
+  {% block breadcrumb %}
+  <li class="active">{% trans "Home" %}</li>
+  {% endblock %}
 
+</ol>
+</div>
 
           <div class="inner cover">
   {% block slogan %}

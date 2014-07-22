@@ -17,7 +17,6 @@
 
     {% block additional-js %}
     <script src="{{ STATIC_URL }}js/jquery.js"></script>
-
     <script src="http://www.lfhs.ca/blobon/assets/js/jquery.js"></script>
     {% endblock %}
     {% block additional-css %}
@@ -98,7 +97,11 @@
     {% block bootstrap-js %}
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 
-    <script src="http://www.lfhs.ca/blobon/assets/js/bootstrap.min.js"></script>
     {% endblock %}
+    {% block bootstrap-js-patch %}
+<script src="http://www.lfhs.ca/blobon/assets/js/bootstrap.min.js"></script>
+    {% endblock %}
+
+
   </body>
 </html>

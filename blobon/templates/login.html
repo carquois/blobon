@@ -15,8 +15,15 @@
   {% block login_link %}
   {% endblock %}
   {% block indication %}
-  <a href="http://blobon.com"><h3 class="masthead-brand">{% trans "Blobon.com" %}</a>{% trans " - Login" %}</h3>
+  <a href="http://blobon.com"><h3 class="masthead-brand">{% trans "Blobon.com" %}</a></h3>
   {% endblock %}
+
+ {% block breadcrumb %}
+<li><a href="http://blobon.com/">{% trans "Home" %}</a></li>
+  <li class="active">{% trans "Login" %}</li>
+  {% endblock %}
+
+
 
   {% block form %}
 

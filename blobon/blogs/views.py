@@ -1219,10 +1219,9 @@ def editmodeldata(request, slug, id):
       if request.method == 'POST':
         formset = ModelFieldDataFormset(request.POST,request.FILES)
         if formset.is_valid():
-          formset.save()
-#          for form in formset:
-#            form.save(commit=False)
-#            form.save_m2m()
+          for form in formset:
+            form.save(commit=False)
+            form.save_m2m()
           messages.add_message(request, messages.INFO, _(u"The object has been saved"))
           return HttpResponseRedirect(reverse('blogs.views.administratemodel', args=(blog.slug, model.id,)))           
 

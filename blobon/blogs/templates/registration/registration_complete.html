@@ -5,8 +5,14 @@
   {% endblock %}
 
   {% block indication %}
-  <a href="http://blobon.com"><h3 class="masthead-brand">{% trans "Blobon.com" %}</a>{% trans " - Registration complete" %}</h3>
+  <a href="http://blobon.com"><h3 class="masthead-brand">{% trans "Blobon.com" %}</a></h3>
   {% endblock %}
+
+ {% block breadcrumb %}
+<li><a href="http://blobon.com/">{% trans "Home" %}</a></li>
+  <li class="active">{% trans "Registration complete" %}</li>
+  {% endblock %}
+
 
   {% block slogan %}
 

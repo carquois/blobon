@@ -4,8 +4,14 @@
 
 
   {% block indication %}
-  <a href="http://blobon.com"><h3 class="masthead-brand">{% trans "Blobon.com" %}</a>{% trans " - Contact" %}</h3>
+  <a href="http://blobon.com"><h3 class="masthead-brand">{% trans "Blobon.com" %}</a></h3>
   {% endblock %}
+
+ {% block breadcrumb %}
+<li><a href="http://blobon.com/">{% trans "Home" %}</a></li>
+  <li class="active">{% trans "Contact" %}</li>
+  {% endblock %}
+
 
   {% block leaderboard %}
   {% endblock %}
@@ -18,7 +24,7 @@
   <div class="row">
   </div> 
 
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-6 col-md-offset-3"style="padding-top:45px;">
   <div class="contact_info" style="text-align:left;padding:15px;">
     <h4>{% trans "Contact Blobon, Inc" %}</h4>
     <p>
