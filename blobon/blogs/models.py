@@ -482,7 +482,7 @@ class Blog(models.Model):
     main_color = models.CharField(verbose_name=_("Main color"),max_length=10, default="#C4BDB2", blank=True)
     language = models.CharField(max_length=7, choices=LANGUAGES,blank=True)
     password = models.CharField(verbose_name=_("Password"), max_length=140, blank=True)
-    custom_domain = models.CharField(verbose_name=_("Custom domain"), max_length=300, blank=True)
+    custom_domain = models.CharField(verbose_name=_("Custom domain"), max_length=300, null=True, blank=True)
     description = models.CharField(verbose_name=_("Description"), max_length=500, blank=True)
     translation = models.ForeignKey('self',  null=True, blank=True)
     is_online = models.BooleanField(default=True)

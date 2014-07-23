@@ -291,6 +291,14 @@ border-radius: 4px;
     {% endfor %}
 {% endif %}
 
+
+{% if blog.title == "Fusion"%}
+<div class="page-header" style="margin-top:-10px;">
+<h3>{% trans "Welcome to the Fusion dashboard" %}</h3>
+</div>
+
+
+{% else %}
 <div class="page-header" style="margin-top:-10px;">
   <h1>{{ blog.title }}<small>&nbsp;&nbsp;<div style="padding-top:10px;"><a href="http://{{ blog.slug }}.blobon.com" target="_blank">{% trans "View blog" %}</a>&nbsp;&nbsp;<a style="float:right;" href="{% url 'blogs.views.dashboard' %}" target="_blank">{% trans "All my blogs" %}</a></div></small></h1>
 </div>
@@ -4185,7 +4193,15 @@ border-radius: 4px;
         $('#addtagtoa3').tooltip({container: 'body'});
       });
     </script>
+
+
+{% endif %}
+
   {% endblock %}
+
+
+
+
   {% block sidebar %}
 {% if blog %}
     <ul class="nav nav-pills nav-stacked">
@@ -4200,6 +4216,10 @@ border-radius: 4px;
  {% endfor %}
 {% endwith %}
 {% endif %}
+
+
+{% if blog.title != "Fusion"%}
+
       <li {% block posts-active %}{% endblock %}><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="posts_button" title="{% trans "Manage your posts" %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Posts" %}</a></li>
 
 
@@ -4232,7 +4252,18 @@ border-radius: 4px;
 
 {% endif %}
 {% endif %}
+
+
+{% else %}
+
+{% endif %}
+
+
     </ul>
+
+
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
     <script type="text/javascript">
       $(function () {
         $('#dashboard_button').tooltip();
