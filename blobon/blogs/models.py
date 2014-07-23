@@ -611,7 +611,7 @@ class ModelField(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=140, null=True, blank=True)
     rank = models.CharField(default="1", max_length=2, choices=ONETOTHIRTY)
     def __unicode__(self):
-        return self.name
+        return self.name or u''
 
 class ModelData(models.Model):
     model = models.ForeignKey(Model, null=True)
