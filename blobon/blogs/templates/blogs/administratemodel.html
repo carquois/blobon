@@ -84,6 +84,9 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
    {% if field.post_type == "Relation" %}
    {{form.relation}}
    {% endif %}
+   {% if field.post_type == "Foreign" %}
+   {{form.foreign}}
+   {% endif %}
 
 
 
@@ -153,6 +156,9 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
                   {% endif %}
                   {% if modelfielddata.relation.all %}
 {% for item in modelfielddata.relation.all %}{{ item }}<br />{% endfor %}
+                  {% endif %}
+                  {% if modelfielddata.foreign %}
+                   {{ modelfielddata.foreign }}
                   {% endif %}
 
                   </td>

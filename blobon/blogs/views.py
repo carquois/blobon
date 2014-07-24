@@ -1199,6 +1199,8 @@ def administratemodel(request, slug, id):
         for field,form in mixlist:
           if field.post_type == 'Relation':
             form.fields['relation'].queryset = ModelData.objects.filter(model__name=field.name)
+          elif field.post_type == 'Foreign':
+            form.fields['foreign'].queryset = ModelData.objects.filter(model__name=field.name)
         return render_to_response('blogs/administratemodel.html',
                                   {'models':models, 'mixlist':mixlist, 'formset': formset,'blog': blog,'model': model, 'fields': fields, 'model_instances': model_instances,},
                                   context_instance=RequestContext(request))
@@ -1231,6 +1233,8 @@ def editmodeldata(request, slug, id):
         for field,form in mixlist:          
           if field.post_type == 'Relation':
             form.fields['relation'].queryset = ModelData.objects.filter(model__name=field.name)
+          elif field.post_type == 'Foreign':
+            form.fields['foreign'].queryset = ModelData.objects.filter(model__name=field.name)
         return render_to_response('blogs/editmodeldata.html',
                                   {'modeldata':modeldata, 'models':models, 'mixlist':mixlist, 'formset': formset,'blog': blog,'model': model, 'fields': fields, 'model_instances': model_instances,},
                                   context_instance=RequestContext(request))

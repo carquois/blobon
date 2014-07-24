@@ -81,6 +81,7 @@ FIELD_TYPE = (
     ('Nullboolean', 'NullbooleanField'),
     ('Price', 'PriceField'),
     ('Relation', 'RelationField'),
+    ('Foreign', 'ForeignField'),
 )
 FREQUENCY = (
     ('Da', 'Daily'),
@@ -602,6 +603,7 @@ class Tag(models.Model):
 class Model(models.Model):
     name = models.CharField(max_length=60)
     blog = models.ForeignKey(Blog, related_name="Custom_post", null=True)
+    hidden = models.BooleanField(default=False) 
     def __unicode__(self):
         return self.name
 
@@ -634,8 +636,10 @@ class ModelFieldData(models.Model):
     nullboolean = models.NullBooleanField(blank=True, null=True, default=None,)
     price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     relation = models.ManyToManyField(ModelData,related_name='relation', null=True, blank=True)
+    foreign = models.ForeignKey(ModelData, related_name='foreign', null=True)
+
     def __unicode__(self):
-        return u"%s" % self.id
+        return u"%s" % self.model_data
     
 class Post(models.Model):
     author = models.ForeignKey(User, null=True)

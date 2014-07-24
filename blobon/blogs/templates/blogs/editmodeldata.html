@@ -83,7 +83,9 @@ background-image: linear-gradient(to bottom,#fff 0,#C4BDB2 100%);
    {% if field.post_type == "Relation" %}
    {{form.relation}}
    {% endif %}
-
+   {% if field.post_type == "Foreign" %}
+   {{form.foreign}}
+   {% endif %}
 
     </div>
   {% endfor %}

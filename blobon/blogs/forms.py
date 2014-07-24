@@ -165,9 +165,11 @@ class DataCustomForm(ModelForm):
 
     relation = ModelMultipleChoiceField(required=False, widget=forms.SelectMultiple, queryset=ModelData.objects.all())
 
+    foreign = ModelChoiceField(required=False, widget=forms.Select, queryset=ModelData.objects.all())
+
     class Meta:
         model = ModelFieldData
-        fields = ('relation','text','email','url','date','onetofive','positiveinteger','longtext','nullboolean','price',)
+        fields = ('foreign', 'relation','text','email','url','date','onetofive','positiveinteger','longtext','nullboolean','price',)
 
 class SubmitForm(ModelForm):
     title = CharField(label=_('Title :'), widget=forms.TextInput(attrs={'placeholder': _('Enter your title here.'), 'class': 'form-control'}), required=False)
