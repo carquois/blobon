@@ -292,9 +292,9 @@ border-radius: 4px;
 {% endif %}
 
 
-{% if blog.title == "Fusion"%}
+{% if blog.is_not_blog%}
 <div class="page-header" style="margin-top:-10px;">
-<h3>{% trans "Welcome to the Fusion dashboard" %}</h3>
+<h3>{% trans "Welcome to " %}{{blog.title}}</h3>
 </div>
 
 
@@ -4218,7 +4218,7 @@ border-radius: 4px;
 {% endif %}
 
 
-{% if blog.title != "Fusion"%}
+{% if not blog.is_not_blog %}
 
       <li {% block posts-active %}{% endblock %}><a href="{% url 'blogs.views.administrateposts' blog.slug %}" id="posts_button" title="{% trans "Manage your posts" %}"><span class="glyphicon glyphicon-pencil"></span> {% trans "Posts" %}</a></li>
 

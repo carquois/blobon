@@ -492,6 +492,7 @@ class Blog(models.Model):
     short_description = models.CharField(verbose_name=_("Short description"), max_length=140, blank=True)
     draft_notice = models.BooleanField(default=False)
     template = models.ForeignKey(Template, null=True, blank=True)
+    is_not_blog = models.BooleanField(default=False)
     def __unicode__(self):
         return self.title
 
